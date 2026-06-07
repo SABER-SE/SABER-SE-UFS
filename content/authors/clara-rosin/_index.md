@@ -28,6 +28,12 @@ highlight_name: false
 
 user_groups:
   - Egressos
+social:
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
+
 ---
 
 **Clara Rosin** foi bolsista de iniciação científica no Grupo SABER-SE durante a graduação em Física na UFS, com participação em projetos de análise espectroscópica e processamento de dados observacionais.

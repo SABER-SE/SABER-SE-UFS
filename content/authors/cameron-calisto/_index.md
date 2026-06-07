@@ -30,6 +30,10 @@ social:
     icon_pack: fas
     link: 'mailto:cameron.calisto@academico.ufs.br'
 
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
 email: 'cameron.calisto@academico.ufs.br'
 
 highlight_name: false

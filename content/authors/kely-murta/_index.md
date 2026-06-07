@@ -28,6 +28,12 @@ highlight_name: false
 
 user_groups:
   - Egressos
+social:
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
+
 ---
 
 **Kely Murta** concluiu o Mestrado em Física na UFS pelo Grupo SABER-SE. Sua dissertação investigou as propriedades químicas de populações estelares do disco galáctico a partir de dados espectroscópicos.

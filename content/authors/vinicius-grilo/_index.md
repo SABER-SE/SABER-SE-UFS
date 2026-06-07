@@ -28,6 +28,12 @@ highlight_name: false
 
 user_groups:
   - Egressos
+social:
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
+
 ---
 
 **Vinicius Grilo** concluiu o Mestrado em Física na UFS pelo Grupo SABER-SE. Sua dissertação abordou a caracterização espectroscópica de estrelas anãs-M a partir de dados de alta resolução.

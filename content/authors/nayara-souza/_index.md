@@ -33,6 +33,10 @@ social:
     icon_pack: fas
     link: 'mailto:nayara.souza@academico.ufs.br'
 
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
 email: 'nayara.souza@academico.ufs.br'
 
 highlight_name: false

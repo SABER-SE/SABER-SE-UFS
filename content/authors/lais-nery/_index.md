@@ -29,6 +29,12 @@ highlight_name: false
 
 user_groups:
   - Egressos
+social:
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
+
 ---
 
 **Laís Nery** concluiu o Mestrado em Física na UFS pelo Grupo SABER-SE. Sua dissertação investigou as propriedades espectroscópicas de estrelas AGB e de carbono, com foco nos processos de nucleossíntese e enriquecimento do meio interestelar.

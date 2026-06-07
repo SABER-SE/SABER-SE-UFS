@@ -1,0 +1,37 @@
+{{- define "main" -}}
+
+{{/* Author profile page. */}}
+
+{{ if not .File }}
+<div class="universal-wrapper pt-3">
+  <h1>{{ .Title }}</h1>
+</div>
+{{ end }}
+
+<section id="profile-page" class="pt-5">
+  <div class="container">
+    {{ if .File }}
+      {{ $widget := "blocks/v1/about.html" }}
+      {{ $username := (path.Base .File.Dir) }}
+      {{ $params := dict "wcPage" $ "wcBlock" . "author" $username }}
+      {{ partial $widget $params }}
+    {{end}}
+
+    {{ $query := where .Pages ".IsNode" false }}
+    {{ $count := len $query }}
+    {{ if $count }}
+    <div class="article-widget content-widget-hr">
+      <h3>{{ i18n "user_profile_latest" | default "Recentes" }}</h3>
+      <ul>
+        {{ range first 4 $query }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+{{- end -}}

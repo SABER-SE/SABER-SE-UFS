@@ -30,6 +30,10 @@ social:
     icon_pack: fas
     link: 'mailto:veronica.loaiza@ufs.br'
 
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
 email: 'veronica.loaiza@ufs.br'
 
 highlight_name: false

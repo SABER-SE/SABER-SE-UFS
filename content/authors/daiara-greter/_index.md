@@ -30,6 +30,10 @@ social:
     icon_pack: fas
     link: 'mailto:daiara.greter@academico.ufs.br'
 
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
 email: 'daiara.greter@academico.ufs.br'
 
 highlight_name: false

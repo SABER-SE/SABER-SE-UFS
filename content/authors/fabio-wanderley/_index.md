@@ -29,6 +29,12 @@ highlight_name: false
 
 user_groups:
   - Egressos
+social:
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
+
 ---
 
 **Fabio Wanderley** concluiu o Doutorado em Física na UFS pelo Grupo SABER-SE. Sua tese abordou a caracterização espectroscópica de estrelas anãs-M hospedeiras de exoplanetas, com foco na determinação de abundâncias químicas e avaliação do potencial de habitabilidade dos sistemas planetários.

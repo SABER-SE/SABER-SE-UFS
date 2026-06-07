@@ -28,6 +28,12 @@ highlight_name: false
 
 user_groups:
   - Egressos
+social:
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
+
 ---
 
 **Camila Paganini** foi bolsista de iniciação científica no Grupo SABER-SE durante a graduação em Física na UFS. Participou de projetos de análise computacional de dados espectroscópicos e contribuiu para a infraestrutura de software do grupo.

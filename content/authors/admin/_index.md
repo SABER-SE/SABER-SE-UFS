@@ -59,6 +59,10 @@ social:
     icon_pack: fab
     link: https://github.com/diogosouto
 
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
 email: 'diogodusouto@gmail.com'
 
 highlight_name: true

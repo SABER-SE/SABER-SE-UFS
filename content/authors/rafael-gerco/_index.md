@@ -28,6 +28,12 @@ highlight_name: false
 
 user_groups:
   - Egressos
+social:
+  - icon: graduation-cap
+    icon_pack: fas
+    link: 'http://lattes.cnpq.br/PREENCHER'
+    label: Currículo Lattes
+
 ---
 
 **Rafael Gerço** concluiu o Mestrado em Física na UFS pelo Grupo SABER-SE. Sua pesquisa focou na determinação de abundâncias químicas de estrelas gigantes por síntese espectral de alta resolução.
