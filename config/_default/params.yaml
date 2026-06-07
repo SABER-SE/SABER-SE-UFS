@@ -7,7 +7,7 @@
 
 appearance:
   theme_day: minimal
-  theme_night:
+  theme_night: minimal
   font: native
   font_size: L
 
@@ -18,8 +18,9 @@ marketing:
     site_type: Organization
     local_business_type: ''
     org_name: ''
-    description: 'A highly-customizable Hugo research group theme powered by Wowchemy website builder.'
-    twitter: 'GetResearchDev'
+    org_name: 'SABERSE-UFS'
+    description: 'Grupo de pesquisa em Astrofísica Estelar, Exoplanetas e Evolução Química da Galáxia — Universidade Federal de Sergipe (UFS).'
+    twitter: ''
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -45,7 +46,7 @@ header:
 
 footer:
   copyright:
-    notice: '© {year} Me. This work is licensed under {license}'
+    notice: '© {year} SABERSE-UFS / Universidade Federal de Sergipe. Este trabalho está licenciado sob {license}'
     license:
       enable: true
       allow_derivatives: false
@@ -55,9 +56,9 @@ footer:
 # Localization
 
 locale:
-  date_format: 'Jan 2, 2006'
-  time_format: '3:04 PM'
-  address_format: en-us
+  date_format: '2 Jan 2006'
+  time_format: '15:04'
+  address_format: pt-br
 
 # Site features
 
@@ -72,7 +73,7 @@ features:
   privacy_pack:
     enable: false
   repository:
-    url: 'https://github.com/<username>/<repository>'
+    url: 'https://github.com/astrofisica-ufs/sabers-dfi-page'
     content_dir: content
     branch: main
   avatar:
@@ -116,3 +117,8 @@ extensions:
 publications:
   date_format: January 2006
   citation_style: apa
+
+# Ícone do site (favicon)
+icon:
+  favicon:
+    filename: icon.png

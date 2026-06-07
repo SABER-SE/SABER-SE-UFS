@@ -1,5 +1,5 @@
 ---
-title: Contact
+title: Contato
 date: 2022-10-24
 
 type: landing
@@ -7,63 +7,47 @@ type: landing
 sections:
   - block: contact
     content:
-      title: Contact
+      title: Entre em Contato
       text: |-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempus augue non tempor egestas. Proin nisl nunc, dignissim in accumsan dapibus, auctor ullamcorper neque. Quisque at elit felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget elementum odio. Cras interdum eget risus sit amet aliquet. In volutpat, nisl ut fringilla dignissim, arcu nisl suscipit ante, at accumsan sapien nisl eu eros.
-      email: test@example.org
-      phone: 888 888 88 88
+        Para informações sobre pesquisa, colaborações, oportunidades de IC/Mestrado/Doutorado ou qualquer outro assunto, entre em contato diretamente com o Prof. Dr. Diogo Souto. Respondemos a todas as mensagens dentro de 2 semanas úteis.
+      email: diogodusouto@gmail.com
       address:
-        street: 450 Serra Mall
-        city: Stanford
-        region: CA
-        postcode: '94305'
-        country: United States
-        country_code: US
+        street: "Departamento de Física (DFI) — Cidade Universitária Prof. José Aloísio de Campos"
+        city: São Cristóvão
+        region: Sergipe
+        postcode: '49100-000'
+        country: Brasil
+        country_code: BR
       coordinates:
-        latitude: '37.4275'
-        longitude: '-122.1697'
-      directions: Enter Building 1 and take the stairs to Office 200 on Floor 2
+        latitude: '-10.9247'
+        longitude: '-37.1059'
+      directions: "Departamento de Física (DFI) — Centro de Ciências Exatas e Tecnologia (CCET), Campus São Cristóvão"
       office_hours:
-        - 'Monday 10:00 to 13:00'
-        - 'Wednesday 09:00 to 10:00'
-      appointment_url: 'https://calendly.com'
-      #contact_links:
-      #  - icon: comments
-      #    icon_pack: fas
-      #    name: Discuss on Forum
-      #    link: 'https://discourse.gohugo.io'
-    
-      # Automatically link email and phone or display as text?
+        - 'Segunda-feira: 10:00 às 12:00'
+        - 'Quarta-feira: 14:00 às 16:00'
+        - 'Outros horários: mediante agendamento por e-mail'
+      contact_links:
+        - icon: globe
+          icon_pack: fas
+          name: Site pessoal do Prof. Diogo Souto
+          link: 'https://diogosouto-astro.org'
+        - icon: graduation-cap
+          icon_pack: fas
+          name: Google Scholar
+          link: 'https://scholar.google.com/citations?user=n-B4YeYAAAAJ'
+
       autolink: true
-    
-      # Email form provider
+
+      # Para ativar o formulário de contato, escolha um provedor:
+      # - formspree: crie conta em formspree.io e adicione o ID abaixo
+      # - netlify: ative se hospedar no Netlify
+      # Deixe em branco para desativar o formulário (apenas email/mapa)
       form:
-        provider: netlify
+        provider: ''
         formspree:
-          id:
+          id: ''
         netlify:
-          # Enable CAPTCHA challenge to reduce spam?
           captcha: false
     design:
       columns: '1'
-
-  - block: markdown
-    content:
-      title:
-      subtitle: ''
-      text:
-    design:
-      columns: '1'
-      background:
-        image: 
-          filename: contact.jpg
-          filters:
-            brightness: 1
-          parallax: false
-          position: center
-          size: cover
-          text_color_light: true
-      spacing:
-        padding: ['20px', '0', '20px', '0']
-      css_class: fullscreen
 ---

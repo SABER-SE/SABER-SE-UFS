@@ -1,54 +1,122 @@
 ---
-title: Tour
+title: Pesquisa
 date: 2022-10-24
 
 type: landing
 
 sections:
+  # Slider de apresentação das linhas de pesquisa
   - block: slider
     content:
       slides:
-      - title: 👋 Welcome to the group
-        content: Take a look at what we're working on...
+      - title: "Estrelas Anãs-M e Exoplanetas"
+        content: "Investigamos a composição química de estrelas frias e seus sistemas planetários usando espectroscopia de alta resolução no infravermelho."
         align: center
-        background:
-          image:
-            filename: coders.jpg
-            filters:
-              brightness: 0.7
-          position: right
-          color: '#666'
-      - title: Lunch & Learn ☕️
-        content: 'Share your knowledge with the group and explore exciting new topics together!'
-        align: left
-        background:
-          image:
-            filename: contact.jpg
-            filters:
-              brightness: 0.7
-          position: center
-          color: '#555'
-      - title: World-Class Semiconductor Lab
-        content: 'Just opened last month!'
-        align: right
         background:
           image:
             filename: welcome.jpg
             filters:
               brightness: 0.5
           position: center
-          color: '#333'
+          color: '#1a1a2e'
+        link:
+          icon: telescope
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../project/estrelas-anas-m-exoplanetas/
+
+      - title: "Abundâncias Químicas Estelares"
+        content: "Medimos as concentrações de dezenas de elementos em estrelas de diferentes tipos, populações e ambientes galácticos."
+        align: left
+        background:
+          image:
+            filename: coders.jpg
+            filters:
+              brightness: 0.4
+          position: center
+          color: '#16213e'
+        link:
+          icon: flask
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../project/abundancias-quimicas-estelares/
+
+      - title: "Evolução Química da Galáxia"
+        content: "Reconstruímos a história química da Via Láctea combinando observações de grandes levantamentos com modelos de síntese evolutiva."
+        align: right
+        background:
+          image:
+            filename: contact.jpg
+            filters:
+              brightness: 0.4
+          position: center
+          color: '#0f3460'
+        link:
+          icon: star
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../project/evolucao-quimica-galaxia/
+
+      - title: "Faça parte do SABERS-DFI"
+        content: "Estamos em busca de estudantes motivados para IC, Mestrado e Doutorado em Astrofísica."
+        align: center
+        background:
+          image:
+            filename: welcome.jpg
+            filters:
+              brightness: 0.3
+          position: center
+          color: '#533483'
         link:
           icon: graduation-cap
           icon_pack: fas
-          text: Join Us
-          url: ../contact/
+          text: Ver oportunidades
+          url: ../opportunities/
     design:
-      # Slide height is automatic unless you force a specific height (e.g. '400px')
       slide_height: ''
       is_fullscreen: true
-      # Automatically transition through slides?
-      loop: false
-      # Duration of transition between slides (in ms)
-      interval: 2000
+      loop: true
+      interval: 5000
+
+  # Linhas de pesquisa em cards
+  - block: collection
+    content:
+      title: Linhas de Pesquisa
+      subtitle: "Nossas áreas de investigação ativas"
+      text: ""
+      count: 4
+      filters:
+        folders:
+          - project
+      offset: 0
+      order: asc
+    design:
+      view: card
+      columns: '2'
+
+  # Publicações de destaque
+  - block: collection
+    content:
+      title: Publicações de Destaque
+      subtitle: ""
+      text: ""
+      count: 3
+      filters:
+        folders:
+          - publication
+        featured_only: true
+      order: desc
+    design:
+      view: citation
+      columns: '1'
+
+  # CTA para ver todas as publicações
+  - block: markdown
+    content:
+      title:
+      subtitle:
+      text: |
+        {{% cta cta_link="../publication/" cta_text="Ver todas as publicações →" %}}
+    design:
+      columns: '1'
 ---

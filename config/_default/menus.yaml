@@ -1,24 +1,23 @@
-# Navigation Links
-#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
-#     desired widget in your `content/home/` folder.
-#   The weight parameter defines the order that the links will appear in.
+# Links de Navegação
+#   Para ligar a um widget da homepage, use URL como '#nome-do-widget'.
+#   O parâmetro weight define a ordem dos links no menu.
 
 main:
-  - name: Tour
+  - name: Pesquisa
     url: tour
     weight: 10
-  - name: News
+  - name: Notícias
     url: post
     weight: 20
-  - name: People
+  - name: Membros
     url: people
     weight: 30
-  - name: Events
-    url: event
-    weight: 40
-  - name: Publications
+  - name: Publicações
     url: publication
     weight: 50
-  - name: Contact
+  - name: Oportunidades
+    url: opportunities
+    weight: 55
+  - name: Contato
     url: contact
     weight: 60

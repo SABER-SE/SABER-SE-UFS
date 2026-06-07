@@ -1,48 +1,204 @@
-# [Hugo Research Group Theme](https://github.com/wowchemy/starter-hugo-research-group)
+# SABERS-DFI — Site do Grupo de Astrofísica da UFS
 
-[![Screenshot](preview.png)](https://hugoblox.com/hugo-themes/)
+Site oficial do grupo de pesquisa em Astrofísica do Departamento de Física (DFI) da Universidade Federal de Sergipe.
 
-The **Research Group Template** empowers your research group to easily create a beautiful website with a stunning homepage, news, academic publications, events, team profiles, and a contact form.
+**URL de produção:** https://astrofisica-ufs.github.io
 
-️**Trusted by 250,000+ researchers, educators, and students.** Highly customizable via the integrated **no-code, widget-based Wowchemy page builder**, making every site truly personalized ⭐⭐⭐⭐⭐
+---
 
-[![Get Started](https://img.shields.io/badge/-Get%20started-ff4655?style=for-the-badge)](https://hugoblox.com/hugo-themes/)
-[![Discord](https://img.shields.io/discord/722225264733716590?style=for-the-badge)](https://discord.com/channels/722225264733716590/742892432458252370/742895548159492138)  
-[![Twitter Follow](https://img.shields.io/twitter/follow/GetResearchDev?label=Follow%20on%20Twitter)](https://twitter.com/wowchemy)
+## Índice
 
-Easily write technical content with plain text Markdown, LaTeX math, diagrams, RMarkdown, or Jupyter, and import publications from BibTeX.
+- [Como rodar localmente](#como-rodar-localmente)
+- [Estrutura de arquivos](#estrutura-de-arquivos)
+- [Guia por tipo de membro](#guia-por-tipo-de-membro)
+  - [Atualizar meu perfil](#atualizar-meu-perfil)
+  - [Adicionar uma publicação](#adicionar-uma-publicação)
+  - [Escrever um post/notícia](#escrever-um-postnotícia)
+- [Deploy automático](#deploy-automático)
+- [Contato e suporte](#contato-e-suporte)
 
-[Check out the latest demo](https://research-group.netlify.app/) of what you'll get in less than 60 seconds, or [view the showcase](https://hugoblox.com/creators/).
+---
 
-The integrated [**Wowchemy**](https://hugoblox.com) website builder and CMS makes it easy to create a beautiful website for free. Edit your site in the CMS (or your favorite editor), generate it with [Hugo](https://github.com/gohugoio/hugo), and deploy with GitHub or Netlify. Customize anything on your site with widgets, light/dark themes, and language packs.
+## Como rodar localmente
 
-- 👉 [**Get Started**](https://hugoblox.com/hugo-themes/)
-- 📚 [View the **documentation**](https://docs.hugoblox.com/)
-- 💬 [Chat with the **Wowchemy research community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- ⬇️ **Automatically import citations from BibTeX** with the [Hugo Academic CLI](https://github.com/GetRD/academic-file-converter)
-- 🐦 Share your new site with the community: [@wowchemy](https://twitter.com/wowchemy) [@GeorgeCushen](https://twitter.com/GeorgeCushen) [#MadeWithWowchemy](https://twitter.com/search?q=%23MadeWithWowchemy&src=typed_query)
-- 🗳 [Take the survey and help us improve #OpenSource](https://forms.gle/NioD9VhUg7PNmdCAA)
-- 🚀 [Contribute improvements](https://github.com/HugoBlox/hugo-blox-builder/blob/main/CONTRIBUTING.md) or [suggest improvements](https://github.com/HugoBlox/hugo-blox-builder/issues)
-- ⬆️ **Updating?** View the [Update Guide](https://docs.hugoblox.com/hugo-tutorials/update/) and [Release Notes](https://github.com/HugoBlox/hugo-blox-builder/releases)
+### Pré-requisitos
+- [Hugo Extended](https://gohugo.io/installation/) v0.136.5+
+- [Go](https://go.dev/dl/) v1.20+
+- [Git](https://git-scm.com/)
 
-## We ask you, humbly, to support this open source movement
+### Passos
 
-Today we ask you to defend the open source independence of the Wowchemy website builder and themes 🐧
+```bash
+# 1. Clone o repositório
+git clone https://github.com/astrofisica-ufs/sabers-dfi-page.git
+cd sabers-dfi-page
 
-We're an open source movement that depends on your support to stay online and thriving, but 99.9% of our creators don't give; they simply look the other way.
+# 2. Instale as dependências do Hugo
+hugo mod tidy
 
-### [❤️ Click here to become a GitHub Sponsor, unlocking awesome perks such as _exclusive academic templates and widgets_](https://github.com/sponsors/gcushen)
+# 3. Inicie o servidor de desenvolvimento
+hugo server
 
-## Demo credits
+# 4. Abra no navegador
+# http://localhost:1313
+```
 
-Please replace the demo images with your own.
+O servidor atualiza automaticamente quando você salva arquivos.
 
-- [Female scientist](https://unsplash.com/photos/uVnRa6mOLOM)
-- [2 Coders](https://unsplash.com/photos/kwzWjTnDPLk)
-- [Cafe](https://unsplash.com/photos/RnDGGnMEOao)
-- Blog posts
-  - https://unsplash.com/photos/AndE50aaHn4
-  - https://unsplash.com/photos/OYzbqk2y26c
-- Avatars
-  - https://unsplash.com/photos/5yENNRbbat4
-  - https://unsplash.com/photos/WNoLnJo7tS8
+---
+
+## Estrutura de arquivos
+
+```
+sabers-dfi-page/
+├── config/_default/          # Configurações globais do site
+│   ├── hugo.yaml             # Nome do site, URL, idioma
+│   ├── params.yaml           # Aparência, SEO, funcionalidades
+│   ├── menus.yaml            # Links da barra de navegação
+│   └── languages.yaml        # Configuração de idiomas
+│
+├── content/                  # Todo o conteúdo do site
+│   ├── _index.md             # Homepage (widgets e seções)
+│   ├── authors/              # Perfis de membros
+│   │   ├── admin/            # Perfil do Prof. Diogo Souto (PI)
+│   │   ├── doutorando-placeholder/
+│   │   ├── mestrando-placeholder/
+│   │   └── ic-placeholder/
+│   ├── publication/          # Publicações científicas
+│   ├── project/              # Linhas de pesquisa
+│   ├── post/                 # Blog e notícias
+│   ├── opportunities/        # Vagas e oportunidades
+│   ├── people/               # Página da equipe
+│   ├── contact/              # Página de contato
+│   └── tour/                 # Página de pesquisa
+│
+├── static/                   # Arquivos estáticos (imagens, PDFs)
+│   └── uploads/              # Local para fotos e documentos
+│
+└── .github/workflows/        # Automação GitHub Actions
+    └── hugo.yml              # Deploy automático para GitHub Pages
+```
+
+---
+
+## Guia por tipo de membro
+
+### Atualizar meu perfil
+
+1. Navegue até `content/authors/SEU-NOME/`
+2. Edite o arquivo `_index.md` — substitua os campos com seus dados reais
+3. Adicione sua foto como `avatar.jpg` na mesma pasta (recomendado: 400×400px)
+
+**Campos importantes:**
+```yaml
+title: Seu Nome Completo
+role: Seu Cargo (ex: Estudante de Doutorado)
+bio: Uma frase sobre sua pesquisa
+interests:
+  - Tema 1
+  - Tema 2
+user_groups:
+  - Doutorandos  # ou: Mestrandos, Iniciação Científica, Alumni
+social:
+  - icon: orcid
+    icon_pack: ai
+    link: https://orcid.org/SEU-ORCID
+```
+
+---
+
+### Adicionar uma publicação
+
+#### Método 1: Manual (recomendado para controle total)
+
+```bash
+# Crie uma pasta para a publicação
+mkdir content/publication/sobrenome-ano-palavra-chave
+
+# Crie o arquivo index.md baseado no modelo
+cp content/publication/souto2018-m-dwarfs/index.md \
+   content/publication/sobrenome-ano-palavra-chave/index.md
+```
+
+Edite os campos:
+```yaml
+title: "Título completo do artigo"
+authors:
+  - admin          # slug do autor (pasta em content/authors/)
+  - Coautor Nome   # ou nome literal para autores externos
+date: "2024-01-15T00:00:00Z"
+doi: "10.xxxx/xxxxx"
+publication_types: ["article-journal"]
+publication: "*Nome da Revista*, Volume, Página"
+abstract: |
+  Resumo do artigo...
+tags:
+  - Tag relevante
+featured: false  # true = aparece em destaque na homepage
+url_pdf: 'https://arxiv.org/pdf/XXXX.XXXXX'
+```
+
+#### Método 2: Importar via BibTeX
+
+```bash
+# Instale o conversor
+pip install academic
+
+# Importe um arquivo .bib
+academic import --bibtex minhas-publicacoes.bib
+
+# Ou importe diretamente do arXiv
+academic import --arxiv 1803.05538
+```
+
+---
+
+### Escrever um post/notícia
+
+```bash
+# Crie uma pasta para o post
+mkdir content/post/meu-post-sobre-tema
+
+# Crie o arquivo
+cat > content/post/meu-post-sobre-tema/index.md << 'EOF'
+---
+title: "Título da Notícia"
+subtitle: "Subtítulo opcional"
+summary: "Resumo em 1-2 frases para a listagem."
+date: "2024-06-01T00:00:00Z"
+draft: false
+featured: false
+authors:
+  - admin
+tags:
+  - Tag 1
+  - Tag 2
+---
+
+Conteúdo do post em Markdown aqui...
+EOF
+```
+
+---
+
+## Deploy automático
+
+O site é publicado automaticamente no GitHub Pages toda vez que um commit é enviado para a branch `main`.
+
+**Fluxo:**
+```
+git add .
+git commit -m "Adiciona publicação de 2024"
+git push origin main
+# → GitHub Actions reconstrói e publica o site em ~2 minutos
+```
+
+Para verificar o status do deploy: GitHub → Actions → "Deploy Hugo site to GitHub Pages"
+
+---
+
+## Contato e suporte
+
+Dúvidas técnicas sobre o site: abra uma issue no GitHub ou contate o Prof. Diogo Souto.
+
+Documentação completa do HugoBlox: https://docs.hugoblox.com

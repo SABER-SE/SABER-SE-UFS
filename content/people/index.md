@@ -1,5 +1,5 @@
 ---
-title: People
+title: Membros
 date: 2022-10-24
 
 type: landing
@@ -7,20 +7,17 @@ type: landing
 sections:
   - block: people
     content:
-      title: Meet the Team
-      # Choose which groups/teams of users to display.
-      #   Edit `user_groups` in each user's profile to add them to one or more of these groups.
+      title: Nossa Equipe
       user_groups:
-          - Principal Investigators
-          - Researchers
-          - Grad Students
-          - Administration
-          - Visitors
+          - Investigador Principal
+          - Doutorandos
+          - Mestrandos
+          - Iniciação Científica
           - Alumni
       sort_by: Params.last_name
       sort_ascending: true
     design:
-      show_interests: false
+      show_interests: true
       show_role: true
       show_social: true
 ---
