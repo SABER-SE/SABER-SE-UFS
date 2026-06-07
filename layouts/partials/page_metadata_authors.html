@@ -1,0 +1,15 @@
+{{/* Display author list as plain text from publication front matter. */}}
+{{- if .Params.authors -}}
+  {{/* Build set of highlighted author names from author profiles with highlight_name: true */}}
+  {{- $highlighted := slice -}}
+  {{- range where site.Pages "Section" "authors" -}}
+    {{- if .Params.highlight_name -}}
+      {{- $highlighted = $highlighted | append .Title -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- range $index, $author := .Params.authors -}}
+    {{- if gt $index 0 }}, {{ end -}}
+    {{- if in $highlighted $author -}}<span class="author-highlighted">{{- $author -}}</span>{{- else -}}{{- $author -}}{{- end -}}
+  {{- end -}}
+{{- end -}}

@@ -1314,3 +1314,43 @@ body.dark .portrait-title h3,
 .dark .portrait-title h3 {
   color: var(--saberse-cyan) !important;
 }
+
+// ──────────────────────────────────────────────
+// Autores nas publicações — texto simples discreto
+// ──────────────────────────────────────────────
+
+// Metadata block (autores + data)
+.view-compact .stream-meta.article-metadata,
+.view-list-item .article-metadata {
+  font-size: 0.85rem !important;
+  color: #6b7280 !important;
+  margin: 0.2rem 0 0.4rem 0 !important;
+  line-height: 1.4 !important;
+}
+
+// Garante que não haja links nos autores
+.view-compact .stream-meta.article-metadata a,
+.view-list-item .article-metadata a {
+  color: inherit !important;
+  text-decoration: none !important;
+  pointer-events: none !important;
+}
+
+// Nome destacado (Diogo Souto) em bold
+.article-metadata .author-highlighted {
+  font-weight: 600 !important;
+  color: var(--saberse-cyan) !important;
+}
+
+// Autores no estilo citation (APA) — span li-cite-author
+.pub-list-item .article-metadata.li-cite-author {
+  font-size: 0.88rem !important;
+  color: #6b7280 !important;
+}
+
+// Destaques em qualquer view de publicação
+.pub-list-item .author-highlighted,
+.article-metadata .author-highlighted {
+  font-weight: 600 !important;
+  color: var(--saberse-cyan) !important;
+}
