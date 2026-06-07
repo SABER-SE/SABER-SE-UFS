@@ -5,13 +5,14 @@ last_name: Calisto
 
 superuser: false
 
-role: Graduando (Iniciação Científica)
+role: Graduando — Iniciação Científica
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Graduando em Física com iniciação científica em análise de dados de levantamentos espectroscópicos.
+bio: >
+  Cameron Calisto é graduando em Astrofísica na UFS e bolsista de iniciação científica no Grupo Saber-SE, trabalhando com análise de catálogos de grandes levantamentos espectroscópicos.
 
 interests:
   - Levantamentos Espectroscópicos
@@ -21,7 +22,7 @@ interests:
 
 education:
   courses:
-    - course: Bacharelado em Física (em andamento)
+    - course: Graduação em Astrofísica (em andamento)
       institution: Universidade Federal de Sergipe (UFS)
       year: 2027
 
@@ -29,17 +30,37 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:cameron.calisto@academico.ufs.br'
-
+    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
-email: 'cameron.calisto@academico.ufs.br'
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
+  - icon: github
+    icon_pack: fab
+    link: 'https://github.com/PREENCHER'
+    label: GitHub
 
-highlight_name: false
+email: 'cameron.calisto@academico.ufs.br'
+highlight_name: true
 
 user_groups:
   - Graduandos
 ---
 
-**Cameron Calisto** é graduando em Física na UFS e bolsista de iniciação científica no Grupo SABER-SE. Trabalha com a análise de catálogos de grandes levantamentos espectroscópicos como o APOGEE, explorando as propriedades de populações estelares do disco galáctico.
+## Sobre
+
+*Esta seção será preenchida em breve.*
+
+**Cameron Calisto** integra o Grupo Saber-SE da Universidade Federal de Sergipe.
+
+## Pesquisa em Andamento
+
+*Informações sobre projetos em andamento serão adicionadas em breve.*

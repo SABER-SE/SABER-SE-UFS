@@ -5,23 +5,27 @@ last_name: Carvalho
 
 superuser: false
 
-role: Mestranda
+role: Mestranda — PPGFI/UFS
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Mestranda em Física com foco em síntese espectral e modelos de atmosferas estelares.
+bio: >
+  Ingryd Victoria de Carvalho é mestranda em Física no PPGFI/UFS. Desenvolve pesquisa em síntese espectral e modelos de atmosferas estelares no Grupo Saber-SE.
 
 interests:
   - Síntese Espectral
   - Modelos de Atmosferas Estelares
-  - Abundâncias de Ferro
+  - Abundâncias Químicas
   - Espectroscopia Óptica
 
 education:
   courses:
-    - course: Bacharelado em Física
+    - course: Mestrado em Física (em andamento)
+      institution: PPGFI — Universidade Federal de Sergipe (UFS)
+      year: 2026
+    - course: Graduação em Física
       institution: Universidade Federal de Sergipe (UFS)
       year: 2023
 
@@ -29,17 +33,37 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:ingryd.carvalho@academico.ufs.br'
-
+    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
-email: 'ingryd.carvalho@academico.ufs.br'
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
+  - icon: github
+    icon_pack: fab
+    link: 'https://github.com/PREENCHER'
+    label: GitHub
 
-highlight_name: false
+email: 'ingryd.carvalho@academico.ufs.br'
+highlight_name: true
 
 user_groups:
   - Mestrandos
 ---
 
-**Ingryd Victoria de Carvalho** é mestranda em Física na UFS. Sua pesquisa no Grupo SABER-SE envolve o desenvolvimento de rotinas de síntese espectral para a determinação automatizada de parâmetros estelares e abundâncias de ferro em grandes amostras de estrelas.
+## Sobre
+
+*Esta seção será preenchida em breve.*
+
+**Ingryd Victoria de Carvalho** integra o Grupo Saber-SE da Universidade Federal de Sergipe.
+
+## Pesquisa em Andamento
+
+*Informações sobre projetos em andamento serão adicionadas em breve.*

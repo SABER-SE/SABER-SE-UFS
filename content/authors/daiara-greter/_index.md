@@ -5,13 +5,14 @@ last_name: Greter
 
 superuser: false
 
-role: Graduanda (Iniciação Científica)
+role: Graduanda — Iniciação Científica
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Graduanda em Física com pesquisa em astrofísica estelar e processamento de espectros.
+bio: >
+  Daiara Greter é graduanda em Astrofísica na UFS e bolsista de iniciação científica no Grupo Saber-SE, desenvolvendo habilidades em processamento de espectros estelares.
 
 interests:
   - Astrofísica Estelar
@@ -21,25 +22,45 @@ interests:
 
 education:
   courses:
-    - course: Bacharelado em Física (em andamento)
+    - course: Graduação em Astrofísica (em andamento)
       institution: Universidade Federal de Sergipe (UFS)
-      year: 2026
+      year: 2027
 
 social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:daiara.greter@academico.ufs.br'
-
+    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
-email: 'daiara.greter@academico.ufs.br'
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
+  - icon: github
+    icon_pack: fab
+    link: 'https://github.com/PREENCHER'
+    label: GitHub
 
-highlight_name: false
+email: 'daiara.greter@academico.ufs.br'
+highlight_name: true
 
 user_groups:
   - Graduandos
 ---
 
-**Daiara Greter** é graduanda em Física na UFS e bolsista de iniciação científica no Grupo SABER-SE. Trabalha com processamento e análise de espectros estelares, aprendendo técnicas de redução de dados e síntese espectral.
+## Sobre
+
+*Esta seção será preenchida em breve.*
+
+**Daiara Greter** integra o Grupo Saber-SE da Universidade Federal de Sergipe.
+
+## Pesquisa em Andamento
+
+*Informações sobre projetos em andamento serão adicionadas em breve.*

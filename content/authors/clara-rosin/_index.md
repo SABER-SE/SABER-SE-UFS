@@ -5,13 +5,14 @@ last_name: Rosin
 
 superuser: false
 
-role: Egressa (Iniciação Científica)
+role: Egressa — Iniciação Científica
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Ex-bolsista de iniciação científica do Grupo SABER-SE.
+bio: >
+  Ex-bolsista de iniciação científica do Grupo Saber-SE.
 
 interests:
   - Astrofísica Observacional
@@ -20,20 +21,32 @@ interests:
 
 education:
   courses:
-    - course: Licenciatura em Física
+    - course: Graduação em Física
       institution: Universidade Federal de Sergipe (UFS)
       year: 2023
 
-highlight_name: false
-
-user_groups:
-  - Egressos
 social:
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
 
+highlight_name: false
+
+user_groups:
+  - Egressos
 ---
 
-**Clara Rosin** foi bolsista de iniciação científica no Grupo SABER-SE durante a graduação em Física na UFS, com participação em projetos de análise espectroscópica e processamento de dados observacionais.
+## Sobre
+
+**Clara Rosin** é egresso(a) do Grupo Saber-SE da Universidade Federal de Sergipe.
+
+*Informações adicionais serão adicionadas em breve.*

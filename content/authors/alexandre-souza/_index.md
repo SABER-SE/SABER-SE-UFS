@@ -5,23 +5,27 @@ last_name: Souza
 
 superuser: false
 
-role: Mestrando
+role: Mestrando — PPGFI/UFS
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Mestrando em Física investigando parâmetros estelares de anãs-M com foco em exoplanetas.
+bio: >
+  Alexandre Souza é mestrando em Astrofísica pelo PPGFI/UFS. Caracterizou exoplanetas de estrelas solares via APOGEE na graduação e trabalha com modelagem atmosférica exoplanetária.
 
 interests:
-  - Estrelas Anãs-M
-  - Parâmetros Estelares
-  - Habitabilidade Planetária
-  - Espectroscopia no Infravermelho
+  - Exoplanetas
+  - Estrelas Tipo Solar
+  - Espectroscopia APOGEE
+  - Modelagem Atmosférica Exoplanetária
 
 education:
   courses:
-    - course: Bacharelado em Física
+    - course: Mestrado em Astrofísica (em andamento)
+      institution: PPGFI — Universidade Federal de Sergipe (UFS)
+      year: 2026
+    - course: Graduação em Astrofísica
       institution: Universidade Federal de Sergipe (UFS)
       year: 2023
 
@@ -29,17 +33,35 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:alexandre.souza@academico.ufs.br'
-
+    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
-email: 'alexandre.souza@academico.ufs.br'
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
+  - icon: github
+    icon_pack: fab
+    link: 'https://github.com/PREENCHER'
+    label: GitHub
 
-highlight_name: false
+email: 'alexandre.souza@academico.ufs.br'
+highlight_name: true
 
 user_groups:
   - Mestrandos
 ---
 
-**Alexandre Souza** é mestrando em Física na UFS. Sua pesquisa no Grupo SABER-SE foca na caracterização espectroscópica de estrelas anãs-M selecionadas como candidatas a hospedar planetas em zona habitável, derivando parâmetros atmosféricos precisos a partir de dados do APOGEE.
+## Sobre
+
+**Alexandre Souza** é mestrando no Grupo Saber-SE. Na graduação, caracterizou exoplanetas de estrelas solares a partir de dados do levantamento APOGEE.
+
+## Pesquisa em Andamento
+
+Trabalha com modelagem atmosférica de exoplanetas, conectando a composição química das estrelas hospedeiras às propriedades de seus planetas.

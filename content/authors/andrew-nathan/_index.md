@@ -5,41 +5,60 @@ last_name: Nathan
 
 superuser: false
 
-role: Graduando (Iniciação Científica)
+role: Graduando — Iniciação Científica / Apoio Pedagógico
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Graduando em Física desenvolvendo iniciação científica em análise de dados espectroscópicos.
+bio: >
+  Andrew Nathan é graduando em Astrofísica na UFS. Organiza workshops e eventos do projeto Apoio Pedagógico. Artista independente e defensor da educação inclusiva (TEA).
 
 interests:
-  - Análise de Dados Astronômicos
-  - Programação Científica (Python)
-  - Espectroscopia Estelar
-  - Astrofísica Computacional
+  - Caracterização Estelar
+  - Educação Inclusiva
+  - Divulgação Científica
+  - Arte
 
 education:
   courses:
-    - course: Bacharelado em Física (em andamento)
+    - course: Graduação em Astrofísica (em andamento)
       institution: Universidade Federal de Sergipe (UFS)
-      year: 2026
+      year: 2027
 
 social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:andrew.nathan@academico.ufs.br'
-
+    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
-email: 'andrew.nathan@academico.ufs.br'
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
+  - icon: github
+    icon_pack: fab
+    link: 'https://github.com/PREENCHER'
+    label: GitHub
 
-highlight_name: false
+email: 'andrew.nathan@academico.ufs.br'
+highlight_name: true
 
 user_groups:
   - Graduandos
 ---
 
-**Andrew Nathan** é graduando em Física na UFS e bolsista de iniciação científica no Grupo SABER-SE. Desenvolve habilidades em análise de dados espectroscópicos com Python, contribuindo para projetos de determinação de parâmetros estelares fundamentais.
+## Sobre
+
+**Andrew Nathan** é graduando em Astrofísica na UFS e bolsista de Iniciação Científica no Grupo Saber-SE. Também atua no projeto Apoio Pedagógico, organizando workshops e eventos de divulgação científica. É artista independente e defensor da educação inclusiva para pessoas com TEA.
+
+## Pesquisa em Andamento
+
+Desenvolve iniciação científica em caracterização estelar, combinando análise de dados espectroscópicos com seu interesse em tornar a ciência mais acessível.

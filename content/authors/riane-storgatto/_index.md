@@ -5,13 +5,14 @@ last_name: Storgatto
 
 superuser: false
 
-role: Graduanda (Iniciação Científica)
+role: Graduanda — Iniciação Científica
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Graduanda em Física com iniciação científica em caracterização de exoplanetas.
+bio: >
+  Riane Storgatto é graduanda em Astrofísica na UFS e bolsista de iniciação científica no Grupo Saber-SE, investigando estrelas hospedeiras de exoplanetas.
 
 interests:
   - Exoplanetas
@@ -21,7 +22,7 @@ interests:
 
 education:
   courses:
-    - course: Bacharelado em Física (em andamento)
+    - course: Graduação em Astrofísica (em andamento)
       institution: Universidade Federal de Sergipe (UFS)
       year: 2027
 
@@ -29,17 +30,37 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:riane.storgatto@academico.ufs.br'
-
+    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
-email: 'riane.storgatto@academico.ufs.br'
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
+  - icon: github
+    icon_pack: fab
+    link: 'https://github.com/PREENCHER'
+    label: GitHub
 
-highlight_name: false
+email: 'riane.storgatto@academico.ufs.br'
+highlight_name: true
 
 user_groups:
   - Graduandos
 ---
 
-**Riane Storgatto** é graduanda em Física na UFS e bolsista de iniciação científica no Grupo SABER-SE. Investiga as propriedades de estrelas hospedeiras de exoplanetas a partir de dados espectroscópicos, contribuindo para a caracterização de sistemas planetários com potencial habitabilidade.
+## Sobre
+
+*Esta seção será preenchida em breve.*
+
+**Riane Storgatto** integra o Grupo Saber-SE da Universidade Federal de Sergipe.
+
+## Pesquisa em Andamento
+
+*Informações sobre projetos em andamento serão adicionadas em breve.*

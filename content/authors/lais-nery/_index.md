@@ -5,13 +5,14 @@ last_name: Nery
 
 superuser: false
 
-role: Egressa (Mestrado)
+role: Egressa — Mestrado (2023)
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Ex-mestranda do Grupo SABER-SE, com pesquisa em estrelas de carbono e AGB.
+bio: >
+  Ex-mestranda do Grupo Saber-SE, com pesquisa em estrelas de carbono e AGB.
 
 interests:
   - Estrelas AGB
@@ -24,17 +25,32 @@ education:
     - course: Mestrado em Física
       institution: Universidade Federal de Sergipe (UFS)
       year: 2023
+    - course: Graduação em Física
+      institution: Universidade Federal de Sergipe (UFS)
+      year: 2021
 
-highlight_name: false
-
-user_groups:
-  - Egressos
 social:
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
 
+highlight_name: false
+
+user_groups:
+  - Egressos
 ---
 
-**Laís Nery** concluiu o Mestrado em Física na UFS pelo Grupo SABER-SE. Sua dissertação investigou as propriedades espectroscópicas de estrelas AGB e de carbono, com foco nos processos de nucleossíntese e enriquecimento do meio interestelar.
+## Sobre
+
+**Laís Nery** é egresso(a) do Grupo Saber-SE da Universidade Federal de Sergipe.
+
+*Informações adicionais serão adicionadas em breve.*

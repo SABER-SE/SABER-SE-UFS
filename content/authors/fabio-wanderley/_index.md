@@ -5,13 +5,14 @@ last_name: Wanderley
 
 superuser: false
 
-role: Egresso (Doutorado)
+role: Egresso — Doutorado (2024)
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Ex-doutorando do Grupo SABER-SE, com tese sobre estrelas anãs-M e exoplanetas.
+bio: >
+  Ex-doutorando do Grupo Saber-SE, com tese sobre estrelas anãs-M e exoplanetas.
 
 interests:
   - Estrelas Anãs-M
@@ -24,17 +25,32 @@ education:
     - course: Doutorado em Física
       institution: Universidade Federal de Sergipe (UFS)
       year: 2024
+    - course: Mestrado em Física
+      institution: Universidade Federal de Sergipe (UFS)
+      year: 2020
 
-highlight_name: false
-
-user_groups:
-  - Egressos
 social:
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
 
+highlight_name: false
+
+user_groups:
+  - Egressos
 ---
 
-**Fabio Wanderley** concluiu o Doutorado em Física na UFS pelo Grupo SABER-SE. Sua tese abordou a caracterização espectroscópica de estrelas anãs-M hospedeiras de exoplanetas, com foco na determinação de abundâncias químicas e avaliação do potencial de habitabilidade dos sistemas planetários.
+## Sobre
+
+**Fabio Wanderley** é egresso(a) do Grupo Saber-SE da Universidade Federal de Sergipe.
+
+*Informações adicionais serão adicionadas em breve.*

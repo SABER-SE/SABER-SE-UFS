@@ -5,44 +5,66 @@ last_name: Andrade
 
 superuser: false
 
-role: Doutorando
+role: Doutorando — PPGFI/UFS
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
-bio: Doutorando em Física com foco em estrelas anãs-M e caracterização de sistemas exoplanetários.
+bio: >
+  Anderson Andrade é doutorando em Astrofísica pelo PPGFI/UFS. Estuda probabilidades de transições moleculares de Hidreto de Ferro (FeH) em estrelas anãs-K via interferometria. Graduado pelo IF Sertão Pernambucano.
 
 interests:
-  - Estrelas Anãs-M
-  - Exoplanetas
-  - Espectroscopia no Infravermelho
-  - Parâmetros Estelares Fundamentais
+  - Estrelas Anãs-K
+  - Hidreto de Ferro (FeH)
+  - Interferometria
+  - Transições Moleculares
 
 education:
   courses:
+    - course: Doutorado em Astrofísica (em andamento)
+      institution: PPGFI — Universidade Federal de Sergipe (UFS)
+      year: 2027
     - course: Mestrado em Física
-      institution: Universidade Federal de Sergipe (UFS)
+      institution: PPGFI — Universidade Federal de Sergipe (UFS)
       year: 2022
-    - course: Bacharelado em Física
-      institution: Universidade Federal de Sergipe (UFS)
+    - course: Graduação em Física
+      institution: IF Sertão Pernambucano
       year: 2020
 
 social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:anderson.andrade@academico.ufs.br'
-
+    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/PREENCHER'
     label: Currículo Lattes
-email: 'anderson.andrade@academico.ufs.br'
+  - icon: google-scholar
+    icon_pack: ai
+    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    label: Google Scholar
+  - icon: orcid
+    icon_pack: ai
+    link: 'https://orcid.org/PREENCHER'
+    label: ORCID
+  - icon: github
+    icon_pack: fab
+    link: 'https://github.com/PREENCHER'
+    label: GitHub
 
-highlight_name: false
+email: 'anderson.andrade@academico.ufs.br'
+highlight_name: true
 
 user_groups:
   - Doutorandos
 ---
 
-**Anderson Andrade** é doutorando em Física na UFS. No Grupo SABER-SE, investiga a caracterização espectroscópica de estrelas anãs-M, com foco na determinação de parâmetros fundamentais e abundâncias químicas para sistemas com exoplanetas detectados.
+## Sobre
+
+**Anderson Andrade** é graduado pelo IF Sertão Pernambucano e desenvolve seu doutorado em Astrofísica no PPGFI/UFS no Grupo Saber-SE.
+
+## Pesquisa em Andamento
+
+Estuda as probabilidades de transições moleculares do Hidreto de Ferro (FeH) em estrelas anãs-K utilizando técnicas de interferometria, com o objetivo de refinar as análises espectroscópicas de estrelas frias.
