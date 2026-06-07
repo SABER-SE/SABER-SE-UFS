@@ -1,0 +1,10 @@
+# Tipografia científica do grupo SABER-SE
+name = "SABER-SE"
+
+# Google Fonts API v2
+google_fonts = "family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700"
+
+heading_font = "Playfair Display"
+body_font    = "Inter"
+nav_font     = "Inter"
+mono_font    = "JetBrains Mono"

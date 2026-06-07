@@ -1,0 +1,15 @@
+{{/* Força dark mode na primeira visita (sem preferência do sistema ou salva no localStorage) */}}
+<script>
+  (function() {
+    var stored = localStorage.getItem('wcTheme');
+    // Se o usuário ainda não escolheu (null ou 2 = auto) e o sistema não tem preferência,
+    // define dark (1) como padrão do site.
+    if (stored === null) {
+      var prefersDark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (!prefersDark && !prefersLight) {
+        localStorage.setItem('wcTheme', '1');
+      }
+    }
+  })();
+</script>

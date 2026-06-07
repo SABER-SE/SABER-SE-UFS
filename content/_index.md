@@ -6,27 +6,44 @@ type: landing
 
 sections:
   # ============================================================
-  # HERO — Banner principal
+  # HERO — Banner principal com campo estelar
   # ============================================================
   - block: hero
     content:
       title: |
-        SABERS-DFI
-        Grupo de Astrofísica
-      image:
-        filename: welcome.jpg
+        Saber-SE
       text: |
-        <br>
+        **Stellar Abundances · Exoplanets · Red Giants & Stellar Evolution**
 
-        Investigamos a natureza das **estrelas**, seus planetas e a **evolução química da Galáxia** por meio de espectroscopia de alta resolução e modelagem atmosférica. Somos parte do **Departamento de Física** da **Universidade Federal de Sergipe**.
+        Grupo de Astrofísica Estelar da Universidade Federal de Sergipe, Brasil.
+        Investigamos estrelas, seus planetas e a evolução química da Galáxia
+        por meio de espectroscopia de alta resolução no infravermelho.
 
-        <a class="btn btn-primary btn-lg" href="./tour/">
-          🔭 Conheça nossa pesquisa
-        </a>
-        &nbsp;
-        <a class="btn btn-outline-light btn-lg" href="./people/">
-          👥 Conheça a equipe
-        </a>
+        <p class="hero-cta-group">
+          <a class="btn btn-saberse-primary btn-lg" href="./tour/">
+            Pesquisa
+          </a>
+          <a class="btn btn-saberse-outline btn-lg" href="./publication/">
+            Publicações
+          </a>
+        </p>
+
+        <p class="hero-image-credit">
+          Imagem: Pilares da Criação · NASA/ESA/Hubble Heritage Team (STScI/AURA) · Domínio Público
+        </p>
+      cta:
+        url: ''
+        label: ''
+    design:
+      background:
+        image:
+          filename: hero-starfield.jpg
+          filters:
+            brightness: 0.38
+          parallax: false
+          position: center
+          size: cover
+        text_color_light: true
 
   # ============================================================
   # MÉTRICAS — Contadores (usando markdown com HTML)

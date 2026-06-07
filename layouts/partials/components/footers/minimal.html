@@ -1,0 +1,41 @@
+{{/* Rodapé customizado — Grupo Saber-SE */}}
+
+<div class="footer-inner">
+
+  {{/* Linha 1 — Logo/nome + links sociais */}}
+  <div class="footer-brand">
+    <span class="footer-title">Saber-SE</span>
+    <span class="footer-subtitle">Grupo de Astrofísica · UFS</span>
+  </div>
+
+  <div class="footer-social">
+    <a href="https://scholar.google.com/citations?user=n-B4YeYAAAAJ"
+       target="_blank" rel="noopener" title="Google Scholar" class="footer-social-link">
+      <i class="ai ai-google-scholar"></i> Scholar
+    </a>
+    <a href="https://orcid.org/0000-0001-8437-5469"
+       target="_blank" rel="noopener" title="ORCID" class="footer-social-link">
+      <i class="ai ai-orcid"></i> ORCID
+    </a>
+    <a href="https://github.com/SABER-SE"
+       target="_blank" rel="noopener" title="GitHub" class="footer-social-link">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+  </div>
+
+  {{/* Linha 2 — Crédito da imagem + copyright */}}
+  <div class="footer-bottom">
+    <span class="footer-image-credit">
+      Imagem hero: Pilares da Criação &middot;
+      <a href="https://hubblesite.org" target="_blank" rel="noopener">NASA/ESA Hubble</a>
+      &middot; Domínio Público
+    </span>
+    <span class="footer-copyright">
+      &copy; {{ now.Year }} Grupo Saber-SE &middot; Universidade Federal de Sergipe
+    </span>
+  </div>
+
+  {{/* Licença (mantida do template original) */}}
+  {{ partial "site_footer_license" . }}
+
+</div>

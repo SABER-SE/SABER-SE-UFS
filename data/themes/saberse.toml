@@ -1,0 +1,36 @@
+# Tema SABER-SE — identidade visual do grupo de Astrofísica da UFS
+name = "SABER-SE"
+
+# ─────────────────────────────────────────────
+# MODO ESCURO (padrão do site)
+# ─────────────────────────────────────────────
+[dark]
+  primary          = "#4a9eca"   # azul ciano estelar — botões, links, destaque
+  link             = "#4a9eca"
+  link_hover       = "#f5c842"   # amarelo sequência principal
+
+  background           = "#0a0f1e"   # azul noturno profundo
+  home_section_odd     = "#0a0f1e"
+  home_section_even    = "#111827"   # levemente mais claro para contraste
+
+  menu_primary         = "#0a0f1e"
+  menu_text            = "#a0aec0"   # cinza claro
+  menu_text_active     = "#4a9eca"   # ciano
+  menu_title           = "#e8edf5"   # branco suave
+
+# ─────────────────────────────────────────────
+# MODO CLARO (toggle)
+# ─────────────────────────────────────────────
+[light]
+  primary          = "#1a2a4a"   # azul marinho
+  link             = "#1a2a4a"
+  link_hover       = "#4a9eca"   # ciano no hover
+
+  background           = "#f8f9fc"
+  home_section_odd     = "#f8f9fc"
+  home_section_even    = "#eef2f7"
+
+  menu_primary         = "#f8f9fc"
+  menu_text            = "#1a2a4a"
+  menu_text_active     = "#4a9eca"
+  menu_title           = "#0a0f1e"
