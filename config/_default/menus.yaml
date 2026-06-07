@@ -4,7 +4,7 @@
 
 main:
   - name: Pesquisa
-    url: tour
+    url: research
     weight: 10
   - name: Notícias
     url: post
