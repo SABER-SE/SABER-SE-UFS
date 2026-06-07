@@ -1,0 +1,17 @@
+# Languages
+#   Documentação: https://docs.hugoblox.com/reference/language/
+
+# Idioma padrão: Português (Brasil)
+pt:
+  languageCode: pt-br
+  title: SABERSE-UFS — Grupo de Astrofísica da UFS
+  params:
+    description: 'Grupo de pesquisa em Astrofísica Estelar, Exoplanetas e Evolução Química da Galáxia — Universidade Federal de Sergipe (UFS).'
+
+# Inglês como segundo idioma (comentado; descomentar para site bilíngue)
+#en:
+#  languageCode: en-us
+#  contentDir: content/en
+#  title: SABERS-DFI — Astrophysics Group at UFS
+#  params:
+#    description: 'Research group in Stellar Astrophysics, Exoplanets and Galactic Chemical Evolution — Universidade Federal de Sergipe (UFS).'

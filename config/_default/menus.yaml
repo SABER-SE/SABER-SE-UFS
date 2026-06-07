@@ -1,0 +1,23 @@
+# Links de Navegação
+#   Para ligar a um widget da homepage, use URL como '#nome-do-widget'.
+#   O parâmetro weight define a ordem dos links no menu.
+
+main:
+  - name: Pesquisa
+    url: tour
+    weight: 10
+  - name: Notícias
+    url: post
+    weight: 20
+  - name: Membros
+    url: people
+    weight: 30
+  - name: Publicações
+    url: publication
+    weight: 50
+  - name: Oportunidades
+    url: opportunities
+    weight: 55
+  - name: Contato
+    url: contact
+    weight: 60
