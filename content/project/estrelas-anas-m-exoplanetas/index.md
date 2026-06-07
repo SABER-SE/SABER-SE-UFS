@@ -16,9 +16,9 @@ date: "2019-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Sistema exoplanetário — NASA/JPL-Caltech (domínio público)"
+  caption: "Exoplaneta Kepler-22b — NASA/Ames/JPL-Caltech (domínio público)"
   focal_point: Smart
-  filename: research-exoplanets.jpg
+  filename: research-anas-m-exoplanetas.jpg
 
 links:
   - icon: telescope
@@ -65,4 +65,4 @@ Nesta linha de pesquisa, utilizamos espectroscopia de alta resolução no infrav
 - Souto et al. 2019, *ApJ*, 874, 97 — Ross 128b
 
 ---
-*Imagem: Sistema exoplanetário (ilustração artística) · Crédito: NASA/JPL-Caltech · Domínio Público*
+*Imagem: Exoplaneta Kepler-22b (ilustração artística) · Crédito: NASA/Ames/JPL-Caltech · Domínio Público*
