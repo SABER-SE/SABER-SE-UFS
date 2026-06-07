@@ -1237,3 +1237,80 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
     font-size: clamp(1.4rem, 5vw, 1.8rem) !important;
   }
 }
+
+// ============================================================
+// PÁGINA DE MEMBROS (/people) — DIVISORES E CARDS
+// ============================================================
+
+// Título de cada categoria (h2.mb-4 é o gerado pelo HugoBlox)
+.wg-people h2.mb-4 {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--saberse-navy) !important;
+  letter-spacing: 0.02em !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  position: relative;
+  width: 100%;
+}
+
+// Linha divisória gradiente ciano → dourado abaixo do título
+.wg-people h2.mb-4::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.1)
+  );
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+// Espaçamento entre membros
+.people-person {
+  margin-bottom: 1.2rem !important;
+}
+
+// Avatar: circular com borda ciano
+.avatar.avatar-circle {
+  border: 3px solid var(--saberse-cyan) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.people-person:hover .avatar.avatar-circle {
+  border-color: var(--saberse-yellow) !important;
+  box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.2) !important;
+}
+
+// Nome do membro
+.portrait-title h2 {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin-top: 0.6rem !important;
+  margin-bottom: 0.2rem !important;
+}
+
+// Cargo/role
+.portrait-title h3 {
+  font-size: 0.82rem !important;
+  color: var(--saberse-cyan) !important;
+  margin-top: 0 !important;
+}
+
+// Modo escuro
+body.dark .wg-people h2.mb-4,
+.dark .wg-people h2.mb-4 {
+  color: var(--saberse-text) !important;
+}
+
+body.dark .portrait-title h3,
+.dark .portrait-title h3 {
+  color: var(--saberse-cyan) !important;
+}
