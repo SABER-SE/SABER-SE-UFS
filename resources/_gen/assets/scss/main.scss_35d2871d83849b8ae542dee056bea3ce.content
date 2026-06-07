@@ -10572,3 +10572,76 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
     flex-direction: row;
     gap: 1.5rem;
     justify-content: center; } }
+
+.wg-slider .carousel-item.fullscreen {
+  height: 70vh !important;
+  min-height: 400px !important; }
+
+.wg-slider .wg-hero.container {
+  margin-left: 6% !important;
+  margin-right: auto !important;
+  max-width: 560px !important;
+  text-align: left !important; }
+
+.wg-slider .carousel-item:first-child .wg-hero.container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important; }
+
+.wg-slider h1.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--saberse-text);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+  margin-bottom: 1rem;
+  line-height: 1.25; }
+
+.wg-slider p.hero-lead {
+  font-size: 1rem;
+  color: rgba(232, 237, 245, 0.9);
+  line-height: 1.7;
+  margin-bottom: 1.5rem !important; }
+
+.wg-slider .btn-light {
+  background-color: var(--saberse-cyan) !important;
+  border-color: var(--saberse-cyan) !important;
+  color: #fff !important;
+  padding: 0.55rem 1.4rem;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s; }
+  .wg-slider .btn-light i {
+    color: #fff !important; }
+  .wg-slider .btn-light:hover {
+    background-color: var(--saberse-yellow) !important;
+    border-color: var(--saberse-yellow) !important;
+    color: var(--saberse-night) !important; }
+    .wg-slider .btn-light:hover i {
+      color: var(--saberse-night) !important; }
+
+.wg-slider .carousel-indicators li {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--saberse-cyan);
+  opacity: 0.5;
+  border-top: none;
+  border-bottom: none; }
+  .wg-slider .carousel-indicators li.active {
+    opacity: 1;
+    background-color: var(--saberse-yellow); }
+
+.wg-slider .carousel-control-prev-icon,
+.wg-slider .carousel-control-next-icon {
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.8)); }
+
+@media (max-width: 767px) {
+  .wg-slider .carousel-item.fullscreen {
+    height: 80vw !important;
+    min-height: 320px !important; }
+  .wg-slider h1.hero-title {
+    font-size: 1.6rem; }
+  .wg-slider .wg-hero.container {
+    margin-left: auto !important;
+    text-align: center !important; } }

@@ -46,6 +46,113 @@ sections:
         text_color_light: true
 
   # ============================================================
+  # SLIDER — Linhas de pesquisa em destaque
+  # ============================================================
+  - block: slider
+    content:
+      slides:
+      - title: "Bem-vindos ao Saber-SE"
+        content: "Somos um grupo de astrofísica da Universidade Federal de Sergipe dedicado ao estudo de estrelas, exoplanetas e à evolução química da Galáxia. Utilizamos espectroscopia de alta resolução no infravermelho em colaboração com projetos internacionais como SDSS-V/APOGEE e PLATO."
+        align: center
+        background:
+          image:
+            filename: hero-starfield.jpg
+            filters:
+              brightness: 0.45
+          position: center
+          color: '#0a0f1e'
+        link:
+          icon: users
+          icon_pack: fas
+          text: Conheça o grupo
+          url: ../people/
+
+      - title: "Conexão Estrela-Planeta"
+        content: "A interligação química entre estrelas e planetas revela segredos sobre formação planetária e evolução estelar. Ao decifrar assinaturas químicas como a relação carbono/oxigênio, mapeamos a origem dos planetas e os ambientes que moldaram sua composição."
+        align: left
+        background:
+          image:
+            filename: research/anas-m-exoplanetas.jpg
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#1a2a4a'
+        link:
+          icon: telescope
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../research/
+
+      - title: "Atmosferas Exoplanetárias"
+        content: "Analisar espectros de luz transmitidos através das atmosferas exoplanetárias desvenda segredos sobre composição e condições climáticas de mundos distantes. A presença de moléculas como água e metano fornece pistas cruciais sobre habitabilidade."
+        align: left
+        background:
+          image:
+            filename: research/atmosferas-exoplanetarias.jpg
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#1a2a4a'
+        link:
+          icon: globe
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../research/
+
+      - title: "Campos Magnéticos Estelares"
+        content: "Os campos magnéticos estelares moldam a atmosfera das estrelas e influenciam todo o ambiente circundante. Compreender esses campos amplia nossa visão sobre seu impacto em sistemas planetários e na habitabilidade de exoplanetas."
+        align: left
+        background:
+          image:
+            filename: research/campos-magneticos.jpg
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#1a2a4a'
+        link:
+          icon: bolt
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../research/
+
+      - title: "Inomogeneidades Químicas Estelares"
+        content: "Variações na composição química das estrelas oferecem um relato detalhado das complexas interações estelares e processos nucleossintéticos ao longo de bilhões de anos."
+        align: left
+        background:
+          image:
+            filename: research/inomogeneidades-quimicas.jpg
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#1a2a4a'
+        link:
+          icon: atom
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../research/
+
+      - title: "Evolução Estelar e Arqueologia Galáctica"
+        content: "Investigar a composição química das estrelas mais antigas desvenda os capítulos iniciais da história cósmica. Rastrear a evolução estelar permite compreender como as estrelas contribuíram para a formação de sistemas planetários."
+        align: left
+        background:
+          image:
+            filename: research/evolucao-galactica.jpg
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#1a2a4a'
+        link:
+          icon: star
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: ../research/
+    design:
+      slide_height: ''
+      is_fullscreen: true
+      loop: true
+      interval: 5000
+
+  # ============================================================
   # MÉTRICAS — Contadores (usando markdown com HTML)
   # ============================================================
   - block: markdown
