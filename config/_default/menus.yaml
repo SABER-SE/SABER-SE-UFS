@@ -4,20 +4,20 @@
 
 main:
   - name: Pesquisa
-    url: research
+    url: /research
     weight: 10
-  - name: Notícias
-    url: post
-    weight: 20
   - name: Membros
-    url: people
-    weight: 30
+    url: /people
+    weight: 20
   - name: Publicações
-    url: publication
-    weight: 50
+    url: /publication
+    weight: 30
+  - name: Notícias
+    url: /post
+    weight: 40
   - name: Oportunidades
-    url: opportunities
-    weight: 55
+    url: /opportunities
+    weight: 50
   - name: Contato
-    url: contact
+    url: /contact
     weight: 60
