@@ -2,14 +2,18 @@
 title: "Campos Magnéticos Estelares"
 
 summary: |
-  Os campos magnéticos estelares moldam a atmosfera das estrelas e influenciam todo o ambiente circundante. Compreender esses campos amplia nossa visão sobre seu impacto em sistemas planetários e na habitabilidade de exoplanetas.
+  Investigamos a intensidade e estrutura dos campos magnéticos de estrelas
+  frias e seu impacto na habitabilidade de exoplanetas. Medimos o efeito
+  Zeeman em linhas espectrais do infravermelho para mapear a evolução do
+  magnetismo estelar com a idade.
 
 tags:
   - Campos Magnéticos
+  - Estrelas Anãs-M
   - Atividade Estelar
-  - Flares
-  - Habitabilidade
-  - Espectroscopia
+  - APOGEE
+  - Aglomerados Abertos
+  - Efeito Zeeman
 
 date: "2020-01-01T00:00:00Z"
 
@@ -30,29 +34,60 @@ slides: ""
 
 ## Visão Geral
 
-Os **campos magnéticos estelares** são responsáveis pela atividade das estrelas em múltiplas escalas de tempo e energia. Desde manchas estelares e flares até ventos estelares e ejeções de massa coronal (CMEs), a magnetosfera de uma estrela molda o ambiente ao redor de seus planetas.
+Os campos magnéticos estelares são forças invisíveis que governam a dinâmica
+das estrelas e têm profundo impacto nos planetas ao seu redor. **Estrelas
+anãs-M** — as mais comuns da Galáxia e hospedeiras de muitos exoplanetas
+rochosos — possuem campos magnéticos intensos que podem evaporar atmosferas
+planetárias e tornar inóspito qualquer planeta em sua órbita.
 
-Em estrelas anãs-M — as mais comuns da Galáxia e hospedeiras de muitos exoplanetas habitáveis — a atividade magnética é particularmente intensa e pode ser determinante para a viabilidade de vida em planetas próximos.
+No grupo Saber-SE, medimos campos magnéticos através de linhas espectrais
+sensíveis ao **efeito Zeeman** no infravermelho próximo, usando dados do
+APOGEE. Estudamos estrelas em aglomerados abertos de idades conhecidas
+— Plêiades (120 Manos), Hyades (625 Manos) e Coma Berenices (500 Manos) —
+o que nos permite entender como o magnetismo evolui ao longo da vida das
+estrelas com precisão cronológica.
 
-## Temas investigados
+## Questões Científicas que Investigamos
 
-- **Cromosfera e heliosfera**: indicadores de atividade magnética em anãs-M
-- **Flares estelares**: frequência, energia e impacto na atmosfera planetária
-- **Linha de emissão Hα e Ca II H&K**: traçadores de atividade cromosférica
-- **Rotação e magnetismo**: relação período–atividade em estrelas frias
-- **Erosão atmosférica**: fluxo de radiação UV/EUV sobre atmosferas exoplanetárias
+- Como a intensidade do campo magnético evolui com a idade da estrela?
+- Campos magnéticos intensos destroem as atmosferas dos exoplanetas que
+  orbitam anãs-M?
+- Existe relação entre a composição química da estrela e seu campo magnético?
+- Como manchas estelares afetam as medições de abundâncias químicas?
+- Estrelas com campos magnéticos mais intensos hospedam menos planetas
+  habitáveis?
 
-## Método
+## Metodologia
 
-Utilizamos espectros de alta resolução no óptico e no infravermelho para:
+Utilizamos linhas espectrais do Fe I e da molécula **FeH** sensíveis ao
+efeito Zeeman nos espectros do APOGEE (infravermelho, banda H). O
+alargamento das linhas espectrais causado pelo campo magnético é modelado
+para determinar a intensidade média do campo magnético *B* (em kG).
+Comparamos estrelas de diferentes idades em aglomerados abertos para
+mapear a relação magnetismo × idade (lei de decaimento de Skumanich).
 
-1. Medir indicadores de atividade (EW de Hα, fluxo de Ca II)
-2. Detectar variações temporais associadas a ciclos magnéticos
-3. Correlacionar atividade magnética com parâmetros estelares (Teff, [Fe/H], período)
+## Membros Envolvidos
 
-## Implicações para habitabilidade
+- **Prof. Dr. Diogo Souto** — Coordenador
+- **Deusalete Vilar** — Doutoranda, Hyades e Coma Berenices
+- **Anderson Andrade** — Doutorando, FeH em estrelas anãs-K e anãs-M
 
-A intensidade e frequência de flares determina o ambiente de radiação ao qual os planetas na zona habitável são expostos. Modelos recentes sugerem que flares muito energéticos podem erodir rapidamente atmosferas de planetas rochosos próximos, limitando drasticamente a possibilidade de vida.
+*Egressos que contribuíram: Fabio Wanderley, Vinicius Grilo*
+
+## Publicações Relacionadas do Grupo
+
+- Vilar et al. 2025 — *ApJ* — Magnetic Fields in Hyades and Coma Berenices
+- da Silva-Andrade & Souto 2025 — *arXiv* — FeH Metallicity Scale M Dwarfs
+- Wanderley et al. 2024 — *ApJ* — Plêiades Magnetic Fields (APOGEE)
+- Wanderley et al. 2024 — *ApJ* — M Dwarfs with Kepler/K2/TESS Light Curves
+- Grilo et al. 2024 — *MNRAS* — FGK Stars in the Pleiades
+
+## Colaborações
+
+- **Universidade de Uppsala (Suécia)** — Oleg Kochukhov, especialista em
+  magnetismo estelar e polarimetria
+- **SDSS-V/APOGEE** — Dados espectroscópicos em larga escala
+- **Observatório Nacional (RJ)** — Colaboração nacional em física estelar
 
 ---
-*Imagem: Erupção solar / Ejeção de Massa Coronal (CME), 31 de agosto de 2012 · Crédito: NASA/SDO · Domínio Público*
+*Imagem: Erupção solar / Ejeção de Massa Coronal (CME), 31/08/2012 · Crédito: NASA/SDO · Domínio Público*

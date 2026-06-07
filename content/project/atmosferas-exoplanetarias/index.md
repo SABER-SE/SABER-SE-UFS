@@ -2,14 +2,18 @@
 title: "Atmosferas Exoplanetárias"
 
 summary: |
-  Analisar espectros de luz transmitidos através das atmosferas exoplanetárias desvenda segredos sobre composição e condições climáticas de mundos distantes. A presença de moléculas como água e metano fornece pistas cruciais sobre a habitabilidade desses mundos.
+  Estudamos a composição e estrutura das atmosferas de exoplanetas para
+  entender sua formação e potencial habitabilidade. Caracterizamos com
+  precisão as estrelas hospedeiras como primeiro passo para interpretar
+  os espectros do JWST.
 
 tags:
   - Exoplanetas
   - Atmosferas
-  - Espectroscopia
-  - Habitabilidade
   - JWST
+  - Habitabilidade
+  - Espectroscopia
+  - Estrelas Anãs-M
 
 date: "2021-01-01T00:00:00Z"
 
@@ -30,33 +34,65 @@ slides: ""
 
 ## Visão Geral
 
-A **espectroscopia de transmissão** permite identificar a composição química de atmosferas de exoplanetas enquanto o planeta passa à frente de sua estrela. A luz estelar filtrada pela atmosfera revela a presença de moléculas específicas por meio de suas assinaturas espectrais características.
+As atmosferas dos exoplanetas são janelas únicas para compreender sua
+história, composição e potencial para abrigar vida. Quando um planeta passa
+em frente à sua estrela (trânsito), parte da luz estelar atravessa sua
+atmosfera — e as moléculas presentes deixam suas "impressões digitais" no
+espectro de luz que chega até nós.
 
-Nesta linha de pesquisa, investigamos:
+No grupo Saber-SE, preparamos e caracterizamos as estrelas hospedeiras de
+exoplanetas que serão alvos prioritários do **Telescópio Espacial James Webb
+(JWST)**, o maior e mais poderoso telescópio espacial já construído. Conhecer
+precisamente a química da estrela é fundamental para interpretar corretamente
+os sinais atmosféricos do planeta — moléculas detectadas no espectro do
+planeta podem ser confundidas com feições espectrais da estrela se esta não
+for bem caracterizada.
 
-- Detecção de **H₂O, CH₄, CO₂, CO e NH₃** em atmosferas de exoplanetas
-- Gradientes de temperatura e perfis de pressão atmosférica
-- Aerossóis e nuvens que mascaram a detecção de biosignatures
-- Correlação entre composição atmosférica e composição da estrela hospedeira
+## Questões Científicas que Investigamos
 
-## Instrumentação
+- Quais moléculas existem nas atmosferas de exoplanetas rochosos e gasosos?
+- Como a atividade magnética da estrela hospedeira afeta a atmosfera do
+  planeta ao longo do tempo?
+- Exoplanetas em torno de estrelas anãs-M podem manter atmosferas estáveis
+  frente ao intenso bombardeio de partículas energéticas?
+- Existem biossinaturas (O₂, O₃, CH₄ em desequilíbrio) detectáveis em
+  atmosferas exoplanetárias?
+- Como a composição estelar influencia a composição da atmosfera
+  que o planeta herda durante sua formação?
 
-Utilizamos dados de:
-- **JWST/NIRSpec**: espectroscopia de transmissão em 0.6–5.3 μm com resolução R ~ 2700
-- **Hubble/WFC3**: detecção de vapor d'água em atmosferas de gigantes quentes
-- **APOGEE/SDSS**: caracterização das estrelas hospedeiras
+## Metodologia
 
-## Alvos de interesse
+Combinamos espectroscopia de alta resolução no infravermelho (APOGEE/SDSS)
+para caracterizar as estrelas hospedeiras com modelos de atmosferas
+planetárias (**PICASO**, **petitRADTRANS**). A caracterização estelar
+precisa — temperatura, gravidade, metalicidade e abundâncias individuais —
+é o primeiro passo indispensável para interpretar os espectros de
+transmissão e emissão dos exoplanetas observados pelo JWST e futuramente
+pelo PLATO (ESA).
 
-| Exoplaneta      | Tipo         | Destaque                                |
-|----------------|-------------|------------------------------------------|
-| TRAPPIST-1e    | Rochoso      | Na zona habitável; 7 planetas no sistema |
-| GJ 1132b       | Super-Terra  | Primeira atmosfera detectada em rochoso  |
-| WASP-39b       | Gigante quente | CO₂ detectado pelo JWST                |
+## Membros Envolvidos
 
-## Conexão com a química estelar
+- **Prof. Dr. Diogo Souto** — Coordenador
+- **Verónica Loaiza-Tacuri** — Pós-Doutoranda, caracterização de estrelas hospedeiras
+- **Nayara Souza** — Doutoranda
+- **Ingryd Victoria** — Mestranda
+- **Beatriz Ribeiro** — Mestranda
 
-A composição da atmosfera de um exoplaneta está diretamente ligada à composição de sua estrela. Quantificar abundâncias na estrela hospedeira (linha de pesquisa conexa) fornece as condições iniciais para os modelos de formação e evolução atmosférica planetária.
+*Egressos que contribuíram: Edypo Melo, Kely Murta*
+
+## Publicações Relacionadas do Grupo
+
+- Souto et al. 2026 — *ApJL* — Chemical Mismatch in Young Disk Stars
+- Melo et al. 2024 — *ApJ* — M Dwarfs as Future JWST Targets
+- Loaiza-Tacuri et al. 2025 — *ApJS* — Stellar Parameters of K2 Planet Hosts
+- Wanderley et al. 2025 — *ApJ* — Radius Gap M Dwarf Exoplanets
+
+## Colaborações
+
+- **NASA/JWST** — Observações de atmosferas exoplanetárias
+- **Missão PLATO (ESA)** — Detecção e caracterização de sistemas
+- **Universidade de Chicago** — Modelos de atmosferas planetárias
+- **IAC — Instituto de Astrofísica de Canarias (Espanha)** — Espectroscopia de precisão
 
 ---
 *Imagem: Sistema multiplanetário (ilustração artística) · Crédito: NASA/JPL-Caltech · Domínio Público*
