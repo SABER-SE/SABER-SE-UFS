@@ -17,7 +17,7 @@ external_link: ""
 image:
   caption: "Diagrama de Hertzsprung-Russell — ESO (domínio público)"
   focal_point: Smart
-  filename: research-hr-diagram.png
+  filename: research/hr-diagram.png
 
 url_code: ""
 url_pdf: ""

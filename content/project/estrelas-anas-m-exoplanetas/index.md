@@ -1,8 +1,8 @@
 ---
-title: "Estrelas Anãs-M e Exoplanetas"
+title: "Conexão Estrela-Planeta"
 
 summary: |
-  Caracterização espectroscópica de estrelas anãs-M e de seus sistemas planetários, com foco em planetas potencialmente habitáveis.
+  A interligação química entre estrelas e planetas revela segredos sobre formação planetária e evolução estelar. Ao decifrar assinaturas químicas como a relação carbono/oxigênio, mapeamos a origem dos planetas e os ambientes que moldaram sua composição.
 
 tags:
   - Estrelas Anãs-M
@@ -18,7 +18,7 @@ external_link: ""
 image:
   caption: "Exoplaneta Kepler-22b — NASA/Ames/JPL-Caltech (domínio público)"
   focal_point: Smart
-  filename: research-anas-m-exoplanetas.jpg
+  filename: research/anas-m-exoplanetas.jpg
 
 links:
   - icon: telescope

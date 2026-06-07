@@ -1,8 +1,8 @@
 ---
-title: "Evolução Química da Galáxia"
+title: "Evolução Estelar e Arqueologia Galáctica"
 
 summary: |
-  Estudo da história de formação estelar e enriquecimento químico da Via Láctea através de populações estelares de diferentes idades e ambientes.
+  Investigar a composição química das estrelas mais antigas desvenda os capítulos iniciais da história cósmica. Rastrear a evolução estelar permite compreender como as estrelas contribuíram para a formação de sistemas planetários, incluindo nosso próprio Sistema Solar.
 
 tags:
   - Evolução Química
@@ -17,7 +17,7 @@ external_link: ""
 image:
   caption: "Laser do VLT/Paranal apontado para a Via Láctea — ESO/G. Hudepohl (domínio público)"
   focal_point: Smart
-  filename: research-evolucao-galactica.jpg
+  filename: research/evolucao-galactica.jpg
 
 url_code: ""
 url_pdf: ""

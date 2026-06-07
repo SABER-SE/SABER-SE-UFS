@@ -2,7 +2,7 @@
 title: "Inomogeneidades Químicas Estelares"
 
 summary: |
-  Estudo das variações internas na composição química de estrelas, revelando os processos nucleossintéticos e de mistura que moldaram sua evolução ao longo de bilhões de anos.
+  Variações na composição química das estrelas oferecem um relato detalhado das complexas interações estelares e processos nucleossintéticos ao longo de bilhões de anos. Cada inomogeneidade é testemunha das histórias cósmicas inscritas nas estrelas.
 
 tags:
   - Inomogeneidades Químicas
@@ -18,7 +18,7 @@ external_link: ""
 image:
   caption: "Aglomerado estelar globular — ESO (domínio público)"
   focal_point: Smart
-  filename: research-inomogeneidades.jpg
+  filename: research/inomogeneidades-quimicas.jpg
 
 url_code: ""
 url_pdf: ""

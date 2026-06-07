@@ -2,7 +2,7 @@
 title: "Atmosferas Exoplanetárias"
 
 summary: |
-  Análise espectroscópica de atmosferas de exoplanetas em trânsito para determinar composição química, condições climáticas e potencial de habitabilidade.
+  Analisar espectros de luz transmitidos através das atmosferas exoplanetárias desvenda segredos sobre composição e condições climáticas de mundos distantes. A presença de moléculas como água e metano fornece pistas cruciais sobre a habitabilidade desses mundos.
 
 tags:
   - Exoplanetas
@@ -18,7 +18,7 @@ external_link: ""
 image:
   caption: "Sistema multiplanetário — NASA/JPL-Caltech (domínio público)"
   focal_point: Smart
-  filename: research-atmosferas.jpg
+  filename: research/atmosferas-exoplanetarias.jpg
 
 url_code: ""
 url_pdf: ""

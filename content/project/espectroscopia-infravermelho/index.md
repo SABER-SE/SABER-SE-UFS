@@ -17,7 +17,7 @@ external_link: ""
 image:
   caption: "Nebulosa do Caranguejo (remanescente de supernova) — NASA/ESA/Hubble (domínio público)"
   focal_point: Smart
-  filename: research-spectroscopy.jpg
+  filename: research/spectroscopy.jpg
 
 url_code: ""
 url_pdf: ""

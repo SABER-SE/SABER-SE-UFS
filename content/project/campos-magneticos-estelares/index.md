@@ -2,7 +2,7 @@
 title: "Campos Magnéticos Estelares"
 
 summary: |
-  Investigação da estrutura e variação dos campos magnéticos em estrelas de diferentes tipos, com foco no impacto sobre a habitabilidade de sistemas exoplanetários.
+  Os campos magnéticos estelares moldam a atmosfera das estrelas e influenciam todo o ambiente circundante. Compreender esses campos amplia nossa visão sobre seu impacto em sistemas planetários e na habitabilidade de exoplanetas.
 
 tags:
   - Campos Magnéticos
@@ -18,7 +18,7 @@ external_link: ""
 image:
   caption: "Erupção solar (CME) — NASA/SDO (domínio público)"
   focal_point: Smart
-  filename: research-campos-magneticos.jpg
+  filename: research/campos-magneticos.jpg
 
 url_code: ""
 url_pdf: ""
