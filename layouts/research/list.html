@@ -1,11 +1,13 @@
 {{- define "main" -}}
 <div class="research-page">
 
-  {{/* ── Cabeçalho ──────────────────────────────────────────────── */}}
-  <header class="rp-header">
-    <div class="container">
-      <h1 class="rp-header__title">Linhas de Pesquisa</h1>
-      <p class="rp-header__intro">
+  {{/* ── Hero ───────────────────────────────────────────────────── */}}
+  <div class="rp-hero"
+       style="background-image: url('{{ "media/research-hero-carina.jpg" | relURL }}')">
+    <div class="rp-hero__overlay"></div>
+    <div class="rp-hero__content">
+      <h1 class="rp-hero__title">Nossas Linhas de Pesquisa</h1>
+      <p class="rp-hero__intro">
         O grupo Saber-SE desenvolve pesquisa de ponta em astrofísica estelar e
         exoplanetária, com foco em espectroscopia de alta resolução no infravermelho.
         Nossas linhas de pesquisa conectam a química das estrelas à formação e
@@ -13,7 +15,7 @@
         internacionais como SDSS-V/APOGEE e PLATO.
       </p>
     </div>
-  </header>
+  </div>
 
   {{/* ── Linhas de Pesquisa ──────────────────────────────────────── */}}
   <section class="rp-lines">
@@ -22,26 +24,27 @@
       {{/* 01 — Conexão Estrela-Planeta ─────────────────────────── */}}
       <article class="rl">
         <div class="rl__media">
-          <img src="{{ "media/rl-01-conexao.jpg" | relURL }}"
+          <img src="{{ "media/research-star-planet.jpg" | relURL }}"
                alt="Ilustração artística do exoplaneta Kepler-22b"
                loading="lazy">
-          <p class="rl__credit">NASA/JPL-Caltech — Domínio Público</p>
+          <p class="rl__credit">NASA/Ames/JPL-Caltech — Domínio Público</p>
         </div>
         <div class="rl__body">
           <span class="rl__num">01</span>
           <h2 class="rl__title">Conexão Estrela-Planeta</h2>
           <p class="rl__text">
-            A composição química de uma estrela ecoa diretamente nos planetas que a
-            orbitam. Decifrar assinaturas elementares como a razão C/O e as abundâncias
-            de Na e K revela a origem dos sistemas planetários e os ambientes que
-            moldaram sua evolução — conectando a espectroscopia estelar à ciência dos
-            exoplanetas.
+            A interligação química entre estrelas e planetas revela segredos sobre
+            formação planetária e evolução estelar. Ao decifrar assinaturas químicas
+            como a relação carbono/oxigênio, mapeamos a origem dos planetas e os
+            ambientes que moldaram sua composição. A abundância de elementos como
+            sódio e potássio nas atmosferas exoplanetárias conta histórias sobre
+            suas jornadas cósmicas.
           </p>
           <div class="rl__members">
-            <span class="rl__member">Kely Murta</span>
-            <span class="rl__member">Cinthya Santos</span>
-            <span class="rl__member">Alexandre Souza</span>
-            <span class="rl__member">Nayara Souza</span>
+            <a class="rl__member" href="{{ "/author/cinthya-santos/" | relURL }}">Cinthya Santos</a>
+            <a class="rl__member" href="{{ "/author/alexandre-souza/" | relURL }}">Alexandre Souza</a>
+            <a class="rl__member" href="{{ "/author/nayara-souza/" | relURL }}">Nayara Souza</a>
+            <a class="rl__member" href="{{ "/author/ingryd-carvalho/" | relURL }}">Ingryd Victoria</a>
           </div>
         </div>
       </article>
@@ -49,25 +52,25 @@
       {{/* 02 — Atmosferas Exoplanetárias ─────────────────────────── */}}
       <article class="rl rl--rev">
         <div class="rl__media">
-          <img src="{{ "media/rl-02-atmosferas.jpg" | relURL }}"
-               alt="Sistema TRAPPIST-1 com sete planetas em trânsito"
+          <img src="{{ "media/research-exoplanet-atmosphere.jpg" | relURL }}"
+               alt="Sistema TRAPPIST-1 — sete planetas em trânsito"
                loading="lazy">
-          <p class="rl__credit">NASA/JPL-Caltech — Domínio Público</p>
+          <p class="rl__credit">NASA/ESA/Hubble — Domínio Público</p>
         </div>
         <div class="rl__body">
           <span class="rl__num">02</span>
           <h2 class="rl__title">Atmosferas Exoplanetárias</h2>
           <p class="rl__text">
-            A luz de uma estrela, filtrada pela atmosfera de um exoplaneta em trânsito,
-            carrega a assinatura de moléculas como H₂O, CH₄ e CO₂. Analisar esses
-            espectros de transmissão é abrir uma janela para mundos distantes —
-            revelando composição, dinâmica climática e potencial de habitabilidade a
-            anos-luz de distância.
+            Analisar espectros de luz transmitidos através das atmosferas
+            exoplanetárias desvenda segredos sobre composição e condições climáticas
+            de mundos distantes. A presença de moléculas como água, metano e dióxido
+            de carbono fornece pistas cruciais sobre a habitabilidade desses mundos
+            extraterrestres.
           </p>
           <div class="rl__members">
-            <span class="rl__member">Edypo Melo</span>
-            <span class="rl__member">Nayara Souza</span>
-            <span class="rl__member">Ingryd Victoria</span>
+            <a class="rl__member" href="{{ "/author/nayara-souza/" | relURL }}">Nayara Souza</a>
+            <a class="rl__member" href="{{ "/author/ingryd-carvalho/" | relURL }}">Ingryd Victoria</a>
+            <a class="rl__member" href="{{ "/author/beatriz-ribeiro/" | relURL }}">Beatriz Ribeiro</a>
           </div>
         </div>
       </article>
@@ -75,8 +78,8 @@
       {{/* 03 — Campos Magnéticos Estelares ──────────────────────── */}}
       <article class="rl">
         <div class="rl__media">
-          <img src="{{ "media/rl-03-magnetismo.jpg" | relURL }}"
-               alt="Nebulosa do Caranguejo — remanescente de supernova com pulsar"
+          <img src="{{ "media/research-solar-magnetic.jpg" | relURL }}"
+               alt="Nebulosa do Caranguejo — remanescente de supernova com pulsar magnetizado"
                loading="lazy">
           <p class="rl__credit">NASA/ESA/Hubble Heritage Team — Domínio Público</p>
         </div>
@@ -84,16 +87,14 @@
           <span class="rl__num">03</span>
           <h2 class="rl__title">Campos Magnéticos Estelares</h2>
           <p class="rl__text">
-            Os campos magnéticos governam a atividade das estrelas — gerando flares,
-            moldando a cromosfera e ionizando o vento estelar que banha os planetas ao
-            redor. Compreender sua estrutura e variação temporal é essencial para
-            avaliar a habitabilidade de sistemas exoplanetários e o impacto das
-            estrelas hospedeiras sobre seus mundos.
+            Os campos magnéticos estelares desempenham papel crucial na dinâmica das
+            estrelas, moldando sua atmosfera e influenciando o ambiente circundante.
+            Compreender esses campos amplia nossa visão sobre seu impacto em sistemas
+            planetários e na habitabilidade de exoplanetas.
           </p>
           <div class="rl__members">
-            <span class="rl__member">Deusalete Vilar</span>
-            <span class="rl__member">Anderson Andrade</span>
-            <span class="rl__member">Fabio Wanderley</span>
+            <a class="rl__member" href="{{ "/author/deusalete-vilar/" | relURL }}">Deusalete Vilar</a>
+            <a class="rl__member" href="{{ "/author/anderson-andrade/" | relURL }}">Anderson Andrade</a>
           </div>
         </div>
       </article>
@@ -101,7 +102,7 @@
       {{/* 04 — Inomogeneidades Químicas ──────────────────────────── */}}
       <article class="rl rl--rev">
         <div class="rl__media">
-          <img src="{{ "media/rl-04-inomogeneidades.jpg" | relURL }}"
+          <img src="{{ "media/research-stellar-cluster.jpg" | relURL }}"
                alt="Aglomerado estelar globular — ESO"
                loading="lazy">
           <p class="rl__credit">ESO — Domínio Público</p>
@@ -110,15 +111,16 @@
           <span class="rl__num">04</span>
           <h2 class="rl__title">Inomogeneidades Químicas Estelares</h2>
           <p class="rl__text">
-            Variações na composição química ao longo de uma estrela registram os
-            processos nucleossintéticos e interações que marcaram sua evolução. Esses
-            padrões — acumulados em bilhões de anos de história cósmica — são
-            testemunhos únicos da formação estelar inscritos na própria matéria das
-            estrelas.
+            Variações na composição química das estrelas oferecem um relato detalhado
+            das complexas interações estelares e processos nucleossintéticos ao longo
+            de bilhões de anos. Cada inomogeneidade química é testemunha das histórias
+            cósmicas inscritas nas estrelas, conectando estrelas, planetas e
+            possivelmente a origem da vida.
           </p>
           <div class="rl__members">
-            <span class="rl__member">Vinicius Grilo</span>
-            <span class="rl__member">Anderson Andrade</span>
+            <a class="rl__member" href="{{ "/author/anderson-andrade/" | relURL }}">Anderson Andrade</a>
+            <a class="rl__member" href="{{ "/author/raphael-souza/" | relURL }}">Raphael Gomes Souza</a>
+            <a class="rl__member" href="{{ "/author/deusalete-vilar/" | relURL }}">Deusalete Vilar</a>
           </div>
         </div>
       </article>
@@ -126,8 +128,8 @@
       {{/* 05 — Evolução Estelar e Arqueologia Galáctica ───────────── */}}
       <article class="rl">
         <div class="rl__media">
-          <img src="{{ "media/research-galactic-evolution.jpg" | relURL }}"
-               alt="VLT/Paranal com laser de óptica adaptativa ao amanhecer"
+          <img src="{{ "media/research-galactic-archaeology.jpg" | relURL }}"
+               alt="VLT/Paranal com laser de óptica adaptativa — ESO/G. Hudepohl"
                loading="lazy">
           <p class="rl__credit">ESO/G. Hudepohl — Domínio Público</p>
         </div>
@@ -135,16 +137,16 @@
           <span class="rl__num">05</span>
           <h2 class="rl__title">Evolução Estelar e Arqueologia Galáctica</h2>
           <p class="rl__text">
-            As estrelas mais antigas da Via Láctea guardam a memória química do
-            universo jovem. Rastreando a evolução de suas abundâncias elementares,
-            reconstruímos a história da formação galáctica e compreendemos como
-            gerações de estrelas forjaram o cosmos — incluindo as condições que
-            permitiram o surgimento do nosso Sistema Solar.
+            Investigar a composição química das estrelas mais antigas desvenda os
+            capítulos iniciais da história cósmica. Rastrear a evolução estelar
+            permite compreender como as estrelas contribuíram para a formação de
+            sistemas planetários, incluindo nosso próprio Sistema Solar, conectando-nos
+            às raízes de nossa existência.
           </p>
           <div class="rl__members">
-            <span class="rl__member">Diogo Souto</span>
-            <span class="rl__member">Raphael Gomes Souza</span>
-            <span class="rl__member">Verónica Loaiza Tacuri</span>
+            <a class="rl__member" href="{{ "/author/admin/" | relURL }}">Diogo Souto</a>
+            <a class="rl__member" href="{{ "/author/raphael-souza/" | relURL }}">Raphael Gomes Souza</a>
+            <a class="rl__member" href="{{ "/author/veronica-loaiza/" | relURL }}">Verónica Loaiza Tacuri</a>
           </div>
         </div>
       </article>

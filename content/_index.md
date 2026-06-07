@@ -20,7 +20,7 @@ sections:
         por meio de espectroscopia de alta resolução no infravermelho.
 
         <p class="hero-cta-group">
-          <a class="btn btn-saberse-primary btn-lg" href="./tour/">
+          <a class="btn btn-saberse-primary btn-lg" href="./research/">
             Pesquisa
           </a>
           <a class="btn btn-saberse-outline btn-lg" href="./publication/">
@@ -106,10 +106,11 @@ sections:
     content:
       title: Nossa Equipe
       user_groups:
-        - Investigador Principal
+        - Coordenador
+        - Pós-Doutorandos
         - Doutorandos
         - Mestrandos
-        - Iniciação Científica
+        - Graduandos
       sort_by: Params.last_name
       sort_ascending: true
     design:
