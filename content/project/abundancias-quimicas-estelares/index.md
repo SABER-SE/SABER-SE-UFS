@@ -15,8 +15,9 @@ date: "2016-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Espectro de alta resolução de uma estrela anã-M no infravermelho próximo"
+  caption: "Diagrama de Hertzsprung-Russell — ESO (domínio público)"
   focal_point: Smart
+  filename: research-hr-diagram.png
 
 url_code: ""
 url_pdf: ""
@@ -46,3 +47,6 @@ Utilizamos principalmente o código de síntese espectral **MOOG** em conjunto c
 ## Elementos estudados
 
 C, N, O, Na, Mg, Al, Si, S, K, Ca, Ti, Cr, Mn, Fe, Ni, Co, Cu, Rb, Mo, Ce, Nd
+
+---
+*Imagem: Diagrama de Hertzsprung-Russell · Crédito: ESO · Domínio Público*

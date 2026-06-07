@@ -16,8 +16,9 @@ date: "2019-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Representação artística de um exoplaneta em órbita de uma anã-M"
+  caption: "Sistema exoplanetário — NASA/JPL-Caltech (domínio público)"
   focal_point: Smart
+  filename: research-exoplanets.jpg
 
 links:
   - icon: telescope
@@ -62,3 +63,6 @@ Nesta linha de pesquisa, utilizamos espectroscopia de alta resolução no infrav
 
 - Souto et al. 2018, *ApJ*, 857, 14 — TRAPPIST-1
 - Souto et al. 2019, *ApJ*, 874, 97 — Ross 128b
+
+---
+*Imagem: Sistema exoplanetário (ilustração artística) · Crédito: NASA/JPL-Caltech · Domínio Público*

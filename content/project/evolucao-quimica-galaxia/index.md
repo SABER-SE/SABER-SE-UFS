@@ -15,8 +15,9 @@ date: "2016-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Mapa de abundâncias químicas na Via Láctea"
+  caption: "Laser de guia no VLT/Paranal — ESO/G. Hudepohl (domínio público)"
   focal_point: Smart
+  filename: research-galactic-evolution.jpg
 
 url_code: ""
 url_pdf: ""
@@ -45,3 +46,6 @@ Combinamos observações espectroscópicas de grandes levantamentos (APOGEE, GAL
 ## Conexão com outros projetos
 
 Esta linha é diretamente complementada pelos projetos de **Abundâncias Químicas Estelares** e **Espectroscopia de Alta Resolução**, pois os dados de abundâncias individuais alimentam os modelos de evolução global da Galáxia.
+
+---
+*Imagem: VLT/Paranal com laser de guia adaptativa · Crédito: ESO/G. Hudepohl · Domínio Público*

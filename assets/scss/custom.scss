@@ -557,45 +557,130 @@ html {
 //  NAVBAR — TRANSPARENTE SOBRE HERO, SÓLIDA AO ROLAR
 // ═══════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════
+//  NAVBAR — ESTADOS: HERO (transparente) E SCROLLED (sólido)
+//  Usa #navbar-main + classe para superar especificidade do Bootstrap
+// ═══════════════════════════════════════════════════════════════
+
+// Transição suave entre estados
 #navbar-main {
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+  transition: background-color 0.35s ease,
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
 }
 
-// Estado sobre o hero (transparente)
+// ── Estado padrão SEM hero (scrolled = sólido legível) ─────────
+// Garante que páginas internas (people, publication…) nunca
+// mostrem texto claro sobre fundo claro.
+#navbar-main.navbar-scrolled {
+  background-color: var(--saberse-night) !important;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.45) !important;
+  border-bottom: 1px solid rgba(74, 158, 202, 0.15) !important;
+}
+
+// Links e ícones no estado scrolled (modo escuro)
+#navbar-main.navbar-scrolled .nav-link,
+#navbar-main.navbar-scrolled .navbar-brand,
+#navbar-main.navbar-scrolled .navbar-nav .nav-link,
+#navbar-main.navbar-scrolled a.nav-link,
+.dark #navbar-main.navbar-scrolled .nav-link {
+  color: var(--saberse-text) !important;  // #e8edf5 — branco suave sobre fundo escuro
+  text-shadow: none;
+}
+#navbar-main.navbar-scrolled .nav-link:hover,
+#navbar-main.navbar-scrolled .navbar-nav .nav-link:hover,
+.dark #navbar-main.navbar-scrolled .nav-link:hover {
+  color: var(--saberse-cyan) !important;
+}
+
+// Ícones dentro do navbar (busca, toggle dark/light) — scrolled
+#navbar-main.navbar-scrolled .nav-link i,
+#navbar-main.navbar-scrolled a i,
+#navbar-main.navbar-scrolled button i {
+  color: var(--saberse-text) !important;
+}
+#navbar-main.navbar-scrolled .nav-link:hover i,
+#navbar-main.navbar-scrolled a:hover i {
+  color: var(--saberse-cyan) !important;
+}
+
+// ── Estado scrolled em modo CLARO ─────────────────────────────
+body:not(.dark) #navbar-main.navbar-scrolled {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 16px rgba(26, 42, 74, 0.12) !important;
+  border-bottom: 1px solid rgba(26, 42, 74, 0.08) !important;
+}
+body:not(.dark) #navbar-main.navbar-scrolled .nav-link,
+body:not(.dark) #navbar-main.navbar-scrolled .navbar-brand,
+body:not(.dark) #navbar-main.navbar-scrolled .navbar-nav .nav-link,
+body:not(.dark) #navbar-main.navbar-scrolled a.nav-link {
+  color: var(--saberse-navy) !important;  // #1a2a4a — azul escuro legível
+  text-shadow: none;
+}
+body:not(.dark) #navbar-main.navbar-scrolled .nav-link:hover,
+body:not(.dark) #navbar-main.navbar-scrolled .navbar-nav .nav-link:hover {
+  color: var(--saberse-cyan) !important;
+}
+body:not(.dark) #navbar-main.navbar-scrolled .nav-link i,
+body:not(.dark) #navbar-main.navbar-scrolled a i {
+  color: var(--saberse-navy) !important;
+}
+
+// ── Estado sobre o HERO (transparente, texto branco) ───────────
+// Só aplicado pelo JS quando .wg-hero existe na página
 #navbar-main.navbar-hero {
   background-color: transparent !important;
   box-shadow: none !important;
   border-bottom: none !important;
 }
+
+// Links brancos sobre hero escuro — com text-shadow para contraste
 #navbar-main.navbar-hero .nav-link,
-#navbar-main.navbar-hero .navbar-brand {
-  color: rgba(232, 237, 245, 0.92) !important;
-}
-#navbar-main.navbar-hero .nav-link:hover {
-  color: var(--saberse-cyan) !important;
-}
-
-// Estado após rolar (sólido)
-#navbar-main.navbar-scrolled {
-  background-color: var(--saberse-night) !important;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.45) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(74, 158, 202, 0.15) !important;
-}
-
-// Modo claro — navbar sólida após rolar
-body:not(.dark) #navbar-main.navbar-scrolled {
-  background-color: var(--saberse-light-bg) !important;
-  box-shadow: 0 2px 16px rgba(26, 42, 74, 0.1) !important;
-}
-body:not(.dark) #navbar-main.navbar-scrolled .nav-link {
-  color: var(--saberse-navy) !important;
-}
-body:not(.dark) #navbar-main.navbar-scrolled .nav-link:hover {
-  color: var(--saberse-cyan) !important;
-}
+#navbar-main.navbar-hero .navbar-brand,
+#navbar-main.navbar-hero .navbar-nav .nav-link,
+#navbar-main.navbar-hero a.nav-link,
+body.dark #navbar-main.navbar-hero .nav-link,
 body:not(.dark) #navbar-main.navbar-hero .nav-link {
-  color: rgba(232, 237, 245, 0.92) !important;
+  color: #e8edf5 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 0, 0, 0.4);
+}
+#navbar-main.navbar-hero .nav-link:hover,
+#navbar-main.navbar-hero .navbar-nav .nav-link:hover,
+body.dark #navbar-main.navbar-hero .nav-link:hover,
+body:not(.dark) #navbar-main.navbar-hero .nav-link:hover {
+  color: var(--saberse-cyan) !important;
+  text-shadow: 0 0 12px rgba(74, 158, 202, 0.5);
+}
+
+// Ícones dentro do navbar no estado hero
+#navbar-main.navbar-hero .nav-link i,
+#navbar-main.navbar-hero a i,
+#navbar-main.navbar-hero button i,
+body:not(.dark) #navbar-main.navbar-hero .nav-link i,
+body:not(.dark) #navbar-main.navbar-hero a i {
+  color: #e8edf5 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+#navbar-main.navbar-hero .nav-link:hover i,
+body:not(.dark) #navbar-main.navbar-hero .nav-link:hover i {
+  color: var(--saberse-cyan) !important;
+}
+
+// Brand (nome do site) no hero
+#navbar-main.navbar-hero .navbar-brand,
+body:not(.dark) #navbar-main.navbar-hero .navbar-brand {
+  color: var(--saberse-cyan) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+// Toggler (hambúrguer mobile) — sempre visível
+#navbar-main.navbar-hero .navbar-toggler,
+body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
+  border-color: rgba(232, 237, 245, 0.5) !important;
+  color: #e8edf5 !important;
+}
+#navbar-main.navbar-hero .navbar-toggler i {
+  color: #e8edf5 !important;
 }
 
 // ═══════════════════════════════════════════════════════════════

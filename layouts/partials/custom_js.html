@@ -1,20 +1,24 @@
-{{/* Navbar transparente sobre o hero — torna sólida ao rolar */}}
+{{/* Navbar: transparente APENAS sobre hero, sólida em todo o resto */}}
 <script>
 (function () {
   var navbar = document.getElementById('navbar-main');
   if (!navbar) return;
 
+  // Só ativa modo transparente se a página tem um bloco hero
+  var hasHero = document.querySelector('.wg-hero') !== null;
+
   function updateNavbar() {
-    if (window.scrollY > 60) {
-      navbar.classList.add('navbar-scrolled');
-      navbar.classList.remove('navbar-hero');
-    } else {
-      navbar.classList.remove('navbar-scrolled');
+    var atTop = window.scrollY < 60;
+    if (hasHero && atTop) {
       navbar.classList.add('navbar-hero');
+      navbar.classList.remove('navbar-scrolled');
+    } else {
+      navbar.classList.remove('navbar-hero');
+      navbar.classList.add('navbar-scrolled');
     }
   }
 
-  // Estado inicial
+  // Aplica imediatamente — sem flash
   updateNavbar();
   window.addEventListener('scroll', updateNavbar, { passive: true });
 })();

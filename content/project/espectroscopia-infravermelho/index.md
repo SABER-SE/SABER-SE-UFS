@@ -15,8 +15,9 @@ date: "2019-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Espectrôgrafo APOGEE no Telescópio Sloan (SDSS)"
+  caption: "Nebulosa do Caranguejo (remanescente de supernova) — NASA/ESA/Hubble (domínio público)"
   focal_point: Smart
+  filename: research-spectroscopy.jpg
 
 url_code: ""
 url_pdf: ""
@@ -49,3 +50,6 @@ O grupo utiliza principalmente **Python** (astropy, specutils, scipy) e **Fortra
 ## Perspectivas
 
 Com a entrada em operação de novos instrumentos como o **CRIRES+** (VLT) e o futuro **MSE**, pretendemos expandir nossas análises para estrelas mais frias e sistemas em ambientes mais extremos.
+
+---
+*Imagem: Nebulosa do Caranguejo (Messier 1) · Crédito: NASA/ESA/Hubble Heritage Team · Domínio Público*
