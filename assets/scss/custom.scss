@@ -1087,58 +1087,90 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
 }
 
 // ============================================================
-// SLIDER DA HOMEPAGE
+// SLIDER DA HOMEPAGE — SABER-SE
 // ============================================================
 
-// Altura: 70vh em vez de 100vh
+// Altura do slide
+.wg-slider .carousel-item,
 .wg-slider .carousel-item.fullscreen {
-  height: 70vh !important;
-  min-height: 400px !important;
+  height: 75vh !important;
+  min-height: 450px !important;
+  max-height: 700px !important;
 }
 
-// Container do texto: alinhar à esquerda, limitar largura
+// Overlay escuro gradiente (esquerda escura → direita transparente)
+.wg-slider .carousel-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(10, 15, 30, 0.80) 0%,
+    rgba(10, 15, 30, 0.45) 55%,
+    rgba(10, 15, 30, 0.15) 100%
+  );
+  z-index: 1;
+}
+
+// Eleva o container de texto acima do overlay
+.wg-slider .position-absolute.d-flex {
+  z-index: 2;
+}
+
+// Container do texto (HugoBlox gera .wg-hero.container, não .carousel-caption)
 .wg-slider .wg-hero.container {
   margin-left: 6% !important;
   margin-right: auto !important;
+  width: 100% !important;
   max-width: 560px !important;
   text-align: left !important;
 }
 
-// Slide 0 (intro) — mantém centralizado
+// Slide 0 (intro) — centralizado
 .wg-slider .carousel-item:first-child .wg-hero.container {
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center !important;
 }
 
-// Título
+// Título — corrige quebra letra por letra
 .wg-slider h1.hero-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: var(--saberse-text);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
-  margin-bottom: 1rem;
-  line-height: 1.25;
+  font-family: 'Playfair Display', serif !important;
+  font-size: clamp(1.8rem, 3vw, 2.6rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  color: #e8edf5 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+  margin-bottom: 1rem !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+  width: 100% !important;
+  display: block !important;
 }
 
 // Descrição
 .wg-slider p.hero-lead {
-  font-size: 1rem;
-  color: rgba(232, 237, 245, 0.9);
-  line-height: 1.7;
+  font-size: clamp(0.85rem, 1.2vw, 1rem) !important;
+  color: rgba(232, 237, 245, 0.92) !important;
+  line-height: 1.7 !important;
   margin-bottom: 1.5rem !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
 }
 
 // Botão CTA
 .wg-slider .btn-light {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
   background-color: var(--saberse-cyan) !important;
   border-color: var(--saberse-cyan) !important;
   color: #fff !important;
-  padding: 0.55rem 1.4rem;
-  font-weight: 500;
-  border-radius: 4px;
-  transition: background 0.2s, color 0.2s;
+  padding: 0.55rem 1.3rem !important;
+  border-radius: 4px !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
 
   i { color: #fff !important; }
 
@@ -1146,44 +1178,62 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
     background-color: var(--saberse-yellow) !important;
     border-color: var(--saberse-yellow) !important;
     color: var(--saberse-night) !important;
+    transform: translateY(-1px) !important;
     i { color: var(--saberse-night) !important; }
   }
 }
 
 // Indicadores (bolinhas)
+.wg-slider .carousel-indicators {
+  z-index: 3 !important;
+  margin-bottom: 1rem !important;
+}
+
 .wg-slider .carousel-indicators li {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--saberse-cyan);
-  opacity: 0.5;
-  border-top: none;
-  border-bottom: none;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background-color: rgba(232, 237, 245, 0.5) !important;
+  opacity: 1 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  margin: 0 4px !important;
 
   &.active {
-    opacity: 1;
-    background-color: var(--saberse-yellow);
+    background-color: var(--saberse-yellow) !important;
   }
 }
 
 // Setas de navegação
-.wg-slider .carousel-control-prev-icon,
-.wg-slider .carousel-control-next-icon {
-  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
+.wg-slider .carousel-control-prev,
+.wg-slider .carousel-control-next {
+  width: 5% !important;
+  z-index: 3 !important;
 }
 
-@media (max-width: 767px) {
-  .wg-slider .carousel-item.fullscreen {
-    height: 80vw !important;
-    min-height: 320px !important;
-  }
+.wg-slider .carousel-control-prev-icon,
+.wg-slider .carousel-control-next-icon {
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.9)) !important;
+}
 
-  .wg-slider h1.hero-title {
-    font-size: 1.6rem;
+// Responsivo — mobile
+@media (max-width: 767px) {
+  .wg-slider .carousel-item,
+  .wg-slider .carousel-item.fullscreen {
+    height: 60vh !important;
+    min-height: 320px !important;
+    max-height: none !important;
   }
 
   .wg-slider .wg-hero.container {
+    width: 85% !important;
+    max-width: 85% !important;
     margin-left: auto !important;
+    margin-right: auto !important;
     text-align: center !important;
+  }
+
+  .wg-slider h1.hero-title {
+    font-size: clamp(1.4rem, 5vw, 1.8rem) !important;
   }
 }
