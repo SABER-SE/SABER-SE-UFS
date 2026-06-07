@@ -9,11 +9,12 @@ sections:
     content:
       title: Nossa Equipe
       user_groups:
-          - Investigador Principal
-          - Doutorandos
-          - Mestrandos
-          - Iniciação Científica
-          - Alumni
+        - Coordenador
+        - Pós-Doutorandos
+        - Doutorandos
+        - Mestrandos
+        - Graduandos
+        - Egressos
       sort_by: Params.last_name
       sort_ascending: true
     design:

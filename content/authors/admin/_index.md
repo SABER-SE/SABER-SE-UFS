@@ -65,7 +65,7 @@ highlight_name: true
 
 # Grupo organizacional para o widget People
 user_groups:
-  - Investigador Principal
+  - Coordenador
 ---
 
 Prof. Dr. **Diogo Souto** é professor adjunto do Departamento de Física (DFI) da Universidade Federal de Sergipe e líder do grupo SABERS-DFI. Sua pesquisa concentra-se na determinação de parâmetros fundamentais e abundâncias químicas de **estrelas anãs-M** e seus sistemas planetários, utilizando espectroscopia de alta resolução no infravermelho próximo.
