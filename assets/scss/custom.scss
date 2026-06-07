@@ -1336,21 +1336,21 @@ body.dark .portrait-title h3,
   pointer-events: none !important;
 }
 
-// Nome destacado (Diogo Souto) em bold
-.article-metadata .author-highlighted {
-  font-weight: 600 !important;
-  color: var(--saberse-cyan) !important;
-}
-
 // Autores no estilo citation (APA) — span li-cite-author
 .pub-list-item .article-metadata.li-cite-author {
   font-size: 0.88rem !important;
   color: #6b7280 !important;
 }
 
-// Destaques em qualquer view de publicação
-.pub-list-item .author-highlighted,
-.article-metadata .author-highlighted {
+// Membros do grupo Saber-SE destacados em ciano
+.group-member-highlight {
+  color: #4a9eca !important;
   font-weight: 600 !important;
-  color: var(--saberse-cyan) !important;
+  text-decoration: none !important;
+}
+
+// Garante cor correta mesmo dentro de links ou spans herdados
+a .group-member-highlight,
+.group-member-highlight a {
+  color: #4a9eca !important;
 }

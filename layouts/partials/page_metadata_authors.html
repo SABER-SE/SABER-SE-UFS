@@ -1,15 +1,40 @@
-{{/* Display author list as plain text from publication front matter. */}}
+{{/* Display author list from front matter, highlighting Saber-SE group members. */}}
 {{- if .Params.authors -}}
-  {{/* Build set of highlighted author names from author profiles with highlight_name: true */}}
-  {{- $highlighted := slice -}}
-  {{- range where site.Pages "Section" "authors" -}}
-    {{- if .Params.highlight_name -}}
-      {{- $highlighted = $highlighted | append .Title -}}
-    {{- end -}}
-  {{- end -}}
+  {{/*
+    Fragments identifying group members (lowercase substring match).
+    Derived from actual name formats found in publication index.md files.
+    Add variations here whenever a new paper uses a different spelling.
+  */}}
+  {{- $groupFragments := slice
+    "souto"
+    "wanderley"
+    "grilo"
+    "edypo"
+    "deusalete"
+    "murta"
+    "silva-andrade"
+    "andrade-silva"
+    "guerco"
+    "guerço"
+    "loaiza-tacuri"
+    "feliciano"
+    "beatriz"
+    "cinthya"
+    "ingryd"
+    "nayara"
+    "raphael souza" "souza, raphael"
+    "alexandre souza" "souza, alexandre"
+  -}}
 
   {{- range $index, $author := .Params.authors -}}
     {{- if gt $index 0 }}, {{ end -}}
-    {{- if in $highlighted $author -}}<span class="author-highlighted">{{- $author -}}</span>{{- else -}}{{- $author -}}{{- end -}}
+    {{- $isGroupMember := false -}}
+    {{- $authorLower := lower $author -}}
+    {{- range $groupFragments -}}
+      {{- if not $isGroupMember -}}
+        {{- if in $authorLower . -}}{{- $isGroupMember = true -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $isGroupMember -}}<span class="group-member-highlight">{{- $author -}}</span>{{- else -}}{{- $author -}}{{- end -}}
   {{- end -}}
 {{- end -}}
