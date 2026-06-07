@@ -12,6 +12,9 @@ main:
   - name: Publicações
     url: /publication
     weight: 30
+  - name: Eventos
+    url: /event
+    weight: 35
   - name: Divulgação
     url: /post
     weight: 40

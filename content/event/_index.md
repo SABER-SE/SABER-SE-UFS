@@ -1,5 +1,6 @@
 ---
-title: Recent & Upcoming Events
+title: Eventos
+cms_exclude: true
 
 # Listing view
 view: compact
@@ -9,3 +10,6 @@ banner:
   caption: ''
   image: ''
 ---
+
+Participação do grupo Saber-SE em conferências, escolas e workshops de astrofísica no Brasil e no exterior. Os eventos estão ordenados por ano — os mais recentes aparecem primeiro.
+
