@@ -230,7 +230,7 @@ sections:
   # ============================================================
   - block: collection
     content:
-      title: Notícias Recentes
+      title: Divulgação Científica
       subtitle: ''
       text: ''
       count: 3

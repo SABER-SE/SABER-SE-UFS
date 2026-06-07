@@ -1,5 +1,6 @@
 ---
-title: Notícias
+title: Divulgação Científica
+cms_exclude: true
 
 # Listing view
 view: card
@@ -10,4 +11,6 @@ banner:
   image: ''
 ---
 
-Acompanhe as novidades do grupo SABERS-DFI: publicações recentes, participação em conferências, notícias sobre missões espaciais e oportunidades.
+Resumos acessíveis das pesquisas desenvolvidas pelo grupo Saber-SE na Universidade Federal de Sergipe. Aqui traduzimos nossas descobertas científicas para o público geral — estudantes, curiosos e entusiastas da astronomia.
+
+Cada texto leva aproximadamente **4–5 minutos** para ser lido e apresenta as principais descobertas de nossas publicações científicas de forma clara e envolvente.
