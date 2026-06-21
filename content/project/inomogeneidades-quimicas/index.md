@@ -19,7 +19,7 @@ date: "2018-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Aglomerado estelar globular — ESO (domínio público)"
+  caption: "Aglomerado aberto M67 (NGC 2682) — Crédito: NOAO/AURA/NSF"
   focal_point: Smart
   filename: research/inomogeneidades-quimicas.jpg
 

@@ -15,9 +15,9 @@ date: "2016-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Diagrama de Hertzsprung-Russell — ESO (domínio público)"
+  caption: "Espectro de primeira luz do espectrógrafo NEID (51 Pegasi) — Crédito: NOIRLab/NSF/AURA"
   focal_point: Smart
-  filename: research/hr-diagram.png
+  filename: research/hr-diagram.jpg
 
 url_code: ""
 url_pdf: ""

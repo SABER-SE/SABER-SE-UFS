@@ -9,7 +9,7 @@ date: "2025-12-01"
 featured: false
 draft: false
 image:
-  caption: "O aglomerado estelar das Plêiades, similar em natureza aos Hyades. Crédito: NASA/ESA/Hubble"
+  caption: "O aglomerado estelar das Hyades, capturado pelo Digitized Sky Survey 2. Crédito: NOIRLab/NSF/AURA/DSS2"
   focal_point: "Center"
   preview_only: false
 links:
@@ -31,7 +31,7 @@ A pesquisa, liderada por **Deusalete Vilar** — doutoranda do grupo Saber-SE �
 
 O APOGEE é um espectrômetro capaz de decompor a luz estelar em suas "impressões digitais" — linhas espectrais que revelam quais elementos químicos existem na estrela e em quais quantidades. Analisar estrelas tão diferentes (as frias anãs-M e as mais quentes tipo G) com a mesma técnica é um desafio, pois cada tipo estelar exige métodos específicos de análise.
 
-{{< figure src="featured.jpg" caption="Aglomerado estelar. Estrelas nascidas juntas compartilham a mesma composição química original. Crédito: NASA/ESA/Hubble" >}}
+{{< figure src="featured.jpg" caption="As Hyades — o aglomerado estelar mais próximo do Sol, a ~45 anos-luz. Estrelas nascidas juntas compartilham a mesma composição química original. Crédito: NOIRLab/NSF/AURA/DSS2" >}}
 
 ## ✨ O que descobrimos?
 
