@@ -1,113 +1,87 @@
 ---
-title: Oportunidades
-date: 2024-01-01
-type: landing
-
-sections:
-  - block: markdown
-    content:
-      title: Oportunidades no Grupo
-      subtitle: "Faça parte do SABERS-DFI"
-      text: |
-        O grupo SABERS-DFI está sempre em busca de estudantes e pesquisadores motivados a explorar o universo através da ciência. Se você tem interesse em **Astrofísica Estelar**, **Exoplanetas** ou **Evolução Química da Galáxia**, entre em contato!
-
-        ---
-
-        ## 🎓 Iniciação Científica (IC)
-
-        **Vagas disponíveis:** 1–2 vagas por semestre
-
-        **Perfil desejado:**
-        - Estudante de Física (a partir do 2º semestre)
-        - Interesse em Astrofísica observacional ou computacional
-        - Disponibilidade de ~10–15h/semana para pesquisa
-        - Conhecimentos básicos de Python (desejável, não obrigatório)
-
-        **O que você vai aprender:**
-        - Análise de espectros estelares de alta resolução
-        - Programação científica em Python/Fortran
-        - Uso de grandes catálogos astronômicos (SDSS, Gaia)
-        - Leitura e interpretação de artigos científicos
-
-        **Bolsas disponíveis:**
-        - PIBIC/CNPq (R$ 700/mês)
-        - PIIC/UFS (sem remuneração, com certificado)
-        - FAPITEC-SE (valor variável por edital)
-
-        ---
-
-        ## 📚 Mestrado
-
-        **Vagas:** 1 vaga por ano (ingresso pelo PPGF/UFS)
-
-        **Processo seletivo:** Via [PPGF — Programa de Pós-Graduação em Física da UFS](https://www.ufs.br/ppgf)
-
-        **Pré-requisitos:**
-        - Bacharelado ou Licenciatura em Física (ou áreas afins)
-        - Média global ≥ 7,0 na graduação
-        - Interesse documentado em Astrofísica
-
-        **Projetos possíveis de dissertação:**
-        - Determinação de parâmetros e abundâncias em estrelas anãs-M
-        - Caracterização de estrelas hospedeiras de exoplanetas
-        - Análise de populações estelares com dados SDSS-V
-
-        **Bolsas disponíveis:**
-        - CAPES (R$ 2.200/mês — sujeito à disponibilidade)
-        - CNPq (R$ 2.200/mês — sujeito a edital)
-
-        ---
-
-        ## 🔬 Doutorado
-
-        **Vagas:** 1 vaga a cada 2 anos (ingresso pelo PPGF/UFS)
-
-        **Pré-requisitos:**
-        - Mestrado concluído em Física, Astronomia ou área afim
-        - Experiência com análise espectroscópica (desejável)
-        - Capacidade de leitura em inglês (artigos científicos)
-
-        **Projetos possíveis de tese:**
-        - Abundâncias químicas em estrelas hospedeiras de exoplanetas com SDSS-V
-        - Caracterização de populações estelares no disco galáctico
-        - Modelagem de atmosferas de estrelas anãs-M
-
-        **Bolsas disponíveis:**
-        - CAPES (R$ 3.300/mês — sujeito à disponibilidade)
-        - CNPq PQ / DTI (sujeito a editais)
-        - Possibilidade de período sanduíche no exterior (IAC, Espanha)
-
-        ---
-
-        ## 🌍 Pós-Doutorado
-
-        Eventuais vagas de pós-doutorado são anunciadas via [FAPESP](https://fapesp.br), [CNPq](https://cnpq.br) e [CAPES](https://www.capes.gov.br). Pesquisadores interessados podem enviar CV com carta de intenção diretamente ao Prof. Diogo Souto.
-
-        ---
-
-        ## 📧 Como se candidatar
-
-        Envie um e-mail para **diogodusouto@gmail.com** com o assunto **"Candidatura SABERS-DFI — [IC/Mestrado/Doutorado]"** contendo:
-
-        1. **CV atualizado** (em PDF)
-        2. **Histórico escolar** (mesmo que incompleto para IC)
-        3. **Carta de motivação** (máx. 1 página): por que você quer pesquisar Astrofísica? Quais são seus objetivos acadêmicos?
-        4. Para pós-graduação: resumo de no máximo 1 página descrevendo o projeto que você gostaria de desenvolver
-
-        Respondemos todas as candidaturas dentro de 2 semanas.
-
-        ---
-
-        ## ❓ Dúvidas Frequentes
-
-        **Preciso saber Python para me candidatar à IC?**
-        Não, mas é desejável. Utilizamos Python extensivamente, mas o aprendizado pode acontecer durante a IC.
-
-        **Posso fazer IC em paralelo com outras atividades?**
-        Sim, desde que haja disponibilidade de pelo menos 10h/semana para atividades de pesquisa.
-
-        **Há possibilidade de participar de conferências?**
-        Sim. Membros do grupo participam regularmente de conferências nacionais (SAB) e internacionais (IAU, AAS).
-    design:
-      columns: '1'
+title: "Oportunidades"
+subtitle: "Junte-se ao grupo Saber-SE"
+summary: "Vagas abertas para Iniciação Científica, Mestrado, Doutorado e Pós-Doutorado em Astrofísica na UFS."
+date: "2026-01-01"
 ---
+
+## Por que fazer parte do Saber-SE?
+
+O grupo Saber-SE é um ambiente de pesquisa ativo e internacionalmente conectado, com participação em levantamentos como **SDSS-V/APOGEE** e na **missão espacial PLATO (ESA)**. Nossos membros publicam em revistas de alto impacto (*ApJ*, *AJ*, *A&A*, *MNRAS*) e apresentam trabalhos em conferências internacionais como Cool Stars e Exoplanets. Aqui você vai trabalhar com dados reais de telescópios espaciais e terrestres, sob orientação próxima e em colaboração com pesquisadores de instituições como NASA, Observatório Nacional, Universidade do Arizona e IAC (Espanha).
+
+## Vagas Abertas
+
+<div class="opp-card">
+<h3>🔭 Iniciação Científica (IC)</h3>
+
+<p><strong>Pré-requisitos:</strong> estar regularmente matriculado em Astrofísica, Física ou área afim na UFS, com bom desempenho acadêmico.</p>
+
+<p><strong>Linhas disponíveis:</strong> todas as linhas de pesquisa do grupo têm vagas abertas para IC — espectroscopia estelar, exoplanetas, campos magnéticos e evolução galáctica.</p>
+
+<p><strong>Bolsa:</strong> sujeita a disponibilidade de edital (PIBIC/PIBITI/FAPITEC) — pode haver período inicial sem bolsa enquanto aguarda resultado de edital.</p>
+</div>
+
+<div class="opp-card">
+<h3>📚 Mestrado</h3>
+
+<p><strong>Programa:</strong> Pós-Graduação em Física (<a href="https://www.ufs.br/ppgfi" target="_blank" rel="noopener">PPGFI/UFS</a>), área de concentração em Astrofísica.</p>
+
+<p><strong>Pré-requisitos:</strong> graduação concluída em Física, Astrofísica ou área afim. Processo seletivo do programa de pós-graduação (edital semestral/anual do PPGFI).</p>
+
+<p><strong>Bolsa:</strong> conforme disponibilidade de cotas CAPES/CNPq do programa — não garantida no momento da entrada.</p>
+</div>
+
+<div class="opp-card">
+<h3>🎓 Doutorado</h3>
+
+<p><strong>Programa:</strong> Doutorado em Física (<a href="https://www.ufs.br/ppgfi" target="_blank" rel="noopener">PPGFI/UFS</a>), área de concentração em Astrofísica.</p>
+
+<p><strong>Pré-requisitos:</strong> mestrado concluído em área afim. Processo seletivo do programa de pós-graduação. Candidatos com experiência em espectroscopia e análise de dados são especialmente bem-vindos.</p>
+
+<p><strong>Bolsa:</strong> conforme disponibilidade de cotas CAPES/CNPq do programa. Há possibilidade de período sanduíche no exterior (IAC, Espanha; Universidade do Arizona).</p>
+</div>
+
+<div class="opp-card">
+<h3>🌟 Pós-Doutorado</h3>
+
+<p><strong>Pré-requisitos:</strong> doutorado concluído em Astrofísica ou área afim, com produção científica compatível com as linhas de pesquisa do grupo.</p>
+
+<p><strong>Bolsa:</strong> sujeita à aprovação de projetos com financiamento (PRONEM-FAPITEC, Universal-CNPq, ou similar) — consulte disponibilidade atual diretamente com o Prof. Diogo Souto.</p>
+</div>
+
+## Como se candidatar
+
+O processo de ingresso no grupo segue edital formal e seleção, de acordo com o nível:
+
+1. **Para IC:** acompanhe os editais de Iniciação Científica da UFS (PIBIC/PIBITI) e entre em contato com o Prof. Diogo Souto manifestando interesse em alguma das linhas de pesquisa **antes** da submissão.
+
+2. **Para Mestrado/Doutorado:** acompanhe os editais de seleção do [Programa de Pós-Graduação em Física (PPGFI/UFS)](https://www.ufs.br/ppgfi) e indique interesse em orientação na área de Astrofísica.
+
+3. **Para Pós-Doutorado:** envie e-mail diretamente com CV e carta de interesse, mencionando a linha de pesquisa de afinidade.
+
+**Em todos os casos**, recomendamos fortemente um contato prévio por e-mail antes de qualquer submissão formal, para conversarmos sobre disponibilidade de vagas e alinhamento de interesses de pesquisa.
+
+📧 **Contato:** [diogosouto@academico.ufs.br](mailto:diogosouto@academico.ufs.br)
+
+## Linhas de pesquisa disponíveis
+
+Veja em detalhe cada linha de pesquisa do grupo e os membros envolvidos:
+
+- [Conexão Estrela-Planeta]({{< relref "/project/estrelas-anas-m-exoplanetas/" >}}) — abundâncias de estrelas anãs-M hospedeiras de exoplanetas
+- [Atmosferas Exoplanetárias]({{< relref "/project/atmosferas-exoplanetarias/" >}}) — caracterização química de atmosferas via espectroscopia de trânsito
+- [Campos Magnéticos Estelares]({{< relref "/project/campos-magneticos-estelares/" >}}) — atividade e campos magnéticos em anãs-M
+- [Inomogeneidades Químicas Estelares]({{< relref "/project/inomogeneidades-quimicas/" >}}) — difusão atômica e variação de abundâncias em aglomerados
+- [Evolução Estelar e Arqueologia Galáctica]({{< relref "/project/evolucao-quimica-galaxia/" >}}) — populações estelares e gradientes químicos no disco da Via Láctea
+- [Abundâncias Químicas Estelares]({{< relref "/project/abundancias-quimicas-estelares/" >}}) — parâmetros atmosféricos e composição de estrelas do campo
+- [Espectroscopia no Infravermelho]({{< relref "/project/espectroscopia-infravermelho/" >}}) — análise espectral de anãs-M com IGRINS e APOGEE
+
+## Perguntas frequentes
+
+**Preciso já saber programar em Python?**
+Não é obrigatório no início, mas é fortemente recomendado. O grupo trabalha bastante com Python para análise de dados espectroscópicos, e você vai aprender ao longo do projeto se ainda não souber.
+
+**O grupo aceita alunos de outras instituições?**
+Sim, especialmente para mestrado, doutorado e pós-doc. A graduação em Astrofísica é exclusiva da UFS, mas a pós-graduação (PPGFI) recebe candidatos de todo o Brasil.
+
+**Quanto tempo leva para ter uma resposta?**
+Após contato por e-mail, normalmente respondemos em até 5 dias úteis.
