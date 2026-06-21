@@ -1136,9 +1136,9 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
 // Altura do slide
 .wg-slider .carousel-item,
 .wg-slider .carousel-item.fullscreen {
-  height: 75vh !important;
-  min-height: 450px !important;
-  max-height: 700px !important;
+  height: 80vh !important;
+  min-height: 500px !important;
+  max-height: 750px !important;
 }
 
 // Overlay escuro gradiente (esquerda escura → direita transparente)
@@ -1160,12 +1160,17 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   z-index: 2;
 }
 
-// Container do texto (HugoBlox gera .wg-hero.container, não .carousel-caption)
+// Container do texto — flex-column garante empilhamento correto de
+// título → texto → botão, sem sobreposição independente de largura
 .wg-slider .wg-hero.container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 1rem !important;
   margin-left: 6% !important;
   margin-right: auto !important;
-  width: 100% !important;
-  max-width: 560px !important;
+  width: 90% !important;
+  max-width: 680px !important;
   text-align: left !important;
 }
 
@@ -1174,17 +1179,18 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center !important;
+  align-items: center !important;
 }
 
-// Título — corrige quebra letra por letra
+// Título
 .wg-slider h1.hero-title {
   font-family: 'Playfair Display', serif !important;
   font-size: clamp(1.8rem, 3vw, 2.6rem) !important;
   font-weight: 700 !important;
-  line-height: 1.25 !important;
+  line-height: 1.2 !important;
   color: #e8edf5 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
-  margin-bottom: 1rem !important;
+  margin: 0 !important;
   word-break: normal !important;
   overflow-wrap: break-word !important;
   white-space: normal !important;
@@ -1194,11 +1200,22 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
 
 // Descrição
 .wg-slider p.hero-lead {
-  font-size: clamp(0.85rem, 1.2vw, 1rem) !important;
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem) !important;
   color: rgba(232, 237, 245, 0.92) !important;
-  line-height: 1.7 !important;
-  margin-bottom: 1.5rem !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  max-width: 520px !important;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+// Parágrafo do botão — não esticar na coluna flex
+.wg-slider .wg-hero.container > p:not(.hero-lead) {
+  margin: 0 !important;
+  width: auto !important;
+  align-self: flex-start !important;
+}
+.wg-slider .carousel-item:first-child .wg-hero.container > p:not(.hero-lead) {
+  align-self: center !important;
 }
 
 // Botão CTA
@@ -1209,10 +1226,11 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   background-color: var(--saberse-cyan) !important;
   border-color: var(--saberse-cyan) !important;
   color: #fff !important;
-  padding: 0.55rem 1.3rem !important;
+  padding: 0.6rem 1.4rem !important;
   border-radius: 4px !important;
   font-size: 0.9rem !important;
   font-weight: 500 !important;
+  white-space: nowrap !important;
   transition: all 0.2s ease !important;
 
   i { color: #fff !important; }
@@ -1259,12 +1277,12 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.9)) !important;
 }
 
-// Responsivo — mobile
-@media (max-width: 767px) {
+// Responsivo — tablet (≤768px)
+@media (max-width: 768px) {
   .wg-slider .carousel-item,
   .wg-slider .carousel-item.fullscreen {
-    height: 60vh !important;
-    min-height: 320px !important;
+    height: 65vh !important;
+    min-height: 450px !important;
     max-height: none !important;
   }
 
@@ -1274,10 +1292,32 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
     margin-left: auto !important;
     margin-right: auto !important;
     text-align: center !important;
+    align-items: center !important;
+  }
+
+  .wg-slider p.hero-lead {
+    max-width: 100% !important;
+  }
+
+  .wg-slider .wg-hero.container > p:not(.hero-lead) {
+    align-self: center !important;
+  }
+}
+
+// Responsivo — mobile pequeno (≤480px)
+@media (max-width: 480px) {
+  .wg-slider .carousel-item,
+  .wg-slider .carousel-item.fullscreen {
+    height: 60vh !important;
+    min-height: 400px !important;
   }
 
   .wg-slider h1.hero-title {
-    font-size: clamp(1.4rem, 5vw, 1.8rem) !important;
+    font-size: 1.5rem !important;
+  }
+
+  .wg-slider p.hero-lead {
+    font-size: 0.85rem !important;
   }
 }
 
