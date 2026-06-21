@@ -1436,3 +1436,67 @@ a .group-member-highlight,
 .dark .event-badge--school     { background: rgba(52, 168, 83, 0.18); }
 .dark .event-badge--workshop   { background: rgba(224, 90, 43, 0.18); }
 .dark .event-badge--seminar    { background: rgba(130, 80, 200, 0.18); }
+
+// ============================================================
+// DIVISOR PADRÃO — SABER-SE
+// Classe utilitária + aplicação automática em h2 de conteúdo
+// ============================================================
+
+// Placeholder SCSS para evitar repetição
+%saberse-divider {
+  content: '' !important;
+  display: block !important;
+  margin-top: 0.6rem !important;
+  margin-bottom: 1.8rem !important;
+  height: 2px !important;
+  width: 100% !important;
+  background: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.1)
+  ) !important;
+  border-radius: 2px !important;
+}
+
+// Classe utilitária — use <hX class="section-divider"> em HTML/shortcodes
+.section-divider::after {
+  @extend %saberse-divider;
+}
+
+// Aplica em h2 dentro das páginas de conteúdo:
+//   .article-style → projetos, posts, eventos (detail), publicações
+//   .wg-markdown   → oportunidades e blocos markdown em landing pages
+.article-style h2,
+.wg-markdown h2 {
+  position: relative;
+}
+
+.article-style h2::after,
+.wg-markdown h2::after {
+  @extend %saberse-divider;
+}
+
+// Modo escuro — força o fallback rgba para browsers sem suporte a variáveis CSS
+.dark .article-style h2::after,
+.dark .wg-markdown h2::after {
+  background: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.15)
+  ) !important;
+}
+
+// ── Resets — contextos onde o divisor NÃO deve aparecer ──────
+// Nomes de membros nos cards (portrait-title h2 é o nome da pessoa)
+.portrait-title h2::after,
+// Títulos dentro de cards genéricos
+.card h2::after,
+// Hero e sliders (títulos de destaque visual)
+.wg-hero h2::after,
+.wg-slider h2::after,
+// Títulos das linhas de pesquisa — já têm decoração própria (::after de 32px)
+h2.rl__title::after {
+  display: none !important;
+}

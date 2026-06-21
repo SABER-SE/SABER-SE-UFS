@@ -10834,3 +10834,29 @@ a .group-member-highlight,
 
 .dark .event-badge--seminar {
   background: rgba(130, 80, 200, 0.18); }
+
+.article-style h2::after,
+.wg-markdown h2::after, .section-divider::after {
+  content: '' !important;
+  display: block !important;
+  margin-top: 0.6rem !important;
+  margin-bottom: 1.8rem !important;
+  height: 2px !important;
+  width: 100% !important;
+  background: linear-gradient(to right, var(--saberse-cyan), var(--saberse-yellow), rgba(74, 158, 202, 0.1)) !important;
+  border-radius: 2px !important; }
+
+.article-style h2,
+.wg-markdown h2 {
+  position: relative; }
+
+.dark .article-style h2::after,
+.dark .wg-markdown h2::after {
+  background: linear-gradient(to right, var(--saberse-cyan), var(--saberse-yellow), rgba(74, 158, 202, 0.15)) !important; }
+
+.portrait-title h2::after,
+.card h2::after,
+.wg-hero h2::after,
+.wg-slider h2::after,
+h2.rl__title::after {
+  display: none !important; }
