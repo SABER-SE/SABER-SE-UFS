@@ -163,7 +163,7 @@ sections:
         <div style="display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding:2rem 0;text-align:center;">
           <div><div style="font-size:2.5rem;font-weight:700;">30+</div><div style="opacity:.7;">Publicações<br>científicas</div></div>
           <div><div style="font-size:2.5rem;font-weight:700;">500+</div><div style="opacity:.7;">Citações<br>(Google Scholar)</div></div>
-          <div><div style="font-size:2.5rem;font-weight:700;">6</div><div style="opacity:.7;">Membros<br>ativos</div></div>
+          <div><div style="font-size:2.5rem;font-weight:700;">15+</div><div style="opacity:.7;">Alunos<br>ativos</div></div>
           <div><div style="font-size:2.5rem;font-weight:700;">2019</div><div style="opacity:.7;">Ano de<br>fundação</div></div>
         </div>
     design:
