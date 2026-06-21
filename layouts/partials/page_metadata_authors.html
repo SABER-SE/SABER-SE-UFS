@@ -1,5 +1,6 @@
 {{/* Display author list from front matter, highlighting Saber-SE group members. */}}
-{{- if .Params.authors -}}
+{{/* project and event pages show author cards below — suppress the slug line here. */}}
+{{- if and (not (in (slice "project" "event") .Type)) .Params.authors -}}
   {{/*
     Fragments identifying group members (lowercase substring match).
     Derived from actual name formats found in publication index.md files.
