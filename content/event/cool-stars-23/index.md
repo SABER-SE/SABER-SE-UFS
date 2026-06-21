@@ -40,8 +40,10 @@ tags:
 featured: true
 
 image:
-  caption: "Crédito: Cool Stars 23 LOC"
+  filename: featured.jpg
+  caption: "Cartaz oficial do Cool Stars 23 — Tóquio, Japão"
   focal_point: Smart
+  preview_only: false
 
 url_code: ""
 url_pdf: ""
