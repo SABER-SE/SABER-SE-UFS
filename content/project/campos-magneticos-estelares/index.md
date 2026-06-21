@@ -17,6 +17,11 @@ tags:
 
 date: "2020-01-01T00:00:00Z"
 
+authors:
+  - admin
+  - deusalete-vilar
+  - anderson-andrade
+
 external_link: ""
 
 image:

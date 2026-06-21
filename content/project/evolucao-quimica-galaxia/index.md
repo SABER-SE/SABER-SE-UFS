@@ -16,6 +16,11 @@ tags:
 
 date: "2016-01-01T00:00:00Z"
 
+authors:
+  - admin
+  - veronica-loaiza
+  - raphael-souza
+
 external_link: ""
 
 image:

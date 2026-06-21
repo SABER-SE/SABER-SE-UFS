@@ -15,6 +15,13 @@ tags:
 
 date: "2019-01-01T00:00:00Z"
 
+authors:
+  - admin
+  - cinthya-santos
+  - alexandre-souza
+  - nayara-souza
+  - ingryd-carvalho
+
 external_link: ""
 
 image:

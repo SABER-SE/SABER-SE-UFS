@@ -17,6 +17,12 @@ tags:
 
 date: "2021-01-01T00:00:00Z"
 
+authors:
+  - admin
+  - nayara-souza
+  - ingryd-carvalho
+  - beatriz-ribeiro
+
 external_link: ""
 
 image:

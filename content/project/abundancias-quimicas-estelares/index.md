@@ -12,6 +12,9 @@ tags:
 
 date: "2016-01-01T00:00:00Z"
 
+authors:
+  - admin
+
 external_link: ""
 
 image:

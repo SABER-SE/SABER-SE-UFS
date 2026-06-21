@@ -16,6 +16,11 @@ tags:
 
 date: "2018-01-01T00:00:00Z"
 
+authors:
+  - admin
+  - anderson-andrade
+  - raphael-souza
+
 external_link: ""
 
 image:
