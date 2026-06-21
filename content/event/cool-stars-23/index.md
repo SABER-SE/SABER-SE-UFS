@@ -26,8 +26,8 @@ all_day: true
 publishDate: "2026-06-20T00:00:00Z"
 
 authors:
-  - admin
-  - anderson-andrade
+  - Diogo Souto
+  - Anderson Silva-Andrade
 
 tags:
   - Estrelas Frias

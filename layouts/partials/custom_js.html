@@ -64,3 +64,116 @@
 
 })();
 </script>
+
+{{/* Auto-link de nomes de membros do Saber-SE em páginas de conteúdo.
+     Executa diretamente no final do <body> — DOM já está pronto. */}}
+<script>
+(function () {
+  var AUTHORS = '{{ "authors/" | relURL }}';
+
+  // Pares [variação de nome, slug] — variações mais longas primeiro
+  // para que nomes completos ganhem sobre formas abreviadas em overlaps.
+  var MEMBERS = [
+    ['Ingryd Victoria de Carvalho',  'ingryd-carvalho'],
+    ['Anderson da Silva Andrade',    'anderson-andrade'],
+    ['Anderson da Silva-Andrade',    'anderson-andrade'],
+    ['Alexandre da Silva Souza',     'alexandre-souza'],
+    ['Verónica Loaiza Tacuri',       'veronica-loaiza'],
+    ['Verónica Loaiza-Tacuri',       'veronica-loaiza'],
+    ['Veronica Loaiza Tacuri',       'veronica-loaiza'],
+    ['Veronica Loaiza-Tacuri',       'veronica-loaiza'],
+    ['Anderson Silva-Andrade',       'anderson-andrade'],
+    ['Raphael Gomes Souza',          'raphael-souza'],
+    ['Ingryd Victoria',              'ingryd-carvalho'],
+    ['Anderson Andrade',             'anderson-andrade'],
+    ['Alexandre Souza',              'alexandre-souza'],
+    ['Deusalete Vilar',              'deusalete-vilar'],
+    ['Cinthya Santos',               'cinthya-santos'],
+    ['Beatriz Ribeiro',              'beatriz-ribeiro'],
+    ['Raphael Souza',                'raphael-souza'],
+    ['Fábio Wanderley',              'fabio-wanderley'],
+    ['Fabio Wanderley',              'fabio-wanderley'],
+    ['Cameron Calisto',              'cameron-calisto'],
+    ['Riane Storgatto',              'riane-storgatto'],
+    ['Vinicius Grilo',               'vinicius-grilo'],
+    ['Madalena Maia',                'madalena-maia'],
+    ['Andrew Nathan',                'andrew-nathan'],
+    ['Nayara Souza',                 'nayara-souza'],
+    ['Edypo Melo',                   'edypo-melo'],
+    ['Lara Barbosa',                 'lara-barbosa'],
+    ['Clara Rosin',                  'clara-rosin'],
+    ['Daiara Greter',                'daiara-greter'],
+    ['Diogo Souto',                  'admin'],
+    ['Iago Menezes',                 'iago-menezes'],
+    ['Yuri Menezes',                 'yuri-menezes'],
+    ['Kely Murta',                   'kely-murta'],
+    ['Laís Nery',                    'lais-nery'],
+    ['Lais Nery',                    'lais-nery'],
+    ['Rafael Gerço',                 'rafael-gerco'],
+    ['Rafael Gerco',                 'rafael-gerco']
+  ];
+
+  // Ancestrais que bloqueiam a substituição
+  var SKIP_TAGS = { A: 1, SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, BUTTON: 1 };
+
+  function isExcluded(el) {
+    var p = el;
+    while (p && p !== document.body) {
+      if (SKIP_TAGS[p.tagName]) return true;
+      var cl = p.className;
+      if (typeof cl === 'string' &&
+          (cl.indexOf('portrait-title') >= 0 ||
+           cl.indexOf('navbar') >= 0 ||
+           cl.indexOf('site-footer') >= 0)) return true;
+      p = p.parentElement;
+    }
+    return false;
+  }
+
+  function linkifyNode(textNode) {
+    var text = textNode.textContent;
+    if (!text.trim() || isExcluded(textNode.parentElement)) return;
+
+    var hits = [];
+    MEMBERS.forEach(function (pair) {
+      var name = pair[0], slug = pair[1], pos = 0, idx;
+      while ((idx = text.indexOf(name, pos)) !== -1) {
+        hits.push({ start: idx, end: idx + name.length, name: name, slug: slug });
+        pos = idx + 1;
+      }
+    });
+    if (!hits.length) return;
+
+    // Resolve sobreposições: em caso de empate no início, o mais longo vence
+    hits.sort(function (a, b) { return a.start - b.start || b.end - a.end; });
+    var clean = [], cursor = 0;
+    hits.forEach(function (h) {
+      if (h.start >= cursor) { clean.push(h); cursor = h.end; }
+    });
+
+    var frag = document.createDocumentFragment();
+    cursor = 0;
+    clean.forEach(function (h) {
+      if (h.start > cursor) frag.appendChild(document.createTextNode(text.slice(cursor, h.start)));
+      var a = document.createElement('a');
+      a.href = AUTHORS + h.slug + '/';
+      a.className = 'member-link';
+      a.textContent = h.name;
+      frag.appendChild(a);
+      cursor = h.end;
+    });
+    if (cursor < text.length) frag.appendChild(document.createTextNode(text.slice(cursor)));
+
+    textNode.parentNode.replaceChild(frag, textNode);
+  }
+
+  function walkAndLink(root) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    var nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(linkifyNode);
+  }
+
+  document.querySelectorAll('.article-style, .wg-markdown').forEach(walkAndLink);
+})();
+</script>

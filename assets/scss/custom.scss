@@ -1533,6 +1533,27 @@ a .group-member-highlight,
 }
 
 // ============================================================
+// LINKS DE MEMBROS — nomes linkados automaticamente via JS
+// ============================================================
+
+.member-link {
+  color: var(--saberse-cyan) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border-bottom: 1px dotted var(--saberse-cyan);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.member-link:hover {
+  color: var(--saberse-yellow) !important;
+  border-bottom-color: var(--saberse-yellow);
+}
+.dark .member-link {
+  color: lighten(#4a9eca, 10%) !important;
+}
+.dark .member-link:hover {
+  color: var(--saberse-yellow) !important;
+}
+
 // DIVISOR PADRÃO — SABER-SE
 // Classe utilitária + aplicação automática em h2 de conteúdo
 // ============================================================
