@@ -15,7 +15,7 @@ date: "2019-01-01T00:00:00Z"
 external_link: ""
 
 image:
-  caption: "Nebulosa do Caranguejo (remanescente de supernova) — NASA/ESA/Hubble (domínio público)"
+  caption: "Espectro estelar de HD 126587 com linhas de absorção de H, Ba, Nd e Sr identificadas — Crédito: NOAO/AURA/NSF"
   focal_point: Smart
   filename: research/spectroscopy.jpg
 
