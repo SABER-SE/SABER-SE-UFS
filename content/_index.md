@@ -147,6 +147,22 @@ sections:
           icon_pack: fas
           text: Ver linha de pesquisa
           url: research/
+
+      - title: "Espectroscopia no Infravermelho"
+        content: "A base metodológica que sustenta toda a pesquisa do grupo: espectros de alta resolução no infravermelho revelam a composição química de estrelas frias e obscurecidas, inacessíveis na luz visível. Trabalhamos com dados do APOGEE e contribuímos para o desenvolvimento de listas de linhas espectrais usadas pela comunidade internacional."
+        align: left
+        background:
+          image:
+            filename: research/spectroscopy.jpg
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#1a2a4a'
+        link:
+          icon: chart-line
+          icon_pack: fas
+          text: Ver linha de pesquisa
+          url: project/espectroscopia-infravermelho/
     design:
       slide_height: ''
       is_fullscreen: true

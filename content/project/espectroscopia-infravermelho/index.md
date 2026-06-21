@@ -2,18 +2,24 @@
 title: "Espectroscopia de Alta Resolução no Infravermelho"
 
 summary: |
-  Desenvolvimento e aplicação de técnicas espectroscópicas de alta resolução no infravermelho próximo para o estudo de estrelas frias e obscurecidas.
+  Desenvolvemos e aplicamos técnicas de espectroscopia de alta resolução no
+  infravermelho próximo, a base metodológica que sustenta todas as demais
+  linhas de pesquisa do grupo.
 
 tags:
   - Espectroscopia
-  - Infravermelho
-  - Instrumentação
   - APOGEE
+  - Infravermelho
+  - Métodos Observacionais
+  - Análise Espectral
 
-date: "2019-01-01T00:00:00Z"
+date: "2024-01-01"
 
 authors:
   - admin
+  - deusalete-vilar
+  - anderson-andrade
+  - cinthya-santos
 
 external_link: ""
 
@@ -32,27 +38,38 @@ slides: ""
 
 ## Visão Geral
 
-A **espectroscopia no infravermelho próximo** (NIR, ~1.5–1.7 μm) é uma ferramenta poderosa para o estudo de:
-- Estrelas frias (anãs-M, T < 4000 K), cujo pico de emissão está no NIR
-- Estrelas em regiões obscurecidas por poeira interestelar
-- Estrelas no centro galáctico
+A espectroscopia de alta resolução no infravermelho próximo é a **base metodológica** que sustenta toda a pesquisa do grupo Saber-SE. Diferente da luz visível, o infravermelho permite observar estrelas frias — como as anãs-M — e regiões obscurecidas por poeira interestelar, revelando informações químicas e físicas inacessíveis a outras técnicas.
 
-Nesta linha, trabalhamos com dados do espectrôgrafo **APOGEE** (*Apache Point Observatory Galactic Evolution Experiment*), operando no telescópio de 2.5 m do Sloan Digital Sky Survey (SDSS) com resolução R ~ 22.500.
+No grupo, trabalhamos principalmente com espectros do survey **APOGEE** (*Apache Point Observatory Galactic Evolution Experiment*), que opera na banda H (1.51–1.70 μm) com resolução espectral R ~ 22.500. O APOGEE integra o projeto SDSS-V e fornece espectros de centenas de milhares de estrelas na Via Láctea e além.
 
-## Técnicas
+## Questões Científicas e Metodológicas que Investigamos
 
-- Síntese espectral linha a linha
-- Análise de equivalente de largura (EW)
-- Determinação de parâmetros via minimização de χ²
-- Correções de pressão para linhas moleculares (OH, CO, H₂O)
+- Como extrair parâmetros estelares fundamentais (temperatura, gravidade, metalicidade) com precisão a partir de espectros no infravermelho?
+- Quais são as limitações e incertezas sistemáticas na análise espectral de estrelas frias?
+- Como aprimorar listas de linhas atômicas e moleculares para melhorar a precisão das medidas?
+- Como padronizar análises espectroscópicas entre diferentes levantamentos (APOGEE, IGRINS, futuras missões)?
 
-## Infraestrutura computacional
+## Metodologia
 
-O grupo utiliza principalmente **Python** (astropy, specutils, scipy) e **Fortran** (MOOG, SYNTHE) para processamento e análise de espectros. Todo o código desenvolvido é versionado e disponibilizado no GitHub.
+Utilizamos os códigos **BACCHUS** e **TURBOSPECTRUM** para síntese espectral e determinação de abundâncias químicas, com grades de modelos de atmosfera MARCS. O grupo também contribui para o desenvolvimento de listas de linhas espectrais e calibração de escalas de metalicidade — trabalho fundamental usado por todas as demais linhas de pesquisa do Saber-SE.
 
-## Perspectivas
+As principais etapas da análise incluem:
 
-Com a entrada em operação de novos instrumentos como o **CRIRES+** (VLT) e o futuro **MSE**, pretendemos expandir nossas análises para estrelas mais frias e sistemas em ambientes mais extremos.
+1. Redução e normalização de espectros brutos
+2. Medição de equivalentes de largura ou síntese espectral linha a linha
+3. Determinação de parâmetros atmosféricos (T_eff, log g, [Fe/H], ξ)
+4. Derivação de abundâncias de elementos individuais (C, N, O, Mg, Al, Si, Ca, Ti, Cr, Fe, Ni)
 
----
-*Imagem: Nebulosa do Caranguejo (Messier 1) · Crédito: NASA/ESA/Hubble Heritage Team · Domínio Público*
+## Membros Envolvidos
+
+- **Prof. Dr. Diogo Souto** — Coordenador e pesquisador principal
+- **Deusalete Vilar** — Doutoranda
+- **Anderson Andrade** — Doutorando
+- **Cinthya Santos** — Mestranda
+
+## Colaborações
+
+- **SDSS-V/APOGEE** — Levantamento espectroscópico principal
+- **Observatório Nacional (RJ)** — Colaboração histórica em espectroscopia estelar
+- **Universidade do Arizona** — Verne Smith, Katia Cunha (especialistas em espectroscopia no IR)
+- **IAC (Espanha)** — Colaborações em análise espectral e modelos de atmosferas
