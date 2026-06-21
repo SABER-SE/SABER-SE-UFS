@@ -23,3 +23,44 @@
   window.addEventListener('scroll', updateNavbar, { passive: true });
 })();
 </script>
+
+{{/* Divisores entre itens de listagem — posts e eventos
+     Executa diretamente: custom_js.html é carregado ao final do <body>,
+     portanto o DOM já está pronto quando este script roda. */}}
+<script>
+(function () {
+  function mkDivider(marginY) {
+    var hr = document.createElement('hr');
+    hr.className = 'block-divider';
+    if (marginY) { hr.style.margin = marginY + ' 0'; }
+    return hr;
+  }
+
+  function insertBetween(items, marginY) {
+    items.forEach(function (item, i) {
+      if (i === 0) return;
+      item.parentNode.insertBefore(mkDivider(marginY), item);
+    });
+  }
+
+  // /post — entre cada card de divulgação científica
+  var postCards = document.querySelectorAll('.universal-wrapper .card-simple.view-card');
+  insertBetween(Array.from(postCards), null);
+
+  // /event — o template gera um <div class="row" id="talk_list"> por ano (IDs duplicados)
+  var talkRows = Array.from(document.querySelectorAll('[id="talk_list"]'));
+  if (talkRows.length) {
+    // Entre grupos de ano (entre cada row#talk_list)
+    insertBetween(talkRows, '2.5rem');
+
+    // Entre eventos dentro de cada ano
+    talkRows.forEach(function (row) {
+      var eventCol = row.querySelector('.col-lg-10');
+      if (!eventCol) return;
+      var items = Array.from(eventCol.querySelectorAll('.media.stream-item'));
+      insertBetween(items, '1.5rem');
+    });
+  }
+
+})();
+</script>

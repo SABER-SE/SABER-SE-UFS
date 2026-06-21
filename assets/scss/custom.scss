@@ -899,10 +899,18 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   gap: 5rem;
   align-items: center;
   padding: 5rem 0;
-  border-bottom: 1px solid rgba(74, 158, 202, 0.07);
 
-  &:last-child {
-    border-bottom: none;
+  // Gradiente ciano→dourado no final de cada linha (exceto a última)
+  &:not(:last-child) {
+    background-image: linear-gradient(
+      to right,
+      var(--saberse-cyan),
+      var(--saberse-yellow),
+      rgba(74, 158, 202, 0.1)
+    );
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
   }
 
   // Layout espelhado (imagem à direita)
@@ -1436,6 +1444,93 @@ a .group-member-highlight,
 .dark .event-badge--school     { background: rgba(52, 168, 83, 0.18); }
 .dark .event-badge--workshop   { background: rgba(224, 90, 43, 0.18); }
 .dark .event-badge--seminar    { background: rgba(130, 80, 200, 0.18); }
+
+// ============================================================
+// DIVISOR ENTRE BLOCOS DE LISTAGEM — SABER-SE
+// Usado entre itens de /event, /post, grupos de /event
+// ============================================================
+
+.block-divider {
+  display: block;
+  height: 2px;
+  width: 100%;
+  margin: 2rem 0;
+  background: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.1)
+  );
+  border-radius: 2px;
+  border: none;
+}
+
+.dark .block-divider {
+  background: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.15)
+  );
+}
+
+// Oportunidades: estiliza <hr> já presentes no markdown
+.wg-markdown hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.1)
+  );
+  border-radius: 2px;
+  margin: 2rem 0;
+}
+
+.dark .wg-markdown hr {
+  background: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.15)
+  );
+}
+
+// Publicações: divisor entre itens — sem quebrar o Isotope
+// Remove estilo de card e insere gradiente no topo de cada item (exceto o primeiro)
+#container-publications .pub-list-item {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 1.5rem;
+  transition: none !important;
+}
+#container-publications .pub-list-item:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+#container-publications .isotope-item:not(:first-child) .pub-list-item {
+  padding-top: 1.5rem;
+  background-image: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.1)
+  );
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+.dark #container-publications .isotope-item:not(:first-child) .pub-list-item {
+  background-image: linear-gradient(
+    to right,
+    var(--saberse-cyan),
+    var(--saberse-yellow),
+    rgba(74, 158, 202, 0.15)
+  );
+}
 
 // ============================================================
 // DIVISOR PADRÃO — SABER-SE
