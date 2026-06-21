@@ -1,6 +1,7 @@
 ---
 title: Divulgação Científica
 cms_exclude: true
+summary: "Resumos acessíveis das pesquisas do Saber-SE em astrofísica estelar e exoplanetária — para estudantes, curiosos e entusiastas da astronomia."
 
 # Listing view
 view: card

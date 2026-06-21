@@ -17,9 +17,8 @@ marketing:
   seo:
     site_type: Organization
     local_business_type: ''
-    org_name: ''
     org_name: 'SABERSE-UFS'
-    description: 'Grupo de pesquisa em Astrofísica Estelar, Exoplanetas e Evolução Química da Galáxia — Universidade Federal de Sergipe (UFS).'
+    description: 'Grupo de Astrofísica Estelar e Exoplanetária da Universidade Federal de Sergipe (UFS). Pesquisa em abundâncias químicas estelares, exoplanetas, estrelas anãs-M e evolução química da Galáxia. Membro das colaborações SDSS-V/APOGEE e PLATO (ESA).'
     twitter: ''
   analytics:
     google_analytics: ''

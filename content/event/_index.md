@@ -1,6 +1,7 @@
 ---
 title: Eventos
 cms_exclude: true
+summary: "Participações do Saber-SE em conferências internacionais de astrofísica e exoplanetas, incluindo Cool Stars, Exoplanets e IAU Symposia."
 
 # Listing view
 view: card

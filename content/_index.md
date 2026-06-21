@@ -3,6 +3,7 @@
 title:
 date: 2022-10-24
 type: landing
+summary: "Grupo de Astrofísica Estelar da UFS — pesquisa em exoplanetas, estrelas anãs-M, abundâncias químicas e evolução química da Galáxia via espectroscopia de alta resolução no infravermelho."
 
 sections:
   # ============================================================
