@@ -1,0 +1,85 @@
+{{- define "main" -}}
+<section class="saberse-404">
+  <div class="saberse-404__inner">
+
+    <p class="saberse-404__code">404</p>
+
+    <h1 class="saberse-404__title">Esta estrela não foi catalogada</h1>
+
+    <p class="saberse-404__text">
+      A página que você procura não existe ou foi movida.<br>
+      Pode ter sido um link desatualizado.
+    </p>
+
+    <div class="saberse-404__actions">
+      <a href="{{ .Site.BaseURL }}" class="saberse-404__btn saberse-404__btn--primary">
+        Voltar ao início
+      </a>
+      <a href="{{ "research/" | relURL }}" class="saberse-404__btn saberse-404__btn--outline">
+        Ver nossa pesquisa
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.saberse-404 {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+.saberse-404__inner {
+  max-width: 520px;
+  width: 100%;
+}
+.saberse-404__code {
+  font-size: clamp(5rem, 18vw, 9rem);
+  font-weight: 700;
+  color: var(--saberse-cyan, #4a9eca);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.saberse-404__title {
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  margin: 0.75rem 0 0.5rem;
+  font-weight: 600;
+}
+.saberse-404__text {
+  font-size: 1rem;
+  opacity: 0.8;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.saberse-404__actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.saberse-404__btn {
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.saberse-404__btn:hover { opacity: 0.85; text-decoration: none; }
+.saberse-404__btn--primary {
+  background-color: var(--saberse-cyan, #4a9eca);
+  color: #fff;
+  border: 1px solid transparent;
+}
+.saberse-404__btn--outline {
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid var(--saberse-cyan, #4a9eca);
+}
+</style>
+{{- end -}}
