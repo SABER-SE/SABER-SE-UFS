@@ -65,7 +65,7 @@ sections:
           icon: users
           icon_pack: fas
           text: Conheça o grupo
-          url: ../people/
+          url: people/
 
       - title: "Conexão Estrela-Planeta"
         content: "A interligação química entre estrelas e planetas revela segredos sobre formação planetária e evolução estelar. Ao decifrar assinaturas químicas como a relação carbono/oxigênio, mapeamos a origem dos planetas e os ambientes que moldaram sua composição."
@@ -81,7 +81,7 @@ sections:
           icon: telescope
           icon_pack: fas
           text: Ver linha de pesquisa
-          url: ../research/
+          url: research/
 
       - title: "Atmosferas Exoplanetárias"
         content: "Analisar espectros de luz transmitidos através das atmosferas exoplanetárias desvenda segredos sobre composição e condições climáticas de mundos distantes. A presença de moléculas como água e metano fornece pistas cruciais sobre habitabilidade."
@@ -97,7 +97,7 @@ sections:
           icon: globe
           icon_pack: fas
           text: Ver linha de pesquisa
-          url: ../research/
+          url: research/
 
       - title: "Campos Magnéticos Estelares"
         content: "Os campos magnéticos estelares moldam a atmosfera das estrelas e influenciam todo o ambiente circundante. Compreender esses campos amplia nossa visão sobre seu impacto em sistemas planetários e na habitabilidade de exoplanetas."
@@ -113,7 +113,7 @@ sections:
           icon: bolt
           icon_pack: fas
           text: Ver linha de pesquisa
-          url: ../research/
+          url: research/
 
       - title: "Inomogeneidades Químicas Estelares"
         content: "Variações na composição química das estrelas oferecem um relato detalhado das complexas interações estelares e processos nucleossintéticos ao longo de bilhões de anos."
@@ -129,7 +129,7 @@ sections:
           icon: atom
           icon_pack: fas
           text: Ver linha de pesquisa
-          url: ../research/
+          url: research/
 
       - title: "Evolução Estelar e Arqueologia Galáctica"
         content: "Investigar a composição química das estrelas mais antigas desvenda os capítulos iniciais da história cósmica. Rastrear a evolução estelar permite compreender como as estrelas contribuíram para a formação de sistemas planetários."
@@ -145,7 +145,7 @@ sections:
           icon: star
           icon_pack: fas
           text: Ver linha de pesquisa
-          url: ../research/
+          url: research/
     design:
       slide_height: ''
       is_fullscreen: true
