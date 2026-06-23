@@ -12,49 +12,46 @@ organizations:
     url: 'https://www.ufs.br'
 
 bio: >
-  Anderson Andrade é doutorando em Astrofísica pelo PPGFI/UFS. Estuda probabilidades de transições moleculares de Hidreto de Ferro (FeH) em estrelas anãs-K via interferometria. Graduado pelo IF Sertão Pernambucano.
+  Anderson é doutorando em Astrofísica pela UFS, natural
+  de Princesa Isabel (PB). Desenvolve estudos em
+  Astrofísica Estelar com foco na caracterização física
+  e química de estrelas anãs-M e estrelas FGK por meio
+  de análises espectroscópicas.
 
 interests:
-  - Estrelas Anãs-K
-  - Hidreto de Ferro (FeH)
-  - Interferometria
-  - Transições Moleculares
+  - Estrelas Anãs-M
+  - Caracterização Espectroscópica de Alta Resolução
+  - Temperatura Efetiva
+  - Gravidade Superficial
+  - Abundâncias Químicas Estelares
+  - Estrelas FGK
 
 education:
   courses:
-    - course: Doutorado em Astrofísica (em andamento)
-      institution: PPGFI — Universidade Federal de Sergipe (UFS)
-      year: 2027
-    - course: Mestrado em Física
-      institution: PPGFI — Universidade Federal de Sergipe (UFS)
+    - course: "Doutorado em andamento — Física/Astrofísica"
+      institution: PPGFI/Universidade Federal de Sergipe (UFS)
+      year: "2024 -"
+    - course: Mestrado em Física/Astrofísica
+      institution: PPGFI/Universidade Federal de Sergipe (UFS)
+      year: 2024
+    - course: Graduação em Licenciatura em Física
+      institution: IFSertão
       year: 2022
-    - course: Graduação em Física
-      institution: IF Sertão Pernambucano
-      year: 2020
 
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:anderson.andrade@academico.ufs.br'
+    link: 'mailto:anders.andrade10@gmail.com'
     label: E-mail
   - icon: graduation-cap
     icon_pack: fas
-    link: 'http://lattes.cnpq.br/PREENCHER'
+    link: 'http://lattes.cnpq.br/1960187195230969'
     label: Currículo Lattes
-  - icon: google-scholar
-    icon_pack: ai
-    link: 'https://scholar.google.com/citations?user=PREENCHER'
-    label: Google Scholar
   - icon: orcid
     icon_pack: ai
-    link: 'https://orcid.org/PREENCHER'
+    link: 'https://orcid.org/0009-0000-2228-8234'
     label: ORCID
-  - icon: github
-    icon_pack: fab
-    link: 'https://github.com/PREENCHER'
-    label: GitHub
 
-email: 'anderson.andrade@academico.ufs.br'
 highlight_name: true
 
 user_groups:
@@ -63,8 +60,8 @@ user_groups:
 
 ## Sobre
 
-**Anderson Andrade** é graduado pelo IF Sertão Pernambucano e desenvolve seu doutorado em Astrofísica no PPGFI/UFS no Grupo Saber-SE.
+Cresci no sertão paraibano, em um ambiente onde a observação do céu estrelado sempre despertou minha curiosidade. Desde cedo, fui fascinado pelas grandes questões sobre a origem, a estrutura e a evolução do Universo, interesse que naturalmente me aproximou da Física e, posteriormente, da Astronomia.
 
-## Pesquisa em Andamento
+Ao longo da minha formação, descobri na pesquisa científica uma oportunidade de contribuir para a construção do conhecimento e de inspirar outras pessoas a seguirem caminhos semelhantes. O que mais me encanta na Astrofísica é a possibilidade de investigar objetos e fenômenos que estão a enormes distâncias de nós, mas que carregam informações fundamentais sobre a história do cosmos.
 
-Estuda as probabilidades de transições moleculares do Hidreto de Ferro (FeH) em estrelas anãs-K utilizando técnicas de interferometria, com o objetivo de refinar as análises espectroscópicas de estrelas frias.
+Fora da academia, gosto de dedicar meu tempo a atividades que desafiam o raciocínio e estimulam a competitividade saudável. Sou apaixonado por futebol, tanto jogando quanto acompanhando meus times do coração — Flamengo/Liverpool. Também gosto de videogames e xadrez, hobbies que me proporcionam momentos de descontração, estratégia e aprendizado. Acredito que a curiosidade, a persistência e a busca constante por novos desafios são características que conectam minha vida pessoal e minha trajetória como pesquisador.
