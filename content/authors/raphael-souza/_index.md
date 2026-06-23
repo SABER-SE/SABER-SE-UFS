@@ -1,7 +1,7 @@
 ---
-title: Raphael Gomes Souza
+title: Raphael Gomes Sousa
 first_name: Raphael
-last_name: Gomes Souza
+last_name: Gomes Sousa
 
 superuser: false
 
@@ -12,49 +12,56 @@ organizations:
     url: 'https://www.ufs.br'
 
 bio: >
-  Raphael Gomes Souza é doutorando em Astrofísica pelo PPGFI/UFS, investigando a evolução química da Galáxia e populações estelares.
+  Raphael é doutorando em Astrofísica pela UFS, com foco
+  em aglomerados globulares e arqueologia galáctica.
+  Mestre em Física pela UFSM (astrofísica extragaláctica)
+  e graduado em Astrofísica pela UFS.
 
 interests:
-  - Evolução Química da Galáxia
-  - Populações Estelares
+  - Aglomerados Estelares
+  - Arqueologia Galáctica
   - Espectroscopia de Alta Resolução
-  - APOGEE
+  - Astrofísica Observacional
+  - Astrofísica Extragaláctica
 
 education:
   courses:
-    - course: Doutorado em Astrofísica (em andamento)
-      institution: PPGFI — Universidade Federal de Sergipe (UFS)
-      year: 2027
-    - course: Mestrado em Física
-      institution: PPGFI — Universidade Federal de Sergipe (UFS)
-      year: 2022
-    - course: Graduação em Física
+    - course: Doutorado em andamento — Astrofísica
       institution: Universidade Federal de Sergipe (UFS)
-      year: 2020
+      year: "2025 -"
+    - course: Mestrado em Física
+      institution: Universidade Federal de Santa Maria (UFSM)
+      year: 2025
+    - course: Graduação em Astrofísica
+      institution: Universidade Federal de Sergipe (UFS)
+      year: 2022
 
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:raphael.souza@academico.ufs.br'
+    link: 'mailto:raphaelgosousa@gmail.com'
     label: E-mail
   - icon: graduation-cap
     icon_pack: fas
-    link: 'http://lattes.cnpq.br/PREENCHER'
+    link: 'http://lattes.cnpq.br/0234585452042051'
     label: Currículo Lattes
   - icon: google-scholar
     icon_pack: ai
-    link: 'https://scholar.google.com/citations?user=PREENCHER'
+    link: 'https://scholar.google.com.br/citations?user=FcmpAZMAAAAJ&hl=pt-BR'
     label: Google Scholar
   - icon: orcid
     icon_pack: ai
-    link: 'https://orcid.org/PREENCHER'
+    link: 'https://orcid.org/0009-0004-4785-3809'
     label: ORCID
   - icon: github
     icon_pack: fab
-    link: 'https://github.com/PREENCHER'
+    link: 'https://github.com/Raphaelgsousa'
     label: GitHub
+  - icon: linkedin
+    icon_pack: fab
+    link: 'https://www.linkedin.com/in/raphael-gomes-sousa-591bb71b1'
+    label: LinkedIn
 
-email: 'raphael.souza@academico.ufs.br'
 highlight_name: true
 
 user_groups:
@@ -63,10 +70,4 @@ user_groups:
 
 ## Sobre
 
-*Esta seção será preenchida em breve.*
-
-**Raphael Gomes Souza** integra o Grupo Saber-SE da Universidade Federal de Sergipe.
-
-## Pesquisa em Andamento
-
-*Informações sobre projetos em andamento serão adicionadas em breve.*
+Nascido em São Paulo, cresci em Aracaju-SE, sempre gostei bastante e tinha facilidade com coisas ligadas a ciências exatas e tecnologias desde o colégio. Sempre tive uma paixão muito grande pelo céu, principalmente à noite, contando as estrelas e olhando a Lua, e quando vi a possibilidade de cursar astronomia na cidade em que eu já morava (e que amo muito morar), me apaixonei pelo curso e pela metodologia aplicada, principalmente a tecnologia misturada com estudo dos astros.

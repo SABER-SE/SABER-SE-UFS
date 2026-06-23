@@ -1,7 +1,7 @@
 ---
-title: Cameron Calisto
+title: Cameron Calisto de Farias
 first_name: Cameron
-last_name: Calisto
+last_name: Calisto de Farias
 
 superuser: false
 
@@ -12,43 +12,35 @@ organizations:
     url: 'https://www.ufs.br'
 
 bio: >
-  Cameron Calisto é graduando em Astrofísica na UFS e bolsista de iniciação científica no Grupo Saber-SE, trabalhando com análise de catálogos de grandes levantamentos espectroscópicos.
+  Cameron é graduando em Física: Astrofísica pela UFS,
+  natural de Curitiba (PR). Estuda abundâncias químicas
+  de estrelas jovens da associação δ Scorpius e sua
+  relação com a formação de discos protoplanetários.
 
 interests:
-  - Levantamentos Espectroscópicos
-  - Análise de Grandes Catálogos
-  - Programação Científica
   - Astrofísica Estelar
+  - Estrelas Jovens
+  - Aglomerados Abertos Jovens
+  - Anãs M
+  - Abundâncias Químicas Estelares
+  - Discos Protoplanetários
 
 education:
   courses:
-    - course: Graduação em Astrofísica (em andamento)
+    - course: "Bacharelado em Física: Astrofísica (em andamento)"
       institution: Universidade Federal de Sergipe (UFS)
-      year: 2027
+      year: ""
 
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:cameron.calisto@academico.ufs.br'
+    link: 'mailto:camcalisto@academico.ufs.br'
     label: E-mail
   - icon: graduation-cap
     icon_pack: fas
-    link: 'http://lattes.cnpq.br/PREENCHER'
+    link: 'http://lattes.cnpq.br/5155252461985936'
     label: Currículo Lattes
-  - icon: google-scholar
-    icon_pack: ai
-    link: 'https://scholar.google.com/citations?user=PREENCHER'
-    label: Google Scholar
-  - icon: orcid
-    icon_pack: ai
-    link: 'https://orcid.org/PREENCHER'
-    label: ORCID
-  - icon: github
-    icon_pack: fab
-    link: 'https://github.com/PREENCHER'
-    label: GitHub
 
-email: 'cameron.calisto@academico.ufs.br'
 highlight_name: true
 
 user_groups:
@@ -57,10 +49,10 @@ user_groups:
 
 ## Sobre
 
-*Esta seção será preenchida em breve.*
+Meu interesse pela astronomia começou após a leitura do livro Pale Blue Dot: A Vision of the Human Future in Space, de Carl Sagan. Desde então, sempre fui fascinado por estrelas jovens, especialmente as estrelas T Tauri e os processos envolvidos na formação estelar.
 
-**Cameron Calisto** integra o Grupo Saber-SE da Universidade Federal de Sergipe.
+Durante a graduação em Física: Astrofísica na Universidade Federal de Sergipe, tive a oportunidade de estudar populações estelares em aglomerados jovens da Grande Nuvem de Magalhães, investigando os efeitos de turn-off estendido e de sequência principal dividida por meio de modelos teóricos e ajustes de diagramas cor-magnitude. Posteriormente, ingressei no grupo SABER-SE, onde realizei uma Iniciação Científica voltada ao estudo da dispersão química interna em aglomerados abertos extremamente jovens.
 
-## Pesquisa em Andamento
+Atualmente, desenvolvo pesquisas sobre abundâncias químicas em estrelas jovens e sua relação com a formação de discos protoplanetários e sistemas planetários. O que mais me motiva na pesquisa é a possibilidade de compreender a origem e a evolução das estrelas em seus estágios iniciais.
 
-*Informações sobre projetos em andamento serão adicionadas em breve.*
+Fora da academia, pratico karatê há 17 anos e atuo como monitor e professor do projeto de extensão Além do Dojo – UFS, que busca difundir a prática do karatê entre a comunidade universitária e a população do entorno da universidade. Também tenho grande interesse pela divulgação científica e pretendo seguir carreira acadêmica em Astrofísica Estelar. Nos momentos de lazer, gosto de passar tempo com meu cachorro, uma companhia constante que me ajuda a manter o equilíbrio entre a vida acadêmica e pessoal.

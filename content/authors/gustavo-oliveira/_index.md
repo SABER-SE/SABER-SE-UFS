@@ -28,10 +28,6 @@ education:
       year: "2022 -"
 
 social:
-  - icon: envelope
-    icon_pack: fas
-    link: 'mailto:PREENCHER@academico.ufs.br'
-    label: E-mail
   - icon: graduation-cap
     icon_pack: fas
     link: 'http://lattes.cnpq.br/8346010473643357'

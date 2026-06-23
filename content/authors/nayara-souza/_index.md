@@ -12,49 +12,43 @@ organizations:
     url: 'https://www.ufs.br'
 
 bio: >
-  Nayara Souza é doutoranda em Astrofísica pelo PPGFI/UFS. Formada em Astrofísica pela UFS (2023), pesquisa exoplanetas com características químicas e dinâmicas de origens extragalácticas.
+  Nayara é doutoranda em Astrofísica pela UFS, unindo suas
+  duas áreas de interesse — exoplanetas e dinâmica
+  galáctica — para investigar populações planetárias em
+  regiões da Galáxia além da vizinhança solar.
 
 interests:
+  - Cinemática e Dinâmica da Galáxia
+  - Arqueologia Galáctica
+  - Levantamentos Estelares
   - Exoplanetas
-  - Surveys Astronômicos
-  - Catálogos Estelares
-  - Origens Extragalácticas
 
 education:
   courses:
-    - course: Doutorado em Astrofísica (em andamento)
-      institution: PPGFI — Universidade Federal de Sergipe (UFS)
-      year: 2028
-    - course: Mestrado em Física
-      institution: PPGFI — Universidade Federal de Sergipe (UFS)
-      year: 2023
-    - course: Graduação em Astrofísica
+    - course: "Doutorado em andamento — Física: Astrofísica"
+      institution: PPGFI/Universidade Federal de Sergipe
+      year: "2025 -"
+    - course: "Mestrado em Física: Astrofísica Estelar"
+      institution: PPGFI/Universidade Federal de Sergipe
+      year: 2025
+    - course: "Graduação em Física: Astrofísica"
       institution: Universidade Federal de Sergipe (UFS)
-      year: 2021
+      year: 2023
 
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:nayara.souza@academico.ufs.br'
+    link: 'mailto:nayara.nifs@gmail.com'
     label: E-mail
   - icon: graduation-cap
     icon_pack: fas
-    link: 'http://lattes.cnpq.br/PREENCHER'
+    link: 'http://lattes.cnpq.br/8888652953547154'
     label: Currículo Lattes
-  - icon: google-scholar
-    icon_pack: ai
-    link: 'https://scholar.google.com/citations?user=PREENCHER'
-    label: Google Scholar
   - icon: orcid
     icon_pack: ai
-    link: 'https://orcid.org/PREENCHER'
+    link: 'https://orcid.org/0009-0001-3601-0572'
     label: ORCID
-  - icon: github
-    icon_pack: fab
-    link: 'https://github.com/PREENCHER'
-    label: GitHub
 
-email: 'nayara.souza@academico.ufs.br'
 highlight_name: true
 
 user_groups:
@@ -63,8 +57,10 @@ user_groups:
 
 ## Sobre
 
-**Nayara Souza** concluiu a graduação em Astrofísica pela UFS (2021) e o mestrado em Física no PPGFI/UFS. Atualmente desenvolve seu doutorado no Grupo Saber-SE.
+Sou mineira, de Poços de Caldas, onde estudei meu ensino fundamental e médio, orgulhosamente, em escolas públicas com ótimos professores. Aos 12 anos decidi que queria ser astrônoma depois de ler O Pequeno Príncipe e ficar fascinada com a viagem dele por diferentes planetas até chegar à Terra. Desde então, sempre pesquisei sobre astronomia e, ao terminar o ensino médio, decidi me mudar para Sergipe para fazer a graduação em Astronomia (que posteriormente se tornou Astrofísica).
 
-## Pesquisa em Andamento
+Durante a graduação expandi meus horizontes e participei de atividades extracurriculares, como o Movimento Empresa Júnior, onde cheguei a ser diretora estadual, e iniciação científica em Mecânica Celeste, no departamento de matemática. Finalizei minha graduação no início de 2023, sendo meu trabalho de conclusão de curso a respeito de exoplanetas do tipo Jupíteres Quentes, com uma revisão de literatura sobre suas características químicas e dinâmicas.
 
-Pesquisa exoplanetas com características químicas e dinâmicas sugestivas de origens extragalácticas, combinando dados de grandes surveys astronômicos com análise de catálogos estelares.
+Em seguida entrei no mestrado e passei a trabalhar com cinemática e dinâmica da Galáxia, tendo diversos colaboradores também em outras instituições. Atualmente estou no doutorado, com minha pesquisa atual em busca de unir minhas duas áreas de interesse: exoplanetas e a Via Láctea. Acho fantástico o fato de estarmos em um planeta completamente comum, ao redor de uma estrela comum, em um universo homogêneo e isotrópico, e ao mesmo tempo sermos tão únicos, e isso me motiva a querer investigar mais detalhes sobre as diferentes populações estelares em nossa Galáxia e os planetas que orbitam essas estrelas.
+
+Fora da universidade, gosto de ler, ir ao cinema, estar perto de pessoas queridas e, como boa mineira, adoro ir à praia. Acredito fortemente que a educação é a melhor forma de transformar a realidade das pessoas e do mundo.
