@@ -1,45 +1,49 @@
 ---
-title: Clara Rosin
+title: Clara Rosin Gomes
 first_name: Clara
-last_name: Rosin
+last_name: Rosin Gomes
 
 superuser: false
 
-role: Egressa — Iniciação Científica
+role: Egressa — Graduação
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
     url: 'https://www.ufs.br'
 
 bio: >
-  Ex-bolsista de iniciação científica do Grupo Saber-SE.
+  Graduada em Física: Astrofísica pela UFS, com TCC sobre
+  classificação taxonômica de núcleos ativos de galáxias
+  (AGN), sob orientação do Prof. Diogo Souto. Atualmente
+  é mestranda em Física na UFSM, estudando AGNs a partir
+  de dados espectroscópicos do infravermelho próximo.
 
 interests:
-  - Astrofísica Observacional
-  - Espectroscopia
-  - Análise de Dados
+  - Núcleos Ativos de Galáxias (AGN)
+  - Astrofísica Extragaláctica
+  - Espectroscopia Infravermelha
+  - Cinemática de Gás Molecular e Ionizado
 
 education:
   courses:
-    - course: Graduação em Física
+    - course: Mestrado em andamento em Física
+      institution: Universidade Federal de Santa Maria (UFSM)
+      year: "2023 -"
+    - course: "Graduação em Física: Astrofísica"
       institution: Universidade Federal de Sergipe (UFS)
-      year: 2023
+      year: "2016 - 2023"
 
 social:
   - icon: graduation-cap
     icon_pack: fas
-    link: 'http://lattes.cnpq.br/PREENCHER'
+    link: 'http://lattes.cnpq.br/2946234243757767'
     label: Currículo Lattes
-  - icon: google-scholar
-    icon_pack: ai
-    link: 'https://scholar.google.com/citations?user=PREENCHER'
-    label: Google Scholar
   - icon: orcid
     icon_pack: ai
-    link: 'https://orcid.org/PREENCHER'
+    link: 'https://orcid.org/0009-0002-4887-0518'
     label: ORCID
 
-highlight_name: false
+highlight_name: true
 
 user_groups:
   - Egressos
@@ -47,6 +51,6 @@ user_groups:
 
 ## Sobre
 
-**Clara Rosin** é egresso(a) do Grupo Saber-SE da Universidade Federal de Sergipe.
+Clara é graduada em Física: Astrofísica pela Universidade Federal de Sergipe. No grupo Saber-SE, desenvolveu seu Trabalho de Conclusão de Curso sobre classificação taxonômica de núcleos ativos de galáxias (AGN), sob orientação do Prof. Diogo Souto, trabalho que recebeu o prêmio de Melhor Pôster no XXVI Encontro Sergipano de Física em 2022.
 
-*Informações adicionais serão adicionadas em breve.*
+Atualmente é mestranda em Física pela Universidade Federal de Santa Maria (UFSM), sob orientação do Prof. Rogemar André Riffel, mantendo o foco em astrofísica extragaláctica e núcleos ativos de galáxias. Sua pesquisa atual investiga a estrutura de emissão de gás molecular e ionizado, além da cinemática, na galáxia hospedeira do AGN MCG+08-011-11, utilizando dados espectroscópicos do infravermelho próximo.
