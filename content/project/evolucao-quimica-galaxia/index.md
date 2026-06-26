@@ -19,7 +19,13 @@ date: "2016-01-01T00:00:00Z"
 authors:
   - admin
   - veronica-loaiza
+  - rafael-gerco
   - raphael-souza
+  - nayara-souza
+  - ingryd-carvalho
+  - lucas-ramos
+  - gustavo-oliveira
+  - andrew-nathan
 
 external_link: ""
 

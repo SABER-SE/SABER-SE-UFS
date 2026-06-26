@@ -17,9 +17,10 @@ date: "2024-01-01"
 
 authors:
   - admin
+  - veronica-loaiza
+  - rafael-gerco
   - deusalete-vilar
   - anderson-andrade
-  - cinthya-santos
 
 external_link: ""
 

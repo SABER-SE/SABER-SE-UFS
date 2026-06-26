@@ -18,8 +18,13 @@ date: "2018-01-01T00:00:00Z"
 
 authors:
   - admin
-  - anderson-andrade
+  - veronica-loaiza
   - raphael-souza
+  - nayara-souza
+  - deusalete-vilar
+  - ingryd-carvalho
+  - lucas-ramos
+  - gustavo-oliveira
 
 external_link: ""
 

@@ -19,9 +19,11 @@ date: "2021-01-01T00:00:00Z"
 
 authors:
   - admin
-  - nayara-souza
-  - ingryd-carvalho
   - beatriz-ribeiro
+  - alexandre-souza
+  - cinthya-santos
+  - yuri-menezes
+  - riane-storgatto
 
 external_link: ""
 

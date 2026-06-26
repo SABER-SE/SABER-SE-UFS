@@ -19,7 +19,8 @@ date: "2020-01-01T00:00:00Z"
 
 authors:
   - admin
-  - deusalete-vilar
+  - veronica-loaiza
+  - fabio-wanderley
   - anderson-andrade
 
 external_link: ""

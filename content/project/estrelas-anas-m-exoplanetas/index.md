@@ -17,10 +17,14 @@ date: "2019-01-01T00:00:00Z"
 
 authors:
   - admin
-  - cinthya-santos
+  - veronica-loaiza
+  - fabio-wanderley
+  - anderson-andrade
+  - madalena-maia
   - alexandre-souza
-  - nayara-souza
-  - ingryd-carvalho
+  - daiara-greter
+  - cameron-calisto
+  - andrew-nathan
 
 external_link: ""
 
