@@ -5,19 +5,22 @@ last_name: Fraga Guerço
 
 superuser: false
 
-role: Egresso — Pós-Doutorado
+role: "Pós-Doutorando - Parceiro do Saber-SE (Observatório Nacional)"
 
 organizations:
-  - name: Universidade Federal de Sergipe (UFS)
-    url: 'https://www.ufs.br'
+  - name: Observatório Nacional (ON/MCTI)
+    url: "https://www.gov.br/observatorio/pt-br"
+  - name: Grupo Saber-SE (Colaborador)
+    url: ""
 
 bio: >
   Doutor em Astronomia pelo Observatório Nacional.
-  Realizou pesquisa pós-doutoral no grupo Saber-SE, com
-  foco em astroquímica estelar e técnicas de aprendizado
+  Atualmente realiza pós-doutorado com bolsa PCI (Programa
+  de Capacitação Institucional) no Observatório Nacional,
+  com foco em astroquímica estelar e técnicas de aprendizado
   de máquina para identificação de membros estelares em
-  aglomerados abertos via APOGEE. Atualmente é pesquisador
-  pós-doutoral na Universidad Católica del Norte (Chile).
+  aglomerados abertos via APOGEE, mantendo colaboração
+  ativa com o grupo Saber-SE.
 
 interests:
   - Astroquímica Estelar
@@ -55,7 +58,7 @@ social:
 highlight_name: true
 
 user_groups:
-  - Egressos
+  - Pós-Doutorandos
 ---
 
 ## Sobre
@@ -64,6 +67,8 @@ Rafael é licenciado e bacharel em Física pela Universidade Federal Fluminense 
 
 No grupo Saber-SE, atuou em pesquisa sobre associações e abundâncias químicas em aglomerados abertos a partir de algoritmos de inteligência artificial, utilizando espectros do APOGEE e o algoritmo HDBSCAN para identificar estrelas membras de aglomerados a partir de dados dinâmicos do Gaia combinados com dados químicos.
 
-Sua trajetória inclui pesquisa pós-doutoral no Observatório Nacional, atuação como pesquisador visitante no European Southern Observatory (ESO) em 2025, e atualmente realiza pós-doutorado na Universidad Católica del Norte (UCN), no Chile, com foco na caracterização quimiodinâmica dos relictos de formação da Via Láctea usando dados do SDSS-V e Gaia DR3.
+Sua trajetória inclui pesquisa pós-doutoral no Observatório Nacional, atuação como pesquisador visitante no European Southern Observatory (ESO) em 2025, e pós-doutorado na Universidad Católica del Norte (UCN), no Chile, com foco na caracterização quimiodinâmica dos relictos de formação da Via Láctea usando dados do SDSS-V e Gaia DR3.
 
 Rafael possui 12 artigos publicados, com mais de 90 citações e fator H igual a 7. É também revisor da revista Astronomy & Astrophysics e tem forte atuação em divulgação científica, incluindo participação em programas de rádio e organização de eventos como a Escola de Inverno em Astrofísica do Observatório Nacional.
+
+**Nota:** Rafael atualmente realiza pós-doutorado com bolsa PCI (Programa de Capacitação Institucional) no Observatório Nacional, não na UFS. Sua colaboração com o grupo Saber-SE continua ativa em pesquisas conjuntas sobre aglomerados abertos e abundâncias químicas via APOGEE.
