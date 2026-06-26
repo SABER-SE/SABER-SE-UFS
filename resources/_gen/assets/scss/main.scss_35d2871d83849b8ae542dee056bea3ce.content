@@ -10606,9 +10606,9 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
 
 .wg-slider .carousel-item,
 .wg-slider .carousel-item.fullscreen {
-  height: 75vh !important;
-  min-height: 450px !important;
-  max-height: 700px !important; }
+  height: 80vh !important;
+  min-height: 500px !important;
+  max-height: 750px !important; }
 
 .wg-slider .carousel-item::after {
   content: '';
@@ -10621,25 +10621,30 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   z-index: 2; }
 
 .wg-slider .wg-hero.container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 1rem !important;
   margin-left: 6% !important;
   margin-right: auto !important;
-  width: 100% !important;
-  max-width: 560px !important;
+  width: 90% !important;
+  max-width: 680px !important;
   text-align: left !important; }
 
 .wg-slider .carousel-item:first-child .wg-hero.container {
   margin-left: auto !important;
   margin-right: auto !important;
-  text-align: center !important; }
+  text-align: center !important;
+  align-items: center !important; }
 
 .wg-slider h1.hero-title {
   font-family: 'Playfair Display', serif !important;
   font-size: clamp(1.8rem, 3vw, 2.6rem) !important;
   font-weight: 700 !important;
-  line-height: 1.25 !important;
+  line-height: 1.2 !important;
   color: #e8edf5 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
-  margin-bottom: 1rem !important;
+  margin: 0 !important;
   word-break: normal !important;
   overflow-wrap: break-word !important;
   white-space: normal !important;
@@ -10647,11 +10652,20 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   display: block !important; }
 
 .wg-slider p.hero-lead {
-  font-size: clamp(0.85rem, 1.2vw, 1rem) !important;
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem) !important;
   color: rgba(232, 237, 245, 0.92) !important;
-  line-height: 1.7 !important;
-  margin-bottom: 1.5rem !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  max-width: 520px !important;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important; }
+
+.wg-slider .wg-hero.container > p:not(.hero-lead) {
+  margin: 0 !important;
+  width: auto !important;
+  align-self: flex-start !important; }
+
+.wg-slider .carousel-item:first-child .wg-hero.container > p:not(.hero-lead) {
+  align-self: center !important; }
 
 .wg-slider .btn-light {
   display: inline-flex !important;
@@ -10660,10 +10674,11 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   background-color: var(--saberse-cyan) !important;
   border-color: var(--saberse-cyan) !important;
   color: #fff !important;
-  padding: 0.55rem 1.3rem !important;
+  padding: 0.6rem 1.4rem !important;
   border-radius: 4px !important;
   font-size: 0.9rem !important;
   font-weight: 500 !important;
+  white-space: nowrap !important;
   transition: all 0.2s ease !important; }
   .wg-slider .btn-light i {
     color: #fff !important; }
@@ -10700,20 +10715,33 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
 .wg-slider .carousel-control-next-icon {
   filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.9)) !important; }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .wg-slider .carousel-item,
   .wg-slider .carousel-item.fullscreen {
-    height: 60vh !important;
-    min-height: 320px !important;
+    height: 65vh !important;
+    min-height: 450px !important;
     max-height: none !important; }
   .wg-slider .wg-hero.container {
     width: 85% !important;
     max-width: 85% !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    text-align: center !important; }
+    text-align: center !important;
+    align-items: center !important; }
+  .wg-slider p.hero-lead {
+    max-width: 100% !important; }
+  .wg-slider .wg-hero.container > p:not(.hero-lead) {
+    align-self: center !important; } }
+
+@media (max-width: 480px) {
+  .wg-slider .carousel-item,
+  .wg-slider .carousel-item.fullscreen {
+    height: 60vh !important;
+    min-height: 400px !important; }
   .wg-slider h1.hero-title {
-    font-size: clamp(1.4rem, 5vw, 1.8rem) !important; } }
+    font-size: 1.5rem !important; }
+  .wg-slider p.hero-lead {
+    font-size: 0.85rem !important; } }
 
 .wg-people h2.mb-4 {
   font-family: 'Playfair Display', serif !important;
@@ -10880,6 +10908,23 @@ a .group-member-highlight,
 .dark #container-publications .isotope-item:not(:first-child) .pub-list-item {
   background-image: linear-gradient(to right, var(--saberse-cyan), var(--saberse-yellow), rgba(74, 158, 202, 0.15)); }
 
+.member-link {
+  color: var(--saberse-cyan) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border-bottom: 1px dotted var(--saberse-cyan);
+  transition: color 0.15s ease, border-color 0.15s ease; }
+
+.member-link:hover {
+  color: var(--saberse-yellow) !important;
+  border-bottom-color: var(--saberse-yellow); }
+
+.dark .member-link {
+  color: #71b3d6 !important; }
+
+.dark .member-link:hover {
+  color: var(--saberse-yellow) !important; }
+
 .article-style h2::after,
 .wg-markdown h2::after, .section-divider::after {
   content: '' !important;
@@ -10905,3 +10950,42 @@ a .group-member-highlight,
 .wg-slider h2::after,
 h2.rl__title::after {
   display: none !important; }
+
+.opp-card {
+  border: 1px solid rgba(74, 158, 202, 0.3);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.75rem;
+  background: rgba(74, 158, 202, 0.04); }
+  .opp-card h3 {
+    color: var(--saberse-cyan, #4a9eca);
+    margin-top: 0;
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(74, 158, 202, 0.2);
+    margin-bottom: 1rem; }
+  .opp-card p:last-child {
+    margin-bottom: 0; }
+
+.dark .opp-card {
+  background: rgba(74, 158, 202, 0.07);
+  border-color: rgba(74, 158, 202, 0.2); }
+
+.opp-urgent {
+  border: 2px solid var(--saberse-yellow);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  background: rgba(245, 200, 66, 0.06); }
+  .opp-urgent h2 {
+    color: var(--saberse-yellow) !important;
+    margin-top: 0; }
+  .opp-urgent p:last-child {
+    margin-bottom: 0; }
+
+.dark .opp-urgent {
+  background: rgba(245, 200, 66, 0.08);
+  border-color: rgba(245, 200, 66, 0.7); }
+
+.opp-urgent h2::after {
+  background: linear-gradient(to right, var(--saberse-yellow), var(--saberse-cyan), rgba(245, 200, 66, 0.1)) !important; }

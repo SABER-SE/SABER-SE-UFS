@@ -1683,3 +1683,37 @@ h2.rl__title::after {
   background: rgba(74, 158, 202, 0.07);
   border-color: rgba(74, 158, 202, 0.2);
 }
+
+// ── OPORTUNIDADES — Vaga urgente com prazo ─────────────────────
+.opp-urgent {
+  border: 2px solid var(--saberse-yellow);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  background: rgba(245, 200, 66, 0.06);
+
+  h2 {
+    color: var(--saberse-yellow) !important;
+    margin-top: 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.dark .opp-urgent {
+  background: rgba(245, 200, 66, 0.08);
+  border-color: rgba(245, 200, 66, 0.7);
+}
+
+// O h2 da vaga urgente herda o divisor gradiente do .wg-markdown h2::after —
+// mas substituímos a cor para ciano→dourado ainda funcionar sobre fundo amarelado
+.opp-urgent h2::after {
+  background: linear-gradient(
+    to right,
+    var(--saberse-yellow),
+    var(--saberse-cyan),
+    rgba(245, 200, 66, 0.1)
+  ) !important;
+}
