@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(hugo version *)",
-      "Bash(git --version)"
+      "Bash(git --version)",
+      "Bash(mkdir -p /home/diogo/saberse_dfi_page/content/authors/gustavo-oliveira/)",
+      "Bash(cp \"/home/diogo/saberse_dfi_page/WhatsApp Image 2026-06-18 at 10.16.14.jpeg\" /home/diogo/saberse_dfi_page/content/authors/gustavo-oliveira/avatar.jpg)"
     ]
   }
 }
