@@ -1,64 +1,71 @@
 ---
-title: Andrew Nathan
+title: "Andrew Nathan"
 first_name: Andrew
 last_name: Nathan
 
 superuser: false
 
-role: Graduando — Iniciação Científica / Apoio Pedagógico
+role: "Graduando - Pesquisa e Design do grupo"
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
-    url: 'https://www.ufs.br'
+    url: "https://www.ufs.br"
 
 bio: >
-  Andrew Nathan é graduando em Astrofísica na UFS. Organiza workshops e eventos do projeto Apoio Pedagógico. Artista independente e defensor da educação inclusiva (TEA).
+  Natural de Goiás, graduando em Física: Astrofísica na
+  UFS. Atuou como ministrante de workshops do projeto
+  APOASTRO e atualmente desenvolve pesquisa em Arqueologia
+  Galáctica sob orientação da Dra. Nayara Souza. Também
+  é responsável pelos designs do Instagram do grupo
+  Saber-SE.
 
 interests:
-  - Caracterização Estelar
-  - Educação Inclusiva
-  - Divulgação Científica
-  - Arte
+  - Cinemática e Dinâmica da Galáxia
+  - Arqueologia Galáctica
+  - Exoplanetas
+  - Astroquímica
 
 education:
   courses:
-    - course: Graduação em Astrofísica (em andamento)
-      institution: Universidade Federal de Sergipe (UFS)
-      year: 2027
+    - course: "Graduação em Física: Astrofísica (em andamento)"
+      institution: "Universidade Federal de Sergipe (UFS)"
+      year: "2021 -"
 
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:andrew.nathan@academico.ufs.br'
+    link: "mailto:andrew.nathan.rs@gmail.com"
     label: E-mail
-  - icon: graduation-cap
-    icon_pack: fas
-    link: 'http://lattes.cnpq.br/PREENCHER'
-    label: Currículo Lattes
-  - icon: google-scholar
-    icon_pack: ai
-    link: 'https://scholar.google.com/citations?user=PREENCHER'
-    label: Google Scholar
-  - icon: orcid
-    icon_pack: ai
-    link: 'https://orcid.org/PREENCHER'
-    label: ORCID
-  - icon: github
-    icon_pack: fab
-    link: 'https://github.com/PREENCHER'
-    label: GitHub
 
-email: 'andrew.nathan@academico.ufs.br'
+email: "andrew.nathan.rs@gmail.com"
 highlight_name: true
 
 user_groups:
-  - Graduandos
+  - "Graduandos"
 ---
 
 ## Sobre
 
-**Andrew Nathan** é graduando em Astrofísica na UFS e bolsista de Iniciação Científica no Grupo Saber-SE. Também atua no projeto Apoio Pedagógico, organizando workshops e eventos de divulgação científica. É artista independente e defensor da educação inclusiva para pessoas com TEA.
+Natural de Goiás, onde vivi boa parte da infância, sempre
+fui apaixonado por arte e ciência. Esse interesse me levou
+a mudar para Sergipe para cursar Bacharelado em Física com
+ênfase em Astrofísica.
 
-## Pesquisa em Andamento
+Durante a graduação, participei de atividades
+extracurriculares, entre elas o Projeto de Apoio Pedagógico
+de Astrofísica (APOASTRO), no qual ministrei workshops sobre
+softwares utilizados na pesquisa em Astronomia — experiência
+que fortaleceu meu amor por ensinar. Como pessoa no
+Transtorno do Espectro Autista (TEA), procuro transformar
+conhecimentos complexos em conteúdos claros e acessíveis,
+valorizando diferentes formas de aprendizagem.
 
-Desenvolve iniciação científica em caracterização estelar, combinando análise de dados espectroscópicos com seu interesse em tornar a ciência mais acessível.
+Paralelamente ao APOASTRO, iniciei minha atuação na área
+de Exoplanetas e, posteriormente, passei a desenvolver
+pesquisas em Arqueologia Galáctica sob orientação da
+Dra. Nayara Souza. Além disso, sou responsável pelos
+designs do Instagram do grupo Saber-SE.
+
+Fora da vida acadêmica, me considero um "colecionador de
+hobbies", buscando conciliar minha paixão pela ciência,
+pelo movimento e pelas artes.
