@@ -1,5 +1,5 @@
 ---
-title: "Ingryd Victoria Bispo de Carvalho"
+title: "Ingryd Carvalho"
 first_name: Ingryd
 last_name: Carvalho
 
@@ -19,10 +19,12 @@ bio: >
 
 interests:
   - Química Estelar
+  - Abundâncias Químicas
   - Aglomerados Globulares
   - Mecânica Celeste
   - Geometria Diferencial
   - Cálculo Fracionário
+  
 
 education:
   courses:
