@@ -1,69 +1,78 @@
 ---
-title: Ingryd Victoria de Carvalho
+title: "Ingryd Victoria Bispo de Carvalho"
 first_name: Ingryd
 last_name: Carvalho
 
 superuser: false
 
-role: Mestranda — PPGFI/UFS
+role: "Mestranda - PPGFI/UFS"
 
 organizations:
   - name: Universidade Federal de Sergipe (UFS)
-    url: 'https://www.ufs.br'
+    url: "https://www.ufs.br"
 
 bio: >
-  Ingryd Victoria de Carvalho é mestranda em Física no PPGFI/UFS. Desenvolve pesquisa em síntese espectral e modelos de atmosferas estelares no Grupo Saber-SE.
+  Baiana, natural de Alagoinhas. Graduada em Física:
+  Astrofísica pela UFS. Atualmente mestranda no PPGFI/UFS,
+  com pesquisa voltada para a química estelar e dinâmica
+  do aglomerado globular NGC 3201.
 
 interests:
-  - Síntese Espectral
-  - Modelos de Atmosferas Estelares
-  - Abundâncias Químicas
-  - Espectroscopia Óptica
+  - Química Estelar
+  - Aglomerados Globulares
+  - Mecânica Celeste
+  - Geometria Diferencial
+  - Cálculo Fracionário
 
 education:
   courses:
-    - course: Mestrado em Física (em andamento)
-      institution: PPGFI — Universidade Federal de Sergipe (UFS)
-      year: 2026
-    - course: Graduação em Física
-      institution: Universidade Federal de Sergipe (UFS)
-      year: 2023
+    - course: "Mestrado em Física (em andamento)"
+      institution: "Universidade Federal de Sergipe (UFS)"
+      year: ""
+    - course: "Graduação em Física: Astrofísica"
+      institution: "Universidade Federal de Sergipe (UFS)"
+      year: "2025"
 
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:ingryd.carvalho@academico.ufs.br'
+    link: "mailto:ingrydcarvalho.astro@gmail.com"
     label: E-mail
   - icon: graduation-cap
     icon_pack: fas
-    link: 'http://lattes.cnpq.br/PREENCHER'
+    link: "http://lattes.cnpq.br/6683515139086652"
     label: Currículo Lattes
-  - icon: google-scholar
-    icon_pack: ai
-    link: 'https://scholar.google.com/citations?user=PREENCHER'
-    label: Google Scholar
   - icon: orcid
     icon_pack: ai
-    link: 'https://orcid.org/PREENCHER'
+    link: "https://orcid.org/0009-0001-5616-9118"
     label: ORCID
-  - icon: github
-    icon_pack: fab
-    link: 'https://github.com/PREENCHER'
-    label: GitHub
 
-email: 'ingryd.carvalho@academico.ufs.br'
+email: "ingrydcarvalho.astro@gmail.com"
 highlight_name: true
 
 user_groups:
-  - Mestrandos
+  - "Mestrandos"
 ---
 
 ## Sobre
 
-*Esta seção será preenchida em breve.*
+Sou baiana, natural de Alagoinhas, e meu interesse pela
+Astronomia surgiu ainda na infância, durante as primeiras
+aulas sobre os planetas — uma curiosidade que acabou
+definindo minha escolha profissional.
 
-**Ingryd Victoria de Carvalho** integra o Grupo Saber-SE da Universidade Federal de Sergipe.
+Durante a graduação em Astrofísica na UFS, desenvolvi
+Iniciações Científicas pelo Departamento de Matemática na
+área de Mecânica Celeste, estudando desde teorias clássicas
+à geometria diferencial no Rⁿ. Também despertei interesse
+pelo Cálculo Fracionário, tema que fundamentou meu Trabalho
+de Conclusão de Curso.
 
-## Pesquisa em Andamento
+Em paralelo, sempre tive interesse em Astrofísica Estelar,
+e atualmente minha pesquisa de mestrado é voltada para a
+química estelar e a dinâmica do aglomerado globular NGC
+3201, investigando a composição química e o comportamento
+dinâmico de suas estrelas.
 
-*Informações sobre projetos em andamento serão adicionadas em breve.*
+Fora da universidade, sou tatuadora, pratico judô e
+jiu-jítsu, gosto de correr e de fazer passeios ao ar livre.
