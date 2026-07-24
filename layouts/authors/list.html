@@ -17,6 +17,8 @@
       {{ partial $widget $params }}
     {{end}}
 
+    {{ if .File }}{{ partial "author-theses.html" . }}{{ end }}
+
     {{ $query := where .Pages ".IsNode" false }}
     {{ $count := len $query }}
     {{ if $count }}

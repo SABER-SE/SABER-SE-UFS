@@ -1,0 +1,19 @@
+{{ $authorSlug := path.Base .File.Dir }}
+{{ $theses := where (where site.RegularPages "Section" "thesis") "Params.authors" "intersect" (slice $authorSlug) }}
+
+{{ with $theses }}
+<div class="author-theses article-widget content-widget-hr">
+  <h3>Trabalhos Acadêmicos</h3>
+  <ul class="theses-list">
+    {{ range (sort . "Date" "desc") }}
+    <li class="thesis-item">
+      {{ with .Params.thesis_type }}
+        <span class="thesis-type-badge">{{ . }}</span>
+      {{ end }}
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <span class="thesis-year">({{ .Date.Format "2006" }})</span>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

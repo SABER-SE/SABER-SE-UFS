@@ -1763,3 +1763,53 @@ h2.rl__title::after {
   border-left-color: var(--saberse-yellow);
   color: var(--saberse-text);
 }
+
+// ── TRABALHOS ACADÊMICOS na página do membro ──────────────
+.author-theses h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+}
+
+.theses-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.75rem;
+}
+
+.thesis-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(74, 158, 202, 0.15);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.thesis-item:last-child {
+  border-bottom: none;
+}
+
+.thesis-item a {
+  color: var(--saberse-cyan);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.thesis-item a:hover {
+  color: var(--saberse-yellow);
+}
+
+.thesis-year {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.dark .thesis-year {
+  color: var(--saberse-muted);
+}
+
+.dark .thesis-item {
+  border-bottom-color: rgba(74, 158, 202, 0.12);
+}
