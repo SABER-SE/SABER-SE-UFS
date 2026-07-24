@@ -1764,26 +1764,17 @@ h2.rl__title::after {
   color: var(--saberse-text);
 }
 
-// ── TRABALHOS ACADÊMICOS — listagem /thesis ───────────────
-.thesis .article-metadata a,
-.thesis-item-author {
+// ── group-member-highlight — links de membros do grupo ───
+// Usado em page_metadata_authors.html (publicações e /thesis)
+// Sobrescreve a cor padrão de link em modo claro
+.group-member-highlight {
   color: var(--saberse-cyan) !important;
   font-weight: 600 !important;
   text-decoration: none !important;
-  font-size: 0.9rem !important;
 }
 
-.thesis .article-metadata a:hover {
+a.group-member-highlight:hover {
   color: var(--saberse-yellow) !important;
-}
-
-.thesis .article-metadata .article-date {
-  color: #6b7280 !important;
-  font-size: 0.85rem !important;
-}
-
-.dark .thesis .article-metadata .article-date {
-  color: var(--saberse-muted) !important;
 }
 
 // ── TRABALHOS ACADÊMICOS na página do membro ──────────────

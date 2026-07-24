@@ -29,23 +29,14 @@
 
   {{- range $index, $author := .Params.authors -}}
     {{- if gt $index 0 }}, {{ end -}}
-    {{- /* First try to resolve as an author slug (e.g. thesis pages store slugs, not full names) */ -}}
+    {{- /* Try to resolve as a registered member slug (thesis pages use slugs, not full names).  */ -}}
+    {{- /* Registered member pages have first_name in frontmatter; auto-taxonomy pages don't.   */ -}}
     {{- $authorPage := site.GetPage (printf "/authors/%s" $author) -}}
-    {{- if $authorPage -}}
-      {{- $isGroupMember := false -}}
-      {{- $nameLower := lower $authorPage.Title -}}
-      {{- range $groupFragments -}}
-        {{- if not $isGroupMember -}}
-          {{- if in $nameLower . -}}{{- $isGroupMember = true -}}{{- end -}}
-        {{- end -}}
-      {{- end -}}
-      {{- if $isGroupMember -}}
-        <a href="{{ $authorPage.RelPermalink }}" class="group-member-highlight">{{ $authorPage.Title }}</a>
-      {{- else -}}
-        <a href="{{ $authorPage.RelPermalink }}">{{ $authorPage.Title }}</a>
-      {{- end -}}
+    {{- if and $authorPage $authorPage.Params.first_name -}}
+      {{- /* Registered group member resolved by slug — always highlight with link */ -}}
+      <a href="{{ $authorPage.RelPermalink }}" class="group-member-highlight">{{ $authorPage.Title }}</a>
     {{- else -}}
-      {{- /* Fallback: author is a full name string (publications) — use fragment-based highlighting */ -}}
+      {{- /* Fallback: full name string (publications) — fragment-based highlighting */ -}}
       {{- $isGroupMember := false -}}
       {{- $authorLower := lower $author -}}
       {{- range $groupFragments -}}
