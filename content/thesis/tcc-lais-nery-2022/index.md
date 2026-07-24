@@ -8,6 +8,7 @@ thesis_type: "TCC"
 supervisor: "Prof. Dr. Diogo Souto"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["espectroscopia de campo integral", "cubo de dados", "galáxias", "AGN", "MaNGA"]
+summary: "A espectroscopia de campo integral permite obter espectros de objetos estendidos ponto a ponto, resultando em cubos de dados tridimensionais. Este trabalho apresenta os softwares Starlight e Megacube para análise desses cubos, aplicando-os a galáxias de núcleo ativo selecionadas do survey MaNGA."
 featured: false
 links:
   - name: "Baixar PDF"

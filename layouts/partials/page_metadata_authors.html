@@ -29,13 +29,31 @@
 
   {{- range $index, $author := .Params.authors -}}
     {{- if gt $index 0 }}, {{ end -}}
-    {{- $isGroupMember := false -}}
-    {{- $authorLower := lower $author -}}
-    {{- range $groupFragments -}}
-      {{- if not $isGroupMember -}}
-        {{- if in $authorLower . -}}{{- $isGroupMember = true -}}{{- end -}}
+    {{- /* First try to resolve as an author slug (e.g. thesis pages store slugs, not full names) */ -}}
+    {{- $authorPage := site.GetPage (printf "/authors/%s" $author) -}}
+    {{- if $authorPage -}}
+      {{- $isGroupMember := false -}}
+      {{- $nameLower := lower $authorPage.Title -}}
+      {{- range $groupFragments -}}
+        {{- if not $isGroupMember -}}
+          {{- if in $nameLower . -}}{{- $isGroupMember = true -}}{{- end -}}
+        {{- end -}}
       {{- end -}}
+      {{- if $isGroupMember -}}
+        <a href="{{ $authorPage.RelPermalink }}" class="group-member-highlight">{{ $authorPage.Title }}</a>
+      {{- else -}}
+        <a href="{{ $authorPage.RelPermalink }}">{{ $authorPage.Title }}</a>
+      {{- end -}}
+    {{- else -}}
+      {{- /* Fallback: author is a full name string (publications) — use fragment-based highlighting */ -}}
+      {{- $isGroupMember := false -}}
+      {{- $authorLower := lower $author -}}
+      {{- range $groupFragments -}}
+        {{- if not $isGroupMember -}}
+          {{- if in $authorLower . -}}{{- $isGroupMember = true -}}{{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if $isGroupMember -}}<span class="group-member-highlight">{{- $author -}}</span>{{- else -}}{{- $author -}}{{- end -}}
     {{- end -}}
-    {{- if $isGroupMember -}}<span class="group-member-highlight">{{- $author -}}</span>{{- else -}}{{- $author -}}{{- end -}}
   {{- end -}}
 {{- end -}}

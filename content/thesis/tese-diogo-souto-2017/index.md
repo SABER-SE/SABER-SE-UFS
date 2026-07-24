@@ -8,6 +8,7 @@ thesis_type: "Tese de Doutorado"
 supervisor: "Dra. Katia Cunha"
 institution: "Observatório Nacional"
 tags: ["anãs M", "abundâncias químicas", "APOGEE", "espectroscopia infravermelha", "aglomerados estelares"]
+summary: "Resultados pioneiros no estudo químico de estrelas anãs-M a partir de espectros do survey APOGEE no infravermelho (1.5–1.7 µm), obtendo abundâncias de 13 elementos. As estrelas hospedeiras de exoplanetas Kepler-138 e Kepler-186 foram analisadas em detalhe pela primeira vez, com metalicidades ∼0.2 dex acima das estimativas anteriores da literatura."
 featured: false
 links:
   - name: "Baixar PDF"

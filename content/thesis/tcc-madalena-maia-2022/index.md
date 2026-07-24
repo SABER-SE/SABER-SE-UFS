@@ -8,6 +8,7 @@ thesis_type: "TCC"
 supervisor: "Prof. Dr. Diogo Souto"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["exoplanetas", "relação estrela-planeta", "abundâncias estelares", "APOGEE", "aprendizado de máquina"]
+summary: "A correlação entre parâmetros exoplanetários e abundâncias químicas estelares é investigada a partir de dados do NASA Exoplanet Archive e do survey APOGEE, usando o algoritmo HDBSCAN. Os resultados confirmam que estrelas ricas em metais tendem a abrigar exoplanetas gigantes, e identificam C, Mg e Si como elementos-chave na caracterização planetária."
 featured: false
 links:
   - name: "Baixar PDF"

@@ -8,6 +8,7 @@ thesis_type: "TCC"
 supervisor: "Prof. Dr. Diogo Souto"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["exoplanetas", "habitabilidade", "trânsito planetário", "velocidade radial", "anãs M"]
+summary: "Busca por exoplanetas similares à Terra a partir do catálogo do NASA Exoplanet Archive, selecionando 52 candidatos com raio ≤ 1,5 raios terrestres e massa ≤ 5 massas terrestres. A análise aponta TRAPPIST-1 e como a melhor candidata a Terra 2.0, por reunir zona habitável, atmosfera e temperatura de equilíbrio favoráveis à vida."
 featured: false
 links:
   - name: "Baixar PDF"

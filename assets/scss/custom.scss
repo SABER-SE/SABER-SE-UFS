@@ -1764,6 +1764,28 @@ h2.rl__title::after {
   color: var(--saberse-text);
 }
 
+// ── TRABALHOS ACADÊMICOS — listagem /thesis ───────────────
+.thesis .article-metadata a,
+.thesis-item-author {
+  color: var(--saberse-cyan) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  font-size: 0.9rem !important;
+}
+
+.thesis .article-metadata a:hover {
+  color: var(--saberse-yellow) !important;
+}
+
+.thesis .article-metadata .article-date {
+  color: #6b7280 !important;
+  font-size: 0.85rem !important;
+}
+
+.dark .thesis .article-metadata .article-date {
+  color: var(--saberse-muted) !important;
+}
+
 // ── TRABALHOS ACADÊMICOS na página do membro ──────────────
 .author-theses h3 {
   font-family: "Playfair Display", serif;

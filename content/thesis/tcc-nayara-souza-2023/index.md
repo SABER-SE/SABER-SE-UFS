@@ -8,6 +8,7 @@ thesis_type: "TCC"
 supervisor: "Prof. Dr. Diogo Souto"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["exoplanetas", "júpiter quente", "migração planetária", "formação planetária", "sistemas planetários"]
+summary: "As descobertas de planetas extrasolares conhecidos como jupíteres quentes desafiam os modelos de formação e evolução planetária. Este trabalho explora as principais características dos sistemas com Jupíteres Quentes, com foco nos exoplanetas Kepler-75 b e WASP-18 b — dois casos extremos na fronteira da astrofísica exoplanetária."
 featured: false
 links:
   - name: "Baixar PDF"

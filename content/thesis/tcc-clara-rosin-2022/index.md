@@ -8,6 +8,7 @@ thesis_type: "TCC"
 supervisor: "Prof. Dr. Diogo Souto"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["AGN", "galáxias", "feedback", "diagrama BPT", "classificação cinemática"]
+summary: "Uma amostra de 62 galáxias observadas pelo MaNGA é analisada para determinar quais são passíveis de apresentar processo de feedback de AGN. Os campos de velocidades das estrelas e do gás Hα são examinados e classificados via diagrama BPT para identificar regiões Seyfert, LINER, compostas ou de formação estelar."
 featured: false
 links:
   - name: "Baixar PDF"

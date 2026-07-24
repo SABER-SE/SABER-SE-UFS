@@ -8,6 +8,7 @@ thesis_type: "Dissertação de Mestrado"
 supervisor: "Prof. Dr. Marcelo Medeiros Guimarães"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["estrelas T Tauri", "acreção", "NGC 2264", "periodicidade", "variabilidade"]
+summary: "Estudo espectroscópico das estrelas T Tauri clássicas Mon-667 e Mon-996 no aglomerado NGC 2264, a partir de dados do espectrógrafo FLAMES obtidos na campanha CSI 2264. A análise de periodogramas da linha Hα revela mudanças significativas entre 2011 e 2013, incluindo uma transformação dramática do perfil de Mon-667 de emissão para absorção."
 featured: false
 links:
   - name: "Baixar PDF"

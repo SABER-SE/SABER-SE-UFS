@@ -8,6 +8,7 @@ thesis_type: "TCC"
 supervisor: "Prof. Dr. Diogo Souto"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["asteroides", "pequenos corpos", "Sistema Solar", "NEATM", "espectroscopia"]
+summary: "Análise dos espectros de emissão térmica dos asteroides primitivos 752 Sulamitis e 329 Svea, observados com o espectrômetro Spex no NASA-IRTF. A partir do modelo NEATM e do Método dos Mínimos Quadrados, foram determinados albedos, diâmetros e o parâmetro η, com resultados compatíveis com o catálogo NEOWISE."
 featured: false
 links:
   - name: "Baixar PDF"

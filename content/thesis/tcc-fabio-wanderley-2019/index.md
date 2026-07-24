@@ -8,6 +8,7 @@ thesis_type: "TCC"
 supervisor: "Prof. Dr. Diogo Souto"
 institution: "Universidade Federal de Sergipe (UFS)"
 tags: ["exoplanetas", "habitabilidade", "anãs M", "espectroscopia", "abundâncias químicas"]
+summary: "Análise de habitabilidade planetária para 290 exoplanetas de estrelas FGK e anãs M, usando dados do survey APOGEE e síntese espectral com o Turbospectrum. Um total de 17 exoplanetas encontram-se na zona habitável, dos quais 6 orbitam estrelas anãs M, incluindo GJ 273 b, Kepler-186 f e Ross 128 b."
 featured: false
 links:
   - name: "Baixar PDF"
