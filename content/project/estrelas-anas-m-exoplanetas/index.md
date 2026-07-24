@@ -14,6 +14,7 @@ tags:
   - APOGEE
 
 date: "2019-01-01T00:00:00Z"
+lider: "Verónica Loaiza Tacuri"
 
 authors:
   - admin
@@ -46,6 +47,8 @@ url_video: ""
 
 slides: ""
 ---
+
+> 👤 **Líder da linha:** Verónica Loaiza Tacuri
 
 ## Visão Geral
 
@@ -120,3 +123,13 @@ utilizamos ferramentas como ExoPlex e PICASO.
 
 ---
 *Imagem: Exoplaneta Kepler-22b (ilustração artística) · Crédito: NASA/Ames/JPL-Caltech · Domínio Público*
+
+## 📚 Sugestões de Leitura
+
+Artigos de revisão recomendados para quem quer se aprofundar nesta linha de pesquisa:
+
+- **Teske, J. K. (2024).** *The Star–Planet Composition Connection.* Annual Review of Astronomy and Astrophysics, 62, 333–368.
+  [DOI: 10.1146/annurev-astro-071221-053007](https://doi.org/10.1146/annurev-astro-071221-053007)
+
+- **Henry, T. J. & Jao, W.-C. (2024).** *The Character of M Dwarfs.* Annual Review of Astronomy and Astrophysics, 62, 593–633.
+  [DOI: 10.1146/annurev-astro-052722-102740](https://doi.org/10.1146/annurev-astro-052722-102740)

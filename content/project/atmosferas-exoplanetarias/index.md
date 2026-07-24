@@ -16,6 +16,7 @@ tags:
   - Estrelas Anãs-M
 
 date: "2021-01-01T00:00:00Z"
+lider: "Cinthya Cerqueira"
 
 authors:
   - admin
@@ -39,6 +40,8 @@ url_video: ""
 
 slides: ""
 ---
+
+> 👤 **Líder da linha:** Cinthya Cerqueira
 
 ## Visão Geral
 
@@ -104,3 +107,14 @@ pelo PLATO (ESA).
 
 ---
 *Imagem: Sistema multiplanetário (ilustração artística) · Crédito: NASA/JPL-Caltech · Domínio Público*
+
+## 📚 Sugestões de Leitura
+
+- **Madhusudhan, N. (2019).** *Exoplanetary Atmospheres: Key Insights, Challenges, and Prospects.* Annual Review of Astronomy and Astrophysics, 57, 617–663.
+  [DOI: 10.1146/annurev-astro-081817-051846](https://doi.org/10.1146/annurev-astro-081817-051846)
+
+- **Birkby, J. L. (2018).** *Exoplanet Atmospheres at High Spectral Resolution.* arXiv:1806.04617.
+  [arXiv](https://arxiv.org/abs/1806.04617)
+
+- **Teske, J. K. (2024).** *The Star–Planet Composition Connection.* Annual Review of Astronomy and Astrophysics, 62, 333–368.
+  [DOI: 10.1146/annurev-astro-071221-053007](https://doi.org/10.1146/annurev-astro-071221-053007)

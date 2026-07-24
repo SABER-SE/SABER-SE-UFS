@@ -14,6 +14,7 @@ tags:
   - Análise Espectral
 
 date: "2024-01-01"
+lider: "Anderson Andrade"
 
 authors:
   - admin
@@ -36,6 +37,8 @@ url_video: ""
 
 slides: ""
 ---
+
+> 👤 **Líder da linha:** Anderson Andrade
 
 ## Visão Geral
 
@@ -74,3 +77,14 @@ As principais etapas da análise incluem:
 - **Observatório Nacional (RJ)** — Colaboração histórica em espectroscopia estelar
 - **Universidade do Arizona** — Verne Smith, Katia Cunha (especialistas em espectroscopia no IR)
 - **IAC (Espanha)** — Colaborações em análise espectral e modelos de atmosferas
+
+## 📚 Sugestões de Leitura
+
+- **Nissen, P. E. & Gustafsson, B. (2018).** *High-precision stellar abundances of the elements: methods and applications.* The Astronomy and Astrophysics Review, 26, 6.
+  [DOI: 10.1007/s00159-018-0111-3](https://doi.org/10.1007/s00159-018-0111-3)
+
+- **Jofré, P., Heiter, U. & Soubiran, C. (2019).** *Accuracy and Precision of Industrial Stellar Abundances.* Annual Review of Astronomy and Astrophysics, 57, 571–616.
+  [DOI: 10.1146/annurev-astro-091918-104509](https://doi.org/10.1146/annurev-astro-091918-104509)
+
+- **Majewski, S. R. et al. (2017).** *The Apache Point Observatory Galactic Evolution Experiment (APOGEE).* The Astronomical Journal, 154, 94.
+  [DOI: 10.3847/1538-3881/aa784d](https://doi.org/10.3847/1538-3881/aa784d)

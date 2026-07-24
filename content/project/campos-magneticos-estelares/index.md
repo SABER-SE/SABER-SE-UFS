@@ -16,6 +16,7 @@ tags:
   - Efeito Zeeman
 
 date: "2020-01-01T00:00:00Z"
+lider: "Deusalete Vilar"
 
 authors:
   - admin
@@ -37,6 +38,8 @@ url_video: ""
 
 slides: ""
 ---
+
+> 👤 **Líder da linha:** Deusalete Vilar
 
 ## Visão Geral
 
@@ -97,3 +100,14 @@ mapear a relação magnetismo × idade (lei de decaimento de Skumanich).
 
 ---
 *Imagem: Erupção solar / Ejeção de Massa Coronal (CME), 31/08/2012 · Crédito: NASA/SDO · Domínio Público*
+
+## 📚 Sugestões de Leitura
+
+- **Kochukhov, O. (2021).** *Magnetic fields of M dwarfs.* The Astronomy and Astrophysics Review, 29, 1.
+  [DOI: 10.1007/s00159-020-00130-3](https://doi.org/10.1007/s00159-020-00130-3)
+
+- **Donati, J.-F. & Landstreet, J. D. (2009).** *Magnetic Fields of Nondegenerate Stars.* Annual Review of Astronomy and Astrophysics, 47, 333–370.
+  [DOI: 10.1146/annurev-astro-082708-101833](https://doi.org/10.1146/annurev-astro-082708-101833)
+
+- **Reiners, A. (2012).** *Observations of Cool-Star Magnetic Fields.* Living Reviews in Solar Physics, 9, 1.
+  [DOI: 10.12942/lrsp-2012-1](https://doi.org/10.12942/lrsp-2012-1)

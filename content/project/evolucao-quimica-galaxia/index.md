@@ -15,6 +15,7 @@ tags:
   - Aglomerados Abertos
 
 date: "2016-01-01T00:00:00Z"
+lider: "Nayara Souza"
 
 authors:
   - admin
@@ -41,6 +42,8 @@ url_video: ""
 
 slides: ""
 ---
+
+> 👤 **Líder da linha:** Nayara Souza
 
 ## Visão Geral
 
@@ -109,3 +112,14 @@ de formação galáctica.
 
 ---
 *Imagem: VLT/Paranal com laser de guia adaptativa apontado para a Via Láctea · Crédito: ESO/G. Hudepohl · Domínio Público*
+
+## 📚 Sugestões de Leitura
+
+- **Freeman, K. & Bland-Hawthorn, J. (2002).** *The New Galaxy: Signatures of Its Formation.* Annual Review of Astronomy and Astrophysics, 40, 487–537.
+  [DOI: 10.1146/annurev.astro.40.060401.093840](https://doi.org/10.1146/annurev.astro.40.060401.093840)
+
+- **Bland-Hawthorn, J. & Gerhard, O. (2016).** *The Galaxy in Context: Structural, Kinematic, and Integrated Properties.* Annual Review of Astronomy and Astrophysics, 54, 529–596.
+  [DOI: 10.1146/annurev-astro-081915-023441](https://doi.org/10.1146/annurev-astro-081915-023441)
+
+- **Matteucci, F. (2021).** *Modelling the chemical evolution of the Milky Way.* The Astronomy and Astrophysics Review, 29, 5.
+  [DOI: 10.1007/s00159-021-00133-8](https://doi.org/10.1007/s00159-021-00133-8)

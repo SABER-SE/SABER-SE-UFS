@@ -1717,3 +1717,27 @@ h2.rl__title::after {
     rgba(245, 200, 66, 0.1)
   ) !important;
 }
+
+// ── DESTAQUE DE LÍDER DE LINHA DE PESQUISA ───────────────────
+// Blockquote usado para indicar o responsável pela linha nos /project/*
+.project blockquote,
+.research-line blockquote,
+.article-style blockquote:first-of-type {
+  border-left: 3px solid var(--saberse-yellow);
+  background: rgba(245, 200, 66, 0.06);
+  padding: 0.8rem 1.2rem;
+  margin: 1.2rem 0;
+  border-radius: 0 6px 6px 0;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.dark .project blockquote,
+.dark .research-line blockquote,
+.dark .article-style blockquote:first-of-type {
+  background: rgba(245, 200, 66, 0.08);
+  border-left-color: var(--saberse-yellow);
+  color: var(--saberse-text);
+}

@@ -15,6 +15,7 @@ tags:
   - APOGEE
 
 date: "2018-01-01T00:00:00Z"
+lider: "Raphael Gomes Sousa"
 
 authors:
   - admin
@@ -40,6 +41,8 @@ url_video: ""
 
 slides: ""
 ---
+
+> 👤 **Líder da linha:** Raphael Gomes Sousa
 
 ## Visão Geral
 
@@ -108,3 +111,13 @@ efeitos da difusão atômica. Estudamos principalmente:
 
 ---
 *Imagem: Aglomerado estelar globular · Crédito: ESO · Domínio Público*
+
+## 📚 Sugestões de Leitura
+
+- **Nissen, P. E. & Gustafsson, B. (2018).** *High-precision stellar abundances of the elements: methods and applications.* The Astronomy and Astrophysics Review, 26, 6.
+  [DOI: 10.1007/s00159-018-0111-3](https://doi.org/10.1007/s00159-018-0111-3)
+
+- **Freeman, K. & Bland-Hawthorn, J. (2002).** *The New Galaxy: Signatures of Its Formation.* Annual Review of Astronomy and Astrophysics, 40, 487–537.
+  [DOI: 10.1146/annurev.astro.40.060401.093840](https://doi.org/10.1146/annurev.astro.40.060401.093840)
+
+- **Michaud, G., Alecian, G. & Richer, J. (2015).** *Atomic Diffusion in Stars.* Astronomy and Astrophysics Library, Springer.
