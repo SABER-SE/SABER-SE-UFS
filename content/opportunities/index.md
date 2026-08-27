@@ -5,33 +5,6 @@ summary: "Vagas abertas para Iniciação Científica, Mestrado, Doutorado e Pós
 date: "2026-01-01"
 ---
 
-<!-- ATENÇÃO: Esta vaga tem prazo até 10/07/2026. Remover ou atualizar esta seção após o prazo expirar. -->
-<div class="opp-urgent">
-
-## 🚨 Vaga Aberta: Bolsa de Iniciação Científica Remunerada
-
-**Prazo para manifestar interesse: até 10/07/2026**
-
-O grupo Saber-SE tem uma oportunidade de bolsa de Iniciação Científica remunerada disponível. Os projetos disponíveis são:
-
-- Caracterização de atmosferas de exoplanetas similares à Terra
-- Correlações entre a química atmosférica de estrelas e planetas
-- Caracterização de Exoplanetas orbitando estrelas do tipo solar a partir de Espectros APOGEE
-
-**Pré-requisitos:**
-
-- Estar a partir do 3º período da graduação
-- Conhecimento básico de programação
-- Motivação para trabalho em equipe
-
-**Como se candidatar:**
-
-Os discentes interessados deverão cadastrar interesse no Plano de Trabalho do projeto que desejarem participar, através do Portal Discente da UFS, em: *Bolsas > Oportunidade de Bolsas > Tipo de Bolsa "Pesquisa" > Ano 2026*.
-
-</div>
-
----
-
 ## Por que fazer parte do Saber-SE?
 
 O grupo Saber-SE é um ambiente de pesquisa ativo e internacionalmente conectado, com participação em levantamentos como **SDSS-V/APOGEE** e na **missão espacial PLATO (ESA)**. Nossos membros publicam em revistas de alto impacto (*ApJ*, *AJ*, *A&A*, *MNRAS*) e apresentam trabalhos em conferências internacionais como Cool Stars e Exoplanets. Aqui você vai trabalhar com dados reais de telescópios espaciais e terrestres, sob orientação próxima e em colaboração com pesquisadores de instituições como NASA, Observatório Nacional, Universidade do Arizona e IAC (Espanha).
@@ -75,6 +48,31 @@ O grupo Saber-SE é um ambiente de pesquisa ativo e internacionalmente conectado
 
 <p><strong>Bolsa:</strong> sujeita à aprovação de projetos com financiamento (PRONEM-FAPITEC, Universal-CNPq, ou similar) — consulte disponibilidade atual diretamente com o Prof. Diogo Souto.</p>
 </div>
+
+## 📋 Regimento Interno do Grupo
+
+O grupo Saber-SE possui um regimento interno que define as diretrizes, responsabilidades e expectativas para todos os membros — desde a Iniciação Científica até o Pós-Doutorado. Recomendamos fortemente a leitura antes de ingressar no grupo.
+
+O documento cobre temas como:
+
+- Código de conduta e ética em pesquisa
+- Direitos e deveres de cada nível acadêmico
+- Política de autoria em publicações científicas
+- Comunicação interna e reuniões do grupo
+- Uso de recursos e infraestrutura
+- Procedimentos para ingresso e desligamento
+
+<a href="/SABER-SE-UFS/files/regimento-interno-saber-se.pdf"
+   target="_blank"
+   class="btn btn-primary btn-lg"
+   style="background-color: #4a9eca; border: none;
+          padding: 0.7rem 1.6rem; border-radius: 4px;
+          color: white; text-decoration: none;
+          font-family: 'Inter', sans-serif;
+          font-weight: 500; display: inline-block;
+          margin: 1rem 0;">
+  📄 Baixar Regimento Interno (PDF)
+</a>
 
 ## Como se candidatar
 
