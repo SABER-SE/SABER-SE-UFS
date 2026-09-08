@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Termodinâmica</title>
+<meta name="description" content="Módulo interativo do Capítulo 3: primeira lei, capacidades térmicas, coeficientes de expansão e o gradiente adiabático.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      vesp: '\\upsilon'
+    },
+    packages: { '[+]': ['cancel'] }
+  },
+  loader: { load: ['[tex]/cancel'] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 3 — Termodinâmica</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, com módulos interativos de exploração.</p>
+
+<h2>Diagramas HR e similares</h2>
+<p><em>Seção pendente: este tópico foi ministrado com apoio de slides nas
+aulas presenciais, sem notas manuscritas correspondentes. O conteúdo
+textual será incorporado quando o material for disponibilizado — nenhum
+conteúdo foi inventado aqui para preencher a lacuna.</em></p>
+
+<h2>Revisão termodinâmica</h2>
+
+<p>A termodinâmica descreve a natureza dinâmica dos processos e
+transformações térmicas. Como estrelas são formadas por gás, a
+termodinâmica descreve os principais mecanismos de transporte de energia
+no seu interior.</p>
+
+<p>O estudo termodinâmico é formulado a partir de três variáveis
+principais: a temperatura, a pressão e o volume.</p>
+
+<h3>Lei zero da termodinâmica</h3>
+
+<p>Se dois corpos, \(A\) e \(B\), estão separados e em equilíbrio com um
+terceiro corpo \(C\), então \(A\) e \(B\) também estão em equilíbrio entre
+si.</p>
+
+<p>A lei zero é importante na definição das escalas de temperatura, como
+Kelvin, Fahrenheit, Celsius, etc.</p>
+
+<h2>Primeira lei da termodinâmica</h2>
+
+<p>A primeira lei da termodinâmica nos diz que a variação da energia
+interna de um sistema (\(\Delta U\)) entre dois estados quaisquer é
+descrita pela diferença entre a quantidade de calor e trabalho trocados
+com o meio externo, onde</p>
+
+\[
+\mathrm{d}U = \mathrm{d}Q - \mathrm{d}W\,,
+\tag{3.1}
+\]
+
+<p>lembrando que o trabalho realizado por uma força é</p>
+
+\[
+\mathrm{d}W = F\,\mathrm{d}x\,.
+\tag{3.2}
+\]
+
+<p>E que a pressão pode ser expressa como</p>
+
+\[
+P = \frac{F}{A}\,,
+\tag{3.3}
+\]
+
+<p>temos \(\mathrm{d}W = P\,A\,\mathrm{d}x = P\,\mathrm{d}V\), logo</p>
+
+\[
+\boxed{\mathrm{d}U = \mathrm{d}Q - P\,\mathrm{d}V}\,, \qquad [\mathrm{d}U] = \mathrm{erg}\,.
+\tag{3.4}
+\]
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — O termo P dV na contração e expansão estelar</div>
+  <div class="conteudo">
+    <p>O termo de trabalho \(P\,\mathrm{d}V\) não é um detalhe formal: é ele
+    quem governa a evolução de uma estrela sempre que seu raio muda. No
+    caso mais simples, uma protoestrela na pré-sequência principal ainda
+    não possui fusão nuclear estabelecida; toda a luminosidade que ela
+    irradia vem da conversão de energia gravitacional em calor à medida
+    que a estrela se contrai (\(\mathrm{d}V<0\), logo \(-P\,\mathrm{d}V>0\)
+    aquece o gás). Esse é o mecanismo de <strong>contração de
+    Kelvin&ndash;Helmholtz</strong>, cuja escala de tempo característica é
+    \[
+    t_{\mathrm{KH}} \sim \frac{GM^2}{RL}\,.
+    \]
+    Para o Sol atual, \(t_{\mathrm{KH}}\approx30\,\mathrm{milhões\ de\ anos}\);
+    no topo da trilha de Hayashi, quando o Sol tinha um raio muito maior
+    (\(R\sim10\)&ndash;\(100\,R_\odot\)) e luminosidade mais alta,
+    \(t_{\mathrm{KH}}\) era bem mais curto — da ordem de \(10^4\) a
+    \(10^6\) anos, dependendo do estágio evolutivo (Kippenhahn et al.
+    2012). O mesmo termo \(P\,\mathrm{d}V\), com sinal oposto, também
+    governa fases de expansão (por exemplo, quando o núcleo estelar se
+    contrai mas o envelope se expande na transição para gigante
+    vermelha).</p>
+  </div>
+</div>
+
+<h2>Módulo interativo — Diagrama P–V e o trabalho da primeira lei</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">dW = P dV — área sombreada no diagrama P–υ (processo isobárico)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m1-p">Pressão P <span class="valor" id="m1-p-valor">5,0</span> (unid. arbitrárias)</label>
+      <input type="range" id="m1-p" min="1" max="10" step="0.1" value="5">
+    </div>
+    <div class="controle">
+      <label for="m1-dv">Variação de volume ΔV <span class="valor" id="m1-dv-valor">+2,0</span> (unid. arbitrárias)</label>
+      <input type="range" id="m1-dv" min="-4" max="4" step="0.1" value="2">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m1-grafico" role="img" aria-label="Diagrama pressão versus volume mostrando um processo isobárico, com a área sob a reta de pressão constante sombreada representando o trabalho P dV.">
+      Gráfico: diagrama P–V de um processo isobárico. A área sombreada sob a reta horizontal em P, entre o volume inicial e o volume final, representa o trabalho dW = P·dV.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Trabalho realizado pelo gás: \(\mathrm{d}W = P\,\mathrm{d}V = \)
+    <strong id="m1-w">10,0</strong> (unid. arbitrárias).
+    \(\Delta V>0\) (expansão): o gás realiza trabalho sobre a vizinhança
+    e, para o mesmo \(\mathrm{d}Q\), \(\mathrm{d}U\) diminui em relação
+    ao caso a volume constante — a base física de por que \(C_P>C_V\),
+    explorada no próximo módulo.
+  </p>
+</div>
+
+<p>Podemos obter a primeira lei por unidade de massa, onde</p>
+
+\[
+\mathrm{d}u = \mathrm{d}q - P\,\mathrm{d}\upsilon\,, \qquad [\mathrm{d}u] = \mathrm{erg/g}\,,
+\tag{3.5}
+\]
+
+<p>sendo \(\upsilon = \rho^{-1}\) o <strong>volume específico</strong>, com
+\(\rho = m/V\).</p>
+
+<p>Lembrando das definições empíricas de capacidade térmica e calor
+específico: a capacidade térmica indica a quantidade de calor que um
+corpo precisa receber ou ceder para que sua temperatura varie 1 grau, e o
+calor específico indica a quantidade de calor que cada unidade de massa
+do corpo precisa receber ou ceder para que a temperatura varie 1 grau,
+onde</p>
+
+\[
+C = \frac{\mathrm{d}Q}{\mathrm{d}T}\,, \quad [C]=\mathrm{erg/K}\,,
+\qquad\text{e}\qquad
+c = \frac{\mathrm{d}q}{\mathrm{d}T}\,, \quad [c]=\mathrm{erg/K/g}\,.
+\tag{3.6}
+\]
+
+<p>Assim, podemos definir a capacidade térmica a pressão e a volume
+constantes por</p>
+
+\[
+C_P = \left(\pdv{q}{T}\right)_P\,,
+\qquad
+C_V = \left(\pdv{q}{T}\right)_\upsilon\,.
+\tag{3.7}
+\]
+
+<h2>Módulo interativo — Por que C<sub>P</sub> &gt; C<sub>V</sub></h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Comparando aquecer a υ constante vs. a P constante, para o mesmo ΔT</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m2-dt">Variação de temperatura ΔT <span class="valor" id="m2-dt-valor">500 K</span></label>
+      <input type="range" id="m2-dt" min="10" max="2000" step="10" value="500">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m2-grafico" role="img" aria-label="Gráfico de barras comparando o calor necessário para aquecer o gás a volume constante versus a pressão constante, para a mesma variação de temperatura.">
+      Gráfico: duas barras. A barra "a υ constante" mostra o calor C_V·ΔT. A barra "a P constante" mostra o mesmo valor C_V·ΔT mais um excedente (R/μ)·ΔT correspondente ao trabalho de expansão, totalizando C_P·ΔT.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Gás ideal monoatômico ilustrativo, \(\mu=0{,}6\) (mistura solar,
+    valor já usado adiante no capítulo): \(C_V=\tfrac{3}{2}R/\mu\),
+    \(C_P=\tfrac{5}{2}R/\mu\). Para o \(\Delta T\) escolhido: calor a
+    volume constante \(=C_V\,\Delta T=\)<strong id="m2-qv">—</strong>
+    erg/g; calor a pressão constante \(=C_P\,\Delta T=\)<strong id="m2-qp">—</strong>
+    erg/g. A barra de \(C_P\) tem exatamente a mesma parte "aumento de
+    \(U\)" que a de \(C_V\) (mesmo \(\Delta T\), mesmo gás), mais um
+    excedente \((R/\mu)\,\Delta T=\)<strong id="m2-extra">—</strong> erg/g
+    — a energia gasta para expandir o gás contra a pressão externa.
+  </p>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — γ = C_P/C_V: do interior estelar típico à instabilidade dinâmica</div>
+  <div class="conteudo">
+    <p>Para um gás ideal monoatômico não-relativístico e não-degenerado —
+    a condição de boa parte do interior estelar, incluindo o plasma de
+    H/He ionizado no núcleo solar — cada partícula tem apenas 3 graus de
+    liberdade translacionais, de modo que \(C_V=\tfrac{3}{2}R/\mu\) e
+    \(C_P=C_V+R/\mu=\tfrac{5}{2}R/\mu\), onde
+    \(R\approx8{,}314\times10^{7}\,\mathrm{erg\,mol^{-1}\,K^{-1}}\) é a
+    constante universal dos gases e \(\mu\) é o peso molecular médio das
+    partículas do gás (adimensional, em unidades de massa atômica)
+    (antecipando o resultado \(C_P-C_V=R/\mu\) que deduziremos adiante),
+    logo
+    \[
+    \gamma = \frac{C_P}{C_V} = \frac{5}{3} \approx 1{,}667\,.
+    \]
+    Esse é o valor de referência para a maior parte das estrelas na
+    sequência principal. Já o limite \(\gamma\to4/3\) é o <strong>limiar
+    crítico de estabilidade dinâmica</strong>: pelo teorema do virial, uma
+    estrela em equilíbrio hidrostático só é estável a perturbações
+    radiais se o índice adiabático médio \(\Gamma_1\) satisfizer
+    \(\Gamma_1>4/3\) (para \(\Gamma_1<4/3\), qualquer contração libera
+    mais energia gravitacional do que a pressão consegue resistir, e o
+    colapso se acelera). Esse limite é aproximado quando um gás de fótons
+    (radiação), que tem \(\gamma=4/3\) exatamente, passa a dominar sobre a
+    pressão do gás — o caso de estrelas muito massivas
+    (\(M\gtrsim100\,M_\odot\)), em que \(P_{\mathrm{rad}}/P_{\mathrm{gas}}\)
+    se torna grande, e também de matéria completamente degenerada e
+    relativística, como no limite de Chandrasekhar para anãs brancas
+    (Kippenhahn et al. 2012; Clayton 1983).</p>
+  </div>
+</div>
+
+<h2>Relações termodinâmicas</h2>
+
+<p>As relações termodinâmicas nos ajudam a descrever as variáveis físicas
+em função de diferentes parâmetros. Vamos determinar uma relação para
+\(C_P-C_V\) partindo da primeira lei da termodinâmica, onde</p>
+
+\[
+\mathrm{d}u = \mathrm{d}q - P\,\mathrm{d}\upsilon\,,
+\qquad
+\mathrm{d}q = \mathrm{d}u + P\,\mathrm{d}\upsilon\,,
+\qquad
+u = u(\upsilon,T)\,.
+\]
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Revisão: derivadas parciais e diferencial total</div>
+  <div class="conteudo">
+    <p>Seja \(f(x,y)\) uma função diferenciável de duas variáveis. A
+    <strong>derivada parcial</strong> de \(f\) em relação a \(x\),
+    \[
+    \left(\pdv{f}{x}\right)_{\!y}
+      \equiv \lim_{\Delta x\to0}\frac{f(x+\Delta x,\,y)-f(x,y)}{\Delta x}\,,
+    \]
+    mede a taxa de variação de \(f\) quando apenas \(x\) varia, mantendo
+    \(y\) <em>constante</em>. Na notação termodinâmica o subscrito é
+    indispensável: a mesma grandeza pode ter derivadas parciais
+    numericamente distintas dependendo de quais variáveis são fixadas —
+    por exemplo, \((\partial u/\partial T)_\upsilon \neq (\partial
+    u/\partial T)_P\) em geral, pois manter \(\upsilon\) constante ou
+    manter \(P\) constante são condições fisicamente diferentes.</p>
+    <p>O <strong>diferencial total</strong> de \(f(x,y)\) combina as
+    contribuições de cada variável:
+    \[
+    \mathrm{d}f = \left(\pdv{f}{x}\right)_{\!y}\!\mathrm{d}x
+                 + \left(\pdv{f}{y}\right)_{\!x}\!\mathrm{d}y\,.
+    \]
+    A variação infinitesimal de \(f\) é simplesmente a soma das variações
+    produzidas por cada variável agindo isoladamente.</p>
+    <p><strong>Exemplo concreto.</strong> Tome \(f(x,y) = x^2 y + y^3\).
+    Calculando as derivadas parciais (a outra variável é tratada como
+    constante):
+    \[
+    \left(\pdv{f}{x}\right)_{\!y} = 2xy\,, \qquad
+    \left(\pdv{f}{y}\right)_{\!x} = x^2 + 3y^2\,.
+    \]
+    O diferencial total fica então
+    \[
+    \mathrm{d}f = 2xy\;\mathrm{d}x + \bigl(x^2 + 3y^2\bigr)\;\mathrm{d}y\,.
+    \]</p>
+    <p><strong>Regra da cadeia — mudança de variáveis.</strong> Se
+    \(f = f(x,y)\) e as variáveis originais dependem de um novo par
+    \((u,v)\) — isto é, \(x=x(u,v)\) e \(y=y(u,v)\) — então derivar \(f\)
+    em relação a \(u\) (com \(v\) fixo) exige:
+    \[
+    \left(\pdv{f}{u}\right)_{\!v}
+      = \left(\pdv{f}{x}\right)_{\!y}\!\left(\pdv{x}{u}\right)_{\!v}
+      + \left(\pdv{f}{y}\right)_{\!x}\!\left(\pdv{y}{u}\right)_{\!v}\,.
+    \]
+    Essa é precisamente a ferramenta empregada a seguir: para reescrever
+    \(u(\upsilon,T)\) em termos de \(u(P,T)\), trata-se \(\upsilon\) como
+    função de \((P,T)\) e aplica-se a regra da cadeia, expressando
+    \((\partial u/\partial T)_P\) e \((\partial u/\partial P)_T\) através
+    das derivadas já conhecidas de \(u\) nas variáveis \((\upsilon,T)\).</p>
+    <p>As definições de \(C_P\) e \(C_V\) e a dedução de \(C_P - C_V\) que
+    se seguem são aplicações diretas dessas duas ferramentas: o
+    diferencial total, que decompõe \(\mathrm{d}u\) e \(\mathrm{d}q\) nas
+    contribuições de cada variável independente, e a regra da cadeia, que
+    permite trocar o conjunto de variáveis termodinâmicas de
+    \((\upsilon,T)\) para \((P,T)\).</p>
+  </div>
+</div>
+
+<p>Fazendo a derivação da função parcial, temos</p>
+
+\[
+\begin{aligned}
+\mathrm{d}q &= \left(\pdv{u}{\upsilon}\right)_T \mathrm{d}\upsilon
+             + \left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T
+             + P\,\mathrm{d}\upsilon \\
+            &= \left[\left(\pdv{u}{\upsilon}\right)_T + P\right]\mathrm{d}\upsilon
+             + \left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T\,.
+\end{aligned}
+\tag{3.8}
+\]
+
+<p>Vemos, a partir da Equação (3.8), que \(C_V\) é o termo</p>
+
+\[
+C_V = \left(\pdv{u}{T}\right)_\upsilon\,,
+\tag{3.9}
+\]
+
+<p>pois é o único a volume constante.</p>
+
+<p>Como o volume não é mais mantido constante, a energia interna será
+agora uma função das duas outras variáveis termodinâmicas, onde
+\(u=u(P,T)\); logo, usando essas variáveis na primeira lei da
+termodinâmica, obtemos:</p>
+
+\[
+\begin{aligned}
+\mathrm{d}q &= \mathrm{d}u(P,T) + P\,\mathrm{d}\upsilon(P,T) \\
+&= \left(\pdv{u}{P}\right)_T \mathrm{d}P + \left(\pdv{u}{T}\right)_P \mathrm{d}T
+ + P\left[\left(\pdv{\upsilon}{P}\right)_T \mathrm{d}P + \left(\pdv{\upsilon}{T}\right)_P \mathrm{d}T\right] \\
+&= \left[\left(\pdv{u}{P}\right)_T + P\left(\pdv{\upsilon}{P}\right)_T\right]\mathrm{d}P
+ + \left[\left(\pdv{u}{T}\right)_P + P\left(\pdv{\upsilon}{T}\right)_P\right]\mathrm{d}T\,.
+\end{aligned}
+\tag{3.10}
+\]
+
+<p>Neste caso, a capacidade específica a pressão constante é</p>
+
+\[
+C_P = \left(\pdv{u}{T}\right)_P + P\left(\pdv{\upsilon}{T}\right)_P\,.
+\tag{3.11}
+\]
+
+<p>Assim, obtemos que</p>
+
+\[
+C_P - C_V = \left(\pdv{u}{T}\right)_P - \left(\pdv{u}{T}\right)_\upsilon
++ P\left(\pdv{\upsilon}{T}\right)_P\,.
+\tag{3.12}
+\]
+
+<p>Voltando às funções parciais, onde \(u(\upsilon,T)\to u(P,T)\),
+\(\upsilon(P,T)\):</p>
+
+\[
+\mathrm{d}u = \left(\pdv{u}{\upsilon}\right)_T \mathrm{d}\upsilon + \left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T\,,
+\qquad \text{mas } \upsilon=\upsilon(P,T)\,,
+\]
+
+\[
+\begin{aligned}
+\mathrm{d}u &= \left(\pdv{u}{\upsilon}\right)_T
+\left[\left(\pdv{\upsilon}{P}\right)_T \mathrm{d}P + \left(\pdv{\upsilon}{T}\right)_P \mathrm{d}T\right]
++ \left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T \\
+&= \left[\left(\pdv{u}{\upsilon}\right)_T\left(\pdv{\upsilon}{P}\right)_T\right] \mathrm{d}P
++ \left[\left(\pdv{u}{\upsilon}\right)_T\left(\pdv{\upsilon}{T}\right)_P + \left(\pdv{u}{T}\right)_\upsilon\right] \mathrm{d}T\,.
+\end{aligned}
+\tag{3.13}
+\]
+
+<p>Logo, podemos obter que \((\partial u/\partial T)_P\) é o primeiro
+termo da Equação (3.13) associado a \(\mathrm{d}T\), onde:</p>
+
+\[
+\left(\pdv{u}{T}\right)_P = \left(\pdv{u}{\upsilon}\right)_T\left(\pdv{\upsilon}{T}\right)_P
++ \left(\pdv{u}{T}\right)_\upsilon\,.
+\tag{3.14}
+\]
+
+<p>Substituindo a Equação (3.14) em (3.12), obtemos:</p>
+
+\[
+\begin{aligned}
+C_P - C_V &= \left(\pdv{u}{\upsilon}\right)_T\left(\pdv{\upsilon}{T}\right)_P
++ \cancel{\left(\pdv{u}{T}\right)_\upsilon} - \cancel{\left(\pdv{u}{T}\right)_\upsilon}
++ P\left(\pdv{\upsilon}{T}\right)_P \\
+&= \left(\pdv{\upsilon}{T}\right)_P
+\left[\left(\pdv{u}{\upsilon}\right)_T + P\right]\,.
+\end{aligned}
+\tag{3.15}
+\]
+
+<p>Utilizando a definição de entropia, onde \(\mathrm{d}q=T\,\mathrm{d}S\),
+podemos trabalhar de forma semelhante, sendo \(S=S(\upsilon,T)\):</p>
+
+\[
+\mathrm{d}q = T\,\mathrm{d}S = P\,\mathrm{d}\upsilon + \mathrm{d}u\,.
+\tag{3.16}
+\]
+
+<p>Substituindo \(\mathrm{d}u=(\partial u/\partial
+\upsilon)_T\mathrm{d}\upsilon + (\partial u/\partial
+T)_\upsilon\mathrm{d}T\), temos:</p>
+
+\[
+\begin{aligned}
+\mathrm{d}S &= \frac{P}{T}\,\mathrm{d}\upsilon + \frac{1}{T}\,\mathrm{d}u \\
+&= \frac{P}{T}\,\mathrm{d}\upsilon + \frac{1}{T}\left[\left(\pdv{u}{\upsilon}\right)_T \mathrm{d}\upsilon
++ \left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T\right] \\
+&= \frac{1}{T}\left[P + \left(\pdv{u}{\upsilon}\right)_T\right]\mathrm{d}\upsilon
++ \frac{1}{T}\left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T\,.
+\end{aligned}
+\tag{3.17}
+\]
+
+<p>Comparando com a diferencial total</p>
+
+\[
+\mathrm{d}S = \left(\pdv{S}{\upsilon}\right)_T \mathrm{d}\upsilon
++ \left(\pdv{S}{T}\right)_\upsilon \mathrm{d}T\,,
+\tag{3.18}
+\]
+
+<p>vemos que</p>
+
+\[
+\left(\pdv{S}{\upsilon}\right)_T = \frac{1}{T}\left[P + \left(\pdv{u}{\upsilon}\right)_T\right]\,,
+\qquad
+\left(\pdv{S}{T}\right)_\upsilon = \frac{1}{T}\left(\pdv{u}{T}\right)_\upsilon\,.
+\tag{3.19}
+\]
+
+<h3>Relação de Maxwell</h3>
+
+<p>Usando que as derivadas parciais mistas de \(S\) comutam,
+\(\partial^2 S/\partial T\,\partial \upsilon = \partial^2 S/\partial
+\upsilon\,\partial T\), podemos escrever que</p>
+
+\[
+\pdv{}{T}\left\{\frac{1}{T}\left[P + \left(\pdv{u}{\upsilon}\right)_T\right]\right\}_\upsilon
+=
+\pdv{}{\upsilon}\left\{\frac{1}{T}\left(\pdv{u}{T}\right)_\upsilon\right\}_T\,.
+\tag{3.20}
+\]
+
+<p>Aplicando a derivada em cada lado da Equação (3.20), temos:</p>
+
+\[
+-\frac{P}{T^2} + \frac{1}{T}\left(\pdv{P}{T}\right)_\upsilon
+- \frac{1}{T^2}\left(\pdv{u}{\upsilon}\right)_T
++ \frac{1}{T}\frac{\partial^2 u}{\partial T\,\partial \upsilon}
+= \frac{1}{T}\frac{\partial^2 u}{\partial \upsilon\,\partial T}\,.
+\tag{3.21}
+\]
+
+<p>Como as derivadas mistas do lado direito e do último termo do lado
+esquerdo são iguais, elas se cancelam, restando</p>
+
+\[
+-\frac{P}{T^2} - \frac{1}{T^2}\left(\pdv{u}{\upsilon}\right)_T
++ \frac{1}{T}\left(\pdv{P}{T}\right)_\upsilon = 0\,.
+\]
+
+<p>Multiplicando por \(T^2\) e isolando \((\partial u/\partial
+\upsilon)_T\):</p>
+
+\[
+\boxed{\left(\pdv{u}{\upsilon}\right)_T = -P + T\left(\pdv{P}{T}\right)_\upsilon}\,.
+\tag{3.22}
+\]
+
+<p>Substituindo a Equação (3.22) em (3.15), obtemos:</p>
+
+\[
+\begin{aligned}
+C_P - C_V &= \left(\pdv{\upsilon}{T}\right)_P
+\left[-P + T\left(\pdv{P}{T}\right)_\upsilon + P\right] \\
+&= T\left(\pdv{\upsilon}{T}\right)_P\left(\pdv{P}{T}\right)_\upsilon\,.
+\end{aligned}
+\tag{3.23}
+\]
+
+\[
+\boxed{C_P - C_V = T\left(\pdv{\upsilon}{T}\right)_P\left(\pdv{P}{T}\right)_\upsilon}
+\tag{3.24}
+\]
+
+<p>Obtemos uma expressão que independe da energia interna \(u\) e é
+função apenas das principais grandezas termodinâmicas. As derivadas podem
+ser determinadas pela derivada da equação de estado.</p>
+
+<h2>Coeficientes de expansão térmica</h2>
+
+<p>Para obter uma relação simplificada para a Equação (3.24), podemos
+definir o coeficiente de expansão térmica \(\alpha\):</p>
+
+\[
+\alpha \equiv \left(\pdv{\ln\rho}{\ln P}\right)_T
+= \left(\frac{\partial \rho/\rho}{\partial P/P}\right)_T
+= \frac{P}{\rho}\left(\pdv{\rho}{P}\right)_T\,,
+\qquad \text{como } \upsilon=\frac{1}{\rho}\,,
+\]
+
+\[
+\alpha = P\upsilon\left[\pdv{}{P}\left(\frac{1}{\upsilon}\right)\right]_T
+= P\upsilon\left(-\frac{1}{\upsilon^2}\right)\left(\pdv{\upsilon}{P}\right)_T
+= -\frac{P}{\upsilon}\left(\pdv{\upsilon}{P}\right)_T\,.
+\tag{3.25}
+\]
+
+<p>Assim, de forma análoga, obtemos o coeficiente \(\delta\):</p>
+
+\[
+\delta \equiv -\left(\pdv{\ln\rho}{\ln T}\right)_P
+= \frac{T}{\upsilon}\left(\pdv{\upsilon}{T}\right)_P\,.
+\tag{3.26}
+\]
+
+<p>Com isto, a razão \(\delta/\alpha\) se reduz a</p>
+
+\[
+\frac{\delta}{\alpha} =
+\frac{\dfrac{T}{\upsilon}\left(\pdv{\upsilon}{T}\right)_P}{-\dfrac{P}{\upsilon}\left(\pdv{\upsilon}{P}\right)_T}
+= -\frac{T}{P}\cdot
+\frac{\left(\pdv{\upsilon}{T}\right)_P}{\left(\pdv{\upsilon}{P}\right)_T}\,.
+\]
+
+<p>Pela regra do produto triplo (regra cíclica das derivadas parciais),
+\((\partial \upsilon/\partial T)_P/(\partial \upsilon/\partial P)_T =
+-(\partial P/\partial T)_\upsilon\) — o sinal troca pela inversão — logo</p>
+
+\[
+\boxed{\frac{\delta}{\alpha} = \frac{T}{P}\left(\pdv{P}{T}\right)_\upsilon}\,.
+\tag{3.27}
+\]
+
+<p>Voltando à Equação (3.24) e substituindo as expressões obtidas, com
+\((\partial \upsilon/\partial T)_P = \delta\upsilon/T\) e \((\partial
+P/\partial T)_\upsilon = (\delta/\alpha)(P/T)\):</p>
+
+\[
+C_P - C_V = T\cdot\frac{\delta\upsilon}{T}\cdot\frac{\delta}{\alpha}\frac{P}{T}
+= \boxed{\frac{P\delta^2\upsilon}{\alpha T}} = \frac{P\delta^2}{\alpha T \rho}\,.
+\tag{3.28}
+\]
+
+<h2>Módulo interativo — Coeficientes α e δ e a diferença C<sub>P</sub> − C<sub>V</sub></h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">C_P − C_V = (Pυ/T)·(δ²/α) — fator adimensional δ²/α</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m3-alpha">Coeficiente α <span class="valor" id="m3-alpha-valor">1,00</span></label>
+      <input type="range" id="m3-alpha" min="0.1" max="3" step="0.01" value="1">
+    </div>
+    <div class="controle">
+      <label for="m3-delta">Coeficiente δ <span class="valor" id="m3-delta-valor">1,00</span></label>
+      <input type="range" id="m3-delta" min="0" max="3" step="0.01" value="1">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m3-grafico" role="img" aria-label="Curva do fator adimensional delta ao quadrado sobre alfa em função de delta, com um marcador no valor atual dos coeficientes alfa e delta.">
+      Gráfico: curva de δ²/α em função de δ, para o α escolhido. Um marcador destaca o valor atual. A curva parte de zero (δ=0, limite de gás degenerado) e cresce quadraticamente com δ.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Fator adimensional: \(\delta^2/\alpha = \)<strong id="m3-fator">1,00</strong>,
+    de modo que \(C_P-C_V = (P\upsilon/T)\times\)<strong id="m3-fator2">1,00</strong>.
+    Para gás ideal, \(\alpha=\delta=1\) e o fator vale exatamente 1
+    (recuperando \(C_P-C_V=P\upsilon/T=R/\mu\), visto adiante). No limite
+    de <strong>gás completamente degenerado</strong>, \(\delta\to0\) (a
+    pressão deixa de depender de \(T\)) e o fator despenca a zero — por
+    isso \(C_P\approx C_V\) em anãs brancas, como discutido na caixa de
+    contexto abaixo.
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Além do gás ideal: degenerescência e ionização parcial</div>
+  <div class="conteudo">
+    <p>A razão de termos deduzido \(C_P-C_V\) na forma geral acima — em
+    termos de \(\alpha\) e \(\delta\), sem assumir gás ideal — é que essa
+    é exatamente a forma necessária para tratar dois regimes onde
+    \(\alpha\neq1\) e/ou \(\delta\neq1\) e a Equação (3.38) (o resultado
+    \(R/\mu\), ainda por vir) deixa de valer:</p>
+    <ul>
+      <li><strong>Gás degenerado</strong> (interior de anãs brancas): no
+      limite de degenerescência completa e não-relativística, a pressão
+      do gás de elétrons \(P\propto\rho^{5/3}\) <em>não depende da
+      temperatura</em>, de modo que \((\partial P/\partial
+      T)_\upsilon\to0\) e, pela Equação (3.27), \(\delta\to0\). Como
+      \(C_P-C_V\propto\delta^2\), isso implica \(C_P\approx C_V\) em
+      matéria fortemente degenerada — um resultado clássico da física de
+      anãs brancas.</li>
+      <li><strong>Zonas de ionização parcial</strong> (H, He&nbsp;I,
+      He&nbsp;II), em camadas com \(T\sim10^4\)&ndash;\(10^5\,\mathrm{K}\)
+      no envelope estelar: parte da energia térmica fornecida ao gás é
+      consumida na ionização em vez de elevar \(T\), fazendo \(\alpha\) e
+      \(\delta\) desviarem significativamente de 1. Isso altera
+      \(C_P-C_V\) e, como veremos na seção do gradiente adiabático, tem
+      um efeito dramático sobre \(\nabla_{\mathrm{ad}}\) — o mecanismo
+      físico por trás da <strong>faixa de instabilidade</strong> de
+      Cefeidas e RR Lyrae no diagrama HR.</li>
+    </ul>
+    <p>Para o tratamento completo dessas correções via equação de estado,
+    incluindo a equação de Saha para ionização parcial, ver Kippenhahn et
+    al. (2012).</p>
+  </div>
+</div>
+
+<h2>Forma alternativa da primeira lei</h2>
+
+<p>Da primeira lei da termodinâmica, onde \(u=u(\upsilon,T)\), temos
+que</p>
+
+\[
+\mathrm{d}q = P\,\mathrm{d}\upsilon + \left(\pdv{u}{\upsilon}\right)_T \mathrm{d}\upsilon
++ \left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T\,,
+\]
+
+<p>logo</p>
+
+\[
+\mathrm{d}q = \left[\left(\pdv{u}{\upsilon}\right)_T + P\right]\mathrm{d}\upsilon
++ \left(\pdv{u}{T}\right)_\upsilon \mathrm{d}T\,.
+\tag{3.29}
+\]
+
+<p>Das Equações (3.9) e (3.22), temos que</p>
+
+\[
+\mathrm{d}q = \left[T\left(\pdv{P}{T}\right)_\upsilon + \cancel{P} - \cancel{P}\right]\mathrm{d}\upsilon
++ C_V\,\mathrm{d}T
+= T\left(\pdv{P}{T}\right)_\upsilon \mathrm{d}\upsilon + C_V\,\mathrm{d}T\,.
+\tag{3.30}
+\]
+
+<p>De forma similar, podemos buscar expressões diferenciais em termos de
+\(\alpha\) e \(\delta\), considerando que \(\rho=\rho(P,T)\):</p>
+
+\[
+\frac{\mathrm{d}\rho}{\rho} = \frac{1}{\rho}\left[\left(\pdv{\rho}{P}\right)_T \mathrm{d}P
++ \left(\pdv{\rho}{T}\right)_P \mathrm{d}T\right]\,.
+\tag{3.31}
+\]
+
+<p>Substituindo nas definições de \(\alpha\) e \(\delta\) [Equações (3.25)
+e (3.26), reescritas em termos de \(\rho\):
+\((\partial\rho/\partial P)_T=\alpha\rho/P\) e
+\((\partial\rho/\partial T)_P=-\delta\rho/T\)], temos</p>
+
+\[
+\boxed{\frac{\mathrm{d}\rho}{\rho} = \alpha\,\frac{\mathrm{d}P}{P} - \delta\,\frac{\mathrm{d}T}{T}}\,.
+\tag{3.32}
+\]
+
+<h2>Módulo interativo — Decomposição de dρ/ρ em pressão e temperatura</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">dρ/ρ = α dP/P − δ dT/T (α = δ = 1, caso do gás ideal, para simplificar)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m3b-dpp">Variação relativa de pressão dP/P <span class="valor" id="m3b-dpp-valor">+0,20</span></label>
+      <input type="range" id="m3b-dpp" min="-0.5" max="0.5" step="0.01" value="0.2">
+    </div>
+    <div class="controle">
+      <label for="m3b-dtt">Variação relativa de temperatura dT/T <span class="valor" id="m3b-dtt-valor">+0,10</span></label>
+      <input type="range" id="m3b-dtt" min="-0.5" max="0.5" step="0.01" value="0.1">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m3b-grafico" role="img" aria-label="Gráfico de barras com as contribuições de pressão e temperatura para a variação relativa de densidade, e a soma das duas.">
+      Gráfico: três barras — contribuição de pressão (α·dP/P), contribuição de temperatura (−δ·dT/T) e a soma (dρ/ρ).
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Para simplificar a visualização, este módulo fixa \(\alpha=\delta=1\)
+    (o módulo anterior já explora o efeito de variar \(\alpha\) e
+    \(\delta\) separadamente). Contribuição de pressão: \(\alpha\,\mathrm{d}P/P=\)
+    <strong id="m3b-termo-p">—</strong>; contribuição de temperatura:
+    \(-\delta\,\mathrm{d}T/T=\)<strong id="m3b-termo-t">—</strong>;
+    soma \(\mathrm{d}\rho/\rho=\)<strong id="m3b-total">—</strong>.
+    Note que aumentar \(T\) a \(P\) fixo sempre <em>reduz</em> \(\rho\)
+    (o termo de temperatura entra com sinal negativo).
+  </p>
+</div>
+
+<p>Utilizando novamente a primeira lei a partir da Equação (3.30), com
+\(\mathrm{d}\upsilon = -\mathrm{d}\rho/\rho^2 =
+-(1/\rho)(\mathrm{d}\rho/\rho)\) e \((\partial P/\partial T)_\upsilon =
+(P/T)(\delta/\alpha)\):</p>
+
+\[
+\begin{aligned}
+\mathrm{d}q &= T\cdot\frac{P\delta}{T\alpha}\,\mathrm{d}\upsilon + C_V\,\mathrm{d}T
+= \frac{P\delta}{\alpha}\left(-\frac{1}{\rho}\right)\frac{\mathrm{d}\rho}{\rho} + C_V\,\mathrm{d}T \\
+&= -\frac{P\delta}{\alpha\rho}\left[\alpha\,\frac{\mathrm{d}P}{P} - \delta\,\frac{\mathrm{d}T}{T}\right]
++ C_V\,\mathrm{d}T
+\end{aligned}
+\tag{3.33}
+\]
+
+\[
+= -\frac{P\delta}{\rho}\frac{\mathrm{d}P}{P}
++ \left[\frac{P\delta^2}{\alpha\rho T} + C_V\right]\mathrm{d}T\,.
+\tag{3.34}
+\]
+
+<p>Reconhecendo, pela Equação (3.28), que o termo entre colchetes é
+exatamente \(C_P\), chegamos à forma alternativa da primeira lei da
+termodinâmica:</p>
+
+\[
+\boxed{\mathrm{d}q = C_P\,\mathrm{d}T - \delta\,\frac{\mathrm{d}P}{\rho}}\,.
+\tag{3.35}
+\]
+
+<p>A primeira lei da termodinâmica escrita desta forma simplifica o
+estudo da evolução estelar, onde temperatura, densidade e pressão se
+modificam.</p>
+
+<h2>O caso do gás ideal</h2>
+
+<p>Para um gás ideal, sabemos que a equação de estado é descrita pela
+equação de Clapeyron, \(PV=nRT\). Em nosso caso, pode também ser descrita
+como</p>
+
+\[
+P = \frac{\rho R T}{\mu}\,.
+\tag{3.36}
+\]
+
+<p>Lembrando que</p>
+
+\[
+\alpha = \left(\pdv{\ln\rho}{\ln P}\right)_T
+= \frac{P}{\rho}\left(\pdv{\rho}{P}\right)_T
+= \frac{P}{\rho}\left[\pdv{}{P}\left(\frac{P\mu}{RT}\right)\right]_T
+= \frac{P}{\rho}\frac{\mu}{RT}\,,
+\tag{3.37}
+\]
+
+<p>mas veja que este é exatamente o termo da equação do gás ideal
+[Equação (3.36) invertida, \(\rho=P\mu/(RT)\)], logo \(\alpha=1\). Por
+analogia, podemos verificar também que \(\delta=1\).</p>
+
+<p>Assim, a Equação (3.28) se reduz a</p>
+
+\[
+C_P - C_V = \frac{P}{T\rho} = \frac{\rho RT}{\mu T\rho}
+= \boxed{\frac{R}{\mu}}\,.
+\tag{3.38}
+\]
+
+<p>A Equação (3.38) retoma a diferença \(C_P-C_V\) para o caso de um gás
+ideal.</p>
+
+<h2>Módulo interativo — Gás ideal: C<sub>P</sub> − C<sub>V</sub> = R/μ</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Peso molecular médio μ e a diferença de capacidades térmicas</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m4-mu">Peso molecular médio μ <span class="valor" id="m4-mu-valor">0,60</span></label>
+      <input type="range" id="m4-mu" min="0.4" max="2" step="0.01" value="0.6">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m4-grafico" role="img" aria-label="Curva de C_P menos C_V em função do peso molecular médio mu, com marcador no valor atual e pontos de referência para hidrogênio ionizado, mistura solar e hidrogênio neutro.">
+      Gráfico: curva de C_P − C_V = R/μ em função de μ, decrescente. Um marcador destaca o valor atual; três pontos de referência (μ≈0,5, 0,6 e 1) marcam H ionizado, núcleo solar e H neutro.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    \(C_P - C_V = R/\mu = \)<strong id="m4-valor">—</strong>
+    \(\mathrm{erg\,g^{-1}\,K^{-1}}\). Marcadores de referência (valores
+    já citados no capítulo): H ionizado (\(\mu\approx0{,}5\)), mistura
+    solar no núcleo (\(\mu\approx0{,}6\)), H neutro
+    (\(\mu\approx1\)).
+  </p>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — C_P−C_V no núcleo solar e o limite da idealidade na fotosfera</div>
+  <div class="conteudo">
+    <p>No núcleo solar, o plasma de hidrogênio e hélio está completamente
+    ionizado, com peso molecular médio \(\mu\approx0{,}6\) para a
+    composição solar típica. Usando a constante de gás
+    \(R=8{,}314\times10^{7}\,\mathrm{erg\,g^{-1}\,K^{-1}}\) (a constante
+    universal por grama, com \(\mu\) adimensional), a Equação (3.38) dá
+    \[
+    C_P - C_V = \frac{R}{\mu} \approx \frac{8{,}314\times10^{7}}{0{,}6}\,\mathrm{erg\,g^{-1}\,K^{-1}}
+    \approx 1{,}39\times10^{8}\,\mathrm{erg\,g^{-1}\,K^{-1}}\,,
+    \]
+    um valor bem definido porque o plasma do núcleo está muito acima da
+    temperatura de ionização e se comporta como gás ideal
+    (\(\alpha=\delta=1\)).</p>
+    <p>Já nas camadas logo abaixo da fotosfera, onde \(T\) cai para
+    \(\sim10^4\,\mathrm{K}\), o hidrogênio passa a se recombinar
+    parcialmente: o peso molecular médio efetivo aumenta (de
+    \(\mu\approx0{,}5\) para hidrogênio totalmente ionizado até
+    \(\mu\approx1\) para hidrogênio neutro), e — mais importante —
+    \(\alpha\) e \(\delta\) deixam de valer 1. Nessa região, a Equação
+    (3.38) <em>não é mais válida</em>; é necessário usar a forma geral
+    \(C_P-C_V=P\delta^2/(\alpha T\rho)\) deduzida anteriormente, com
+    \(\alpha\) e \(\delta\) calculados a partir de uma equação de estado
+    que inclua ionização parcial (tipicamente via equação de Saha). A
+    próxima seção mostra o efeito concreto disso sobre
+    \(\nabla_{\mathrm{ad}}\).</p>
+  </div>
+</div>
+
+<h2 id="gradiente-adiabatico">O gradiente adiabático</h2>
+
+<p>Podemos, também, definir um termo que é o <strong>gradiente
+adiabático</strong>, que se repete muito em astrofísica, onde</p>
+
+\[
+\nabla_{\mathrm{ad}} \equiv \left(\pdv{\ln T}{\ln P}\right)_S
+= \frac{P}{T}\left(\pdv{T}{P}\right)_S\,.
+\tag{3.39}
+\]
+
+<p>Essa equação é similar a outras vistas anteriormente, sendo que agora
+temos a entropia do sistema como uma constante.</p>
+
+<p>Da primeira lei da termodinâmica, temos a Equação (3.35), onde, para
+um sistema adiabático, não existe troca de calor com o meio, logo
+\(\mathrm{d}q\equiv 0\). Assim,</p>
+
+\[
+\mathrm{d}q = C_P\,\mathrm{d}T - \delta\,\frac{\mathrm{d}P}{\rho} = 0
+\quad\Longrightarrow\quad
+C_P\,\mathrm{d}T = \frac{\delta}{\rho}\,\mathrm{d}P
+\quad\Longrightarrow\quad
+\left(\pdv{T}{P}\right)_S = \frac{\delta}{\rho C_P}\,.
+\tag{3.40}
+\]
+
+<p>Substituindo a Equação (3.40) na Equação (3.39), temos:</p>
+
+\[
+\frac{T}{P}\nabla_{\mathrm{ad}} = \frac{\delta}{\rho C_P}
+\quad\Longrightarrow\quad
+\boxed{\nabla_{\mathrm{ad}} = \frac{P\delta}{T\rho C_P}}\,.
+\tag{3.41}
+\]
+
+<p>Em uma aproximação para um gás ideal, temos que \(\delta=1\) e
+\(P/(T\rho)=R/\mu\) [Equação (3.36)]; logo, a Equação (3.41) se reduz
+a</p>
+
+\[
+\nabla_{\mathrm{ad}} = \frac{R}{\mu\,C_P}\,.
+\tag{3.42}
+\]
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Por que C_P alto significa ∇_ad baixo</div>
+  <div class="conteudo">
+    <p>A Equação (3.42) mostra que \(\nabla_{\mathrm{ad}}\) e \(C_P\) são
+    inversamente proporcionais, e vale entender fisicamente por quê.
+    \(C_P\) mede quanta energia térmica é necessário fornecer a um grama
+    de gás, a pressão constante, para elevar sua temperatura em
+    \(1\,\mathrm{K}\). Um \(C_P\) maior significa que o gás "resiste"
+    mais a mudar de temperatura: para uma dada variação de pressão ao
+    longo de uma expansão ou compressão adiabática, quanto mais energia
+    for necessária para mudar \(T\), menor será a variação de temperatura
+    efetivamente produzida por unidade de variação de pressão — e é
+    exatamente essa razão, \((\partial\ln T/\partial\ln P)_S\), que define
+    \(\nabla_{\mathrm{ad}}\) [Equação (3.39)]. Um \(\nabla_{\mathrm{ad}}\)
+    baixo significa, portanto, um perfil \(T(P)\) adiabático mais "raso"
+    ou comprimido.</p>
+    <p>Essa relação tem uma consequência astrofísica direta. Em zonas de
+    ionização parcial (do hidrogênio ou do hélio, por exemplo), a energia
+    fornecida ao gás durante uma compressão não vai só para aumentar a
+    energia cinética das partículas — parte dela é consumida para
+    ionizar átomos, energia que fica "escondida" no processo de
+    ionização em vez de aparecer como aumento de temperatura. Isso faz
+    \(C_P\) disparar anomalamente nessas camadas e, pela relação acima,
+    faz \(\nabla_{\mathrm{ad}}\) despencar localmente, tornando o
+    critério de instabilidade convectiva de Schwarzschild
+    (\(\nabla_{\mathrm{rad}}>\nabla_{\mathrm{ad}}\), discutido adiante e
+    retomado em detalhe no capítulo de Equações de Estrutura Estelar)
+    muito mais fácil de satisfazer. Esse é um dos mecanismos físicos
+    reais por trás da zona convectiva externa do Sol — não apenas um
+    efeito de opacidade alta, mas também esse "efeito \(C_P\)" ligado à
+    ionização parcial de H e He logo abaixo da fotosfera, como detalhado
+    no exemplo a seguir (Cantiello &amp; Braithwaite 2019; Kippenhahn et
+    al. 2012).</p>
+  </div>
+</div>
+
+<p>Combinando com \(\gamma=5/3\) e \(C_P=\tfrac{5}{2}R/\mu\), válidos
+para um gás ideal monoatômico não-relativístico (como discutido
+anteriormente para o interior estelar típico), obtemos a forma mais
+usual desse resultado,</p>
+
+\[
+\nabla_{\mathrm{ad}} = \frac{\gamma-1}{\gamma} = \frac{2}{5} = 0{,}4\,.
+\tag{3.43}
+\]
+
+<h2>Módulo interativo — Índice adiabático γ e o gradiente adiabático</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">∇_ad = (γ − 1)/γ</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m5-gamma">Índice adiabático γ <span class="valor" id="m5-gamma-valor">1,667</span></label>
+      <input type="range" id="m5-gamma" min="1.05" max="2" step="0.001" value="1.667">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m5-grafico" role="img" aria-label="Curva do gradiente adiabático em função do índice adiabático gama, com marcador no valor atual e pontos de referência em gama igual a 4 terços e 5 terços.">
+      Gráfico: curva de ∇_ad = (γ−1)/γ em função de γ, crescente. Um marcador destaca o valor atual; dois pontos de referência marcam γ=4/3 (radiação/degenerado relativístico) e γ=5/3 (monoatômico ideal).
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    \(\nabla_{\mathrm{ad}} = (\gamma-1)/\gamma = \)<strong id="m5-nabla">—</strong>.
+    Marcadores de referência (valores já discutidos no capítulo):
+    \(\gamma=5/3\approx1{,}667\) (gás ideal monoatômico, maior parte da
+    sequência principal) e \(\gamma=4/3\approx1{,}333\) (gás de
+    radiação, ou matéria completamente degenerada e relativística —
+    limiar de instabilidade dinâmica pelo teorema do virial).
+  </p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Pistão: compressão adiabática vs. isotérmica, lado a lado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Dois pistões comprimem a mesma quantidade de gás ideal a partir do
+    mesmo estado inicial $(P_0,V_0,T_0)$ — um isolado termicamente
+    (adiabático, $PV^\gamma=\text{cte}$) e outro em contato com um
+    reservatório térmico (isotérmico, $PV=\text{cte}$, $T$ fixo). A
+    primeira lei vira processo: acompanhe o trabalho e o calor
+    acumulando em tempo real conforme o volume diminui.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mpist-gamma">Índice adiabático γ <span class="valor" id="mpist-gamma-valor">1,667</span></label>
+      <input type="range" id="mpist-gamma" min="1.05" max="2" step="0.001" value="1.667">
+    </div>
+    <div class="controle">
+      <label for="mpist-razao">Compressão final V/V₀ <span class="valor" id="mpist-razao-valor">0,30</span></label>
+      <input type="range" id="mpist-razao" min="10" max="80" step="1" value="30">
+    </div>
+    <div class="controle" style="display:flex;gap:0.5rem;align-items:flex-end;">
+      <button type="button" id="mpist-play" class="botao-modulo">▶ Comprimir</button>
+      <button type="button" id="mpist-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;flex-wrap:wrap;gap:1rem;">
+    <div style="flex:1 1 220px;height:260px;">
+      <canvas id="mpist-cilindros" role="img" aria-label="Dois cilindros com pistão comprimindo gás: um adiabático, mudando de cor conforme a temperatura sobe, e outro isotérmico, mantendo a cor por estar em contato com um reservatório térmico." style="width:100%;height:260px;display:block;"></canvas>
+    </div>
+    <div style="flex:1 1 260px;height:260px;">
+      <canvas id="mpist-pv" role="img" aria-label="Diagrama pressão-volume com as curvas adiabática e isotérmica a partir do mesmo estado inicial, com marcadores no estado atual de cada uma." style="width:100%;height:260px;display:block;"></canvas>
+    </div>
+  </div>
+  <p class="leitura-card" style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1rem;">
+    <span><strong>Adiabático</strong> — $T/T_0=$<strong id="mpist-ad-T">—</strong>,
+    $W=$<strong id="mpist-ad-W">—</strong>, $Q=0$ (por definição)</span>
+    <span><strong>Isotérmico</strong> — $T/T_0=1$ (fixo),
+    $W=$<strong id="mpist-iso-W">—</strong>, $Q=$<strong id="mpist-iso-Q">—</strong></span>
+  </p>
+  <p class="leitura-card">
+    <strong>O que é calculado de verdade:</strong> $P(V)$ em cada processo
+    vem exatamente de $PV^\gamma=P_0V_0^\gamma$ (adiabático) e
+    $PV=P_0V_0$ (isotérmico); $T/T_0=(PV)/(P_0V_0)$ (gás ideal); o
+    trabalho $W=\int P\,\mathrm dV$ usa as primitivas exatas de cada
+    processo ($W_{\rm iso}=P_0V_0\ln(V/V_0)$;
+    $W_{\rm ad}=(P V-P_0V_0)/(1-\gamma)$), não uma soma numérica
+    aproximada; $Q$ vem da 1ª lei, $Q=\Delta U+W$, com $\Delta U=0$ no
+    caso isotérmico (gás ideal, $U=U(T)$). <strong>O que é apenas
+    ilustrativo:</strong> as proporções e a cor dos cilindros (a cor do
+    pistão adiabático é só uma pista visual de "mais quente", não uma
+    escala de temperatura calibrada), e a velocidade da animação.
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Critério de Schwarzschild e a zona convectiva do Sol</div>
+  <div class="conteudo">
+    <p>O gradiente adiabático é o termo de comparação no <strong>critério
+    de Schwarzschild</strong> para estabilidade convectiva: uma camada
+    estelar é instável à convecção sempre que o gradiente radiativo local
+    excede \(\nabla_{\mathrm{ad}}\), isto é, \(\nabla_{\mathrm{rad}} >
+    \nabla_{\mathrm{ad}}\). O valor \(\nabla_{\mathrm{ad}}=2/5=0{,}4\)
+    [Equação (3.43)] é a referência de gás ideal usada para identificar,
+    em um modelo estelar, onde o transporte de energia deixa de ser
+    puramente radiativo. No caso do Sol, medidas helio­sismológicas
+    colocam a base da zona convectiva em
+    \(r=(0{,}713\pm0{,}003)\,R_\odot\) (Christensen-Dalsgaard, Gough
+    &amp; Thompson 1991) — ou seja, os cerca de 29% externos do raio
+    solar (frequentemente arredondados para "além de \(0{,}71\,R_\odot\)")
+    são convectivos, exatamente a região onde \(\nabla_{\mathrm{rad}}\)
+    ultrapassa \(\nabla_{\mathrm{ad}}\).</p>
+  </div>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — A zona de ionização parcial do hidrogênio e a origem da convecção solar</div>
+  <div class="conteudo">
+    <p>O critério de Schwarzschild por si só não explica por que a
+    convecção solar começa tão perto da superfície, onde a densidade é
+    baixa e a composição é majoritariamente hidrogênio neutro. A resposta
+    está na Equação (3.41): nas camadas com \(T\sim10^4\,\mathrm{K}\)
+    (aproximadamente \(\log T\approx4{,}1\)), o hidrogênio está sendo
+    parcialmente ionizado. Parte da energia térmica disponível é
+    consumida no processo de ionização em vez de elevar a temperatura do
+    gás — o que se traduz, via \(\alpha\) e \(\delta\), em uma queda
+    acentuada de \(\nabla_{\mathrm{ad}}\): modelos solares detalhados
+    mostram \(\nabla_{\mathrm{ad}}\) caindo para valores da ordem de
+    \(0{,}1\) nessa região, bem abaixo do valor de gás ideal \(0{,}4\).
+    Como \(\nabla_{\mathrm{rad}}\) nas camadas externas já é tipicamente
+    alto (baixa densidade, alta opacidade), a combinação de
+    \(\nabla_{\mathrm{rad}}\) elevado com \(\nabla_{\mathrm{ad}}\)
+    reduzido torna a instabilidade convectiva praticamente inevitável
+    nessa camada — esse é o motivo físico, e não apenas geométrico, pelo
+    qual o envelope solar é convectivo. O mesmo mecanismo, atuando nas
+    zonas de ionização parcial de H e He&nbsp;II em estrelas um pouco mais
+    quentes que o Sol, é responsável por acionar o mecanismo \(\kappa\)
+    de pulsação que define a faixa de instabilidade de Cefeidas e RR
+    Lyrae no diagrama HR.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Da termodinâmica à estrutura estelar</div>
+  <div class="conteudo">
+    <p>As relações termodinâmicas deduzidas neste capítulo não são um
+    exercício abstrato: \(C_P\), \(C_V\), \(\alpha\), \(\delta\) e
+    \(\nabla_{\mathrm{ad}}\) aparecem diretamente nas equações que
+    governam a estrutura e a evolução estelar. Os coeficientes \(\alpha\)
+    e \(\delta\) (frequentemente escritos como \(\chi_\rho \equiv
+    1/\alpha\) e \(\chi_T \equiv \delta/\alpha\) em outras convenções)
+    descrevem como a pressão responde a pequenas variações de densidade e
+    temperatura — informação essencial em qualquer equação de estado
+    usada nos modelos numéricos de interior estelar. Para uma dedução
+    completa dessas relações no contexto da estrutura estelar, incluindo
+    suas generalizações para gases parcialmente degenerados e regiões de
+    ionização, ver Kippenhahn et al. (2012).</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leituras complementares e referências atuais — Equações de estado modernas em modelos estelares</div>
+  <div class="conteudo">
+    <p>Os códigos de evolução estelar atuais não usam a equação do gás
+    ideal diretamente, exceto como aproximação de baixa densidade: eles
+    combinam diferentes tabelas e formulações de equação de estado,
+    válidas em diferentes regimes de densidade e temperatura (gás
+    ionizado, matéria parcialmente degenerada, efeitos de Coulomb, etc.).
+    O código MESA (<em>Modules for Experiments in Stellar
+    Astrophysics</em>), amplamente usado na pesquisa atual, combina as
+    equações de estado OPAL, SCVH, FreeEOS, HELM, PC e Skye, escolhendo
+    automaticamente a mais apropriada a cada ponto da malha estelar
+    (Jermyn et al. 2023). O módulo Skye, em particular, foi desenvolvido
+    para ser diferenciável analiticamente — uma propriedade importante
+    para a estabilidade numérica dos modelos modernos de evolução
+    estelar (Jermyn et al. 2021). A profundidade da zona convectiva
+    solar, usada ao longo deste capítulo como referência observacional
+    para o critério de Schwarzschild, é um dos vínculos mais precisos
+    disponíveis para calibrar essas equações de estado e a opacidade nas
+    camadas de ionização parcial, através da comparação entre a
+    velocidade do som inferida por helio­sismologia e a prevista pelos
+    modelos (Christensen-Dalsgaard, Gough &amp; Thompson 1991).</p>
+  </div>
+</div>
+
+<h2>Fechamento: o gradiente adiabático para gás ideal</h2>
+
+<p>As notas retomam explicitamente a Equação (3.42),</p>
+
+\[
+\nabla_{\mathrm{ad}}\Big|_{\mathrm{ideal}} = \frac{R}{\mu C_P}\,,
+\]
+
+<p>como o valor esperado para um gás ideal — confirmando a dedução já
+apresentada na seção do gradiente adiabático.</p>
+
+<p>Para um gás ideal monoatômico não-relativístico,
+\(C_V=\tfrac{3}{2}R/\mu\) e, por conseguinte, \(C_P=C_V+R/\mu=\tfrac{5}{2}R/\mu\).
+Substituindo esse resultado na Equação (3.42),</p>
+
+\[
+\nabla_{\mathrm{ad}}\Big|_{\text{monoatômico}}
+= \frac{R/\mu}{(5/2)\,R/\mu} = \frac{2}{5} = 0{,}4\,,
+\]
+
+<p>recuperando o mesmo valor \(\nabla_{\mathrm{ad}}=2/5=0{,}4\) já obtido
+na Equação (3.43) — um número finito e não-nulo, como exige a primeira
+lei da termodinâmica para um gás com capacidade térmica finita
+(\(C_P<\infty\)): sob compressão ou expansão adiabática, a temperatura de
+uma parcela de gás monoatômico necessariamente varia.</p>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 3.
+</footer>
+
+<script src="assets/cap03_modulos.js"></script>

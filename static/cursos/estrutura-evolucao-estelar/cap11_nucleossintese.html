@@ -1,0 +1,2950 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Evolução Estelar com MIST e MESA</title>
+<meta name="description" content="Módulo interativo do Capítulo 11: adaptação do artigo de Garcia, Carvalho, Oliveira, Porto, Santos, Santos, Sousa e Souto (DFI/UFS) sobre evolução estelar com trilhas MIST e simulação MESA, e nucleossíntese — com a tabela periódica da origem cósmica dos elementos, a carta de nuclídeos animada (processo-s vs. r), o pico de Gamow, a energia de ligação nuclear, a estrutura em cascas pré-colapso e o painel sincronizado da vida de uma estrela.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: { pdv: ['\\frac{\\partial #1}{\\partial #2}', 2], sen: '\\operatorname{sen}' }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 11 — Evolução Estelar com Trilhas MIST e Simulações MESA: uma Abordagem Didática</h1>
+<p class="subtitulo">Adaptação de um artigo científico completo, com trilhas evolutivas MIST 1.2, uma simulação MESA de 50 M☉, análise de nucleossíntese e uma tabela periódica interativa da origem cósmica dos elementos.</p>
+
+<div class="caixa atencao" style="border-width:3px;">
+  <div class="rotulo">Atenção — Origem deste capítulo</div>
+  <div class="conteudo">
+    <p>Diferente dos capítulos anteriores, este capítulo é uma
+    <strong>adaptação de um artigo científico completo</strong> já
+    pronto, de autoria de <strong>Garcia, Carvalho, Oliveira, Porto,
+    Santos, Santos, Sousa e Souto</strong> (Departamento de Física,
+    UFS), intitulado <em>"Evolução estelar com trilhas MIST e
+    simulações MESA em uma abordagem didática para o ensino de
+    Astrofísica"</em>. O texto científico original foi preservado
+    fielmente; apenas a estrutura editorial (título, resumo em formato
+    de artigo, seção de agradecimentos) foi adaptada ao formato de
+    capítulo de livro, e foram acrescentadas caixas de contexto,
+    exemplos e observações (nos mesmos moldes já usados no restante do
+    livro) conectando o conteúdo explicitamente aos capítulos
+    anteriores. Referências bibliográficas e arquivos de figura foram
+    integrados ao acervo único do projeto.</p>
+  </div>
+</div>
+
+<p>Este capítulo apresenta um estudo didático-computacional da
+evolução estelar usando: (i) trilhas evolutivas e isócronas públicas
+do projeto MIST 1.2 (\(0{,}3\)–\(40\,\mathrm M_\odot\)); e (ii) uma
+simulação de uma estrela de \(50\,\mathrm M_\odot\) no código MESA
+(versão r23.05.1). O objetivo é integrar, em um único estudo
+reprodutível, a análise de trilhas evolutivas, isócronas, evolução
+temporal de parâmetros internos e nucleossíntese, servindo como
+síntese quantitativa de tudo o que foi construído nos capítulos
+anteriores deste livro — das equações de estrutura estelar
+(<a href="cap05_equacoes_estrutura.html">Capítulo 5</a>) às equações de
+estado degeneradas (<a href="cap08_equacoes_estado.html">Capítulo
+8</a>), da massa de Chandrasekhar (<a href="cap09_anas_brancas.html">Capítulo
+9</a>) aos processos de geração de energia — agora ilustrados com dados
+públicos e uma simulação computacional real.</p>
+
+<h2>Introdução</h2>
+
+<p>O Diagrama de Hertzsprung-Russell (HR) constitui um pilar
+fundamental para o estudo da evolução estelar, permitindo correlacionar
+propriedades observáveis, como luminosidade e temperatura efetiva, com
+os parâmetros físicos intrínsecos das estrelas. Duas ferramentas
+teóricas são particularmente importantes para a sua interpretação: as
+trilhas evolutivas (<em>evolutionary tracks</em>) e as isócronas
+(<em>isochrones</em>).</p>
+
+<p>As trilhas apresentadas no diagrama da figura 1 estão
+correlacionadas a trajetória evolutiva que estrelas de diferentes
+massas solares percorrem ao longo de sua vida, desde a formação de sua
+proto-estrela, antes de adentrar na sequência principal (SP), até os
+estágios evolutivos finais. Isso serve para ilustrar como a sua
+estrutura interna e propriedades de superfície respondem aos processos
+de fusão nuclear e às mudanças na composição química. Por outro lado,
+as isócronas representam o lugar geométrico ocupado, em um dado
+instante, por estrelas de mesma idade e metalicidade, mas com massas
+diferentes, servindo como uma ferramenta teórica fundamental para datar
+aglomerados estelares, como os globulares, ao se comparar sua forma e
+posição no diagrama Hertzsprung–Russell com a distribuição observada
+das estrelas do aglomerado. A precisão da datação depende crucialmente
+da correspondência entre a metalicidade das isócronas e a do
+aglomerado em estudo. A comparação entre isócronas teóricas e
+populações estelares observadas, como as de aglomerados, nos permite a
+determinação de idades e a realização de testes de modelos de evolução
+estelar.</p>
+
+<p>A trajetória evolutiva de uma estrela é primariamente governada por
+sua massa inicial e metalicidade. Estrelas de baixa massa evoluem
+lentamente, permanecendo na sequência principal por bilhões de anos,
+enquanto estrelas massivas consomem seu combustível nuclear de forma
+acelerada, culminando em estágios finais explosivos ou colapsantes. A
+metalicidade, por sua vez, influencia a opacidade do envelope estelar
+e a eficiência dos processos de fusão, afetando tanto a posição no
+diagrama HR quanto a duração de cada fase evolutiva.</p>
+
+<p>Este trabalho tem como objetivo estudar e visualizar graficamente a
+dependência da evolução estelar em relação a massa, idade e
+metalicidade, utilizando os modelos teóricos do projeto MIST (Dotter,
+2016) (MESA <em>Isochrones &amp; Stellar Tracks</em>) — todos os dados
+foram obtidos a partir do projeto (MIST):
+<code>https://waps.cfa.harvard.edu/MIST/</code>. A metodologia consiste
+na análise de diagramas HR e de gráficos de temperatura efetiva versus
+gravidade superficial (diagramas de Kiel), gerados a partir de trilhas
+evolutivas e isócronas. Adicionalmente, será realizada uma análise
+temporal de parâmetros estruturais e nucleares fundamentais — como
+raio, temperatura e densidade central, e a produção de energia via
+cadeia próton-próton, ciclo CNO e processo triplo-\(\alpha\) — para
+estrelas de diferentes massas, de modo que, em vez de nos limitarmos a
+retratos estáticos, essa abordagem nos permite analisar e rastrear
+como essas grandezas físicas e químicas variam ao longo do tempo de
+vida da estrela. Logo, é possível fazer a identificação dessas
+transições críticas, como a entrada e saída da sequência principal, o
+<em>flash</em> de hélio, a correlação entre as mudanças das estruturas
+internas, e também observarmos graficamente as produções dos elementos
+mais pesados do Universo. Além disso, escolhemos analisar a taxa de
+perda de massa nessas estrelas, como parâmetro adicional que possui
+muita relevância em estrelas massivas.</p>
+
+<p>A pergunta que orienta este trabalho é: como trilhas evolutivas
+públicas (MIST) e uma simulação própria no código MESA podem ser
+combinadas para ilustrar, de forma quantitativa e didática, os efeitos
+da massa, da metalicidade e da rotação sobre a evolução estelar e
+sobre a nucleossíntese? Através desta abordagem, buscamos desenvolver
+uma compreensão quantitativa e fisicamente fundamentada dos processos
+que governam o ciclo de vida estelar, apresentando os resultados
+numéricos em diálogo com os princípios da teoria da evolução estelar
+consolidados na literatura. Em particular, seguimos a formulação
+apresentada por Maeder em <em>Physics, Formation and Evolution of
+Rotating Stars</em> (Maeder, 2009), cuja estrutura teórica fornece o
+enquadramento físico para interpretar a evolução da estrutura, os
+mecanismos de transporte e os processos nucleares relevantes. Cabe
+ressaltar que a contribuição deste artigo não é a obtenção de
+resultados astrofísicos inéditos, mas sim a síntese
+didático-computacional: a integração, em um único estudo guiado por
+dados públicos (MIST) e por uma simulação própria (MESA), de trilhas
+evolutivas, isócronas, parâmetros estruturais temporais e
+nucleossíntese, de modo a oferecer um material de apoio quantitativo
+para o ensino de evolução estelar.</p>
+
+<p>Para a análise de dados e criação das figuras, utilizamos a
+linguagem de programação <em>Python</em>, juntamente com suas
+bibliotecas. As principais ferramentas utilizadas foram pandas
+(McKinney, 2010), numpy (Harris et al., 2020) e bokeh — biblioteca de
+visualização interativa para <em>Python</em>, ideal para a construção
+de dashboards e aplicações <em>web</em>; optou-se por Bokeh em vez da
+tradicional matplotlib devido à sua capacidade de gerar visualizações
+interativas e esteticamente mais agradáveis (Bokeh Development Team,
+2018) — para a geração dos gráficos. A biblioteca pandas foi essencial
+para a manipulação e análise dos dados evolutivos das estrelas,
+enquanto numpy forneceu suporte para operações numéricas eficientes.</p>
+
+<p>Também foi feita a utilização do MESA (<em>Modules for Experiments
+in Stellar Astrophysics</em>), que é o código principal de simulação,
+e o Tulips, que é o pacote (<em>Python</em>) para visualizar as
+simulações de forma computacional, para compilar e criar um modelo de
+evolução de uma estrela, levando em conta alguns parâmetros importantes
+como: luminosidade \((L/L_{\odot})\), temperatura (Kelvin), tempo
+(Myr), raio \((R_{\odot})\) e massa \((\mathrm M_{\odot})\) estelar.</p>
+
+<h2>Trajetórias Evolutivas para Estrelas de Baixa e Alta Massa</h2>
+
+<p>As figuras a seguir apresentam as trajetórias evolutivas extraídas
+do projeto MIST para estrelas de massas baixas
+(0,3–1 M\(_\odot\)), intermediárias (3–8 M\(_\odot\)) e altas
+(10–40 M\(_\odot\)). Nos diagramas, o eixo horizontal representa o
+logaritmo da temperatura efetiva, \(\log T_{\rm eff}\), com a escala
+invertida (temperaturas mais altas à esquerda), de acordo com a
+convenção do diagrama HR. O eixo vertical mostra o logaritmo da
+luminosidade bolométrica em unidades solares, \(\log(L/L_\odot)\).</p>
+
+<p>Para todas as curvas, foram excluídas idades inferiores a
+\({\sim}10^6\) anos — fase inicial da pré-sequência principal (pré-MS),
+período em que a estrutura hidrostática ainda não se estabilizou e os
+parâmetros internos, como luminosidade, raio e temperatura efetiva,
+variam de forma abrupta, dificultando a análise da sequência
+principal. Esse critério físico é consistente com o filtro de
+pré-processamento documentado na Seção 2: para estrelas de alta massa,
+\(10^6\) anos corresponde a um instante ainda anterior à ZAMS (do
+inglês <em>Zero-Age Main Sequence</em>, ou sequência principal de
+idade zero — o estágio em que a estrela inicia a queima estável de
+hidrogênio em seu núcleo e passa a integrar a sequência principal no
+diagrama de Hertzsprung–Russell); para estrelas de baixa massa (por
+exemplo, \(0{,}5\)–\(1\,\mathrm{M}_\odot\), com ZAMS em
+\({\sim}157\)–\(42\) Myr), a pré-MS remanescente ainda está
+representada nas curvas e é identificada nas figuras correspondentes.
+Além disso, é importante ressaltar que, em uma primeira análise, a
+rotação dessas estrelas foi desconsiderada, isto é, as trilhas
+evolutivas foram obtidas com \(v/v_{\text{crit}} = 0\).</p>
+
+<p>Os dados provêm do projeto MIST 1.2 (Dotter, 2016) (<em>MESA
+Isochrones &amp; Stellar Tracks</em>, versão MESA r7503). A grade
+utilizada cobre massas de \(0{,}3\) a \(40\,\mathrm M_\odot\) com
+metalicidade solar (\([\mathrm{Fe/H}]=0{,}00\),
+\(Z_\mathrm{init}=0{,}01429\), \(Y_\mathrm{init}=0{,}2703\)) e sem
+rotação (\(v/v_\mathrm{crit}=0{,}00\)). Para as comparações rotacionais
+(Seção 2.4) foram utilizadas trilhas adicionais com
+\(v/v_\mathrm{crit}=0{,}40\) para as mesmas massas e metalicidade; para
+a análise de metalicidade (Seção 4.1), grades com
+\([\mathrm{Fe/H}]\in\{0{,}00;\;{+0{,}02};\;{+0{,}20}\}\) com
+\(v/v_\mathrm{crit}=0{,}40\).</p>
+
+<p>Os arquivos <code>.track.eep</code> contêm 77 colunas; as
+utilizadas neste trabalho foram: <code>star_age</code> (col. 1, idade
+em anos), <code>log_Teff</code> (12), <code>log_L</code> (7),
+<code>log_R</code> (14), <code>log_center_T</code> (46),
+<code>log_center_Rho</code> (47), <code>center_h1</code> (52, fração
+mássica de hidrogênio central), e <code>pp</code>/<code>cno</code>/<code>tri_alfa</code>
+(cols. 60–62, logaritmo das luminosidades nucleares em unidades
+solares).</p>
+
+<p>O esquema de pontos evolutivos equivalentes (EEP) do MIST garante
+correspondência física entre trilhas de diferentes massas. Os pontos
+relevantes para este trabalho são: EEP 1 (linha 1) = início da
+pré-SP; EEP 2 (linha 202) = ZAMS, com \(X_c \approx 0{,}714\) para
+toda a grade; EEP 4 (linha 454) = TAMS (do inglês <em>Terminal-Age
+Main Sequence</em>, ou idade terminal da sequência principal — o
+estágio em que a estrela chega ao final da sequência principal, após o
+hidrogênio disponível para a fusão nuclear em sua região central ter
+sido praticamente esgotado). O tempo de vida na sequência principal
+adotado é \(\Delta t_\mathrm{SP} = t_\mathrm{TAMS} - t_\mathrm{ZAMS}\),
+calculado a partir do campo <code>star_age</code> nesses dois pontos. A
+trilha de \(0{,}3\,\mathrm M_\odot\) não atinge a TAMS na grade MIST;
+sua evolução disponível encerra-se ainda na sequência principal
+(\(X_c \approx 0{,}32\)). Para os gráficos temporais (Seção 3), as
+curvas foram filtradas para idades \({>}\,10^6\) anos, de modo a
+excluir as fases mais iniciais da pré-SP; as fases pré-ZAMS
+remanescentes estão identificadas nas respectivas figuras.</p>
+
+<h3>Estrelas de Baixa Massa</h3>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/diagrama_hr_baixa_massa_padronizado.svg" alt="Diagrama HR para estrelas de baixa massa, 0,3 a 5 massas solares, mostrando trajetorias evolutivas MIST para 0,3, 0,5, 0,8, 1, 3 e 5 massas solares.">
+  <figcaption><span class="figura-num">Figura 1.</span> Diagrama HR para estrelas de baixa massa (0,3–5 M\(_\odot\)).</figcaption>
+</div>
+
+<p>A figura acima exibe trajetórias para estrelas de massas 0,3, 0,5,
+0,8, 1, 3 e 5 M\(_\odot\). Podemos observar três regimes distintos:</p>
+<ul>
+  <li><strong>Massas muito baixas</strong>: Estas estrelas ocupam a
+  região inferior direita do diagrama HR, com baixas luminosidades e
+  temperaturas efetivas. São estrelas totalmente convectivas, o que
+  homogeneíza sua composição química e resulta em trajetórias quase
+  horizontais (pouca variação em luminosidade) ao longo de escalas de
+  tempo extremamente longas, comparáveis à idade do Universo. Sua
+  evolução é dominada por queima de hidrogênio via cadeia próton-próton
+  e têm tempos de vida na sequência principal da ordem de trilhões de
+  anos — previsão teórica dos modelos de evolução estelar (esses
+  tempos excedem a idade do Universo), com suporte observacional
+  indireto na existência de estrelas de baixíssima massa essencialmente
+  não-evoluídas.</li>
+  <li><strong>Massa solar e próximas</strong>: Localizam-se na
+  sequência principal em \(\log(L/L_\odot) \approx 0\) e
+  \(\log T_{\rm eff} \approx 3{,}75\) (estrela solar). Apresentam uma
+  evolução típica: após alguns bilhões de anos, esgotam o hidrogênio no
+  núcleo, saem da sequência principal (ponto de <em>turnoff</em>) e
+  expandem o envelope, movendo-se para o ramo das gigantes (aumento de
+  luminosidade e diminuição de temperatura efetiva). A variação em
+  luminosidade é moderada (até cerca de 2 ordens de magnitude) em
+  comparação com estrelas mais massivas.</li>
+  <li><strong>Massas intermediárias</strong>: São mais luminosas e
+  quentes na sequência principal (posicionadas à esquerda e acima no
+  diagrama). Evoluem rapidamente (tempos de vida na sequência principal
+  de centenas de milhões de anos) e, após esgotar o hidrogênio central,
+  expandem-se significativamente, tornando-se gigantes com envelopes
+  muito expandidos e frios. Nota-se um movimento para cima e para a
+  direita no diagrama, indicando aumento de luminosidade e resfriamento
+  superficial.</li>
+</ul>
+<p>Para essas estrelas, optamos por não limitar os eixos, já que os
+valores convencionais esperados não estão de acordo com o que
+encontramos para essa faixa de massas. Assim, adequamos os valores
+para melhor visualização do diagrama HR.</p>
+
+<h3>Estrelas de Alta Massa</h3>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/diagrama_hr_alta_massa_padronizado.svg" alt="Diagrama HR para estrelas de alta massa, 8 a 40 massas solares.">
+  <figcaption><span class="figura-num">Figura 2.</span> Diagrama HR para estrelas de alta massa (8–40 M\(_\odot\)).</figcaption>
+</div>
+
+<p>A figura acima mostra as trajetórias para estrelas de 8, 10, 15,
+20, 25, 30 e 40 M\(_\odot\). Estas estrelas apresentam características
+marcantes:</p>
+<ul>
+  <li><strong>Sequência Principal</strong>: Ocupam a região superior
+  esquerda do diagrama HR, com altíssimas luminosidades
+  (\(\log(L/L_\odot) > 3\)) e temperaturas efetivas
+  (\(\log T_{\rm eff} > 4{,}2\)). A sequência principal para essas
+  massas é muito íngreme, ressaltando a relação entre massa e
+  luminosidade (\(L \propto M^{3{,}5}\)).</li>
+  <li><strong>Evolução Pós-Sequência Principal</strong>: Após um curto
+  tempo na sequência principal (de alguns milhões a dezenas de milhões
+  de anos), estas estrelas evoluem para a região das gigantes e
+  supergigantes. Seus envelopes se expandem enormemente, levando a um
+  grande aumento de luminosidade e expansão do raio, resultando na
+  diminuição da temperatura efetiva. Movem-se para a direita no
+  diagrama, podendo atingir a região das supergigantes vermelhas
+  (baixa temperatura, alta luminosidade) ou, em alguns casos, voltar
+  para a esquerda (<em>blue loops</em>) durante a queima de hélio.</li>
+  <li><strong>Finais Evolutivos</strong>: Estrelas massivas evoluem
+  rapidamente para estágios avançados de queima nuclear (hélio,
+  carbono, etc.) e terminam suas vidas como supernovas (tipo II, Ib ou
+  Ic), deixando para trás buracos negros ou estrelas de nêutrons. A
+  trajetória no diagrama HR reflete a complexa interação entre a
+  queima nuclear em camadas, a perda de massa por ventos estelares
+  (especialmente para estrelas entre 25 e 30 M\(_\odot\)) e possíveis
+  erupções como as variáveis luminosas azuis, que pode alterar
+  significativamente a evolução.</li>
+</ul>
+
+<h3>Pontos Importantes</h3>
+
+<p>A evolução das estrelas em ambas as faixas de massa é governada por
+princípios físicos bem estabelecidos pela teoria moderna de evolução
+estelar. Esses fundamentos — relação massa–luminosidade, tempo de vida
+nuclear, dependência com parâmetros estruturais e efeitos da
+composição — são discutidos em detalhe em trabalhos clássicos de
+estrutura estelar (Kippenhahn, Weigert &amp; Weiss, 2012; Hansen,
+Kawaler &amp; Trimble, 2004).</p>
+<ol>
+  <li><strong>Relação Massa–Luminosidade</strong>: Na sequência
+  principal, a luminosidade cresce fortemente com a massa, seguindo
+  aproximadamente \(L \propto M^\alpha\), com \(\alpha \sim
+  3\!-\!4\) dependendo do regime de opacidade e da lei de energia
+  nuclear. Esse comportamento emerge diretamente das equações de
+  equilíbrio hidrostático e do forte aumento da taxa nuclear com a
+  temperatura central, como apresentado em Kippenhahn, Weigert &amp;
+  Weiss (2012). Essa relação explica por que estrelas massivas são
+  muito mais luminosas e ocupam a parte superior esquerda do diagrama
+  HR.</li>
+  <li><strong>Tempo de Vida na Sequência Principal</strong>: O tempo
+  característico de queima do hidrogênio, \(t_{\mathrm{SP}} \propto
+  M/L\), diminui rapidamente com a massa. Isso implica que estrelas
+  massivas consomem seu combustível em apenas alguns milhões de anos,
+  enquanto estrelas de baixa massa — com luminosidades muito menores —
+  podem viver por dezenas de bilhões de anos (Prialnik, 2000).</li>
+  <li><strong>Lei de Stefan–Boltzmann e expansão do envelope</strong>:
+  A relação \(L = 4\pi R^2 \sigma T_{\mathrm{eff}}^4\) conecta
+  diretamente parâmetros internos e observáveis. Durante fases
+  pós-sequência principal, o envelope se expande, aumentando o raio e
+  deslocando a estrela para regiões de menor temperatura efetiva e
+  maior luminosidade.</li>
+  <li><strong>Opacidade, composição química e perda de massa</strong>:
+  A metalicidade modifica a opacidade e, portanto, o gradiente de
+  temperatura no envelope, deslocando trajetórias evolutivas no
+  Diagrama HR. Em estrelas massivas, ventos intensos — dependentes da
+  metalicidade — removem camadas externas e alteram profundamente a
+  estrutura e a evolução (Langer, 2012). A combinação desses fatores
+  ajuda a explicar a diversidade de trajetórias evolutivas observadas,
+  especialmente em populações com diferentes Z.</li>
+</ol>
+<p>Em conclusão, a comparação entre estrelas de baixa e alta massa
+revela que a massa inicial é o principal parâmetro que determina
+luminosidade, tempo de vida e o caminho evolutivo, sendo a composição
+química inicial (especialmente a metalicidade) um fator modificador
+crucial. O diagrama HR permite visualizar de forma direta essas
+diferenças, funcionando como uma ferramenta essencial para diagnosticar
+populações estelares e reconstruir histórias evolutivas.</p>
+
+<div class="grafico-card" style="overflow-x:auto;">
+<table>
+  <caption style="text-align:left;font-size:.85rem;margin-bottom:.5rem;">Tabela 1. Parâmetros de validação na ZAMS e tempo de vida na sequência principal para os modelos MIST 1.2 ([Fe/H]=0,00, v/v<sub>crit</sub>=0,00, Z<sub>init</sub>=0,01429, MESA r7503). t<sub>ZAMS</sub> (EEP 2, linha 202) e t<sub>TAMS</sub> (EEP 4, linha 454): idades cumulativas desde o início da pré-SP; tempo de vida na SP: Δt=t<sub>TAMS</sub>−t<sub>ZAMS</sub>. Demais parâmetros avaliados no EEP 2 (ZAMS). "Mec.": mecanismo nuclear dominante na ZAMS (pp: cadeia próton-próton; CNO: ciclo CNO). A trilha de 0,3 M☉ não atinge a TAMS na grade MIST; sua evolução disponível encerra-se ainda na sequência principal (X<sub>c</sub>≈0,32). Fonte: arquivos .track.eep do projeto MIST 1.2 (Dotter, 2016).</caption>
+  <thead><tr><th>M<sub>ini</sub> [M☉]</th><th>t<sub>ZAMS</sub> [anos]</th><th>t<sub>TAMS</sub> [anos]</th><th>T<sub>eff</sub> [K]</th><th>log(L/L☉)</th><th>R/R☉</th><th>T<sub>c</sub> [K]</th><th>ρ<sub>c</sub> [g/cm³]</th><th>X<sub>c</sub></th><th>Mec.</th></tr></thead>
+  <tbody>
+    <tr><td>0,3</td><td>4,70×10⁸</td><td>—</td><td>3410</td><td>-1,98</td><td>0,29</td><td>7,57×10⁶</td><td>99,3</td><td>0,715</td><td>pp</td></tr>
+    <tr><td>0,5</td><td>1,57×10⁸</td><td>9,58×10¹⁰</td><td>3800</td><td>-1,40</td><td>0,46</td><td>9,06×10⁶</td><td>85,6</td><td>0,714</td><td>pp</td></tr>
+    <tr><td>0,8</td><td>6,69×10⁷</td><td>2,24×10¹⁰</td><td>4940</td><td>-0,57</td><td>0,71</td><td>1,18×10⁷</td><td>79,4</td><td>0,715</td><td>pp</td></tr>
+    <tr><td>1,0</td><td>4,19×10⁷</td><td>9,92×10⁹</td><td>5710</td><td>-0,13</td><td>0,88</td><td>1,37×10⁷</td><td>79,0</td><td>0,715</td><td>pp</td></tr>
+    <tr><td>3,0</td><td>3,48×10⁶</td><td>3,59×10⁸</td><td>12800</td><td>1,93</td><td>1,87</td><td>2,49×10⁷</td><td>45,2</td><td>0,714</td><td>CNO</td></tr>
+    <tr><td>5,0</td><td>1,00×10⁶</td><td>1,00×10⁸</td><td>17750</td><td>2,74</td><td>2,47</td><td>2,84×10⁷</td><td>24,0</td><td>0,714</td><td>CNO</td></tr>
+    <tr><td>8,0</td><td>3,16×10⁵</td><td>3,57×10⁷</td><td>23240</td><td>3,44</td><td>3,23</td><td>3,16×10⁷</td><td>13,7</td><td>0,714</td><td>CNO</td></tr>
+    <tr><td>10,0</td><td>1,87×10⁵</td><td>2,36×10⁷</td><td>26110</td><td>3,75</td><td>3,67</td><td>3,31×10⁷</td><td>10,7</td><td>0,714</td><td>CNO</td></tr>
+    <tr><td>15,0</td><td>8,59×10⁴</td><td>1,24×10⁷</td><td>31650</td><td>4,29</td><td>4,62</td><td>3,57×10⁷</td><td>7,1</td><td>0,714</td><td>CNO</td></tr>
+    <tr><td>25,0</td><td>4,04×10⁴</td><td>6,93×10⁶</td><td>38720</td><td>4,88</td><td>6,13</td><td>3,88×10⁷</td><td>4,6</td><td>0,714</td><td>CNO</td></tr>
+    <tr><td>40,0</td><td>2,39×10⁴</td><td>4,74×10⁶</td><td>44740</td><td>5,36</td><td>7,92</td><td>4,13×10⁷</td><td>3,3</td><td>0,714</td><td>CNO</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Efeitos da Rotação Estelar nas Trajetórias Evolutivas</h3>
+
+<p>Para complementar a análise das trajetórias evolutivas, foram
+gerados diagramas HR adicionais considerando estrelas com rotação
+inicial de \(v/v_{\text{crit}} = 0{,}4\), na qual \(v_{\text{crit}}\) é
+a velocidade crítica de rotação. As figuras a seguir apresentam os
+resultados para estrelas de baixa e alta massa, respectivamente,
+permitindo uma comparação direta com os modelos sem rotação
+anteriormente discutidos.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/diagrama_hr_baixa_massa_rotacao.svg" alt="Diagrama HR para estrelas de baixa massa com rotacao inicial v sobre v crit igual a 0,4.">
+  <figcaption><span class="figura-num">Figura 3.</span> Diagrama HR para estrelas de baixa massa (0,3–5 M\(_\odot\)) com rotação inicial \(v/v_{\text{crit}} = 0{,}4\). Comparado com a Figura 1, observa-se um deslocamento para temperaturas efetivas menores, acompanhado de ajustes na luminosidade, devido aos efeitos da mistura rotacional e ao escurecimento gravitacional.</figcaption>
+</div>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/diagrama_hr_alta_massa_rotacao.svg" alt="Diagrama HR para estrelas de alta massa com rotacao inicial v sobre v crit igual a 0,4.">
+  <figcaption><span class="figura-num">Figura 4.</span> Diagrama HR para estrelas de alta massa (8–40 M\(_\odot\)) com rotação inicial \(v/v_{\text{crit}} = 0{,}4\). Os efeitos da rotação são mais pronunciados que nas estrelas de baixa massa, com alterações significativas na trajetória evolutiva, particularmente nas fases de supergigante, incluindo modificações na perda de massa e possivelmente na ocorrência de <em>blue loops</em>.</figcaption>
+</div>
+
+<p>Como mostram as tabelas a seguir, o efeito da rotação no tempo de
+vida na sequência principal é modesto e dependente da massa. Os
+maiores aumentos consistentemente medidos são \({\approx}8\%\) para
+\(8\,\mathrm M_{\odot}\) e \({\approx}6\%\) para
+\(40\,\mathrm M_{\odot}\), enquanto estrelas de
+\(0{,}5\)–\(1\,\mathrm M_{\odot}\) mostram variação negligenciável
+(\(\lesssim 0{,}1\%\)).</p>
+
+<p><strong>Mecanismos Físicos da Rotação.</strong> A rotação modifica
+profundamente a estrutura e a evolução estelar, introduzindo
+anisotropias, novas formas de transporte interno e alterações no
+equilíbrio hidrostático. Esses efeitos tornam-se especialmente
+importantes em estrelas de massa intermediária e alta, nas quais a
+rotação inicial é geralmente elevada (Maeder, 2009). A seguir
+destacamos os mecanismos centrais envolvidos.</p>
+<ul>
+  <li><strong>Achatamento Rotacional e o Teorema de von Zeipel</strong>:
+  A rotação rápida leva a um achatamento do corpo estelar devido ao
+  aumento da força centrífuga no equador. Como consequência, a
+  gravidade efetiva \(g_{\mathrm{eff}}\) torna-se maior nos polos e
+  menor no equador. Pelo teorema de von Zeipel (von Zeipel, 1924), em
+  estrelas cujo envelope é dominado por transporte radiativo a
+  temperatura efetiva superficial se relaciona com a gravidade efetiva
+  como
+  \[
+  T_{\mathrm{eff}} \propto g_{\mathrm{eff}}^{1/4}\,,
+  \tag{11.1}
+  \]
+  implicando que os polos são mais quentes e brilhantes que o equador
+  — fenômeno conhecido como escurecimento gravitacional. Trabalhos
+  mais recentes, como Espinosa Lara &amp; Rieutord (2011), mostram que
+  a relação clássica de von Zeipel pode ser modificada pela estrutura
+  tridimensional realista das camadas externas, refinando previsões
+  para estrelas em rotação extrema.
+  <li><strong>Mistura Rotacional</strong>: A rotação aciona uma série
+  de processos de transporte angular e químico. Entre os principais
+  estão:
+    <ul>
+      <li>circulação meridional, que tem sua origem no paradoxo de von
+      Zeipel (1924): a rotação torna impossível o equilíbrio térmico
+      simultâneo em camadas radiativas (as superfícies equipotenciais
+      e isóbaras não coincidem), de modo que correntes axissimétricas
+      surgem para redistribuir calor e momento angular;</li>
+      <li>instabilidade de <em>shear</em>, produzida por gradientes de
+      velocidade diferencial;</li>
+      <li>turbulência horizontal, que promove homogenização
+      química.</li>
+    </ul>
+  Esses mecanismos aumentam o suprimento de hidrogênio ao núcleo,
+  prolongam o tempo de vida na sequência principal e podem modificar
+  profundamente a composição superficial da estrela (por exemplo,
+  enriquecimento em nitrogênio).</li>
+  <li><strong>Alterações no Equilíbrio Hidrostático</strong>: A
+  presença da força centrífuga reduz a gravidade efetiva, alterando o
+  equilíbrio hidrostático clássico. O termo centrífugo contribui para
+  o gradiente de pressão requerido:
+  \[
+  \frac{dP}{dr} = - \rho g_{\mathrm{eff}}\,,
+  \tag{11.2}
+  \]
+  com \(g_{\mathrm{eff}} = g - \Omega^2 r_{\perp}\). Isso influencia a
+  estrutura interna, diminuindo a temperatura central e afetando as
+  taxas de fusão nuclear. Em massas altas, a rotação pode até suprimir
+  ou retardar a formação de um núcleo convectivo mais profundo.</li>
+</ul>
+
+<div class="grafico-card" style="overflow-x:auto;">
+<table>
+  <caption style="text-align:left;font-size:.85rem;margin-bottom:.5rem;">Tabela 2. Comparação dos tempos de vida na sequência principal (TAMS, EEP4 da grade MIST) para estrelas de baixa massa: modelos sem e com rotação (v/v<sub>crit</sub>=0,4). A estrela de 0,3 M☉ foi excluída porque o modelo não-rotativo não atinge a TAMS na grade MIST.</caption>
+  <thead><tr><th>Massa</th><th>Sem rotação</th><th>Com rotação</th><th>Diferença</th><th>Variação</th></tr></thead>
+  <tbody>
+    <tr><td>0,5 M☉</td><td>9,58×10¹⁰</td><td>9,59×10¹⁰</td><td>+1×10⁸</td><td>+0,1%</td></tr>
+    <tr><td>0,8 M☉</td><td>2,48×10¹⁰</td><td>2,48×10¹⁰</td><td>0</td><td>0%</td></tr>
+    <tr><td>1 M☉</td><td>1,15×10¹⁰</td><td>1,15×10¹⁰</td><td>0</td><td>0%</td></tr>
+    <tr><td>3 M☉</td><td>4,59×10⁸</td><td>4,68×10⁸</td><td>+9×10⁶</td><td>+2%</td></tr>
+    <tr><td>5 M☉</td><td>1,16×10⁸</td><td>1,19×10⁸</td><td>+3×10⁶</td><td>+2,6%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="grafico-card" style="overflow-x:auto;">
+<table>
+  <caption style="text-align:left;font-size:.85rem;margin-bottom:.5rem;">Tabela 3. Comparação dos tempos de vida na sequência principal (TAMS, EEP4) para estrelas de alta massa: modelos sem e com rotação (v/v<sub>crit</sub>=0,4).</caption>
+  <thead><tr><th>Massa</th><th>Sem rotação</th><th>Com rotação</th><th>Diferença</th><th>Variação</th></tr></thead>
+  <tbody>
+    <tr><td>8 M☉</td><td>4,01×10⁷</td><td>4,32×10⁷</td><td>+3,1×10⁶</td><td>+7,7%</td></tr>
+    <tr><td>10 M☉</td><td>2,63×10⁷</td><td>2,70×10⁷</td><td>+7×10⁵</td><td>+2,7%</td></tr>
+    <tr><td>15 M☉</td><td>1,38×10⁷</td><td>1,42×10⁷</td><td>+4×10⁵</td><td>+2,9%</td></tr>
+    <tr><td>20 M☉</td><td>9,62×10⁶</td><td>9,91×10⁶</td><td>+2,9×10⁵</td><td>+3%</td></tr>
+    <tr><td>25 M☉</td><td>6,93×10⁶</td><td>7,19×10⁶</td><td>+2,6×10⁵</td><td>+3,7%</td></tr>
+    <tr><td>30 M☉</td><td>5,89×10⁶</td><td>6,14×10⁶</td><td>+2,5×10⁵</td><td>+4,2%</td></tr>
+    <tr><td>40 M☉</td><td>4,74×10⁶</td><td>5,03×10⁶</td><td>+2,9×10⁵</td><td>+6,0%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>Análise Comparativa dos Efeitos da Rotação nos Tempos de
+Vida.</strong> As tabelas acima apresentam uma comparação quantitativa
+entre os tempos de vida dos modelos sem e com rotação. A análise
+revela padrões complexos e dependentes da massa:</p>
+<ul>
+  <li><strong>Efeito Variável por Faixa de Massa</strong>: A rotação
+  não afeta uniformemente todas as estrelas. Para estrelas entre
+  \(0{,}5\)–\(1\,\mathrm M_{\odot}\), as diferenças são negligenciáveis
+  (\(0\)–\(0{,}1\%\)). Para \(3\)–\(5\,\mathrm M_{\odot}\), há um
+  aumento modesto de \(2\)–\(2{,}5\%\). A comparação para
+  \(0{,}3\,\mathrm M_{\odot}\) não é possível porque o modelo
+  não-rotativo não atinge a TAMS na grade MIST.</li>
+  <li><strong>Comportamento em Estrelas Massivas</strong>: Nas
+  estrelas de alta massa, os efeitos são igualmente variáveis. A
+  estrela de \(8\,\mathrm M_{\odot}\) apresenta o maior aumento
+  relativo (\(7{,}7\%\)), enquanto para massas entre
+  \(10\)–\(30\,\mathrm M_{\odot}\) o aumento é de
+  \(2{,}7\)–\(4{,}2\%\). Para \(40\,\mathrm M_{\odot}\), o aumento é
+  de \(+6{,}0\%\), resultado de mistura rotacional combinada com
+  intensificação da perda de massa.</li>
+  <li><strong>Não Linearidade dos Efeitos</strong>: Os dados
+  demonstram que a influência da rotação não segue uma tendência
+  linear com a massa, sugerindo que diferentes mecanismos físicos
+  dominam em diferentes regimes de massa.</li>
+</ul>
+
+<p><strong>Interpretação Física dos Padrões Observados.</strong> O
+efeito da rotação sobre o tempo de vida na sequência principal é
+modesto em toda a grade considerada (\(\lesssim 8\%\)). Ele é
+praticamente nulo em estrelas de baixa massa
+(\(0{,}5\)–\(1\,\mathrm M_\odot\)), nas quais o gradiente de peso
+molecular (\(\nabla_\mu\)) que se desenvolve entre o núcleo e o
+envelope suprime a mistura rotacional — a mesma estratificação estável
+que distingue o critério de Ledoux do de Schwarzschild (Maeder, 2009).
+Nas demais massas o aumento é pequeno, atingindo um máximo de
+\(\sim8\%\) em torno de \(8\,\mathrm M_\odot\). Essa dependência
+não-monotônica com a massa reflete a interação entre a mistura
+rotacional, que repõe combustível nas regiões centrais e prolonga a
+queima de hidrogênio, e a estrutura interna específica de cada
+estrela; uma modelagem mecanística detalhada de cada regime de massa
+está além do escopo deste trabalho didático.</p>
+
+<p><strong>Mecanismos Físicos Subjacentes.</strong> A rotação
+influencia a evolução estelar através de vários mecanismos
+interconectados:</p>
+<ul>
+  <li><strong>Mistura Rotacional</strong>: Transporte de elementos
+  químicos que altera a composição das regiões de queima nuclear,
+  podendo prolongar fases evolutivas específicas.</li>
+  <li><strong>Alteração da Estrutura Interna</strong>: A força
+  centrífuga modifica os perfis de densidade e pressão, afetando as
+  condições para fusão nuclear.</li>
+  <li><strong>Mudanças na Opacidade</strong>: O enriquecimento químico
+  superficial altera a opacidade do envelope, influenciando a
+  eficiência do transporte de energia.</li>
+</ul>
+
+<p><strong>Implicações para Datação de Populações Estelares.</strong>
+Estes resultados têm consequências importantes para métodos de datação
+astrofísica:</p>
+<ol>
+  <li><strong>Precisão em Diferentes Populações</strong>: Aglomerados
+  ricos em estrelas de massas baixas ou muito massivas podem ter suas
+  idades significativamente subestimadas ou superestimadas se a
+  rotação for negligenciada.</li>
+  <li><strong>Calibração de Isócronas</strong>: As isócronas devem ser
+  calibradas separadamente para diferentes faixas de massa,
+  considerando os efeitos específicos da rotação em cada regime.</li>
+  <li><strong>Interpretação de Diagramas HR</strong>: A posição das
+  estrelas no diagrama HR em função da idade é afetada de maneira não
+  uniforme, necessitando de correções específicas por massa.</li>
+</ol>
+
+<p><strong>Limitações e Perspectivas Futuras.</strong> Também vale
+ressaltar que os modelos apresentados neste trabalho consideram uma
+rotação inicial uniforme e constante (\(v/v_{\text{crit}} = 0{,}4\)),
+mas não incluindo uma evolução rica em detalhes a respeito do perfil
+de rotação interna ou o acoplamento magnético entre camadas. Em casos
+reais observados, a rotação evolui devido ao transporte de momento
+angular e à perda de massa. Além disso, a metalicidade (que não foi
+debatida nessa análise) interage fortemente com a rotação, afetando
+tanto a opacidade quanto a eficiência dos ventos estelares. Estudos
+futuros podem nos mostrar como as diferentes evoluções da rotação e
+composição química influenciam na trajetória do diagrama HR.</p>
+
+<p>A análise comparativa revela que a rotação estelar tem efeitos
+modestos e dependentes da massa nos tempos de vida na sequência
+principal. Enquanto estrelas de \(0{,}5\)–\(1\,\mathrm M_{\odot}\)
+mostram pouca sensibilidade (\(\lesssim0{,}1\%\)), estrelas de massa
+intermediária e alta apresentam aumentos de até \(7{,}7\%\) (pico em
+\(8\,\mathrm M_{\odot}\)). Esta heterogeneidade ressalta a importância
+de se considerar a rotação como um parâmetro nos modelos evolutivos,
+particularmente para datação de populações estelares ricas em
+estrelas de 5–15 M\(_\odot\). Os resultados demonstram que não existe
+uma correção universal para os efeitos da rotação, sendo necessário
+tratamento específico por faixa de massa.</p>
+
+<h2>Evolução Temporal dos Parâmetros</h2>
+
+<p>A evolução estelar é governada por processos físicos intimamente
+dependentes da massa inicial da estrela, o que determina desde os
+tempos de vida até a estrutura interna e o comportamento energético ao
+longo das diferentes fases evolutivas. Para investigar essa relação,
+analisamos a trajetória temporal de estrelas com massas iniciais de
+\(0{,}5\), \(1\), \(5\), \(10\), \(15\) e \(25\,\mathrm M_{\odot}\),
+desde a sequência principal até as fases finais de vida. A partir das
+trilhas evolutivas fornecidas pelos modelos MIST, examinamos a
+variação de parâmetros fundamentais — como raio, temperatura efetiva,
+produção de energia nuclear (cadeia pp, ciclo CNO e processo
+triplo-\(\alpha\)), temperatura central e densidade central — com o
+objetivo de identificar como cada regime de massa responde aos
+diferentes estágios de queima nuclear. Esses diagnósticos permitem
+conectar diretamente a física interna (temperatura, densidade,
+composição e mecanismos de transporte) às propriedades observáveis das
+estrelas e às diferenças drásticas nos tempos evolutivos entre
+estrelas de baixa, intermediária e alta massa. Nas subseções a seguir,
+discutimos cada parâmetro em detalhe, destacando as transições
+estruturais e os mecanismos físicos que definem o ciclo de vida
+estelar em cada regime de massa.</p>
+
+<h3>Raio</h3>
+
+<p>A evolução temporal do raio estelar apresenta um comportamento
+fortemente dependente da massa inicial, refletindo as diferenças
+estruturais e nos tempos de evolução nuclear entre estrelas de baixa,
+média e alta massa. A figura a seguir mostra as trajetórias evolutivas
+para estrelas de \(0{,}5, 1, 5, 10, 15\) e \(25\,\mathrm{M}_\odot\)
+desde o início da sequência principal até as fases finais de vida,
+considerando apenas idades superiores a \(1\,\mathrm{Myr}\) para
+eliminar a pré-sequência principal.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_raio_estelar_com_corte.svg" alt="Evolucao temporal do raio para estrelas entre 0,5 e 25 massas solares.">
+  <figcaption><span class="figura-num">Figura 5.</span> Evolução temporal do raio para estrelas entre \(0{,}5\) e \(25\,\mathrm M_{\odot}\), evidenciando a forte dependência do raio com a massa inicial e a expansão pronunciada nas fases pós-sequência principal.</figcaption>
+</div>
+
+<p>Para estrelas de baixa massa, observa-se uma evolução lenta,
+dominada por longas escalas de tempo na sequência principal. A
+estrela de \(0{,}5\,\mathrm{M}_\odot\) exibe variações modestas de
+raio ao longo de praticamente toda sua vida, mantendo-se próxima de
+\(R\approx 0{,}5\)–\(1\,\mathrm{M}_\odot\) ao longo de mais de
+\(10^{10}\) anos. Já o caso solar (\(1\,\mathrm{M}_\odot\)) mostra um
+período inicial de contração até atingir a sequência principal,
+seguido de uma fase estável com pequeno decréscimo no raio durante a
+queima de hidrogênio central. Em idades próximas ao fim da sequência
+principal (\(\sim 10^{10}\) anos), o aumento abrupto do raio marca a
+entrada na fase de gigante vermelha, atingindo valores superiores a
+\(R \approx 300\,\mathrm{R}_\odot\).</p>
+
+<p>Para massas intermediárias, a evolução é muito mais rápida: suas
+escalas de vida variam entre \(10^{7}\) e \(10^{8}\) anos. Essas
+estrelas apresentam uma fase inicial de contração mais curta, atingem
+rapidamente a sequência principal e, após o esgotamento do hidrogênio
+central, sofrem expansão significativa do envelope, alcançando raios
+máximos da ordem de centenas de raios solares. O pico observado nas
+curvas — particularmente pronunciado em \(5\,\mathrm{M}_\odot\) —
+corresponde à expansão do envelope durante a fase de gigante vermelha
+ou supergigante, momento em que o principal combustível da estrela é o
+hélio.</p>
+
+<p>Nas estrelas de alta massa, os tempos evolutivos são ainda
+menores, variando de poucos milhões até aproximadamente \(10^{7}\)
+anos. Já na sequência principal, essas estrelas apresentam raios mais
+elevados em comparação com massas menores. A expansão é também mais
+abrupta e precoce, com máximos que ultrapassam
+\(R\approx 10^{3}\,\mathrm{R}_\odot\), atingindo regimes típicos de
+supergigantes vermelhas. Essa expansão extrema reflete a forte
+dependência da estrutura estelar com a luminosidade e com a eficiência
+do transporte convectivo no envelope. Após esse pico, o colapso
+dinâmico do raio (visível no final das curvas) marca o início das
+fases finais que antecedem a formação do remanescente compacto.</p>
+
+<p>Em resumo, a figura acima evidencia três comportamentos
+essenciais: (i) a forte dependência do raio com a massa inicial ao
+longo da vida estelar; (ii) a aceleração drástica da evolução para
+massas maiores, reduzindo o tempo total de vida em vários ordens de
+grandeza; (iii) a expansão extrema do envelope como assinatura
+universal das fases pós-sequência principal, com amplitudes que
+aumentam com a massa estelar. Esses resultados são consistentes com
+os valores numéricos obtidos a partir de código em <em>Python</em>,
+que indicam raios máximos variando de apenas alguns R\(_\odot\) para
+\(0{,}5\,\mathrm{M}_\odot\) até mais de \(1200\,\mathrm{R}_\odot\)
+para estrelas de \(25\,\mathrm{M}_\odot\). Enquanto estrelas de baixa
+massa apresentam expansão única e tardia, as de massa intermediária
+mostram múltiplas fases de expansão e contração, e as de alta massa
+exibem expansão precoce e maciça seguida de colapso terminal.</p>
+
+<h4>Raio em Estrelas Muito Massivas</h4>
+
+<p>Para as estrelas extremamente massivas (\(40\)–\(150\,\mathrm{M}_\odot\)),
+a evolução do raio apresenta características marcantes que diferem
+significativamente do padrão observado em estrelas de menor massa. A
+análise revela que o tempo de vida diminui drasticamente com o
+aumento da massa, variando de aproximadamente \(4{,}8\) milhões de
+anos para \(40\,\mathrm{M}_\odot\) em até apenas \(3\) milhões de anos
+para \(150\,\mathrm{M}_\odot\).</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_raio_estelar_muito_massivas.svg" alt="Evolucao do raio para estrelas muito massivas, 40 a 150 massas solares.">
+  <figcaption><span class="figura-num">Figura 6.</span> Evolução do raio para estrelas muito massivas (\(40\)–\(150\,\mathrm M_{\odot}\)). O gráfico destaca a supressão da expansão em massas elevadas devido à pressão de radiação e às intensas perdas de massa por ventos estelares.</figcaption>
+</div>
+
+<p>Notavelmente, observa-se um comportamento não monotônico na
+expansão máxima em função da massa. A estrela de \(40\,\mathrm{M}_\odot\)
+atinge a maior expansão absoluta, enquanto estrelas mais massivas
+apresentam expansões progressivamente menores. A estrela mais massiva
+(de \(150\,\mathrm{M}_\odot\)) apresenta expansão mínima de apenas
+\(\approx 24\,R_{\odot}\).</p>
+
+<p>Este padrão inverso, no qual estrelas mais massivas se expandem
+menos, pode ser atribuído a vários fatores físicos: (i) a intensa
+pressão de radiação em estrelas acima de \(60\,\mathrm{M}_\odot\)
+inibe a expansão do envelope; (ii) perdas de massa significativas
+através de ventos estelares fortes removem material antes que a
+expansão possa ocorrer; (iii) a queima nuclear extremamente rápida em
+núcleos mais quentes leva a transições evolutivas mais abruptas. O
+colapso final do raio, visível particularmente nas estrelas de
+\(80, 100\) e \(150\,\mathrm{M}_\odot\), marca as fases finais de
+queima nuclear antes do colapso do núcleo.</p>
+
+<p>A estrela de \(150\,\mathrm{M}_\odot\) apresenta o comportamento
+mais peculiar, praticamente mantendo seu raio inicial durante toda a
+evolução, sugerindo que estrelas nesta faixa de massa podem evoluir
+diretamente para estrelas de Wolf-Rayet sem passar por uma fase
+significativa de supergigante vermelha, devido às extremas taxas de
+perda de massa.</p>
+
+<p>A supressão da expansão em estrelas acima de \(60\,\mathrm{M}_\odot\)
+constitui um exemplo marcante de como limites físicos fundamentais,
+como o limite de Eddington, impõem restrições observáveis na evolução
+estelar. Este comportamento contrastante em relação às expectativas
+baseadas em extrapolações de massas menores destaca a importância de
+modelos específicos para estrelas extremamente massivas.</p>
+
+<h3>Temperatura Efetiva</h3>
+
+<p>A figura a seguir apresenta a variação do logaritmo da temperatura
+efetiva para estrelas de \(0{,}5\), \(1\), \(5\), \(10\), \(15\) e
+\(25\,\mathrm M_{\odot}\) desde o início da sequência principal até as
+fases finais.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/temperatura_efetiva.svg" alt="Temperatura efetiva em funcao do tempo para estrelas de 0,5 a 25 massas solares.">
+  <figcaption><span class="figura-num">Figura 7.</span> Temperatura efetiva em função do tempo para estrelas de \(0{,}5\) a \(25\,\mathrm M_{\odot}\), evidenciando a estabilidade térmica em baixas massas, o resfriamento pronunciado durante a fase de gigante e supergigante e o aumento abrupto de temperatura nas etapas finais da evolução.</figcaption>
+</div>
+
+<p>Para estrelas de baixa massa, observa-se uma trajetória marcada por
+estabilidade durante a longa fase de sequência principal, com
+temperaturas efetivas mantendo-se aproximadamente constantes em torno
+de \(\log(T_{\mathrm{eff}}/\mathrm{K}) \approx 3{,}5\)–\(3{,}7\). No
+caso de uma estrela de \(1\,\mathrm M_{\odot}\), após o esgotamento do
+hidrogênio central, a expansão do envelope durante a fase de gigante
+vermelha provoca um declínio acentuado na temperatura efetiva, que
+passa a assumir valores inferiores a
+\(\log(T_{\mathrm{eff}}/\mathrm{K}) \approx 3{,}5\), refletindo o
+resfriamento superficial associado ao aumento do raio estelar.</p>
+
+<p>Além disso, uma estrela de \(0{,}5\,\mathrm M_{\odot}\) apresenta
+temperaturas em torno de \(T_{\mathrm{eff}} \sim 3000\,\mathrm{K}\),
+exibindo uma coloração mais avermelhada e pertencendo ao tipo
+espectral M. Seu processo evolutivo é lento e estável, com aumento
+suave da temperatura ao longo do tempo devido às baixas
+instabilidades no núcleo. Já uma estrela de \(1\,\mathrm M_{\odot}\)
+apresenta temperatura efetiva típica de \(\sim 6000\,\mathrm{K}\), com
+coloração amarela. Quando o hidrogênio central se esgota, o núcleo se
+contrai e o envelope se expande, fazendo com que a temperatura efetiva
+caia abruptamente, como observado no gráfico.</p>
+
+<p>Nas estrelas de massa intermediária, como as de
+\(5\,\mathrm M_{\odot}\), a evolução é mais dinâmica. Durante a
+sequência principal, apresentam temperaturas mais elevadas,
+tipicamente em torno de \(T_{\mathrm{eff}} \sim 20\,000\,\mathrm{K}\),
+pertencendo ao tipo espectral B e exibindo coloração branca. O
+esgotamento do hidrogênio no núcleo leva a um colapso rápido,
+produzindo um pico mais acentuado e prolongado na temperatura efetiva
+antes que a estrela se expanda para a fase de gigante vermelha. Além
+disso, essas estrelas frequentemente apresentam <em>loops</em>
+característicos no diagrama HR durante a queima de hélio, associados
+a instabilidades térmicas e ajustes estruturais. No final de suas
+vidas, essas estrelas podem exibir flutuações térmicas significativas,
+com a de \(5\,\mathrm M_{\odot}\) apresentando um reaquecimento final
+associado a pulsos térmicos da fase AGB (e não a um colapso do núcleo,
+pelo mesmo motivo discutido acima: \(5\,\mathrm M_\odot\) está abaixo
+do limiar de \(\sim 8\,\mathrm M_\odot\) para supernova por colapso de
+núcleo), enquanto a de \(10\,\mathrm M_{\odot}\) mantém temperaturas
+mais baixas ao longo da fase de supergigante vermelha até o evento de
+supernova.</p>
+
+<p>As temperaturas efetivas iniciam em valores ainda mais elevados
+para as estrelas de alta massa, e mantêm-se relativamente altas
+durante a maior parte de suas vidas curtas. O resfriamento durante a
+fase de supergigante vermelha é mais pronunciado em comparação com
+estrelas de menor massa quando relacionamos às temperaturas iniciais.
+O final da evolução para estas estrelas massivas é marcado por um
+colapso abrupto do raio com consequente aumento rápido da temperatura
+efetiva, imediatamente antes da supernova, resultado da perda de
+massa que expõe camadas internas mais quentes ou da contração final do
+núcleo.</p>
+
+<p>As estrelas de alta massa, como as de \(10\), \(15\) e
+\(20\,\mathrm M_{\odot}\), apresentam as maiores temperaturas
+efetivas, frequentemente acima de \(30\,000\,\mathrm{K}\), pertencendo
+ao tipo espectral O, com coloração azulada. Iniciam suas vidas com
+temperaturas extremamente elevadas e as mantêm durante grande parte de
+suas curtas escalas de tempo evolutivas. Ao deixarem a sequência
+principal, expandem-se rapidamente e ingressam na fase de supergigante
+vermelha, apresentando um resfriamento mais pronunciado quando
+comparado ao de estrelas de menor massa, devido ao contraste com suas
+temperaturas iniciais extremamente altas. Nos estágios finais de
+evolução, o colapso abrupto do núcleo resulta em um aumento súbito da
+temperatura efetiva imediatamente antes da supernova, seja pela
+contração final que aquece as camadas externas, seja pela perda de
+massa que expõe regiões internas mais quentes.</p>
+
+<h3 id="processos-geracao-energia">Processos de Geração de Energia</h3>
+
+<p>A produção de energia nuclear é o motor fundamental da evolução
+estelar, responsável por determinar luminosidades, estrutura interna e
+escalas de tempo ao longo da vida das estrelas. Diferentes mecanismos
+de fusão tornam-se relevantes conforme a temperatura e densidade
+centrais evoluem, estabelecendo regimes distintos de queima nuclear
+para cada faixa de massa. Em estrelas de baixa massa, a cadeia
+próton-próton domina praticamente toda a sequência principal, enquanto
+em estrelas mais massivas o ciclo CNO assume rapidamente a geração de
+energia. Em fases mais avançadas, quando o hidrogênio central se
+esgota e temperaturas da ordem de \(10^8\,\mathrm{K}\) são atingidas,
+o processo triplo-\(\alpha\) torna-se o principal responsável pela
+fusão de hélio. As subseções a seguir discutem separadamente cada um
+desses processos, comparando sua eficiência, domínio em massa e
+assinatura temporal nas trajetórias evolutivas estudadas.</p>
+
+<p>Todos os tempos discutidos nesta seção são medidos desde o início
+da sequência principal, permitindo comparações diretas entre estrelas
+de diferentes massas. O tempo de evolução pré-sequência principal não
+é considerado, uma vez que não contribui significativamente para as
+fases nucleares destacadas.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Do formalismo geral às curvas de luminosidade nuclear</div>
+  <div class="conteudo">
+    <p>As três subseções a seguir são a contrapartida
+    <em>observacional/temporal</em> de todo o formalismo deduzido no
+    capítulo de Geração de Energia: a taxa de reação
+    \(\langle\sigma v\rangle\), o fator de Gamow e a equação mestra de
+    rede de reações, aplicados ali a um único instante e a pares
+    isolados de núcleos, são exatamente o que um código como o
+    <code>MESA</code> integra, núcleo a núcleo e passo a passo no
+    tempo, para produzir as curvas \(L_{\rm pp}(t)\), \(L_{\rm
+    CNO}(t)\) e \(L_{3\alpha}(t)\) mostradas nas figuras a seguir. A
+    forte dependência com a temperatura de cada processo —
+    \(\varepsilon_{\rm pp}\propto T^4\), \(\varepsilon_{\rm
+    CNO}\propto T^{15\text{–}20}\) e \(\varepsilon_{3\alpha}\propto
+    T^{40}\), já deduzidas e comentadas naquele capítulo — é
+    precisamente o que explica, de forma quantitativa, por que a
+    transição de dominância entre os três processos ocorre de forma
+    tão abrupta nas trajetórias evolutivas discutidas abaixo.</p>
+  </div>
+</div>
+
+<h4>Cadeia Próton-Próton</h4>
+
+<p>A cadeia próton-próton constitui um dos principais mecanismos de
+fusão nuclear através do qual estrelas convertem hidrogênio em hélio,
+sendo particularmente dominante em estrelas de baixa massa. Este
+processo inicia-se com a colisão entre dois prótons que, mediante o
+tunelamento quântico através da barreira coulombiana, formam um
+núcleo de deutério:</p>
+\[
+p + p \rightarrow \,^2_1H + e^+ + \nu_e + 1{,}442\,\text{MeV}
+\tag{11.3}
+\]
+<p>Sequencialmente, o deutério funde-se com outro próton produzindo
+\(^3He\), que posteriormente pode seguir diferentes ramos de reação. O
+ramo PP-I, dominante em temperaturas típicas de \(\sim 10^7\) K,
+completa-se através da fusão de dois núcleos de \(^3\)He em
+\(^4\)He, liberando aproximadamente 26,7 MeV de energia.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/analise_cadeia_pp.svg" alt="Evolucao temporal da luminosidade nuclear da cadeia proton-proton para diferentes massas estelares.">
+  <figcaption><span class="figura-num">Figura 8.</span> Evolução temporal da luminosidade nuclear proveniente da cadeia próton-próton para diferentes massas estelares, evidenciando sua dominância em estrelas de baixa massa e seu rápido declínio em estrelas mais massivas devido à transição para o ciclo CNO.</figcaption>
+</div>
+
+<p>A figura acima evidencia a dependência da massa na contribuição da
+cadeia PP para a geração de energia nuclear. Para estrelas de baixa
+massa (\(0{,}5\) e \(1\,\mathrm M_{\odot}\)), o gráfico inclui a fase
+pré-ZAMS (PMS), pois as curvas abrangem todas as idades \(>1\) Myr sem
+filtragem por fase evolutiva. O trecho inicial com
+\(\log(L_{\mathrm{PP}}/L_{\odot}) \approx -7\) a \(-4\) corresponde a
+essa fase pré-ZAMS, durante a qual a queima nuclear de hidrogênio
+ainda está se instalando — a PMS de \(0{,}5\,\mathrm M_{\odot}\)
+estende-se até \({\sim}157\) Myr, e a de \(1\,\mathrm M_{\odot}\) até
+\({\sim}42\) Myr. Na entrada da sequência principal (ZAMS),
+\(\log(L_{\mathrm{PP}}/L_{\odot}) \approx -1{,}4\)
+(\(0{,}5\,\mathrm M_{\odot}\)) e \(\approx -0{,}2\)
+(\(1\,\mathrm M_{\odot}\)), estabilizando-se ao longo da queima de
+hidrogênio central. Estas estrelas exibem apenas uma modesta
+diminuição na produção energética via PP até o final da queima de
+hidrogênio central.</p>
+
+<p>Para estrelas de massa intermediária e alta, observa-se um
+comportamento distinto: a contribuição da cadeia PP decai abruptamente
+nos primeiros milhões de anos, com \(\partial \log(L_{\mathrm{PP}})/\partial
+\log(t) \propto -\mathrm M/\mathrm M_{\odot}\). Este declínio acelerado
+marca a transição para o domínio do ciclo CNO, sensível a ambientes de
+maior temperatura central. Quanto mais massiva a estrela, mais precoce
+e completa é esta transição, com as estrelas de \(15\) e
+\(25\,\mathrm M_{\odot}\) apresentando contribuições marginais da
+cadeia PP (\(\log(L_{\mathrm{PP}}/L_{\odot}) < -10\)) já nas fases
+iniciais de evolução.</p>
+
+<p>Embora estrelas mais massivas exibam luminosidades nucleares
+iniciais mais elevadas, isso não implica maior eficiência da cadeia
+PP. Esse aumento reflete apenas as condições internas mais quentes e
+densas antes da transição completa para o ciclo CNO, que rapidamente
+passa a dominar a geração de energia.</p>
+
+<p>A diminuição da eficiência da cadeia PP nas estrelas mais massivas
+conduz naturalmente ao segundo grande mecanismo de fusão de
+hidrogênio: o ciclo CNO, cujas taxas são fortemente dependentes da
+temperatura e tornam-se dominantes conforme o núcleo estelar se
+aquece.</p>
+
+<h4>Ciclo CNO</h4>
+
+<p>O ciclo CNO (carbono-nitrogênio-oxigênio) representa o segundo
+principal mecanismo de fusão de hidrogênio em hélio, tornando-se
+dominante em estrelas com massas superiores a \(\sim 1{,}5\,\mathrm
+M_{\odot}\). Nos modelos MIST, o ciclo predominante durante a
+sequência principal é o CNO-I, embora CNO-II e CNO-III possam
+contribuir marginalmente em temperaturas centrais superiores a
+\(2{,}5 \times 10^7\,\mathrm{K}\). Esses subciclos não alteram a
+composição química global, mas afetam sensivelmente a taxa de
+produção de energia devido às diferenças nas seções de choque das
+reações. Diferentemente da cadeia próton-próton, este processo atua
+como um ciclo catalítico em que núcleos de carbono, nitrogênio e
+oxigênio participam das reações sem serem consumidos, servindo como
+intermediários para a conversão de quatro prótons em um núcleo de
+\(^4\)He.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/analise_ciclo_cno.svg" alt="Contribuicao temporal do ciclo CNO para a geracao de energia nuclear em estrelas entre 0,5 e 25 massas solares.">
+  <figcaption><span class="figura-num">Figura 9.</span> Contribuição temporal do ciclo CNO para a geração de energia nuclear em estrelas entre \(0{,}5\) e \(25\,\mathrm M_{\odot}\), destacando sua sensibilidade extrema à temperatura e seu papel dominante na sequência principal de estrelas intermediárias e massivas.</figcaption>
+</div>
+
+<p>A figura acima demonstra a transição de dominância entre os
+mecanismos nucleares em função da massa estelar. Para a estrela de
+\(1\,\mathrm M_{\odot}\), o ciclo CNO atinge um máximo de
+\(\log(L_{\mathrm{CNO}}/L_{\odot}) = 5{,}04\), porém com duração muito
+limitada (\(1{,}6\) bilhão de anos), sendo subsequentemente superado
+por outros processos. Este comportamento reflete a forte dependência
+da temperatura do ciclo CNO (\(\epsilon_{\mathrm{CNO}} \propto
+T^{20}\)), que o torna extremamente sensível às condições
+termodinâmicas do núcleo estelar.</p>
+
+<p>Em estrelas de massa intermediária, o ciclo CNO estabelece-se como
+o mecanismo dominante durante a sequência principal. Para \(5\,\mathrm
+M_{\odot}\), atinge \(\log(L_{\mathrm{CNO}}/L_{\odot}) = 4{,}86\) com
+duração de \(\sim 115\) milhões de anos, enquanto em
+\(10\,\mathrm M_{\odot}\) mantém valores similares
+(\(\log(L_{\mathrm{CNO}}/L_{\odot}) = 4{,}86\)) por \(\sim 25\)
+milhões de anos. A redução no tempo de dominância com o aumento da
+massa é causada pela aceleração dos processos evolutivos.</p>
+
+<p>Para estrelas de alta massa, o ciclo CNO alcança seu máximo de
+eficiência. A estrela de \(25\,\mathrm M_{\odot}\) alcança
+\(\log(L_{\mathrm{CNO}}/L_{\odot}) = 6{,}41\) — aproximadamente uma
+ordem de grandeza acima das estrelas de massa intermediária — embora
+por apenas \(\sim 6{,}7\) milhões de anos. Esta elevação na produção
+energética acompanha o aumento das temperaturas centrais, que, nas
+estrelas massivas, podem exceder \(3 \times 10^7\) K; condições ideais
+para a ativação eficiente do ciclo.</p>
+
+<p>A abrupta queda na contribuição do ciclo CNO ao final de cada
+trajetória marca o esgotamento do hidrogênio central e a transição
+para fases evolutivas mais avançadas, nas quais a queima de hélio e
+elementos mais pesados assume o papel dominante na produção de energia
+estelar.</p>
+
+<p>Concluída a queima de hidrogênio, a contração do núcleo aumenta as
+temperaturas acima de \(10^{8}\) K, inaugurando a fase de queima de
+hélio através do processo triplo-\(\alpha\), que marca o início da
+evolução nuclear avançada.</p>
+
+<h4>Processo Triplo-\(\alpha\)</h4>
+
+<p>O processo triplo-\(\alpha\) representa um marco crucial na
+evolução estelar, marcando a transição da queima de hidrogênio para a
+fusão de elementos mais pesados. A elevada taxa dessa reação depende
+criticamente da existência do estado ressonante de Hoyle em
+\(^{12}\mathrm C\), cuja energia coincide com a soma dos estados
+intermediários de \(^8\mathrm{Be}\) e \(\alpha\). Essa ressonância
+aumenta em muitas ordens de grandeza a probabilidade de fusão quando
+\(T \gtrsim 10^{8}\) K, permitindo que o carbono seja produzido de
+forma eficiente (Fowler, 1984). Este mecanismo nuclear, que converte
+três núcleos de hélio em carbono através de uma reação em duas etapas,
+torna-se significativo apenas quando as estrelas atingem temperaturas
+centrais superiores a \(\sim 10^8\) K, condições típicas das fases
+pós-sequência principal.</p>
+
+<p>A figura a seguir revela padrões temporais distintos para o
+processo triplo-\(\alpha\) em diferentes faixas de massa. Para a
+estrela de \(1\,\mathrm M_{\odot}\), o processo manifesta-se
+tardiamente, com \(\log(L_{\mathrm{tri\_alfa}}/L_{\odot}) = 6{,}72\)
+alcançado apenas após \(\sim 10^{10}\) anos de evolução, porém com
+duração relativamente breve de \(\sim 127\) milhões de anos. Este
+comportamento reflete a lenta progressão evolutiva das estrelas de
+baixa massa até as fases de gigante vermelha, nas quais as condições
+necessárias para a ignição do hélio são finalmente atingidas.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/analise_triple_alpha.svg" alt="Variacao temporal da luminosidade nuclear associada ao processo triplo-alfa.">
+  <figcaption><span class="figura-num">Figura 10.</span> Variação temporal da luminosidade nuclear associada ao processo triplo-\(\alpha\), mostrando sua ativação tardia em estrelas de baixa massa e sua rápida intensificação e curta duração em estrelas intermediárias e massivas durante a queima de hélio.</figcaption>
+</div>
+
+<p>Em estrelas de massa intermediária, o triplo-\(\alpha\) exibe uma
+ativação mais precoce e energeticamente significativa. A estrela de
+\(5\,\mathrm M_{\odot}\) inicia a queima de hélio via
+triplo-\(\alpha\) na fase de queima central de hélio (CHeB, fase 3,
+\({\sim}101\)–\(115\) Myr), com
+\(\log(L_{\mathrm{tri\_alfa}}/L_{\odot}) = 6{,}71\) atingido ao longo
+de \({\sim}15\) milhões de anos no total (triplo-\(\alpha\) ativo de
+\({\sim}100{,}7\) a \({\sim}115{,}6\) Myr). Importa ressaltar que esse
+valor máximo <em>não</em> ocorre durante a CHeB, mas sim nos pulsos
+térmicos da fase TPAGB (<em>Thermal Pulse Asymptotic Giant Branch</em>,
+fase 5, \({\sim}115{,}6\) Myr), quando
+\(\rho_c \approx 1{,}25 \times 10^7\,\mathrm{g\,cm}^{-3}\), consistente
+com a degenerescência parcial do núcleo de C/O nessa fase final da
+vida da estrela. Notavelmente, nesta faixa de massa o processo
+triplo-\(\alpha\) torna-se mecanicamente dominante, superando tanto a
+cadeia PP quanto o ciclo CNO.</p>
+
+<p>Para as estrelas de alta massa, o processo triplo-\(\alpha\) mostra
+uma evolução ainda mais acelerada. A estrela de \(25\,\mathrm
+M_{\odot}\) ativa a queima de hélio em apenas \(\sim 6\) milhões de
+anos, alcançando \(\log(L_{\mathrm{tri\_alfa}}/L_{\odot}) = 6{,}29\)
+com duração de apenas \(\sim 0{,}7\) milhão de anos. A redução
+drástica nos tempos característicos acompanha o aumento exponencial
+das temperaturas centrais e taxas de consumo nuclear em estrelas
+massivas.</p>
+
+<p>É importante ressaltar que, enquanto em estrelas de \(5\,\mathrm
+M_{\odot}\) o triplo-\(\alpha\) constitui o mecanismo primário, nas
+estrelas de \(10\,\mathrm M_{\odot}\) e superiores ele é suplantado
+pelo ciclo CNO durante a sequência principal, indicando que a queima
+de hidrogênio via CNO mantém-se competitiva mesmo nas fases iniciais
+de queima de hélio em estrelas massivas.</p>
+
+<p>O pico abrupto seguido por rápido decaimento nas curvas do
+triplo-\(\alpha\) para todas as massas evidencia a natureza
+transitória deste processo, que consome rapidamente o combustível de
+hélio disponível antes da ignição de elementos mais pesados ou do
+colapso final do núcleo, marcando assim um ponto de inflexão crítico
+na vida das estrelas.</p>
+
+<p>Em conjunto, a evolução das contribuições relativas da cadeia PP,
+do ciclo CNO e do processo triplo-\(\alpha\) nos mostra como a
+temperatura central, a composição química e a massa determinam a
+hierarquia dos mecanismos nucleares ao longo da vida das estrelas.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Barreira coulombiana e tunelamento, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Por que a queima de H precisa de \(T\sim10^7\) K, a de He de
+    \(\sim10^8\) K, e as de C/Ne/O/Si de
+    \(10^8\)–\(10^9\) K? Porque a altura da barreira coulombiana
+    cresce com \(Z_1Z_2\) [Eq. (11.10), adiante], e é o tunelamento
+    quântico através dela — não a energia térmica sozinha — que
+    permite a fusão.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mbarreira-z1z2">Produto de cargas \(Z_1Z_2\) <span class="valor" id="mbarreira-z1z2-valor">1</span></label>
+      <input type="range" id="mbarreira-z1z2" min="1" max="200" step="1" value="1">
+    </div>
+    <div class="controle">
+      <label for="mbarreira-energia">Energia da partícula (fração da barreira) <span class="valor" id="mbarreira-energia-valor">0,300</span></label>
+      <input type="range" id="mbarreira-energia" min="10" max="990" step="1" value="300">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mbarreira-play" class="botao-modulo">▶ Aproximar núcleo</button>
+      <button type="button" id="mbarreira-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mbarreira-canvas" role="img" aria-label="Grafico do potencial coulombiano V(r) com um marcador representando uma particula se aproximando do nucleo, cuja opacidade cai dentro da barreira classica para representar o tunelamento quantico." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(E_C=\)<strong id="mbarreira-Ec">—</strong> MeV &middot;
+    Temperatura de referência para ignição (regra de bolso,
+    \(kT\sim E_C/20\)): \(T\sim\)<strong id="mbarreira-T">—</strong> K.
+  </p>
+  <p class="leitura-card" id="mbarreira-nota">—</p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Pico de Gamow</div>
+  <p class="leitura-card" style="margin-top:0;">
+    O produto entre a cauda maxwelliana decrescente (cinza) e a
+    probabilidade de tunelamento crescente com \(E\) (roxo) forma o
+    pico de Gamow (curva preenchida) — a faixa de energia onde a
+    maioria das fusões realmente ocorre, nem na energia mais provável
+    nem na energia mínima para tunelar, mas em um compromisso entre as
+    duas. <strong>Link cruzado</strong>: dedução completa deste mesmo
+    pico no capítulo de Geração de Energia.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mgamow-T">Temperatura \(\log_{10}(T/\mathrm K)\) <span class="valor" id="mgamow-T-valor">1,00×10⁷</span></label>
+      <input type="range" id="mgamow-T" min="600" max="900" step="1" value="700">
+    </div>
+    <div class="controle">
+      <label for="mgamow-z1z2">\(Z_1Z_2\) <span class="valor" id="mgamow-z1z2-valor">1</span></label>
+      <input type="range" id="mgamow-z1z2" min="1" max="100" step="1" value="1">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mgamow-canvas" role="img" aria-label="Grafico mostrando a cauda maxwelliana decrescente, a probabilidade de tunelamento crescente, e o produto das duas formando o pico de Gamow." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">Energia do pico de Gamow: \(E_0=\)<strong id="mgamow-E0">—</strong> keV (massa reduzida de referência ~1 u).</p>
+</div>
+
+<h3>Temperatura do Núcleo</h3>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_temperatura_central_processos.svg" alt="Evolucao temporal da temperatura central para estrelas de diferentes massas.">
+  <figcaption><span class="figura-num">Figura 11.</span> Evolução temporal da temperatura central para estrelas de diferentes massas, desde a sequência principal até as fases avançadas de queima nuclear. A progressão crescente de \(T_c\) reflete a contração gravitacional do núcleo à medida que os combustíveis são esgotados, revelando claramente as transições entre os regimes de fusão dominantes para cada faixa de massa.</figcaption>
+</div>
+
+<p>As estrelas de baixa massa (\(0{,}5\) e \(1{,}0\,\mathrm M_{\odot}\))
+apresentam uma evolução muito constante da temperatura central ao
+longo de \(\sim10^{10}\) anos. Seus núcleos altamente opacos e
+parcialmente degenerados impedem contrações agressivas, resultando em
+um aumento suave de \(T_c\) até o final da sequência principal. Para
+essas estrelas, as temperaturas centrais permanecem relativamente
+moderadas durante a maior parte da sequência principal, tipicamente em
+\(T_c \sim (5\)–\(15)\times10^6\,\mathrm{K}\). Essa estabilidade
+decorre da fraca dependência da cadeia próton–próton com a temperatura
+(\(\epsilon_{\mathrm{PP}} \propto T^4\)), o que confere autorregulação
+ao núcleo. Apenas nas fases tardias, quando o hidrogênio se esgota e a
+contração gravitacional se intensifica sobre um núcleo já
+parcialmente degenerado, observa-se um crescimento rápido da
+temperatura até valores próximos de \(10^8\,\mathrm{K}\), necessários
+para a ignição do hélio pelo processo triplo-\(\alpha\). Em estrelas
+de \(\sim1\,\mathrm M_{\odot}\), essa ignição ocorre de forma
+explosiva, no chamado <em>flash</em> do hélio.</p>
+
+<p>Nas estrelas de massa intermediária, as temperaturas centrais
+iniciam em valores mais elevados (\(\sim 2\)–\(4 \times
+10^7\,\mathrm{K}\)) e aumentam de forma mais acentuada ao longo da
+evolução. Nessas massas, a queima de hidrogênio transita rapidamente
+de um regime misto PP–CNO para a dominância do ciclo CNO, cuja
+sensibilidade extrema à temperatura (\(\epsilon_{\mathrm{CNO}} \propto
+T^{15-20}\)) provoca uma subida muito mais rápida de \(T_c\). Como os
+núcleos dessas estrelas ainda não atingem níveis significativos de
+degenerescência durante o esgotamento do hidrogênio, a contração
+gravitacional subsequente é eficiente: pequenas reduções no raio
+central elevam rapidamente a temperatura. Assim, a ignição do hélio
+ocorre em núcleos pouco ou não degenerados, evitando o <em>flash</em>
+do hélio típico das estrelas de baixa massa e permitindo uma transição
+suave para a queima de hélio em equilíbrio hidrostático.</p>
+
+<p>Os valores extremos de temperatura, encontrados em estrelas de
+alta massa, permitem a queima sequencial de hélio, carbono, neônio,
+oxigênio e silício, uma vez que suas temperaturas centrais já começam
+acima de \(5\times 10^7\,\mathrm{K}\) e rapidamente atingem \(T_c >
+3\times 10^8\,\mathrm{K}\) em apenas alguns milhões de anos. Nesses
+casos, a degenerescência praticamente não desempenha papel estrutural
+relevante, pois as temperaturas elevadas e os núcleos convectivos
+mantêm o gás firmemente no regime não degenerado. A escalada contínua
+de \(T_c\) reflete tanto a intensa contração gravitacional necessária
+para sustentar luminosidades elevadas quanto a ativação de reações
+nucleares com dependências de potência extremamente altas em
+temperatura.</p>
+
+<p>De modo geral, observa-se que quanto maior a massa inicial da
+estrela, mais elevada é a temperatura central em todos os estágios
+evolutivos. As descontinuidades e mudanças de inclinação nas curvas
+evidenciam transições críticas, como o fim da queima de hidrogênio, a
+ignição do hélio e o início dos ciclos de fusão avançados. Assim, a
+evolução de \(T_c\) não apenas diferencia claramente os regimes de
+degenerescência e não degenerescência, mas também torna a temperatura
+central um dos parâmetros mais sensíveis para identificar o estágio
+evolutivo interno de uma estrela.</p>
+
+<h3>Densidade do Núcleo</h3>
+
+<p>A densidade central (\(\rho_c\)) constitui um dos parâmetros
+internos mais sensíveis ao balanço entre contração gravitacional e os
+mecanismos de suporte de pressão atuantes no interior estelar. A
+figura a seguir evidencia comportamentos não-monotônicos ao longo da
+evolução e entre diferentes massas iniciais, revelando que a relação
+entre massa e densidade central é mais complexa do que uma dependência
+direta com a gravidade. Em particular, a presença ou ausência de
+degenerescência eletrônica desempenha papel decisivo na forma dessas
+curvas.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_densidade_central.svg" alt="Evolucao temporal da densidade central para estrelas de diferentes massas.">
+  <figcaption><span class="figura-num">Figura 12.</span> Evolução temporal da densidade central para estrelas de diferentes massas. O crescimento de \(\rho_c\) reflete a contração gravitacional do núcleo e a transição entre regimes de suporte por pressão térmica, degenerescência eletrônica e, em estrelas massivas, pressão de radiação.</figcaption>
+</div>
+
+<p>Para estrelas de baixa massa, como \(0{,}5\) e \(1\,\mathrm
+M_{\odot}\), o gráfico abrange a fase pré-ZAMS (PMS, idades \(>1\)
+Myr): no início das curvas (\({\sim}1\) Myr), \(\rho_c \approx
+0{,}7\,\mathrm{g\,cm^{-3}}\), crescendo até \(\rho_c \approx
+79\)–\(86\,\mathrm{g\,cm^{-3}}\) na entrada da sequência principal
+(ZAMS — \({\sim}42\) Myr para \(1\,\mathrm M_{\odot}\) e
+\({\sim}157\) Myr para \(0{,}5\,\mathrm M_{\odot}\)), compatíveis com
+núcleos dominados por pressão térmica durante a sequência principal.
+Em estrelas de \(0{,}5\,\mathrm M_{\odot}\), a evolução lenta e a
+baixa luminosidade mantêm o núcleo próximo ao regime parcialmente
+degenerado, garantindo grande estabilidade estrutural: a queima de
+hidrogênio ocorre de forma suave e regulada, sem contrações bruscas.
+Já em estrelas de \(1\,\mathrm M_{\odot}\), embora o núcleo permaneça
+não degenerado durante a maior parte da sequência principal, a
+contração após o esgotamento do hidrogênio leva à formação de um
+núcleo de hélio degenerado. Essa degenerescência crescente é
+responsável pelo aumento de muitas ordens de grandeza na densidade,
+culminando no <em>flash</em> do hélio quando \(\rho_c\) atinge valores
+suficientemente altos para permitir ignição explosiva.</p>
+
+<p>A estrela de \(5\,\mathrm M_{\odot}\) exibe o comportamento mais
+notável entre todas as massas analisadas, apresentando o maior pico de
+densidade central, com \(\rho_c \sim 1{,}25\times
+10^7\,\mathrm{g\,cm^{-3}}\) nos pulsos térmicos da fase TPAGB
+(\({\sim}115{,}6\) Myr). A ausência de convecção total e a elevada
+opacidade amplificam a compressão do núcleo de C/O, produzindo o pico
+abrupto observado. Estrelas de massa intermediária são particularmente
+sensíveis a reorganizações estruturais que aparecem como variações
+intensas na densidade central.</p>
+
+<p>O pico \(\rho_c \approx 1{,}25 \times 10^7\ \mathrm{g\,cm}^{-3}\)
+durante os pulsos térmicos da TPAGB (\({\sim}115{,}6\) Myr) reflete a
+degenerescência eletrônica do núcleo de C/O da estrela de
+\(5\,\mathrm M_\odot\). Importa notar que esse núcleo de C/O forma-se
+ao término da queima <em>não-degenerada</em> de hélio na fase CHeB
+(\({\sim}101\)–\(115\) Myr) e somente se torna eletricamente
+degenerado na contração subsequente, já nas fases AGB e TPAGB — não
+durante a queima central de hélio em si. A densidade atingida, embora
+elevada, permanece muito abaixo das condições para ignição de carbono
+não-degenerado (\(\rho_c \gtrsim 2 \times 10^8\ \mathrm{g\,cm}^{-3}\));
+e a massa desse núcleo permanece inferior ao limite de Chandrasekhar
+(\(M_\mathrm{Ch} \approx 1{,}4\,\mathrm M_\odot\)), conforme esperado
+pela relação empírica massa inicial–final para progenitoras nessa
+faixa de massa (Salaris et al., 2005), abaixo do qual a pressão de
+degenerescência eletrônica é suficiente para sustentar a estrutura sem
+colapso gravitacional.</p>
+
+<p>A estrela ejeta o envelope na TPAGB e deixa esse núcleo como
+resíduo: uma anã branca de C/O. O contraste com estrelas de baixa
+massa (\(M \lesssim 2\,\mathrm M_\odot\)) é instrutivo: nessas
+estrelas o núcleo de <em>hélio</em> já está degenerado <em>antes</em>
+de atingir a temperatura de ignição (\({\sim}10^8\) K), de modo que a
+queima se inicia de forma explosiva — o <em>helium flash</em>. Na
+estrela de \(5\,\mathrm M_\odot\) isso não ocorre: o núcleo de hélio
+ignite de forma não-degenerada, com a queima central de He (CHeB)
+transcorrendo de modo estável; apenas o resíduo de C/O resultante
+atinge o regime degenerado durante a contração pós-CHeB.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Conectando com os Capítulos de Estrutura Estelar e Equações de Estado: da degenerescência à massa de Chandrasekhar</div>
+  <div class="conteudo">
+    <p>Esta discussão sobre o núcleo de C/O degenerado da estrela de
+    \(5\,M_\odot\) é uma aplicação direta de dois resultados centrais
+    já deduzidos neste livro. A pressão que sustenta esse núcleo —
+    mesmo à temperatura praticamente constante da fase TPAGB, enquanto
+    a densidade sobe seis ordens de grandeza — é exatamente a
+    <strong>pressão de degenerescência eletrônica
+    não-relativística</strong>, \(P\propto\rho^{5/3}\), deduzida do
+    zero a partir da mecânica quântica de um gás de Fermi no
+    <a href="cap08_equacoes_estado.html">Capítulo 8</a>. E o limite de
+    massa citado acima, \(M_{\rm Ch}\approx1{,}4\,M_\odot\), é
+    precisamente a <strong>massa de Chandrasekhar</strong> deduzida no
+    <a href="cap09_anas_brancas.html">Capítulo 9</a> a partir da
+    equação diferencial de Chandrasekhar (a generalização
+    relativística da equação de Lane–Emden). O fato de o núcleo
+    residual desta estrela ficar <em>abaixo</em> desse limite é o que
+    garante que ela termine sua vida como uma anã branca estável, e
+    não como uma supernova — a mesma física, com o mesmo número,
+    aparece aqui como consequência natural de um cálculo evolutivo
+    temporal completo.</p>
+  </div>
+</div>
+
+<p>Para estrelas massivas (\(10\)–\(25\,\mathrm M_{\odot}\)), a
+tendência se inverte: suas densidades centrais máximas são inferiores
+às das estrelas intermediárias, atingindo apenas
+\(\sim 10^5\)–\(10^6\,\mathrm{g\,cm^{-3}}\). Esse comportamento
+resulta do papel dominante da pressão de radiação, que mantém os
+núcleos mais expandidos e quentes, evitando a degenerescência
+eletrônica durante a maior parte da evolução. Assim, mesmo com
+temperaturas muito elevadas, seus núcleos não se tornam compactos o
+suficiente para atingir densidades extremas até as fases derradeiras.
+À medida que progridem pela queima sequencial de hélio, carbono,
+neônio, oxigênio e silício, a densidade aumenta gradualmente, mas
+continua limitada pelo intenso suporte térmico. Apenas no final da
+vida, quando o núcleo de ferro torna-se altamente compacto, a
+densidade cresce até o ponto em que elétrons degenerados começam a ser
+capturados por prótons, removendo o próprio suporte por degenerescência
+e desencadeando o colapso gravitacional em queda livre que precede a
+supernova.</p>
+
+<p>Além disso, as densidades centrais máximas nessas estrelas são
+inferiores às de massas intermediárias, com valores de
+\(\sim 7{,}7\times 10^5\,\mathrm{g\,cm^{-3}}\) (\(10\,\mathrm
+M_{\odot}\)), \(\sim 3{,}3\times 10^5\,\mathrm{g\,cm^{-3}}\)
+(\(15\,\mathrm M_{\odot}\)) e \(\sim 2{,}2\times
+10^5\,\mathrm{g\,cm^{-3}}\) (\(25\,\mathrm M_{\odot}\)). Essa tendência
+inversa com a massa reflete o papel dominante da pressão de radiação
+nesses objetos, que mantém núcleos mais quentes e menos compactos.
+Nesses regimes extremos, o suporte por pressão térmica e radiação
+impede que o núcleo atinja níveis elevados de degenerescência durante
+grande parte da evolução, resultando em densidades centrais
+relativamente menores.</p>
+
+<p>A comparação entre as trajetórias temporais revela três padrões:
+(i) Estrelas de baixa massa apresentam um aumento lento e depois
+acelerado de \(\rho_c\), refletindo a aproximação progressiva da
+degenerescência eletrônica; (ii) Estrelas intermediárias exibem picos
+abruptos de densidade, resultado direto de ignições termonucleares
+sensíveis às condições internas e ao grau de degenerescência parcial;
+(iii) Estrelas massivas mostram evoluções mais suaves, dominadas pela
+pressão de radiação, com densidades relativamente baixas até o
+colapso final.</p>
+
+<p>Esses resultados demonstram que a densidade central não cresce
+simplesmente com a massa estelar. Em vez disso, ela reflete a
+competição entre pressão térmica, degenerescência eletrônica e pressão
+de radiação, bem como o impacto das transições nucleares que
+reestruturam o núcleo ao longo da evolução.</p>
+
+<h3 id="zonas-conv-rad">Zonas Convectivas e Radiativas</h3>
+
+<p>A estrutura interna de uma estrela resulta do balanço entre
+transporte radiativo e transporte convectivo de energia. Na prática
+usa-se o critério de Schwarzschild: uma região é convectiva se o
+gradiente radiativo excede o adiabático,
+\(\nabla_{\rm rad}>\nabla_{\rm ad}\), o que implica que o transporte
+por fótons não consegue escoar o fluxo energético e a matéria se
+mobiliza para transportar calor (convecção). Como</p>
+\[
+\nabla_{\rm rad} \propto \frac{\kappa L}{m T^{4}}\,,
+\tag{11.4}
+\]
+<p>o aumento da luminosidade \(L\), da opacidade \(\kappa\), ou da
+redução da massa interior \(m\) favorecem a convecção. Esses
+princípios físicos explicam as tendências observadas nas figuras a
+seguir (Kippenhahn, Weigert &amp; Weiss, 2012; Hansen, Kawaler &amp;
+Trimble, 2004; Maeder, 2009; Paxton et al., 2011).</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O mesmo critério de Schwarzschild do Capítulo de Estrutura Estelar</div>
+  <div class="conteudo">
+    <p>\(\nabla_{\rm rad}\) e \(\nabla_{\rm ad}\) aqui são exatamente
+    os mesmos gradientes logarítmicos
+    \(\nabla\equiv\mathrm d\ln T/\mathrm d\ln P\) definidos e
+    deduzidos em detalhe no <a href="cap05_equacoes_estrutura.html">Capítulo
+    5</a> — o critério de Schwarzschild \(\nabla_{\rm rad}>\nabla_{\rm
+    ad}\) citado aqui é literalmente o mesmo critério (com a mesma
+    notação) usado para explicar a zona convectiva do Sol naquele
+    capítulo. O gradiente de peso molecular \(\nabla_\mu\) mencionado
+    anteriormente (efeitos da rotação) também se conecta diretamente:
+    quando a composição química varia com a profundidade, o critério
+    mais geral de <strong>Ledoux</strong> (que soma a
+    \(\nabla_{\rm ad}\) um termo extra proporcional a
+    \(\nabla_\mu\), também deduzido no Capítulo 5) substitui o de
+    Schwarzschild, sendo essa a razão física pela qual gradientes de
+    \(\mu\) podem suprimir ou modificar regiões convectivas.</p>
+  </div>
+</div>
+
+<h4>Estrelas de baixa e média massa (\(0{,}5\)–\(10\,\mathrm M_{\odot}\))</h4>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/zonas_convectivas_baixa_media_massa.svg" alt="Evolucao temporal das zonas convectivas e radiativas para massas entre 0,5 e 10 massas solares.">
+  <figcaption><span class="figura-num">Figura 13.</span> Evolução temporal das zonas convectivas (vermelho) e radiativas (azul) para massas entre \(0{,}5\) e \(10\,\mathrm M_{\odot}\). A linha preta representa a massa total, evidenciando perdas por ventos quando presentes.</figcaption>
+</div>
+
+<p>As estrelas de baixa massa exibem um padrão dominado por envelopes
+convectivos durante grande parte da evolução. Para o caso de
+\(0{,}5\,\mathrm M_{\odot}\), essa região convectiva profunda decorre
+da opacidade elevada e da ionização parcial do hidrogênio, que
+favorecem a ineficiência do transporte radiativo nas camadas
+superficiais (Chabrier &amp; Baraffe, 2000; Kippenhahn, Weigert &amp;
+Weiss, 2012). O núcleo permanece essencialmente radiativo, refletindo
+temperaturas centrais ainda moderadas e gradientes mais suaves.</p>
+
+<p>À medida que a massa aumenta (1–5 M\(_{\odot}\)), o envelope
+torna-se progressivamente menos profundo. O aumento da temperatura
+central reduz a opacidade e torna o transporte radiativo mais
+eficiente, permitindo que a convecção restrinja às regiões externas. A
+estrela de \(1\,\mathrm M_{\odot}\) representa esse regime clássico:
+núcleo radiativo durante a sequência principal e envelope convectivo
+superficial, que se aprofunda na fase de gigante durante o
+<em>first dredge-up</em> (Paxton et al., 2011). Em 5–10 M\(_{\odot}\),
+a eficiência crescente do transporte radiativo favorece a diminuição
+do envelope convectivo, enquanto regiões convectivas internas podem
+surgir associadas a gradientes de composição e à ignição de hélio.</p>
+
+<h4>Estrelas massivas (\(20\)–\(50\,\mathrm M_{\odot}\))</h4>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/zonas_convectivas_estrelas_massivas.svg" alt="Zonas convectivas para estrelas massivas entre 20 e 50 massas solares.">
+  <figcaption><span class="figura-num">Figura 14.</span> Zonas convectivas para estrelas massivas (\(20\)–\(50\,\mathrm M_{\odot}\)). Nota-se o núcleo convectivo crescente e a perda de massa (linha preta) que modifica a estrutura interna.</figcaption>
+</div>
+
+<p>Em massas elevadas a estrutura interna é tipicamente dominada por
+núcleos convectivos extensos. As figuras mostram frações convectivas
+internas crescentes (aprox.: \(\sim7\%\) em 20 M\(_{\odot}\),
+\(\sim17\%\) em 30 M\(_{\odot}\), \(\sim30\%\) em 50 M\(_{\odot}\)),
+embora variações não-monótonas ocorram (p.ex. redução em 40
+M\(_{\odot}\)) devido à interação entre perda de massa, gradientes de
+composição e rotação. A razão física é a sensibilidade extrema do
+ciclo CNO à temperatura (\(\epsilon_{\rm CNO}\propto T^{15-20}\)):
+maiores temperaturas centrais geram gradientes radiativos acentuados
+que só a convecção consegue remover, formando grandes núcleos
+convectivos (Maeder, 2009; Hirschi et al., 2005).</p>
+
+<p>Além disso, os ventos radiativos (visíveis na linha da massa total
+nas figuras) removem camadas externas, alteram gradientes de \(\mu\) e
+podem expor camadas interiores, modificando tanto a extensão das
+zonas convectivas quanto os yields (<em>rendimentos
+nucleossintéticos</em> finais, isto é, as quantidades de cada
+elemento/isótopo produzidas e ejetadas pela estrela). Essas interações
+explicam a rápida evolução (tempos de vida curtos) e a complexidade
+estrutural nas massas maiores (Vink et al., 2001; Langer, 2012).</p>
+
+<h4>Consequências físicas e nucleossintéticas</h4>
+<p>As diferenças na arquitetura convectiva têm consequências diretas
+para:</p>
+<ul>
+  <li><em>Tempos de vida</em>: para uma dada massa, núcleos
+  convectivos maiores aumentam a quantidade de combustível bem
+  misturado disponível, o que pode até prolongar a permanência na
+  sequência principal. O tempo de vida mais curto das estrelas
+  massivas decorre, sobretudo, da forte dependência da luminosidade
+  com a massa (\(L \propto M^{\sim 3-4}\), já discutida na relação
+  massa–luminosidade), e não simplesmente da existência de um núcleo
+  convectivo maior.</li>
+  <li><em>Mistura química</em>: convecção homogeniza regiões internas,
+  alterando yields e a composição superficial (dredge-ups).</li>
+  <li><em>Queima nuclear</em>: conchas convectivas favorecem camadas
+  ricas em produtos de fusão que participam dos ciclos nucleares e
+  afetam os yields.</li>
+  <li><em>Efeitos de ventos e rotação</em>: perda de massa e rotação
+  alteram gradientes térmicos e químicos, influenciando a extensão das
+  zonas convectivas e o destino final da estrela (Langer, 2012;
+  Maeder, 2009).</li>
+</ul>
+<p>Podemos concluir que a comparação entre as massas \(0{,}5\), \(1\),
+\(5\) e \(10\,\mathrm M_{\odot}\) confirma a regra prática: estrelas
+muito leves apresentam envelopes fortemente convectivos e evolução
+lenta; a estrela solar tem núcleo radiativo e envelope convectivo;
+estrelas intermediárias/massivas desenvolvem núcleos convectivos
+significativos e evoluem rapidamente. Detalhes quantitativos (extensão
+exata da convecção, presença de conchas, variações não-monótonas)
+dependem de perda de massa, gradientes de composição e rotação —
+processos incluídos nos modelos MESA usados para gerar as figuras
+(Paxton et al., 2011; Kippenhahn, Weigert &amp; Weiss, 2012; Maeder,
+2009).</p>
+
+<h3>Perda de Massa</h3>
+
+<p>A inclusão dos efeitos de rotação e metalicidade permite avaliar
+modificações relevantes nas taxas de perda de massa. As figuras a
+seguir apresentam, respectivamente, as taxas instantâneas de perda de
+massa e os principais episódios evolutivos responsáveis pela ejeção
+de material ao longo da vida estelar.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_taxa_perda_massa_corrigido.svg" alt="Evolucao temporal da taxa de perda de massa para estrelas de diferentes massas.">
+  <figcaption><span class="figura-num">Figura 15.</span> Evolução temporal da taxa de perda de massa para estrelas de diferentes massas, destacando os episódios associados a ventos estelares, pulsos térmicos e fases de gigante/supergigante.</figcaption>
+</div>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/padroes_perda_massa_destaque.svg" alt="Principais fases evolutivas responsaveis pela perda de massa ao longo do tempo para diferentes massas estelares.">
+  <figcaption><span class="figura-num">Figura 16.</span> Principais fases evolutivas responsáveis pela perda de massa ao longo do tempo para diferentes massas estelares.</figcaption>
+</div>
+
+<p><strong>Regime de baixa massa e fase AGB.</strong> Em estrelas de
+baixa massa, a perda de massa é mínima durante a sequência principal,
+refletindo sua baixa luminosidade e ventos pouco eficientes. Para
+\(1\,\mathrm M_{\odot}\), a taxa de perda permanece reduzida até as
+fases avançadas, quando atinge valores da ordem de
+\(10^{-5}\,\mathrm M_{\odot}\,\mathrm{yr}^{-1}\). O valor final da
+massa ejetada (\(0{,}46\,\mathrm M_{\odot}\)) é compatível com modelos
+evolutivos de estrelas solares.</p>
+
+<p>Estrelas de massa intermediária exibem os maiores valores absolutos
+de perda de massa. Para \(5\,\mathrm{M}_{\odot}\), observa-se um pico
+de \({\sim}10^{-3}\,\mathrm{M}_{\odot}\,\mathrm{yr}^{-1}\) ao longo da
+evolução. Esses valores refletem a ação de ventos intensos durante
+fases de supergigantes e AGB (do inglês <em>Asymptotic Giant
+Branch</em>, ou Ramo Assintótico das Gigantes — fase evolutiva
+avançada e luminosa, posterior à queima central de hélio, na qual a
+estrela possui um núcleo degenerado de carbono e oxigênio circundado
+por camadas de queima de hélio e hidrogênio), operando em escalas de
+tempo curtas (\({\sim}10^{6}\) anos para as fases EAGB e TPAGB
+combinadas).</p>
+
+<p><strong>Ventos de estrelas massivas (regime OB e
+supergigante).</strong> Nas estrelas massivas
+(\(10\)–\(25\,\mathrm M_{\odot}\)), a perda de massa apresenta uma
+dependência mais complexa. Embora a estrela de \(10\,\mathrm
+M_{\odot}\) perca apenas cerca de \(0{,}59\,\mathrm M_{\odot}\), as de
+\(15\,\mathrm M_{\odot}\) e \(25\,\mathrm M_{\odot}\) atingem perdas
+totais de \(3{,}12\) e \(6{,}41\,\mathrm M_{\odot}\), respectivamente.
+Essa diferença advém da ação combinada de ventos radiativos e da
+rápida evolução para estados luminosos, em que tais ventos se tornam
+altamente eficientes.</p>
+
+<p><strong>Efeito da Metalicidade.</strong></p>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/comparacao_perda_massa_por_configuracao.svg" alt="Comparacao da perda de massa ao longo do tempo para diferentes configuracoes de rotacao e metalicidade.">
+  <figcaption><span class="figura-num">Figura 17.</span> Comparação da perda de massa ao longo do tempo para diferentes configurações de rotação e metalicidade, evidenciando o papel combinado da opacidade e do achatamento rotacional na eficiência dos ventos estelares.</figcaption>
+</div>
+
+<p>A inclusão de rotação e metalicidade permite uma análise mais
+realista dos ventos estelares, já que ambos os fatores alteram de
+maneira significativa a eficiência da perda de massa. A figura acima
+apresenta uma comparação entre três configurações: rotação com
+\(v/v_{\text{crit}} = 0{,}4\), rotação com metalicidade quase-solar
+(\([\mathrm{Fe/H}] = +0{,}02\), \(Z \approx 0{,}015\)) e rotação com
+alta metalicidade (\([\mathrm{Fe/H}] = +0{,}20\), \(Z \approx
+0{,}022\), \({\approx}1{,}6\times\) a metalicidade solar).</p>
+
+<p>Para estrelas de baixa massa, a metalicidade elevada reduz a taxa
+máxima de perda de massa em aproximadamente \(18{,}5\%\). Nesse
+regime, os ventos são governados por prescrições empíricas e
+pulsacionais que não dependem explicitamente de \(Z\): a prescrição
+de Reimers (1975) (RGB) e a de Bloecker (1995) (TPAGB) nos modelos
+MIST, e a prescrição de de Jager et al. (1988) (<em>Dutch</em>) no
+<em>inlist</em> MESA para ventos frios. Em contraste com a lei de Vink
+et al. (2001), nenhuma dessas prescrições contém \(Z\) como parâmetro
+direto de força do vento: a influência de \(Z\) sobre \(\dot{M}\)
+manifesta-se indiretamente, por meio de variações na opacidade e na
+estrutura estelar.</p>
+
+<p>A estrela de \(5\,\mathrm M_{\odot}\), que apresenta a maior perda
+percentual entre todos os casos analisados (\(82{,}54\%\)), mostra
+pouca sensibilidade à metalicidade no valor máximo de \(\dot{M}\). A
+diferença mais notável é temporal: o pico de perda ocorre cerca de
+\(2\) milhões de anos mais cedo para \([\mathrm{Fe/H}] = +0{,}20\).
+Isto sugere que, para esta faixa de massa, os mecanismos de perda são
+dominados por processos relacionados à luminosidade e estrutura
+interna, sendo menos sensíveis às variações de composição química.</p>
+
+<p>Para a estrela mais massiva analisada, a alta metalicidade reduz a
+taxa máxima de perda em cerca de \(14\%\) e diminui a perda total em
+\(8{,}5\%\). Esse resultado pode parecer contraditório com a relação
+\(\dot{M}\propto Z^{0{,}6\text{–}0{,}9}\) (Vink et al., 2001), que
+prevê dependência positiva no regime de ventos de linhas (fases OB e
+supergigante quente). A aparente contradição resolve-se ao reconhecer
+que: (a) a lei \(\dot{M}\propto Z^{0{,}6\text{–}0{,}9}\) se aplica
+especificamente às fases quentes; em fases de supergigante fria (RSG)
+e avançadas, outros mecanismos governam a ejeção com diferente
+dependência em \(Z\); (b) a comparação é feita à mesma <em>idade
+estelar</em> — não ao mesmo ponto evolutivo equivalente (EEP) — de
+modo que a estrela de maior metalicidade pode estar em fase
+estruturalmente distinta no mesmo instante. Observações empíricas e
+estudos de modelagem confirmam que ambientes com maior abundância de
+metais favorecem a absorção de fótons por íons pesados e, portanto,
+aumentam a força do vento; por outro lado, em certos regimes (ex.:
+aproximação do limite de Eddington, efeitos de <em>clumping</em> e
+mudanças na estrutura do envelope) a resposta não é linear (Vink et
+al., 2001; Mokiem et al., 2007; Puls et al., 2008).</p>
+
+<p>Em síntese, a dependência de \(\dot{M}\) com a metalicidade é
+regime-dependente: positiva (\(\dot{M}\propto Z^{0{,}6\text{–}0{,}9}\))
+no regime OB/supergigante quente, e mais fraca ou indireta em estrelas
+de baixa massa e fases AGB/RSG, onde prescrições empíricas e
+pulsacionais dominam sem escalonamento explícito com \(Z\).</p>
+
+<p><strong>Efeito da Rotação.</strong> A rotação atua como
+intensificadora dos ventos estelares, sobretudo nas fases em que a
+interação entre achatamento rotacional e opacidade se torna relevante.
+Nos modelos MIST analisados, a taxa de rotação é inicializada em
+\(v/v_\mathrm{crit}=0{,}40\) na ZAMS e evolui ao longo da sequência
+principal. A auditoria direta da coluna
+<code>surf_avg_v_div_v_crit</code> nas trilhas rotacionais confirma
+esse comportamento para estrelas de \(8\)–\(25\,\mathrm M_\odot\): a
+razão cai ligeiramente para \({\approx}0{,}39\) no início da SM (perda
+superficial de momento angular por ventos) e cresce até
+\(0{,}46\)–\(0{,}57\) no TAMS, pois a expansão do envelope reduz
+\(v_\mathrm{crit}=\sqrt{GM/R}\) mais rapidamente do que
+\(v_\mathrm{rot}\) decresce. O valor \(v/v_\mathrm{crit}=0{,}40\) deve
+ser entendido, portanto, como condição de contorno na ZAMS, não como
+parâmetro constante ao longo de toda a evolução. Embora a rotação
+afete também a estrutura interna e o transporte de momento angular,
+sua influência direta sobre a perda de massa manifesta-se
+principalmente como modulação da taxa, sobrepondo-se aos efeitos
+primários de massa e luminosidade.</p>
+
+<p><strong>Taxa instantânea de perda e massa total ejetada.</strong>
+Os resultados revelam três regimes distintos: (i) estrelas de baixa
+massa apresentam picos tardios associados às fases de gigante; (ii)
+estrelas intermediárias passam por episódios intensos e concentrados
+de perda de massa; (iii) estrelas massivas perdem massa ao longo de
+grande parte da evolução, com múltiplos picos distribuídos
+temporalmente.</p>
+
+<p>A Figura 16 evidencia que a eficiência total de perda de massa
+(massa ejetada/massa inicial) ultrapassa \(80\%\) para
+\(5\,\mathrm M_{\odot}\), enquanto atinge cerca de \(25\%\) para
+\(25\,\mathrm M_{\odot}\). Essa não-monotonicidade reflete a cobertura
+evolutiva das trilhas: a trilha de \(5\,\mathrm M_{\odot}\) percorreu
+fases mais avançadas (incluindo as fases EAGB e TPAGB, onde a perda de
+massa é intensa), enquanto a trilha de \(25\,\mathrm M_{\odot}\)
+abrange estágios anteriores ao colapso do núcleo, com ventos
+relativamente menos eficientes nessas etapas. Esses resultados mostram
+que a perda de massa não escala linearmente com a massa inicial, mas
+depende das propriedades estruturais e das fases evolutivas
+específicas de cada estrela.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Painel da vida de uma estrela, sincronizado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Uma "sala de controle" que sintetiza toda a Seção 3: escolha uma
+    massa (ou a simulação MESA real de 50 M☉) e mova o slider de fase
+    para ver a posição no diagrama HR, \(T_{\rm eff}\), \(L\), \(R\),
+    \(T_c\), \(\rho_c\) e o processo nuclear dominante mudarem juntos.
+    <strong>Reconstrução esquemática</strong>: cada preset interpola
+    (log-linearmente) apenas entre dois pontos <em>explicitamente
+    citados no texto</em> — não é a trilha MIST/MESA real ponto a
+    ponto (exceto os dois extremos, que são exatos). Onde o texto não
+    dá um número, o painel mostra "—" em vez de inventar um valor.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mdash-preset">Estrela</label>
+      <select id="mdash-preset" style="padding:.4rem;border-radius:6px;border:1px solid #ccc;">
+        <option value="m50mesa">50 M☉ (simulação MESA real)</option>
+        <option value="m05">0,5 M☉ (MIST)</option>
+        <option value="m1">1,0 M☉ (MIST)</option>
+        <option value="m5">5,0 M☉ (MIST)</option>
+        <option value="m25">25,0 M☉ (MIST)</option>
+      </select>
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mdash-play" class="botao-modulo">▶ Evoluir estrela</button>
+      <button type="button" id="mdash-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdash-canvas" role="img" aria-label="Diagrama HR mostrando a posicao inicial (cinza), final (cinza) e atual (laranja) da estrela escolhida, conforme a fase evolutiva selecionada." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card" style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1rem;">
+    <span>fase: <strong id="mdash-fase-valor">0,00</strong> (0=início, 1=final)</span>
+    <span>processo dominante: <strong id="mdash-processo">—</strong></span>
+    <span>\(T_{\rm eff}=\)<strong id="mdash-Teff">—</strong> K</span>
+    <span>\(\log(L/L_\odot)=\)<strong id="mdash-L">—</strong></span>
+    <span>\(R=\)<strong id="mdash-R">—</strong> R☉</span>
+    <span>\(T_c=\)<strong id="mdash-Tc">—</strong> K, \(\rho_c=\)<strong id="mdash-rhoc">—</strong> g/cm³</span>
+  </p>
+  <p class="leitura-card" id="mdash-nota">—</p>
+</div>
+
+<h2 id="isocronas">Isócronas</h2>
+
+<p>O Diagrama de Kiel (\(\log\) g \(\times\) \(\log\) \(T_{eff}\))
+constitui uma ferramenta complementar ao Diagrama HR para o estudo da
+evolução estelar, especialmente em contextos observacionais onde a
+luminosidade absoluta é difícil de determinar. A gravidade superficial,
+definida por</p>
+\[
+g = \frac{GM}{R^2}\,,
+\tag{11.5}
+\]
+<p>permite inferir o raio estelar diretamente, fornecendo informações
+estruturais essenciais quando combinada com a temperatura efetiva
+(Paxton et al., 2011; Langer et al., 2014).</p>
+
+<p>Diferentemente do Diagrama HR, que depende de luminosidade e
+portanto de distância, o Diagrama de Kiel utiliza grandezas obtidas
+diretamente por espectroscopia, tornando-o especialmente útil no
+estudo de populações distantes ou com incertezas de paralaxe.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/isocronas_mist_bokeh.svg" alt="Diagrama de Kiel mostrando isocronas para metalicidade solar em tres idades: 0,1, 1 e 10 Gyr.">
+  <figcaption><span class="figura-num">Figura 18.</span> Diagrama de Kiel (\(\log g\) versus \(\log T_{\mathrm{eff}}\)) mostrando isócronas para metalicidade solar em três idades representativas: 0,1, 1 e 10 Gyr. As curvas destacam a evolução da sequência principal, o deslocamento do ponto de <em>turn-off</em> e o desenvolvimento do ramo de gigantes vermelhas ao longo do tempo.</figcaption>
+</div>
+
+<p>A figura acima apresenta isócronas para metalicidade solar
+(\(Z_{\odot}\)) nas idades de 0,1, 1 e 10 Gyr, revelando padrões
+característicos da evolução estelar. Para a isócrona de 0,1 Gyr,
+observa-se uma sequência principal bem definida na região de altas
+gravidades superficiais e temperaturas efetivas elevadas,
+correspondendo a estrelas jovens em fase de queima de hidrogênio.</p>
+
+<p>O ponto de <em>turn-off</em> fornece a principal assinatura da
+idade de um aglomerado. Para idades da ordem de 1 Gyr, o
+<em>turn-off</em> situa-se em torno de \(\log(T_{\rm eff}) \approx
+3{,}8\)–\(3{,}9\), indicando massas típicas de 1,5–2,5
+\(\mathrm M_{\odot}\). Para idades da ordem de 10 Gyr, o
+<em>turn-off</em> desloca-se para regiões mais frias e com gravidades
+mais baixas, evidenciando que apenas estrelas de baixa massa
+permanecem na sequência principal. Esse deslocamento caracteriza o
+consumo do hidrogênio central e marca o início da evolução para o
+ramo das gigantes vermelhas.</p>
+
+<p>A isócrona de 10 Gyr exibe características de uma população
+estelar evoluída, com: uma sequência principal restrita a estrelas de
+baixa massa (\(\log T_{\mathrm{eff}} < 3{,}7\)); um ramo de gigantes
+vermelhas bem desenvolvido na região de baixas gravidades
+(\(\log g < 3\)); e o <em>turn-off</em> deslocado para temperaturas
+mais baixas (\(\log T_{\mathrm{eff}} \approx 3{,}7\)).</p>
+
+<p>A evolução das curvas isócronas no Diagrama de Kiel reflete
+mudanças fundamentais na estrutura estelar: estrelas na sequência
+principal ocupam a região de altas gravidades superficiais; a
+expansão do envelope durante as fases de gigante resulta em uma
+drástica redução em \(\log g\); e o deslocamento horizontal nas curvas
+corresponde ao resfriamento superficial durante a evolução.</p>
+
+<p>A aplicação prática deste diagrama inclui a determinação de idades
+de aglomerados estelares através do ajuste de isócronas a dados
+observacionais, além da caracterização de parâmetros atmosféricos
+estelares. A sensibilidade do <em>turn-off</em> à idade torna o
+Diagrama de Kiel particularmente útil para estudos de evolução
+estelar e arqueologia galáctica. Este método de datação é estabelecido
+na literatura e constitui uma das principais ferramentas da
+arqueologia galáctica moderna (Gallart et al., 2005; Deason &amp;
+Belokurov, 2024).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Isócronas esquemáticas: o conceito de datação por turn-off</div>
+  <p class="leitura-card" style="margin-top:0;">
+    <strong>Este módulo não usa dados MIST reais</strong> (não
+    encontrados como arquivo local neste projeto — apenas as figuras
+    já renderizadas em PDF) — é uma reconstrução puramente esquemática
+    (sequência principal + ramo de gigantes de forma simplificada),
+    calibrada apenas para ilustrar o <em>conceito</em> de como o
+    turn-off se desloca com a idade, não para reproduzir as isócronas
+    MIST reais mostradas nas figuras acima. Link cruzado: a mesma
+    lógica de hierarquia de escalas de tempo (massas maiores evoluem
+    mais rápido) já foi usada no <a href="cap05_equacoes_estrutura.html">Capítulo
+    5</a> para conectar turn-off à datação de aglomerados.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="miso-idade">Idade (Gyr) <span class="valor" id="miso-idade-valor">1,00</span></label>
+      <input type="range" id="miso-idade" min="10" max="1300" step="1" value="100">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="miso-canvas" role="img" aria-label="Diagrama HR esquematico mostrando uma isocrona simplificada, com o ponto de turn-off se deslocando conforme a idade aumenta." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">Massa (esquemática) no turn-off: <strong id="miso-turnoff">—</strong> M☉.</p>
+</div>
+
+<h3>Efeito da Metalicidade em Isócronas com idade fixa</h3>
+
+<p>A metalicidade é um dos parâmetros fundamentais que modulam a
+estrutura interna das estrelas, alterando opacidades, eficiências
+nucleares e a própria morfologia das isócronas. Ela é frequentemente
+expressa pela quantidade
+\([\mathrm{Fe/H}] = \log_{10}(N_{\mathrm{Fe}}/N_{\mathrm{H}})_{\star} -
+\log_{10}(N_{\mathrm{Fe}}/N_{\mathrm{H}})_{\odot}\), isto é, o
+logaritmo da razão entre o número de átomos de ferro e de hidrogênio
+na estrela, comparado ao mesmo valor para o Sol. Por se tratar de uma
+escala logarítmica relativa, \([\mathrm{Fe/H}] = 0\) corresponde à
+metalicidade solar, valores negativos indicam estrelas mais pobres em
+metais que o Sol (por exemplo, \([\mathrm{Fe/H}] = -1\) corresponde a
+\(1/10\) da abundância de ferro solar), e valores positivos indicam
+estrelas mais ricas em metais que o Sol (por exemplo,
+\([\mathrm{Fe/H}] = +0{,}5\) corresponde a cerca de
+\(10^{0{,}5} \approx 3{,}16\) vezes a abundância solar). Para uma
+mesma idade, variações em [Fe/H] deslocam sistematicamente as
+estrelas no plano \(\log g\)–\(\log T_{\mathrm{eff}}\), o que nos
+permite estudar de forma comparativa populações estelares pertencentes
+a diferentes ambientes galácticos.</p>
+
+<p>A análise do efeito da metalicidade na evolução estelar ajuda a
+visualizar padrões na estrutura e desenvolvimento das estrelas em
+detrimento da sua composição química, que vai além do hidrogênio e do
+hélio. A figura a seguir apresenta isócronas para idade fixa de 4
+Giga-anos com quatro diferentes metalicidades: [Fe/H] = \(-2\),
+\(-1\), \(0\) e \(+0{,}5\), permitindo observar como a composição
+química influencia a posição das estrelas no Diagrama de Kiel.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/isocronas_metalicidade_4gyr.svg" alt="Diagrama de Kiel para isocronas de 4 Gyr com diferentes metalicidades.">
+  <figcaption><span class="figura-num">Figura 19.</span> Diagrama de Kiel para isócronas de 4 Gyr com diferentes metalicidades. As curvas demonstram o deslocamento da sequência principal em função do conteúdo metálico.</figcaption>
+</div>
+
+<p>Os resultados mostram um deslocamento sistemático das curvas
+isócronas em função da metalicidade. Estrelas pobres em metais
+([Fe/H] = \(-2\)) ocupam a região de maiores temperaturas efetivas,
+enquanto estrelas com alta metalicidade ([Fe/H] = \(+0{,}5\))
+situam-se em temperaturas efetivas mais baixas. Este comportamento
+decorre do aumento da opacidade com o conteúdo metálico: metais
+introduzem numerosas linhas e absorções contínuas que dificultam o
+transporte radiativo. Com a energia acumulando-se mais eficientemente
+nas camadas internas, a estrutura ajusta-se expandindo ligeiramente o
+envelope e reduzindo \(T_{\mathrm{eff}}\) para manter o equilíbrio
+hidrostático. Assim, para uma mesma idade e massa, estrelas ricas em
+metais aparecem mais frias no Diagrama de Kiel.</p>
+
+<p>A gravidade superficial (\(\log g\)) permanece dentro de faixas
+semelhantes para todas as metalicidades, mas a distribuição ao longo
+da sequência principal varia. Em baixa metalicidade, a menor
+opacidade produz estrelas mais compactas, resultando em valores
+ligeiramente mais altos de \(\log g\) para uma mesma fase evolutiva.
+Já metalicidades elevadas favorecem envelopes mais expandidos e
+valores ligeiramente menores de \(\log g\), especialmente próximo ao
+<em>turn-off</em>.</p>
+
+<p>As implicações astrofísicas são que populações pobres em metais,
+como as de aglomerados globulares, apresentam isócronas deslocadas
+para temperaturas mais altas, enquanto populações mais jovens e
+metalicamente enriquecidas — típicas do disco galáctico, por exemplo —
+ocupam regiões mais frias do diagrama. Assim, a interpretação de
+\(\log g\) e \(T_{\mathrm{eff}}\) deve sempre considerar o conteúdo
+químico, pois a degenerescência idade–metalicidade pode levar a
+estimativas incorretas se o ajuste de isócronas negligenciar o efeito
+da composição.</p>
+
+<h3>Efeitos da Idade em Isócronas com metalicidades fixas</h3>
+
+<p>Nesta subseção analisamos o efeito da idade na morfologia das
+isócronas para uma metalicidade fixa. Como a idade controla diretamente
+a posição do ponto de <em>turn-off</em> e a extensão do ramo das
+gigantes, a comparação entre isócronas de 1, 4, 7 e 10 Gyr permite
+visualizar de forma clara como populações estelares de mesma
+composição química, mas em diferentes estágios evolutivos,
+distribuem-se no Diagrama de Kiel.</p>
+
+<p>A progressão das isócronas com a idade segue um padrão universal:
+(i) o <em>turn-off</em> desloca-se para temperaturas efetivas
+menores; (ii) o ramo das gigantes torna-se mais extenso; e (iii) a
+sequência principal encurta-se, refletindo a ausência de estrelas de
+maior massa que já evoluíram para fases avançadas. Estes padrões
+aparecem em todas as metalicidades, mas sua intensidade depende
+fortemente do conteúdo metálico.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/isocronas_-2_0.svg" alt="Isocronas no diagrama de Kiel para Fe/H=-2 e idades de 1, 4, 7 e 10 Gyr.">
+  <figcaption><span class="figura-num">Figura 20.</span> Isócronas no Diagrama de Kiel para \([Fe/H] = -2\) e idades de 1, 4, 7 e 10 Gyr. A baixa opacidade desloca a sequência principal para temperaturas mais altas e comprime o ramo das gigantes.</figcaption>
+</div>
+
+<p>Para a metalicidade extremamente baixa ([Fe/H] = \(-2\)), as
+isócronas apresentam uma sequência principal estreita e quente,
+característica de baixa opacidade. O ponto de <em>turn-off</em>
+desloca-se para temperaturas progressivamente menores com o aumento
+da idade, e o ramo das gigantes torna-se mais pronunciado, embora mais
+compacto que em metalicidades maiores devido à menor expansão do
+envelope.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/isocronas_-1_0.svg" alt="Isocronas para Fe/H=-1.">
+  <figcaption><span class="figura-num">Figura 21.</span> Isócronas para \([Fe/H] = -1\). O aumento moderado da opacidade em relação a \([Fe/H] = -2\) desloca as curvas para temperaturas mais baixas e expande o ramo das gigantes.</figcaption>
+</div>
+
+<p>Para \([Fe/H] = -1\), observa-se o mesmo padrão geral, mas com um
+resfriamento global em comparação à metalicidade mais baixa. As
+isócronas tornam-se ligeiramente mais largas e o ramo das gigantes
+mais extenso, refletindo maior opacidade e maior eficiência de
+expansão do envelope. A isócrona de 10 Gyr exibe um <em>turn-off</em>
+mais frio e deslocado verticalmente, indicando uma evolução estrutural
+mais avançada.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/isocronas_0_0.svg" alt="Isocronas para metalicidade solar.">
+  <figcaption><span class="figura-num">Figura 22.</span> Isócronas para metalicidade solar. Observa-se sequência principal mais larga e um ramo de gigantes mais extenso, refletindo maior opacidade.</figcaption>
+</div>
+
+<p>Na metalicidade solar ([Fe/H] = 0), as isócronas tornam-se mais
+dispersas na sequência principal e o ramo das gigantes é mais estendido
+para todas as idades. O <em>turn-off</em> das isócronas mais velhas
+aparece consideravelmente resfriado em relação aos casos pobres em
+metais, consequência direta da maior opacidade que retarda a evolução
+e favorece envelopes mais expandidos.</p>
+
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/isocronas_p0_5.svg" alt="Isocronas para Fe/H=+0,5.">
+  <figcaption><span class="figura-num">Figura 23.</span> Isócronas para \([Fe/H] = +0{,}5\). A alta metalicidade produz o maior deslocamento para baixas temperaturas e o ramo das gigantes mais expandido entre todos os casos analisados.</figcaption>
+</div>
+
+<p>Para a alta metalicidade ([Fe/H] = +0,5), observa-se o
+deslocamento mais pronunciado para temperaturas efetivas reduzidas. A
+sequência principal apresenta forte dispersão vertical e horizontal,
+especialmente em idades avançadas, devido à combinação entre alta
+opacidade e estruturas internas menos compactas. O ramo das gigantes
+torna-se significativamente expandido e mais frio, destacando o efeito
+cumulativo da metalicidade sobre a evolução estelar. Estes efeitos
+estão amplamente documentados em modelos evolutivos modernos, como nas
+isócronas PARSEC (Bressan et al., 2012).</p>
+
+<p>Assim, a evolução das isócronas com a idade fornece um diagnóstico
+direto da evolução temporal de populações estelares, enquanto a
+comparação entre metalicidades revela como diferenças na opacidade
+modulam trajetórias evolutivas. O Diagrama de Kiel torna-se, portanto,
+uma ferramenta essencial para caracterizar idades, massas e estágios
+evolutivos de estrelas em distintos ambientes galácticos.</p>
+
+<p>O ajuste de isócronas a aglomerados estelares é uma das principais
+ferramentas observacionais para determinação de idades: escolhe-se a
+isócrona teórica cuja posição do ponto de <em>turn-off</em> no
+diagrama HR (ou de Kiel) coincide com a do aglomerado observado. Os
+arquivos de isócrona MIST utilizados neste trabalho (para
+\([\mathrm{Fe/H}] \in \{-2{,}0;\ -1{,}0;\ 0{,}0;\ +0{,}5\}\)) são os
+mesmos que seriam empregados nessa análise, e estão disponíveis no
+portal do projeto (Dotter, 2016). O leitor pode, a partir dos
+diagramas de Kiel apresentados nas figuras anteriores, explorar o
+procedimento de ajuste combinando as isócronas MIST com dados
+fotométricos de aglomerados reais obtidos de catálogos públicos.</p>
+
+<h2 id="modelo-mesa">Modelo de Evolução Estelar</h2>
+
+<p>Nesta seção descrevemos o modelo de evolução estelar utilizado nas
+simulações. Para isso, empregamos o código <code>MESA</code> versão
+r23.05.1, adotando como caso de estudo uma estrela massiva de
+\(50\,\mathrm M_{\odot}\) com metalicidade solar (\(Z=0{,}02\)). A
+escolha de uma estrela de alta massa permite explorar fenômenos
+característicos desse regime — como ventos radiativos intensos, tempos
+de vida curtos e evolução estrutural acelerada — em contraste com a
+evolução mais lenta típica de estrelas de menor massa.</p>
+
+<p>A evolução de uma estrela é descrita por um sistema de equações
+diferenciais acopladas que governam sua estrutura interna e evolução
+temporal. Essas equações expressam as condições de equilíbrio
+hidrostático, conservação de massa, transporte de energia e
+conservação de energia no interior estelar (Kippenhahn, Weigert &amp;
+Weiss, 2012). Em coordenada de massa \(m(r)\), as equações
+fundamentais podem ser escritas como</p>
+\[
+\frac{dP}{dm} = -\frac{Gm}{4\pi r^4}\,,
+\tag{11.6}
+\]
+<p>representando a condição de equilíbrio hidrostático, estabelecendo
+o balanço entre o gradiente de pressão e a força gravitacional.</p>
+\[
+\frac{dr}{dm} = \frac{1}{4\pi r^2 \rho}\,,
+\tag{11.7}
+\]
+<p>que expressa a conservação de massa e relaciona o raio da camada
+estelar com sua densidade local.</p>
+\[
+\frac{dL}{dm} = \epsilon_{\rm nuc} - \epsilon_\nu\,,
+\tag{11.8}
+\]
+<p>que descreve a conservação de energia, onde \(\epsilon_{\rm nuc}\)
+representa a taxa de geração de energia por reações nucleares e
+\(\epsilon_\nu\) a perda de energia por emissão de neutrinos.</p>
+
+<p>Por fim, o transporte de energia no interior da estrela pode
+ocorrer por radiação ou convecção. No regime radiativo, o gradiente
+de temperatura é dado por</p>
+\[
+\frac{dT}{dm} = -\frac{3 \kappa L}{64 \pi^2 a c r^4 T^3}\,,
+\tag{11.9}
+\]
+<p>cujo \(\kappa\) é a opacidade do plasma estelar, \(a\) é a
+constante de radiação e \(c\) é a velocidade da luz.</p>
+
+<p>A integração numérica dessas equações, combinada com equações de
+estado apropriadas, tabelas de opacidade e redes de reações nucleares,
+permite determinar a estrutura interna da estrela e sua evolução ao
+longo do tempo. Códigos modernos de evolução estelar, como o
+<code>MESA</code> (<em>Modules for Experiments in Stellar
+Astrophysics</em>), resolvem esse sistema incorporando uma descrição
+detalhada da física estelar (Paxton et al., 2011).</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — As mesmas quatro equações do Capítulo de Estrutura Estelar</div>
+  <div class="conteudo">
+    <p>As quatro equações apresentadas acima são exatamente as
+    <strong>quatro equações fundamentais de estrutura estelar</strong>
+    deduzidas em detalhe no <a href="cap05_equacoes_estrutura.html">Capítulo
+    5</a>: equilíbrio hidrostático (\(\mathrm dP/\mathrm dm\)),
+    conservação de massa (\(\mathrm dr/\mathrm dm\)), conservação de
+    energia (\(\mathrm dL/\mathrm dm\), com \(\epsilon_{\rm nuc}\) dado
+    pelas taxas de reação já discutidas) e transporte radiativo
+    (\(\mathrm dT/\mathrm dm\), na forma de difusão de fótons já
+    obtida a partir da Aproximação de Rosseland naquele mesmo bloco de
+    capítulos). O que o <code>MESA</code> faz — e que este capítulo
+    ilustra na prática — é justamente integrar numericamente esse
+    sistema, acoplado a uma equação de estado (que pode incluir os
+    regimes degenerados do <a href="cap08_equacoes_estado.html">Capítulo
+    8</a>) e a uma rede de reações nucleares, para milhares de passos
+    temporais ao longo da vida de uma estrela. Vale notar ainda que
+    modelos politrópicos como os deduzidos no
+    <a href="cap06_estrelas_politropicas.html">Capítulo 6</a> (equação
+    de Lane–Emden) continuam relevantes mesmo na era dos códigos
+    numéricos: o <code>MESA</code> os usa como modelo inicial
+    (<em>initial guess</em>) para relaxar a estrutura de uma estrela
+    pré-sequência principal antes de iniciar a evolução completa.</p>
+  </div>
+</div>
+
+<p>No presente trabalho, o modelo foi evoluído desde uma idade
+inicial de \(1\,\mathrm{Myr}\) até aproximadamente
+\(5{,}24\,\mathrm{Myr}\), resultando em 333 modelos sucessivos. Esse
+intervalo cobre a sequência principal tardia e as fases iniciais de
+expansão do envelope rumo ao estágio de supergigante, antes do início
+da queima avançada de elementos mais pesados.</p>
+
+<h3>Configuração Física do Modelo</h3>
+
+<p>A configuração utilizada no arquivo <code>inlist</code>
+(disponibilizado no Apêndice A) incluiu os seguintes parâmetros
+fundamentais:</p>
+<ul>
+  <li><strong>Massa e composição inicial</strong>: \(M_{\mathrm{ini}} =
+  50\,\mathrm M_{\odot}\), \(Z=0{,}02\).</li>
+  <li><strong>Idade inicial</strong>: \(1\,\mathrm{Myr}\), iniciando
+  já dentro da sequência principal.</li>
+  <li><strong>Esquemas de ventos</strong>:
+    <ul>
+      <li>Vento de <em>Vink</em> para fases quentes
+      (\(T_{\mathrm{eff}} \gtrsim 10^4\) K), baseado no formalismo de
+      Vink et al. (2001), amplamente utilizado para estrelas OB devido
+      à sua sensibilidade à luminosidade, metalicidade e taxa de
+      ionização;</li>
+      <li>Esquema <em>Dutch</em> para fases frias, que utiliza
+      prescrições empíricas de de Jager et al. (1988), sendo o padrão
+      recomendado pelo <code>MESA</code> para supergigantes frias e
+      fases avançadas;</li>
+      <li>Fator de escala aumentado para 2,0 em ambos os regimes,
+      refletindo evidências observacionais de ventos intensificados em
+      estrelas massivas luminosas.</li>
+    </ul>
+  </li>
+  <li><strong>Condição de parada</strong>: tempo máximo de \(10^7\)
+  anos. A simulação encerrou-se aos \({\sim}5{,}24\) Myr, cobrindo a
+  sequência principal e o início da expansão do envelope, mas não as
+  fases avançadas de queima (He, C, Ne, O, Si) nem o colapso do
+  núcleo.</li>
+  <li><strong>Ultrapassagem convectiva (<em>overshoot</em>)</strong>:
+  ativada com esquema exponencial nas bordas do núcleo convectivo, com
+  parâmetros <code>overshoot_f(1) = 0,02</code> e
+  <code>overshoot_f0(1) = 0,01</code> (ver <em>inlist</em> no Apêndice
+  A).</li>
+  <li><strong>Rotação</strong>: não incluída nesta simulação. O modelo
+  considera estrutura esférica e sem mistura rotacional.</li>
+  <li><strong>Opacidade e equação de estado</strong>: tabelas OPAL
+  para altas temperaturas combinadas com opacidades moleculares de
+  baixa temperatura (Ferguson et al., 2005); equação de estado para
+  matéria parcialmente ionizada e degenerada (Saumon et al., 1995);
+  implementação via <code>MESA r23.05.1</code> (Paxton et al.,
+  2011).</li>
+  <li><strong>Rede nuclear</strong>: <code>basic.net</code> (padrão do
+  <code>MESA</code>), que inclui as reações nucleares relevantes para
+  a sequência principal de estrelas massivas (pp, CNO, triplo-\(\alpha\)
+  e captura de \(\alpha\)).</li>
+  <li><strong>Semiconvecção</strong>: não ativada explicitamente; a
+  escolha prioriza viabilidade computacional para fins didáticos.</li>
+  <li><strong>Fator de escala dos ventos</strong>
+  (\(\textit{Vink\_scaling\_factor} = \textit{Dutch\_scaling\_factor}
+  = 2{,}0\)): este fator foi adotado na configuração original da
+  simulação sem uma justificativa física documentada, constituindo uma
+  escolha não-padrão que tende a superestimar a taxa de perda de
+  massa. Os valores de massa perdida reportados para esta estrela
+  devem, portanto, ser interpretados como estimativas ilustrativas,
+  provavelmente superiores às que seriam obtidas com as prescrições
+  padrão (fator \(1{,}0\)).</li>
+  <li><strong>Nota sobre convergência</strong>: os parâmetros acima
+  foram adotados como ponto de partida operacional e não foram
+  submetidos a estudo sistemático de convergência de parâmetros
+  físicos. As grandezas integradas reportadas (massa perdida, raio
+  final, \(T_{\rm eff}\) final) têm caráter ilustrativo e devem ser
+  interpretadas no contexto didático deste trabalho.</li>
+</ul>
+
+<p>O uso combinado das prescrições de Vink e do esquema Dutch é
+justificado pela forte dependência dos ventos de estrelas massivas à
+temperatura efetiva. Ventos radiativos dominam as fases quentes
+(\(T_{\mathrm{eff}} \gtrsim 2{,}5\times10^4\) K), enquanto ventos
+empíricos de supergigantes tornam-se mais adequados quando o envelope
+se expande e a estrela se torna mais fria. Essa abordagem híbrida é
+adotada pela comunidade para reproduzir de forma consistente a perda
+de massa ao longo de todo o ciclo evolutivo de estrelas de alta
+massa.</p>
+
+<h3>Resultados da Simulação</h3>
+
+<p>A evolução ocorre de forma extremamente rápida: a estrela completa
+todas as fases simuladas em apenas \(5{,}24\,\mathrm{Myr}\), valor
+consistente com o esperado para estrelas de \(40\)–\(60\,\mathrm
+M_{\odot}\).</p>
+
+<p>A análise quantitativa obtida a partir do arquivo
+<code>history.data</code> revela:</p>
+<ul>
+  <li>Massa inicial: \(50{,}0\,\mathrm M_{\odot}\)</li>
+  <li>Massa final: \(26{,}42\,\mathrm M_{\odot}\)</li>
+  <li>Massa perdida: \(23{,}58\,\mathrm M_{\odot}\) (47% da massa
+  inicial) — estimativa superior, em razão do fator de escala de
+  ventos não-padrão adotado na simulação (ver nota acima).</li>
+  <li>Luminosidade final: \(\log(L/L_{\odot}) = 5{,}79\)</li>
+  <li>Temperatura final: \(\log(T_{\mathrm{eff}}/\mathrm{K}) = 3{,}86\)</li>
+  <li>Raio final: \(\log(R/\mathrm R_{\odot}) = 2{,}696 \Rightarrow R
+  \approx 497\,\mathrm R_{\odot}\)</li>
+  <li>Máxima taxa de perda: \(8{,}19\times 10^{-5}\,\mathrm
+  M_{\odot}/\mathrm{ano}\)</li>
+</ul>
+
+<p>A massa inicial determina o destino da estrela. Estrelas com
+\(M < 8\,\mathrm M_{\odot}\) evoluem para anãs brancas, expondo
+núcleos de He, C/O ou O/Ne. Para massas intermediárias
+(8–25 M\(_{\odot}\)), o colapso gravitacional leva à explosão de
+supernova tipo II e à formação de estrelas de nêutrons. Estrelas mais
+massivas podem formar buracos negros via colapso direto ou com queda
+de material (<em>fallback</em>), em concordância com modelos recentes
+de colapso de núcleo (Griffiths et al., 2025).</p>
+
+<h3>Diagrama HR</h3>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/diagrama_hr_bokeh.svg" alt="Trajetoria evolutiva da estrela de 50 massas solares no diagrama HR.">
+  <figcaption><span class="figura-num">Figura 24.</span> Trajetória evolutiva da estrela de \(50\,\mathrm M_{\odot}\) no diagrama HR. A estrela inicia quente e luminosa na sequência principal e evolui para a região das supergigantes.</figcaption>
+</div>
+<p>A figura acima mostra que a estrela começa sua evolução com
+\(\log(T_{\mathrm{eff}})\approx 4{,}66\) e
+\(\log(L/L_{\odot})\approx 5{,}56\), evoluindo rapidamente para
+temperaturas mais baixas enquanto a luminosidade aumenta de forma
+contínua. Este comportamento é típico de estrelas massivas que deixam
+a sequência principal após esgotarem o hidrogênio central.</p>
+
+<h3>Evolução Temporal da Luminosidade</h3>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_luminosidade_bokeh.svg" alt="Evolucao da luminosidade ao longo da simulacao MESA.">
+  <figcaption><span class="figura-num">Figura 25.</span> Evolução da luminosidade ao longo da simulação. A luminosidade aumenta de forma quase monótona, característica do aumento contínuo da taxa de queima nuclear.</figcaption>
+</div>
+<p>De acordo com a figura acima, a luminosidade aumenta de
+\(\log(L/L_\odot) = 5{,}56\) para \(5{,}79\) ao longo de 5,2 Myr, um
+crescimento de aproximadamente 70%. Esse comportamento é típico de
+estrelas massivas na sequência principal e início da fase de
+supergigante: conforme o hidrogênio central é consumido, o núcleo se
+contrai e aquece, aumentando a taxa de queima nuclear.</p>
+<p>Como o tempo de vida nuclear de uma estrela de 50 M\(_\odot\) é
+extremamente curto, mesmo mudanças relativamente pequenas na
+abundância central de hidrogênio resultam em aumentos perceptíveis de
+luminosidade.</p>
+<p>Além disso, outros parâmetros físicos podem influenciar
+significativamente a evolução de estrelas massivas. A rotação
+estelar, por exemplo, pode prolongar o tempo de vida na sequência
+principal por meio de processos de mistura rotacional, que
+transportam hidrogênio fresco para o núcleo e trazem produtos da
+queima nuclear para a superfície. Esse processo pode levar ao
+enriquecimento superficial de elementos como nitrogênio.</p>
+<p>A metalicidade também desempenha um papel fundamental, pois
+controla a intensidade dos ventos estelares radiativamente dirigidos.
+Em estrelas massivas, ventos mais intensos podem remover uma fração
+significativa da massa estelar ao longo da evolução, alterando a
+estrutura interna da estrela e influenciando significativamente seu
+destino final.</p>
+
+<h3>Evolução da Temperatura Efetiva</h3>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_temperatura_bokeh.svg" alt="Diminuicao da temperatura efetiva indicando expansao do envelope estelar.">
+  <figcaption><span class="figura-num">Figura 26.</span> Diminuição da temperatura efetiva indicando expansão do envelope estelar.</figcaption>
+</div>
+<p>A temperatura efetiva diminui de \(\log(T_{\mathrm{eff}})=4{,}66\)
+(\(\approx\)46000 K) para \(3{,}86\) (\(\approx\)7200 K), o que
+representa um resfriamento superficial de quase uma ordem de
+grandeza.</p>
+<p>Esse comportamento reflete diretamente a expansão do envelope.
+Embora o núcleo se torne mais luminoso ao contrair-se, a superfície
+estelar se afasta do centro, aumentando enormemente a área
+irradiadora. Assim, a maior luminosidade é compensada pela queda de
+temperatura, em concordância com a relação de Stefan–Boltzmann. A
+trajetória no diagrama HR confirma essa tendência: a estrela migra da
+região quente, de tipo espectral O, para o domínio das supergigantes
+amarelas/vermelhas à medida que o envelope se dilata.</p>
+
+<h3>Evolução do Raio</h3>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_raio_bokeh.svg" alt="Crescimento exponencial do raio, atingindo quase 500 raios solares.">
+  <figcaption><span class="figura-num">Figura 27.</span> Crescimento exponencial do raio, atingindo quase \(500\,\mathrm R_{\odot}\).</figcaption>
+</div>
+<p>O raio aumenta de 9,7 R\(_\odot\) para 497 R\(_\odot\), um fator de
+expansão de aproximadamente 51 vezes. Esse crescimento abrupto é
+característico da fase de transição entre a sequência principal e a
+fase de supergigante vermelha.</p>
+<p>O comportamento exponencial do crescimento sugere que a estrela
+está próxima de regimes avançados de evolução, nos quais a estrutura
+passa a ser fortemente influenciada por gradientes acentuados de
+energia e pressão de radiação.</p>
+
+<h3>Evolução da Massa</h3>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/evolucao_massa_bokeh.svg" alt="Perda de massa continua e intensa, atingindo 47% da massa inicial.">
+  <figcaption><span class="figura-num">Figura 28.</span> Perda de massa contínua e intensa, atingindo 47% da massa inicial.</figcaption>
+</div>
+<p>Na figura acima, analisamos a perda de massa, que é dominada por
+ventos radiativos descritos pelo formalismo de Vink et al. (2001).
+Como consequência, a massa final (26,4 M\(_\odot\)) coloca a estrela
+no regime típico de pré-Wolf–Rayet ou supergigante evoluída,
+evidenciando que a perda de massa é um dos processos-chave que
+definem o destino final da estrela.</p>
+
+<h3>Timeline Evolutiva</h3>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/timeline_evolutiva_bokeh.svg" alt="Comparacao temporal entre luminosidade e temperatura.">
+  <figcaption><span class="figura-num">Figura 29.</span> Comparação temporal entre luminosidade e temperatura, mostrando a diminuição da temperatura acompanhada de aumento na luminosidade.</figcaption>
+</div>
+<p>A timeline ressalta o comportamento inverso entre luminosidade e
+temperatura. Enquanto a luminosidade cresce continuamente devido à
+contração do núcleo e ao aumento da taxa de queima, a temperatura
+superficial diminui de forma pronunciada. Essa relação é uma
+assinatura clássica da evolução de estrelas massivas e está em
+perfeita concordância com os diagramas HR observados e simulados.</p>
+
+<h3>Diagrama de Kippenhahn</h3>
+<p>O diagrama de Kippenhahn (figura a seguir) revela a estrutura
+interna da estrela ao longo da evolução.</p>
+<div class="figura-cap11">
+  <img src="assets/figs_cap11/kippenhahn_padronizado.svg" alt="Diagrama de Kippenhahn mostrando regioes convectivas em azul e zonas de queima nuclear em tons de laranja.">
+  <figcaption><span class="figura-num">Figura 30.</span> Diagrama de Kippenhahn mostrando regiões convectivas (em azul) e zonas de queima nuclear (tons de laranja).</figcaption>
+</div>
+<p>Durante toda a sequência principal, um núcleo convectivo extenso se
+mantém, característico de estrelas massivas nas quais a queima de
+hidrogênio ocorre pelo ciclo CNO, extremamente sensível à temperatura.
+Conforme o hidrogênio central se esgota, a estrela desenvolve queima
+de hidrogênio em camada, visível como zonas de geração de energia
+imediatamente acima do núcleo inerte de He.</p>
+<p>A perda de massa progressiva empurra as linhas de coordenada de
+massa para baixo, evidenciando que o envelope está sendo removido
+continuamente pelos ventos intensos. Nas fases mais tardias, a
+estrutura interna torna-se mais complexa, com múltiplas regiões de
+queima e fronteiras convectivas transitórias, prenunciando a entrada
+na fase de supergigante.</p>
+<p>Esse diagrama é crucial porque confirma, no interior, os fenômenos
+inferidos a partir dos diagramas HR, das curvas de raio e das curvas
+de temperatura.</p>
+
+<h3>Conclusão (simulação MESA)</h3>
+<p>As simulações conduzidas com o MESA permitem caracterizar de forma
+consistente a evolução de uma estrela massiva de \(50\,\mathrm
+M_{\odot}\) ao longo de seus primeiros \(5{,}2\) milhões de anos. O
+modelo discutido nesta seção sintetiza a visão contemporânea da
+evolução estelar, na qual a massa inicial estabelece o regime nuclear
+dominante, enquanto a composição química, a rotação e a perda de
+massa modulam as propriedades estruturais e o destino final da
+estrela. Essas conclusões são coerentes com resultados obtidos por
+códigos modernos de evolução estelar descritos na literatura.</p>
+<p>O modelo captura adequadamente os principais mecanismos estruturais
+e nucleares que governam a trajetória evolutiva desse tipo de objeto,
+reproduzindo tendências esperadas para estrelas dominadas por pressão
+de radiação e ventos radiativos intensos. Os resultados obtidos
+evidenciam:</p>
+<ul>
+  <li><strong>Perda de massa extrema</strong>: a estrela perde
+  aproximadamente \(47\%\) de sua massa inicial, um resultado
+  diretamente associado à aplicação dos ventos de Vink et al. (2001) e
+  do formalismo Dutch em regimes frios e quentes. Essa remoção
+  contínua do envelope modifica de forma profunda o ritmo evolutivo e
+  o futuro da estrela.</li>
+  <li><strong>Expansão de grande amplitude</strong>: o raio cresce por
+  um fator de \(\sim 51\), alcançando quase \(500\,\mathrm
+  R_{\odot}\). Essa expansão, acompanhada pela redução da temperatura
+  efetiva, é assinatura inequívoca da transição para a fase de
+  supergigante vermelha.</li>
+  <li><strong>Aumento gradual da luminosidade</strong>: a luminosidade
+  cresce de forma quase monotônica, refletindo a elevação da taxa de
+  queima nuclear e o aumento da opacidade do envelope conforme a
+  estrela se expande.</li>
+  <li><strong>Evolução coerente com modelos teóricos</strong>: a
+  trajetória no diagrama HR, o comportamento das abundâncias centrais
+  e a estrutura convectiva observada no diagrama de Kippenhahn
+  reproduzem com fidelidade as expectativas para estrelas massivas
+  dominadas por queima central de hidrogênio e posterior ignição de
+  queima em casca.</li>
+</ul>
+<p>É importante ressaltar que a simulação cobre apenas os primeiros
+\({\sim}5{,}2\) Myr da vida estelar — a sequência principal de
+hidrogênio e o início da expansão do envelope — e <em>não</em> inclui
+as fases de queima avançada (He, C, Ne, O, Si) nem o colapso do
+núcleo. As afirmações sobre Wolf–Rayet, tipo de supernova e formação
+de remanescentes baseiam-se em extrapolação teórica a partir da massa
+final simulada (\({\approx}26{,}4\,\mathrm M_{\odot}\)) e em modelos
+da literatura (Griffiths et al., 2025), e não em resultados diretos
+desta simulação. Em contextos pedagógicos, é fundamental distinguir o
+que foi <em>calculado</em> (estrutura interna e evolução até
+\({\sim}5{,}2\) Myr) do que é <em>previsto pela teoria</em> (destino
+final). Simulações completas de estrelas massivas até o colapso do
+núcleo requerem redes nucleares extensas e estabilidade numérica nas
+fases de queima de Si e O, demandando recursos computacionais
+significativos (Paxton et al., 2011). Do ponto de vista didático, o
+intervalo modelado já é suficiente para ilustrar a perda de massa
+intensa, a expansão do envelope e a transição para o regime de
+supergigante — fenômenos centrais na evolução de estrelas
+massivas.</p>
+
+<h2 id="nucleossintese">Nucleossíntese</h2>
+
+<p>A nucleossíntese compreende os processos responsáveis pela formação
+dos núcleos atômicos e engloba desde os primeiros minutos após o
+<em>Big Bang</em> até os eventos explosivos e violentos que encerram a
+vida de estrelas de diferentes massas. A partir da compreensão dos
+processos responsáveis pela produção dos diferentes elementos
+químicos, torna-se possível relacionar diretamente fenômenos
+astrofísicos a padrões observacionais de abundâncias estelares e
+galácticas.</p>
+
+<p>A seguir descrevemos, de forma sintética, os principais mecanismos
+de geração de núcleos, destacando elementos produzidos, ambientes
+físicos e incertezas associadas. Em cada processo, listamos
+explicitamente os elementos (número atômico Z e nome) cuja produção é
+associada de forma significativa a esse processo.</p>
+
+<h3>Fundamentos físicos</h3>
+
+<p>A viabilidade de cada processo de nucleossíntese é determinada pela
+competição entre a energia cinética térmica dos núcleos e a
+<em>barreira coulombiana</em> de repulsão eletrostática. Para dois
+núcleos de números atômicos \(Z_1\) e \(Z_2\) e raio nuclear
+\(R\sim R_0 A^{1/3}\), a altura da barreira é da ordem de</p>
+\[
+E_{\rm C} = \frac{Z_1 Z_2 e^2}{R} \approx \frac{Z_1 Z_2}{A^{1/3}}\,\mathrm{MeV}\,,
+\tag{11.10}
+\]
+<p>muito superior à energia térmica típica \(k_{\rm B}T \sim 1\)\,keV
+nas condições estelares. A fusão ocorre principalmente por tunelamento
+quântico através dessa barreira, com probabilidade proporcional ao
+fator de Gamow \(\exp(-2\pi\eta)\), onde
+\(\eta = Z_1 Z_2 e^2/\hbar v\) (Kippenhahn, Weigert &amp; Weiss,
+2012). Por isso, reações entre núcleos mais pesados (maior produto
+\(Z_1Z_2\)) requerem temperaturas progressivamente mais altas: a
+queima de H ocorre em \(T\sim10^7\) K, a de He em
+\({\sim}10^8\) K, e as queimas de C, Ne, O e Si em
+\(T\sim10^8\)–\(10^9\) K em estrelas massivas.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Barreira coulombiana e tunelamento (Eq. 11.10) — ver também acima, na Seção "Processos de Geração de Energia"</div>
+  <p class="leitura-card" style="margin-top:0;">O módulo de barreira coulombiana e tunelamento já apresentado
+  anteriormente neste capítulo (logo após a discussão da cadeia pp/CNO/triplo-α)
+  usa exatamente a Equação 11.10 acima — role para cima até
+  "Processos de Geração de Energia" para manipular os sliders de \(Z_1Z_2\) e energia.</p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O fator de Gamow, idêntico ao do capítulo de Geração de Energia</div>
+  <div class="conteudo">
+    <p>Esta é exatamente a mesma probabilidade de tunelamento e o
+    mesmo parâmetro de Sommerfeld \(\eta=Z_1Z_2e^2/\hbar v\) deduzidos
+    em detalhe no capítulo de <strong>Geração de Energia</strong>,
+    incluindo a mesma discussão do pico de Gamow (a competição entre a
+    cauda maxwelliana decrescente e a probabilidade de tunelamento
+    crescente — veja o módulo "Pico de Gamow" logo acima, nesta mesma
+    página). A dependência de \(\eta\) com \(Z_1Z_2\) explica
+    quantitativamente, aqui, por que a nucleossíntese segue uma
+    sequência ordenada de temperaturas — queima de H, depois He,
+    depois elementos progressivamente mais pesados — a mesma lógica
+    física usada naquele capítulo para explicar por que o Sol queima
+    hidrogênio tão devagar.</p>
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Colisão de notação: Z como metalicidade vs. Z como número atômico</div>
+  <div class="conteudo">
+    <p>Ao longo das seções anteriores deste capítulo, \(Z\) designou a
+    <strong>fração de massa em metais</strong> (\(Z\equiv1-X-Y\),
+    mesma convenção do <a href="cap05_equacoes_estrutura.html">Capítulo
+    5</a>). A partir desta seção, retomando a notação padrão de física
+    nuclear, \(Z_1,Z_2\) (e o \(Z\) que acompanha cada elemento na
+    lista abaixo) designam o <strong>número atômico</strong> de um
+    núcleo — o número de prótons, sem relação direta com a fração de
+    massa metálica da estrela como um todo. Ambas são convenções
+    padrão em suas respectivas subáreas (evolução estelar e física
+    nuclear), e o contexto de cada seção deixa claro qual está em uso;
+    o próprio artigo original já opera com essa dupla convenção, comum
+    na literatura de nucleossíntese.</p>
+  </div>
+</div>
+
+<p>Nas camadas mais centrais de uma estrela massiva próxima ao
+colapso, quando \(T\gtrsim4\times10^9\) K e
+\(\rho\gtrsim10^9\) g cm\(^{-3}\), as reações nucleares tornam-se
+suficientemente rápidas em ambas as direções para que o sistema
+atinja o <em>equilíbrio estatístico nuclear</em> (NSE —
+<em>Nuclear Statistical Equilibrium</em>): a abundância de cada
+espécie passa a ser determinada apenas pela temperatura, densidade e
+razão prótons/nêutrons, não mais pela sequência histórica de reações.
+Nesse regime, a distribuição converge para o pico do ferro
+(\(^{56}\)Fe, \(^{56}\)Ni, \(^{56}\)Co), pois esses isótopos possuem a
+maior energia de ligação por núcleon (Woosley &amp; Weaver, 1995). É
+essa característica que torna o ferro um "fim de linha" para a
+nucleossíntese por fusão: fundir núcleos mais pesados que o ferro
+consumiria energia em vez de liberá-la.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Energia de ligação por núcleon (fórmula semi-empírica de massa)</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Calculado a partir da fórmula semi-empírica de massa (Bethe–Weizsäcker),
+    sem qualquer dado tabelado externo — apenas os termos de volume,
+    superfície, Coulomb, assimetria e emparelhamento, para o caso
+    \(N=Z\) (mais estável para cada \(A\)). O pico em \(A\approx56\)
+    (\(^{56}\)Fe/\(^{56}\)Ni/\(^{56}\)Co) explica por que a fusão
+    libera energia até o ferro e a consome depois — a origem física do
+    equilíbrio NSE discutido acima.
+  </p>
+  <div class="grafico-card"><canvas id="mligacao-canvas" role="img" aria-label="Curva de energia de ligacao por nucleon em funcao do numero de massa A, com pico marcado proximo do grupo do ferro." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mligacao-fe56">—</p>
+</div>
+
+<p>Além das reações de fusão hidrostática, dois processos de captura
+de nêutrons produzem os elementos mais pesados que o ferro. No
+processo-s (<em>slow neutron capture</em>), a densidade numérica de
+nêutrons é suficientemente baixa
+(\(n_{\rm n}\lesssim10^{10}\)\,cm\(^{-3}\)) para que os núcleos
+produzidos tenham tempo de decair por \(\beta^-\) antes de capturar um
+novo nêutron, seguindo o "vale de estabilidade" da tabela de núcleos
+(Käppeler et al., 2011; Busso et al., 1999). No processo-r (<em>rapid
+neutron capture</em>), a densidade numérica de nêutrons é
+extremamente elevada (\(n_{\rm n}\gtrsim10^{20}\)\,cm\(^{-3}\)),
+impedindo o decaimento antes de novas capturas; os núcleos muito ricos
+em nêutrons resultantes decaem em cascata após o evento (Cowan et al.,
+2021; Sneden et al., 2008). Essa distinção fundamental — estabelecida
+de forma seminal por Burbidge, Burbidge, Fowler &amp; Hoyle (1957) — é
+o princípio organizador dos padrões de abundância dos elementos
+pesados observados em estrelas e na Galáxia.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Carta de nuclídeos: processo-s vs. processo-r, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Plano N×Z com o vale de estabilidade beta. Um slider de densidade
+    de nêutrons \(n_{\rm n}\) mostra os dois regimes citados no texto:
+    abaixo de \(n_{\rm n}\approx10^{10}\)cm\(^{-3}\), o processo-s
+    (captura→espera→decaimento \(\beta^-\), seguindo de perto o vale);
+    acima de \(n_{\rm n}\approx10^{20}\)cm\(^{-3}\), o processo-r
+    (rajada de capturas rápidas para longe do vale, seguida de cascata
+    de decaimentos \(\beta^-\) de volta). Trajetória e limiares
+    ilustrativos, calibrados apenas para reproduzir corretamente a
+    física qualitativa descrita no texto (picos \(N{\sim}50\),
+    \(N{\sim}82\) e platô do Pb) — não são dados observacionais ou de
+    rede nuclear tabelados.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mnucl-nn">Densidade de nêutrons \(n_n\) [cm⁻³] <span class="valor" id="mnucl-nn-valor">10¹⁰</span></label>
+      <input type="range" id="mnucl-nn" min="0" max="100" step="1" value="0">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mnucl-modo-s" class="botao-modulo botao-modo-toggle ativo">processo-s</button>
+      <button type="button" id="mnucl-modo-r" class="botao-modulo botao-modo-toggle">processo-r</button>
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mnucl-play" class="botao-modulo">▶ Animar captura</button>
+      <button type="button" id="mnucl-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mnucl-canvas" role="img" aria-label="Carta de nuclideos N por Z mostrando o vale de estabilidade e a trajetoria animada de captura de neutrons no processo s ou r." style="width:100%;height:380px;display:block;"></canvas></div>
+  <p class="leitura-card">Regime: <strong id="mnucl-regime">processo-s</strong> — <span id="mnucl-regime-densidade">\(n_n\lesssim10^{10}\) cm⁻³: tempo entre capturas maior que o tempo médio de decaimento β⁻ ("sítios principais confirmados": estrelas AGB).</span></p>
+</div>
+
+<p>Segue a lista completa dos mecanismos de nucleossíntese discutidos
+no texto original, com os respectivos elementos associados a cada
+processo:</p>
+
+<ul>
+  <li><strong>Nucleossíntese Primordial</strong>: ocorreu nos primeiros
+    minutos após o <em>Big Bang</em>, até cerca de 200 s. Produziu
+    primordialmente:
+    <ul>
+      <li>Hidrogênio (Z = 1, H) — prótons livres.</li>
+      <li>Hélio (Z = 2, He) — \(^3\)He e principalmente \(^4\)He.</li>
+      <li>Lítio (Z = 3, Li) — traços de \(^7\)Li (e muito menor \(^6\)Li).</li>
+      <li>Isótopos leves relacionados: deutério (\(^2\)H), \(^3\)He.</li>
+    </ul>
+  </li>
+  <li><strong><em>Spallation</em> por raios cósmicos</strong>: tem
+    origem galáctica, através da fragmentação de núcleos mais pesados
+    por partículas energéticas. Gera principalmente:
+    <ul>
+      <li>Lítio (Z = 3, Li), Berílio (Z = 4, Be), Boro (Z = 5, B).</li>
+    </ul>
+    Estes elementos são pouco produzidos em estrelas e explicam as
+    observações em estrelas pobres em metais (Fields, 2011).
+  </li>
+  <li><strong>Queimas estelares hidrostáticas e processos em estrelas
+    massivas / SNe II</strong>: estrelas de grande massa e as
+    supernovas por colapso produzem grande parte dos elementos leves
+    até o pico do ferro via queimas sucessivas. Elementos com
+    contribuições significativas incluem:
+    <ul>
+      <li>Carbono (Z = 6, C), Nitrogênio (Z = 7, N), Oxigênio (Z = 8, O) — He- e C-<em>burning</em>; AGB e massas altas.</li>
+      <li>Flúor (Z = 9, F) — contribuição de AGB, processos-\(\nu\) e algumas supernovas.</li>
+      <li>Neônio (Z = 10, Ne), Sódio (Z = 11, Na), Magnésio (Z = 12, Mg), Alumínio (Z = 13, Al) — He-, C- e Ne-<em>burning</em>.</li>
+      <li>Silício (Z = 14, Si), Fósforo (Z = 15, P), Enxofre (Z = 16, S), Cloro (Z = 17, Cl), Argônio (Z = 18, Ar) — estágios avançados e queima explosiva.</li>
+      <li>Potássio (Z = 19, K), Cálcio (Z = 20, Ca) — queima explosiva e camadas pré-explosão.</li>
+      <li>Escândio (Z = 21, Sc), Titânio (Z = 22, Ti), Vanádio (Z = 23, V), Cromo (Z = 24, Cr), Manganês (Z = 25, Mn) — produções variáveis em SNe II e queima explosiva.</li>
+      <li>Ferro (Z = 26, Fe), Cobalto (Z = 27, Co), Níquel (Z = 28, Ni) — pico de ferro; \(^{56}\)Ni produzido em explosão (decaindo em \(^{56}\)Fe).</li>
+      <li>Cobre (Z = 29, Cu), Zinco (Z = 30, Zn) — produções via queima explosiva, processo-\(\alpha\) rico, e componente <em>weak-s</em>.</li>
+    </ul>
+    Estas formas de rendimentos dependem fortemente da massa estelar,
+    metalicidade, rotação e detalhes da explosão (Woosley &amp;
+    Weaver, 1995; Nomoto et al., 2013).
+  </li>
+  <li><strong>Processo-s (captura lenta de nêutrons)</strong> —
+    estrelas AGB e <em>weak-s</em> em massas altas: os processos-s
+    constroem núcleos mais pesados que o Ferro através de capturas
+    lentas de nêutrons. Entre os elementos produzidos estão:
+    <ul>
+      <li>Primeiro pico (\(N\sim50\)): Estrôncio (Z = 38, Sr), Ítrio (Z = 39, Y) e Zircônio (Z = 40, Zr).</li>
+      <li>Segundo pico (\(N\sim82\)): Bário (Z = 56, Ba), Lantânio (Z = 57, La), Cério (Z = 58, Ce) e Neodímio (Z = 60, Nd).</li>
+      <li>Terceiro pico: Chumbo (Z = 82, Pb) é um produto final típico de processos-s em baixa-metalicidade; Polônio/Bismuto em certos ramos (mas Bi é <em>borderline</em>).</li>
+      <li>Lantanídeos (Z = 57–71) em parte são produzidos pelo processo-s (com contribuição r significativa para muitos isótopos).</li>
+    </ul>
+    Ambientes: estrelas AGB de baixa a média massa (<em>dredge-ups</em>)
+    e componente <em>weak-s</em> em estrelas massivas (Käppeler et
+    al., 2011; Busso et al., 1999).
+  </li>
+  <li><strong>Processos-r (captura rápida de nêutrons)</strong>: em
+    ambientes extremamente ricos em nêutrons, capturas rápidas
+    constroem núcleos bem além do ferro. Elementos fortemente
+    afetados:
+    <ul>
+      <li>Lantanídeos e actinídeos: Európio (Z = 63, Eu — indicador de processo-r), Gadolínio (Z = 64, Gd), até Lutécio (Z = 71, Lu).</li>
+      <li>Metais pesados: Platina (Z = 78, Pt), Ouro (Z = 79, Au) e Prata (Z = 47, Ag).</li>
+      <li>Actinídeos: Tório (Z = 90, Th) e Urânio (Z = 92, U) — produzidos pelo processo-r e usados como cronômetros cosmoquímicos (núcleos radioativos de meia-vida longa cujas razões isotópicas em relação aos produtos de decaimento permitem estimar idades estelares e galácticas; Cowan et al., 2021; Schatz et al., 2002).</li>
+      <li>Outros: Ósmio (Z = 76, Os) e Irídio (Z = 77, Ir) têm contribuições r importantes.</li>
+    </ul>
+    Ambientes: fusões de estrelas de nêutrons são atualmente sítios
+    principais confirmados; raras supernovas magnetorrotacionais podem
+    contribuir (Thielemann et al., 2017; Metzger, 2019; Sneden et al.,
+    2008).
+  </li>
+  <li><strong>Supernovas Ia</strong>: produzem principalmente o pico de
+    ferro em grande escala nas galáxias:
+    <ul>
+      <li>Ferro (Z = 26, Fe), Níquel (Z = 28, Ni), Cobalto (Z = 27, Co) — grandes quantidades de \(^{56}\)Ni que decai em \(^{56}\)Fe.</li>
+      <li>Elementos intermediários (Si, S, Ca) são produzidos nas camadas externas por queima incompleta.</li>
+    </ul>
+    Papel: dominam o enriquecimento de Fe nas fases tardias da história
+    galáctica (Nomoto et al., 2013). Como discutido no
+    <a href="cap09_anas_brancas.html">Capítulo 9</a>, é justamente o
+    acréscimo de matéria sobre uma anã branca até próximo da massa de
+    Chandrasekhar que desemboca nesse tipo de explosão termonuclear —
+    o módulo de simulação de acréscimo daquele capítulo termina
+    exatamente onde esta discussão de nucleossíntese começa.
+  </li>
+  <li><strong>AGB e nebulosas planetárias (produção não
+    explosiva)</strong>: além do processo-s listado acima, estrelas
+    AGB e seus ventos produzem:
+    <ul>
+      <li>Carbono (Z = 6, C) — formação de estrelas de carbono via dredge-up.</li>
+      <li>Nitrogênio (Z = 7, N) — processamento CNO e dredge-up.</li>
+      <li>Elementos leves e raros: \(^7\)Li (Z = 3, Li, via processo Cameron–Fowler em algumas AGB), Flúor (Z = 9, F).</li>
+    </ul>
+  </li>
+  <li><strong>Processos-p e processos-\(\gamma\) (fotodesintegração)</strong>:
+    produzem isótopos raros que não nascem por captura de nêutrons.
+    Exemplos notórios:
+    <ul>
+      <li>Isótopos p: Mo (Z = 42, especialmente \(^{92,94}\)Mo) e Ru (Z = 44, \(^{96,98}\)Ru).</li>
+      <li>Processos-\(\nu p\) em ambientes ricos em neutrinos (e.g., certas regiões de SNe) contribuem para nucleossíntese de alguns núcleos leves.</li>
+    </ul>
+    Ambientes: camadas internas de supernovas de colapso submetidas a
+    intensas radiações; regiões com fluxo intenso de neutrinos
+    (Arnould &amp; Goriely, 2003; Rauscher et al., 2002).
+  </li>
+  <li><strong>Processos explosivos raros e captura de prótons
+    (rp-process)</strong>: em explosões termonucleares em superfície
+    de estrelas compactas (<em>X-ray bursts</em>) ocorrem capturas
+    rápidas de prótons que podem sintetizar núcleos ricos em prótons
+    até números de massa \(A\sim100\). Elementos envolvidos
+    (principalmente em isótopos exóticos, muitas vezes instáveis):
+    <ul>
+      <li>Produções isotópicas em regiões de Ga–Sn (Z\(\approx\)31–50) e além, dependendo das condições.</li>
+    </ul>
+    Exemplos: processos-rp têm impacto sobre abundâncias isotópicas,
+    mas raramente produzem isótopos estáveis abundantes observáveis em
+    grande escala (Schatz et al., 2001).
+  </li>
+  <li><strong>Novas (explosões em sistemas cataclísmicos)</strong>:
+    novas termonucleares (José &amp; Hernanz, 1998) na superfície de
+    anãs brancas contribuem para alguns isótopos leves/intermediários:
+    <ul>
+      <li>\(^{13}\)C, \(^{15}\)N e \(^{17}\)O (elementos leves com isótopos específicos).</li>
+      <li>\(^{22}\)Na e \(^{26}\)Al (isótopos radioativos observáveis em raios \(\gamma\)) — contribuições combinadas com estrelas massivas.</li>
+      <li>Em certas condições, produção de \(^7\)Be (decaindo em \(^7\)Li).</li>
+    </ul>
+  </li>
+  <li><strong>Processos de Neutrino (\(\nu\)-process)</strong>:
+    interações de neutrinos durante a explosão de uma SN podem
+    sintetizar alguns núcleos raros:
+    <ul>
+      <li>\(^7\)Li (Z = 3, Li), \(^{11}\)B (Z = 5, B), \(^{19}\)F (Z = 9, F), \(^{138}\)La (Z = 57), \(^{180}\)Ta (Z = 73) — exemplos dependentes do fluxo neutrínico.</li>
+    </ul>
+    Destaque: contribuições cruciais para certas abundâncias raras que
+    não são explicadas apenas por processos-s ou -r (Woosley et al.,
+    1990; Heger et al., 2005).
+  </li>
+  <li><strong>Contribuições mistas / menores e elementos de
+    transição</strong>: muitos elementos entre Ga (Z = 31) e Te (Z =
+    52), e elementos do bloco d e f (\(Z\approx30\)–80) têm origens
+    distribuídas entre:
+    <ul>
+      <li><em>weak-s</em> em estrelas massivas,</li>
+      <li>processos-s em AGB,</li>
+      <li>processos-s em eventos violentos,</li>
+      <li>processamentos explosivos em SNe II/SNe Ia,</li>
+      <li>processos-p para isótopos ricos em prótons.</li>
+    </ul>
+    Exemplos: Ga (31), Ge (32), As (33), Se (34), Br (35), Kr (36), Rb
+    (37), Sr (38), Y (39), Zr (40), Nb (41), Mo (42), Tc (43 — sem
+    isótopos estáveis), Ru (44), Rh (45), Pd (46), Ag (47), Cd (48),
+    In (49), Sn (50), Sb (51), Te (52), I (53), Xe (54), Cs (55), Ba
+    (56), La (57), Ce (58), Pr (59), Nd (60), Pm (61, radioativo), Sm
+    (62), Eu (63), Gd (64), Tb (65), Dy (66), Ho (67), Er (68), Tm
+    (69), Yb (70), Lu (71), Hf (72), Ta (73), W (74), Re (75), Os
+    (76), Ir (77), Pt (78), Au (79), Hg (80), Tl (81), Pb (82), Bi
+    (83). Para cada elemento desta faixa existe uma "impressão
+    digital" isotópica que modelos galácticos buscam reproduzir.
+  </li>
+  <li><strong>Elementos naturais mais pesados</strong>:
+    <ul>
+      <li>Protactínio (Z = 91, Pa) — também associado ao processo-s.</li>
+      <li>Elementos com Z &gt; 92 (Neptúnio em diante): Neptúnio (Z = 93), Plutônio (Z = 94), Amerício (Z = 95) etc. — em geral são instáveis com meias-vidas curtas; embora o processo-r possa produzir núcleos muito pesados, esses elementos decaem e não se acumulam em abundâncias cósmicas significativas. Apenas Th e U são abundantes e detectáveis em espectros estelares antigos.</li>
+    </ul>
+  </li>
+  <li><strong>Elementos sintéticos / superpesados (Z &gt; 92 até Z =
+    118)</strong>:
+    <ul>
+      <li>A maioria dos elementos transurânicos (\(Z\geq93\)) foram sintetizados em laboratórios terrestres (reatores, aceleradores) e têm meias-vidas muito curtas. Não contribuem para as abundâncias cósmicas observáveis.</li>
+      <li>Exemplos: Np (93), Pu (94), Am (95), Cm (96), …, Og (118). Não são relevantes como fontes estáveis no meio interestelar.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Tabela periódica da origem cósmica dos elementos</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Cada elemento (Z = 1 a 118) colorido pelo(s) processo(s)
+    dominante(s) de nucleossíntese, usando <strong>exatamente</strong>
+    os dados do Apêndice B (tabela completa reproduzida logo abaixo,
+    no final do capítulo). Clique em um elemento para ver Z, nome,
+    processo(s) e o comentário original da tabela; use o filtro para
+    destacar apenas um processo por vez. Elementos de origem mista
+    (ex.: a faixa Ga–Bi, Z = 31–83) aparecem com cor mesclada, não
+    forçados a um único processo — refletindo que a fração exata de
+    cada via de produção para esses elementos é ainda assunto de
+    pesquisa ativa (Burbidge et al., 1957; Käppeler et al., 2011;
+    Cowan et al., 2021; Nomoto et al., 2013).
+  </p>
+  <div class="mtab-controles">
+    <label for="mtab-filtro">Filtrar por processo:</label>
+    <select id="mtab-filtro" style="padding:.4rem;border-radius:6px;border:1px solid #ccc;">
+      <option value="todos">— todos os processos —</option>
+    </select>
+  </div>
+  <div class="mtab-wrap">
+    <div class="mtab-grid" id="mtab-grid"></div>
+  </div>
+  <div class="mtab-legenda" id="mtab-legenda"></div>
+  <div class="mtab-painel" id="mtab-painel">Clique em um elemento da tabela acima para ver detalhes.</div>
+</div>
+
+<h3>Estrutura em camadas pré-colapso ("cebola")</h3>
+<p>A convergência para o pico do ferro descrita acima nas camadas mais
+centrais, junto com as queimas sucessivas de C, Ne, O e Si discutidas
+nesta seção, produz a clássica estrutura em camadas concêntricas
+("estrutura em cebola") de uma estrela massiva pouco antes do colapso
+do núcleo — cada camada dominada por um estágio de queima diferente,
+do envelope de H ainda intocado até o núcleo de Fe/Ni inerte no
+centro.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Estrutura em camadas pré-colapso, animada</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Esquema didático (não um perfil MESA real — nenhum arquivo de
+    perfil de estrela massiva pré-colapso foi encontrado neste
+    projeto) das camadas concêntricas de queima nuclear discutidas no
+    texto acima (H, He, C, Ne, O, Si, núcleo de Fe/Ni), na ordem de
+    temperatura de ignição crescente rumo ao centro.
+  </p>
+  <div class="controles" style="display:flex;gap:.5rem;">
+    <button type="button" id="mcebola-play" class="botao-modulo">▶ Animar formação das camadas</button>
+    <button type="button" id="mcebola-reset" class="botao-modulo">↺ Reiniciar</button>
+  </div>
+  <div class="grafico-card"><canvas id="mcebola-canvas" role="img" aria-label="Diagrama em camadas concentricas mostrando a estrutura em cebola de uma estrela massiva pouco antes do colapso do nucleo, do envelope de hidrogenio ate o nucleo de ferro-niquel." style="width:100%;height:380px;display:block;"></canvas></div>
+</div>
+
+<h2 id="conclusoes">Conclusões</h2>
+
+<p>Este trabalho propôs uma síntese didático-computacional da evolução
+estelar, combinando dois tipos de recursos: (i) trilhas evolutivas e
+isócronas públicas do projeto MIST (Dotter, 2016), utilizadas para
+construir diagramas HR e de Kiel com e sem rotação, bem como para
+analisar temporalmente parâmetros estruturais e nucleares de estrelas
+entre \(0{,}5\) e \(25\,\mathrm M_{\odot}\); e (ii) uma simulação
+própria no código MESA (versão r23.05.1) para uma estrela de
+\(50\,\mathrm M_{\odot}\) com ventos prescritos pelos esquemas
+<em>Vink</em> e <em>Dutch</em>. O objetivo não foi produzir resultados
+astrofísicos inéditos, mas integrar, em um único estudo guiado por
+dados quantitativos, o ciclo de vida estelar desde a sequência
+principal até as fases evolutivas avançadas, incluindo nucleossíntese,
+para uso como material de apoio no ensino de Física e Astronomia.</p>
+
+<p>Os resultados obtidos com as trilhas MIST confirmaram tendências
+físicas robustas. Nos diagramas HR, a forte dependência da
+luminosidade e da temperatura efetiva com a massa inicial foi
+diretamente visualizada: estrelas de baixa massa permanecem próximas
+à sequência principal por escalas de tempo comparáveis ou superiores
+à idade do Universo, enquanto estrelas massivas evoluem rapidamente
+para fases de supergigante. A análise temporal dos processos
+nucleares confirmou os regimes esperados: a cadeia pp domina em
+estrelas de massa solar, o ciclo CNO prevalece desde o ZAMS em
+estrelas de \({\gtrsim}1{,}5\)–\(2\,\mathrm M_{\odot}\), e o processo
+triplo-\(\alpha\) fica ativo após o esgotamento do hidrogênio central
+— com o pico máximo de \(5\,\mathrm M_{\odot}\) ocorrendo nos pulsos
+térmicos da fase TPAGB (\({\sim}115{,}6\) Myr), não durante a queima
+central de hélio. A densidade central cresce desde
+\({\sim}80\)\,g\,cm\(^{-3}\) na ZAMS de estrelas solares até
+\({\sim}1{,}25\times10^7\)\,g\,cm\(^{-3}\) nos pulsos térmicos de
+\(5\,\mathrm M_{\odot}\). As isócronas evidenciaram o deslocamento do
+ponto de <em>turn-off</em> com a idade e o efeito da metalicidade
+sobre a posição da sequência principal no diagrama de Kiel. A
+simulação MESA capturou o início da expansão do envelope e o aumento
+da perda de massa conforme a estrela de \(50\,\mathrm M_{\odot}\)
+deixa a sequência principal — a massa caiu aproximadamente \(47\%\)
+no período simulado de \({\sim}5{,}2\) Myr.</p>
+
+<p>Algumas limitações devem ser consideradas na interpretação dos
+resultados. As trajetórias evolutivas analisadas foram obtidas a
+partir da grade MIST e, portanto, dependem das hipóteses físicas,
+prescrições de perda de massa, critérios de mistura e demais
+parâmetros adotados nesses modelos. Além disso, as trilhas utilizadas
+foram calculadas sem rotação, com \(v/v_{\mathrm{crit}}=0\), de modo
+que efeitos como mistura induzida pela rotação, alterações no tempo de
+vida da sequência principal e variações nas taxas de perda de massa
+não foram considerados. O filtro temporal de idades superiores a
+\(10^6\) anos remove apenas as fases mais iniciais da pré-sequência
+principal, mas não corresponde a uma seleção direta por estágio
+evolutivo. Como consequência, parte da evolução pré-ZAMS permanece
+representada nas curvas de estrelas de baixa massa. A cobertura
+temporal das trilhas também não é uniforme para todas as massas, pois
+algumas sequências não alcançam as mesmas fases evolutivas finais
+dentro da grade considerada. Dessa forma, as comparações apresentadas
+devem ser interpretadas dentro do intervalo de massas, metalicidades,
+idades e fases evolutivas efetivamente coberto pelos modelos. Por
+fim, o caráter predominantemente didático e comparativo deste
+trabalho não contempla uma análise sistemática das incertezas
+numéricas e teóricas associadas às diferentes prescrições de evolução
+estelar.</p>
+
+<p>A contribuição principal deste trabalho é de natureza
+didático-computacional: ao integrar trilhas evolutivas públicas,
+isócronas, análise temporal de parâmetros internos e uma simulação
+computacional própria em um único material narrativo e quantitativo,
+oferecemos um recurso estruturado para o ensino de evolução estelar em
+cursos avançados de graduação e pós-graduação em Física e Astronomia.
+A tabela periódica anotada na seção de nucleossíntese sintetiza
+visualmente a conexão entre os processos astrofísicos e a origem dos
+elementos, conectando a evolução estelar ao enriquecimento químico
+galáctico. O <em>inlist</em> MESA disponibilizado no Apêndice A
+permite que os leitores reproduzam a simulação apresentada e também
+modifiquem parâmetros como massa inicial, metalicidade, rotação,
+prescrições de mistura e perda de massa, de acordo com os objetivos
+específicos de cada estudo ou atividade pedagógica. Espera-se que este
+material contribua como referência ou ponto de partida para
+laboratórios computacionais em disciplinas de Astrofísica e Física
+Computacional em programas de graduação e pós-graduação em Física.</p>
+
+<div class="leitura-card">
+  <div class="rotulo-card">Leituras complementares</div>
+  <p style="margin:0 0 .6rem;">
+    Para uma extensão muito recente do próprio projeto MIST usado
+    neste capítulo — agora cobrindo a sequência de resfriamento de
+    anãs brancas, conectando diretamente com o
+    <a href="cap09_anas_brancas.html">Capítulo 9</a> — ver Bauer et
+    al. (2026). Sobre o impacto da perda de massa na sequência
+    principal para a estrutura e evolução de estrelas Wolf–Rayet
+    (relevante para a simulação MESA de \(50\,M_\odot\) discutida
+    neste capítulo), ver a revisão recente de Josiek et al. (2024).
+    Para o tratamento completo e atualizado da física nuclear estelar
+    (fator de Gamow, taxas de reação, cadeia pp e ciclo CNO) por trás
+    das curvas de luminosidade nuclear apresentadas aqui, ver Iliadis
+    (2015).
+  </p>
+</div>
+
+<h2 id="agradecimentos">Agradecimentos</h2>
+<p>O autor agradece o apoio financeiro da Coordenação de
+Aperfeiçoamento de Pessoal de Nível Superior (CAPES), do Conselho
+Nacional de Desenvolvimento Científico e Tecnológico (CNPq) e ao
+Departamento de Física da Universidade Federal de Sergipe (DFI/UFS).
+Este trabalho foi desenvolvido no âmbito do Programa de Pós-Graduação
+em Física, contando com a infraestrutura institucional e o ambiente
+acadêmico fornecidos pela UFS.</p>
+
+<h2 id="apendice-a">Apêndice A: Inlist Utilizado</h2>
+<p>Nesta seção, disponibilizamos o conteúdo do arquivo
+<code>inlist</code> usado na simulação MESA.</p>
+
+<div style="position:relative;">
+  <button type="button" id="apA-copiar" class="botao-copiar" type="button">Copiar</button>
+  <pre class="apendice-codigo" id="apA-codigo"><span class="tok-key">&amp;star_job</span>
+  create_pre_main_sequence_model = <span class="tok-num">.false.</span>
+  pgstar_flag = <span class="tok-num">.false.</span>
+  set_initial_age = <span class="tok-num">.true.</span>
+  initial_age = <span class="tok-num">1d6</span>
+/
+
+<span class="tok-key">&amp;eos</span>
+/
+
+<span class="tok-key">&amp;kap</span>
+  Zbase = <span class="tok-num">0.02</span>
+/
+
+<span class="tok-key">&amp;controls</span>
+  initial_mass = <span class="tok-num">50</span>
+  initial_z = <span class="tok-num">0.02</span>
+
+  <span class="tok-com">! VENTOS -  50 Msun</span>
+  hot_wind_scheme = <span class="tok-str">'Vink'</span>
+  Vink_scaling_factor = <span class="tok-num">2.0</span>
+  cool_wind_RGB_scheme = <span class="tok-str">'Dutch'</span>
+  cool_wind_AGB_scheme = <span class="tok-str">'Dutch'</span>
+  Dutch_scaling_factor = <span class="tok-num">2.0</span>
+
+  <span class="tok-com">! Condições de parada</span>
+  max_age = <span class="tok-num">1.0d7</span>           <span class="tok-com">! Reduzido - 50 Msun vive ~6-8 milhões de anos</span>
+  max_model_number = <span class="tok-num">100000</span>
+
+  <span class="tok-com">! xa_central_lower_limit_species(1) = 'he4'</span>
+  <span class="tok-com">! xa_central_lower_limit(1) = 1d-3</span>
+  <span class="tok-com">! xa_central_lower_limit_species(2) = 'c12'</span>
+  <span class="tok-com">! xa_central_lower_limit(2) = 1d-3</span>
+
+  <span class="tok-com">! Controles de passo de tempo</span>
+  varcontrol_target = <span class="tok-num">1d-2</span>
+  delta_lgL_H_limit = <span class="tok-num">0.5</span>   <span class="tok-com">! Aumentado</span>
+  delta_lgL_He_limit = <span class="tok-num">0.5</span>  <span class="tok-com">! Aumentado</span>
+  delta_lgL_z_limit = <span class="tok-num">0.5</span>   <span class="tok-com">! Aumentado</span>
+
+  <span class="tok-com">! Mixing extra para estrelas massivas</span>
+  overshoot_scheme(1) = <span class="tok-str">'exponential'</span>
+  overshoot_zone_type(1) = <span class="tok-str">'any'</span>
+  overshoot_zone_loc(1) = <span class="tok-str">'core'</span>
+  overshoot_bdy_loc(1) = <span class="tok-str">'top'</span>
+  overshoot_f(1) = <span class="tok-num">0.02</span>
+  overshoot_f0(1) = <span class="tok-num">0.01</span>
+/</pre>
+</div>
+
+<p>O <code>inlist</code> apresentado neste apêndice, em conjunto com a
+descrição metodológica da Seção "Modelo de Evolução Estelar", permite
+reproduzir a configuração da simulação MESA utilizada neste trabalho.
+Para ampliar a transparência e a reprodutibilidade do estudo, os
+autores disponibilizam no repositório computacional associado ao
+artigo original os códigos de pós-processamento em Python, os
+notebooks de análise, os arquivos <code>inlist</code> selecionados, o
+arquivo <code>history.data</code>, as figuras geradas e instruções
+detalhadas para configuração e execução do ambiente computacional. Os
+arquivos completos das trilhas e isócronas MIST não são redistribuídos
+no repositório e devem ser obtidos a partir do projeto oficial MIST.
+Da mesma forma, o arquivo <code>profiles.index</code> e os arquivos
+<code>profile*.data</code> necessários à construção do diagrama de
+Kippenhahn não são disponibilizados, devendo ser produzidos ou obtidos
+a partir da execução correspondente do MESA. Assim, a reprodução
+integral das análises requer a instalação das dependências indicadas e
+a obtenção prévia dos arquivos MIST e MESA necessários.</p>
+
+<h2 id="apendice-b">Apêndice B: Mecanismos de Síntese e Ambientes Físicos dos Elementos Químicos</h2>
+<p>Tabela completa dos mecanismos de nucleossíntese e ambientes
+físicos associados a cada elemento químico, exatamente como no
+original em LaTeX (esta é a mesma tabela usada como fonte de dados
+para o módulo "Tabela periódica da origem cósmica dos elementos"
+acima).</p>
+
+<div class="tabela-scroll">
+<table>
+<caption>Principais mecanismos e ambientes físicos para a síntese dos elementos químicos conhecidos.</caption>
+<thead><tr><th>Processo Progenitor</th><th>Z</th><th>Elementos</th><th>Comentários</th></tr></thead>
+<tbody>
+<tr><td rowspan="3">Nucleossíntese Primordial</td><td>1</td><td>Hidrogênio (H)</td><td>Sob a forma de prótons livres (\(^1\)H) e deutério (\(^2\)H).</td></tr>
+<tr><td>2</td><td>Hélio (He)</td><td>Principalmente \(^4\)He, mas também \(^3\)He.</td></tr>
+<tr><td>3</td><td>Lítio (Li)</td><td>Traços de \(^7\)Li, quantidade ainda menor de \(^6\)Li.</td></tr>
+<tr><td rowspan="3">Espalação por raios cósmicos</td><td>3</td><td>Lítio (Li)</td><td rowspan="3">Produzidos por meio da fragmentação dos núcleos de elementos mais pesados por raios cósmicos.</td></tr>
+<tr><td>4</td><td>Berílio (Be)</td></tr>
+<tr><td>5</td><td>Boro (B)</td></tr>
+<tr><td rowspan="25">Queimas estelares hidrostáticas e Supernovas</td><td>6</td><td>Carbono (C)</td><td rowspan="2">Produzidos durante He- e C-burning e dredge-ups na fase de AGB de estrelas de massa baixa a intermediária ou durante a SP de estrelas massivas.</td></tr>
+<tr><td>7</td><td>Nitrogênio (N)</td></tr>
+<tr><td>8</td><td>Oxigênio (O)</td><td>Produzidos em AGBs e SNe de colapso de núcleo em estrelas massivas.</td></tr>
+<tr><td>9</td><td>Flúor (F)</td><td>Produzido em estrelas AGB e por processos-\(\nu\) em supernovas de colapso de núcleo.</td></tr>
+<tr><td>10</td><td>Neônio (Ne)</td><td rowspan="3">Produzidos durante He-, C- e Ne-burning.</td></tr>
+<tr><td>11</td><td>Sódio (Na)</td></tr>
+<tr><td>13</td><td>Alumínio (Al)</td></tr>
+<tr><td>12</td><td>Magnésio (Mg)</td><td>Elemento \(\alpha\), produzido em estrelas massivas nas fases antes do colapso do núcleo.</td></tr>
+<tr><td>14</td><td>Silício (Si)</td><td>Produzido em C- e Ne-burning (componente estática) e queima explosiva (componente dinâmica); elemento \(\alpha\) dominante em estrelas massivas.</td></tr>
+<tr><td>15</td><td>Fósforo (P)</td><td>Produzido durante estágios avançados e queima explosiva.</td></tr>
+<tr><td>16</td><td>Enxofre (S)</td><td>Elemento \(\alpha\); produzido em O-burning e queima explosiva.</td></tr>
+<tr><td>17</td><td>Cloro (Cl)</td><td rowspan="2">Produzidos durante estágios avançados e queima explosiva.</td></tr>
+<tr><td>18</td><td>Argônio (Ar)</td></tr>
+<tr><td>19</td><td>Potássio (K)</td><td>Proveniente de queima explosiva e camadas pré-explosão.</td></tr>
+<tr><td>20</td><td>Cálcio (Ca)</td><td>Elemento \(\alpha\); produzido em O- e Si-burning e queima explosiva.</td></tr>
+<tr><td>21</td><td>Escândio (Sc)</td><td rowspan="5">Produções variáveis em supernovas tipo II e queima explosiva.</td></tr>
+<tr><td>22</td><td>Titânio (Ti)</td></tr>
+<tr><td>23</td><td>Vanádio (V)</td></tr>
+<tr><td>24</td><td>Cromo (Cr)</td></tr>
+<tr><td>25</td><td>Manganês (Mn)</td></tr>
+<tr><td>26</td><td>Ferro (Fe)</td><td rowspan="3">Elementos do pico do Ferro, gerados durante supernovas Ia ou em estrelas massivas (componente weak-s); \(^{56}\)Ni decai, gerando \(^{56}\)Fe.</td></tr>
+<tr><td>27</td><td>Cobalto (Co)</td></tr>
+<tr><td>28</td><td>Níquel (Ni)</td></tr>
+<tr><td>29</td><td>Cobre (Cu)</td><td rowspan="2">Produções via queima explosiva, processos-\(\alpha\) rico e processos-s, constituindo a componente weak-s.</td></tr>
+<tr><td>30</td><td>Zinco (Zn)</td></tr>
+<tr><td>Contribuições Mistas (processos-s, r, p e explosivos)</td><td>31–83</td><td>—</td><td>Elementos neste intervalo geralmente têm múltiplas vias de produção. Os casos mais relevantes para o enriquecimento galáctico estão detalhados nos blocos de processos-s, r e p abaixo.</td></tr>
+<tr><td rowspan="8">Processos-s (captura lenta de nêutrons) — estrelas de massa baixa a intermediária na fase AGB (componente main-s) e estrelas massivas (componente weak-s)</td><td>38</td><td>Estrôncio (Sr)</td><td rowspan="8">Constituem a componente main-s.</td></tr>
+<tr><td>39</td><td>Ítrio (Y)</td></tr>
+<tr><td>40</td><td>Zircônio (Zr)</td></tr>
+<tr><td>56</td><td>Bário (Ba)</td></tr>
+<tr><td>57</td><td>Lantânio (La)</td></tr>
+<tr><td>58</td><td>Cério (Ce)</td></tr>
+<tr><td>60</td><td>Neodímio (Nd)</td></tr>
+<tr><td>82</td><td>Chumbo (Pb)</td></tr>
+<tr><td>83</td><td>Bismuto (Bi)</td><td>Limítrofe (maior núcleo estável oriundo de processos-s), gerado em certas cadeias.</td></tr>
+<tr><td>84</td><td>Polônio (Po)</td><td>Instável, gerado a partir do bismuto em certas cadeias.</td></tr>
+<tr><td rowspan="10">Processos-r (captura rápida de nêutrons) — Fusões de estrelas de nêutrons e raras supernovas magnetorrotacionais</td><td>63</td><td>Európio (Eu)</td><td rowspan="2">Lantanídeos e actinídeos produzidos em parte pelo processo-s, mas com contribuição significativa de processos-r para muitos isótopos.</td></tr>
+<tr><td>71</td><td>Lutécio (Lu)</td></tr>
+<tr><td>47</td><td>Prata (Ag)</td><td rowspan="3">Metais Pesados.</td></tr>
+<tr><td>78</td><td>Platina (Pt)</td></tr>
+<tr><td>79</td><td>Ouro (Au)</td></tr>
+<tr><td>76</td><td>Ósmio (Os)</td><td rowspan="2">Processos-r contribuem de maneira importante.</td></tr>
+<tr><td>77</td><td>Irídio (Ir)</td></tr>
+<tr><td>90</td><td>Tório (Th)</td><td rowspan="2">Usados como cronômetros cosmoquímicos.</td></tr>
+<tr><td>92</td><td>Urânio (U)</td></tr>
+<tr><td rowspan="2">Processos-p e processos-\(\gamma\)</td><td>42</td><td>Molibdênio (Mo)</td><td>Principalmente os isótopos \(^{92}\)Mo e \(^{94}\)Mo.</td></tr>
+<tr><td>44</td><td>Rutênio (Ru)</td><td>Principalmente os isótopos \(^{96}\)Ru e \(^{98}\)Ru.</td></tr>
+<tr><td rowspan="2">Processos-rp e processos-\(\nu\)p</td><td>31</td><td>Gálio (Ga)</td><td rowspan="2">Geram isótopos até A \(\sim\) 100.</td></tr>
+<tr><td>50</td><td>Estanho (Sn)</td></tr>
+<tr><td rowspan="3">Processos-\(\nu\)</td><td>19</td><td>Potássio (K)</td><td rowspan="3">Ocorrem em supernovas de colapso de núcleo (II, Ib e Ic).</td></tr>
+<tr><td>21</td><td>Escândio (Sc)</td></tr>
+<tr><td>23</td><td>Vanádio (V)</td></tr>
+<tr><td rowspan="6">Novas — explosões em sistemas cataclísmicos</td><td>4</td><td>Berílio (Be)</td><td rowspan="6">Produção de isótopos leves e intermediários específicos: \(^{13}\)C, \(^{15}\)N, \(^{17}\)O, \(^{22}\)Na, \(^{26}\)Al e \(^7\)Be (que decai em \(^7\)Li).</td></tr>
+<tr><td>6</td><td>Carbono (C)</td></tr>
+<tr><td>7</td><td>Nitrogênio (N)</td></tr>
+<tr><td>8</td><td>Oxigênio (O)</td></tr>
+<tr><td>11</td><td>Sódio (Na)</td></tr>
+<tr><td>13</td><td>Alumínio (Al)</td></tr>
+<tr><td rowspan="5">Elementos sintéticos/superpesados</td><td>93</td><td>Neptúnio (Np)</td><td rowspan="5">Instáveis e com meias-vidas curtas, estes elementos decaem e não se acumulam em abundâncias cósmicas significativas. Não são relevantes como fontes estáveis no meio estelar, sendo sintetizados em laboratórios terrestres.</td></tr>
+<tr><td>94</td><td>Plutônio (Pu)</td></tr>
+<tr><td>95</td><td>Amerício (Am)</td></tr>
+<tr><td>…</td><td>…</td></tr>
+<tr><td>118</td><td>Oganessônio (Og)</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 11, adaptação de
+  Garcia, Carvalho, Oliveira, Porto, Santos, Santos, Sousa e Souto (DFI/UFS).
+</footer>
+
+<script src="assets/cap11_modulos.js"></script>

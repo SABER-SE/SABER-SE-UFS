@@ -1,0 +1,1088 @@
+[
+  {
+    "file": "cap01_paralaxe.html",
+    "url": "http://localhost:8960/cap01_paralaxe.html",
+    "modules": [
+      {
+        "rotulo": "Diagrama Sol–Terra–estrela: ajuste a distância",
+        "sliderIds": [
+          "p1-dist"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "tan α exato vs. aproximação α (radianos)",
+        "sliderIds": [
+          "p2-max"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "d(pc) = 1 / α(arcsec)",
+        "sliderIds": [
+          "p3-alpha-range",
+          "p3-d-range"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "A Terra orbitando o Sol, com a estrela-alvo oscilando contra o fundo de estrelas distantes",
+        "sliderIds": [
+          "p4-dist"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "p4-mes",
+            "valor": "jan"
+          },
+          {
+            "id": "p4-desloc",
+            "valor": "+0,00e+0"
+          }
+        ]
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap02_magnitudes.html",
+    "url": "http://localhost:8960/cap02_magnitudes.html",
+    "modules": [
+      {
+        "rotulo": "m₁ − m₂ = −2,5 log₁₀(F₁/F₂)",
+        "sliderIds": [
+          "m1-razao"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Efeito de avermelhamento e extinção sobre um conjunto de estrelas hipotéticas",
+        "sliderIds": [
+          "m3-ebv",
+          "m3-r"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "r(pc) = 10^((m − M + 5)/5)",
+        "sliderIds": [
+          "m2-m",
+          "m2-M"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Correção bolométrica e M_bol",
+        "sliderIds": [
+          "m5-teff",
+          "m5-mv"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "B_λ(T): pico se deslocando com a temperatura",
+        "sliderIds": [
+          "m4-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap03_termodinamica.html",
+    "url": "http://localhost:8960/cap03_termodinamica.html",
+    "modules": [
+      {
+        "rotulo": "dW = P dV — área sombreada no diagrama P–υ (processo isobárico)",
+        "sliderIds": [
+          "m1-p",
+          "m1-dv"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Comparando aquecer a υ constante vs. a P constante, para o mesmo ΔT",
+        "sliderIds": [
+          "m2-dt"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "C_P − C_V = (Pυ/T)·(δ²/α) — fator adimensional δ²/α",
+        "sliderIds": [
+          "m3-alpha",
+          "m3-delta"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "dρ/ρ = α dP/P − δ dT/T (α = δ = 1, caso do gás ideal, para simplificar)",
+        "sliderIds": [
+          "m3b-dpp",
+          "m3b-dtt"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Peso molecular médio μ e a diferença de capacidades térmicas",
+        "sliderIds": [
+          "m4-mu"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "∇_ad = (γ − 1)/γ",
+        "sliderIds": [
+          "m5-gamma"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Pistão: compressão adiabática vs. isotérmica, lado a lado",
+        "sliderIds": [
+          "mpist-gamma",
+          "mpist-razao"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "mpist-ad-T",
+            "valor": "1,000"
+          },
+          {
+            "id": "mpist-ad-W",
+            "valor": "0,000"
+          },
+          {
+            "id": "mpist-iso-W",
+            "valor": "0,000"
+          },
+          {
+            "id": "mpist-iso-Q",
+            "valor": "0,000"
+          }
+        ]
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap04_processos_radiativos.html",
+    "url": "http://localhost:8960/cap04_processos_radiativos.html",
+    "modules": [
+      {
+        "rotulo": "Versão interativa da Figura \"feixe atravessando dS\" — por que aparece cos θ",
+        "sliderIds": [
+          "m1-theta",
+          "m1-domega"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Estrela esférica real (esquerda) vs. zoom da atmosfera em camadas planas (direita)",
+        "sliderIds": [
+          "m2-ratio"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m2-svg",
+            "valor": "interioratmosferazoom da atmosfera — camadas planas (aprox. PP) vs. curvatura real (exagerada)"
+          }
+        ]
+      },
+      {
+        "rotulo": "I(μ) = I₀·(1 + a·μ) — grau de anisotropia a controla H_ν",
+        "sliderIds": [
+          "m3-a"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m3-J",
+            "valor": "1,000"
+          },
+          {
+            "id": "m3-K",
+            "valor": "0,333"
+          }
+        ]
+      },
+      {
+        "rotulo": "Caminhada aleatória do fóton até escapar de uma \"estrela\" de raio R",
+        "sliderIds": [
+          "m7-l"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m7-passos",
+            "valor": "0"
+          }
+        ]
+      },
+      {
+        "rotulo": "Um único gráfico, quatro regimes físicos",
+        "sliderIds": [
+          "m4-I0",
+          "m4-mu",
+          "m4-S0"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m4-legenda",
+            "valor": "Caso 1 (vácuo): χ_ν=η_ν=0, logo I_ν≡constante — nenhuma atenuação nem ganho, mesmo a grandes distâncias (é o fluxo que cai com 1/r², não a intensidade específica). Nota sobre o eixo: nos Casos 1 e 2, χ_ν=0 e a profundidade ótica não está definida (τ≡0 sempre); o eixo horizontal representa, nesses dois casos, o percurso s ao longo do feixe, não uma verdadeira profundidade ótica — a mesma distinção feita no texto original."
+          }
+        ]
+      },
+      {
+        "rotulo": "Atenuação e^(−τ/μ) e a camada ficando opaca",
+        "sliderIds": [
+          "m5-tau",
+          "m5-mu"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m5-camada",
+            "valor": ""
+          }
+        ]
+      },
+      {
+        "rotulo": "S_ν = a + b·t → I(0,μ) = a + b·μ → brilho do disco visto pelo observador",
+        "sliderIds": [
+          "m6-a",
+          "m6-b"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "F = 16σT³/(3κρ) · |dT/dr| — escala log no fluxo",
+        "sliderIds": [
+          "m8-T",
+          "m8-kappa",
+          "m8-rho",
+          "m8-grad"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "L_Edd/L_sol ≈ 3,3×10⁴ (M/M_sol) — escala log-log, com objetos reais marcados",
+        "sliderIds": [
+          "m9-M"
+        ],
+        "problems": [],
+        "neverChanged": []
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap05_equacoes_estrutura.html",
+    "url": "http://localhost:8960/cap05_equacoes_estrutura.html",
+    "modules": [
+      {
+        "rotulo": "Módulo interativo 1 — Casca esférica e a equação da massa",
+        "sliderIds": [
+          "m1-r",
+          "m1-dr"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m1-svg",
+            "valor": "m (r)m+dm (r+dr)"
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 2 — Aplicação: massa contida a partir de ∂m/∂r=4πr2ρ",
+        "sliderIds": [
+          "m2-M",
+          "m2-R",
+          "m2-r"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 3 — Calculadora da massa de Jeans",
+        "sliderIds": [
+          "m3-T",
+          "m3-n",
+          "m3-mu"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 4 — O elemento cilíndrico: forças em escala real (peça central do capítulo)",
+        "sliderIds": [
+          "m4-r",
+          "m4-dr"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 5 — Aplicação: dP/dr e ∂P/∂m em um ponto da estrela",
+        "sliderIds": [
+          "m5-M",
+          "m5-R",
+          "m5-r"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 6a — Calculadora de Pc, comparada ao Modelo Solar Padrão",
+        "sliderIds": [
+          "m6a-M",
+          "m6a-R"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 6b — Calculadora de Tc, comparada ao Modelo Solar Padrão",
+        "sliderIds": [
+          "m6b-M",
+          "m6b-R",
+          "m6b-mu"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 7 — Sol, Júpiter, Terra: onde a hidrostática funciona sozinha, e onde precisa de gás ideal",
+        "sliderIds": [
+          "m7exo-M",
+          "m7exo-R",
+          "m7exo-mu"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m7exo-Pc-real",
+            "valor": "7,50×10¹³"
+          },
+          {
+            "id": "m7exo-Tc-real",
+            "valor": "2,25×10⁴"
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 8 — Perfis P(r), m(r), ρ(r) e por que Δm=M/2 subestima Pc",
+        "sliderIds": [
+          "m7-M",
+          "m7-R"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m7-Pmeio",
+            "valor": "0,267"
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 9 — Quando o equilíbrio quebra: a estrela entra em queda livre",
+        "sliderIds": [
+          "m8-M",
+          "m8-R"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 10 — Contração estelar: ϕ, ug e o Teorema do Virial em tempo real",
+        "sliderIds": [
+          "m9-Ri",
+          "m9-Rf",
+          "m9-M"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 11 — Aplicação: τKH para uma estrela qualquer",
+        "sliderIds": [
+          "m10-M",
+          "m10-R",
+          "m10-L"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m10-exemplo",
+            "valor": "3,8×10⁴"
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 12 — Comparador das quatro escalas de tempo estelares",
+        "sliderIds": [
+          "m11-M",
+          "m11-R",
+          "m11-L"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 13 — Aplicação: construindo l(r) a partir de ∂l/∂m=ε",
+        "sliderIds": [
+          "m12-L",
+          "m12-fnuc"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 14 — Diagrama de zonas de transporte: como mudam com a massa estelar",
+        "sliderIds": [
+          "m13-M"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 15 — Calculadora do transporte radiativo",
+        "sliderIds": [
+          "m14-kappa",
+          "m14-l",
+          "m14-T",
+          "m14-r"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 16 — Combinando κrad e κcond por média harmônica",
+        "sliderIds": [
+          "m15-krad",
+          "m15-kcond"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 17 — A bolha sobe ou afunda? Critério de Schwarzschild em ação",
+        "sliderIds": [
+          "m16-nablarad",
+          "m16-nablaad"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 18 — ∇ad=(γ−1)/γ para qualquer gás",
+        "sliderIds": [
+          "m17-gamma"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 19 — Calculadora do fluxo convectivo (MLT)",
+        "sliderIds": [
+          "m18-lmHp",
+          "m18-excesso"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 20 — Confirmando ∇−∇ad∼10−8 para qualquer estrela",
+        "sliderIds": [
+          "m19-M",
+          "m19-R",
+          "m19-L"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 21 — Calculadora do tempo de mistura τmix",
+        "sliderIds": [
+          "m20-q",
+          "m20-R",
+          "m20-vB"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 22 — Aplicação: evolução de X (H→He) e a taxa de consumo do Sol",
+        "sliderIds": [
+          "m21-L",
+          "m21-X0"
+        ],
+        "problems": [],
+        "neverChanged": []
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap06_estrelas_politropicas.html",
+    "url": "http://localhost:8960/cap06_estrelas_politropicas.html",
+    "modules": [
+      {
+        "rotulo": "Módulo interativo 1 (central) — Integrador de Lane–Emden ao vivo",
+        "sliderIds": [
+          "m1-n"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m1-ref-nota",
+            "valor": ""
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 1B — Integração de Lane–Emden, passo a passo",
+        "sliderIds": [
+          "m1b-n",
+          "m1b-vel"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "m1b-z",
+            "valor": "0,0000"
+          },
+          {
+            "id": "m1b-w",
+            "valor": "1,0000"
+          },
+          {
+            "id": "m1b-dw",
+            "valor": "0,0000"
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 2 — Perfis de densidade e pressão",
+        "sliderIds": [
+          "m2-n"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 3 — Versão interativa da Figura ω(z)",
+        "sliderIds": [
+          "m3-n"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 4 — Distribuição de massa m(z)/M",
+        "sliderIds": [
+          "m4-n"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 5 — Relação politrópica P=Kργ",
+        "sliderIds": [
+          "m5-gamma",
+          "m5-K"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 6 — Massa de Chandrasekhar",
+        "sliderIds": [
+          "m6-mue"
+        ],
+        "problems": [],
+        "neverChanged": []
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap07_formacao_estelar.html",
+    "url": "http://localhost:8960/cap07_formacao_estelar.html",
+    "modules": [
+      {
+        "rotulo": "Módulo interativo 1 — Relação de dispersão ω2(k)",
+        "sliderIds": [
+          "mj2-T",
+          "mj2-n",
+          "mj2-mu"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 2 — Massa e comprimento de Jeans",
+        "sliderIds": [
+          "mj1-T",
+          "mj1-n",
+          "mj1-mu"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 3 — Perfil da esfera isotérmica singular (SIS)",
+        "sliderIds": [
+          "ms1-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 4 — Taxa de acréscimo de Shu e massa acumulada",
+        "sliderIds": [
+          "ms2-T",
+          "ms2-t"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 5 (destaque) — Colapso inside-out de Shu, animado",
+        "sliderIds": [
+          "mshu-T"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "mshu-t",
+            "valor": "—"
+          },
+          {
+            "id": "mshu-mstar",
+            "valor": "0,000"
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 6 — Raio centrífugo",
+        "sliderIds": [
+          "mrc-R0",
+          "mrc-Om0",
+          "mrc-Mstar"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 8 — Traços de Hayashi e Henyey no diagrama HR",
+        "sliderIds": [
+          "mhr-M"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 10 — Rotação kepleriana e estrutura vertical H(r)",
+        "sliderIds": [
+          "mdgeo-M",
+          "mdgeo-r"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 11 — Disco-α: viscosidade e tempo viscoso",
+        "sliderIds": [
+          "mdvisc-alpha",
+          "mdvisc-r"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 13 — Perfil de temperatura: aquecimento viscoso vs. irradiação",
+        "sliderIds": [
+          "mdtemp-mdot"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 14 — A linha de gelo",
+        "sliderIds": [
+          "mgelo-L"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 15 — Tempo de vida dos discos protoplanetários",
+        "sliderIds": [
+          "mdvida-t"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 16 — T~Tauri: truncamento, corrotação, impacto e luminosidade de acréscimo",
+        "sliderIds": [
+          "mtt-B",
+          "mtt-Mdot",
+          "mtt-M",
+          "mtt-R",
+          "mtt-P"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 18 — Tempo de crescimento por coagulação",
+        "sliderIds": [
+          "mcoag-a"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 20 — Massa crítica do núcleo e acréscimo descontrolado de gás",
+        "sliderIds": [
+          "mnucleo-Mc"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 21 — Critério de Toomre Q",
+        "sliderIds": [
+          "mtoomre-r",
+          "mtoomre-f"
+        ],
+        "problems": [],
+        "neverChanged": []
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap08_equacoes_estado.html",
+    "url": "http://localhost:8960/cap08_equacoes_estado.html",
+    "modules": [
+      {
+        "rotulo": "Módulo interativo 1 — Calculadora de μ, μe e μi",
+        "sliderIds": [
+          "mmu-X",
+          "mmu-Y"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 2 — Pressão do gás ideal: Pe vs. Pion",
+        "sliderIds": [
+          "mpgas-rho",
+          "mpgas-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 3 (destaque) — Elétron confinado 1D → 3D, animado",
+        "sliderIds": [
+          "m1d3d-L"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 4 (flagship) — O mar de Fermi e a distribuição f(E), animado",
+        "sliderIds": [
+          "mfermi-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 5 — Densidade de elétrons por intervalo de momento ne(p)",
+        "sliderIds": [
+          "mnep-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 7 (central) — Comparador de regimes de pressão",
+        "sliderIds": [
+          "mreg-rho",
+          "mreg-T",
+          "mreg-mue"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 8 — Parâmetro relativístico X=pF/(mec)",
+        "sliderIds": [
+          "mX-rho",
+          "mX-mue"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 9 — Funções de Fermi–Dirac e o fator de degenerescência",
+        "sliderIds": [
+          "mfd-psi"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 10 (central) — Diagrama densidade–temperatura interativo",
+        "sliderIds": [
+          "mdiag-rho",
+          "mdiag-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 11 — Equação de estado total: Pe, Pion e Prad",
+        "sliderIds": [
+          "meos-rho",
+          "meos-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 13 — Neutronização: limiar de densidade para captura eletrônica",
+        "sliderIds": [
+          "mneutron-rho"
+        ],
+        "problems": [],
+        "neverChanged": []
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap09_anas_brancas.html",
+    "url": "http://localhost:8960/cap09_anas_brancas.html",
+    "modules": [
+      {
+        "rotulo": "Módulo interativo 1 (central) — Integrador da equação de Chandrasekhar",
+        "sliderIds": [
+          "mch-zc"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 2 — Perfis internos ψ(y) e ρ(y)",
+        "sliderIds": [
+          "mperfil-zc"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 3 — Relação massa-raio construída ao vivo",
+        "sliderIds": [
+          "mmr-mue"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo 4 (destaque) — Simulação: acréscimo até o limite de Chandrasekhar",
+        "sliderIds": [
+          "macre-M0",
+          "macre-taxa"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "macre-t",
+            "valor": "—"
+          },
+          {
+            "id": "macre-status",
+            "valor": "Acretando massa da companheira — a estrela encolhe à medida que ganha massa, percorrendo a curva massa-raio."
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo 5 — Mch vs. composição",
+        "sliderIds": [
+          "mcomp-mue"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "mcomp-nota",
+            "valor": "Composições mais ricas em nêutrons (menor Z/A, maior μ_e) reduzem M_ch."
+          }
+        ]
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap10_geracao_energia.html",
+    "url": "http://localhost:8960/cap10_geracao_energia.html",
+    "modules": [
+      {
+        "rotulo": "Módulo interativo (destaque) — Tunelamento através da barreira coulombiana",
+        "sliderIds": [
+          "mtunel-E",
+          "mtunel-z1z2"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "mtunel-contador",
+            "valor": "Nenhuma tentativa ainda."
+          }
+        ]
+      },
+      {
+        "rotulo": "Módulo interativo (destaque) — Pico de Gamow",
+        "sliderIds": [
+          "mgamow-T",
+          "mgamow-z1z2",
+          "mgamow-A"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Blindagem eletrônica (Debye–Hückel)",
+        "sliderIds": [
+          "mblindagem-ne",
+          "mblindagem-T"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Integração ao vivo do exemplo do 25Al",
+        "sliderIds": [
+          "mal25-rho",
+          "mal25-XH",
+          "mal25-sigmav"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Equilíbrio D/H (Equação 10.55)",
+        "sliderIds": [
+          "mdh-taup-p",
+          "mdh-taup-d"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Comparador de dependência com T (pp vs. CNO vs. triplo-α)",
+        "sliderIds": [
+          "mcompT-T",
+          "mcompT-nCNO"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Tabela comparativa: destaque a linha aplicável",
+        "sliderIds": [
+          "mtabcomp-T",
+          "mtabcomp-M"
+        ],
+        "problems": [],
+        "neverChanged": []
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  },
+  {
+    "file": "cap11_nucleossintese.html",
+    "url": "http://localhost:8960/cap11_nucleossintese.html",
+    "modules": [
+      {
+        "rotulo": "Módulo interativo — Barreira coulombiana e tunelamento, animado",
+        "sliderIds": [
+          "mbarreira-z1z2",
+          "mbarreira-energia"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Pico de Gamow",
+        "sliderIds": [
+          "mgamow-T",
+          "mgamow-z1z2"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo — Isócronas esquemáticas: o conceito de datação por turn-off",
+        "sliderIds": [
+          "miso-idade"
+        ],
+        "problems": [],
+        "neverChanged": []
+      },
+      {
+        "rotulo": "Módulo interativo (destaque) — Carta de nuclídeos: processo-s vs. processo-r, animado",
+        "sliderIds": [
+          "mnucl-nn"
+        ],
+        "problems": [],
+        "neverChanged": [
+          {
+            "id": "mnucl-regime",
+            "valor": "Processo-s: captura de nêutron (N aumenta em 1) → espera → decaimento β⁻ (N-1, Z+1, sobe e volta ao vale) → repete. Caminho lento, sempre próximo ao vale de estabilidade, subindo pelos picos N~50, N~82 e até o Pb."
+          }
+        ]
+      }
+    ],
+    "pageErrorsAtLoad": [],
+    "consoleErrorsAtLoad": []
+  }
+]

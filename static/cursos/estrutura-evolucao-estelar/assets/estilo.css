@@ -1,0 +1,513 @@
+/* =====================================================================
+   Estrutura e Evolução Estelar — estilo compartilhado dos módulos HTML
+   Paleta espelhada de preambulo.tex (corContexto, corExemplo, corAtencao, corRef)
+   ===================================================================== */
+
+:root {
+  --cor-contexto: #1c4878;
+  --cor-contexto-fundo: #ebf2fa;
+  --cor-exemplo: #3c6e3c;
+  --cor-exemplo-fundo: #edf6ed;
+  --cor-atencao: #963c1e;
+  --cor-atencao-fundo: #faeee8;
+  --cor-ref: #5a3c82;
+  --cor-ref-fundo: #f3eefa;
+  --cor-interativo: #0d6e6e;
+  --cor-interativo-fundo: #e8f6f6;
+
+  --texto: #1e1e1e;
+  --texto-suave: #555;
+  --fundo: #fdfdfb;
+  --fundo-painel: #ffffff;
+  --borda: #ddd8cc;
+  --link: #1c4878;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  color: var(--texto);
+  background: var(--fundo);
+  line-height: 1.65;
+}
+
+.pagina {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* --- Cabeçalho / breadcrumb --- */
+.topo {
+  background: var(--cor-contexto);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.topo .miolo {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: center;
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 0.92rem;
+}
+.topo a { color: #dce8f7; text-decoration: none; }
+.topo a:hover { text-decoration: underline; color: #fff; }
+.topo .sep { opacity: 0.6; }
+.topo .titulo-livro { font-weight: 600; }
+
+h1, h2, h3, h4 {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  color: #16233a;
+  line-height: 1.25;
+}
+h1 { font-size: 1.9rem; border-bottom: 3px solid var(--cor-contexto); padding-bottom: 0.5rem; }
+h2 { font-size: 1.4rem; margin-top: 2.6rem; color: var(--cor-contexto); }
+h3 { font-size: 1.15rem; margin-top: 2rem; }
+
+p { margin: 1rem 0; }
+
+a { color: var(--link); }
+
+.subtitulo {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  color: var(--texto-suave);
+  margin-top: -0.5rem;
+  font-size: 1rem;
+}
+
+/* --- Caixas (espelham os ambientes tcolorbox do LaTeX) --- */
+.caixa {
+  border: 1px solid;
+  border-radius: 4px;
+  margin: 1.6rem 0;
+  padding: 0;
+  overflow: hidden;
+}
+.caixa .rotulo {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  padding: 0.35rem 0.8rem;
+}
+.caixa .conteudo { padding: 0.9rem 1.1rem 1.1rem; }
+.caixa .conteudo > p:first-child { margin-top: 0; }
+.caixa .conteudo > p:last-child { margin-bottom: 0; }
+
+.caixa.contexto { border-color: var(--cor-contexto); background: var(--cor-contexto-fundo); }
+.caixa.contexto .rotulo { background: var(--cor-contexto); }
+
+.caixa.exemplo { border-color: var(--cor-exemplo); background: var(--cor-exemplo-fundo); }
+.caixa.exemplo .rotulo { background: var(--cor-exemplo); }
+
+.caixa.atencao { border-color: var(--cor-atencao); background: var(--cor-atencao-fundo); }
+.caixa.atencao .rotulo { background: var(--cor-atencao); }
+
+.caixa.leitura { border-color: var(--cor-ref); background: var(--cor-ref-fundo); }
+.caixa.leitura .rotulo { background: var(--cor-ref); }
+
+/* --- Módulo interativo --- */
+.modulo {
+  border: 1.5px solid var(--cor-interativo);
+  border-radius: 6px;
+  background: var(--cor-interativo-fundo);
+  margin: 1.8rem 0 2.2rem;
+  padding: 0;
+  overflow: hidden;
+}
+.modulo .rotulo {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--cor-interativo);
+  padding: 0.4rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.modulo .rotulo::before { content: "⚙"; }
+/* Padding lateral igual ao de .pagina (1.5rem), para o conteúdo do módulo
+   — inclusive o gráfico — alinhar com a margem do texto corrido acima/abaixo. */
+.modulo .corpo { padding: 1rem 1.5rem 1.3rem; background: var(--fundo-painel); overflow: hidden; }
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem 2rem;
+  margin-bottom: 0.8rem;
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 0.92rem;
+}
+.controle { flex: 1 1 260px; min-width: 220px; }
+.controle label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  color: #16233a;
+}
+.controle .valor {
+  font-weight: 700;
+  color: var(--cor-interativo);
+  font-variant-numeric: tabular-nums;
+}
+.controle input[type="range"] {
+  width: 100%;
+  accent-color: var(--cor-interativo);
+}
+.controle input[type="number"] {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.saida {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  background: #f4f4ef;
+  border: 1px dashed var(--borda);
+  border-radius: 4px;
+  padding: 0.6rem 0.9rem;
+  margin: 0.8rem 0;
+  font-size: 0.95rem;
+}
+.saida strong { color: var(--cor-interativo); }
+
+/* O gráfico "sangra" até a borda do card (cancelando o padding lateral de
+   .modulo .corpo só para ele), para alinhar com a margem do texto corrido —
+   os demais elementos do módulo (rótulos, controles, saída) mantêm o padding
+   normal do card. */
+.grafico {
+  width: calc(100% + 3rem);
+  margin: 0 -1.5rem;
+  min-height: 320px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* =====================================================================
+   MÓDULO INTERATIVO — padrão de card "novo estilo" (Chart.js)
+   Adotado a partir do Cap. 3 (Termodinâmica). Capítulos futuros que
+   migrarem para Chart.js devem reusar exatamente estas classes — não
+   crie uma variação por capítulo. Card branco/claro, cantos arredondados,
+   borda fina, sem gradiente/sombra; paleta de cores dos datasets fica em
+   assets/comuns.js (CORES_GRAFICO), não aqui.
+   ===================================================================== */
+.modulo-card {
+  background: var(--fundo-painel);
+  border: 0.75px solid #d8d4c8;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1.8rem 0 2.2rem;
+}
+.modulo-card .rotulo-card {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 600;
+  color: var(--texto-suave);
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.01em;
+}
+.modulo-card .controles { margin-bottom: 0.6rem; }
+.modulo-card .controle input[type="range"] { accent-color: #1D9E75; }
+.modulo-card .controle .valor { color: #17805f; }
+
+/* Canvas do Chart.js "sangra" até a borda do card, alinhando com a
+   margem do texto — mesmo critério de alinhamento já validado nos
+   Caps. 1-3, adaptado ao padding de .modulo-card (1.25rem). */
+.grafico-card {
+  width: calc(100% + 2.5rem);
+  margin: 0 -1.25rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.leitura-card {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 0.8125rem; /* 13px */
+  color: var(--texto-suave);
+  margin: 0.7rem 0 0;
+}
+.leitura-card strong { color: #16233a; font-variant-numeric: tabular-nums; }
+
+/* Botão de ação dentro de um módulo interativo (presets, play/pause/reset
+   de animações) — introduzido no Cap. 4, reutilizável por capítulos
+   futuros que precisem do mesmo padrão. */
+.botao-modulo {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  /* #17805f (não #1D9E75) para atender contraste WCAG AA com texto branco
+     (4,9:1 vs. 3,4:1 do tom mais claro — ver Etapa D da auditoria,
+     docs/AUDITORIA.md). Mesmo tom da família de verde já usada como
+     estado :hover, apenas promovido a cor de repouso. */
+  background: #17805f;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.botao-modulo:hover { background: #136349; }
+.botao-modulo:active { background: #0f4f3a; }
+
+/* Módulo em destaque — usado para a peça central de um capítulo (ex.
+   equilíbrio hidrostático no Cap. 5): mesmo .modulo-card, com uma borda
+   de acento mais forte para sinalizar "pare e explore este". */
+.modulo-destaque {
+  border: 1.5px solid #1D9E75;
+  box-shadow: 0 0 0 3px #1D9E7522;
+}
+
+.tabela-simples { width: auto; }
+.tabela-simples td { text-align: left; border-bottom: none; padding: 0.2rem 0.9rem 0.2rem 0; }
+.tabela-simples td:first-child { font-weight: 600; }
+
+.tabela-resumo { font-size: 0.92rem; }
+.tabela-resumo td { text-align: left; }
+.tabela-resumo td:last-child { text-align: right; color: var(--texto-suave); white-space: nowrap; }
+.caixa-resumo-equacoes {
+  border: 1.5px solid #16233a;
+  border-radius: 4px;
+  padding: 0.8rem 1.1rem;
+  background: #fafaf6;
+  overflow-x: auto;
+}
+
+/* --- Tabelas --- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2rem 0;
+  font-size: 0.95rem;
+}
+th, td {
+  border-bottom: 1px solid var(--borda);
+  padding: 0.45rem 0.7rem;
+  text-align: center;
+}
+th { font-family: -apple-system, "Segoe UI", Arial, sans-serif; background: #f4f4ef; }
+td:nth-child(3), td:nth-child(4), th:nth-child(3), th:nth-child(4) { text-align: left; }
+.tabela-scroll { overflow-x: auto; }
+.tabela-scroll table { min-width: 720px; }
+tr.linha-destacada td { background: #e8f6f0; font-weight: 600; }
+caption { caption-side: top; text-align: left; font-size: .85rem; color: var(--texto-suave); padding: .3rem 0; }
+
+.equacao-caixa {
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 0.7rem 1rem;
+  background: #fafaf6;
+  display: inline-block;
+}
+
+footer.rodape {
+  max-width: 880px;
+  margin: 3rem auto 0;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--borda);
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+/* --- Índice --- */
+.lista-capitulos {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.lista-capitulos li {
+  margin-bottom: 0.8rem;
+}
+.lista-capitulos a.cartao {
+  display: block;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--borda);
+  border-left: 5px solid var(--cor-contexto);
+  border-radius: 4px;
+  text-decoration: none;
+  background: var(--fundo-painel);
+  transition: background 0.15s;
+}
+.lista-capitulos a.cartao:hover { background: var(--cor-contexto-fundo); }
+.lista-capitulos .num {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  color: var(--cor-contexto);
+  font-size: 0.85rem;
+}
+.lista-capitulos .tit {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  color: #16233a;
+  font-size: 1.1rem;
+  margin-top: 0.15rem;
+}
+.lista-capitulos .desc {
+  color: var(--texto-suave);
+  font-size: 0.92rem;
+  margin-top: 0.2rem;
+}
+.pendente {
+  opacity: 0.55;
+}
+.pendente .cartao { border-left-color: #aaa; cursor: default; pointer-events: none; }
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.5rem; }
+  .topo .miolo { font-size: 0.85rem; }
+}
+
+/* --- Fluxograma navegável (Cap. 7, síntese) --- */
+.fluxograma {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas:
+    "nuvem colapso proto proto pms"
+    "nuvem colapso proto proto zams"
+    "gi    .       poeira poeira ."
+    "gi    .       planetesimais planetesimais ."
+    ".     rochoso embrioes embrioes gigante"
+    ".     rochoso embrioes embrioes gigante";
+  gap: 0.6rem;
+  margin: 1rem 0;
+  position: relative;
+}
+.fluxograma .no {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.7rem 0.6rem;
+  border-radius: 10px;
+  border: 2px solid var(--cor-contexto);
+  background: var(--cor-contexto-fundo);
+  color: var(--cor-contexto);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.25;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.fluxograma .no:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+.fluxograma .no.cor-atencao { border-color: var(--cor-atencao); background: var(--cor-atencao-fundo); color: var(--cor-atencao); }
+.fluxograma .no.cor-exemplo { border-color: var(--cor-exemplo); background: var(--cor-exemplo-fundo); color: var(--cor-exemplo); }
+.fluxograma .no.cor-contexto { border-color: var(--cor-contexto); background: var(--cor-contexto-fundo); color: var(--cor-contexto); }
+.fluxograma .no.tracejado { border-style: dashed; }
+.fluxograma-setas { display: none; }
+@media (max-width: 720px) {
+  .fluxograma {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nuvem" "colapso" "proto" "pms" "zams"
+      "poeira" "planetesimais" "embrioes"
+      "rochoso" "gigante" "gi";
+  }
+}
+
+/* =====================================================================
+   Capítulo 11 — Tabela periódica da origem cósmica e demais widgets
+   Paleta categórica de processos de nucleossíntese: baseada em Okabe &
+   Ito (2008), estendida a 13 categorias para acessibilidade a
+   daltônicos (evita depender só de matiz vermelho/verde). Ver
+   window.PROC_CAP11 em cap11_modulos.js para as cores exatas.
+   ===================================================================== */
+.mtab-wrap { display: flex; flex-direction: column; gap: .8rem; }
+.mtab-controles { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.mtab-controles select { padding: .4rem .5rem; border-radius: 6px; border: 1px solid #ccc; font-size: .85rem; }
+.mtab-grid {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(28px, 1fr));
+  grid-template-rows: repeat(10, minmax(28px, auto));
+  gap: 2px;
+  overflow-x: auto;
+  padding-bottom: .3rem;
+}
+.mtab-elemento {
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.15);
+  min-width: 28px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: .58rem;
+  line-height: 1;
+  color: #1a1a1a;
+  transition: transform .1s, box-shadow .1s, opacity .15s;
+}
+.mtab-elemento .mtab-z { font-size: .48rem; opacity: .75; position: absolute; top: 1px; left: 2px; }
+.mtab-elemento .mtab-sym { font-weight: 700; font-size: .68rem; margin-top: 2px; }
+.mtab-elemento:hover { transform: scale(1.18); z-index: 5; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.mtab-elemento.selecionado { outline: 3px solid #222; outline-offset: 1px; z-index: 6; }
+.mtab-elemento.esmaecido { opacity: .12; }
+.mtab-legenda { display: flex; flex-wrap: wrap; gap: .4rem .9rem; font-size: .78rem; }
+.mtab-legenda-item { display: flex; align-items: center; gap: .35rem; }
+.mtab-swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,0.2); }
+.mtab-painel {
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  background: #fafaf6;
+  padding: .8rem 1rem;
+  min-height: 4.5rem;
+}
+.mtab-painel h4 { margin: 0 0 .4rem; }
+.mtab-painel p { margin: .3rem 0 0; font-size: .9rem; }
+.mtab-badges { display: flex; flex-wrap: wrap; gap: .3rem; }
+.mtab-badge { color: #fff; font-size: .72rem; padding: .15rem .5rem; border-radius: 999px; text-shadow: 0 1px 1px rgba(0,0,0,.35); }
+
+.botao-modo-toggle {
+  padding: .4rem .8rem; border-radius: 999px; border: 1.5px solid #1D9E75;
+  /* texto em #17805f, não #1D9E75 — mesmo ajuste de contraste WCAG AA
+     do .botao-modulo (ver Etapa D, docs/AUDITORIA.md) */
+  background: #fff; color: #17805f; font-size: .82rem; cursor: pointer;
+}
+.botao-modo-toggle.ativo { background: #17805f; color: #fff; }
+
+.apendice-codigo {
+  position: relative;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  font-family: 'Courier New', Consolas, monospace;
+  font-size: .82rem;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.45;
+}
+.apendice-codigo .tok-com { color: #6a9955; }
+.apendice-codigo .tok-key { color: #4fc1ff; }
+.apendice-codigo .tok-str { color: #ce9178; }
+.apendice-codigo .tok-num { color: #b5cea8; }
+.botao-copiar {
+  position: absolute; top: .6rem; right: .6rem;
+  background: #333; color: #eee; border: 1px solid #555;
+  border-radius: 6px; padding: .3rem .6rem; font-size: .75rem; cursor: pointer;
+}
+.botao-copiar:hover { background: #444; }
+.botao-copiar.copiado { background: #1D9E75; border-color: #1D9E75; }
+
+.figura-cap11 { margin: 1.2rem 0; text-align: center; }
+.figura-cap11 img, .figura-cap11 object { max-width: 100%; height: auto; border: 1px solid var(--borda); border-radius: 8px; background: #fff; }
+.figura-cap11 figcaption { font-size: .85rem; color: var(--texto-suave); margin-top: .5rem; text-align: left; padding: 0 .3rem; }
+.figura-cap11 .figura-num { font-weight: 700; color: var(--texto); }

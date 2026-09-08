@@ -15,6 +15,9 @@ main:
   - name: Trabalhos
     url: /thesis/
     weight: 32
+  - name: Cursos
+    url: /courses/
+    weight: 37
   - name: Eventos
     url: /event
     weight: 35

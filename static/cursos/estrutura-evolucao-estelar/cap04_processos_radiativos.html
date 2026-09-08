@@ -1,0 +1,2870 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Processos Radiativos</title>
+<meta name="description" content="Módulo interativo do Capítulo 4: intensidade específica, ângulo sólido, geometria plano-paralela, equação do transporte, soluções para a EDO de transporte, escurecimento de limbo, aproximação de Rosseland e luminosidade de Eddington.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      sen: '\\operatorname{sen}'
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 4 — Processos Radiativos</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, com módulos interativos de exploração — ênfase em visualizações geométricas e animadas.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — colisão de notação: μ neste capítulo</div>
+  <div class="conteudo">
+    <p>A partir deste capítulo, \(\mu\) designa o <strong>cosseno diretor</strong>
+    \(\mu\equiv\cos\theta\) (ângulo entre a direção do fóton e o eixo de
+    referência, normal à atmosfera plano-paralela) — a convenção universal
+    em transporte radiativo. No <a href="cap03_termodinamica.html">Capítulo 3
+    (Termodinâmica)</a>, o mesmo símbolo \(\mu\) foi usado com um significado
+    completamente diferente: o <strong>peso molecular médio</strong> da
+    equação de estado (\(P=\rho RT/\mu\)). É uma colisão de notação real e
+    comum na literatura da área — ambas as convenções são padrão em suas
+    respectivas subáreas —, não um erro de transcrição. Este HTML reforça
+    o significado correto (\(\mu=\cos\theta\)) sempre que necessário.</p>
+  </div>
+</div>
+
+<h2>Definição de estrela</h2>
+
+<p>O estudo dos processos radiativos que ocorrem em estrelas nos ajuda a
+compreender os processos mais importantes da astrofísica, uma vez que
+estrelas são um dos objetos astronômicos mais abundantes no universo.</p>
+
+<p>Para uma definição inicial de estrelas, podemos dizer que se trata de
+uma grande bola de gás comprimida pela ação da força gravitacional. Tal
+compressão implica um aumento da densidade de partículas na região
+central da estrela, onde ocorrem processos de fusão atômica, que geram
+energia e brilho (radiação) para o corpo. Ao longo deste curso, veremos
+mais detalhes sobre as propriedades estelares.</p>
+
+<h2>Fundamentos do transporte radiativo</h2>
+
+<p>Inicialmente, vamos recordar que uma estrela, a grosso modo, pode ser
+subdividida em duas camadas: o <strong>interior estelar</strong> e a
+<strong>atmosfera estelar</strong>. Para o Sol,
+\(R_\star\sim700\,000\,\mathrm{km}\) e a espessura da atmosfera
+\(R_{\mathrm{atm}}\sim300\,\mathrm{km}\) — uma razão de apenas
+\(\approx4\times10^{-4}\), a base da aproximação plano-paralela explorada
+no Módulo 2 adiante.</p>
+
+<p>Vamos, inicialmente, estudar os processos radiativos que ocorrem no
+interior estelar. Ou seja, gases de fótons em grande maioria.</p>
+
+<p>Para descrever o campo de radiação de uma estrela, podemos definir três
+variáveis necessárias:</p>
+<ul>
+  <li>\(I_\nu\): intensidade específica luminosa;</li>
+  <li>\(J_\nu\): intensidade média luminosa;</li>
+  <li>\(F_\nu\): fluxo de radiação luminosa.</li>
+</ul>
+
+<h2>Intensidade específica</h2>
+
+<p>A intensidade específica é definida por \(I_\nu(\vec{r},\hat{n},t)\).
+Ela descreve a intensidade da radiação na frequência \(\nu\), em um ponto
+\(\vec{r}\) qualquer, que tem direção \(\hat{n}\), em um instante no tempo
+\(t\).</p>
+
+<p>Considere o caso de um elemento de ângulo sólido em coordenadas
+polares: a área da esfera de raio \(r\) limitada por
+\((\theta,\theta+\Delta\theta)\) e \((\varphi,\varphi+\Delta\varphi)\) é
+\(r^2\,\mathrm{sen}\,\theta\,\Delta\theta\,\Delta\varphi\), de modo que o
+ângulo sólido correspondente é
+\(\Delta\Omega=\mathrm{sen}\,\theta\,\Delta\theta\,\Delta\varphi\)
+(Módulo interativo 1 adiante recria esta geometria). Considere agora um
+feixe luminoso atravessando um elemento de área \(\mathrm{d}S\), com
+normal \(\hat{n}\).</p>
+
+<p>Logo, a quantidade de energia que atravessa o plano \(\mathrm{d}S\)
+pode ser expressa como</p>
+
+\[
+\mathrm{d}E = \underbrace{I_\nu(\vec{r},\hat{n},t)}_{\text{intensidade específica}}\cdot
+\underbrace{(\hat{n}\cdot\mathrm{d}\vec{S})}_{\mathrm{d}\vec{S}=\mathrm{d}S\,\hat{s}}
+\cdot\underbrace{\mathrm{d}t}_{\text{tempo}}\cdot\underbrace{\mathrm{d}\omega}_{\text{ângulo sólido}}\cdot\underbrace{\mathrm{d}\nu}_{\text{freq.}}\,,
+\tag{4.1}
+\]
+
+<p>que é a quantidade de energia transportada. A intensidade específica
+tem unidades de medida de</p>
+
+\[
+I_\nu = \left[\frac{\mathrm{erg}}{\mathrm{s\,m^2\,ster\,Hz}}\right]\,.
+\tag{4.2}
+\]
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — O que um telescópio realmente mede</div>
+  <div class="conteudo">
+    <p>Nenhum instrumento mede \(I_\nu\) em uma única direção matemática
+    \(\hat n\): todo detector tem uma abertura angular finita (o campo de
+    visada do telescópio, ou a fenda do espectrógrafo) e uma área coletora
+    finita (o espelho ou a lente). O que um telescópio de área efetiva
+    \(A\), observando através de um ângulo sólido \(\Delta\omega\),
+    efetivamente registra é</p>
+    \[
+    \mathrm{d}E_{\mathrm{medida}} = \left[\int_{\Delta\omega} I_\nu(\vec r,\hat n,t)\,(\hat n\cdot\hat s)\,\mathrm{d}\omega\right] A\,\mathrm{d}t\,\mathrm{d}\nu\,,
+    \tag{4.3}
+    \]
+    <p>ou seja, uma integral de \(I_\nu\) sobre o ângulo sólido do feixe
+    aceito pelo instrumento. Para uma fonte pontual não resolvida (como a
+    maioria das estrelas, exceto o Sol), essa integral se reduz
+    essencialmente ao fluxo \(F_\nu\); já para objetos resolvidos
+    espacialmente (o disco solar, nebulosas, galáxias próximas), é
+    possível recuperar \(I_\nu(\hat n)\) ponto a ponto — é exatamente isso
+    que uma imagem astronômica registra, pixel a pixel.</p>
+  </div>
+</div>
+
+<p>A intensidade específica pode ser representada em diferentes sistemas
+de coordenadas:</p>
+<ul>
+  <li><strong>Plano cartesiano:</strong> \(I_\nu(x,y,z,\hat n,t)\);</li>
+  <li><strong>Plano esférico:</strong> \(I_\nu(r,\theta,\varphi,\Theta,\Phi,t)\),
+  onde \((\Theta,\Phi)\) é o ângulo que descreve a direção normal \(\hat n\).</li>
+</ul>
+
+<p>A expressão geral para \(\mathrm{d}E_\nu\) é</p>
+
+\[
+\mathrm{d}E_\nu = I_\nu(x,y,z,\theta,\varphi,t)\,\underbrace{\cos\theta\,\mathrm{d}A}_{\hat n\cdot\mathrm{d}\vec S}\,\mathrm{d}t\,\mathrm{d}\nu\,\mathrm{d}\omega\,.
+\tag{4.4}
+\]
+
+<h2>Módulo interativo 1 — Ângulo sólido, projeção geométrica e I<sub>ν</sub></h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Versão interativa da Figura "feixe atravessando dS" — por que aparece cos θ</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m1-theta">Ângulo θ (em relação à normal) <span class="valor" id="m1-theta-valor">30°</span></label>
+      <input type="range" id="m1-theta" min="0" max="85" step="1" value="30">
+    </div>
+    <div class="controle">
+      <label for="m1-domega">Abertura angular do feixe Δω (ilustrativa) <span class="valor" id="m1-domega-valor">20°</span></label>
+      <input type="range" id="m1-domega" min="4" max="60" step="1" value="20">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m1-canvas" role="img" aria-label="Diagrama de um feixe de luz incidindo sobre um elemento de área dA com ângulo theta em relação à normal, mostrando a área projetada dA vezes cosseno de theta." style="width:100%;height:360px;display:block;">
+      Diagrama: elemento de área dA (segmento horizontal), normal n (linha tracejada vertical) e um feixe de luz incidindo com ângulo θ em relação à normal, dentro de um cone ilustrativo de abertura Δω. A área projetada, perpendicular à direção do feixe, é dA·cos θ — desenhada como um segmento mais curto que dA, destacado em laranja.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Elemento de área \(\mathrm dA=1{,}00\) (unid. arb.). Área projetada
+    perpendicular ao feixe: \(\mathrm dA\cos\theta=\)
+    <strong id="m1-projetada">—</strong>. É exatamente esse fator
+    \(\cos\theta\) — a fração de \(\mathrm dA\) que "fica de frente" para
+    o feixe — que aparece na Equação (4.4) e em toda definição de fluxo
+    a seguir. Em \(\theta\to90^\circ\) (rasante), a área projetada tende a
+    zero: um feixe rasante praticamente não atravessa a superfície.
+  </p>
+</div>
+
+<h3 id="plano-paralela">Geometria plano-paralela</h3>
+
+<p>Como \(R_{\mathrm{atm}}\ll R_\star\), estrelas como o Sol podem ser
+estudadas com a atmosfera estratificada em camadas horizontais
+semi-infinitas, de modo que \(I_\nu(\vec r,\hat n,t)\to I_\nu(z,\theta,t)\)
+— depende apenas da profundidade \(z\) e do ângulo \(\theta\).</p>
+
+<p>A intensidade luminosa, \(I_\nu\), descreve completamente o campo de
+radiação estelar.</p>
+
+<h2>Módulo interativo 2 — Quando a aproximação plano-paralela vale?</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Estrela esférica real (esquerda) vs. zoom da atmosfera em camadas planas (direita)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m2-ratio">Razão R<sub>atm</sub>/R<sub>★</sub> (escala log) <span class="valor" id="m2-ratio-valor">4,3×10⁻⁴</span></label>
+      <input type="range" id="m2-ratio" min="0" max="1000" step="1" value="331">
+    </div>
+    <div class="controle" style="display:flex;align-items:flex-end;">
+      <button type="button" id="m2-preset-sol" class="botao-modulo">Usar valor solar real (R_atm/R★ ≈ 4,3×10⁻⁴)</button>
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+    <svg id="m2-svg" role="img" aria-label="Painel esquerdo: estrela esférica com uma fina camada de atmosfera; painel direito: zoom da atmosfera mostrado como camadas horizontais planas, com uma curva sobreposta indicando o desvio real em relação à aproximação plana." style="width:100%;max-width:100%;height:300px;">
+      Painel esquerdo: um círculo (interior estelar) com um anel fino (atmosfera) ao redor, de espessura proporcional à razão escolhida. Painel direito: zoom da atmosfera representada por linhas horizontais paralelas (a aproximação plano-paralela), com uma curva mostrando o quanto a superfície real seria curva nessa escala.
+    </svg>
+  </div>
+  <p class="leitura-card">
+    Razão \(R_{\mathrm{atm}}/R_\star=\)<strong id="m2-ratio-texto">—</strong>.
+    Desvio relativo da aproximação plana (sagita/espessura,
+    \(\approx(R_{\mathrm{atm}}/R_\star)/8\)): <strong id="m2-sagita">—</strong>
+    — <em>a curvatura no painel direito é exagerada visualmente para ficar
+    perceptível; o número ao lado é o valor real.</em> Para o Sol
+    (\(R_\star\approx7\times10^5\,\mathrm{km}\),
+    \(R_{\mathrm{atm}}\approx300\,\mathrm{km}\)), a razão é
+    \(\approx4{,}3\times10^{-4}\) e o desvio é da ordem de
+    \(5\times10^{-5}\) — desprezível, o que justifica plenamente a
+    aproximação PP para a fotosfera solar. Arrastando o slider para razões
+    artificialmente grandes (\(\gtrsim0{,}3\)), a curvatura deixa de ser
+    desprezível e a aproximação PP se degrada.
+  </p>
+</div>
+
+<h2>Intensidade média</h2>
+
+<p>A intensidade média, como o nome sugere, descreve a distribuição média
+da intensidade luminosa por elemento de área. Ela é definida como</p>
+
+\[
+J_\nu(\vec r,t) = \frac{\displaystyle\oint I_\nu(\vec r,\hat n,t)\,\mathrm{d}\omega}{\displaystyle\oint \mathrm{d}\omega}\,,
+\tag{4.5}
+\]
+
+<p>onde, em coordenadas esféricas,
+\(\mathrm{d}\omega=\mathrm{sen}\,\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi\)
+(a área da esfera de raio \(r\) limitada por
+\((\theta,\theta+\Delta\theta)\) e \((\varphi,\varphi+\Delta\varphi)\) é
+\(r^2\,\mathrm{sen}\,\theta\,\Delta\theta\,\Delta\varphi\)).</p>
+
+<p>Lembrando que</p>
+
+\[
+\begin{aligned}
+\oint\mathrm{d}\omega = 4\pi
+&= \int_0^{2\pi}\!\!\int_0^{\pi} \mathrm{sen}\,\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi \\
+&= \underbrace{\Big[-\cos\theta\Big]_0^\pi}_{=\,2}\cdot\underbrace{2\pi}_{\int_0^{2\pi}\mathrm{d}\varphi} = 2\cdot2\pi = 4\pi\,,
+\end{aligned}
+\tag{4.6}
+\]
+
+<p>temos, portanto,</p>
+
+\[
+\boxed{J_\nu(\vec r,t) = \frac{1}{4\pi}\oint I_\nu(\vec r,\hat n,t)\,\mathrm{d}\omega}\,.
+\tag{4.7}
+\]
+
+<p>Veja que ambos \(J_\nu\) e \(I_\nu\) são grandezas escalares (mesma
+dimensão). Para o caso de um corpo negro ideal, a intensidade específica
+pode ser descrita como \(I_\nu=B_\nu\) (Planck), se for um corpo negro.
+Assim,</p>
+
+\[
+J_\nu = \frac{1}{4\pi}\oint B_\nu(T)\,\mathrm{d}\omega = B_\nu\,.
+\tag{4.8}
+\]
+
+<h2>Densidade de energia radiativa</h2>
+
+<p>Vamos considerar um fóton, ou feixe luminoso, atravessando uma região
+cilíndrica de comprimento \(\mathrm{d}l\) e superfície de área
+\(\mathrm{d}s\). A quantidade de energia que entra no cilindro é igual
+a</p>
+
+\[
+\mathrm{d}E = I_\nu\cdot\mathrm{d}s\cdot\mathrm{d}t\cdot\mathrm{d}\omega\cdot\mathrm{d}\nu\,.
+\tag{4.9}
+\]
+
+<p>No caso de fótons, sua velocidade é constante (\(c\)), assim que
+podemos escrever \(c=\mathrm{d}l/\mathrm{d}t \Rightarrow
+\mathrm{d}t=\mathrm{d}l/c\), logo</p>
+
+\[
+\mathrm{d}E = I_\nu\,\frac{\mathrm{d}s\,\mathrm{d}l}{c}\,\mathrm{d}\omega\,\mathrm{d}\nu\,,
+\qquad\text{mas } \mathrm{d}s\,\mathrm{d}l\equiv\mathrm{d}V\,,
+\tag{4.10}
+\]
+
+<p>logo</p>
+
+\[
+\frac{\mathrm{d}E}{\mathrm{d}V\,\mathrm{d}\omega\,\mathrm{d}\nu} = \frac{I_\nu}{c} \equiv \mathrm{d}u_\nu(\omega)\,,
+\tag{4.11}
+\]
+
+<p>onde \(\mathrm{d}u_\nu\) é a densidade de energia radiativa (por ângulo
+sólido e frequência). Podemos integrar a Equação (4.11) em \(\omega\),
+logo,</p>
+
+\[
+u_\nu(\vec r,t) = \frac{1}{c}\oint I_\nu\,\mathrm{d}\omega = \frac{4\pi}{c}J_\nu\,,
+\tag{4.12}
+\]
+
+<p>usando a Equação (4.7). No caso em que \(I_\nu=B_\nu\), ou seja, um
+corpo negro,</p>
+
+\[
+u_\nu = \frac{4\pi}{c}J_\nu = \frac{4\pi}{c}B_\nu\,,
+\qquad [u_\nu] = \left[\frac{\mathrm{erg}}{\mathrm{cm^3}}\right]\,.
+\tag{4.13}
+\]
+
+<p>Integrando a Equação (4.13) no espaço de frequência, e usando o
+resultado da integração de Planck em frequência,
+\(\int_0^\infty B_\nu\,\mathrm{d}\nu=\sigma T^4/\pi\) (que deduziremos
+mais adiante, Equação (4.130)), obtemos</p>
+
+\[
+u = \frac{4\pi}{c}\int_0^\infty B_\nu\,\mathrm{d}\nu
+= \frac{4\pi}{c}\cdot\frac{\sigma T^4}{\pi} = a\,T^4\,,
+\qquad a = \frac{4\sigma}{c}\,,
+\tag{4.14}
+\]
+
+<p>onde \(a\) é a constante de radiação — note que os dois fatores de
+\(\pi\) se cancelam exatamente, de modo que \(a\) não carrega \(\pi\):
+numericamente,
+\(a=4\sigma/c\approx7{,}566\times10^{-15}\,\mathrm{erg\,cm^{-3}\,K^{-4}}\).</p>
+
+<table class="tabela-simples">
+  <thead><tr><th>Ambiente astrofísico</th><th>Densidade de energia</th></tr></thead>
+  <tbody>
+    <tr><td>Síncrotron</td><td>\(3\times10^{-18}\,\mathrm{erg/cm^3}\)</td></tr>
+    <tr><td>Poeira</td><td>\(6\times10^{-13}\,\mathrm{erg/cm^3}\)</td></tr>
+    <tr><td>Emissão H\(\alpha\)</td><td>\(3\times10^{-16}\,\mathrm{erg/cm^3}\)</td></tr>
+  </tbody>
+</table>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Onde essas densidades de energia ocorrem</div>
+  <div class="conteudo">
+    <p>A densidade de energia radiativa cobre uma faixa dinâmica enorme:
+    síncrotron (elétrons relativísticos em jatos de AGN e remanescentes de
+    supernova) \(\sim3\times10^{-18}\,\mathrm{erg/cm^3}\); poeira
+    interestelar reemitindo no IV \(\sim6\times10^{-13}\,\mathrm{erg/cm^3}\)
+    (comparável à densidade de energia da própria radiação cósmica de
+    fundo, \(u_{\mathrm{CMB}}\approx4{,}2\times10^{-13}\,\mathrm{erg/cm^3}\));
+    emissão H\(\alpha\) de regiões HII \(\sim3\times10^{-16}\,\mathrm{erg/cm^3}\),
+    um dos traçadores mais usados de formação estelar recente em
+    galáxias.</p>
+  </div>
+</div>
+
+<h2 id="fluxo-radiacao">Fluxo de radiação</h2>
+
+<p>O fluxo de radiação descreve a energia total que atravessa uma área
+perpendicular ao plano da radiação por segundo, onde</p>
+
+\[
+\vec F(\vec r,t) = \oint I_\nu(\vec r,\hat n,t)\,\hat n\,\mathrm{d}\omega\,.
+\tag{4.15}
+\]
+
+<p>Assumindo que seja um corpo negro, \(I_\nu=B_\nu\), logo:</p>
+
+\[
+\vec F(\vec r,t) = B_\nu(T)\oint\hat n\,\mathrm{d}\omega\,.
+\tag{4.16}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — F ≠ 0: por que uma estrela real não está em ETL estrito</div>
+  <div class="conteudo">
+    <p>Se a estrela fosse um corpo negro perfeito, \(\vec F\equiv0\)
+    (radiação reemitida isotropicamente, sem direção preferencial). Como
+    \(\vec F\) é sempre \(\neq0\) — é justamente o fluxo que escapa e que
+    observamos como luminosidade —, a igualdade \(I_\nu=B_\nu\) é apenas
+    uma aproximação.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — A aproximação de Equilíbrio Termodinâmico Local (ETL)</div>
+  <div class="conteudo">
+    <p>O ETL supõe que, embora o campo de radiação não esteja em
+    equilíbrio térmico com a matéria (\(F\neq0\)), as propriedades
+    <em>locais</em> da matéria (população dos níveis atômicos, ionização,
+    velocidades) são bem descritas pelas fórmulas de equilíbrio térmico
+    (Boltzmann, Saha, Maxwell) avaliadas em \(T\) e \(\rho\) locais.
+    <strong>Vale bem</strong> no interior denso e opticamente espesso
+    (livre caminho médio curto). <strong>Falha</strong> nas camadas
+    externas opticamente finas (cromosfera, coroa, ventos estelares),
+    onde é necessário tratamento completo de não-ETL (NLTE).</p>
+  </div>
+</div>
+
+<p>Analisando o fluxo de radiação na direção de um observador, temos:</p>
+
+\[
+\vec F\cdot\hat z = \hat z\cdot\oint B_\nu(T)\,\hat n\,\mathrm{d}\omega\,.
+\tag{4.17}
+\]
+
+<p>Como \(\hat z\cdot\hat n=\cos\theta\) (vetores unitários), temos:</p>
+
+\[
+\begin{aligned}
+\vec F\cdot\hat z &= B_\nu\int_0^{2\pi}\!\!\int_0^{\pi/2} \cos\theta\,\mathrm{sen}\,\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi \\
+&= B_\nu \cdot 2\pi\cdot\underbrace{\left[\frac{\mathrm{sen}^2\theta}{2}\right]_0^{\pi/2}}_{=\,1/2}
+= \pi B_\nu\,.
+\end{aligned}
+\tag{4.18}
+\]
+
+<p>Vemos novamente que o fluxo de radiação é diferente de zero, logo não é
+um corpo negro e não está em equilíbrio termodinâmico local.</p>
+
+<p>Em coordenadas cartesianas, podemos descrever o fluxo por</p>
+
+\[
+\vec F = (F_x,F_y,F_z)\,,\qquad
+\begin{cases}
+F_x = \displaystyle\oint I_\nu\,n_x\,\mathrm{d}\omega\,,\\[4pt]
+F_y = \displaystyle\oint I_\nu\,n_y\,\mathrm{d}\omega\,,\\[4pt]
+F_z = \displaystyle\oint I_\nu\,n_z\,\mathrm{d}\omega\,,
+\end{cases}
+\tag{4.19}
+\]
+
+<p>onde, em coordenadas esféricas, o vetor unitário \(\hat n\) tem
+componentes</p>
+
+\[
+n_x = \mathrm{sen}\,\theta\cos\varphi\,,\qquad
+n_y = \mathrm{sen}\,\theta\,\mathrm{sen}\,\varphi\,,\qquad
+n_z = \cos\theta\,.
+\tag{4.20}
+\]
+
+<p>Logo, para um caso plano-paralelo (onde \(I_\nu=I_\nu(z,\theta)\) não
+depende de \(\varphi\)):</p>
+
+\[
+\begin{aligned}
+F_x &= \int_0^{2\pi}\!\!\int_0^{\pi} I_\nu(z,\theta)\,\mathrm{sen}^2\theta\cos\varphi\,\mathrm{d}\theta\,\mathrm{d}\varphi = 0\,,\\
+F_y &= \int_0^{2\pi}\!\!\int_0^{\pi} I_\nu(z,\theta)\,\mathrm{sen}^2\theta\,\mathrm{sen}\,\varphi\,\mathrm{d}\theta\,\mathrm{d}\varphi = 0\,,\\
+F_z &= \int_0^{2\pi}\!\!\int_0^{\pi} I_\nu(z,\theta)\,\cos\theta\,\mathrm{sen}\,\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi
+= 2\pi\int_0^\pi I_\nu(z,\theta)\,\cos\theta\,\mathrm{sen}\,\theta\,\mathrm{d}\theta\,.
+\end{aligned}
+\tag{4.21}
+\]
+
+<p>As integrais de \(F_x\) e \(F_y\) se anulam pela ciclicidade das
+funções seno e cosseno em \(\varphi\) (e também porque \(I_\nu\) não
+depende de \(\varphi\)). Temos assim uma geometria plano-paralela que
+depende apenas de uma componente \(z\), logo \(\vec F(\vec r) =
+F(0,0,F_z)\).</p>
+
+<p>Analisando o caso plano-paralelo, temos que a profundidade de uma
+atmosfera pode ser analisada pelos parâmetros \(I_\nu\), \(J_\nu\),
+\(F_\nu\), delimitada entre \(z_{\min}\) (base, junto ao interior
+estelar) e \(z_{\max}\) (topo).</p>
+
+<h2>Momentos do campo de radiação</h2>
+
+<p>Lembrando da Equação (4.7), podemos trabalhar um pouco mais com a
+intensidade média. Fazendo uma definição de que \(\cos\theta\equiv\mu\),</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — μ = cos θ neste capítulo — colisão de notação com o Capítulo 3</div>
+  <div class="conteudo">
+    <p>A partir daqui, \(\mu\) designa o <strong>cosseno diretor</strong>
+    \(\mu\equiv\cos\theta\), o ângulo entre a direção do fóton \(\hat n\) e
+    o eixo de referência (tipicamente o eixo \(z\), normal à atmosfera
+    plano-paralela). Esta é a convenção universal em transporte radiativo,
+    e será usada em todo o restante deste livro sempre que o contexto for
+    radiação.</p>
+    <p><strong>Atenção</strong>: no Capítulo 3 (Termodinâmica), \(\mu\) foi
+    usado com um significado completamente diferente — o <em>peso
+    molecular médio</em> da equação de estado (\(P=\rho RT/\mu\)). Essa
+    colisão de símbolos é real e comum na literatura de astrofísica
+    estelar (ambas as convenções são amplamente estabelecidas em suas
+    respectivas subáreas), não um erro deste texto. Optamos por manter
+    \(\mu=\cos\theta\) aqui, sem introduzir um símbolo alternativo,
+    precisamente porque essa é a notação universalmente reconhecida em
+    transporte radiativo — fugir dela tornaria este capítulo difícil de
+    comparar com qualquer referência da área. Sempre que houver ambiguidade
+    real entre os dois capítulos, o significado de \(\mu\) será reforçado
+    explicitamente no texto.</p>
+  </div>
+</div>
+
+<p>logo, \(\mathrm{d}\mu=-\mathrm{sen}\,\theta\,\mathrm{d}\theta\), e</p>
+
+\[
+J_\nu = \frac{1}{4\pi}\int_0^{2\pi}\!\!\int_0^\pi I_\nu(z,\mu)\,\mathrm{sen}\,\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi\,.
+\tag{4.22}
+\]
+
+<p>Como \(I_\nu\) não depende de \(\varphi\) no caso plano-paralelo,</p>
+
+\[
+\begin{aligned}
+J_\nu &= \frac{1}{4\pi}\cdot2\pi\int_0^\pi I_\nu\,\mathrm{sen}\,\theta\,\mathrm{d}\theta
+= \frac{1}{2}\int_1^{-1} I_\nu\,(-\mathrm{d}\mu) \\
+&= \frac{1}{2}\int_{-1}^{1} I_\nu\,\mathrm{d}\mu\,,
+\end{aligned}
+\tag{4.23}
+\]
+
+<p>logo</p>
+
+\[
+\boxed{J_\nu(z) = \frac{1}{2}\int_{-1}^{1} I_\nu(z,\mu)\,\mathrm{d}\mu}\,.
+\tag{4.24}
+\]
+
+<p>A Equação (4.24) é conhecida como <strong>momento de ordem zero</strong>
+do campo de radiação. O momento descreve a quantidade de
+movimento/deslocamento de algo; neste caso, em particular, estamos
+estudando a evolução da intensidade luminosa no interior estelar.</p>
+
+<p>Existem ainda dois outros graus para o momento, que têm uma expressão
+geral descrita por</p>
+
+\[
+M_n = \frac{1}{2}\int_{-1}^{1} I_\nu\,\mu^n\,\mathrm{d}\mu\,,
+\tag{4.25}
+\]
+
+\[
+n=0:\ J_\nu=\frac{1}{2}\int_{-1}^{1} I_\nu\,\mathrm{d}\mu\,,\qquad
+n=1:\ H_\nu=\frac{1}{2}\int_{-1}^{1} I_\nu\,\mu\,\mathrm{d}\mu\,,\qquad
+n=2:\ K_\nu=\frac{1}{2}\int_{-1}^{1} I_\nu\,\mu^2\,\mathrm{d}\mu\,.
+\tag{4.26}
+\]
+
+<p>Para os momentos de \(1^\text{a}\) e \(2^\text{a}\) ordem, uma descrição
+detalhada foge do escopo desta revisão, mas os significados físicos deles
+podem ser analisados.</p>
+
+<p>A função momento de ordem \(1\) é diretamente relacionada com o fluxo de
+radiação e é conhecida como <strong>fluxo de Eddington</strong>, onde:</p>
+
+\[
+H_\nu = \frac{F_\nu(z,t)}{4\pi}\,.
+\tag{4.27}
+\]
+
+<p>Para \(n=2\), momento de \(2^\text{a}\) ordem, obtemos uma relação
+direta com a <strong>pressão de radiação</strong>. Quando consideramos um
+gás de fótons, temos que sua pressão clássica é</p>
+
+\[
+P = \frac{F}{A}\,,
+\tag{4.28}
+\]
+
+<p>que no caso quântico resulta em</p>
+
+\[
+\mathrm{d}P_r = \mathrm{d}p_\nu\cdot\frac{1}{\mathrm{d}t}\cdot\frac{1}{\mathrm{d}A}\,,
+\tag{4.29}
+\]
+
+<p>isto é, a pressão como taxa de entrega de momento por unidade de área.
+Precisamos agora expressar \(\mathrm dp_\nu\) em termos do campo de
+radiação — e é aqui que retomamos a definição de intensidade específica
+já estabelecida anteriormente neste capítulo: a energia radiativa que
+atravessa um elemento de área \(\mathrm dA\), por unidade de tempo, dentro
+de um elemento de ângulo sólido \(\mathrm d\omega\) em torno da direção
+\(\theta\) (medida a partir da normal \(\hat n\)), na faixa de frequência
+\([\nu,\nu+\mathrm d\nu]\), é [Equação (4.4)]</p>
+
+\[
+\mathrm dE_\nu = I_\nu\cos\theta\,\mathrm dA\,\mathrm dt\,\mathrm d\nu\,\mathrm d\omega\,.
+\tag{4.30}
+\]
+
+<p>Como cada fóton carrega momento \(p_\nu=h\nu/c=E_\nu/c\), o momento
+associado a essa energia, atravessando \(\mathrm dA\) por unidade de
+tempo, é obtido simplesmente dividindo por \(c\):</p>
+
+\[
+\mathrm dp_\nu = \frac{1}{c}\,I_\nu\cos\theta\,\mathrm dA\,\mathrm dt\,\mathrm d\nu\,\mathrm d\omega\,.
+\tag{4.31}
+\]
+
+<p>Vale a pena parar aqui e entender <em>por que</em> vamos precisar de um
+<em>segundo</em> fator de \(\cos\theta\) — e por que \(\mu^2=\cos^2\theta\)
+aparece em \(K_\nu\), e não apenas um único fator de \(\mu\) como em
+\(H_\nu\). O fator de \(\cos\theta\) que já está na Equação (4.31) vem da
+própria definição de \(I_\nu\): ele mede a projeção geométrica do
+elemento de área \(\mathrm dA\) na direção do feixe, ou seja, quantifica
+<em>quantos fótons de fato atravessam a superfície</em> vindos da direção
+\(\theta\) (é o mesmo \(\cos\theta\) que aparece na definição do fluxo
+\(F_\nu\) e, consequentemente, de \(H_\nu\)). Mas um fóton que se propaga
+fazendo um ângulo \(\theta\) com a normal \(\hat n\) carrega o momento
+\(p_\nu\) na direção de propagação, <em>não</em> na direção normal; a
+componente desse momento que é efetivamente transferida <em>através</em>
+da superfície (na direção normal \(\hat n\)) é apenas \(p_\nu\cos\theta\)
+— a projeção do vetor momento sobre a normal. Isso introduz um
+<em>segundo</em> fator de \(\cos\theta\), independente do primeiro:</p>
+
+\[
+\mathrm dP_\nu = \frac{\cos\theta\cdot\mathrm dp_\nu}{\mathrm dt\,\mathrm dA}
+= \frac{1}{c}\,I_\nu\cos^2\theta\,\mathrm d\nu\,\mathrm d\omega\,.
+\tag{4.32}
+\]
+
+<p>Combinando os dois fatores de projeção angular — um do fluxo de fótons
+que atravessam a superfície, outro da projeção do momento transferido
+sobre a normal — chegamos a \(\cos\theta\cdot\cos\theta=\cos^2\theta=\mu^2\),
+que é exatamente o peso angular que define \(K_\nu\) na Equação (4.26).</p>
+
+<p>Falta agora integrar a Equação (4.32) sobre todo o ângulo sólido,
+somando a contribuição de fótons vindos de todas as direções. Usando
+\(\mu\equiv\cos\theta\) e \(\mathrm d\omega=\mathrm d\mu\,\mathrm
+d\varphi\), e integrando \(\varphi\) de \(0\) a \(2\pi\) (simetria
+azimutal) e \(\mu\) de \(-1\) a \(1\) (todas as direções, não apenas o
+hemisfério que se afasta da superfície, já que estamos somando o momento
+entregue por fótons vindos de ambos os lados):</p>
+
+\[
+\begin{aligned}
+\mathrm dP_\nu &= \frac{1}{c}\int_0^{2\pi}\!\!\int_{-1}^{1} I_\nu\,\mu^2\,\mathrm d\mu\,\mathrm d\varphi\;\mathrm d\nu \\
+&= \frac{2\pi}{c}\int_{-1}^1 I_\nu\,\mu^2\,\mathrm d\mu\;\mathrm d\nu\,.
+\end{aligned}
+\tag{4.33}
+\]
+
+<p>Reconhecendo, na integral acima, a própria definição de \(K_\nu\)
+[Equação (4.26)], \(K_\nu\equiv\frac12\int_{-1}^1I_\nu\mu^2\,\mathrm
+d\mu\), de modo que \(\int_{-1}^1I_\nu\mu^2\,\mathrm d\mu=2K_\nu\),
+substituímos diretamente na Equação (4.33):</p>
+
+\[
+\mathrm dP_\nu = \frac{2\pi}{c}\times2K_\nu\,\mathrm d\nu = \frac{4\pi}{c}K_\nu\,\mathrm d\nu\,.
+\tag{4.34}
+\]
+
+<p>Essa lógica — momento projetado na normal, multiplicado pelo fluxo de
+fótons (também projetado na normal), integrado sobre todas as direções de
+incidência — é precisamente a mesma ideia geométrica geral por trás de
+<em>qualquer</em> pressão de origem cinética, não apenas a de um gás de
+fótons. Aqui a aplicamos de forma simplificada porque, para radiação, a
+velocidade de propagação é sempre \(v=c\), o que elimina uma das integrais
+que aparecem no caso geral.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Fluxo de Eddington, pressão de radiação e a Luminosidade de Eddington</div>
+  <div class="conteudo">
+    <p>\(H_\nu\) e \(K_\nu\) não são apenas exercícios formais: eles são a
+    base de um dos limites mais importantes da astrofísica estelar, a
+    <strong>Luminosidade de Eddington</strong>, \(L_{\mathrm{Edd}}\). Ela é
+    definida como a luminosidade máxima que uma estrela (ou qualquer
+    objeto acretante) pode sustentar em equilíbrio hidrostático: acima
+    dela, a pressão de radiação — governada pelo momento de segunda ordem
+    \(K_\nu\) — supera a força gravitacional que confina o gás, e o
+    excesso de matéria é literalmente empurrado para fora por radiação.
+    Para uma fonte esférica de massa \(M\) com opacidade dominada por
+    espalhamento Thomson (\(\kappa_{\mathrm{es}}\)),</p>
+    \[
+    L_{\mathrm{Edd}} = \frac{4\pi G M c}{\kappa_{\mathrm{es}}}\,.
+    \tag{4.35}
+    \]
+    <p>Esse limite é central para entender por que estrelas muito massivas
+    (\(M\gtrsim100\,M_\odot\)) têm ventos tão intensos e são instáveis (a
+    pressão de radiação já compete com a gravidade em suas camadas
+    externas), e é igualmente crucial na física de acréscimo: discos de
+    acréscimo em torno de buracos negros e estrelas de nêutrons em
+    binárias de raios X, e em núcleos ativos de galáxias, tipicamente
+    saturam próximo de \(L_{\mathrm{Edd}}\), regulando a taxa na qual esses
+    objetos podem crescer (Kippenhahn, Weigert &amp; Weiss 2012). Dedução
+    completa e módulo interativo na
+    <a href="#luminosidade-eddington">Seção "Luminosidade de Eddington"</a>
+    adiante.</p>
+  </div>
+</div>
+
+<p>Recuperamos, assim, sem saltos, o resultado já anunciado na
+Equação (4.34), agora deduzido passo a passo a partir da definição de
+\(I_\nu\):</p>
+
+\[
+\boxed{\mathrm{d}P_\nu = \frac{4\pi}{c}K_\nu\,\mathrm d\nu}\,,
+\tag{4.36}
+\]
+
+<p>indicando que \(K_\nu\) é uma medida da pressão de radiação
+monocromática. Integrando em frequência sobre todo o espectro, obtemos a
+pressão de radiação total,</p>
+
+\[
+P_{\mathrm{rad}} = \frac{4\pi}{c}\int_0^\infty K_\nu\,\mathrm d\nu\,,
+\tag{4.37}
+\]
+
+<p>que, no caso isotrópico e em equilíbrio termodinâmico local (quando
+\(I_\nu\to B_\nu(T)\), independente de \(\theta\)), se reduz a
+\(P_{\mathrm{rad}}=\frac13aT^4\), com \(a\) a constante de radiação.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Pressão de radiação como caso particular da pressão cinética geral</div>
+  <div class="conteudo">
+    <p>A ideia física usada acima — pressão como fluxo de momento projetado
+    por \(\cos\theta\), integrado sobre todas as direções de incidência —
+    será retomada de forma muito mais geral no Capítulo de Equações de
+    Estado (seção "Fluxo de momento e pressão mecânica"), onde
+    deduziremos a pressão de <em>qualquer</em> gás (não apenas fótons, mas
+    também partículas massivas, relativísticas ou não) a partir de
+    primeiros princípios, chegando à fórmula geral</p>
+    \[
+    P = \frac13\int_0^\infty p\,v\,n(p)\,\mathrm dp
+    \tag{4.38}
+    \]
+    <p>A pressão de radiação que acabamos de obter é, na verdade, um caso
+    particular dessa fórmula geral, no qual \(v=c\) para todos os fótons —
+    o que é o que torna a dedução aqui mais simples do que a dedução geral
+    que veremos adiante.</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar — Transporte radiativo em atmosferas estelares modernas</div>
+  <div class="conteudo">
+    <p>A formulação de \(I_\nu\), \(J_\nu\), \(F_\nu\) e dos momentos
+    \(H_\nu\), \(K_\nu\) apresentada aqui é a base teórica sobre a qual são
+    construídos os códigos modernos de síntese espectral estelar. O
+    código <strong>TLUSTY</strong>, um dos mais usados para atmosferas de
+    estrelas quentes (O, B), resolve o transporte radiativo acoplado ao
+    equilíbrio estatístico dos níveis atômicos fora do ETL (não-LTE),
+    usando o método híbrido de linearização completa/iteração lambda
+    acelerada (Hubeny &amp; Lanz 1995). Já o código <strong>PHOENIX</strong>
+    é amplamente usado para atmosferas mais frias (estrelas tipo solar,
+    anãs M, atmosferas de exoplanetas), incluindo tratamento detalhado de
+    linhas moleculares (Husser et al. 2013). Para uma revisão recente e
+    abrangente do problema de transporte radiativo em 3D fora do ETL —
+    cada vez mais relevante à medida que simulações hidrodinâmicas de
+    atmosferas estelares substituem os modelos 1D clássicos — ver
+    Bergemann et al. (2025).</p>
+  </div>
+</div>
+
+<h2>Módulo interativo 3 — Momentos J<sub>ν</sub>, H<sub>ν</sub>, K<sub>ν</sub></h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">I(μ) = I₀·(1 + a·μ) — grau de anisotropia a controla H_ν</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m3-a">Grau de anisotropia a <span class="valor" id="m3-a-valor">0,00</span></label>
+      <input type="range" id="m3-a" min="-0.9" max="0.9" step="0.01" value="0">
+    </div>
+  </div>
+  <div class="grafico-card" style="height:300px;">
+    <canvas id="m3-grafico" role="img" aria-label="Curva de I em função de mu, de -1 a 1, mostrando o grau de anisotropia escolhido.">
+      Gráfico: I(μ) = I₀(1+a·μ) em função de μ de -1 a 1. Reta horizontal quando a=0 (isotrópico); inclinada quando a≠0.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Com \(I_0\equiv1\) (unid. arb.): \(J_\nu=\)<strong id="m3-J">1,000</strong>
+    (sempre \(=I_0\), independente de \(a\)); \(H_\nu=I_0a/3=\)<strong id="m3-H">0,000</strong>;
+    \(K_\nu=I_0/3=\)<strong id="m3-K">0,333</strong> (constante — a primeira
+    correção que alteraria \(K_\nu\) seria de ordem \(\mu^2\), fora deste
+    modelo linear). Em \(a=0\) (isotrópico), \(H_\nu=0\): sem anisotropia,
+    não há fluxo líquido — é exatamente o ponto físico central desta
+    seção.
+  </p>
+</div>
+
+<h2>Campo radiativo em qualquer ambiente astrofísico</h2>
+
+<p>Vimos que o campo de radiação é completamente caracterizado se temos a
+intensidade luminosa \(I_\nu\). No entanto, como calcular e derivar essa
+grandeza?</p>
+
+<h3>Interação radiação-matéria</h3>
+
+<p>Vamos definir duas grandezas macroscópicas essenciais: a opacidade do
+gás e a emissividade do gás. Consideremos um feixe luminoso \(I_\nu\) que
+atravessa um gás qualquer (átomos, íons, moléculas, prótons, etc.), que se
+modifica para \(I_\nu'\) ao atravessá-lo.</p>
+
+<p>Existem três principais processos nos quais a radiação pode ser
+modificada: a absorção, a emissão e o espalhamento.</p>
+<ul>
+  <li><strong>Absorção</strong>: o fóton é transformado em energia térmica.
+  Sua energia é incorporada ao meio.</li>
+  <li><strong>Emissão</strong>: é a energia de transição que foi liberada
+  por um volume qualquer.</li>
+  <li><strong>Espalhamento</strong>: os fótons podem ser emitidos ou
+  absorvidos em direções quaisquer.</li>
+</ul>
+
+<h3>Opacidade do gás</h3>
+
+<p>Definimos o termo \(\chi_\nu(\vec r,\hat n,t)\) através da quantidade
+de energia absorvida em um elemento de volume do gás:</p>
+
+\[
+\mathrm{d}E = I_\nu(\vec r,\hat n,t)\cdot
+\underbrace{\chi_\nu(\vec r,\hat n,t)}_{\text{opacidade}}
+\cdot\mathrm{d}S\cdot\mathrm{d}s\cdot\mathrm{d}t\cdot\mathrm{d}\nu\cdot\mathrm{d}\omega\,.
+\tag{4.39}
+\]
+
+<p>\(\chi_\nu(\vec r,\hat n,t)\) é a opacidade do gás. A opacidade depende
+do tempo, da direção \(\hat n\), da posição (ponto a ponto) e da
+frequência. A opacidade depende também da profundidade ótica da estrela
+(ver adiante).</p>
+
+<p>No caso particular que estamos analisando, geometria plano-paralela,
+temos que \(\chi_\nu(z)\) é função apenas de \(z\). Também é isotrópico,
+não depende de \(\hat n\). Sob estas circunstâncias, \(\chi_\nu\) deve ter
+unidade de medida de \(\mathrm{cm}^{-1}\).</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — unidade de χ_ν não depende da geometria</div>
+  <div class="conteudo">
+    <p>A opacidade \(\chi_\nu\) é definida como energia absorvida por
+    unidade de caminho percorrido pelo feixe [Equação (4.39)], e por isso
+    tem unidade de \(\mathrm{cm}^{-1}\) (comprimento inverso)
+    <em>independentemente</em> do sistema de coordenadas usado para
+    descrever a posição — trocar de geometria plano-paralela para
+    esférica muda a forma funcional de \(\chi_\nu(\vec r)\), não a sua
+    dimensão física.</p>
+  </div>
+</div>
+
+<p>Assim, podemos definir a grandeza \(1/\chi_\nu=l\), que tem unidade de
+medida de distância. Essa grandeza descreve o <strong>caminho livre
+médio</strong> dos fótons no interior estelar:</p>
+
+\[
+l = \frac{1}{\chi_\nu}\,.
+\tag{4.40}
+\]
+
+<p>Note que quanto maior o coeficiente de absorção, menor é o caminho
+livre médio dos fótons.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — O random walk radiativo: quanto tempo um fóton leva para escapar do Sol?</div>
+  <div class="conteudo">
+    <p>O caminho livre médio \(l=1/\chi_\nu\) no núcleo solar é
+    surpreendentemente curto — da ordem de frações de milímetro a alguns
+    centímetros, muitas ordens de grandeza menor que o raio solar
+    (\(R_\odot\approx7\times10^{10}\,\mathrm{cm}\)). Um fóton criado por
+    fusão no núcleo não viaja em linha reta até a superfície: ele é
+    absorvido e reemitido repetidamente, em direções aleatórias,
+    percorrendo uma <strong>caminhada aleatória</strong> (<em>random
+    walk</em>) de \(N=(R_\odot/l)^2\) passos até escapar. O cálculo
+    cuidadoso de Mitalas &amp; Sills (1992), usando um modelo solar
+    realista (onde \(l\) varia com a profundidade, em vez de um valor
+    único assumido <em>a priori</em>), encontra um caminho livre médio
+    efetivo de \(\approx9\times10^{-4}\,\mathrm{m}\) (\(\approx0{,}9\,
+    \mathrm{mm}\)) e um tempo de difusão de</p>
+    \[
+    t_{\text{difusão}} \approx 1{,}7\times10^{5}\ \text{anos}\,,
+    \tag{4.41}
+    \]
+    <p>consideravelmente mais longo do que estimativas ingênuas com
+    \(l\sim1\,\mathrm{cm}\) (que dão \(t\sim10^4\,\mathrm{yr}\), um valor
+    frequentemente citado, mas subestimado em cerca de uma ordem de
+    grandeza). Em ambos os casos, o resultado qualitativo é impressionante:
+    a luz que chega à Terra hoje carrega energia gerada no núcleo solar há
+    dezenas a centenas de milhares de anos, embora o fóton final, já livre
+    no espaço, leve apenas \(\approx8\) minutos para atravessar a
+    distância Terra-Sol.</p>
+  </div>
+</div>
+
+<h2>Módulo interativo 7 — O random walk radiativo do fóton</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Caminhada aleatória do fóton até escapar de uma "estrela" de raio R</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m7-l">Caminho livre médio ℓ (unid. de tela) <span class="valor" id="m7-l-valor">14</span></label>
+      <input type="range" id="m7-l" min="4" max="40" step="1" value="14">
+    </div>
+    <div class="controle" style="display:flex;gap:0.5rem;align-items:flex-end;">
+      <button type="button" id="m7-play" class="botao-modulo">▶ Iniciar</button>
+      <button type="button" id="m7-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m7-canvas" role="img" aria-label="Animação de um fóton fazendo uma caminhada aleatória dentro de um círculo representando o interior estelar, até escapar pela borda." style="width:100%;height:340px;display:block;">
+      Animação: um ponto (fóton) parte do centro de um círculo (o interior estelar) e dá passos de comprimento fixo ℓ em direções aleatórias, até atravessar a borda do círculo (escapar). O número de passos dados é contado.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Passos dados: <strong id="m7-passos">0</strong>. Estimativa
+    \(N\sim(R/\ell)^2=\)<strong id="m7-nesp">—</strong> (nesta tela, com
+    \(R\) fixo e \(\ell\) ajustável pelo slider). <strong>Números reais do
+    núcleo solar</strong> (não animados aqui — \(N\) real é
+    \(\sim10^{21}\), inviável de desenhar passo a passo): usando
+    \(\ell_\gamma\approx2\,\mathrm{cm}\) [Eq. (4.112)] e um cálculo
+    detalhado com um modelo solar realista (\(\ell\) variando com a
+    profundidade), Mitalas &amp; Sills (1992) obtêm um caminho livre médio
+    efetivo \(\approx0{,}9\,\mathrm{mm}\) e tempo de difusão
+    \(t_{\mathrm{difusão}}\approx1{,}7\times10^5\) anos — bem mais longo
+    que estimativas ingênuas com \(\ell\sim1\,\mathrm{cm}\)
+    (\(t\sim10^4\,\mathrm{anos}\)). A luz que chega à Terra hoje carrega
+    energia gerada no núcleo solar há dezenas a centenas de milhares de
+    anos, embora o fóton final, já livre no espaço, leve apenas
+    \(\approx8\) minutos para atravessar a distância Terra–Sol.
+  </p>
+</div>
+
+<p>Outras definições importantes:</p>
+
+\[
+\chi_\nu = n\,\sigma_\nu\,;\qquad
+n=\text{densidade numérica}\ (\mathrm{cm}^{-3})\,,\quad
+\sigma_\nu=\text{seção de choque em }\nu\ (\mathrm{cm}^{2})\,,
+\tag{4.42}
+\]
+
+\[
+\chi_\nu = \kappa_\nu\,\rho\,;\qquad
+\kappa_\nu=\text{seção de choque por massa}\ (\mathrm{cm}^2/\mathrm{g})\,,\quad
+\rho=\text{densidade}\ (\mathrm{g/cm}^3)\,.
+\tag{4.43}
+\]
+
+<p>\(\chi_\nu\) é uma das grandezas mais fundamentais em astrofísica.
+Lembre também que ela é função da profundidade ótica, podendo assumir
+valores diferentes em diferentes profundidades \(z_1\neq z_2\)
+(\(\chi_{z_1}\neq\chi_{z_2}\)).</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — De onde vem κ_ν: as principais fontes de opacidade estelar</div>
+  <div class="conteudo">
+    <p>A opacidade específica \(\kappa_\nu\) não é uma única grandeza
+    física, mas a soma de vários processos de interação radiação-matéria,
+    cuja importância relativa muda drasticamente com a temperatura e
+    composição:</p>
+    <ul>
+      <li><strong>Opacidade de Kramers</strong> (livre-livre e
+      ligado-livre): domina em interiores estelares densos e quentes, onde
+      elétrons livres espalham ou são acelerados no campo de íons; escala
+      aproximadamente como \(\kappa\propto\rho T^{-3.5}\), a base das
+      primeiras estimativas analíticas de estrutura estelar.</li>
+      <li><strong>Opacidade do íon H\(^-\)</strong>: domina em atmosferas de
+      estrelas frias (tipo solar e mais frias), onde a abundância de
+      elétrons livres (doados por metais de baixo potencial de ionização)
+      permite a formação do íon H\(^-\), um absorvedor eficiente no
+      visível/infravermelho próximo — responsável por boa parte da
+      opacidade da fotosfera solar.</li>
+      <li><strong>Espalhamento Thomson</strong> por elétrons livres: domina
+      em estrelas quentes e massivas (tipos O, B), onde a ionização é
+      quase total; é a opacidade que define o limite de Eddington
+      (Seção "<a href="#fluxo-radiacao">Fluxo de radiação</a>" e
+      seguintes).</li>
+    </ul>
+    <p>O cálculo preciso de \(\kappa_\nu\) (ou de suas médias, como a
+    opacidade de Rosseland, usada nas equações de estrutura estelar) para
+    todas as combinações relevantes de temperatura, densidade e composição
+    química é tarefa de grandes projetos computacionais coordenados: o
+    projeto <strong>OPAL</strong>, do Lawrence Livermore National
+    Laboratory (Iglesias &amp; Rogers 1996), e o <strong>Opacity
+    Project</strong> (OP), uma colaboração internacional independente que
+    serve como verificação cruzada dos resultados da OPAL. Ambos
+    permanecem, décadas depois, a base das tabelas de opacidade usadas em
+    códigos de evolução estelar como o MESA (já mencionado no Capítulo 3).</p>
+  </div>
+</div>
+
+<h3>Emissividade do gás</h3>
+
+<p>A emissividade possui um significado físico parecido com o da
+opacidade, porém, neste caso, há um aumento na intensidade do feixe de
+radiação, logo:</p>
+
+\[
+\mathrm{d}E = \underbrace{\eta_\nu(\vec r,\hat n,t)}_{\text{emissividade}}\cdot
+\underbrace{\mathrm{d}S\cdot\mathrm{d}s}_{\text{volume}}\cdot\mathrm{d}t\cdot\mathrm{d}\nu\cdot\mathrm{d}\omega\,.
+\tag{4.44}
+\]
+
+<p>Em plano-paralelo, temos que \(\eta_\nu(z)\). A unidade de medida de
+\(\eta_\nu(z)\) é \(\mathrm{erg}/(\mathrm{cm^3\,Hz\,s\,ster})\), similar à
+de \(I_\nu\).</p>
+
+<h3>Espalhamento do gás</h3>
+
+<p>O espalhamento do gás pode ser representado por um coeficiente de
+absorção ou emissão, uma vez que a energia pode variar em qualquer
+direção. Assim, os coeficientes \(\eta_\nu\) e \(\chi_\nu\) também
+descrevem as transições por espalhamento.</p>
+
+<h2>Equação do transporte radiativo</h2>
+
+<p>Uma vez definidos \(\chi_\nu\) e \(\eta_\nu\) do gás, podemos determinar
+a equação de transporte radiativo, ou seja, a equação que descreve a
+interação macroscópica da radiação-matéria.</p>
+
+<p>Consideremos um cilindro de gás com coeficientes de opacidade
+\(\chi_\nu\) e emissividade \(\eta_\nu\), atravessado ao longo de um eixo
+\(s\) até um observador. Neste caso, a \(I_\nu(s,t)\) <em>entra no
+cilindro</em>, e \(I_\nu(s+\mathrm{d}s,t+\mathrm{d}t)\) <em>sai do
+cilindro</em>. A energia absorvida e a energia emitida dentro do cilindro
+podem ser descritas como</p>
+
+\[
+\begin{aligned}
+E_{\mathrm{abs}} &= \chi_\nu I_\nu\,\mathrm{d}S\,\mathrm{d}s\,\mathrm{d}t\,\mathrm{d}\nu\,\mathrm{d}\omega\,,\\
+E_{\mathrm{emi}} &= \eta_\nu\,\mathrm{d}S\,\mathrm{d}s\,\mathrm{d}t\,\mathrm{d}\nu\,\mathrm{d}\omega\,.
+\end{aligned}
+\tag{4.45}
+\]
+
+<p>Por outro lado, a energia que entra no cilindro é</p>
+
+\[
+E_1 = I_\nu(s,t)\,\mathrm{d}S\,\mathrm{d}\omega\,\mathrm{d}t\,\mathrm{d}\nu\,,
+\tag{4.46}
+\]
+
+<p>e a que sai do cilindro é</p>
+
+\[
+E_2 = I_\nu(s+\mathrm{d}s,t+\mathrm{d}t)\,\mathrm{d}S\,\mathrm{d}\omega\,\mathrm{d}t\,\mathrm{d}\nu\,.
+\tag{4.47}
+\]
+
+<p>Assim, pela conservação de energia do sistema, podemos estudar a
+variação de energia, onde</p>
+
+\[
+E_2-E_1 = \Delta E = \big[I_\nu(s+\mathrm{d}s,t+\mathrm{d}t)-I_\nu(s,t)\big]\,\mathrm{d}S\,\mathrm{d}\omega\,\mathrm{d}t\,\mathrm{d}\nu\,.
+\tag{4.48}
+\]
+
+<p>Mas essa variação de energia é consequência dos processos de absorção e
+emissão do gás, logo podemos, também, representar \(\Delta E\) por</p>
+
+\[
+\Delta E = E_{\mathrm{emi}}-E_{\mathrm{abs}} = (\eta_\nu-\chi_\nu I_\nu)\,\mathrm{d}S\,\mathrm{d}s\,\mathrm{d}t\,\mathrm{d}\nu\,\mathrm{d}\omega\,.
+\tag{4.49}
+\]
+
+<p>Igualando as duas expressões para \(\Delta E\) [Equações (4.48) e
+(4.49)] e dividindo ambos os lados por
+\(\mathrm{d}S\,\mathrm{d}t\,\mathrm{d}\nu\,\mathrm{d}\omega\) (note que a
+Equação (4.48) <em>não</em> tem o fator \(\mathrm{d}s\), enquanto a
+Equação (4.49) tem — o fator \(\mathrm{d}s\) sobrevive à divisão apenas do
+lado direito):</p>
+
+\[
+I_\nu(s+\mathrm{d}s,t+\mathrm{d}t)-I_\nu(s,t) = (\eta_\nu-\chi_\nu I_\nu)\,\mathrm{d}s\,.
+\tag{4.50}
+\]
+
+<p>No limite infinitesimal, o lado esquerdo é, por definição, a
+diferencial total \(\mathrm{d}I_\nu\), logo</p>
+
+\[
+\mathrm{d}I_\nu = (\eta_\nu-\chi_\nu I_\nu)\,\mathrm{d}s\,.
+\tag{4.51}
+\]
+
+<p>Sabendo que \(I_\nu\) é função de \(s\) e \(t\), podemos escrever,
+usando as derivadas parciais, que</p>
+
+\[
+\left(\pdv{I_\nu}{s}\right)\mathrm{d}s + \left(\pdv{I_\nu}{t}\right)\mathrm{d}t
+= (\eta_\nu-\chi_\nu I_\nu)\,\mathrm{d}s\,.
+\tag{4.52}
+\]
+
+<p>Dividindo a Equação (4.52) por \(\mathrm{d}s\) e usando que, para um
+fóton, \(\mathrm{d}t/\mathrm{d}s=1/c\):</p>
+
+\[
+\pdv{I_\nu}{s} + \frac{1}{c}\pdv{I_\nu}{t} = \eta_\nu-\chi_\nu I_\nu\,.
+\tag{4.53}
+\]
+
+<p>Esta é a equação do transporte radiativo ao longo do feixe de fótons.</p>
+
+<p>Para um deslocamento em uma direção qualquer,
+\(\mathrm{d}I_\nu/\mathrm{d}s \Rightarrow (\hat n\cdot\nabla)I_\nu\), de
+modo que a Equação (4.53) se generaliza para a <strong>forma vetorial
+geral</strong> da equação do transporte radiativo:</p>
+
+\[
+\boxed{\left[\hat n\cdot\nabla + \frac{1}{c}\pdv{}{t}\right]I_\nu(\vec r,\hat n,t)
+= \eta_\nu(\vec r,\hat n,t) - \chi_\nu(\vec r,\hat n,t)\,I_\nu(\vec r,\hat n,t)}\,.
+\tag{4.54}
+\]
+
+<h3>Caso plano-paralelo, estacionário</h3>
+
+<p>Em uma estrela típica, para as camadas mais externas da atmosfera,
+temos uma geometria plano-paralela estacionária (sem dependência temporal
+explícita), com deslocamento \(\mathrm{d}s\) ao longo da direção \(\hat
+n\) tendo componente vertical \(\mathrm{d}z=\mathrm{d}s\cos\theta\).</p>
+
+<p>Da Equação (4.51), temos que \(\mathrm{d}I_\nu/\mathrm{d}s =
+\eta_\nu-\chi_\nu I_\nu\). Mas, pela geometria plano-paralela,
+\(\vec r=(0,0,z)\), logo</p>
+
+\[
+\frac{\mathrm{d}I_\nu}{\mathrm{d}s} = \frac{\mathrm{d}I_\nu}{\mathrm{d}z}\cdot\frac{\mathrm{d}z}{\mathrm{d}s}\,.
+\tag{4.55}
+\]
+
+<p>Da análise das componentes geométricas, temos que \(\cos\theta =
+\mathrm{d}z/\mathrm{d}s\), logo podemos definir, novamente,
+\(\cos\theta\equiv\mu\), de modo que</p>
+
+\[
+\frac{\mathrm{d}I_\nu}{\mathrm{d}s} = \mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}z}\,.
+\tag{4.56}
+\]
+
+<p>Assim, a equação do transporte radiativo em geometria plano-paralela
+assume a forma</p>
+
+\[
+\boxed{\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}z}(z,\mu) = \eta_\nu(z) - \chi_\nu(z)\,I_\nu(z,\mu)}\,.
+\tag{4.57}
+\]
+
+<h2>Profundidade ótica e função fonte</h2>
+
+<p>Profundidade ótica é uma medida de \(\chi_\nu\) do topo da atmosfera da
+estrela até um ponto \(z\). Ela indica o quanto de um feixe luminoso será
+absorvido ao se deslocar na atmosfera. Definimos \(\tau\) por</p>
+
+\[
+\tau_\nu(z) = -\int_z^{z_{\max}} \chi_\nu(z')\,\mathrm{d}z'\,,
+\qquad \mathrm{d}\tau_\nu = -\chi_\nu\,\mathrm{d}z\,.
+\tag{4.58}
+\]
+
+<p>Note que \(\tau\) é uma grandeza adimensional; ela varia com a
+frequência e com a altura da atmosfera.</p>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Por que a fotosfera é definida em τ ≈ 2/3</div>
+  <div class="conteudo">
+    <p>A profundidade ótica dá um sentido operacional preciso à ideia de
+    "superfície" de uma estrela — algo que, para uma bola de gás sem borda
+    sólida, não é óbvio <em>a priori</em>. Um fóton típico, produzido em
+    uma camada de profundidade ótica \(\tau\) (medida a partir do topo da
+    atmosfera), tem probabilidade de escapar sem ser reabsorvido da ordem
+    de \(e^{-\tau}\). A camada convencionalmente identificada como a
+    <strong>fotosfera</strong> — de onde vem a maior parte da luz que
+    observamos — é definida como aquela em que \(\tau_\nu\approx2/3\):
+    pode-se mostrar que, para uma atmosfera em equilíbrio radiativo com
+    \(S_\nu\approx B_\nu(T)\) variando suavemente com a profundidade, a
+    intensidade emergente no topo é aproximadamente igual à função fonte
+    avaliada exatamente em \(\tau=2/3\). É por isso que definimos a
+    temperatura efetiva \(T_{\mathrm{eff}}\) (via
+    \(L=4\pi R^2\sigma T_{\mathrm{eff}}^4\)) como a temperatura da camada
+    em \(\tau\approx2/3\): é essa camada que domina o espectro emergente
+    e, portanto, o fluxo total observado.</p>
+  </div>
+</div>
+
+<p>Substituindo \(\tau\) na equação de transporte radiativo no caso
+plano-paralelo [Equação (4.57)], com
+\(\mathrm{d}z=-\mathrm{d}\tau_\nu/\chi_\nu\):</p>
+
+\[
+\mu\,\frac{\mathrm{d}I_\nu}{-\mathrm{d}\tau_\nu/\chi_\nu} = \eta_\nu-\chi_\nu I_\nu
+\quad\Longrightarrow\quad
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau_\nu}(\tau_\nu,\mu) = I_\nu - \frac{\eta_\nu(\tau)}{\chi_\nu(\tau)}\,.
+\tag{4.59}
+\]
+
+<p>Podemos definir o coeficiente \(\eta_\nu/\chi_\nu\) como sendo a
+<strong>função fonte</strong>, \(S_\nu(\tau)\) ou \(S_\nu(z)\). Esta
+grandeza descreve o aumento ou decréscimo que um dado ponto \(z\) fornece
+ao feixe radiativo:</p>
+
+\[
+S_\nu(\tau) = \frac{\eta_\nu}{\chi_\nu}\,,
+\qquad [S_\nu] = \left[\frac{\mathrm{erg}}{\mathrm{s\,cm^2\,ster\,Hz}}\right]\,.
+\tag{4.60}
+\]
+
+<p>Quando existe equilíbrio termodinâmico, temos que \(S_\nu=B_\nu\).
+Desta forma, podemos escrever a equação do transporte radiativo como</p>
+
+\[
+\boxed{\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau} = I_\nu - S_\nu}\,,
+\qquad \text{onde } S_\nu(\tau_\nu)\,,\quad I_\nu(\tau_\nu,\mu)\,.
+\tag{4.61}
+\]
+
+<p>Esta é a forma final da equação do transporte radiativo em uma
+geometria plano-paralela.</p>
+
+<h2>Soluções para a equação de transporte (PP)</h2>
+
+<p>Até agora, vimos que o campo de radiação pode ser totalmente
+caracterizado pelos parâmetros \(I_\nu\), \(J_\nu\), \(F_\nu\). O gás e a
+matéria podem ser estudados pelos coeficientes \(\chi_\nu\) e \(\eta_\nu\),
+e a interação radiação-matéria é descrita pela equação do transporte
+radiativo,</p>
+
+\[
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}z}(z,\mu) = \eta_\nu-\chi_\nu I_\nu\,,
+\qquad\text{ou}\qquad
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau}(\tau,\mu) = I_\nu-S_\nu(\tau)\,.
+\tag{4.62}
+\]
+
+<p>Neste tópico, vamos determinar as soluções para a equação do transporte
+radiativo para quatro casos. Vejamos:</p>
+
+<h3>Caso 1: vácuo (χ<sub>ν</sub> = η<sub>ν</sub> = 0)</h3>
+
+<p>Caso em que não há nem absorção nem emissão, logo: \(\chi_\nu=0\) e
+\(\eta_\nu=0\). Neste caso, a Equação (4.62) se resume a</p>
+
+\[
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}z}(z,\mu) = 0
+\quad\Longrightarrow\quad
+I_\nu(z,\mu) = \text{constante}\,.
+\tag{4.63}
+\]
+
+<p>Este caso descreve um ambiente com ausência de gás. Assim, o feixe de
+radiação não se altera: \(I_\nu\equiv\) constante.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Por que o brilho superficial não muda com a distância, mas o fluxo, sim</div>
+  <div class="conteudo">
+    <p>O Caso 1 parece trivial, mas encerra um ponto conceitual sutil e
+    importante: no vácuo (o espaço interestelar ou intergaláctico, em boa
+    aproximação), a <em>intensidade específica</em> \(I_\nu\) ao longo de
+    um raio de luz não muda com a distância — é exatamente o que a
+    Equação (4.63) afirma. Isso é diferente do que a intuição cotidiana
+    sugere ("fontes de luz ficam mais fracas quanto mais longe estão"): o
+    que cai com \(1/r^2\) é o <em>fluxo</em> \(F_\nu\), não \(I_\nu\). A
+    razão é geométrica: à medida que um feixe se afasta de uma fonte, o
+    ângulo sólido que a fonte subtende diminui com \(1/r^2\), mas isso é
+    compensado porque a intensidade específica é medida <em>por</em>
+    unidade de ângulo sólido, e essa combinação é exatamente o que a
+    mantém constante ao longo do raio. Na prática, isso significa que o
+    brilho superficial de uma fonte resolvida (como a superfície do Sol,
+    ou de uma galáxia próxima) não depende da distância do observador —
+    apenas o quão grande, angularmente, essa fonte parece (e, portanto,
+    quanto fluxo total ela entrega), diminui.</p>
+  </div>
+</div>
+
+<h3>Caso 2: apenas emissão (χ<sub>ν</sub> = 0)</h3>
+
+<p>Caso em que a opacidade é nula (\(\chi_\nu=0\)), temos apenas
+emissões:</p>
+
+\[
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}z}(z,\mu) = \eta_\nu
+\quad\Longrightarrow\quad
+\mathrm{d}I_\nu(z,\mu) = \frac{\eta_\nu}{\mu}\,\mathrm{d}z\,.
+\tag{4.64}
+\]
+
+<p>Resolvendo a integral, temos</p>
+
+\[
+\int_{I_\nu(z_1,\mu)}^{I_\nu(z_2,\mu)} \mathrm{d}I_\nu = \int_{z_1}^{z_2} \frac{\eta_\nu(z)}{\mu}\,\mathrm{d}z\,,
+\tag{4.65}
+\]
+
+<p>onde \(I_\nu(z_1,\mu)\) é a intensidade inicial do feixe e
+\(I_\nu(z_2,\mu)\) é a intensidade final. Logo,</p>
+
+\[
+I_\nu(z_2,\mu) - I_\nu(z_1,\mu) = \frac{1}{\mu}\int_{z_1}^{z_2}\eta_\nu(z)\,\mathrm{d}z\,,
+\tag{4.66}
+\]
+
+<p>ou seja,</p>
+
+\[
+\boxed{I_\nu(z_2,\mu) = I_\nu(z_1,\mu) + \frac{1}{\mu}\int_{z_1}^{z_2}\eta_\nu(z)\,\mathrm{d}z}\,.
+\tag{4.67}
+\]
+
+<p>A partir da Equação (4.67), já podemos ver que o feixe <em>ganha</em>
+energia, e esse ganho é da ordem de
+\(\dfrac{1}{\mu}\displaystyle\int_{z_1}^{z_2}\eta_\nu\,\mathrm{d}z\): ao
+percorrer a trajetória de \(z_1\) até \(z_2\) (recebendo energia a cada
+elemento de volume atravessado), o feixe emerge mais intenso do que
+entrou.</p>
+
+<h4>Exemplo: as nebulosas planetárias</h4>
+
+<p>Um exemplo importante deste caso são as <strong>nebulosas
+planetárias</strong>: uma estrela central quente e compacta (o núcleo
+remanescente exposto de uma estrela de massa baixa/intermediária no fim
+de sua evolução), envolta por uma nebulosa de gás ionizado que a própria
+estrela ejetou. Nessa geometria, o gás que envolve a estrela emite luz
+(mas não a absorve de volta de forma significativa), de modo que o
+espectro observado é um contínuo fraco (a luz estelar central, atenuada
+pela distância) somado a linhas de emissão intensas e estreitas,
+produzidas pela recombinação de fótons no gás ionizado da nebulosa
+circundante. A estrela central quente emite radiação UV que ioniza o gás
+circundante, produzindo alta emissividade \(\eta_\nu\) na camada externa
+(a nebulosa); o feixe \(I_\nu\) vindo do disco estelar central atravessa a
+nebulosa e chega ao observador somado à emissão acumulada ao longo do
+caminho, conforme a Equação (4.67).</p>
+
+<p>O que o observador enxerga é, portanto, o espectro central da estrela
+somado ao espectro de emissão (por recombinação de fótons) da nebulosa
+circundante — exatamente a soma descrita pela Equação (4.67).</p>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Nebulosas opticamente finas: regiões HII</div>
+  <div class="conteudo">
+    <p>O Caso 2 — emissão pura, sem absorção — é a aproximação de
+    referência também para <strong>regiões HII</strong>, nuvens de
+    hidrogênio ionizado por estrelas jovens e quentes (tipos O e B), como
+    as que produzem a emissão H\(\alpha\) já mencionada na tabela de
+    densidades de energia. Assim como as nebulosas planetárias discutidas
+    acima, essas nebulosas costumam ser opticamente finas
+    (\(\tau_\nu\ll1\)) na maior parte do espectro visível: a linha de
+    visada atravessa o gás ionizado <em>acumulando</em> emissão (cada
+    elemento de volume ao longo do caminho contribui com
+    \(\eta_\nu\,\mathrm{d}z/\mu\)) sem sofrer absorção significativa de
+    volta. É exatamente por isso que imagens de regiões HII (a Nebulosa de
+    Órion sendo o exemplo mais observado) podem ser modeladas, em primeira
+    aproximação, apenas somando a emissividade ao longo da linha de visada
+    — sem resolver o problema de transporte radiativo completo, que
+    exigiria tratar também a absorção.</p>
+  </div>
+</div>
+
+<h3>Caso 3: apenas absorção (η<sub>ν</sub> = 0)</h3>
+
+<p>Caso em que a emissividade é nula (\(\eta_\nu=0\)), ou seja, há apenas
+absorções. Neste caso, temos que a função fonte é nula, uma vez que
+\(S_\nu(\tau)=\eta_\nu/\chi_\nu=0\). Logo, podemos trabalhar com a
+equação do transporte radiativo em função da profundidade ótica,
+\(I_\nu(\tau,\mu)\):</p>
+
+\[
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau} = I_\nu - S_\nu
+\quad\Longrightarrow\quad
+\frac{\mathrm{d}I_\nu}{I_\nu} = \frac{\mathrm{d}\tau}{\mu}\,.
+\tag{4.68}
+\]
+
+<p>Resolvendo a equação diferencial (por separação de variáveis),
+obtemos</p>
+
+\[
+\int_{I_\nu(\tau_1,\mu)}^{I_\nu(\tau_2,\mu)} \frac{\mathrm{d}I_\nu}{I_\nu}
+= \frac{1}{\mu}\int_{\tau_1}^{\tau_2}\mathrm{d}\tau
+\quad\Longrightarrow\quad
+\ln I_\nu\Big|_{I_\nu(\tau_1,\mu)}^{I_\nu(\tau_2,\mu)} = \frac{1}{\mu}(\tau_2-\tau_1)\,,
+\tag{4.69}
+\]
+
+<p>ou seja,</p>
+
+\[
+\ln\!\left(\frac{I_\nu(\tau_2,\mu)}{I_\nu(\tau_1,\mu)}\right) = \frac{1}{\mu}(\tau_2-\tau_1)\,.
+\tag{4.70}
+\]
+
+<p>Aplicando a exponencial dos dois lados,</p>
+
+\[
+\boxed{I_\nu(\tau_2,\mu) = I_\nu(\tau_1,\mu)\,e^{(\tau_2-\tau_1)/\mu}}\,.
+\tag{4.71}
+\]
+
+<p>Se quisermos determinar o \(I_\nu\) emergente da estrela, temos que
+considerar o feixe no topo da atmosfera, ou seja, \(\tau_2=0\) e
+\(\tau_1=\tau\). Assim, a Equação (4.71) assume a forma</p>
+
+\[
+I_\nu(0,\mu) = I_\nu(\tau,\mu)\,e^{-\tau/\mu}\,.
+\tag{4.72}
+\]
+
+<p>No caso em que \(\tau_2=\tau(z_{\max})\) e \(\tau_1=\tau\) é um ponto
+qualquer, com \(\mu=1\) (feixe emergindo perpendicularmente à
+superfície), a Equação (4.72) se reduz a</p>
+
+\[
+I_\nu(0,1) = I_\nu(\tau,1)\,e^{-\tau}\,.
+\tag{4.73}
+\]
+
+<p>Ainda mais, se \(\tau=1\), temos que</p>
+
+\[
+I_\nu(0,1) = \frac{1}{e}\,I_\nu(1,1)\,.
+\tag{4.74}
+\]
+
+<p>Ou seja, nesse caso, o feixe de luz foi reduzido por um fator \(1/e\).
+Este valor, por sua vez, é proporcional à absorção do meio.</p>
+
+<p>De forma geral, podemos dizer que:</p>
+<ul>
+  <li>se \(\tau\gg1\), temos um meio <strong>espesso</strong>, com mais
+  absorções possíveis;</li>
+  <li>se \(\tau\ll1\), temos um meio <strong>fino</strong>, onde a
+  radiação viaja mais livremente.</li>
+</ul>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Profundidades óticas típicas em diferentes ambientes astrofísicos</div>
+  <div class="conteudo">
+    <p>A Equação (4.71) torna concreta a noção de "espesso" e "fino" em
+    transporte radiativo, mas vale a pena comparar a escala de \(\tau\) em
+    ambientes astrofísicos reais — as diferenças são de muitas ordens de
+    grandeza:</p>
+    <ul>
+      <li><strong>Interior estelar (núcleo até a superfície solar)</strong>:
+      usando o caminho livre médio \(l\approx0{,}9\,\mathrm{mm}\) estimado
+      por Mitalas &amp; Sills (1992) (já discutido na caixa sobre o
+      <em>random walk</em> radiativo) e
+      \(R_\odot\approx7\times10^{10}\,\mathrm{cm}\), a profundidade ótica
+      típica entre o centro e a superfície é
+      \(\tau\sim R_\odot/l\sim10^{11}\) — um meio extremamente espesso, no
+      qual a radiação só se desloca por difusão.</li>
+      <li><strong>Coroa solar</strong>: ao contrário, a coroa é opticamente
+      fina ao espalhamento Thomson (\(\tau\ll1\)) na maior parte do seu
+      volume — é exatamente por isso que conseguimos observar a coroa em
+      luz branca durante eclipses, com a luz fotosférica de fundo
+      atravessando-a sem grande atenuação, e por isso que a técnica de
+      coronografia (bloquear o disco solar) é necessária para isolar seu
+      brilho, muito mais fraco.</li>
+      <li><strong>Meio interestelar difuso</strong>: a extinção
+      interestelar média na banda \(V\) é da ordem de
+      \(\sim1\)–\(2\,\mathrm{mag/kpc}\) em direções típicas do disco
+      Galáctico (Fitzpatrick 1999), o que corresponde a
+      \(\tau_V=A_V/1{,}086\sim10^{-3}\) por parsec — um meio muito fino em
+      escalas de nuvens individuais, mas que se acumula em
+      \(\tau_V\sim1\)–\(2\) ao longo de todo o disco Galáctico.</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Caso 4: caso geral (χ<sub>ν</sub> ≠ 0 e η<sub>ν</sub> ≠ 0)</h3>
+
+<p>Este é o caso mais importante e mais geral: nem a opacidade nem a
+emissividade são nulas. Partimos, mais uma vez, da equação do transporte
+radiativo em função da profundidade ótica,</p>
+
+\[
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau} = I_\nu(\tau,\mu) - S_\nu(\tau)\,,
+\tag{4.75}
+\]
+
+<p>cuja solução vamos deduzir passo a passo pelo <strong>método do fator
+integrante</strong>, a técnica padrão para resolver equações diferenciais
+lineares de primeira ordem.</p>
+
+<p><strong>Passo (a): forma padrão.</strong> Dividimos a Equação (4.75)
+por \(\mu\) para colocá-la na forma padrão de uma EDO linear de
+\(1^\text{a}\) ordem:</p>
+
+\[
+\begin{aligned}
+\mu\,\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau} &= I_\nu - S_\nu \\[2pt]
+\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau} - \frac{1}{\mu}\,I_\nu &= -\frac{S_\nu}{\mu}\,.
+\end{aligned}
+\tag{4.76}
+\]
+
+<p>Comparando com a forma padrão
+\(\dfrac{\mathrm{d}y}{\mathrm{d}x}+P(x)\,y=Q(x)\), identificamos
+\(y\equiv I_\nu\), \(x\equiv\tau\), \(P(\tau)=-1/\mu\) (uma constante,
+pois \(\mu\) é fixo ao longo de um dado raio) e
+\(Q(\tau)=-S_\nu(\tau)/\mu\).</p>
+
+<p><strong>Passo (b): o método do fator integrante.</strong> Antes de
+aplicá-lo, vale relembrar a ideia geral por trás do método, útil para
+qualquer EDO linear de \(1^\text{a}\) ordem
+\(\mathrm{d}y/\mathrm{d}x+P(x)y=Q(x)\). A estratégia é multiplicar toda a
+equação por uma função auxiliar \(\mathcal{F}(x)\) — o <em>fator
+integrante</em> — escolhida especificamente para que o lado esquerdo da
+equação se torne a derivada de um produto,
+\(\mathrm{d}[\mathcal{F}(x)\,y]/\mathrm{d}x\). Isso acontece exatamente
+quando</p>
+
+\[
+\mathcal{F}(x) = \exp\!\left(\int P(x)\,\mathrm{d}x\right)\,,
+\tag{4.77}
+\]
+
+<p>pois então \(\mathrm{d}\mathcal{F}/\mathrm{d}x=P(x)\,\mathcal{F}(x)\), e</p>
+
+\[
+\frac{\mathrm{d}}{\mathrm{d}x}\big[\mathcal{F}(x)\,y\big]
+= \mathcal{F}\,\frac{\mathrm{d}y}{\mathrm{d}x} + y\,\frac{\mathrm{d}\mathcal{F}}{\mathrm{d}x}
+= \mathcal{F}\,\frac{\mathrm{d}y}{\mathrm{d}x} + \mathcal{F}\,P\,y
+= \mathcal{F}\left(\frac{\mathrm{d}y}{\mathrm{d}x}+P\,y\right) = \mathcal{F}\,Q\,.
+\tag{4.78}
+\]
+
+<p>Uma vez que o lado esquerdo vira uma derivada exata, basta integrar dos
+dois lados e isolar \(y\). (Note que usamos aqui o símbolo
+\(\mathcal{F}\) para o fator integrante, e não \(\mu\), precisamente para
+não colidir com o cosseno diretor \(\mu=\cos\theta\) já em uso neste
+capítulo — essa é apenas uma coincidência de nomes na literatura de
+EDOs.)</p>
+
+<p><strong>Passo (c): o fator integrante da nossa equação.</strong> Como
+\(P(\tau)=-1/\mu\) é constante,</p>
+
+\[
+\mathcal{F}(\tau) = \exp\!\left(\int\!\left(-\frac{1}{\mu}\right)\mathrm{d}\tau\right) = e^{-\tau/\mu}\,.
+\tag{4.79}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — cuidado com o sinal do fator integrante</div>
+  <div class="conteudo">
+    <p>É essencial não confundir este resultado com uma tentativa de usar
+    \(e^{+\tau}\) como fator integrante — que é precisamente o que
+    aparece, de forma parcialmente rasurada, no meio da dedução original
+    nas notas manuscritas (página 44). A forma padrão da nossa equação
+    [Equação (4.76)] tem \(P(\tau)=-1/\mu\), não \(P(\tau)=+1\): o fator
+    integrante correto <em>precisa</em> carregar exatamente esse
+    coeficiente no expoente, ou seja, \(e^{-\tau/\mu}\), e não \(e^{\tau}\).
+    Substituir \(e^{+\tau}\) no lugar de \(e^{-\tau/\mu}\) não faz o lado
+    esquerdo da equação se tornar a derivada de um produto [a condição da
+    Equação (4.78) deixa de valer], e é justamente por isso que aquele
+    caminho não fechou algebricamente e foi abandonado no meio do
+    cálculo. Vamos conferir adiante que \(e^{-\tau/\mu}\) reproduz
+    exatamente o resultado final que o professor já havia registrado — e
+    esta é também a convenção adotada em textos de referência padrão da
+    área, como <em>Radiative Processes in Astrophysics</em> (Rybicki &amp;
+    Lightman) e Kippenhahn, Weigert &amp; Weiss (2012).</p>
+  </div>
+</div>
+
+<p><strong>Passo (d): reconhecendo a regra do produto "de trás para
+frente".</strong> Aplicando a Equação (4.78) ao nosso caso específico
+(\(\mathcal{F}=e^{-\tau/\mu}\), \(y=I_\nu\)), verificamos explicitamente
+que</p>
+
+\[
+\begin{aligned}
+\frac{\mathrm{d}}{\mathrm{d}\tau}\Big[I_\nu(\tau,\mu)\,e^{-\tau/\mu}\Big]
+&= \frac{\mathrm{d}I_\nu}{\mathrm{d}\tau}\,e^{-\tau/\mu} + I_\nu\cdot\left(-\frac{1}{\mu}\right)e^{-\tau/\mu} \\
+&= e^{-\tau/\mu}\left(\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau} - \frac{I_\nu}{\mu}\right)\,,
+\end{aligned}
+\tag{4.80}
+\]
+
+<p>que é exatamente a regra do produto usada "de trás para frente": em
+vez de derivar um produto para obter dois termos, reconhecemos que os
+dois termos do lado direito da Equação (4.76), quando multiplicados por
+\(e^{-\tau/\mu}\), se recombinam na derivada de um único produto.</p>
+
+<p><strong>Passo (e): integrando.</strong> Multiplicando a Equação (4.76)
+por \(e^{-\tau/\mu}\) e usando a Equação (4.80),</p>
+
+\[
+\begin{aligned}
+e^{-\tau/\mu}\left(\frac{\mathrm{d}I_\nu}{\mathrm{d}\tau} - \frac{I_\nu}{\mu}\right) &= -\frac{S_\nu}{\mu}\,e^{-\tau/\mu} \\
+\frac{\mathrm{d}}{\mathrm{d}\tau}\Big[I_\nu(\tau,\mu)\,e^{-\tau/\mu}\Big] &= -\frac{S_\nu(\tau)}{\mu}\,e^{-\tau/\mu}\,.
+\end{aligned}
+\tag{4.81}
+\]
+
+<p>Integrando os dois lados de \(\tau_1\) a \(\tau_2\) (com
+\(\tau_2>\tau_1\)),</p>
+
+\[
+\begin{aligned}
+\int_{\tau_1}^{\tau_2}\frac{\mathrm{d}}{\mathrm{d}t}\Big[I_\nu(t,\mu)\,e^{-t/\mu}\Big]\,\mathrm{d}t
+&= -\frac{1}{\mu}\int_{\tau_1}^{\tau_2} S_\nu(t)\,e^{-t/\mu}\,\mathrm{d}t \\
+I_\nu(\tau_2,\mu)\,e^{-\tau_2/\mu} - I_\nu(\tau_1,\mu)\,e^{-\tau_1/\mu}
+&= -\frac{1}{\mu}\int_{\tau_1}^{\tau_2} S_\nu(t)\,e^{-t/\mu}\,\mathrm{d}t\,,
+\end{aligned}
+\tag{4.82}
+\]
+
+<p>onde usamos o Teorema Fundamental do Cálculo no lado esquerdo.
+Isolando \(I_\nu(\tau_1,\mu)\),</p>
+
+\[
+\begin{aligned}
+I_\nu(\tau_1,\mu)\,e^{-\tau_1/\mu} &= I_\nu(\tau_2,\mu)\,e^{-\tau_2/\mu} + \frac{1}{\mu}\int_{\tau_1}^{\tau_2} S_\nu(t)\,e^{-t/\mu}\,\mathrm{d}t \\
+I_\nu(\tau_1,\mu) &= I_\nu(\tau_2,\mu)\,e^{-(\tau_2-\tau_1)/\mu} + \frac{1}{\mu}\int_{\tau_1}^{\tau_2} S_\nu(t)\,e^{-(t-\tau_1)/\mu}\,\mathrm{d}t\,,
+\end{aligned}
+\tag{4.83}
+\]
+
+<p>onde, no último passo, multiplicamos ambos os lados por
+\(e^{\tau_1/\mu}\) e absorvemos a exponencial dentro da integral (já que
+\(\tau_1\) não depende de \(t\)).</p>
+
+<p><strong>Passo (f): resultado final.</strong> Escrevendo
+\(\tau\equiv\tau_1\) (o ponto onde avaliamos a intensidade), chegamos à
+<strong>solução formal</strong> da intensidade de radiação em uma
+atmosfera estelar em geometria plano-paralela:</p>
+
+\[
+\boxed{I_\nu(\tau,\mu) = I_\nu(\tau_2,\mu)\,e^{-(\tau_2-\tau_1)/\mu}
++ \frac{1}{\mu}\int_{\tau_1}^{\tau_2} S_\nu(t)\,e^{-(t-\tau_1)/\mu}\,\mathrm{d}t}\,.
+\tag{4.84}
+\]
+
+<p>Como verificação adicional de consistência: se \(S_\nu=0\) (o Caso 3,
+só absorção), a integral desaparece e a Equação (4.84) se reduz a
+\(I_\nu(\tau_1,\mu)=I_\nu(\tau_2,\mu)\,e^{-(\tau_2-\tau_1)/\mu}\) —
+exatamente a Equação (4.71), como era de se esperar.</p>
+
+<p>O resultado da Equação (4.84) tem uma interpretação física direta: a
+intensidade em \(\tau_1\) é a soma de <strong>(i)</strong> a intensidade
+que entrou em \(\tau_2\), atenuada exponencialmente por sua passagem pelo
+meio até \(\tau_1\), com <strong>(ii)</strong> a contribuição de cada
+camada intermediária \(t\in[\tau_1,\tau_2]\), emitindo de acordo com sua
+função fonte local \(S_\nu(t)\) e também atenuada exponencialmente pelo
+trecho de meio entre \(t\) e \(\tau_1\).</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — A equação central de todo código de síntese espectral estelar</div>
+  <div class="conteudo">
+    <p>A Equação (4.84) não é apenas um exercício de EDOs: é, literalmente,
+    a equação que todo código moderno de síntese espectral resolve
+    numericamente para prever o espectro emergente de uma estrela. A
+    complexidade real desses códigos — <strong>TLUSTY</strong> (Hubeny
+    &amp; Lanz 1995), <strong>PHOENIX</strong> (Husser et al. 2013), e os
+    métodos 3D fora do ETL revisados por Bergemann et al. (2025), já
+    mencionados neste capítulo — está quase inteiramente em como se
+    calcula \(S_\nu(t)\) em cada profundidade: em equilíbrio termodinâmico
+    local (ETL), basta \(S_\nu=B_\nu[T(t)]\) (ver a próxima seção); fora
+    do ETL, a função fonte depende da solução simultânea de equações de
+    equilíbrio estatístico para as populações atômicas, que por sua vez
+    dependem do próprio campo de radiação \(I_\nu\) — um problema acoplado
+    e não linear, resolvido iterativamente. Mas, uma vez conhecida
+    \(S_\nu(t)\) em cada ponto, a Equação (4.84) (ou sua generalização
+    para geometrias esféricas/3D) é sempre o passo final: a integral
+    formal ao longo da linha de visada que converte a estrutura física do
+    modelo de atmosfera em um espectro observável.</p>
+  </div>
+</div>
+
+<h2>Módulo interativo 4 — As quatro soluções da equação de transporte</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Um único gráfico, quatro regimes físicos</div>
+  <div class="controles">
+    <div class="controle" style="flex-basis:100%;">
+      <label>Caso:</label>
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.3rem;">
+        <label><input type="radio" name="m4-caso" value="1" checked> 1. Vácuo</label>
+        <label><input type="radio" name="m4-caso" value="2"> 2. Só emissão</label>
+        <label><input type="radio" name="m4-caso" value="3"> 3. Só absorção</label>
+        <label><input type="radio" name="m4-caso" value="4"> 4. Caso geral</label>
+      </div>
+    </div>
+    <div class="controle">
+      <label for="m4-I0">I<sub>ν</sub>(0) <span class="valor" id="m4-I0-valor">1,00</span></label>
+      <input type="range" id="m4-I0" min="0" max="2" step="0.05" value="1">
+    </div>
+    <div class="controle">
+      <label for="m4-mu">μ = cos θ <span class="valor" id="m4-mu-valor">0,80</span></label>
+      <input type="range" id="m4-mu" min="0.05" max="1" step="0.01" value="0.8">
+    </div>
+    <div class="controle">
+      <label for="m4-S0">Função fonte S<sub>ν</sub> (casos 2 e 4: também dá a "emissividade" do caso 2) <span class="valor" id="m4-S0-valor">0,50</span></label>
+      <input type="range" id="m4-S0" min="0" max="2" step="0.05" value="0.5">
+    </div>
+  </div>
+  <div class="grafico-card" style="height:340px;">
+    <canvas id="m4-grafico" role="img" aria-label="Gráfico de I em função de tau (ou percurso, quando chi é zero) para o caso selecionado entre vácuo, só emissão, só absorção e caso geral.">
+      Gráfico: intensidade I em função de τ (profundidade ótica) ou do percurso s ao longo do feixe, quando χ_ν=0. Caso 1: reta horizontal. Caso 2: reta crescente. Caso 3: decaimento exponencial. Caso 4: curva que sobe ou desce suavemente até saturar na função fonte S₀.
+    </canvas>
+  </div>
+  <p class="leitura-card" id="m4-legenda">
+    Caso 1 (vácuo): \(\chi_\nu=\eta_\nu=0\), logo \(I_\nu\equiv\)constante
+    — nenhuma atenuação nem ganho, mesmo a grandes distâncias (é o fluxo
+    que cai com \(1/r^2\), não a intensidade específica). <strong>Nota
+    sobre o eixo</strong>: nos Casos 1 e 2, \(\chi_\nu=0\) e a profundidade
+    ótica não está definida (\(\tau\equiv0\) sempre); o eixo horizontal
+    representa, nesses dois casos, o percurso \(s\) ao longo do feixe, não
+    uma verdadeira profundidade ótica — a mesma distinção feita no texto
+    original.
+  </p>
+</div>
+
+<h3>Condições de contorno</h3>
+
+<p>A solução formal, Equação (4.84), depende de dois valores de contorno,
+\(I_\nu(\tau_2,\mu)\) e a função fonte \(S_\nu(t)\) em todo o intervalo.
+Precisamos agora especificar essas condições de contorno para os casos de
+interesse físico.</p>
+
+<p><strong>Interior estelar (\(\tau\to\infty\)).</strong> Na geometria PP,
+consideramos a condição de fronteira de uma atmosfera delimitada entre
+\(z_{\max}\) (topo, \(\tau=0\)) e \(z_{\rm base}\) (base, no interior
+estelar). No estudo do interior da estrela, podemos supor que
+\(\tau\to\infty\), e que a intensidade \(I_\nu\) permanece finita nessas
+profundezas (não pode divergir fisicamente). Logo, também temos que:</p>
+
+\[
+\lim_{\tau\to\infty} I_\nu(\tau,\mu)\,e^{-\tau/\mu} \to 0\,.
+\tag{4.85}
+\]
+
+<p>O primeiro termo da solução do transporte radiativo [o termo
+\(I_\nu(\tau_2,\mu)e^{-(\tau_2-\tau_1)/\mu}\) da Equação (4.84)] é nulo
+nesta circunstância.</p>
+
+<p><strong>Caso onde \(\mu>0\) (saindo da estrela).</strong> O feixe se
+propaga de \(\tau_2\to\infty\) (interior) até \(\tau_1=\tau\), em direção
+à superfície. Logo, a intensidade específica pode ser representada por
+(usando a Equação (4.85) para anular o primeiro termo):</p>
+
+\[
+I_\nu(\tau,\mu) = 0 + \frac{1}{\mu}\int_{\tau}^{\infty} S_\nu(t)\,e^{-(t-\tau)/\mu}\,\mathrm{d}t\,,\qquad\text{para }\mu>0\,.
+\tag{4.86}
+\]
+
+<p>Note que, no topo da atmosfera (\(\tau=0\)),</p>
+
+\[
+I_\nu(0,\mu) = \frac{1}{\mu}\int_0^\infty S_\nu(t)\,e^{-t/\mu}\,\mathrm{d}t\,,
+\tag{4.87}
+\]
+
+<p>e, se \(\mu=1\),</p>
+
+\[
+I_\nu(0,1) = \int_0^\infty S_\nu(t)\,e^{-t}\,\mathrm{d}t\,.
+\tag{4.88}
+\]
+
+<p><strong>Caso onde \(\mu<0\) (entrando na estrela).</strong> Sem
+radiação externa incidindo sobre a estrela, \(I_\nu(\tau_2{=}0,\mu{<}0)=0\)
+é a condição de contorno natural no topo da atmosfera. Logo, a
+intensidade luminosa assume a forma:</p>
+
+\[
+I_\nu(\tau,\mu) = \frac{1}{\mu}\int_\tau^0 S_\nu(t)\,e^{-(t-\tau)/\mu}\,\mathrm{d}t\,,\qquad\text{para }\mu<0\,.
+\tag{4.89}
+\]
+
+<p>Note que este tratamento é apenas para o interior da estrela. Logo, o
+campo de radiação em uma atmosfera pode ser expresso de forma geral, em
+qualquer direção, como</p>
+
+\[
+I_\nu(\tau,\mu) =
+\begin{cases}
+\displaystyle\frac{1}{\mu}\int_\tau^\infty S_\nu(t)\,e^{-(t-\tau)/\mu}\,\mathrm{d}t\,, & \mu>0\,,\\[10pt]
+\displaystyle\frac{1}{\mu}\int_\tau^0 S_\nu(t)\,e^{-(t-\tau)/\mu}\,\mathrm{d}t\,, & \mu<0\,,
+\end{cases}
+\tag{4.90}
+\]
+
+<p>lembrando a definição de profundidade ótica dada na Equação (4.58). O
+termo \(\tau\) é quem define a separação entre o interior estelar e a
+atmosfera.</p>
+
+<h3>Momentos do campo de radiação em função de τ e as equações de Schwarzschild–Milne</h3>
+
+<p>Lembrando dos momentos de ordem zero e um que definimos anteriormente
+[Equação (4.26)], agora escritos explicitamente como funções de
+\(\tau\):</p>
+
+\[
+J_\nu(\tau) = \frac{1}{2}\int_{-1}^{1} I_\nu(\tau,\mu)\,\mathrm{d}\mu\,,
+\qquad
+H_\nu(\tau) = \frac{1}{2}\int_{-1}^{1} I_\nu(\tau,\mu)\,\mu\,\mathrm{d}\mu\,.
+\tag{4.91}
+\]
+
+<p>Substituindo a solução formal \(I_\nu(\tau,\mu)\) [Equação (4.90)]
+dentro dessas integrais em \(\mu\), obtemos um conjunto de equações
+integrais que relacionam os momentos do campo de radiação, \(J_\nu(\tau)\),
+\(H_\nu(\tau)\) e \(K_\nu(\tau)\), à função fonte \(S_\nu(\tau)\) em toda a
+atmosfera — as chamadas <strong>equações de Schwarzschild–Milne</strong>.
+Elas são o elo formal entre o campo de radiação (via seus momentos) e a
+estrutura física da atmosfera (via \(S_\nu\), que por sua vez depende de
+\(T\), \(\rho\) e da composição química) — é exatamente esse elo que
+torna possível, em princípio, resolver a estrutura de uma atmosfera
+estelar de forma autoconsistente.</p>
+
+<h3>Dedução das Equações de Schwarzschild–Milne</h3>
+
+<p><strong>Ponto de partida.</strong> Já estabelecemos a solução formal da
+equação de transporte para um meio plano-paralelo semi-infinito, separada
+nos dois casos de direção do feixe [Equações (4.86) e (4.89)]:</p>
+
+\[
+I_\nu(\tau,\mu) = \int_\tau^\infty S_\nu(t)\,e^{-(t-\tau)/\mu}\,\frac{\mathrm{d}t}{\mu}\,,\qquad \mu>0\,,
+\tag{4.92}
+\]
+
+\[
+I_\nu(\tau,\mu) = -\int_0^\tau S_\nu(t)\,e^{-(t-\tau)/\mu}\,\frac{\mathrm{d}t}{\mu}\,,\qquad \mu<0\,.
+\tag{4.93}
+\]
+
+<p>Fisicamente, a Equação (4.92) descreve um raio que caminha em direção
+à superfície (\(\mu>0\)): ele carrega a soma (ponderada por
+\(e^{-(t-\tau)/\mu}\)) de tudo o que foi emitido em profundidades
+\(t>\tau\), isto é, <em>abaixo</em> do ponto de observação. Já a Equação
+(4.93) descreve um raio que caminha para dentro da estrela (\(\mu<0\)):
+usando a condição de contorno de que não há radiação externa incidindo em
+\(\tau=0\), ele carrega apenas a contribuição das camadas \(t<\tau\), isto
+é, <em>acima</em> do ponto de observação.</p>
+
+<p><strong>A função integral exponencial.</strong> Para compactar o
+resultado final, é conveniente introduzir a família de funções</p>
+
+\[
+E_n(x) \equiv \int_1^\infty \frac{e^{-xt}}{t^n}\,\mathrm{d}t
+= \int_0^1 \mu^{n-2}\,e^{-x/\mu}\,\mathrm{d}\mu\,,
+\tag{4.94}
+\]
+
+<p>conhecida como <strong>função integral exponencial</strong>. Duas
+propriedades serão úteis: a relação de recorrência
+\(\mathrm{d}E_n/\mathrm{d}x=-E_{n-1}(x)\), e o fato de que \(E_n(x)\)
+decai monotonicamente com \(x\) — fisicamente, é essa propriedade que vai
+controlar o quão "local" é a influência da função fonte sobre o campo de
+radiação em profundidades distantes.</p>
+
+<p><strong>Montando os momentos.</strong> Partindo da definição dos
+momentos já estabelecida [Equação (4.26)], escrita explicitamente em
+função de \(\tau\),</p>
+
+\[
+J_\nu(\tau) = \frac{1}{2}\int_{-1}^1 I_\nu(\tau,\mu)\,\mathrm{d}\mu\,,\quad
+H_\nu(\tau) = \frac{1}{2}\int_{-1}^1 \mu\,I_\nu(\tau,\mu)\,\mathrm{d}\mu\,,\quad
+K_\nu(\tau) = \frac{1}{2}\int_{-1}^1 \mu^2\,I_\nu(\tau,\mu)\,\mathrm{d}\mu\,,
+\tag{4.95}
+\]
+
+<p>separamos cada integral em \(\mu\) nas duas metades \(\mu\in(0,1]\) e
+\(\mu\in[-1,0)\), e substituímos as soluções formais [Equações (4.92) e
+(4.93)] em cada metade. Tomando \(J_\nu(\tau)\) como exemplo,</p>
+
+\[
+J_\nu(\tau) = \frac{1}{2}\int_0^1 \left[\int_\tau^\infty S_\nu(t)\,e^{-(t-\tau)/\mu}\,\frac{\mathrm{d}t}{\mu}\right]\mathrm{d}\mu
+- \frac{1}{2}\int_{-1}^0 \left[\int_0^\tau S_\nu(t)\,e^{-(t-\tau)/\mu}\,\frac{\mathrm{d}t}{\mu}\right]\mathrm{d}\mu\,.
+\tag{4.96}
+\]
+
+<p>O passo central da dedução é <strong>trocar a ordem de integração</strong>
+entre \(\mu\) e \(t\): em vez de integrar primeiro em \(t\) (para \(\mu\)
+fixo) e depois em \(\mu\), integramos primeiro em \(\mu\) (para \(t\)
+fixo) e depois em \(t\). No primeiro termo, \(t\) percorre
+\((\tau,\infty)\) e, para cada \(t\), \(\mu\) percorre \((0,1]\); no
+segundo termo, \(t\) percorre \((0,\tau)\) e, para cada \(t\), \(\mu\)
+percorre \([-1,0)\) — os limites de \(t\) e \(\mu\) apenas trocam de
+papel, sem alterar a região coberta pela integral dupla:</p>
+
+\[
+J_\nu(\tau) = \frac{1}{2}\int_\tau^\infty S_\nu(t)\left[\int_0^1 e^{-(t-\tau)/\mu}\,\frac{\mathrm{d}\mu}{\mu}\right]\mathrm{d}t
+- \frac{1}{2}\int_0^\tau S_\nu(t)\left[\int_{-1}^0 e^{-(t-\tau)/\mu}\,\frac{\mathrm{d}\mu}{\mu}\right]\mathrm{d}t\,.
+\tag{4.97}
+\]
+
+<p><strong>Resolvendo a integral em \(\mu\).</strong> No primeiro termo,
+\(t>\tau\), então \((t-\tau)>0\); com a substituição \(\mu\to\mu\)
+diretamente na definição (4.94) (com \(n=1\)), \(\int_0^1
+e^{-(t-\tau)/\mu}\,\mathrm{d}\mu/\mu = E_1(t-\tau)\). No segundo termo,
+\(t<\tau\), então \((t-\tau)<0\); fazendo \(\mu\to-\mu\) na integral (o
+que inverte os limites para \(\mu\in(0,1]\) e troca o sinal de
+\(\mathrm d\mu/\mu\) duas vezes, cancelando-se), obtemos igualmente
+\(\int_{-1}^0 e^{-(t-\tau)/\mu}\,\mathrm{d}\mu/\mu = E_1(\tau-t)\). Em
+ambos os casos o argumento de \(E_1\) é a distância \(|t-\tau|\), de modo
+que</p>
+
+\[
+\boxed{J_\nu(\tau) = \frac{1}{2}\int_0^\infty S_\nu(t)\,E_1(|t-\tau|)\,\mathrm{d}t}\,.
+\tag{4.98}
+\]
+
+<p>O mesmo procedimento, repetido para \(H_\nu(\tau)\) e \(K_\nu(\tau)\) —
+com um fator adicional de \(\mu\) ou \(\mu^2\) dentro da integral, que
+desloca o índice da função integral exponencial resultante de \(E_1\)
+para \(E_2\) e \(E_3\), respectivamente, e introduz uma troca de sinal
+entre as duas metades no caso de \(H_\nu\) (pois \(\mu\) muda de sinal,
+enquanto \(\mu^2\) não) —, fornece as outras duas equações de
+Schwarzschild–Milne:</p>
+
+\[
+\boxed{H_\nu(\tau) = \frac{1}{2}\int_0^\infty S_\nu(t)\,\operatorname{sgn}(t-\tau)\,E_2(|t-\tau|)\,\mathrm{d}t}\,,
+\tag{4.99}
+\]
+
+\[
+\boxed{K_\nu(\tau) = \frac{1}{2}\int_0^\infty S_\nu(t)\,E_3(|t-\tau|)\,\mathrm{d}t}\,.
+\tag{4.100}
+\]
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — O que as equações de Schwarzschild–Milne dizem fisicamente</div>
+  <div class="conteudo">
+    <p>A Equação (4.98) mostra que \(J_\nu(\tau)\) é uma <strong>média
+    ponderada</strong> da função fonte \(S_\nu\) em todas as profundidades
+    óticas \(t\) da atmosfera, com peso \(E_1(|t-\tau|)\). Como \(E_1\)
+    decai rapidamente com seu argumento, o campo de radiação médio em uma
+    dada profundidade é determinado principalmente pela função fonte nas
+    vizinhanças próximas — tipicamente dentro de um livre caminho médio
+    ótico (\(|t-\tau|\sim1\)) —, e apenas fracamente pelo que acontece em
+    profundidades distantes. Essa é exatamente a intuição física por trás
+    da Aproximação da Difusão (adiante), onde \(S_\nu(t)\) é expandida em
+    série de Taylor em torno de \(\tau\): a expansão só faz sentido porque
+    a influência de \(S_\nu\) é predominantemente local, propriedade que
+    aqui aparece de forma explícita através do peso \(E_1(|t-\tau|)\).</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar — Funções integrais exponenciais em atmosferas estelares</div>
+  <div class="conteudo">
+    <p>O formalismo das equações de Schwarzschild–Milne, com as funções
+    integrais exponenciais \(E_n(x)\) como núcleo de ponderação, é
+    tratamento padrão em livros-texto de atmosferas estelares — ver
+    Mihalas (1978), Capítulo 2, para a dedução completa e suas aplicações
+    à solução numérica do transporte radiativo, e Hubeny &amp; Mihalas
+    (2014) para um tratamento moderno e mais extenso, incluindo a
+    generalização para atmosferas fora do equilíbrio termodinâmico
+    local.</p>
+  </div>
+</div>
+
+<h3>Problemas e dificuldades</h3>
+
+<p>Antes de prosseguir para uma aproximação prática, vale explicitar por
+que a solução formal, Equação (4.84), ainda não é uma solução
+<em>utilizável</em> sem mais trabalho:</p>
+<ul>
+  <li>A função fonte \(S_\nu=\eta_\nu/\chi_\nu\) varia ponto a ponto e com
+  a frequência.</li>
+  <li>O gás pode mudar com \((\rho,T)\) em cada ponto, inclusive sua
+  composição química predominante.</li>
+</ul>
+<p>Ou seja, \(S_\nu(t)\) dentro da integral da Equação (4.84) não é, em
+geral, uma função conhecida <em>a priori</em> — ela é parte do que
+queremos determinar. Isso motiva a busca por aproximações
+simplificadoras, como a que veremos a seguir.</p>
+
+<h2>Módulo interativo 5 — Profundidade ótica: fino vs. espesso</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Atenuação e^(−τ/μ) e a camada ficando opaca</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m5-tau">Profundidade ótica τ (escala log) <span class="valor" id="m5-tau-valor">1,00</span></label>
+      <input type="range" id="m5-tau" min="0" max="1000" step="1" value="500">
+    </div>
+    <div class="controle">
+      <label for="m5-mu">μ = cos θ <span class="valor" id="m5-mu-valor">1,00</span></label>
+      <input type="range" id="m5-mu" min="0.05" max="1" step="0.01" value="1">
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:stretch;">
+    <div style="flex:2 1 320px;height:280px;">
+      <canvas id="m5-grafico" role="img" aria-label="Gráfico em escala logarítmica de e elevado a menos tau sobre mu, em função de tau, com uma linha vertical marcando tau igual a 1.">
+        Gráfico: curva de e^(−τ/μ) em função de τ (eixo log), decrescente de 1 a 0. Uma linha vertical tracejada marca τ=1, a fronteira convencional entre opticamente fino e espesso.
+      </canvas>
+    </div>
+    <div style="flex:1 1 140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;">
+      <div id="m5-camada" style="width:90px;height:180px;border:1px solid #999;border-radius:4px;background:rgba(29,158,117,0);"></div>
+      <span style="font-family:-apple-system,'Segoe UI',Arial,sans-serif;font-size:0.78rem;color:var(--texto-suave);text-align:center;">opacidade visual da camada</span>
+    </div>
+  </div>
+  <p class="leitura-card">
+    Atenuação \(e^{-\tau/\mu}=\)<strong id="m5-atenuacao">—</strong>.
+    <span id="m5-classificacao">—</span>. Referências do capítulo:
+    interior solar (\(\tau\sim R_\odot/\ell\sim10^{11}\), extremamente
+    espesso, radiação só se desloca por difusão); coroa solar
+    (\(\tau\ll1\) ao espalhamento Thomson, por isso observável em luz
+    branca durante eclipses); meio interestelar difuso
+    (\(\tau_V\sim10^{-3}\) por parsec, acumulando \(\tau_V\sim1\)–\(2\) ao
+    longo de todo o disco Galáctico).
+  </p>
+</div>
+
+<h2>Aproximação de Eddington–Barbier</h2>
+
+<p>Para evitar toda a complexidade da função fonte,
+\(S_\nu=\eta_\nu/\chi_\nu\), podemos assumir uma aproximação em
+\(1^\text{o}\) grau, onde:</p>
+
+\[
+S_\nu = a + b\,t\,,
+\tag{4.101}
+\]
+
+<p>com \(a\) e \(b\) constantes. Assim, temos uma forma linear da função
+fonte com a profundidade ótica. Substituindo na Equação (4.87) (caso
+\(\mu>0\), no topo da atmosfera, \(\tau=0\)):</p>
+
+\[
+I_\nu(0,\mu{>}0) = \frac{1}{\mu}\int_0^\infty S_\nu(t)\,e^{-t/\mu}\,\mathrm{d}t
+= \frac{1}{\mu}\int_0^\infty a\,e^{-t/\mu}\,\mathrm{d}t + \frac{1}{\mu}\int_0^\infty b\,t\,e^{-t/\mu}\,\mathrm{d}t\,.
+\tag{4.102}
+\]
+
+<p>Calculando as integrais separadamente. Para a primeira, com a
+substituição \(x=e^{-t/\mu}\) (logo
+\(\mathrm{d}x=-\frac{1}{\mu}e^{-t/\mu}\,\mathrm{d}t\)):</p>
+
+\[
+\frac{1}{\mu}\int_0^\infty a\,e^{-t/\mu}\,\mathrm{d}t = a\int_0^\infty \frac{1}{\mu}e^{-t/\mu}\,\mathrm{d}t = a\,\Big[-e^{-t/\mu}\Big]_0^\infty = a\,(0-(-1)) = a\,.
+\tag{4.103}
+\]
+
+<p>Para a segunda integral, fazemos integração por partes,
+\(\int u\,\mathrm{d}v = uv - \int v\,\mathrm{d}u\), com</p>
+
+\[
+u=t\,,\quad \mathrm{d}v=e^{-t/\mu}\,\mathrm{d}t
+\qquad\Longrightarrow\qquad
+\mathrm{d}u=\mathrm{d}t\,,\quad v=-\mu\,e^{-t/\mu}\,.
+\tag{4.104}
+\]
+
+<p>Logo,</p>
+
+\[
+\begin{aligned}
+\frac{1}{\mu}\int_0^\infty b\,t\,e^{-t/\mu}\,\mathrm{d}t
+&= \frac{b}{\mu}\left\{\Big[t\cdot(-\mu\,e^{-t/\mu})\Big]_0^\infty - \int_0^\infty(-\mu\,e^{-t/\mu})\,\mathrm{d}t\right\} \\
+&= \frac{b}{\mu}\left\{\underbrace{\Big[-\mu\,t\,e^{-t/\mu}\Big]_0^\infty}_{=\,0} + \mu\int_0^\infty e^{-t/\mu}\,\mathrm{d}t\right\} \\
+&= \frac{b}{\mu}\cdot\mu\cdot\Big[-\mu\,e^{-t/\mu}\Big]_0^\infty
+= \frac{b}{\mu}\cdot\mu\cdot\mu = b\,\mu\,,
+\end{aligned}
+\tag{4.105}
+\]
+
+<p>onde o termo de contorno \([-\mu t e^{-t/\mu}]_0^\infty\) se anula em
+ambos os limites (\(t=0\) dá zero diretamente; \(t\to\infty\) dá zero
+porque a exponencial decai mais rápido do que \(t\) cresce).</p>
+
+<p>Substituindo as Equações (4.103) e (4.105) de volta na Equação (4.102),
+obtemos que</p>
+
+\[
+\boxed{I_\nu(0,\mu{>}0) = a + b\,\mu}\,,
+\tag{4.106}
+\]
+
+<p>onde \(a\) e \(b\) são as constantes da aproximação linear da função
+fonte, Equação (4.101). Para \(\mu=0\), temos diretamente que
+\(I_\nu(0,0)=a\); para \(\mu=1\), \(I_\nu(0,1)=a+b\).</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — quando a relação de Eddington–Barbier funciona</div>
+  <div class="conteudo">
+    <p>A Equação (4.106) é conhecida como a <strong>relação de
+    Eddington–Barbier</strong>: ela diz que a intensidade emergente na
+    direção \(\mu\) é aproximadamente igual à função fonte avaliada na
+    profundidade ótica \(\tau=\mu\) (compare \(S_\nu(\tau)=a+b\tau\) com
+    \(I_\nu(0,\mu)=a+b\mu\) — são a mesma expressão, com \(\tau\to\mu\)).
+    Essa aproximação é boa quando \(S_\nu\) varia suavemente
+    (aproximadamente linear) na escala de \(\Delta\tau\sim1\), o que é
+    razoável para o contínuo estelar na fotosfera, mas falha em regiões
+    onde \(S_\nu\) varia rapidamente com \(\tau\) (por exemplo, núcleos de
+    linhas espectrais fortes, ou descontinuidades de opacidade).</p>
+  </div>
+</div>
+
+<h2>Escurecimento de limbo (<em>limb darkening</em>)</h2>
+
+<p>Reparem que \(\mu=\cos\theta\); com \(\theta=0\), temos que \(\hat
+n\equiv\hat s\) (a linha de visada coincide com a normal à superfície) e
+\(I_\nu\) é máximo. Conforme \(\mu\) diminui (ou seja, \(\theta\) aumenta),
+\(I_\nu\) também diminui, pela Equação (4.106) (assumindo \(b>0\), o caso
+usual em que a atmosfera esquenta para dentro). Assim, \(I_\nu\) é máximo
+no centro do disco estelar, e vai diminuindo à medida que se afasta do
+centro. Isso gera o <strong>escurecimento do limbo</strong> (<em>limb
+darkening</em>), pois o astro fica mais escuro nos arredores (perto da
+borda aparente do disco).</p>
+
+<p>A explicação física é a seguinte: pela relação de Eddington–Barbier,
+observar na direção \(\mu\) equivale a "enxergar" a função fonte na
+profundidade ótica \(\tau\approx\mu\). No centro do disco (\(\mu=1\)),
+olhamos ao longo da normal e enxergamos até \(\tau\approx1\), uma camada
+relativamente profunda e quente. Perto do limbo (\(\mu\to0\)), a mesma
+profundidade física \(z\) corresponde a um caminho oblíquo muito mais
+longo através do gás [pois \(\mathrm{d}s=\mathrm{d}z/\mu\), Equação
+(4.56)], de modo que a profundidade ótica \(\tau=1\) é atingida numa
+camada muito mais próxima da superfície — mais externa e, como a
+temperatura cresce para dentro da estrela, mais fria. Como
+\(S_\nu\approx B_\nu(T)\) cresce com \(T\), uma camada mais fria emite
+menos, e é por isso que o limbo aparece mais escuro que o centro do
+disco.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — O limb darkening solar e os modelos semi-empíricos VAL/FAL</div>
+  <div class="conteudo">
+    <p>O Sol é o único caso em que o escurecimento de limbo é observado
+    diretamente e resolvido espacialmente. A medida cuidadosa de
+    \(I_\nu(0,\mu)\) combinada com Eddington–Barbier permitiu reconstruir
+    o perfil \(T(\tau)\) da fotosfera solar — a base dos modelos
+    semi-empíricos VAL (Vernazza, Avrett &amp; Loeser 1981) e sua
+    atualização FAL (Fontenla, Avrett &amp; Loeser 1993), ainda usados
+    como referência em física solar.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Limb darkening na era da espectroscopia de trânsito exoplanetária</div>
+  <div class="conteudo">
+    <p>Para qualquer estrela com planeta em trânsito, um limb darkening
+    mal caracterizado se traduz em viés sistemático no raio planetário
+    inferido — crítico para a espectroscopia de transmissão de alta
+    precisão (HST/WFC3, JWST). Surpreendentemente, modelos teóricos padrão
+    (PHOENIX, ATLAS, MARCS) preveem escurecimento mais acentuado do que o
+    observado em curvas de luz do Kepler/TESS/JWST, uma discrepância
+    atribuída à ausência de campos magnéticos de pequena escala nos
+    modelos — área ativa de pesquisa (Kostogryz et al. 2024).</p>
+  </div>
+</div>
+
+<h2>Módulo interativo 6 — Eddington–Barbier e o disco estelar com limb darkening</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">S_ν = a + b·t → I(0,μ) = a + b·μ → brilho do disco visto pelo observador</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m6-a">a (termo isotrópico de S<sub>ν</sub>) <span class="valor" id="m6-a-valor">0,44</span></label>
+      <input type="range" id="m6-a" min="0" max="1.5" step="0.01" value="0.44">
+    </div>
+    <div class="controle">
+      <label for="m6-b">b (termo de anisotropia/gradiente de S<sub>ν</sub>) <span class="valor" id="m6-b-valor">0,56</span></label>
+      <input type="range" id="m6-b" min="0" max="1.5" step="0.01" value="0.56">
+    </div>
+    <div class="controle" style="display:flex;align-items:flex-end;">
+      <button type="button" id="m6-preset" class="botao-modulo">Usar coeficiente solar real (Cox 2000, u≈0,56 em 600 nm)</button>
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;flex-wrap:wrap;gap:1rem;">
+    <div style="flex:1 1 260px;height:280px;">
+      <canvas id="m6-curva" role="img" aria-label="Curva de I em função de mu, de 0 a 1, mostrando o aumento de intensidade do limbo para o centro do disco.">
+        Gráfico: I(0,μ)=a+bμ, crescente com μ, de a (limbo, μ=0) até a+b (centro, μ=1).
+      </canvas>
+    </div>
+    <canvas id="m6-disco" role="img" aria-label="Disco estelar renderizado com escurecimento de limbo: mais brilhante no centro, mais escuro na borda." style="flex:1 1 260px;height:280px;">
+      Disco circular com gradiente radial de brilho: centro claro, borda escura, seguindo I(0,μ) com μ=cos θ calculado a partir da distância ao centro do disco.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Centro do disco (\(\mu=1\)): \(I=a+b=\)<strong id="m6-centro">—</strong>.
+    Limbo (\(\mu\to0\)): \(I=a=\)<strong id="m6-limbo">—</strong>. Razão
+    limbo/centro: <strong id="m6-razao">—</strong>. O preset usa
+    \(u\approx0{,}56\) — coeficiente linear de escurecimento de limbo
+    solar em \(\approx600\,\mathrm{nm}\), tabelado por
+    Cox (2000) — convertido para a forma \(a+b\mu\) via
+    \(I(\mu)/I(1)=1-u(1-\mu)\), com \(I(1)\equiv1\).
+  </p>
+</div>
+
+<h2>Função fonte e equilíbrio termodinâmico</h2>
+
+<p>Afirmar que um sistema está em equilíbrio termodinâmico implica, como
+uma de suas consequências, que a taxa de absorções de um gás deve ser a
+mesma que a taxa de emissões. Assim, lembrando que definimos</p>
+
+\[
+\mathrm{d}E = \chi_\nu I_\nu\,\mathrm{d}t\,\mathrm{d}V\,\mathrm{d}\omega\,\mathrm{d}\nu
+\qquad\text{e}\qquad
+\mathrm{d}E = \eta_\nu\,\mathrm{d}t\,\mathrm{d}V\,\mathrm{d}\omega\,\mathrm{d}\nu\,,
+\tag{4.107}
+\]
+
+<p>temos que a variação de energia deve ser conservada, onde:</p>
+
+\[
+\left(\frac{\Delta E}{\Delta t\,\Delta V\,\Delta\omega\,\Delta\nu}\right)_{\rm abs}
+\equiv
+\left(\frac{\Delta E}{\Delta t\,\Delta V\,\Delta\omega\,\Delta\nu}\right)_{\rm emi}\,.
+\tag{4.108}
+\]
+
+<p>Também, se a taxa de absorção e emissão são similares, o fluxo de
+radiação deve ser nulo, \(\vec F=0\), ou seja, emissão e absorção estão
+balanceados.</p>
+
+<p>Como vimos anteriormente, no equilíbrio termodinâmico, \(I_\nu=B_\nu\),
+mas \(I_\nu\chi_\nu=\eta_\nu\), logo \(I_\nu=\eta_\nu/\chi_\nu\). Logo:</p>
+
+\[
+B_\nu = \frac{\eta_\nu}{\chi_\nu} = S_\nu
+\quad\Longrightarrow\quad
+\boxed{B_\nu = S_\nu}\,,\qquad\text{válido em equilíbrio termodinâmico}\,.
+\tag{4.109}
+\]
+
+<h2 id="aproximacao-difusao">Aproximação da Difusão</h2>
+
+<p>À medida que adentramos em direção ao centro (interior) estelar,
+sabemos intuitivamente que a densidade, a pressão e a temperatura
+aumentam, onde \((\rho\uparrow,\ T\uparrow,\ P\uparrow)\). Assim, a
+opacidade do meio será maior, o que implica que o livre caminho médio dos
+fótons é muito menor que na atmosfera:</p>
+
+\[
+l_\gamma = \frac{1}{\chi_\nu} = \frac{1}{\kappa\rho}\,.
+\tag{4.110}
+\]
+
+<p>Para comparação com valores solares, temos</p>
+
+\[
+\rho = \rho_\odot = \frac{M_\odot}{V_\odot} = \frac{M_\odot}{\frac{4}{3}\pi R_\odot^3} = 1{,}4\ \mathrm{g/cm^3}\,.
+\tag{4.111}
+\]
+
+<p>Sendo \(\kappa\) a seção de choque do espalhamento, descrita pelo
+espalhamento eletrônico de Thomson, temos que
+\(\kappa=0{,}4\ \mathrm{cm^2\,g^{-1}}\), logo</p>
+
+\[
+l_\gamma = \frac{1}{0{,}4\cdot1{,}4} \sim 2\ \mathrm{cm}\,.
+\tag{4.112}
+\]
+
+<p>Ou seja, o fóton tem um caminho livre médio da ordem de
+\(2\ \mathrm{cm}\). A cada \(2\ \mathrm{cm}\) ele é absorvido ou reemitido
+em uma direção qualquer.</p>
+
+<p>Temos, portanto, as seguintes considerações:</p>
+<ul>
+  <li>(i) o campo de radiação está em equilíbrio termodinâmico local;</li>
+  <li>(ii) \(S_\nu=B_\nu=I_\nu\).</li>
+</ul>
+
+<p>Lembrando que, da Equação (4.86), podemos descrever o campo de radiação
+no interior estelar como</p>
+
+\[
+I_\nu(\tau,\mu) = \frac{1}{\mu}\int_\tau^\infty S_\nu(t)\,e^{-(t-\tau)/\mu}\,\mathrm{d}t\,,\qquad\text{para }\mu>0\,.
+\tag{4.113}
+\]
+
+<p>Para obter a aproximação de difusão, podemos utilizar a série de
+Taylor, lembrando que, por definição,</p>
+
+\[
+f(x) = \sum_{n=0}^\infty \frac{\mathrm{d}^n f(x)}{\mathrm{d}x^n}\bigg|_{x_0}\,\frac{(x-x_0)^n}{n!}\,.
+\tag{4.114}
+\]
+
+<p>Considerando que nossa aproximação é feita para \(S_\nu(t)\) em um meio
+opaco, onde \(\tau\gg1\), temos</p>
+
+\[
+S_\nu(t) = \sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_{\tau\gg1}\,\frac{(t-\tau)^n}{n!}\,,
+\tag{4.115}
+\]
+
+<p>onde já usamos \(S_\nu\to B_\nu\) [item (ii) acima]. Substituindo a
+Equação (4.115) em (4.113), temos:</p>
+
+\[
+I_\nu(\tau,\mu) = \frac{1}{\mu}\int_\tau^\infty \sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau\,\frac{(t-\tau)^n}{n!}\,e^{-(t-\tau)/\mu}\,\mathrm{d}t\,.
+\tag{4.116}
+\]
+
+<p><strong>Resolvendo a integral.</strong> Analisando a integral em
+\(t\): seja \(x=(t-\tau)/\mu\), logo \(\mathrm{d}x=\mathrm{d}t/\mu\).
+Então</p>
+
+\[
+\int_0^\infty x^n\,\mu^n\,e^{-x}\,\mu\,\mathrm{d}x = \mu^{n+1}\int_0^\infty x^n\,e^{-x}\,\mathrm{d}x\,.
+\tag{4.117}
+\]
+
+<p>Mas temos que a integral \(\int_0^\infty x^n e^{-x}\,\mathrm{d}x\) pode
+ser obtida em tabelas:</p>
+
+\[
+\int_0^\infty e^{-x}x^n\,\mathrm{d}x = \Gamma(n+1) = n!\,,\qquad n\in\mathbb{Z}^+_0\,.
+\tag{4.118}
+\]
+
+<p>Substituindo na Equação (4.116), temos:</p>
+
+\[
+I_\nu(\tau,\mu) = \frac{1}{\mu}\sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau\,\mu^{n+1}\cdot\frac{1}{n!}\cdot n!\,,
+\tag{4.119}
+\]
+
+<p>ou seja,</p>
+
+\[
+\boxed{I_\nu(\tau,\mu) = \sum_{n=0}^\infty \mu^n\,\frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau}\,.
+\tag{4.120}
+\]
+
+<h3>Aproximação de primeira ordem</h3>
+
+<p>Para uma aproximação com os dois primeiros termos da série, temos:</p>
+
+\[
+I_\nu(\tau,\mu) \cong \underbrace{B_\nu(T)}_{n=0} + \underbrace{\mu\,\frac{\mathrm{d}B_\nu}{\mathrm{d}t}\bigg|_\tau}_{n=1}\,.
+\tag{4.121}
+\]
+
+<p>O segundo termo é o <strong>termo de anisotropia</strong>. Ele é
+essencial: se \(I_\nu=B_\nu\) exatamente (isotrópico, sem dependência de
+\(\mu\)), o fluxo \(F_\nu=\oint I_\nu\hat n\,\mathrm{d}\omega\) seria
+necessariamente nulo — a contribuição de cada direção \(\hat n\) seria
+cancelada exatamente pela direção oposta, \(-\hat n\). Isso não pode ser
+verdade para uma estrela real: sabemos que \(F\neq0\) (é o próprio fluxo
+de energia que a estrela irradia!). O termo \(\mu\,\mathrm{d}B_\nu/\mathrm{d}t\)
+é, portanto, a pequena mas essencial correção que rompe a isotropia
+perfeita — e é ela, não o termo isotrópico \(B_\nu(T)\), que carrega toda
+a informação sobre o transporte efetivo de energia radiativa para fora da
+estrela.</p>
+
+<h2>Intensidade Média e Fluxo de Radiação</h2>
+
+<p>Como definimos em aulas passadas, a intensidade média e o fluxo de
+radiação são definidos como os momentos de ordem zero e um do campo de
+radiação [Equação (4.26)]. Para \(J_\nu\), temos:</p>
+
+\[
+\begin{aligned}
+J_\nu(\tau) &= \frac{1}{2}\int_{-1}^1 I_\nu(\tau,\mu)\,\mathrm{d}\mu
+= \frac{1}{2}\int_{-1}^1 \sum_{n=0}^\infty \mu^n\,\frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau\,\mathrm{d}\mu \\
+&= \frac{1}{2}\sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau \int_{-1}^1 \mu^n\,\mathrm{d}\mu\,.
+\end{aligned}
+\tag{4.122}
+\]
+
+<p>Resolvendo a integral em \(\mu\),</p>
+
+\[
+J_\nu(\tau) = \frac{1}{2}\sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau\,\frac{\mu^{n+1}}{n+1}\bigg|_{-1}^1
+= \frac{1}{2}\sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau\,\frac{1}{n+1}\Big(1^{n+1}-(-1)^{n+1}\Big)\,.
+\tag{4.123}
+\]
+
+<p>Veja que, quando \(n\) é ímpar, \(n+1\) é par, e
+\(1^{n+1}-(-1)^{n+1}=1-1=0\): o termo se anula. Renomeando \(n\to2n\)
+para manter apenas os termos pares que sobrevivem, obtemos a intensidade
+média em função da função de Planck:</p>
+
+\[
+J_\nu(\tau) = \sum_{n=0}^\infty \frac{\mathrm{d}^{2n} B_\nu}{\mathrm{d}t^{2n}}\bigg|_\tau\,\frac{1}{2n+1}\,.
+\tag{4.124}
+\]
+
+<p>Truncando a Equação (4.124) na primeira correção não-nula, obtemos a
+aproximação de difusão para \(J_\nu\):</p>
+
+\[
+\boxed{J_\nu(\tau) \cong B_\nu(T) + \frac{1}{3}\,\frac{\mathrm{d}^2 B_\nu}{\mathrm{d}t^2}\bigg|_{\tau\gg1}}\,.
+\tag{4.125}
+\]
+
+<p>De forma análoga, podemos obter uma relação para o momento de ordem
+um, ou seja, o fluxo de energia radiativa. Logo:</p>
+
+\[
+\begin{aligned}
+H_\nu(\tau) &= \frac{1}{2}\int_{-1}^1 I_\nu(\tau,\mu)\,\mu\,\mathrm{d}\mu
+= \frac{1}{2}\sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau \int_{-1}^1 \mu^{n+1}\,\mathrm{d}\mu \\
+&= \frac{1}{2}\sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau\,\frac{\mu^{n+2}}{n+2}\bigg|_{-1}^1
+= \frac{1}{2}\sum_{n=0}^\infty \frac{\mathrm{d}^n B_\nu}{\mathrm{d}t^n}\bigg|_\tau\,\frac{1}{n+2}\Big(1^{n+2}-(-1)^{n+2}\Big)\,.
+\end{aligned}
+\tag{4.126}
+\]
+
+<p>Agora, é quando \(n\) é <em>par</em> que \(n+2\) é par e o termo se
+anula; os termos de ordem ímpar sobrevivem. Renomeando \(n\to2n+1\),</p>
+
+\[
+H_\nu(\tau) = \sum_{n=0}^\infty \frac{1}{2n+3}\,\frac{\mathrm{d}^{2n+1}B_\nu}{\mathrm{d}t^{2n+1}}\bigg|_\tau\,.
+\tag{4.127}
+\]
+
+<p>Desta forma, a aproximação de ordem \(0\) (o primeiro termo dessa
+soma, \(n=0\)) já é suficiente na maior parte dos casos práticos, onde:</p>
+
+\[
+\boxed{H_\nu(\tau) \cong \frac{1}{3}\,\frac{\mathrm{d}B_\nu}{\mathrm{d}t}\bigg|_{\tau\gg1}}\,.
+\tag{4.128}
+\]
+
+<p>Este é o fluxo de radiação no interior estelar, ou seja, a energia
+líquida que sai da estrela. Vemos, assim, que \(I_\nu\), \(J_\nu\) e
+\(H_\nu\) descrevem bem o interior estelar.</p>
+
+<p>Na escolha em que \(\tau\gg1\), estamos estudando regiões de maior
+profundidade ótica, ou seja, mais dentro da estrela. Assim, estudar
+\(H_\nu\) significa estudar o transporte de energia de camadas mais
+internas para camadas mais externas das estrelas.</p>
+
+<h2 id="rosseland">Aproximação (Equação) de Rosseland</h2>
+
+<p>Integrando a Equação (4.128) sobre a frequência, obtemos:</p>
+
+\[
+H = \int_0^\infty \frac{1}{3}\,\frac{\mathrm{d}B_\nu}{\mathrm{d}t}\bigg|_\tau\,\mathrm{d}\nu
+= \frac{1}{3}\,\frac{\mathrm{d}}{\mathrm{d}t}\int_0^\infty B_\nu\,\mathrm{d}\nu\,.
+\tag{4.129}
+\]
+
+\[
+\int_0^\infty B_\nu(T)\,\mathrm{d}\nu = \frac{\sigma T^4}{\pi}\,,
+\tag{4.130}
+\]
+
+<p>logo</p>
+
+\[
+H = \frac{1}{3}\,\frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\sigma T^4}{\pi}\right)\bigg|_\tau
+= \frac{4\sigma T^3}{3\pi}\,\frac{\mathrm{d}T}{\mathrm{d}t}\bigg|_\tau\,.
+\tag{4.131}
+\]
+
+<p>Como \(H\) é o fluxo de Eddington, definido por \(H=F/(4\pi)\)
+[Equação (4.27), agora integrada em frequência], e lembrando que a
+profundidade ótica é \(\mathrm{d}\tau=-\chi_\nu\,\mathrm{d}r\), que por
+sua vez \(\chi=\kappa\rho\) [Equação (4.43)], temos, pela regra da
+cadeia,</p>
+
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}\bigg|_\tau \equiv \frac{\mathrm{d}}{\mathrm{d}\tau}
+= -\frac{1}{\chi}\,\frac{\mathrm{d}}{\mathrm{d}r} = -\frac{1}{\kappa\rho}\,\frac{\mathrm{d}}{\mathrm{d}r}\,.
+\tag{4.132}
+\]
+
+<p>Substituindo na Equação (4.131) e usando \(H=F/(4\pi)\):</p>
+
+\[
+\frac{F}{4\pi} = -\frac{4\sigma T^3}{3\pi\,\kappa\rho}\,\frac{\mathrm{d}T}{\mathrm{d}r}
+\quad\Longrightarrow\quad
+\boxed{F = -\frac{16\,\sigma T^3}{3\kappa\rho}\,\frac{\mathrm{d}T}{\mathrm{d}r}}\,.
+\tag{4.133}
+\]
+
+<p>Este resultado bate exatamente com o valor final registrado nas notas
+manuscritas, e também é a forma padrão encontrada na literatura (ex.
+Kippenhahn &amp; Weigert, capítulo de transporte radiativo) — os dois
+fatores de \(\pi\) (um da integração de Planck, outro da relação
+\(H=F/4\pi\)) se cancelam exatamente na conta correta.</p>
+
+<p>Esta relação é conhecida como <strong>Aproximação de Rosseland</strong>
+para o fluxo de energia. Ela é comumente chamada de <strong>equação de
+difusão radiativa</strong>. Usando \(\chi=\kappa\rho\), uma forma
+equivalente da Equação (4.133) é:</p>
+
+\[
+\boxed{F = -\frac{16\,\sigma T^3}{3\chi}\,\frac{\mathrm{d}T}{\mathrm{d}r}}\,.
+\tag{4.134}
+\]
+
+<p>Assim, a equação do fluxo pode ser descrita, em sentido físico, como um
+fluxo de difusão análogo à <strong>lei de Fourier</strong> da condução de
+calor, \(F\propto\nabla T\) — com o papel da "condutividade térmica"
+desempenhado pelo coeficiente \(16\sigma T^3/(3\kappa\rho)\).</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Da equação de Rosseland às tabelas de opacidade dos códigos modernos</div>
+  <div class="conteudo">
+    <p>A Equação (4.133) é, literalmente, a equação que todo código de
+    evolução estelar moderno (MESA, GARSTEC) usa para o transporte de
+    energia radiativa camada a camada. Na prática, \(\kappa\) é a
+    <strong>média de Rosseland</strong> sobre todas as frequências,
+    calculada pelos projetos OPAL e Opacity Project e lida diretamente
+    como tabela de entrada pelo MESA.</p>
+  </div>
+</div>
+
+<h2>Módulo interativo 8 — Fluxo de Rosseland: a forte dependência em T³</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">F = 16σT³/(3κρ) · |dT/dr| — escala log no fluxo</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m8-T">Temperatura T (K) <span class="valor" id="m8-T-valor">1,0×10⁷</span></label>
+      <input type="range" id="m8-T" min="0" max="1000" step="1" value="500">
+    </div>
+    <div class="controle">
+      <label for="m8-kappa">Opacidade κ (cm²/g) <span class="valor" id="m8-kappa-valor">0,40</span></label>
+      <input type="range" id="m8-kappa" min="0.01" max="5" step="0.01" value="0.4">
+    </div>
+    <div class="controle">
+      <label for="m8-rho">Densidade ρ (g/cm³) <span class="valor" id="m8-rho-valor">1,40</span></label>
+      <input type="range" id="m8-rho" min="0.01" max="150" step="0.01" value="1.4">
+    </div>
+    <div class="controle">
+      <label for="m8-grad">|dT/dr| (K/cm) <span class="valor" id="m8-grad-valor">1,0×10⁻²</span></label>
+      <input type="range" id="m8-grad" min="0" max="600" step="1" value="300">
+    </div>
+  </div>
+  <div class="grafico-card" style="height:320px;">
+    <canvas id="m8-grafico" role="img" aria-label="Gráfico em escala log-log do fluxo de Rosseland em função da temperatura, mostrando a forte dependência em T ao cubo.">
+      Gráfico: F em função de T, ambos em escala logarítmica, para κ, ρ e o gradiente escolhidos. Curva com inclinação 3 em log-log, refletindo F∝T³.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    \(F=\)<strong id="m8-F">—</strong> erg s⁻¹ cm⁻². Valores padrão do
+    slider (\(\kappa=0{,}4\,\mathrm{cm^2/g}\),
+    \(\rho=1{,}4\,\mathrm{g/cm^3}\)) são exatamente os já usados na
+    Equação (4.112) para o interior solar (espalhamento Thomson). Dobrar
+    \(T\) multiplica \(F\) por \(2^3=8\) — a razão física de \(F\) ser tão
+    sensível ao perfil de temperatura no interior estelar.
+  </p>
+</div>
+
+<h2 id="luminosidade-eddington">Luminosidade de Eddington</h2>
+
+<p>Conforme vimos, uma estrela não pode ser considerada um corpo negro
+perfeito por alguns motivos, mas principalmente pelo seu fluxo de
+radiação ser diferente de zero. A <strong>Luminosidade de Eddington</strong>
+descreve um limite máximo de luminosidade que um corpo (ex.: estrela)
+pode obter enquanto existe equilíbrio entre a força de radiação (que age
+de dentro para fora da estrela) e a força gravitacional (que age de fora
+para dentro).</p>
+
+<p>Vimos que o coeficiente de absorção, ou a opacidade de um gás
+qualquer, é definido por [Equação (4.39)]:</p>
+
+\[
+\mathrm{d}E = \chi_\nu I_\nu\,\mathrm{d}A\,\mathrm{d}s\,\mathrm{d}t\,\mathrm{d}\nu\,\mathrm{d}\omega\,.
+\tag{4.135}
+\]
+
+<p>Em processos de absorção, existe transporte de momento e energia do
+campo de radiação (fótons) para a matéria (gases). Assim, podemos usar a
+relação relativística de energia-momento,</p>
+
+\[
+E^2 = (m_0c^2)^2 + (pc)^2\,,
+\tag{4.136}
+\]
+
+<p>que, para o fóton (\(m_\gamma=0\)), se reduz a</p>
+
+\[
+E = pc\,,
+\tag{4.137}
+\]
+
+<p>que, para um elemento infinitesimal, \(\mathrm{d}E=c\,\mathrm{d}p\).
+Logo, substituindo na Equação (4.135),</p>
+
+\[
+c\,\mathrm{d}p = \chi_\nu I_\nu\,\mathrm{d}A\,\mathrm{d}s\,\mathrm{d}t\,\mathrm{d}\nu\,\mathrm{d}\omega\,.
+\tag{4.138}
+\]
+
+<p>Como \(\vec F=\mathrm{d}\vec p/\mathrm{d}t\) (força),</p>
+
+\[
+\frac{\mathrm{d}\vec p}{\mathrm{d}t} = \vec F = \frac{1}{c}\,\chi_\nu I_\nu\,\mathrm{d}V\,\mathrm{d}\nu\,\mathrm{d}\omega\,,
+\tag{4.139}
+\]
+
+<p>onde usamos \(\mathrm{d}A\,\mathrm{d}s=\mathrm{d}V\) (elemento de
+volume). Esta é a <strong>força radiativa</strong>.</p>
+
+<p>Podemos definir a <strong>força radiativa por unidade de volume</strong>,</p>
+
+\[
+\frac{\mathrm{d}\vec p}{\mathrm{d}t\,\mathrm{d}V} \equiv \vec f\,.
+\tag{4.140}
+\]
+
+<p>Logo, o elemento de força volumar que depende de \(\nu\) e \(\omega\)
+é</p>
+
+\[
+\frac{\mathrm{d}\vec f}{\mathrm{d}\nu\,\mathrm{d}\omega} = \frac{1}{c}\,\chi_\nu I_\nu\,\hat n\,.
+\tag{4.141}
+\]
+
+<p>O termo \(\hat n\) precisa aparecer nesta passagem por causa da
+premissa de que \(\mathrm{d}\vec p=\hat n\,\mathrm{d}E/c\) — o momento é
+vetorial.</p>
+
+<p>A partir da Equação (4.141), podemos expressar a força radiativa
+volumar por:</p>
+
+\[
+\vec F_{\rm rad}(\vec r,t) = \frac{1}{c}\int_0^\infty \chi_\nu\left(\oint I_\nu\,\hat n\,\mathrm{d}\omega\right)\mathrm{d}\nu
+= \frac{1}{c}\int_0^\infty \chi_\nu\,\vec F_\nu\,\mathrm{d}\nu\,,
+\tag{4.142}
+\]
+
+<p>onde reconhecemos \(\oint I_\nu\hat n\,\mathrm{d}\omega\equiv\vec
+F_\nu\) — a própria definição de fluxo \(F_\nu\) já estabelecida neste
+capítulo — e obtemos, assim, a força radiativa volumar para qualquer
+gás.</p>
+
+<p><strong>Pergunta</strong>: pode a força radiativa equilibrar ou até
+mesmo superar a força gravitacional? Sim! No limite de Eddington.</p>
+
+<p>Podemos supor que temos um gás de hidrogênio puro e que o coeficiente
+de opacidade não depende da frequência (temos espalhamento Thomson
+apenas), logo \(\chi_\nu\equiv\chi\). A Equação (4.142) assume a forma</p>
+
+\[
+\vec F_{\rm rad} = \frac{\chi}{c}\int_0^\infty \vec F_\nu\,\mathrm{d}\nu\,,
+\tag{4.143}
+\]
+
+<p>que é a definição de fluxo bolométrico, em todas as frequências.
+Logo:</p>
+
+\[
+\boxed{\vec F_{\rm rad} = \frac{\chi}{c}\,\vec F}\,.
+\tag{4.144}
+\]
+
+<p>Para que haja equilíbrio com a força gravitacional, temos que
+\(F_{\rm rad}\equiv F_g\), onde \(F_g\) é a força gravitacional
+volumétrica (\(F_g=\rho g=GM\rho/r^2\), com \(\rho=m/V\)). Logo:</p>
+
+\[
+\frac{\chi F}{c} = \frac{GM\rho}{r^2}\,.
+\tag{4.145}
+\]
+
+<p>Sabendo que \(F=L/(4\pi r^2)\) (fluxo bolométrico a uma distância
+\(r\) de uma fonte de luminosidade \(L\)), temos:</p>
+
+\[
+\frac{\chi}{c}\cdot\frac{L}{4\pi r^2} = \frac{GM\rho}{r^2}
+\quad\Longrightarrow\quad
+L = \frac{4\pi GM\rho c}{\chi}\,.
+\tag{4.146}
+\]
+
+<p>Como definimos anteriormente [Equação (4.42)], \(\chi=n_{\rm
+H}\sigma_{\rm T}\) (para hidrogênio puro, totalmente ionizado, com
+\(\sigma_{\rm T}\) a seção de choque de espalhamento Thomson). A
+densidade também pode ser expressa por \(\rho=n_{\rm H}m_{\rm H}\).
+Substituindo esses valores na Equação (4.146), temos:</p>
+
+\[
+L_{\rm Edd} = \frac{4\pi GM\,n_{\rm H}m_{\rm H}\,c}{n_{\rm H}\sigma_{\rm T}}
+\quad\Longrightarrow\quad
+\boxed{L_{\rm Edd} = \frac{4\pi GMm_{\rm H}c}{\sigma_{\rm T}}}\,.
+\tag{4.147}
+\]
+
+<p>Sob estas suposições, a Equação (4.147) descreve a luminosidade limite
+para que a radiação e a força gravitacional estejam em equilíbrio. Note
+que ela é exatamente equivalente à forma geral já apresentada
+anteriormente neste capítulo (caixa de contexto logo após a definição do
+fluxo de Eddington \(H_\nu\), Equação (4.35)),
+\(L_{\rm Edd}=4\pi GMc/\kappa_{\rm es}\): basta identificar a opacidade
+específica de espalhamento Thomson por hidrogênio ionizado,
+\(\kappa_{\rm es}=\sigma_{\rm T}/m_{\rm H}\) (seção de choque por unidade
+de massa).</p>
+
+<p>Podemos calcular, por exemplo, a luminosidade de Eddington em função
+da luminosidade solar, onde:</p>
+
+\[
+\frac{L_{\rm Edd}}{L_\odot} = \frac{1}{L_\odot}\cdot\frac{4\pi GMm_{\rm H}c}{\sigma_{\rm T}}\cdot\frac{M_\odot}{M_\odot}
+= \left(\frac{M_\odot}{L_\odot}\right)\frac{4\pi Gm_{\rm H}c}{\sigma_{\rm T}}\left(\frac{M}{M_\odot}\right)\,,
+\tag{4.148}
+\]
+
+<p>ou seja,</p>
+
+\[
+\boxed{\frac{L_{\rm Edd}}{L_\odot} = \alpha\left(\frac{M}{M_\odot}\right)}\,,
+\qquad \alpha \equiv \left(\frac{M_\odot}{L_\odot}\right)\frac{4\pi Gm_{\rm H}c}{\sigma_{\rm T}}\,.
+\tag{4.149}
+\]
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — O valor numérico de α</div>
+  <div class="conteudo">
+    <p>Substituindo os valores em unidades CGS
+    (\(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\),
+    \(m_{\rm H}=1{,}673\times10^{-24}\,\mathrm{g}\),
+    \(c=2{,}998\times10^{10}\,\mathrm{cm/s}\),
+    \(\sigma_{\rm T}=6{,}652\times10^{-25}\,\mathrm{cm^2}\),
+    \(M_\odot=1{,}989\times10^{33}\,\mathrm{g}\),
+    \(L_\odot=3{,}828\times10^{33}\,\mathrm{erg/s}\)), obtemos</p>
+    \[
+    \alpha = \left(\frac{M_\odot}{L_\odot}\right)\frac{4\pi Gm_{\rm H}c}{\sigma_{\rm T}} \approx 3{,}3\times10^4\,,
+    \tag{4.150}
+    \]
+    <p>em excelente acordo com o valor padrão citado na literatura,
+    \(L_{\rm Edd}\approx3{,}2\text{–}3{,}3\times10^4\,(M/M_\odot)\,L_\odot\)
+    (Kippenhahn, Weigert &amp; Weiss 2012).</p>
+  </div>
+</div>
+
+<p>Esta força de radiação é uma das componentes que dão às estrelas
+estabilidade.</p>
+
+<h2>Módulo interativo 9 — Luminosidade de Eddington vs. massa</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">L_Edd/L_sol ≈ 3,3×10⁴ (M/M_sol) — escala log-log, com objetos reais marcados</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m9-M">Massa M/M<sub>☉</sub> (escala log) <span class="valor" id="m9-M-valor">1,0</span></label>
+      <input type="range" id="m9-M" min="0" max="1000" step="1" value="300">
+    </div>
+  </div>
+  <div class="grafico-card" style="height:340px;">
+    <canvas id="m9-grafico" role="img" aria-label="Gráfico log-log da luminosidade de Eddington sobre a luminosidade solar em função da massa em massas solares, com marcadores para eta Carinae e para a fonte ultraluminosa de raios X M82 X-2.">
+      Gráfico log-log: reta de inclinação 1 (L_Edd/L_sol = 3,3×10⁴ M/M_sol). Marcador em M≈100 M_sol (η Carinae, Wolf-Rayet/LBV). Marcador em M≈1,4 M_sol correspondente à estrela de nêutrons de M82 X-2, com um segundo ponto ~100× acima da reta indicando a luminosidade super-Eddington observada.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    \(L_{\mathrm{Edd}}/L_\odot=\)<strong id="m9-L">—</strong> para
+    \(M=\)<strong id="m9-Mtexto">—</strong> \(M_\odot\). Marcadores:
+    \(\eta\) Carinae, primária \(M\approx90\)–\(120\,M_\odot\)
+    (Hillier et al. 2001), próxima do regime Wolf-Rayet/LBV; M82 X-2,
+    estrela de nêutrons \(M\approx1{,}4\,M_\odot\) acretando a
+    \(\approx100\times L_{\mathrm{Edd}}\) (Bachetti et al. 2014) — o ponto
+    super-Eddington aparece bem acima da reta teórica de equilíbrio.
+  </p>
+</div>
+
+<h2>Curva de Planck e a função fonte em ETL</h2>
+
+<p>Já demonstramos [Equação (4.109)] que \(S_\nu=B_\nu\) em equilíbrio
+termodinâmico local. A forma explícita de \(B_\nu(T)\) e sua Lei de
+Deslocamento de Wien já têm um módulo interativo dedicado — a curva de
+Planck completa, com slider de temperatura, seria redundante reconstruir
+aqui:</p>
+
+<div class="caixa leitura">
+  <div class="rotulo">Ver também — Módulo interativo da curva de Planck</div>
+  <div class="conteudo">
+    <p>Para explorar \(B_\nu(T)\) (ou \(B_\lambda(T)\)) interativamente,
+    incluindo a Lei de Deslocamento de Wien, ver o
+    "<a href="cap02_magnitudes.html#modulo-wien-planck">Módulo interativo 4 — Lei de Wien e a curva de Planck</a>"
+    no <a href="cap02_magnitudes.html">Capítulo 2</a>. O resultado deste
+    capítulo que se conecta diretamente a ele é a Equação (4.109): em
+    ETL, a função fonte que entra na Equação (4.84) é exatamente essa
+    mesma \(B_\nu(T)\).</p>
+  </div>
+</div>
+
+<h2 id="aplicacoes-astrofisicas">Aplicações Astrofísicas</h2>
+
+<p>Fechamos este capítulo conectando seus dois resultados centrais — a
+aproximação de difusão/Rosseland e a luminosidade de Eddington — a
+fenômenos astrofísicos reais e observáveis, do interior solar a buracos
+negros supermassivos.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Ventos quase-Eddington: estrelas Wolf-Rayet e variáveis luminosas azuis</div>
+  <div class="conteudo">
+    <p>Estrelas muito massivas (\(M\gtrsim50\,M_\odot\)) podem ter
+    luminosidades que se aproximam de uma fração substancial de
+    \(L_{\rm Edd}\) [Equação (4.147)], o que reduz drasticamente a
+    gravidade efetiva em suas camadas externas e impulsiona ventos
+    estelares muito intensos e densos — a assinatura observacional das
+    estrelas <strong>Wolf-Rayet</strong>. Um caso ainda mais extremo é o
+    das <strong>variáveis luminosas azuis</strong> (LBVs, do inglês
+    <em>luminous blue variables</em>), como \(\eta\)~Carinae: essas
+    estrelas sofrem episódios eruptivos de <strong>super-Eddington</strong>,
+    nos quais a luminosidade momentaneamente excede \(L_{\rm Edd}\) e o
+    excesso de matéria é fisicamente ejetado da estrela (a Grande Erupção
+    histórica de \(\eta\)~Carinae, no século XIX, é o exemplo mais
+    estudado desse fenômeno). O papel exato do limite de Eddington — e se
+    episódios como esse são melhor explicados por proximidade instantânea
+    de \(L_{\rm Edd}\) ou por outros mecanismos, como fusões em sistemas
+    binários — segue sendo uma área ativa de pesquisa (Smith 2025).</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Acréscimo super-Eddington: binárias de raios X e fontes ultraluminosas</div>
+  <div class="conteudo">
+    <p>O limite de Eddington também regula o quão rápido objetos
+    compactos — estrelas de nêutrons, buracos negros estelares e buracos
+    negros supermassivos em núcleos ativos de galáxias — podem crescer
+    por acréscimo de matéria: taxas de acréscimo que produziriam
+    \(L>L_{\rm Edd}\) tendem a ser autolimitadas, pois o excesso de
+    radiação empurra a própria matéria que alimenta o objeto para fora.
+    No entanto, descobriu-se que esse limite pode ser superado (ou
+    aparentemente superado) em certas condições: as <strong>fontes
+    ultraluminosas de raios X</strong> (ULXs, <em>ultraluminous X-ray
+    sources</em>) exibem luminosidades de raios X que, se emitidas
+    isotropicamente, excederiam \(L_{\rm Edd}\) para um buraco negro de
+    massa estelar por fatores de \(10\)–\(100\). A explicação hoje mais
+    aceita é o <strong>acréscimo super-Eddington genuíno</strong>: taxas
+    de acréscimo muito altas infladas em um disco espesso, que colima a
+    radiação em um cone estreito (<em>beaming</em>) na direção do
+    observador — um cenário reforçado pela descoberta de pulsações
+    coerentes em algumas ULXs (M82 X-2, \(M\approx1{,}4\,M_\odot\),
+    acretando a \(L_X\approx1{,}8\times10^{40}\,\mathrm{erg/s}\), mais de
+    100 vezes \(L_{\mathrm{Edd}}\) para essa massa — Bachetti et al.
+    2014), revelando que o objeto acretor pode ser uma estrela de
+    nêutrons fortemente magnetizada, e não um buraco negro (Kaaret, Feng
+    &amp; Roberts 2017).</p>
+  </div>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — De volta ao tempo de difusão do fóton solar</div>
+  <div class="conteudo">
+    <p>No início deste capítulo, ao discutir o livre caminho médio dos
+    fótons no interior estelar, vimos que um fóton produzido no núcleo
+    solar leva \(\sim1{,}7\times10^5\) anos para escapar por difusão,
+    apesar do percurso final em linha reta durar apenas minutos (Mitalas
+    &amp; Sills 1992). Agora temos, finalmente, a ferramenta que torna
+    esse número calculável de forma quantitativa: a Equação (4.133) é
+    exatamente a equação que, integrada camada por camada ao longo do
+    perfil \(T(r)\), \(\rho(r)\) e \(\kappa(r)\) de um modelo solar
+    completo, permite calcular o tempo de difusão radiativa do centro à
+    superfície. É essa mesma equação — a aproximação de Rosseland,
+    construída neste capítulo a partir da expansão em série de Taylor da
+    função fonte em um meio opticamente espesso — que conecta o pequeno
+    livre caminho médio de \(l_\gamma\sim2\,\mathrm{cm}\) [Equação (4.112)]
+    à escala de tempo, de centenas de milhares de anos, que rege a
+    evolução térmica de todo o interior solar.</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar — Processos radiativos: referências para aprofundamento</div>
+  <div class="conteudo">
+    <p>Este capítulo cobriu a teoria do transporte radiativo desde a
+    definição de intensidade específica até a aproximação de difusão e a
+    luminosidade de Eddington — a base teórica sobre a qual se constrói
+    toda a física de interiores e atmosferas estelares. Para um
+    tratamento completo e sistemático de transporte radiativo, equilíbrio
+    radiativo e a aproximação de Rosseland no contexto da estrutura
+    estelar, a referência padrão continua sendo Kippenhahn, Weigert &amp;
+    Weiss (2012). As tabelas de opacidade de Rosseland que tornam a
+    Equação (4.133) utilizável na prática são calculadas e mantidas pelos
+    projetos <strong>OPAL</strong> (Iglesias &amp; Rogers 1996) e
+    <strong>Opacity Project</strong>, ambos ainda em uso ativo em códigos
+    modernos de evolução estelar como o MESA (Jermyn et al. 2023). Para a
+    física de acréscimo super-Eddington e suas assinaturas observacionais
+    em fontes ultraluminosas de raios X, ver a revisão de Kaaret, Feng
+    &amp; Roberts (2017); para a fenomenologia de estrelas próximas ao
+    limite de Eddington no outro extremo de massa estelar — os ventos e
+    erupções de variáveis luminosas azuis como \(\eta\)~Carinae — ver
+    Smith (2025).</p>
+  </div>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 4.
+</footer>
+
+<script src="assets/cap04_modulos.js"></script>

@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Equações de Estado Estelar</title>
+<meta name="description" content="Módulo interativo do Capítulo 8: pressão do gás ideal, peso molecular médio, o gás de elétrons de Fermi-Dirac, degenerescência total e parcial, o diagrama densidade-temperatura, a equação de estado total, cristalização e neutronização — com o mar de Fermi, o confinamento 1D→3D e a pressão cinética animados.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      sen: '\\operatorname{sen}'
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 8 — Equações de Estado Estelar</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, do gás ideal ionizado ao gás de elétrons degenerado (não-relativístico, ultra-relativístico e relativístico geral), com o mar de Fermi, o confinamento quântico 1D→3D e a dedução da pressão cinética animados.</p>
+
+<h2>Introdução</h2>
+
+<p>Vamos iniciar a análise das equações de estado a partir de um caso
+relativamente simples: o de um <strong>gás ideal ionizado</strong>, no
+qual desconsideramos efeitos quânticos (degenerescência) e assumimos que
+o material está completamente ionizado. Nessa situação, a pressão total
+no interior estelar é a soma das contribuições do gás e da radiação,</p>
+\[
+P = P_{\rm gas} + P_{\rm rad}\,.
+\tag{8.1}
+\]
+
+<h2>Pressão do gás ideal</h2>
+
+<p>Para o gás ideal, \(P_{\rm gas}\) é dado pela já conhecida equação
+de Clapeyron,</p>
+\[
+PV = \bar n R_u T\,,
+\qquad
+\bar n = \frac{N}{N_A}\,,
+\tag{8.2}
+\]
+<p>onde \(N\) é o número de partículas, \(N_A\) o número de Avogadro e
+\(R_u\) a constante universal dos gases.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Colisão de notação: duas constantes de gás diferentes chamadas \(R\)</div>
+  <div class="conteudo">
+    <p>O símbolo \(R\) é usado, em contextos diferentes, tanto para a
+    constante <em>universal</em> dos gases na equação de Clapeyron
+    [Equação (8.2)] quanto para a <strong>constante específica dos
+    gases</strong> \(R\equiv k/m_a\) (\(k\) = constante de Boltzmann,
+    \(m_a\) = massa atômica, \(1\) Dalton) — a mesma convenção já usada
+    nos Capítulos 3 e 5 para escrever \(P=\rho RT/\mu\) com \(\mu\)
+    adimensional. Para evitar ambiguidade nesta dedução, usamos aqui
+    \(R_u\) exclusivamente para a constante universal molar da Equação
+    (8.2), e reservamos \(R\) (sem índice) para a constante específica
+    \(R\equiv k/m_a\approx8{,}314\times10^7\,\mathrm{erg\,g^{-1}\,K^{-1}}\),
+    consistente com o restante do livro.</p>
+  </div>
+</div>
+
+<p>Reescrevendo a Equação (8.2) em termos da densidade volumétrica de
+partículas, \(n\equiv N/V\),</p>
+\[
+P = \frac{N}{VN_A}R_uT = n\,\frac{R_u}{N_A}\,T = nkT\,,
+\tag{8.3}
+\]
+<p>onde identificamos a constante de Boltzmann \(k\equiv R_u/N_A\).</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Colisão de notação: \(\mu\) volta a ser peso molecular médio</div>
+  <div class="conteudo">
+    <p>A partir daqui, \(\mu\) designa novamente o <strong>peso
+    molecular médio</strong> da composição química do gás, exatamente
+    como nos <a href="cap03_termodinamica.html">Capítulo 3
+    (Termodinâmica)</a> e <a href="cap05_equacoes_estrutura.html">Capítulo 5
+    (Equações de Estrutura)</a> — e <em>não</em> o cosseno diretor
+    \(\mu\equiv\cos\theta\) usado ao longo do
+    <a href="cap04_processos_radiativos.html">Capítulo 4 (Processos
+    Radiativos)</a>. Essa reversão de convenção acompanha a mudança de
+    assunto: transporte radiativo usa \(\mu=\cos\theta\) universalmente
+    na literatura, enquanto equação de estado e estrutura estelar usam
+    \(\mu\) para o peso molecular médio. Neste capítulo, o símbolo será
+    ainda mais desdobrado, em \(\mu_e\) (peso molecular médio por
+    elétron) e \(\mu_i\) (peso molecular médio iônico), introduzidos
+    mais adiante.</p>
+  </div>
+</div>
+
+<p>A densidade de massa \(\rho\) se relaciona com \(n\) pela massa
+média por partícula, \(\rho = n\,\mu\,m_a\), onde \(\mu\) é o peso
+molecular médio (adimensional, em unidades da massa atômica \(m_a\)).
+Logo \(n=\rho/(\mu m_a)\), e a Equação (8.3) se torna</p>
+\[
+P_{\rm gas} = n k T = \frac{\rho\,(k/m_a)\,T}{\mu} \equiv \frac{\rho RT}{\mu}\,,
+\qquad R\equiv\frac{k}{m_a}\,,
+\tag{8.4}
+\]
+<p>a forma usual da pressão do gás ideal, já usada nos capítulos
+anteriores. Reunindo com a pressão de radiação
+\(P_{\rm rad}=\tfrac13aT^4\) [já estabelecida no Capítulo 4], a Equação
+(8.1) fica</p>
+\[
+P = \frac{\rho RT}{\mu} + \frac13aT^4\,.
+\tag{8.5}
+\]
+
+<h2>Decomposição para um gás completamente ionizado</h2>
+
+<p>Para um gás completamente ionizado, a pressão do gás recebe
+contribuições dos elétrons livres e de cada espécie iônica,</p>
+\[
+P_{\rm gas} = P_{\text{elétrons}} + P_{\text{íons}}
+= \sum_i (1+Z_i)\,n_i\,kT\,,
+\tag{8.6}
+\]
+<p>onde \(Z_i\) é o número atômico do elemento \(i\) (o número de
+elétrons liberados por átomo completamente ionizado) e o fator
+\((1+Z_i)\) conta o íon mais seus \(Z_i\) elétrons como \(1+Z_i\)
+partículas independentes por átomo original. A densidade numérica de
+íons da espécie \(i\) é</p>
+\[
+n_i = \frac{\rho_i X_i}{m_a\mu_i}\,,
+\tag{8.7}
+\]
+<p>onde \(X_i\) é a fração de massa do elemento \(i\) e \(\mu_i\) seu
+peso atômico. As notas consideram, como exemplo simplificado, uma
+composição de apenas hidrogênio e hélio, com \(X_{\rm H}=0{,}7\) e
+\(X_{\rm He}=0{,}3\).</p>
+
+<h2>Peso molecular médio de um gás totalmente ionizado</h2>
+
+<p>Substituindo a Equação (8.7) na Equação (8.6), com \(\rho_i=\rho\)
+(a densidade não varia entre espécies, apenas a fração de massa),</p>
+\[
+P_{\rm gas} = \sum_i (1+Z_i)\,\frac{\rho X_i}{m_a\mu_i}\,kT
+= \rho R T\sum_i (1+Z_i)\frac{X_i}{\mu_i}\,,
+\qquad R=\frac{k}{m_a}\,.
+\tag{8.8}
+\]
+<p>Comparando diretamente com a forma geral do gás ideal [Equação
+(8.4), \(P_{\rm gas}=\rho RT/\mu\)], obtemos o resultado clássico de
+estrutura estelar para o peso molecular médio de um gás totalmente
+ionizado:</p>
+\[
+\boxed{\frac{1}{\mu} = \sum_i (1+Z_i)\,\frac{X_i}{\mu_i}}\,.
+\tag{8.9}
+\]
+
+<p>Essa fórmula conecta diretamente com a estimativa \(\mu=0{,}50\)
+usada no Capítulo 5 para o cálculo da temperatura central do Sol: para
+hidrogênio puro totalmente ionizado (\(X_{\rm H}=1\), \(Z_{\rm H}=1\),
+\(\mu_{\rm H}=1\)), a Equação (8.9) dá exatamente
+\(1/\mu=(1+1)\cdot1/1=2\Rightarrow\mu=0{,}50\) — o valor usado naquele
+capítulo como aproximação inicial.</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Peso molecular médio: H puro vs. composição realista</div>
+  <div class="conteudo">
+    <p>Para hidrogênio puro totalmente ionizado (\(X_{\rm H}=1\),
+    \(Z_{\rm H}=1\), \(\mu_{\rm H}=1\)),</p>
+    \[
+    \frac1\mu = (1+1)\cdot\frac{1}{1} = 2 \quad\Longrightarrow\quad \mu=0{,}50\,,
+    \tag{8.10}
+    \]
+    <p>o valor usado no Capítulo 5 para estimar \(T_c\) do Sol.</p>
+    <p>Já para a mistura simplificada de H e He usada nas notas deste
+    capítulo (\(X_{\rm H}=0{,}7\), \(X_{\rm He}=0{,}3\), com
+    \(Z_{\rm He}=2\) e \(\mu_{\rm He}=4\)),</p>
+    \[
+    \frac1\mu = (1+1)\frac{0{,}7}{1} + (1+2)\frac{0{,}3}{4}
+    = 1{,}4 + 0{,}225 = 1{,}625\,,
+    \tag{8.11}
+    \]
+    \[
+    \mu = \frac{1}{1{,}625} \approx 0{,}615\,.
+    \tag{8.12}
+    \]
+    <p>A composição realista (com \(\approx30\%\) de hélio em massa,
+    próxima da composição solar) aumenta o peso molecular médio de
+    \(0{,}50\) (H puro) para \(\approx0{,}62\) — em boa concordância com
+    o valor \(\mu\approx0{,}6\) já usado no Capítulo 3 para o plasma do
+    núcleo solar. Esse aumento faz sentido fisicamente: átomos de hélio
+    são \(4\) vezes mais massivos que o hidrogênio mas liberam apenas
+    \(2\) elétrons (em vez de \(1\)), então cada átomo de He
+    completamente ionizado contribui <em>menos</em> partículas por
+    unidade de massa do que o mesmo total de massa em hidrogênio —
+    elevando o peso molecular médio efetivo da mistura.</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 1 — Calculadora de \(\mu\), \(\mu_e\) e \(\mu_i\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mmu-X">Fração de hidrogênio \(X\) <span class="valor" id="mmu-X-valor">0,700</span></label>
+      <input type="range" id="mmu-X" min="0" max="1000" step="1" value="700">
+    </div>
+    <div class="controle">
+      <label for="mmu-Y">Fração de hélio \(Y\) <span class="valor" id="mmu-Y-valor">0,300</span></label>
+      <input type="range" id="mmu-Y" min="0" max="1000" step="1" value="300">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
+    <p class="leitura-card" style="margin:0;">\(Z=1-X-Y=\)<strong id="mmu-Z-valor">0,000</strong></p>
+    <p class="leitura-card" style="margin:0;">\(\mu=\)<strong id="mmu-mu">—</strong></p>
+    <p class="leitura-card" style="margin:0;">\(\mu_e=\)<strong id="mmu-mue">—</strong></p>
+    <p class="leitura-card" style="margin:0;">\(\mu_i=\)<strong id="mmu-mui">—</strong></p>
+  </div>
+  <p class="leitura-card">
+    Usa \(1/\mu=\sum_i(1+Z_i)X_i/\mu_i\) [Eq. (8.9)] para H e He
+    exatamente como no texto, e a aproximação padrão da literatura
+    \(Z_i/\mu_i\approx1/2\) para os "metais" (\(Z\)). O slider de
+    \(Y\) é automaticamente limitado a \(X+Y\le1\). Com \(X=0{,}7\),
+    \(Y=0{,}3\) (padrão), reproduz o Exemplo acima: \(\mu\approx0{,}615\).
+    Mova \(X\to1\), \(Y\to0\) para reproduzir \(\mu=0{,}50\) (H puro,
+    usado no Cap. 5 para estimar \(T_{c,\odot}\)); e \(X\to0\),
+    \(Y\to1\) para o hélio puro, \(\mu_e=2\) — o mesmo \(\mu_e\) usado
+    no módulo da massa de Chandrasekhar do Cap. 6.
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Por que o peso molecular médio importa tanto</div>
+  <div class="conteudo">
+    <p>O peso molecular médio \(\mu\) aparece diretamente na pressão do
+    gás [Equação (8.4)] e, por consequência, em praticamente toda
+    estimativa de temperatura e pressão centrais de uma estrela (como
+    vimos no Capítulo 5). Como \(\mu\) depende da composição química
+    local — que muda ao longo da evolução estelar à medida que o
+    hidrogênio é convertido em hélio e elementos mais pesados pela
+    fusão nuclear — o núcleo de uma estrela evoluída tem \(\mu\)
+    sistematicamente maior que o de uma estrela jovem de mesma massa.
+    Isso é, na verdade, uma das razões físicas pelas quais estrelas se
+    tornam mais luminosas ao longo da sequência principal: para um
+    dado \(M\) e \(R\), um \(\mu\) maior no núcleo exige uma
+    temperatura central maior para sustentar a mesma pressão (ver
+    Capítulo 5), o que acelera as reações nucleares e aumenta \(L\).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 2 — Pressão do gás ideal: \(P_e\) vs. \(P_{\rm ion}\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mpgas-rho">\(\log_{10}(\rho/(\mathrm{g/cm^3}))\) <span class="valor" id="mpgas-rho-valor">1,00×10²</span></label>
+      <input type="range" id="mpgas-rho" min="-200" max="700" step="1" value="200">
+    </div>
+    <div class="controle">
+      <label for="mpgas-T">\(\log_{10}(T/\mathrm K)\) <span class="valor" id="mpgas-T-valor">1,00×10⁷</span></label>
+      <input type="range" id="mpgas-T" min="300" max="900" step="1" value="700">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;">
+    <p class="leitura-card" style="margin:0;">
+      \(P_{\rm gas}=\)<strong id="mpgas-P">—</strong> dyn/cm² &middot;
+      \(P_e=\)<strong id="mpgas-Pe">—</strong> dyn/cm² &middot;
+      \(P_{\rm ion}=\)<strong id="mpgas-Pi">—</strong> dyn/cm²
+    </p>
+  </div>
+  <p class="leitura-card">
+    Usa a composição de referência do capítulo (\(X=0{,}7\),
+    \(Y=0{,}3\): \(\mu\approx0{,}615\), \(\mu_e\approx1{,}18\),
+    \(\mu_i\approx1{,}30\)) com \(P=\rho RT/\mu\) [Eq. (8.4)] aplicada
+    separadamente a elétrons e íons. Como \(\mu_e<\mu_i\), os elétrons
+    sempre contribuem a maior fração da pressão do gás ideal (mais
+    partículas por unidade de massa) — o oposto do que ocorre na
+    energia interna térmica, dominada pelos íons mais numerosos em
+    massa total.
+  </p>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Para o tratamento completo das equações de estado estelar,
+    incluindo os regimes de degenerescência eletrônica (parcial e
+    total, relativística e não-relativística) que serão vistos no
+    próximo bloco deste capítulo, ver Kippenhahn, Weigert &amp; Weiss
+    (2012), cap. 13-14, e Chandrasekhar (1939) para o tratamento
+    clássico da degenerescência. Sobre a determinação precisa do peso
+    molecular médio e sua evolução com a composição química estelar,
+    ver também Kippenhahn, Weigert &amp; Weiss (2012), cap. 3.</p>
+  </div>
+</div>
+
+<h2 id="eee-degenerescencia">Condições degeneradas no interior estelar</h2>
+
+<p>Para entendermos melhor a existência de certas estrelas compactas
+extremamente quentes (raio \(R_\star\sim R_\oplus\), com
+\(T_{\rm eff}\sim7000\,\mathrm K\)), devemos estudar o gás de elétrons
+como um <strong>gás de Fermi–Dirac</strong>. Lembrando que férmions são
+partículas de spin semi-inteiro, como os elétrons, e obedecem ao
+princípio de exclusão de Pauli — dois férmions idênticos não podem
+ocupar o mesmo estado quântico.</p>
+
+<h3>Motivação: um gás de elétrons confinado em 1D</h3>
+
+<p>Consideremos primeiro uma situação simplificada em uma dimensão, a
+\(T=0\,\mathrm K\): um único elétron confinado a uma região de tamanho
+\(L\). Pelo princípio da incerteza de Heisenberg,</p>
+\[
+\Delta x\,\Delta p \gtrsim \frac{h}{2}\,.
+\tag{8.13}
+\]
+<p>Como \(\Delta x\equiv L\),</p>
+\[
+\Delta p \gtrsim \frac{h}{2L}\,.
+\tag{8.14}
+\]
+<p>Em \(T=0\), a velocidade (e o momento) térmico médio é nulo, então o
+momento máximo de uma única partícula é dado inteiramente pela
+incerteza quântica,</p>
+\[
+p_{\text{máx}} = p(T) + \Delta p = 0+\Delta p = \Delta p = \frac{h}{2L}\,.
+\tag{8.15}
+\]
+
+<p>Se adicionarmos mais elétrons, o princípio de exclusão de Pauli
+impede que dois elétrons ocupem o mesmo estado quântico — mas dois
+elétrons de spins opostos <em>podem</em> ocupar o mesmo nível de
+momento. Preenchendo os níveis sucessivamente:</p>
+<table>
+  <thead><tr><th>Elétron</th><th>\(p_{\text{máx}}\)</th><th>Spin</th></tr></thead>
+  <tbody>
+    <tr><td>\(1^\circ\)</td><td>\(h/2L\)</td><td>↑</td></tr>
+    <tr><td>\(2^\circ\)</td><td>\(h/2L\)</td><td>↓</td></tr>
+    <tr><td>\(3^\circ\)</td><td>\(h/2L+h/2L=h/L\)</td><td>↑</td></tr>
+    <tr><td>\(4^\circ\)</td><td>\(h/L\)</td><td>↓</td></tr>
+    <tr><td>\(5^\circ\)</td><td>\(h/L+h/2L=\tfrac32\,h/L\)</td><td>↑</td></tr>
+    <tr><td>\(6^\circ\)</td><td>\(\tfrac32\,h/L\)</td><td>↓</td></tr>
+  </tbody>
+</table>
+<p>Cada <em>par</em> de elétrons ocupa um novo nível de largura
+\(h/2L\) no espaço de momento. Generalizando para \(N\) elétrons,</p>
+\[
+p_{\text{máx}} = \frac{N}{2}\cdot\frac{h}{2L}
+\quad\Longrightarrow\quad
+\Delta p = \frac{2\,p_{\text{máx}}}{N}\,.
+\tag{8.16}
+\]
+
+<h3>Generalização para 3D</h3>
+
+<p>No caso tridimensional, o mesmo preenchimento gradual ocorre
+independentemente em cada direção,</p>
+\[
+\Delta p_x = \Delta p_y = \Delta p_z = \frac{h}{2L}\,,
+\tag{8.17}
+\]
+<p>de modo que, por analogia com a Equação (8.16),</p>
+\[
+p_{{\text{máx}},x}=\Delta p_x\,,\quad
+p_{{\text{máx}},y}=\Delta p_y\,,\quad
+p_{{\text{máx}},z}=\Delta p_z\,,
+\qquad\text{e}\qquad
+N = \frac{2\,p_{\text{máx}}}{\Delta p}\,.
+\tag{8.18}
+\]
+
+<p>Como no caso em 1D vimos que \(N=2p_{\text{máx}}/\Delta p\), podemos
+inferir que em três dimensões o número de estados disponíveis dentro de
+uma esfera de raio \(p_{\text{máx}}\) no espaço de momento é</p>
+\[
+N = 2\cdot\left(\frac{4\pi p_{\text{máx}}^3/3}{8}\right)\cdot\frac{1}{\Delta p^3}\,,
+\tag{8.19}
+\]
+<p>onde o termo \(4\pi p_{\text{máx}}^3/3\) descreve o volume do campo
+de momento se propagando em uma casca esférica.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — De onde vem o fator \(1/8\)?</div>
+  <div class="conteudo">
+    <p>O fator \(1/8\) na Equação (8.19) aparece por uma razão
+    puramente geométrica, ligada à forma como os níveis de momento são
+    contados. Assim como no caso 1D os elétrons preenchem apenas
+    momentos <em>positivos</em> (a quantização de uma partícula
+    confinada em uma caixa de tamanho \(L\) é indexada por números
+    quânticos positivos, não por momentos com sinal), em 3D cada
+    componente \(p_x,p_y,p_z\) também só assume valores positivos — ou
+    seja, os estados ocupados preenchem apenas o <strong>octante
+    positivo</strong> da esfera de momento, não a esfera completa. Como
+    o octante corresponde a exatamente \(1/8\) do volume total da
+    esfera \(4\pi p_{\text{máx}}^3/3\), esse fator de \(1/8\) entra
+    multiplicando o volume esférico. O fator \(2\) que multiplica tudo,
+    por outro lado, é a degenerescência de spin (dois elétrons, com
+    spins opostos, por estado espacial). Assim,</p>
+    \[
+    N = 2\left(\frac{4\pi p_{\text{máx}}^3/3}{8}\right)\left(\frac{1}{h/2L}\right)^3
+    = 2\left(\frac{4\pi p_{\text{máx}}^3/3}{8}\right)\frac{8L^3}{h^3}
+    = \frac{8\pi}{3}\,\frac{p_{\text{máx}}^3\,L^3}{h^3}\,,
+    \tag{8.20}
+    \]
+    <p>onde o fator \(8\) vindo de \((2L/h)^3=8L^3/h^3\) cancela
+    exatamente o fator \(1/8\) do octante, deixando apenas o fator
+    \(2\) da degenerescência de spin multiplicando o volume esférico
+    completo — o resultado líquido é o mesmo que se obteria contando
+    <em>toda</em> a esfera de momento com peso \(2/h^3\) por elemento
+    de volume \(\mathrm d^3p\) (a forma mais comum de apresentar esse
+    resultado na literatura, e a que usaremos a seguir). O fator
+    \(1/8\) está correto, mas seu cancelamento parcial com o fator
+    \(8\) da mudança de unidades torna o resultado final mais simples
+    do que o passo intermediário sugere.</p>
+  </div>
+</div>
+
+<p>Dividindo a Equação (8.20) por \(L^3\), obtemos a <strong>densidade
+eletrônica</strong> do gás,</p>
+\[
+n_e \equiv \frac{N}{L^3} = \frac{8\pi}{3}\,\frac{p_{\text{máx}}^3}{h^3}\,.
+\tag{8.21}
+\]
+
+<p>Podemos expressar esse resultado em função do <strong>momento de
+Fermi</strong>, usando \(\hbar\equiv h/2\pi\):</p>
+\[
+p_F = \left(3\pi^2\hbar^3 n_e\right)^{1/3} = \hbar\left(3\pi^2n_e\right)^{1/3}\,.
+\tag{8.22}
+\]
+<p>Assim, um gás de elétrons em \(T=0\) terá um momento máximo bem
+definido. Assumindo que o gás não é relativístico, \(E=p^2/2m_e\), a
+<strong>energia de Fermi</strong> não-relativística é</p>
+\[
+E_F^{\rm NR} = \frac{\hbar^2}{2m_e}\left(3\pi^2n_e\right)^{2/3}\,.
+\tag{8.23}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 3 (destaque) — Elétron confinado 1D → 3D, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Painel esquerdo: níveis de energia \(E_n=n^2h^2/(8m_eL^2)\) de um
+    elétron confinado a uma caixa 1D de tamanho \(L\), preenchidos aos
+    pares (spins opostos), reproduzindo a tabela acima. Painel direito:
+    a generalização 3D — o octante positivo da esfera de momento
+    (\(1/8\) do volume total, Eq. 8.19-8.20) sendo preenchido conforme
+    mais elétrons são adicionados, até o momento máximo \(p_{\text{máx}}\).
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="m1d3d-L">Tamanho da caixa \(L\) (Å) <span class="valor" id="m1d3d-L-valor">5,0</span></label>
+      <input type="range" id="m1d3d-L" min="1" max="20" step="0.5" value="5">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="m1d3d-play" class="botao-modulo">▶ Preencher níveis</button>
+      <button type="button" id="m1d3d-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m1d3d-canvas" role="img" aria-label="Animacao mostrando niveis de energia 1D sendo preenchidos aos pares e, em paralelo, o octante da esfera de momento 3D sendo preenchido conforme mais eletrons sao adicionados." style="width:100%;height:360px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(p_{\text{máx}}=\)<strong id="m1d3d-pmax">—</strong> g·cm/s. Reduza
+    \(L\) e observe os níveis de energia se afastarem (confinamento
+    mais apertado → maior energia, exatamente a física por trás da
+    pressão de degenerescência: comprimir o gás aumenta \(p_{\text{máx}}\)
+    e, portanto, a pressão, mesmo em \(T=0\)).
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Da caixa quântica às anãs brancas</div>
+  <div class="conteudo">
+    <p>A motivação inicial desta seção — estrelas compactas com
+    \(R_\star\sim R_\oplus\) — não é coincidência: é exatamente a
+    <strong>pressão de degenerescência eletrônica</strong> que estamos
+    deduzindo aqui que sustenta as <strong>anãs brancas</strong> contra
+    o colapso gravitacional, sem depender da temperatura do gás (ao
+    contrário da pressão térmica de um gás ideal comum). Esse é o
+    motivo pelo qual anãs brancas podem esfriar por bilhões de anos sem
+    encolher significativamente: sua estrutura é sustentada por um
+    efeito puramente quântico. O futuro capítulo sobre Anãs Brancas
+    retomará esse resultado com profundidade, incluindo a relação
+    massa-raio característica desses objetos.</p>
+  </div>
+</div>
+
+<h2 id="eee-distribuicao-ocupacao">Distribuição de ocupação e densidade de elétrons</h2>
+
+<p>Podemos estudar a probabilidade de ocupação de um estado de energia
+\(E\), definida por \(f(E)\). Supondo que o gás seja um gás de
+elétrons, a distribuição de probabilidade de ocupação versus energia
+tem a forma da figura abaixo: em \(T=0\), \(f(E)=1\) para todo estado
+com \(E\le E_F\) (máxima probabilidade de ocupação) e \(f(E)=0\) para
+\(E> E_F\); a temperaturas finitas, a transição em \(E_F\) se suaviza e
+a distribuição decai como \(f(E)\propto e^{-E/kT}\) para \(E\gg E_F\).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 4 (flagship) — O mar de Fermi e a distribuição \(f(E)\), animado</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mfermi-T">Temperatura \(\log_{10}(T/\mathrm K)\) <span class="valor" id="mfermi-T-valor">1,00×10²</span></label>
+      <input type="range" id="mfermi-T" min="150" max="900" step="1" value="200">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mfermi-play" class="botao-modulo">▶ Preencher mar de Fermi</button>
+      <button type="button" id="mfermi-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mfermi-canvas" role="img" aria-label="Animacao do mar de Fermi: grade de estados preenchendo de baixo para cima respeitando o principio de exclusao de Pauli, ao lado do grafico de f(E) que amolece na borda conforme a temperatura sobe." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mfermi-regime">—</p>
+  <p class="leitura-card">
+    Clique em "Preencher mar de Fermi" para ver os estados sendo
+    ocupados um par por vez (princípio de exclusão de Pauli), de baixo
+    para cima, até o nível de Fermi \(E_F\) — a mesma física do Módulo
+    3, agora em \(T=0\). O slider de temperatura mostra \(f(E)\)
+    suavizando a borda: em \(T\to0\) é um degrau perfeito (curva desta
+    figura, reproduzindo a Figura do texto); em \(T\) muito alto,
+    \(f(E)\) se aproxima do decaimento exponencial de
+    Maxwell–Boltzmann, \(f(E)\propto e^{-E/kT}\), para (quase) todo
+    \(E\) — o limite clássico não-degenerado.
+  </p>
+</div>
+
+<p>Em regimes de altas densidades (degenerescência total), todos os
+níveis de energia até um valor máximo estarão ocupados. Como a
+densidade total de partículas é finita, os estados estarão ocupados
+até um certo valor de momento \(p_0\), de modo que</p>
+\[
+n_e(p) =
+\begin{cases}
+\dfrac{2}{h^3}\,4\pi p^2\,, & p\le p_0\,,\\[6pt]
+0\,, & p>p_0\,,
+\end{cases}
+\tag{8.24}
+\]
+<p>onde, para \(p>p_0\), a densidade já não engloba os elétrons deste
+ponto em diante — esse limite deverá ser o estado de menor energia
+cinética disponível para o gás de elétrons, já que todos os estados de
+energia mais baixos estão ocupados.</p>
+
+<p>Como a densidade de partículas total é a soma (integral) sobre
+todos os momentos ocupados,</p>
+\[
+n_e = \int_0^\infty n_e(p)\,\mathrm dp = \frac{8\pi}{3h^3}\,p_0^3\,,
+\tag{8.25}
+\]
+<p>ou, em função do momento máximo,</p>
+\[
+p_0 = \left(\frac{3h^3}{8\pi}\,n_e\right)^{1/3} = \left(3\pi^2\hbar^3n_e\right)^{1/3}\,.
+\tag{8.26}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 5 — Densidade de elétrons por intervalo de momento \(n_e(p)\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mnep-T">Temperatura (escala relativa) <span class="valor" id="mnep-T-valor">0,00</span></label>
+      <input type="range" id="mnep-T" min="0" max="500" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mnep-canvas" role="img" aria-label="Grafico de n_e(p) versus p/p0: cresce como p ao quadrado ate p0 e cai abruptamente a zero em T=0; a temperaturas maiores a borda se suaviza." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mnep-regime">—</p>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Distinção com a distribuição de Maxwell–Boltzmann</div>
+  <div class="conteudo">
+    <p>A distribuição realmente usada nesta seção é a de
+    <strong>Fermi–Dirac em \(T=0\)</strong> [Equação (8.24)], com corte
+    abrupto em \(p_0\), qualitativamente muito diferente da
+    distribuição de Maxwell–Boltzmann, \(\propto v^2e^{-mv^2/2kT}\)
+    (suave, sem corte, válida para um gás <em>clássico
+    não-degenerado</em> em equilíbrio térmico). Vale o contraste: no
+    limite oposto ao degenerado (baixas densidades, altas
+    temperaturas), a distribuição de velocidades seria a
+    Maxwell–Boltzmann clássica, não a de Fermi–Dirac com corte abrupto.
+    Nenhum resultado numérico desta seção usa a fórmula de
+    Maxwell–Boltzmann — todos partem de \(n_e(p)\) [Equação (8.24)].</p>
+  </div>
+</div>
+
+<h2 id="eee-pressao-cinetica">Fluxo de momento e pressão mecânica</h2>
+
+<p>Sabemos que a fonte microscópica de pressão em um gás perfeito é o
+bombardeamento de partículas contra a parede do recipiente. Em um gás
+perfeito (ideal), não existe interação entre as partículas
+constituintes do gás — critério que nunca é de fato totalmente
+possível, mas é uma boa aproximação quando a energia térmica é muito
+maior que a energia de interação entre as partículas.</p>
+
+<p>Usando a segunda lei de Newton, \(F=\mathrm dp/\mathrm dt\), e a
+relação entre trabalho e pressão,</p>
+\[
+P = \frac{F}{A} = \frac{F\cdot d}{A\cdot d} = \frac{W}{V}
+\quad\Longrightarrow\quad
+W = P\,V\,,
+\tag{8.27}
+\]
+<p>ou, na forma diferencial,</p>
+\[
+\mathrm dW = P\,\mathrm dV\,.
+\tag{8.28}
+\]
+
+<p>Consideremos a geometria de uma seção cônica de ângulo \(\theta\)
+em torno da normal \(\hat n\) à parede. Quando partículas incidem na
+superfície, elas transferem momento para esta; assumindo reflexão
+especular, o momento de reação na direção normal é</p>
+\[
+\cos\theta = \frac{\Delta p}{2p_x} = \frac{\Delta p}{2p}
+\quad\Longrightarrow\quad
+\Delta p = 2p\cos\theta\,,
+\tag{8.29}
+\]
+<p>já que a variação do momento inicial é a componente normal,
+\(2p_x\), com \(p_x=p\cos\theta\).</p>
+
+<figure>
+<svg viewBox="0 0 260 200" role="img" aria-label="Geometria da colisao: uma particula com momento p colide com a parede fazendo um angulo theta com a normal n-chapeu, transferindo momento 2p cos(theta) por reflexao especular." style="width:100%;max-width:340px;display:block;margin:0 auto;height:auto;">
+  <rect x="8" y="14" width="14" height="172" fill="#ebf2fa" stroke="#1c4878" stroke-width="1.5"></rect>
+  <line x1="22" y1="100" x2="220" y2="100" stroke="#333" stroke-width="1.6" marker-end="url(#setaN)"></line>
+  <text x="228" y="104" font-size="13" fill="#333">n̂</text>
+  <line x1="22" y1="100" x2="170" y2="42" stroke="#1c4878" stroke-width="2" marker-end="url(#setaP)"></line>
+  <text x="176" y="38" font-size="13" fill="#1c4878">p</text>
+  <path d="M 62 100 A 40 40 0 0 0 91 71" fill="none" stroke="#963c1e" stroke-width="1.6"></path>
+  <text x="72" y="85" font-size="13" fill="#963c1e">θ</text>
+  <line x1="22" y1="100" x2="170" y2="158" stroke="#1c4878" stroke-width="1.4" stroke-dasharray="4 3"></line>
+  <text x="176" y="168" font-size="12" fill="#1c4878">parede</text>
+  <defs>
+    <marker id="setaN" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#333"></path></marker>
+    <marker id="setaP" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1c4878"></path></marker>
+  </defs>
+</svg>
+<figcaption>Geometria usada na dedução da pressão cinética: uma partícula de momento \(\vec p\) colide com a parede (normal \(\hat n\)) fazendo um ângulo \(\theta\) com a normal; a reflexão especular transfere momento \(\Delta p=2p\cos\theta\) para a parede.</figcaption>
+</figure>
+
+<p>Seja \(F(\theta,p)\) o número de partículas com momento \(p\) no
+intervalo \(\mathrm dp\) colidindo com a parede, por unidade de área,
+tempo, e ângulo sólido, na direção \(\theta\). A contribuição total de
+pressão é</p>
+\[
+\mathrm dP = 2p\cos\theta\,F(\theta,p)\,\mathrm dp\,\mathrm d\theta\,,
+\tag{8.30}
+\]
+<p>de modo que a pressão total se obtém integrando,</p>
+\[
+P = \int_0^{\pi/2}\int_0^\infty 2p\cos\theta\,F(\theta,p)\,\mathrm d\theta\,\mathrm dp\,.
+\tag{8.31}
+\]
+
+<p>Para relacionar \(F(\theta,p)\) ao número de partículas por unidade
+de volume, consideramos o volume \(V\) varrido por partículas que
+passam por um elemento de superfície \(\mathrm dA\) em um intervalo
+\(\mathrm dt\),</p>
+\[
+V = (n_x\cos\theta)\,\mathrm dA\cdot v\,\mathrm dt = v\cos\theta\,\mathrm dt\,\mathrm dA\,,
+\tag{8.32}
+\]
+<p>onde \(n_x\cos\theta\) é a componente tangencial do elemento de
+superfície ao longo da direção de propagação. Disso, obtemos</p>
+\[
+F(\theta,p)\,\mathrm d\theta\,\mathrm dp = v\cos\theta\,n(\theta,p)\,\mathrm d\theta\,\mathrm dp\,,
+\tag{8.33}
+\]
+<p>onde \(n(\theta,p)\) é o número de partículas por unidade de volume
+no cone de pressão. Para um gás isotrópico,</p>
+\[
+\frac{n(\theta,p)\,\mathrm d\theta\,\mathrm dp}{n(p)\,\mathrm dp} = \frac{2\pi\operatorname{sen}\theta}{4\pi} = \frac12\operatorname{sen}\theta\,,
+\tag{8.34}
+\]
+<p>ou seja,</p>
+\[
+\mathrm d_\theta n(\theta,p) = \frac12\operatorname{sen}\theta\,\mathrm d\theta\,n(p)\,\mathrm dp\,.
+\tag{8.35}
+\]
+
+<p>Substituindo a Equação (8.35) na Equação (8.33),</p>
+\[
+F(\theta,p)\,\mathrm d\theta\,\mathrm dp = v\cos\theta\cdot\frac12\operatorname{sen}\theta\,\mathrm d\theta\,n(p)\,\mathrm dp\,,
+\tag{8.36}
+\]
+<p>e substituindo na Equação (8.31),</p>
+\[
+P = \int_0^{\pi/2}\int_0^\infty 2p\cos\theta\cdot v\cos\theta\cdot\frac12\operatorname{sen}\theta\,n(p)\,\mathrm d\theta\,\mathrm dp
+= \int_0^{\pi/2}\int_0^\infty n(p)\,v\,p\,\mathrm dp\,\cos^2\theta\operatorname{sen}\theta\,\mathrm d\theta\,.
+\tag{8.37}
+\]
+<p>Integrando em \(\theta\), com a substituição \(\mu=\cos\theta\),
+\(\mathrm d\mu=-\operatorname{sen}\theta\,\mathrm d\theta\),</p>
+\[
+\int_0^{\pi/2}\cos^2\theta\operatorname{sen}\theta\,\mathrm d\theta
+= -\int_1^0\mu^2\,\mathrm d\mu = \frac13\,,
+\tag{8.38}
+\]
+<p>chegamos finalmente à <strong>fórmula geral da pressão
+cinética</strong>, válida para qualquer gás — clássico ou degenerado,
+relativístico ou não:</p>
+\[
+\boxed{P = \frac13\int_0^\infty p\,v\,n(p)\,\mathrm dp}\,.
+\tag{8.39}
+\]
+<p>Com essa relação, passamos de uma descrição microscópica (a
+distribuição de partículas em momento) para uma descrição
+macroscópica (a pressão do gás).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 6 (destaque) — Pressão cinética: partículas colidindo com a parede, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Cada colisão elástica com a parede direita transfere momento
+    \(\Delta p=2p\cos\theta\) [Eq. (8.29)] — exatamente a geometria da
+    figura acima. O contador acumula o impulso total transferido; sua
+    taxa de crescimento por unidade de área e tempo é, em essência, a
+    própria pressão cinética [Eq. (8.39)], agora tornada concreta como
+    bombardeamento de partículas.
+  </p>
+  <div class="controles">
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mparede-play" class="botao-modulo">▶ Iniciar colisões</button>
+      <button type="button" id="mparede-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mparede-canvas" role="img" aria-label="Animacao de particulas em movimento dentro de uma caixa, colidindo elasticamente com a parede direita e transferindo momento, com um contador acumulando o impulso total." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Colisões com a parede: <strong id="mparede-ncol">0</strong> &middot;
+    Impulso acumulado (unid. arbitrárias): <strong id="mparede-impulso">0</strong>.
+  </p>
+</div>
+
+<h2 id="eee-degenerescencia-nr">Degenerescência total não-relativística</h2>
+
+<p>Em um caso onde a energia associada ao momento \(p_0\) for muito
+menor que a energia de repouso do elétron, ou seja, \(v\ll c\), o
+tratamento relativístico pode ser descrito de forma clássica:
+\(p=m_ev\), logo</p>
+\[
+v = \frac{p}{m_e}\,.
+\tag{8.40}
+\]
+
+<p>Podemos então determinar a pressão exercida pelos elétrons sobre o
+gás, usando a Equação (8.39) com \(v=p/m_e\) [Equação (8.40)] e
+\(n_e(p)\) [Equação (8.24)]:</p>
+\[
+P = \frac13\int_0^\infty p\cdot\frac{p}{m_e}\cdot\frac{8\pi p^2}{h^3}\,\mathrm dp
+= \frac{8\pi}{3m_eh^3}\int_0^{p_0} p^4\,\mathrm dp\,,
+\tag{8.41}
+\]
+<p>onde o limite superior da integral passa a ser \(p_0\) (em vez de
+\(\infty\)), já que \(n_e(p)=0\) para \(p>p_0\) [Equação (8.24)].
+Integrando,</p>
+\[
+P = \frac{8\pi}{3m_eh^3}\cdot\frac{p_0^5}{5}\,.
+\tag{8.42}
+\]
+<p>Substituindo \(p_0=(3h^3n_e/8\pi)^{1/3}\) [Equação (8.26)],</p>
+\[
+P = \frac{8\pi}{3m_eh^3}\cdot\frac15\left(\frac{3h^3}{8\pi}n_e\right)^{5/3}
+= \frac{1}{20}\left(\frac3\pi\right)^{2/3}\frac{h^2}{m_e}\,n_e^{5/3}\,.
+\tag{8.43}
+\]
+
+<p>Usando \(n_e=N_A\rho/\mu_e\) (\(\mu_e\) o peso molecular médio por
+elétron), a <strong>equação de estado de um gás de Fermi
+não-relativístico completamente degenerado</strong> (\(T=0\)) é</p>
+\[
+\boxed{P = \frac{1}{20}\,\frac{h^2}{m_e}\left(\frac3\pi\right)^{2/3}\left(\frac{N_A}{\mu_e}\right)^{5/3}\rho^{5/3}}\,,
+\qquad P\propto\rho^{5/3}\,.
+\tag{8.44}
+\]
+<p>Numericamente, essa equação de estado vale</p>
+\[
+P \sim 1{,}00\times10^{13}\left(\frac{\rho}{\mu_e}\right)^{5/3}\ \mathrm{dyn/cm^2}\,,
+\tag{8.45}
+\]
+<p>válida no regime não-relativístico, aproximadamente quando</p>
+\[
+\frac{\rho}{\mu_e} > 2{,}4\times10^{-8}\,T^{3/2}\ \mathrm{g/cm^3}\,.
+\tag{8.46}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Coeficiente numérico da Equação (8.45)</div>
+  <div class="conteudo">
+    <p>Calculando diretamente o coeficiente
+    \(\frac1{20}(3/\pi)^{2/3}(h^2/m_e)N_A^{5/3}\) em unidades cgs,
+    obtém-se \(\approx1{,}0036\times10^{13}\,\mathrm{dyn\,cm^{-2}}\) —
+    em excelente acordo com o valor padrão citado na literatura de
+    estrutura estelar (Kippenhahn, Weigert &amp; Weiss, 2012;
+    Chandrasekhar, 1939). Adotamos aqui o valor \(1{,}00\times10^{13}\),
+    consistente com esse cálculo direto.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — A origem física do índice politrópico \(n=3/2\)</div>
+  <div class="conteudo">
+    <p>Este é um dos resultados mais elegantes deste capítulo: a
+    Equação (8.44), \(P\propto\rho^{5/3}\), é <strong>exatamente</strong>
+    a relação politrópica do caso (i) da tabela do Capítulo 6
+    (\(\gamma=5/3\), \(n=3/2\), "gás degenerado não-relativístico").
+    Isso mostra que aquele índice politrópico específico não é uma
+    escolha arbitrária ou puramente matemática: ele tem origem física
+    direta na mecânica quântica de um gás de Fermi completamente
+    degenerado — o expoente \(5/3\) surge diretamente da combinação
+    entre a contagem de estados no espaço de momento (que dá
+    \(n_e\propto p_0^3\)) e a integração da pressão cinética (que dá
+    \(P\propto p_0^5\)), sem qualquer input termodinâmico. Esse é o
+    motivo físico de fundo pelo qual esse politropo descreve tão bem
+    anãs brancas de baixa massa e o núcleo de gigantes vermelhas —
+    ambos os ambientes onde o gás de elétrons está completamente
+    degenerado mas ainda não-relativístico.</p>
+  </div>
+</div>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Pressão central de uma anã branca de C/O</div>
+  <div class="conteudo">
+    <p>Usando a Equação (8.45) com uma densidade central típica de anã
+    branca, \(\rho_c\sim10^6\)&ndash;\(10^7\,\mathrm{g/cm^3}\), e
+    \(\mu_e\approx2\) (composição rica em carbono e oxigênio,
+    completamente ionizados, com \(Z/\mu_i\approx1/2\) para ambos):</p>
+    \[
+    \rho_c\sim10^6\,\mathrm{g/cm^3}:\quad
+    P_c \sim 1{,}00\times10^{13}\left(\frac{10^6}{2}\right)^{5/3}
+    \approx 3{,}1\times10^{22}\ \mathrm{dyn/cm^2}\,,
+    \tag{8.47}
+    \]
+    \[
+    \rho_c\sim10^7\,\mathrm{g/cm^3}:\quad
+    P_c \sim 1{,}00\times10^{13}\left(\frac{10^7}{2}\right)^{5/3}
+    \approx 1{,}5\times10^{24}\ \mathrm{dyn/cm^2}\,.
+    \tag{8.48}
+    \]
+    <p>Esses valores estão em boa concordância de ordem de grandeza com
+    modelos detalhados de anãs brancas
+    (\(P_c\sim10^{22}\)&ndash;\(10^{24}\,\mathrm{dyn/cm^2}\) para massas
+    típicas, \(0{,}5\)&ndash;\(1{,}0\,M_\odot\)), confirmando que a
+    equação de estado degenerada não-relativística [Equação (8.44)]
+    captura corretamente a física central desses objetos nesse
+    intervalo de densidades.</p>
+  </div>
+</div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Da não-relatividade à relatividade nas anãs brancas</div>
+  <div class="conteudo">
+    <p>A condição de validade não-relativística [Equação (8.46)] mostra
+    que, para uma anã branca já esfriada (temperatura interna baixa), a
+    maior parte do intervalo de densidades relevante está de fato no
+    regime não-relativístico descrito nesta seção. No entanto, em
+    densidades centrais mais altas — anãs brancas mais massivas,
+    próximas do limite de Chandrasekhar — o gás de elétrons se torna
+    progressivamente mais relativístico, o que <em>amolece</em> a
+    equação de estado (o expoente efetivo de \(P(\rho)\) diminui de
+    \(5/3\) para \(4/3\), como veremos a seguir). É exatamente essa
+    transição que impõe um limite superior à massa que a pressão de
+    degenerescência consegue sustentar.</p>
+  </div>
+</div>
+
+<h2 id="eee-degenerescencia-ur">Degenerescência total ultra-relativística</h2>
+
+<p>De forma análoga ao caso da degenerescência total não-relativística,
+podemos determinar a pressão exercida pelos <strong>elétrons</strong>
+agora supondo um caso ultra-relativístico, ou seja, \(v\approx c\).
+Esse tratamento faz com que a análise da pressão fique até mais
+simples, uma vez que a velocidade da luz é constante:</p>
+\[
+P = \frac13\int_0^\infty p\,v\,n(p)\,\mathrm dp
+= \frac13\,c\cdot\frac{8\pi}{h^3}\int_0^{p_0}p^3\,\mathrm dp
+= \frac{2\pi c}{3h^3}\,p_0^4\,.
+\tag{8.49}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Esta é a pressão dos elétrons, não dos fótons</div>
+  <div class="conteudo">
+    <p>Toda a integração acima usa \(n(p)\) do <strong>gás de
+    elétrons</strong> degenerado, já estabelecido nos blocos anteriores
+    [Equação (8.24)], não uma distribuição de fótons — trata-se da
+    pressão exercida pelos <strong>elétrons</strong>
+    ultra-relativísticos (o mesmo formalismo da seção anterior aplicado
+    a \(v=c\)). Vale notar a distinção com a pressão de radiação
+    (fótons), já estabelecida em capítulo anterior como
+    \(P_{\rm rad}=\tfrac13aT^4\) [Equação (8.5)] — uma expressão
+    completamente diferente desta dedução cinética.</p>
+  </div>
+</div>
+
+<p>Substituindo \(p_0=(3h^3n_e/8\pi)^{1/3}\) [Equação (8.26)] na
+Equação (8.49),</p>
+\[
+P = \frac{2\pi c}{3h^3}\left(\frac{3h^3}{8\pi}n_e\right)^{4/3}
+= \left(\frac{3}{8\pi}\right)^{1/3}\frac{hc}{4}\,n_e^{4/3}\,,
+\tag{8.50}
+\]
+<p>ou, em termos da densidade, usando \(n_e=N_A\rho/\mu_e\),</p>
+\[
+P = \left(\frac{3}{8\pi}\right)^{1/3}\frac{hc}{4}\left(\frac{N_A}{\mu_e}\right)^{4/3}\rho^{4/3}\,,
+\qquad\text{ou seja,}\qquad
+P\propto\rho^{4/3}\propto n_e^{4/3}\,.
+\tag{8.51}
+\]
+<p>Note que os valores de \(P\) e \(\rho/\mu_e\) nesta equação são
+exatamente os mesmos que no caso não-relativístico [Equação (8.44)] —
+a única diferença é o expoente, \(4/3\) em vez de \(5/3\). Esta é a
+<strong>primeira via</strong> pela qual chegamos à equação de estado
+ultra-relativística; a próxima seção chega ao mesmo resultado por um
+caminho independente, como verificação cruzada. Note ainda que ainda
+estamos considerando \(T=0\,\mathrm K\), temperatura constante, e a
+pressão sendo função apenas da densidade — ou seja, seguimos o caso
+politrópico.</p>
+
+<h2 id="eee-degenerescencia-relativistica">Degenerescência total relativística</h2>
+
+<p>À medida que a densidade de elétrons no núcleo de uma estrela
+aumenta, o momento máximo do gás também aumenta pela agitação das
+partículas, e os elétrons mais energéticos se tornarão relativísticos.
+Nesse caso, a forma clássica para o momento não pode mais ser
+empregada — devemos usar a fórmula relativística,</p>
+\[
+p = \frac{m_ev}{\left(1-(v/c)^2\right)^{1/2}}\,.
+\tag{8.52}
+\]
+<p>Para escrever \(v\) em função de \(p\), elevamos ao quadrado,</p>
+\[
+p^2 = \frac{m_e^2v^2}{1-v^2/c^2}
+\quad\Longrightarrow\quad
+\frac{p^2}{m_e^2} = \frac{v^2}{1-v^2/c^2}\,,
+\tag{8.53}
+\]
+<p>e, usando \(v^2=p^2/m_e^2-(p^2/m_e^2)(v^2/c^2)\), isolamos \(v^2\)
+em evidência:</p>
+\[
+v^2\left(1+\frac{p^2}{m_e^2c^2}\right) = \frac{p^2}{m_e^2}
+\quad\Longrightarrow\quad
+v = \frac{p/m_e}{\left(1+\dfrac{p^2}{m_e^2c^2}\right)^{1/2}}\,.
+\tag{8.54}
+\]
+
+<p>Substituindo a Equação (8.54) na fórmula geral da pressão cinética
+[Equação (8.39)], para determinarmos a pressão de um gás totalmente
+degenerado em qualquer regime de relatividade,</p>
+\[
+P = \frac13\int_0^{p_0} p\cdot\frac{p/m_e}{\left(1+\dfrac{p^2}{m_e^2c^2}\right)^{1/2}}\cdot\frac{8\pi p^2}{h^3}\,\mathrm dp
+= \frac{8\pi}{3m_eh^3}\int_0^{p_0}\frac{p^4\,\mathrm dp}{\left(1+\left(\dfrac{p}{m_ec}\right)^2\right)^{1/2}}\,.
+\tag{8.55}
+\]
+<p>Definindo a variável adimensional \(Y\equiv p/m_ec\) (logo
+\(\mathrm dY=\mathrm dp/m_ec\)),</p>
+\[
+P = \frac{8\pi m_e^4c^5}{3h^3}\int_0^{X}\frac{Y^4\,\mathrm dY}{(1+Y^2)^{1/2}}\,,
+\qquad X\equiv\frac{p_0}{m_ec}\,.
+\tag{8.56}
+\]
+
+<p>Essa integral pode ser resolvida com a substituição trigonométrica
+\(Y=\tan u\), \(\mathrm dY=\sec^2(u)\,\mathrm du\); após algumas
+transformações, obtém-se a forma fechada</p>
+\[
+\int_0^X\frac{Y^4\,\mathrm dY}{(1+Y^2)^{1/2}}
+= \frac18\,X(2X^2-3)(X^2+1)^{1/2} + 3\operatorname{senh}^{-1}(X)\,.
+\tag{8.57}
+\]
+<p>Substituindo de volta na Equação (8.56),</p>
+\[
+P = \frac{8\pi m_e^4c^5}{3h^3}\cdot\frac18\,F(X)
+= \frac{\pi m_e^4c^5}{3h^3}\,F(X)\,,
+\qquad
+F(X) = X(2X^2-3)(X^2+1)^{1/2}+3\operatorname{senh}^{-1}(X)\,.
+\tag{8.58}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — \(X\): momento de Fermi em unidades de \(m_ec\)</div>
+  <div class="conteudo">
+    <p>Assim como \(Y=p/m_ec\) é o momento adimensionalizado de uma
+    partícula qualquer, \(X\equiv p_0/m_ec\) é o momento de Fermi (o
+    momento máximo do gás degenerado) na mesma unidade — usando
+    \(p_0=(3h^3n_e/8\pi)^{1/3}\) [Equação (8.26)],</p>
+    \[
+    X = \frac{p_0}{m_ec} = \frac{h}{m_ec}\left(\frac{3n_e}{8\pi}\right)^{1/3}\,.
+    \tag{8.59}
+    \]
+  </div>
+</div>
+
+<p>A Equação (8.58) pode ser considerada a <strong>forma geral da
+pressão de um gás de elétrons totalmente degenerados</strong> no
+interior estelar, válida para qualquer grau de relatividade, sempre em
+\(T=0\,\mathrm K\).</p>
+
+<h3>Limite ultra-relativístico: verificação cruzada</h3>
+
+<p>Podemos supor o caso ultra-relativístico, onde \(X\gg1\). Nesse
+caso, os termos de baixa ordem na Equação (8.58) podem ser
+desprezados quando comparados aos termos de ordem superior, de modo
+que</p>
+\[
+F(X) \approx 2X^4 - 2X^2 + \cdots\,,
+\tag{8.60}
+\]
+<p>e, tomando apenas o primeiro termo da aproximação,</p>
+\[
+P \approx \frac{\pi m_e^4c^5}{3h^3}\cdot2X^4
+= \frac{2\pi m_e^4c^5}{3h^3}\left[\frac{h}{m_ec}\left(\frac{3n_e}{8\pi}\right)^{1/3}\right]^4\,.
+\tag{8.61}
+\]
+<p>Simplificando os expoentes (\(4/3-1=1/3\), e
+\(8^{4/3}\equiv2^{3\cdot4/3}=2^4\)),</p>
+\[
+P = \left(\frac{3}{8\pi}\right)^{1/3}\frac{hc}{4}\,n_e^{4/3}\,,
+\tag{8.62}
+\]
+<p>que reproduz <strong>exatamente</strong> a pressão obtida no caso
+ultra-relativístico visto na Equação (8.50) — uma verificação cruzada
+entre duas deduções independentes: a substituição direta de \(v=c\)
+(seção anterior) e o limite \(X\gg1\) da fórmula geral relativística
+deduzida aqui.</p>
+
+<p>O limite oposto, \(X\ll1\), recupera o caso não-relativístico
+(\(v\ll c\), \(p\approx m_ev\)) do bloco anterior [Equação (8.44)].</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — O coeficiente \(hc/4\) na Equação (8.50)</div>
+  <div class="conteudo">
+    <p>Essa forma é algebricamente idêntica à forma mais comum na
+    literatura, \(P=(3/\pi)^{1/3}(hc/8)n_e^{4/3}\), já que
+    \((3/8\pi)^{1/3}/4=(3/\pi)^{1/3}/8\) — apenas duas maneiras
+    equivalentes de agrupar a mesma constante.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — A física da massa de Chandrasekhar</div>
+  <div class="conteudo">
+    <p>Agora que deduzimos fisicamente, do zero, os <strong>dois</strong>
+    regimes de degenerescência eletrônica — \(P\propto\rho^{5/3}\) no
+    caso não-relativístico [Equação (8.44)] e \(P\propto\rho^{4/3}\) no
+    caso ultra-relativístico [Equação (8.51)] — podemos entender a
+    origem física da <strong>massa de Chandrasekhar</strong>. Conforme
+    a massa de uma anã branca aumenta, seu interior fica mais denso e
+    os elétrons mais relativísticos, amolecendo a equação de estado de
+    \(\gamma=5/3\) (\(n=3/2\)) para \(\gamma=4/3\) (\(n=3\)). Resolver a
+    equação de estrutura interna com essa pressão leva de volta à
+    <a href="cap06_estrelas_politropicas.html">equação de Lane–Emden do
+    Capítulo 6</a>, agora com \(n=3\) — o segundo caso politrópico
+    importante da tabela daquele capítulo, agora com dedução física
+    completa a partir da mecânica quântica. O ponto crucial (que será
+    deduzido em detalhe no futuro capítulo sobre Anãs Brancas) é que o
+    índice \(n=3\) produz, na equação de Lane–Emden, uma massa total
+    <em>independente do raio</em> — o que implica a existência de uma
+    massa máxima, \(M_{\rm Ch}\approx1{,}4\,M_\odot\), acima da qual
+    nenhuma configuração de equilíbrio hidrostático sustentada por
+    degenerescência eletrônica é possível (Chandrasekhar, 1935, 1939).
+    O <a href="cap06_estrelas_politropicas.html">módulo do integrador de
+    Lane–Emden do Cap. 6</a>, que já reproduzia \(M_{\rm Ch}\approx
+    1{,}4\,M_\odot\) usando a solução \(n=3\), agora tem sua equação de
+    estado deduzida por completo — é exatamente a Equação (8.51) que
+    fecha aquele cálculo.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 7 (central) — Comparador de regimes de pressão</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mreg-rho">Densidade \(\log_{10}(\rho/(\mathrm{g/cm^3}))\) <span class="valor" id="mreg-rho-valor">6,00</span></label>
+      <input type="range" id="mreg-rho" min="-400" max="1000" step="1" value="600">
+    </div>
+    <div class="controle">
+      <label for="mreg-T">Temperatura do gás ideal \(\log_{10}(T/\mathrm K)\) <span class="valor" id="mreg-T-valor">1,00×10⁷</span></label>
+      <input type="range" id="mreg-T" min="300" max="900" step="1" value="700">
+    </div>
+    <div class="controle">
+      <label for="mreg-mue">\(\mu_e\) <span class="valor" id="mreg-mue-valor">2,00</span></label>
+      <input type="range" id="mreg-mue" min="100" max="250" step="1" value="200">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mreg-canvas" role="img" aria-label="Grafico log-log comparando quatro pressoes em funcao da densidade: gas ideal (cinza tracejado), degenerado nao-relativistico (roxo tracejado), degenerado ultra-relativistico (terracota tracejado) e a formula relativistica geral exata (verde solido), com marcador na densidade escolhida." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card" style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1rem;">
+    <span>\(P_{\rm ideal}=\)<strong id="mreg-Pideal">—</strong> dyn/cm²</span>
+    <span>\(P_{\rm exata}=\)<strong id="mreg-Pex">—</strong> dyn/cm²</span>
+    <span style="color:#7F77DD;">\(P_{\rm NR}=\)<strong id="mreg-Pnr">—</strong> dyn/cm²</span>
+    <span style="color:#D85A30;">\(P_{\rm UR}=\)<strong id="mreg-Pur">—</strong> dyn/cm²</span>
+  </p>
+  <p class="leitura-card" id="mreg-dominante" style="font-weight:600;">—</p>
+  <p class="leitura-card">
+    A curva verde sólida é a fórmula relativística geral exata [Eq.
+    (8.58)] — repare como ela coincide com a curva roxa tracejada
+    (\(P_{\rm NR}\), Eq. 8.44) em densidades baixas e converge para a
+    curva terracota tracejada (\(P_{\rm UR}\), Eq. 8.51) em densidades
+    altas, tornando visível a verificação cruzada do texto. Onde a
+    curva cinza (gás ideal, depende de \(T\)) fica acima da curva
+    verde, o gás não está degenerado; onde fica abaixo, a
+    degenerescência domina.
+  </p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 8 — Parâmetro relativístico \(X=p_F/(m_ec)\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mX-rho">Densidade \(\log_{10}(\rho/(\mathrm{g/cm^3}))\) <span class="valor" id="mX-rho-valor">6,00</span></label>
+      <input type="range" id="mX-rho" min="200" max="900" step="1" value="600">
+    </div>
+    <div class="controle">
+      <label for="mX-mue">\(\mu_e\) <span class="valor" id="mX-mue-valor">2,00</span></label>
+      <input type="range" id="mX-mue" min="100" max="250" step="1" value="200">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;text-align:center;">
+    <div style="font-size:1.7rem;color:#17805f;font-variant-numeric:tabular-nums;"><strong id="mX-X">—</strong></div>
+  </div>
+  <p class="leitura-card" id="mX-regime">—</p>
+</div>
+
+<h2 id="eee-degenerescencia-parcial">Degenerescência parcial</h2>
+
+<p>Para \(T\neq0\), nem todos os elétrons estarão o mais perto
+possível da origem no espaço de momento. À medida que \(T\) aumenta,
+os elétrons vão saindo da origem (\(E=0\)) e populando estados em
+direção à superfície de Fermi. A função estatística que descreve esse
+caso é a <strong>distribuição de Fermi–Dirac</strong>,</p>
+\[
+F(p) = n_e(p)\cdot\frac{1}{1+e^{\varepsilon/kT-\psi}}\,,
+\tag{8.63}
+\]
+<p>onde \(n_e(p)=8\pi p^2/h^3\) [a forma diferencial da Equação
+(8.24)], \(\varepsilon=\varepsilon(p)\) é a energia da partícula, e
+\(\psi\) é o <strong>parâmetro de degenerescência</strong>. No limite
+\(\psi\to-\infty\), o termo exponencial domina e recuperamos o caso
+não-degenerado (clássico).</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Convenção de sinal de \(\psi\)</div>
+  <div class="conteudo">
+    <p>Adotamos, de forma consistente, a convenção com "\(-\psi\)"
+    [Equação (8.63)], compatível com a definição padrão do parâmetro de
+    degenerescência na literatura.</p>
+  </div>
+</div>
+
+<p>A partir de \(F(p)\), podemos determinar \(n_e\),</p>
+\[
+n_e = \int_0^\infty F(p)\,\mathrm dp = \int_0^\infty \frac{8\pi p^2}{h^3}\,\frac{1}{1+e^{\varepsilon/kT-\psi}}\,\mathrm dp\,.
+\tag{8.64}
+\]
+
+<h3>Caso não-relativístico</h3>
+
+<p>Para o caso newtoniano, \(\varepsilon=p^2/2m_e\), ou seja,
+\(p=(2m_e\varepsilon)^{1/2}\) e
+\(\mathrm dp=m_e\,\mathrm d\varepsilon/(2m_e\varepsilon)^{1/2}\).
+Substituindo na Equação (8.64),</p>
+\[
+n_e = \frac{8\pi}{h^3}\int_0^\infty(2m_e\varepsilon)\cdot m_e\cdot\frac{1}{1+e^{\varepsilon/kT-\psi}}\cdot\frac{\mathrm d\varepsilon}{(2m_e\varepsilon)^{1/2}}
+= \frac{8\pi}{h^3}(2m_e)^{1/2}m_e\int_0^\infty\frac{\varepsilon^{1/2}}{1+e^{\varepsilon/kT-\psi}}\,\mathrm d\varepsilon\,.
+\tag{8.65}
+\]
+<p>Fazendo a mudança de variável \(u=\varepsilon/kT\),
+\(\mathrm du=\mathrm d\varepsilon/kT\),</p>
+\[
+n_e = \frac{8\pi}{h^3}(2m_e)^{1/2}m_e\,(kT)^{3/2}\int_0^\infty\frac{u^{1/2}}{1+e^{u-\psi}}\,\mathrm du
+= \frac{4\pi}{h^3}(2m_ekT)^{3/2}\,F_{1/2}(\psi)\,,
+\tag{8.66}
+\]
+<p>onde definimos a <strong>função de Fermi–Dirac generalizada</strong>,</p>
+\[
+F_v(\psi) \equiv \int_0^\infty\frac{u^v}{1+e^{u-\psi}}\,\mathrm du\,,
+\tag{8.67}
+\]
+<p>onde \(v\) descreve o expoente de \(u^v\) e, a depender do caso
+analisado, pode assumir diferentes valores.</p>
+
+<p>Repetindo o procedimento (mesma mudança de variáveis) para
+determinar a pressão dos elétrons, a partir da fórmula geral da
+pressão cinética [Equação (8.39)] com \(v(p)=p/m_e\),</p>
+\[
+P = \frac13\int_0^\infty\frac{8\pi p^2}{h^3}\cdot p\cdot\frac{p}{m_e}\cdot\frac{1}{1+e^{\varepsilon/kT-\psi}}\,\mathrm dp
+= \frac{8\pi}{3m_eh^3}\int_0^\infty\frac{p^4}{1+e^{\varepsilon/kT-\psi}}\,\mathrm dp\,,
+\tag{8.68}
+\]
+<p>e, usando novamente \(\varepsilon=p^2/2m_e\) e \(u=\varepsilon/kT\),</p>
+\[
+P = \frac{8\pi kT}{3h^3}(2m_ekT)^{3/2}\int_0^\infty\frac{u^{3/2}}{1+e^{u-\psi}}\,\mathrm du
+= \frac{8\pi kT}{3h^3}(2m_ekT)^{3/2}\,F_{3/2}(\psi)\,,
+\tag{8.69}
+\]
+<p>a <strong>pressão de um gás de Fermi parcialmente degenerado</strong>.</p>
+
+<p>As funções \(F_v(\psi)\) são, felizmente, tabeladas, já que a
+resolução analítica delas é difícil (não existe forma fechada geral).
+É possível mostrar que</p>
+\[
+\boxed{P = n_ekT\left[\frac{2\,F_{3/2}(\psi)}{3\,F_{1/2}(\psi)}\right]}\,,
+\tag{8.70}
+\]
+<p>onde o fator entre colchetes mede o desvio da pressão eletrônica em
+relação ao gás ideal não-degenerado (\(P=n_ekT\), recuperado quando
+esse fator tende a \(1\)). Note que os íons são normalmente
+não-degenerados, pois seu espaço de fase disponível é muito maior que
+o do elétron (a massa do íon, milhares de vezes maior que \(m_e\), faz
+com que a temperatura de degenerescência iônica seja muito mais alta
+que a eletrônica, para uma mesma densidade).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 9 — Funções de Fermi–Dirac e o fator de degenerescência</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mfd-psi">Parâmetro de degenerescência \(\psi\) <span class="valor" id="mfd-psi-valor">-5,00</span></label>
+      <input type="range" id="mfd-psi" min="-800" max="2000" step="1" value="-500">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mfd-canvas" role="img" aria-label="Grafico do fator 2F(3/2) sobre 3F(1/2) em funcao de psi, mostrando que tende a 1 (gas ideal) para psi muito negativo e cresce rapidamente para psi grande (regime degenerado)." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(F_{1/2}(\psi)=\)<strong id="mfd-f12">—</strong> &middot;
+    \(F_{3/2}(\psi)=\)<strong id="mfd-f32">—</strong> &middot;
+    fator \(=\)<strong id="mfd-fator">—</strong> (integrais calculadas
+    numericamente por quadratura de Simpson, já que \(F_v(\psi)\) não
+    tem forma fechada). Em \(\psi\to-\infty\), o fator tende a \(1\)
+    [Eq. (8.70) recupera \(P=n_ekT\), o gás ideal]; para \(\psi\)
+    grande, o fator cresce rapidamente — a pressão de degenerescência
+    excede em muito \(n_ekT\).
+  </p>
+</div>
+
+<p>Temos que a energia térmica e a energia cinética (não-relativística)
+são descritas por</p>
+\[
+E_t = \frac32kT\,,
+\qquad
+E_c = \frac12m_ev^2\,,
+\tag{8.71}
+\]
+<p>assim, a pressão total do gás é descrita por</p>
+\[
+P_{\rm gas} = P_e + \frac{N_Ak}{\mu_i}\,\rho T\,,
+\tag{8.72}
+\]
+<p>combinando a contribuição eletrônica parcialmente degenerada
+[Equação (8.70)] com a contribuição iônica, tratada como gás ideal
+clássico.</p>
+
+<h2 id="eee-diagrama-rho-t">Diagrama densidade–temperatura</h2>
+
+<p>O diagrama densidade–temperatura para os regimes descritos ao longo
+deste capítulo tem a forma esquematizada na figura abaixo: em baixas
+densidades e altas temperaturas, domina a pressão de radiação sobre a
+pressão do gás; em densidades mais altas, domina a pressão do gás, que
+por sua vez se divide em uma região não-degenerada (gás ideal
+clássico) e uma região degenerada (onde a pressão de degenerescência
+eletrônica, deduzida neste capítulo, passa a dominar); perto de
+\(T\sim10^4\,\mathrm K\), uma faixa horizontal separa hidrogênio
+neutro (abaixo) de hidrogênio ionizado (acima); e, em densidades muito
+altas, uma fronteira vertical separa elétrons não-relativísticos (à
+esquerda) de relativísticos (à direita) — a fronteira que motivou a
+seção de degenerescência relativística.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Localizando estrelas reais no diagrama</div>
+  <div class="conteudo">
+    <p>Podemos localizar objetos astrofísicos reais nesse diagrama. O
+    <strong>núcleo do Sol</strong> (\(\rho_c\sim150\,\mathrm{g/cm^3}\),
+    \(T_c\sim1{,}5\times10^7\,\mathrm K\)) está bem dentro da região de
+    gás ideal não-degenerado — consistente com a aproximação de gás
+    ideal usada no Capítulo 5 para estimar \(T_c\) solar. O
+    <strong>núcleo de uma anã branca típica</strong>
+    (\(\rho\sim10^6\,\mathrm{g/cm^3}\), \(T\sim10^7\,\mathrm K\)) já
+    está profundamente na região degenerada — consistente com a
+    discussão da seção de degenerescência não-relativística. E o
+    <strong>núcleo degenerado de hélio</strong> de uma gigante vermelha,
+    antes do <em>flash do hélio</em> (também com
+    \(\rho\sim10^5\)&ndash;\(10^6\,\mathrm{g/cm^3}\) mas \(T\) menor que
+    no caso anterior), ocupa uma região semelhante à da anã branca — a
+    origem física do próprio flash do hélio é justamente o fato de a
+    pressão ali ser degenerada (praticamente independente de \(T\)), o
+    que impede a auto-regulação térmica normal e permite que a taxa de
+    reação do triplo-alfa dispare antes que o núcleo possa se expandir
+    e esfriar. Este ponto será retomado em capítulos futuros de
+    evolução estelar, quando o flash do hélio for discutido em
+    detalhe.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 10 (central) — Diagrama densidade–temperatura interativo</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mdiag-rho">\(\log_{10}(\rho/(\mathrm{g/cm^3}))\) <span class="valor" id="mdiag-rho-valor">2,18</span></label>
+      <input type="range" id="mdiag-rho" min="-600" max="1200" step="1" value="218">
+    </div>
+    <div class="controle">
+      <label for="mdiag-T">\(\log_{10}(T/\mathrm K)\) <span class="valor" id="mdiag-T-valor">1,50×10⁷</span></label>
+      <input type="range" id="mdiag-T" min="300" max="900" step="1" value="718">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdiag-canvas" role="img" aria-label="Diagrama log rho vs log T com as quatro fronteiras calculadas (radiacao/gas, degenerado/nao-degenerado, H neutro/ionizado, relativistico/nao-relativistico), objetos reais marcados (nucleo do Sol, anã branca, nucleo de helio pre-flash), e um marcador movel controlado por sliders." style="width:100%;height:380px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mdiag-status">—</p>
+  <p class="leitura-card">
+    Fronteiras <strong>calculadas</strong> (não esquemáticas): pressão
+    do gás \(=\) radiação [\(\rho=a\mu T^3/3R\)]; degenerado
+    \(=\) não-degenerado [Eq. (8.46)]; H neutro/ionizado
+    (\(T\sim10^4\,\)K, simplificado); e relativístico/não-relativístico
+    (onde \(X=1\), independente de \(T\)). Mova os sliders (ou comece
+    nos valores padrão, que reproduzem o núcleo do Sol) e veja o
+    marcador preto se deslocar entre regiões, com a classificação
+    atualizada em texto. Os três objetos reais citados no texto
+    aparecem marcados em laranja.
+  </p>
+</div>
+
+<p>Podemos incluir também a pressão da radiação para uma descrição
+mais completa,</p>
+\[
+P_{\rm gas} = P_e + \frac{N_Ak}{\mu_i}\,\rho T + P_{\rm rad}\,.
+\tag{8.73}
+\]
+<p>Note que a degenerescência parcial descrita até aqui cobre o caso
+não-relativístico. Podemos obter também as pressões para os casos
+ultra-relativístico e relativístico geral, seguindo a mesma
+metodologia. Por exemplo, para o caso ultra-relativístico, onde
+\(v\approx c\), temos \(p=E/c\); repetindo o mesmo tratamento,</p>
+\[
+n_e = 8\pi\left(\frac{kT}{hc}\right)^3F_2(\psi)\,,
+\qquad
+P_e = \frac{8\pi}{3h^3c^3}(kT)^4\,F_3(\psi)\,.
+\tag{8.74}
+\]
+
+<p>Para casos de degenerescência parcial e gás moderadamente
+relativístico (nem \(X\ll1\) nem \(X\gg1\)), não temos soluções
+analíticas simples para as integrais, pois não conseguimos separar a
+energia \(\varepsilon\) do momento \(p\) na distribuição de
+Fermi–Dirac, onde</p>
+\[
+n_e = \frac{8\pi}{h^3}\int_0^\infty\frac{p^2\,\mathrm dp}{1+e^{\varepsilon/kT-\psi}}\,,
+\qquad
+\varepsilon = \left(m_e^2c^4+(pc)^2\right)^{1/2}-m_ec^2\,.
+\tag{8.75}
+\]
+<p>Nesse caso, modelos numéricos mais elaborados devem ser adotados.</p>
+
+<h2 id="eee-equacao-estado-total">Equação de estado total</h2>
+
+<p>Para uma estrela comum, a equação de estado total é descrita pelo
+somatório das pressões que atuam na estrela. Considerando as pressões
+dos íons, elétrons e radiação,</p>
+\[
+P = P_{\text{íon}} + P_e + P_{\rm rad}\,,
+\tag{8.76}
+\]
+<p>onde, em um caso parcialmente degenerado, a pressão dos íons pode
+ser expressa como a de um gás ideal (não-degenerado, pela razão
+discutida na seção anterior), e a pressão dos elétrons pela forma
+integral completa que engloba qualquer grau de degenerescência e de
+relatividade:</p>
+\[
+P = \frac{R}{\mu_i}\rho T
++ \frac{8\pi}{3h^3}\int_0^\infty\frac{p^3\,v(p)}{1+e^{\varepsilon/kT-\psi}}\,\mathrm dp
++ \frac13aT^4\,,
+\qquad v(p)=\frac{\partial\varepsilon}{\partial p}\,,
+\tag{8.77}
+\]
+<p>onde \(R\equiv k/m_a\) é a constante específica dos gases [mesma
+convenção da Equação (8.4)].</p>
+
+<p>A partir dessa relação, podemos também estimar a energia interna
+total do gás. Para os íons (sempre um gás clássico não-relativístico)
+e para a radiação (sempre ultra-relativística), a razão entre energia
+interna e pressão é exata e fixa,</p>
+\[
+U_{\text{íon}} = \frac32P_{\text{íon}}\,,
+\qquad
+U_{\rm rad} = 3P_{\rm rad}\,.
+\tag{8.78}
+\]
+<p>Já para os elétrons, a mesma proporcionalidade \(U_e=3P_e\) só é
+exata no limite ultra-relativístico [onde \(\varepsilon(p)=p\,v(p)\),
+já que \(v\to c\)]; no limite não-relativístico vale, em vez disso,
+\(U_e=\frac32P_e\) [mesma relação dos íons, Equação (8.71)], e no
+regime intermediário não existe uma razão fixa entre \(U_e\) e \(P_e\)
+— a energia interna eletrônica exigiria, em geral, a integral de
+\(\varepsilon(p)\,n(p)\) diretamente, que não se reduz a um múltiplo
+simples da integral de pressão já obtida. Adotando aqui a aproximação
+ultra-relativística \(U_e\approx3P_e\) — razoável no regime de
+densidades mais altas, onde a contribuição eletrônica à energia
+interna é mais relevante —, obtemos a estimativa</p>
+\[
+u \equiv \frac{U_{\text{íon}}+U_e+U_{\rm rad}}{\rho}
+\approx \frac{3}{2}\frac{R}{\mu_i}T
++ \frac{8\pi}{h^3\rho}\int_0^\infty\frac{p^3\,v(p)}{1+e^{\varepsilon/kT-\psi}}\,\mathrm dp
++ \frac{aT^4}{\rho}\,,
+\tag{8.79}
+\]
+<p>onde a densidade, por sua vez, é definida em função da distribuição
+de Fermi–Dirac completa,</p>
+\[
+\rho = \frac{4\pi}{h^3}(2m_e)^{3/2}\mu_em_a\int_0^\infty\frac{\varepsilon^{1/2}}{1+e^{\varepsilon/kT-\psi}}\,\mathrm d\varepsilon\,.
+\tag{8.80}
+\]
+
+<p>Temos assim a equação de estado que descreve, de forma geral, a
+interação das partículas no interior estelar. Infelizmente, não
+existem soluções analíticas para essas expressões em termos das
+grandezas termodinâmicas convencionais, como \(c_P\), \(c_V\),
+\(\chi\), \(\delta\), \(\nabla_{\rm ad}\) — apenas soluções numéricas
+existem. Note que, em casos aproximativos, pode ser possível
+determinar soluções analíticas (ver Seção 16.2.3 de Kippenhahn, Weigert
+&amp; Weiss, 2012).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 11 — Equação de estado total: \(P_e\), \(P_{\rm ion}\) e \(P_{\rm rad}\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="meos-rho">\(\log_{10}(\rho/(\mathrm{g/cm^3}))\) <span class="valor" id="meos-rho-valor">2,18</span></label>
+      <input type="range" id="meos-rho" min="-400" max="800" step="1" value="218">
+    </div>
+    <div class="controle">
+      <label for="meos-T">\(\log_{10}(T/\mathrm K)\) <span class="valor" id="meos-T-valor">1,50×10⁷</span></label>
+      <input type="range" id="meos-T" min="400" max="900" step="1" value="718">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="meos-canvas" role="img" aria-label="Grafico de barras em escala log mostrando as tres contribuicoes a pressao total: ion, eletron e radiacao, para a densidade e temperatura escolhidas." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card" id="meos-fracoes">—</p>
+  <p class="leitura-card">
+    \(P_e\) aqui usa uma interpolação suave
+    \(P_e=\sqrt{P_{e,\rm ideal}^2+P_{e,\rm degenerada}^2}\) entre o gás
+    ideal e a degenerescência não-relativística [Eq. (8.44)] —
+    aproximação esquemática (a forma exata exige as integrais de
+    Fermi–Dirac do Módulo 9), mas suficiente para mostrar quando a
+    pressão de radiação passa a importar: aumente \(T\) mantendo
+    \(\rho\) baixo e observe a fração de \(P_{\rm rad}\) crescer
+    rapidamente (\(P_{\rm rad}\propto T^4\), mais rápido que qualquer
+    outra contribuição).
+  </p>
+</div>
+
+<h2 id="eee-cristalizacao-neutronizacao">Cristalização e neutronização</h2>
+
+<p>Nos gases reais, a presença de interações entre as partículas torna
+a equação de estado mais complexa, e processos como a formação de
+redes cristalinas, estados superfluidos e neutronização podem ocorrer.
+Vejamos dois exemplos.</p>
+
+<h3>Cristalização</h3>
+
+<p>Redes cristalinas podem se formar quando existem desvios da
+equação de estado dos gases ideais e a razão entre a energia de
+interação coulombiana e a energia térmica dos gases é cerca de
+\(175\) vezes maior que essa última, onde</p>
+\[
+\Gamma \equiv \frac{(Ze)^2}{r_{\text{íon}}\,kT}\,,
+\qquad
+\Gamma_c \approx 175\,,
+\tag{8.81}
+\]
+<p>com \(\Gamma_c\) a razão crítica (valor de referência para um
+plasma clássico de um componente) acima da qual a cristalização
+ocorre. É possível obter essa condição em função da temperatura,</p>
+\[
+T_m \approx \frac{(Ze)^2}{\Gamma_ck}\left(\frac{4\pi\rho}{3\mu_im_u}\right)^{1/3}\,,
+\tag{8.82}
+\]
+<p>onde \(m_u\) é a unidade de massa atômica. Note que o coeficiente
+numérico depende explicitamente da composição, através de \(Z\) e
+\(\mu_i\): para uma anã branca de carbono puro (\(Z=6\), \(\mu_i=12\),
+composição representativa do interior desses objetos),</p>
+\[
+T_m \approx 2{,}0\times10^4\,\rho^{1/3}\ \mathrm K\,,
+\tag{8.83}
+\]
+<p>que, para \(\rho\sim10^6\,\mathrm{g/cm^3}\) (densidade central
+típica de anã branca), dá \(T_m\sim2\times10^6\,\)K — da mesma ordem
+de grandeza das temperaturas centrais em que o início da cristalização
+é de fato observado em anãs brancas reais. Se a temperatura estiver
+nessa ordem de grandeza, pode ocorrer a cristalização. Tal fenômeno
+pode ocorrer em anãs brancas em fase de resfriamento, onde temos a
+temperatura diminuindo e uma densidade elevada.</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Evidência observacional de cristalização com o <em>Gaia</em></div>
+  <div class="conteudo">
+    <p>A previsão teórica de cristalização em anãs brancas [Equação
+    (8.82)] recebeu confirmação observacional direta com dados da
+    missão <em>Gaia</em>: o calor latente liberado durante a transição
+    de fase (líquido para sólido) libera energia extra, retardando o
+    resfriamento da estrela. Isso produz um <strong>acúmulo
+    observável</strong> de anãs brancas em uma faixa específica do
+    diagrama HR (cor-magnitude), correspondente a estrelas que passam
+    mais tempo cristalizando naquela luminosidade do que esperado de
+    um resfriamento simples sem transição de fase — um excesso
+    detectado estatisticamente na população de anãs brancas do disco
+    galáctico (Tremblay et al., 2019).</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 12 (destaque) — Cristalização, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Conforme a estrela esfria, \(\Gamma\) [Eq. (8.81)] cresce (mesmo com
+    \(\rho\) fixo, \(\Gamma\propto1/T\)). Abaixo de \(\Gamma_c\approx175\)
+    (laranja), o plasma é desordenado; acima (verde), os íons se
+    organizam em uma rede cristalina.
+  </p>
+  <div class="controles">
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mcristal-play" class="botao-modulo">▶ Resfriar (aumentar Γ)</button>
+      <button type="button" id="mcristal-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mcristal-canvas" role="img" aria-label="Animacao de particulas transicionando de posicoes aleatorias (plasma desordenado) para uma rede cristalina regular conforme o parametro Gamma cresce acima do valor critico." style="width:100%;height:360px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mcristal-status">—</p>
+</div>
+
+<h3>Neutronização</h3>
+
+<p>A análise dos gases que fizemos neste capítulo considera apenas
+elétrons; no entanto, a colisão de partículas pode levar à formação de
+nêutrons (captura eletrônica, \(e^-+p\to n+\nu_e\)). Nesses casos, uma
+expressão mais completa para o momento deve ser utilizada,</p>
+\[
+p = \frac1c\left(E^2-m_e^2c^4\right)^{1/2}\,.
+\tag{8.84}
+\]
+<p>Em casos onde a densidade de nêutrons é muito alta — em estrelas
+muito massivas e quentes — a pressão dos nêutrons também deve ser
+levada em conta,</p>
+\[
+\boxed{P = P_{\text{íon}} + P_e + P_{\rm rad} + P_{\text{nêutron}}}\,.
+\tag{8.85}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 13 — Neutronização: limiar de densidade para captura eletrônica</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mneutron-rho">\(\log_{10}(\rho/(\mathrm{g/cm^3}))\) <span class="valor" id="mneutron-rho-valor">7,00</span></label>
+      <input type="range" id="mneutron-rho" min="500" max="1200" step="1" value="700">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;">
+    <p class="leitura-card" style="margin:0;">\(E_F=\)<strong id="mneutron-EF">—</strong> MeV (limiar: \(1{,}293\) MeV)</p>
+  </div>
+  <p class="leitura-card" id="mneutron-status">—</p>
+  <p class="leitura-card">
+    Com \(\mu_e=2\), a energia de Fermi cruza o limiar de captura
+    eletrônica (\(m_nc^2-m_pc^2\approx1{,}293\,\)MeV) em torno de
+    \(\rho\sim10^9\,\mathrm{g/cm^3}\) — ordens de grandeza acima do
+    interior de uma anã branca típica, mas exatamente a escala de
+    densidade em que o interior de uma <strong>estrela de
+    nêutrons</strong> se torna relevante, quando o limite de
+    Chandrasekhar já foi ultrapassado.
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Da neutronização às estrelas de nêutrons</div>
+  <div class="conteudo">
+    <p>A neutronização discutida aqui — a captura eletrônica inversa,
+    \(e^-+p\to n+\nu_e\), que se torna energeticamente favorável quando
+    a energia de Fermi dos elétrons excede a diferença de massa
+    nêutron-próton — é o mesmo processo físico que se torna dominante
+    além do limite de Chandrasekhar, quando a pressão de
+    degenerescência eletrônica relativística já não consegue mais
+    sustentar o objeto contra o colapso gravitacional. É esse processo
+    que converte o núcleo estelar remanescente em uma <strong>estrela
+    de nêutrons</strong>, sustentada então pela pressão de
+    degenerescência dos próprios nêutrons — o resultado final,
+    \(P=P_{\text{íon}}+P_e+P_{\rm rad}+P_{\text{nêutron}}\) [Equação
+    (8.85)], antecipa exatamente essa física, que será revisitada em
+    capítulos futuros sobre objetos compactos.</p>
+  </div>
+</div>
+
+<p>Com a cristalização e a neutronização, encerramos o estudo das
+equações de estado estelar. Partimos do gás ideal ionizado simples,
+passamos pela degenerescência eletrônica total — não-relativística e
+relativística, com seu limite ultra-relativístico —, pela
+degenerescência parcial via as integrais de Fermi–Dirac, pela equação
+de estado total, e terminamos nos efeitos de interação entre
+partículas (cristalização e neutronização). A degenerescência
+relativística de elétrons deduzida aqui é exatamente o ingrediente
+físico que faltava para o próximo capítulo, sobre <strong>Anãs
+Brancas</strong>, e a neutronização antecipa a física de
+<strong>estrelas de nêutrons</strong>, tema de capítulos ainda mais
+adiante.</p>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Para a dedução completa da degenerescência ultra-relativística e
+    sua conexão com o <strong>limite de Chandrasekhar</strong>, ver o
+    trabalho original Chandrasekhar (1935) e o tratamento clássico em
+    Chandrasekhar (1939). Para uma referência moderna e abrangente
+    sobre equações de estado de matéria degenerada em objetos
+    compactos, incluindo neutronização e a transição para estrelas de
+    nêutrons, ver Shapiro &amp; Teukolsky (1983). Para as soluções
+    analíticas aproximadas da equação de estado geral em casos limites,
+    ver a Seção 16.2.3 de Kippenhahn, Weigert &amp; Weiss (2012). Sobre
+    a evidência observacional de cristalização em anãs brancas via
+    <em>Gaia</em>, ver Tremblay et al. (2019); sobre testes
+    observacionais mais recentes da relação massa-raio de anãs brancas,
+    ver a revisão de Tremblay et al. (2024) — ambos os temas serão
+    retomados com detalhe no próximo capítulo, sobre Anãs Brancas.
+    Sobre o parâmetro de acoplamento coulombiano \(\Gamma\) em plasmas
+    densos, ver Horedt (2004), que trata também de aplicações de
+    politropos a sistemas de matéria condensada astrofísica correlatos.</p>
+  </div>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 8.
+</footer>
+
+<script src="assets/cap08_modulos.js"></script>

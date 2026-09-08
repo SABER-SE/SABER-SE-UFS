@@ -1,0 +1,3803 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Equações de Estrutura Estelar</title>
+<meta name="description" content="Módulo interativo do Capítulo 5: as quatro (mais uma) equações de estrutura estelar — massa, equilíbrio hidrostático, escalas de tempo, Teorema do Virial, conservação de energia, transporte radiativo/condutivo/convectivo e evolução da composição química, com aplicação numérica para toda equação final.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      sen: '\\operatorname{sen}'
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 5 — Equações de Estrutura Estelar</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, com módulo de aplicação numérica para toda equação final e tratamento especial, em destaque visual, para o equilíbrio hidrostático.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — colisão de notação: μ neste capítulo volta a ser peso molecular médio</div>
+  <div class="conteudo">
+    <p>Neste capítulo, \(\mu\) volta a designar o <strong>peso molecular
+    médio</strong> (composição química do gás), exatamente como no
+    <a href="cap03_termodinamica.html">Capítulo 3 (Termodinâmica)</a> — e
+    <em>não</em> o cosseno diretor \(\mu=\cos\theta\) usado ao longo do
+    <a href="cap04_processos_radiativos.html">Capítulo 4 (Processos
+    Radiativos)</a>. Essa reversão de convenção acompanha a mudança de
+    assunto: transporte radiativo usa \(\mu=\cos\theta\) universalmente na
+    literatura, enquanto equações de estado e de estrutura estelar usam
+    \(\mu\) para peso molecular médio — ambas são convenções padrão em suas
+    respectivas subáreas. Uma segunda caixa de atenção, mais abaixo, reforça
+    esse ponto exatamente onde \(\mu\) reaparece pela primeira vez neste
+    capítulo.</p>
+  </div>
+</div>
+
+<h2>Introdução</h2>
+
+<p>A discussão mais simples de uma estrela considera algumas aproximações:</p>
+<ul>
+  <li><strong>Esférica</strong>: sem achatamento ou distorções na forma.</li>
+  <li><strong>Isolada</strong>: sem troca de matéria, efeitos de maré, etc.</li>
+  <li><strong>Sem rotação</strong>: sem desvios da simetria esférica (1D), sem
+  instabilidades associadas à rotação.</li>
+  <li><strong>Sem campos magnéticos</strong>.</li>
+  <li><strong>Sem perda de massa</strong>: sem ventos estelares.</li>
+</ul>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Quando essas aproximações falham</div>
+  <div class="conteudo">
+    <p>Cada uma dessas cinco aproximações é violada por classes inteiras de
+    estrelas reais — e é justamente onde elas falham que surge muita física
+    interessante:</p>
+    <ul>
+      <li><strong>Isolada</strong>: sistemas binários próximos, especialmente
+      binárias interagentes ou em contato, trocam massa através do lóbulo de
+      Roche e sofrem efeitos de maré significativos, tornando a evolução de
+      cada estrela dependente da companheira.</li>
+      <li><strong>Sem campos magnéticos</strong>: estrelas Ap/Bp têm campos
+      magnéticos de superfície fortes e organizados (dezenas a milhares de
+      gauss), que alteram a difusão de elementos químicos e a estrutura da
+      atmosfera; no extremo oposto, magnetares — remanescentes compactos de
+      estrelas massivas — têm campos de até \(10^{15}\,\mathrm{G}\), muitas
+      ordens de grandeza além de qualquer estrela na sequência principal.</li>
+      <li><strong>Sem rotação</strong>: estrelas Be e outros rotadores rápidos
+      giram próximo à velocidade crítica (de quebra centrífuga), o que
+      achata a estrela, induz circulação meridional e pode formar discos
+      circunstelares — nenhum desses efeitos é capturado por um modelo 1D
+      esférico.</li>
+      <li><strong>Sem perda de massa</strong>: estrelas com ventos muito
+      intensos, como as Wolf-Rayet, perdem massa a taxas que alteram
+      significativamente sua evolução; não por acaso, essas mesmas estrelas
+      têm luminosidades próximas do limite de Eddington \(L_{\mathrm{Edd}}\)
+      (<a href="cap04_processos_radiativos.html">Capítulo 4</a>), que é
+      exatamente o que impulsiona ventos radiativos tão fortes.</li>
+    </ul>
+    <p>Os modelos que relaxam cada uma dessas aproximações (rotação, campos
+    magnéticos, perda de massa, efeitos binários) são extensões necessárias
+    do formalismo 1D apresentado aqui, e permanecem áreas ativas de pesquisa
+    em física estelar.</p>
+  </div>
+</div>
+
+<p>Vamos mostrar que a estrutura interna de estrelas pode ser estudada por
+5 equações (4+1) diferenciais não lineares acopladas, onde os parâmetros
+principais são:</p>
+<table class="tabela-simples">
+  <tr><td>\(\rho\)</td><td>densidade</td></tr>
+  <tr><td>\(P\)</td><td>pressão</td></tr>
+  <tr><td>\(T\)</td><td>temperatura</td></tr>
+  <tr><td>\(l\)</td><td>luminosidade</td></tr>
+  <tr><td>\(X_i\)</td><td>fração de cada elemento químico</td></tr>
+</table>
+<p>As primeiras quatro equações descrevem, respectivamente, a massa, o
+equilíbrio hidrostático, o transporte de energia e a geração de energia; a
+quinta (o "+1") descreve a evolução da composição química do gás ao longo
+do tempo, via reações nucleares. Neste capítulo, começamos pela
+<strong>equação da massa</strong> e pelo <strong>equilíbrio
+hidrostático</strong>.</p>
+
+<h2>Equação da massa</h2>
+
+<p>Inicialmente, vamos supor que temos apenas duas forças sendo aplicadas
+nas estrelas: a força gravitacional e a força de pressão.</p>
+
+<p>Considerando que uma estrela seja esférica, temos a geometria de uma
+casca esférica de espessura \(\mathrm dr\) a uma distância \(r\) do centro
+da estrela: a massa contida até \(r\) é \(m\), e a massa contida até
+\(r+\mathrm dr\) é \(m+\mathrm dm\).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 1 — Casca esférica e a equação da massa</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m1-r">Raio \(r/R_\star\) da casca <span class="valor" id="m1-r-valor">0,50</span></label>
+      <input type="range" id="m1-r" min="1" max="99" step="1" value="50">
+    </div>
+    <div class="controle">
+      <label for="m1-dr">Espessura \(\mathrm dr/R_\star\) (ilustrativa) <span class="valor" id="m1-dr-valor">0,05</span></label>
+      <input type="range" id="m1-dr" min="1" max="15" step="1" value="5">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <svg id="m1-svg" role="img" aria-label="Diagrama de uma casca esférica de espessura dr a uma distância r do centro da estrela, mostrando a massa m contida até r e m+dm contida até r+dr." style="width:100%;max-width:100%;height:320px;">
+      Diagrama: dois círculos concêntricos, o interno de raio r (massa m) e o externo de raio r+dr (massa m+dm), com a casca entre eles destacada.
+    </svg>
+  </div>
+  <p class="leitura-card">
+    Para o perfil de densidade politrópico simples \(\rho(r)=\rho_c[1-(r/R_\star)^2]\)
+    (usado como referência ilustrativa neste módulo — ver discussão de perfis
+    adiante), a massa contida até \(r\) é <strong id="m1-massa">—</strong>
+    \(M_\star\), e o elemento de massa da casca mostrada é
+    \(\mathrm dm=4\pi r^2\rho(r)\,\mathrm dr=\)<strong id="m1-dm">—</strong>
+    \(M_\star\) — ilustrando diretamente a Equação (5.4) abaixo: quanto maior
+    \(r\), maior a área \(4\pi r^2\) da casca, mesmo com \(\rho(r)\) caindo.
+  </p>
+</div>
+
+<p>A massa contida até um raio \(r\) é, em geral, também função do tempo,
+\(m(r,t)\). Logo, por derivadas parciais, podemos descrever o termo
+\(\mathrm dm\) por:</p>
+\[
+\mathrm dm = \left(\frac{\partial m}{\partial r}\right)_t \mathrm dr
++ \left(\frac{\partial m}{\partial t}\right)_r \mathrm dt\,,
+\tag{5.1}
+\]
+<p>onde temos uma parcela constante no tempo (dependente só de \(r\)) e
+outra constante em \(r\) (dependente só de \(t\)).</p>
+
+<p>Lembrando que \(\rho=m/V\), temos, para uma parcela infinitesimal,</p>
+\[
+\mathrm dm = \rho(r)\,\mathrm dV\,,\qquad\text{mas sabendo que }\mathrm dV=4\pi r^2\,\mathrm dr\,,
+\tag{5.2}
+\]
+<p>temos:</p>
+\[
+\mathrm dm = 4\pi r^2\rho(r)\,\mathrm dr\,,
+\qquad\text{ou}\qquad
+m = \int_0^r 4\pi r'^2\rho(r')\,\mathrm dr'\,.
+\tag{5.3}
+\]
+<p>Comparando a Equação (5.3) com a Equação (5.1), temos:</p>
+\[
+\boxed{\left(\frac{\partial m}{\partial r}\right)_t = 4\pi r^2\rho(r)}\,,\qquad\text{com }t\text{ constante}\,.
+\tag{5.4}
+\]
+<p>Esta é a <strong>equação da massa</strong> propriamente dita — a
+primeira das 5 equações de estrutura estelar.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 2 — Aplicação: massa contida a partir de \(\partial m/\partial r=4\pi r^2\rho\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m2-M">Massa da estrela \(M/M_\odot\) <span class="valor" id="m2-M-valor">1,00</span></label>
+      <input type="range" id="m2-M" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m2-R">Raio da estrela \(R/R_\odot\) <span class="valor" id="m2-R-valor">1,00</span></label>
+      <input type="range" id="m2-R" min="10" max="1000" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m2-r">Ponto de avaliação \(r/R_\star\) <span class="valor" id="m2-r-valor">0,50</span></label>
+      <input type="range" id="m2-r" min="1" max="99" step="1" value="50">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m2-canvas" role="img" aria-label="Gráfico de dm/dr contra r/R para um perfil de densidade politrópico simples, com marcador no ponto escolhido pelo slider." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Usando o perfil ilustrativo \(\rho(r)=\rho_c[1-(r/R_\star)^2]\), com
+    \(\rho_c\) fixado para reproduzir a massa total \(M\) informada: em
+    \(r/R_\star=\)<strong id="m2-r-texto">—</strong>,
+    \(\partial m/\partial r=4\pi r^2\rho(r)=\)<strong id="m2-dmdr">—</strong>
+    g/cm, e a massa acumulada até esse raio é
+    <strong id="m2-macum">—</strong> \(M_\star\) (\(\approx\)<strong id="m2-macum-g">—</strong> g).
+    Valor de referência solar (\(M=M_\odot\), \(R=R_\odot\)): use os
+    controles acima para comparar diretamente com o Sol.
+  </p>
+</div>
+
+<p>Como (Equação (5.3)) \(\mathrm dm=4\pi r^2\rho(r)\,\mathrm dr\), e
+\(v=\mathrm dr/\mathrm dt\) é a velocidade radial do gás, temos
+\(\mathrm dm=4\pi r^2\rho(r)\,v\,\mathrm dt\), logo:</p>
+\[
+\left(\frac{\partial m}{\partial t}\right)_r = -4\pi r^2\rho\, v\,.
+\tag{5.5}
+\]
+<p>Temos um sinal negativo que aparece devido ao fluxo de massa possuir
+direção radial para fora da estrela: se \(v>0\) (fluxo para fora), a massa
+contida dentro de um raio \(r\) <em>fixo</em> diminui com o tempo — o
+material está, literalmente, atravessando a fronteira da casca considerada
+e saindo dela.</p>
+
+<p>Assim, podemos escrever a Equação (5.1) como:</p>
+\[
+\mathrm dm = 4\pi r^2\rho\,\mathrm dr - 4\pi r^2\rho\,v\,\mathrm dt\,.
+\tag{5.6}
+\]
+
+<p>Lembrando da propriedade de derivadas parciais em que
+\(\partial^2m/\partial r\,\partial t=\partial^2m/\partial t\,\partial r\)
+(as derivadas cruzadas comutam), temos:</p>
+\[
+\frac{\partial}{\partial r}\Big(-4\pi r^2\rho v\Big)_t = \frac{\partial}{\partial t}\Big(4\pi r^2\rho\Big)_r\,.
+\tag{5.7}
+\]
+<p>Como o raio não depende do tempo (é apenas a coordenada radial), podemos
+assumir que \(r\) não tem dependência temporal, logo:</p>
+\[
+r^2\,\frac{\partial\rho}{\partial t} = -\frac{\partial}{\partial r}\big(r^2\rho v\big)\,,
+\tag{5.8}
+\]
+<p>ou seja,</p>
+\[
+\boxed{\frac{\partial\rho}{\partial t} = -\frac{1}{r^2}\frac{\partial}{\partial r}\big(r^2\rho v\big)}\,,
+\tag{5.9}
+\]
+<p>que é a <strong>equação da continuidade</strong>.</p>
+
+<p>Assumindo que existe simetria esférica, temos a conhecida equação da
+continuidade hidrodinâmica, em sua forma vetorial geral:</p>
+\[
+\boxed{\frac{\partial\rho}{\partial t} = -\nabla\cdot(\rho\vec v)}\,.
+\tag{5.10}
+\]
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — A continuidade além do "sem perda de massa"</div>
+  <div class="conteudo">
+    <p>Neste capítulo, adotamos a aproximação de estrela sem perda de massa
+    (\(v=0\) na fronteira externa), o que torna a estrutura estacionária no
+    tempo. Mas a Equação (5.10) já contém, em sua forma completa, tudo o
+    que é necessário para descrever fases da evolução estelar em que a
+    perda de massa <em>não</em> é desprezível: os ventos estelares ao longo
+    de toda a sequência principal, e — de forma muito mais dramática — as
+    fases finais de gigantes vermelhas e da ramificação assintótica das
+    gigantes (AGB), em que taxas de perda de massa de \(10^{-7}\) a
+    \(10^{-4}\,M_\odot/\mathrm{ano}\) removem boa parte do envelope da
+    estrela em poucos milhões de anos, expondo eventualmente o núcleo
+    degenerado que se tornará uma anã branca. O mesmo formalismo usado aqui
+    para uma estrela estática se generaliza diretamente para esses casos —
+    basta não impor \(v=0\).</p>
+  </div>
+</div>
+
+<h2>Campo gravitacional</h2>
+
+<p>Vamos lembrar o que é uma estrela. Uma estrela começa a nascer quando
+existe gás suficiente em uma região na qual a força gravitacional consegue
+aglutinar a matéria. Em termos físicos, a força gravitacional é maior que
+a força de pressão do gás — uma nuvem de gás autogravitante colapsa quando
+\(\vec F_g\) supera \(\vec F_p\): o início da <strong>instabilidade de
+Jeans</strong>.</p>
+
+<p>Uma vez que a massa do sistema seja igual à massa de Jeans, a
+instabilidade se inicia, dando início também ao processo de formação
+estelar.</p>
+
+<p>Uma vez que o gás se comprime, acretando mais matéria pelo aumento de
+densidade e pela ação da força gravitacional, pode se iniciar a fusão do
+hidrogênio em hélio, que gera energia no núcleo (localmente) e faz com que
+a pressão volte a aumentar.</p>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — A massa de Jeans e a formação estelar</div>
+  <div class="conteudo">
+    <p>A condição de instabilidade de Jeans pode ser expressa, em ordem de
+    grandeza, comparando a energia gravitacional com a energia térmica de
+    uma nuvem esférica de gás. O resultado — a <strong>massa de
+    Jeans</strong> — é</p>
+    \[
+    M_J \sim \left(\frac{5kT}{G\mu m_{\mathrm H}}\right)^{3/2}\left(\frac{3}{4\pi\rho}\right)^{1/2}\,,
+    \tag{5.11}
+    \]
+    <p>onde \(\mu\) é o peso molecular médio do gás, \(m_{\mathrm H}\) a
+    massa do átomo de hidrogênio, \(T\) a temperatura e \(\rho\) a densidade
+    da nuvem. Nuvens com \(M>M_J\) são gravitacionalmente instáveis e
+    colapsam.</p>
+    <p>Para uma nuvem molecular fria e densa típica, com
+    \(T\sim10\,\mathrm K\), composição predominantemente de H\(_2\)
+    molecular (\(\mu\approx2{,}3\)) e densidade numérica
+    \(n\sim10^2\)–\(10^4\,\mathrm{cm^{-3}}\) (\(\rho=n\mu m_{\mathrm H}\)),
+    obtemos:</p>
+    <ul>
+      <li>para \(n=10^2\,\mathrm{cm^{-3}}\)
+      (\(\rho\approx3{,}8\times10^{-22}\,\mathrm{g/cm^3}\)):
+      \(M_J\sim\) algumas centenas de \(M_\odot\);</li>
+      <li>para \(n=10^4\,\mathrm{cm^{-3}}\) (núcleos densos, pré-estelares,
+      \(\rho\approx3{,}8\times10^{-20}\,\mathrm{g/cm^3}\)):
+      \(M_J\sim\) poucas dezenas de \(M_\odot\).</li>
+    </ul>
+    <p>Em ambos os casos, o resultado é da ordem de <strong>massas solares a
+    algumas dezenas/centenas de massas solares</strong> — consistente com o
+    fato de que nuvens moleculares gigantes (\(10^4\)–\(10^6\,M_\odot\)) não
+    colapsam de uma vez, mas se fragmentam hierarquicamente em núcleos
+    menores, cada um da ordem de \(M_J\), que dão origem a estrelas
+    individuais ou pequenos aglomerados. Essa fragmentação é um dos
+    ingredientes físicos centrais por trás da forma da <strong>função de
+    massa inicial</strong> (IMF, do inglês <em>initial mass function</em>) —
+    a distribuição estatística de massas com que as estrelas nascem — como
+    discutido na revisão recente de Hennebelle &amp; Grudić (2024).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 3 — Calculadora da massa de Jeans</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m3-T">Temperatura \(T\) (K) <span class="valor" id="m3-T-valor">10</span></label>
+      <input type="range" id="m3-T" min="0" max="200" step="1" value="0">
+    </div>
+    <div class="controle">
+      <label for="m3-n">Densidade numérica \(\log_{10}(n/\mathrm{cm^{-3}})\) <span class="valor" id="m3-n-valor">2,0</span></label>
+      <input type="range" id="m3-n" min="0" max="60" step="1" value="20">
+    </div>
+    <div class="controle">
+      <label for="m3-mu">Peso molecular médio \(\mu\) <span class="valor" id="m3-mu-valor">2,30</span></label>
+      <input type="range" id="m3-mu" min="50" max="300" step="1" value="230">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m3-canvas" role="img" aria-label="Gráfico da massa de Jeans em massas solares em função da densidade numérica, com marcador no valor escolhido." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Para \(T=\)<strong id="m3-T-texto">—</strong> K,
+    \(n=\)<strong id="m3-n-texto">—</strong> cm\(^{-3}\),
+    \(\mu=\)<strong id="m3-mu-texto">—</strong>:
+    \(M_J\approx\)<strong id="m3-MJ">—</strong> \(M_\odot\).
+    Os dois casos de referência do texto: \(n=10^2\,\mathrm{cm^{-3}}\) dá
+    algumas centenas de \(M_\odot\); \(n=10^4\,\mathrm{cm^{-3}}\) dá poucas
+    dezenas de \(M_\odot\). Aumentar \(T\) (mais energia térmica) ou
+    diminuir \(n\) (menos autogravidade) aumenta \(M_J\), dificultando o
+    colapso.
+  </p>
+</div>
+
+<p>No momento em que temos a força de pressão sendo balanceada pela força
+gravitacional, definimos que existe o <strong>equilíbrio
+hidrostático</strong>, e a partir deste momento a estrela entra na
+sequência principal do diagrama HR:</p>
+\[
+F_g = F_p \quad\Longrightarrow\quad \textbf{Equilíbrio hidrostático}\,.
+\tag{5.12}
+\]
+
+<p>Sabemos que podemos obter a força gravitacional pela lei de Newton,
+onde:</p>
+\[
+\mathrm d\vec F_g = \mathrm dm\,\vec g = -\frac{Gm\,\mathrm dm}{r^2}\,\hat r\,,
+\tag{5.13}
+\]
+<p>ou, a força volumétrica,</p>
+\[
+\vec f_g = \frac{\mathrm d\vec F_g}{\mathrm dV} = -\frac{Gm\rho}{r^2}\,\hat r\,,
+\tag{5.14}
+\]
+<p>onde \(m=m(r)\) é a massa contida até o raio \(r\) [Equação (5.3)].</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Equilíbrio hidrostático e o Teorema do Virial</div>
+  <div class="conteudo">
+    <p>A condição de equilíbrio hidrostático, \(F_g=F_p\), é a versão local
+    (camada a camada) de um resultado global mais amplo: o
+    <strong>Teorema do Virial</strong>, que para um sistema autogravitante
+    em equilíbrio estabelece \(2K+U=0\), onde \(K\) é a energia cinética
+    total (térmica, no caso de um gás) e \(U\) é a energia potencial
+    gravitacional total. Já mencionamos esse teorema no
+    <a href="cap03_termodinamica.html">Capítulo 3</a> ao discutir o limiar
+    \(\Gamma_1=4/3\) de estabilidade dinâmica. A violação do equilíbrio
+    hidrostático — quando \(F_g\neq F_p\) em alguma camada — é precisamente
+    o que caracteriza as fases <em>dinâmicas</em> (não-estáticas) da
+    evolução estelar: o colapso do núcleo de ferro em uma supernova de
+    colapso gravitacional (onde \(F_g\gg F_p\) subitamente), as pulsações
+    radiais de estrelas variáveis Cefeidas e RR Lyrae (oscilações em torno
+    do equilíbrio), e a própria contração de Kelvin–Helmholtz durante a
+    formação estelar, antes que a fusão nuclear se estabeleça. Em todos
+    esses casos, é o <em>desequilíbrio</em> entre \(F_g\) e \(F_p\) que
+    governa a dinâmica, e a escala de tempo característica dessa resposta é
+    precisamente o assunto da seção "Escalas de tempo", mais adiante.</p>
+  </div>
+</div>
+
+<h2 id="equilibrio-hidrostatico">Equilíbrio hidrostático</h2>
+
+<p>Podemos obter uma expressão para a força de pressão agindo em uma
+estrela estudando um pequeno elemento de área e de massa — um cilindro,
+com força gravitacional \(\vec F_g\) e forças de pressão no topo, na base e
+nas laterais, estas últimas se cancelando pelo Teorema de Stevin. Esta é a
+seção mais didática do capítulo: o módulo a seguir recria a figura das
+notas de forma manipulável.</p>
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 4 — O elemento cilíndrico: forças em escala real (peça central do capítulo)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m4-r">Posição \(r/R_\star\) do elemento <span class="valor" id="m4-r-valor">0,50</span></label>
+      <input type="range" id="m4-r" min="2" max="98" step="1" value="50">
+    </div>
+    <div class="controle">
+      <label for="m4-dr">Espessura \(\mathrm dr/R_\star\) do elemento <span class="valor" id="m4-dr-valor">0,04</span></label>
+      <input type="range" id="m4-dr" min="1" max="10" step="1" value="4">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="m4-canvas" role="img" aria-label="Elemento cilíndrico de gás com vetores de força: gravitacional para baixo, pressão no topo para baixo, pressão na base para cima, e pressões laterais iguais e opostas que se cancelam." style="width:100%;height:420px;display:block;">
+      Diagrama: um cilindro vertical de altura dr e área A, com uma seta F_g apontando para baixo no topo, uma seta F_p,top apontando para baixo no topo (pressão do gás acima empurrando para baixo), uma seta F_p,bottom apontando para cima na base (pressão do gás abaixo empurrando para cima), e duas setas laterais F_p iguais e opostas que se cancelam mutuamente (destacadas e depois anuladas). Os comprimentos das setas mudam com a posição r dentro da estrela, refletindo as magnitudes reais de P(r) e g(r) para um perfil politrópico simples.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Perfil de referência (declarado): densidade politrópica simples
+    \(\rho(r)=\rho_c[1-(r/R_\star)^2]\) com \(\rho_c\) calibrado para
+    \(M=M_\odot\), \(R=R_\odot\) — a mesma escolha usada nos módulos 1–2 e
+    reaproveitada nos módulos 5–6, adiante, para manter consistência entre
+    todos os gráficos desta seção. Em \(r/R_\star=\)<strong id="m4-r-texto">—</strong>:
+    \(g(r)=Gm(r)/r^2=\)<strong id="m4-g">—</strong> cm/s²,
+    \(P(r)\approx\)<strong id="m4-P">—</strong> dyn/cm² (integrado
+    numericamente do equilíbrio hidrostático a partir da superfície),
+    \(F_g/A=\)<strong id="m4-Fg">—</strong> dyn/cm²
+    (\(=g\rho\,\mathrm dr\)) e \(\mathrm dP=\)<strong id="m4-dP">—</strong>
+    dyn/cm² — <strong>as duas barras coloridas do painel devem ter
+    exatamente o mesmo comprimento</strong>: esse é o próprio conteúdo físico
+    do equilíbrio hidrostático, \(F_g=F_{p,\rm top}-F_{p,\rm bottom}\)
+    (Equação (5.19) abaixo). As setas laterais, iguais e de sentido oposto,
+    ficam destacadas e então se anulam visualmente — o Teorema de Stevin em
+    ação.
+  </p>
+</div>
+
+<p>A Figura recriada acima mostra a decomposição das forças que atuam na
+casca de gás considerada. (Note que estamos considerando apenas duas
+forças, o caso mais simples.)</p>
+
+<p>Podemos, inicial e diretamente, concluir que as pressões aplicadas
+lateralmente são anuladas, uma vez que a pressão depende apenas da altura
+(<strong>Teorema de Stevin</strong>). Logo, assumimos que a resultante das
+forças que estão sendo aplicadas no sistema é</p>
+\[
+\vec F_r = m\,\vec a\,,
+\tag{5.15}
+\]
+\[
+\vec F_g + \cancel{\vec F_p} + \vec F_{p,\mathrm{top}} + \vec F_{p,\mathrm{bot}} = \mathrm dm\,\frac{\mathrm d^2\vec r}{\mathrm dt^2}\,,
+\tag{5.16}
+\]
+\[
+F_g - F_{p,\mathrm{top}} + F_{p,\mathrm{bot}} = \mathrm dm\,\frac{\mathrm d^2 r}{\mathrm dt^2}\,.
+\tag{5.17}
+\]
+<p>Podemos definir que a variação de pressão é</p>
+\[
+\mathrm dF_p = \mathrm dF_{p,\mathrm{top}} - \mathrm dF_{p,\mathrm{bot}}\,,
+\tag{5.18}
+\]
+<p>substituindo na Equação (5.17),</p>
+\[
+F_g - \mathrm dF_p = \mathrm dm\,\frac{\mathrm d^2 r}{\mathrm dt^2}\,.
+\tag{5.19}
+\]
+
+<p>Mas sabemos que \(F_g=-Gm\,\mathrm dm\,\hat r/r^2\) [Equação (5.14),
+integrada sobre o elemento], e que, por definição, \(P=F/A\), logo
+\(\mathrm dF=\mathrm dP\cdot A\). Assim:</p>
+\[
+-\frac{Gm\,\mathrm dm}{r^2} - \mathrm dP\cdot A = \mathrm dm\,\frac{\mathrm d^2r}{\mathrm dt^2}\,.
+\tag{5.20}
+\]
+<p>Utilizando as expressões volumétricas, como de costume
+(\(\mathrm dm=\rho\,\mathrm dV=\rho A\,\mathrm dr\)):</p>
+\[
+-\frac{Gm\rho}{r^2} - \frac{\mathrm dP\cdot A}{\mathrm dr\cdot A} = \frac{\mathrm dm}{\mathrm dV}\frac{\mathrm d^2r}{\mathrm dt^2}
+\quad\Longrightarrow\quad
+-\frac{Gm\rho}{r^2} - \frac{\mathrm dP}{\mathrm dr} = \rho\,\frac{\mathrm d^2r}{\mathrm dt^2}\,.
+\tag{5.21}
+\]
+
+<p>Assumindo que a estrela está em <strong>equilíbrio hidrostático</strong>,
+temos que não há aceleração, logo \(\mathrm d^2r/\mathrm dt^2=0\), o que
+resulta em:</p>
+\[
+\frac{\mathrm dP}{\mathrm dr} + \frac{Gm\rho}{r^2} = 0
+\quad\Longrightarrow\quad
+\boxed{\frac{\mathrm dP}{\mathrm dr} = -\frac{Gm(r)\rho(r)}{r^2}}\,,
+\tag{5.22}
+\]
+<p>a <strong>equação de equilíbrio hidrostático</strong> — a segunda das 5
+equações de estrutura estelar.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Conferindo o sinal da Equação (5.22)</div>
+  <div class="conteudo">
+    <p>Vale a pena parar e conferir explicitamente o sinal deste resultado
+    central, passo a passo: \(G\), \(m(r)\), \(\rho(r)\) e \(r^2\) são todos
+    positivos, logo o lado direito da Equação (5.22) é sempre
+    <em>negativo</em>. Isso significa \(\mathrm dP/\mathrm dr<0\): a pressão
+    <strong>decresce</strong> com \(r\) — fisicamente correto, já que a
+    pressão deve ser máxima no centro e cair até (aproximadamente) zero na
+    superfície. O sinal negativo surge de dois lugares na dedução: (i) a
+    força gravitacional [Equação (5.14)] já é definida como atrativa (aponta
+    para dentro, \(-\hat r\)); (ii) ao isolar \(\mathrm dP/\mathrm dr\) na
+    Equação (5.21), o termo gravitacional muda de lado sem trocar de sinal,
+    e o termo de aceleração se anula. O resultado final é exatamente
+    consistente com a literatura padrão (ex. Kippenhahn &amp; Weigert).</p>
+  </div>
+</div>
+
+<p>Vemos que a pressão em si não é importante — o que domina é o
+<strong>gradiente</strong> de pressão. E é este termo que contrabalança a
+força gravitacional.</p>
+
+<h3>Forma alternativa, em massa</h3>
+
+<p>Podemos obter uma forma alternativa para a equação de equilíbrio
+hidrostático multiplicando a Equação (5.22) por \(\partial r/\partial m\):</p>
+\[
+\frac{\partial P}{\partial r}\cdot\frac{\partial r}{\partial m} + \frac{Gm\rho}{r^2}\cdot\frac{\partial r}{\partial m} = 0\,.
+\tag{5.23}
+\]
+<p>Usando \(\partial r/\partial m = 1/(\partial m/\partial r) = 1/(4\pi
+r^2\rho)\) [Equação (5.4)], o primeiro termo já é \(\partial P/\partial m\),
+e no segundo termo o fator \(\rho\) se cancela:</p>
+\[
+\frac{\partial P}{\partial m} + \frac{Gm\rho}{r^2}\cdot\frac{1}{4\pi r^2\rho} = 0\,,
+\tag{5.24}
+\]
+<p>ou seja,</p>
+\[
+\boxed{\frac{\partial P}{\partial m} + \frac{Gm(r)}{4\pi r^4} = 0}\,.
+\tag{5.25}
+\]
+<p>Temos aqui o gradiente de pressão em função da massa contida na região
+estelar — uma forma frequentemente mais conveniente quando se integra a
+estrutura estelar usando \(m\), em vez de \(r\), como variável
+independente.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 5 — Aplicação: \(\mathrm dP/\mathrm dr\) e \(\partial P/\partial m\) em um ponto da estrela</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m5-M">Massa \(M/M_\odot\) <span class="valor" id="m5-M-valor">1,0</span></label>
+      <input type="range" id="m5-M" min="1" max="500" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="m5-R">Raio \(R/R_\odot\) <span class="valor" id="m5-R-valor">1,0</span></label>
+      <input type="range" id="m5-R" min="1" max="1000" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="m5-r">Raio de avaliação \(r/R_\star\) <span class="valor" id="m5-r-valor">0,50</span></label>
+      <input type="range" id="m5-r" min="2" max="98" step="1" value="50">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m5-canvas" role="img" aria-label="Gráfico de dP/dr contra r/R, com marcador no ponto escolhido." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Em \(r/R_\star=\)<strong id="m5-r-texto">—</strong>, com \(m(r)\) do
+    perfil politrópico de referência:
+    \(\mathrm dP/\mathrm dr=-Gm\rho/r^2=\)<strong id="m5-dPdr">—</strong>
+    dyn/cm³, e a forma equivalente em massa
+    \(\partial P/\partial m=-Gm/(4\pi r^4)=\)<strong id="m5-dPdm">—</strong>
+    (unidades cgs) — os dois números descrevem exatamente o mesmo gradiente
+    físico, apenas com variáveis independentes diferentes (\(r\) vs. \(m\)).
+  </p>
+</div>
+
+<h2>Estimativa de valores centrais para pressão e temperatura</h2>
+
+<p>A partir das Equações (5.22) e (5.25), podemos obter estimativas para os
+valores centrais da pressão e da temperatura no interior do Sol.</p>
+
+<p>Podemos expressar \(\partial P/\partial m\) como \((P_0-P_c)/(M/2)\),
+onde \(P_0=0\) na superfície da estrela e \(P_c\) é o valor da pressão no
+centro da estrela. Usamos, em aproximação, \(\Delta m=M/2\) (a massa média
+da estrela) como escala representativa para a diferença finita — e, de
+forma consistente, avaliamos o termo gravitacional em um raio
+característico \(r=R/2\).</p>
+
+<p>Logo:</p>
+\[
+\frac{P_c}{M/2} \simeq \frac{GM}{4\pi r^4}\bigg|_{r=R/2}
+\quad\Longrightarrow\quad
+P_c = \frac{GM^2}{8\pi\,(R/2)^4} = \frac{GM^2}{8\pi}\cdot\frac{16}{R^4}\,,
+\tag{5.26}
+\]
+<p>ou seja,</p>
+\[
+\boxed{P_c \approx \frac{2\,GM^2}{\pi R^4}}\,.
+\tag{5.27}
+\]
+<p>Substituindo os valores de referência para as constantes e para o Sol
+(\(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\),
+\(M_\odot=1{,}989\times10^{33}\,\mathrm g\),
+\(R_\odot\approx7\times10^{10}\,\mathrm{cm}\)), obtemos que</p>
+\[
+P_{c,\odot} \approx 7\times10^{15}\ \mathrm{dyn/cm^2}\,.
+\tag{5.28}
+\]
+
+<p>Para determinar a temperatura central, é possível considerar que o gás
+que compõe a estrela seja ideal, logo:</p>
+\[
+P_c = \frac{\rho_c R T_c}{\mu}
+\quad\Longrightarrow\quad
+T_c = \frac{\mu P_c}{\rho_c R}\,,
+\tag{5.29}
+\]
+<p>onde \(R\) é a constante universal dos gases [mesma convenção da
+equação de gás ideal do <a href="cap03_termodinamica.html">Capítulo 3</a>]
+e \(\mu\) é o peso molecular médio do gás.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Nota de notação: μ volta a ser peso molecular médio</div>
+  <div class="conteudo">
+    <p>A partir daqui, \(\mu\) designa novamente o <strong>peso molecular
+    médio</strong> da composição química do gás, exatamente como no
+    <a href="cap03_termodinamica.html">Capítulo 3</a> (Termodinâmica) — e
+    <em>não</em> o cosseno diretor \(\mu=\cos\theta\) usado ao longo do
+    <a href="cap04_processos_radiativos.html">Capítulo 4</a> (Processos
+    Radiativos). Essa reversão de convenção acompanha a mudança de assunto:
+    transporte radiativo usa \(\mu=\cos\theta\) universalmente na
+    literatura, enquanto equações de estado e de estrutura estelar usam
+    \(\mu\) para peso molecular médio — ambas são convenções padrão em suas
+    respectivas subáreas, e retomamos aqui a notação original deste
+    capítulo.</p>
+  </div>
+</div>
+
+<p>Sabendo que a densidade média é definida por \(\bar\rho=3M/(4\pi R^3)\),
+podemos reescrever \(1/\rho_c\) em termos da razão adimensional
+\(\bar\rho/\rho_c\):</p>
+\[
+T_c = \frac{\mu}{\rho_c R}\,P_c
+= \frac{\mu}{R}\,P_c\cdot\frac{\bar\rho}{\rho_c}\cdot\frac{1}{\bar\rho}
+= \frac{\mu}{R}\,P_c\cdot\frac{\bar\rho}{\rho_c}\cdot\frac{4\pi R^3}{3M}\,,
+\tag{5.30}
+\]
+<p>substituindo \(P_c=2GM^2/(\pi R^4)\) [Equação (5.27)]:</p>
+\[
+T_c = \frac{\mu}{R}\cdot\frac{2GM^2}{\pi R^4}\cdot\frac{4\pi R^3}{3M}\cdot\frac{\bar\rho}{\rho_c}
+= \frac{8}{3}\,\frac{G\mu}{R}\,\frac{M}{R}\cdot\frac{\bar\rho}{\rho_c}\,.
+\tag{5.31}
+\]
+<p>Para a maioria das estrelas, a densidade cresce monotonicamente da
+superfície até o centro, logo \(\bar\rho/\rho_c<1\), e assim:</p>
+\[
+\boxed{T_c \lesssim \frac{8}{3}\,\frac{G\mu}{R}\,\frac{M}{R}}\,.
+\tag{5.32}
+\]
+<p>Note que \(\mu\) é um parâmetro que depende da composição química do gás
+e é muito difícil de ser determinado <em>a priori</em>. Suponha que
+\(\mu=0{,}50\) para o Sol (hidrogênio totalmente ionizado). Substituindo as
+constantes e os valores para o Sol na Equação (5.32), obtemos:</p>
+\[
+T_{c,\odot} \lesssim 3\times10^7\ \mathrm K\,.
+\tag{5.33}
+\]
+
+<p>Veja que a temperatura e a pressão no centro do Sol (e de qualquer
+estrela) são muito maiores que seus valores em sua superfície.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 6a — Calculadora de \(P_c\), comparada ao Modelo Solar Padrão</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m6a-M">Massa \(M/M_\odot\) <span class="valor" id="m6a-M-valor">1,00</span></label>
+      <input type="range" id="m6a-M" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m6a-R">Raio \(R/R_\odot\) <span class="valor" id="m6a-R-valor">1,00</span></label>
+      <input type="range" id="m6a-R" min="10" max="1000" step="1" value="100">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m6a-canvas" role="img" aria-label="Gráfico de barras comparando a estimativa grosseira e o valor real do Modelo Solar Padrão para a pressão central, em escala logarítmica." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Estimativa: \(P_c\approx\)<strong id="m6a-Pc">—</strong> dyn/cm²
+    [Equação (5.27), a partir apenas do equilíbrio hidrostático + equação
+    da massa — nenhuma hipótese sobre a equação de estado é usada aqui].
+    Valor solar real do Modelo Solar Padrão (Vinyoles et al. 2017):
+    \(P_{c,\odot}^{\rm real}\approx2{,}4\times10^{17}\,\mathrm{dyn/cm^2}\).
+    Para \(M=M_\odot\), \(R=R_\odot\): a estimativa subestima o valor real
+    em um fator <strong id="m6a-razaoP">—</strong> — ver a discussão
+    completa abaixo sobre por que \(\Delta m=M/2\) falha por mais de uma
+    ordem de grandeza para \(P_c\).
+  </p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 6b — Calculadora de \(T_c\), comparada ao Modelo Solar Padrão</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m6b-M">Massa \(M/M_\odot\) <span class="valor" id="m6b-M-valor">1,00</span></label>
+      <input type="range" id="m6b-M" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m6b-R">Raio \(R/R_\odot\) <span class="valor" id="m6b-R-valor">1,00</span></label>
+      <input type="range" id="m6b-R" min="10" max="1000" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m6b-mu">Peso molecular médio \(\mu\) <span class="valor" id="m6b-mu-valor">0,50</span></label>
+      <input type="range" id="m6b-mu" min="30" max="140" step="1" value="50">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m6b-canvas" role="img" aria-label="Gráfico de barras comparando a estimativa grosseira e o valor real do Modelo Solar Padrão para a temperatura central, em escala logarítmica." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Estimativa: \(T_c\lesssim\)<strong id="m6b-Tc">—</strong> K [Equação
+    (5.32)]. <strong>Diferente do Módulo 6a</strong>, este cálculo não
+    depende só da hidrostática: ele também impõe, como hipótese
+    <em>adicional</em>, que o gás obedeça à equação de estado de gás ideal
+    (\(P=\rho R T/\mu\), Equação (5.29)) — é essa segunda hipótese, e não
+    o equilíbrio hidrostático em si, que será testada (e vai falhar) para
+    objetos planetários na próxima seção. Valor solar real do Modelo Solar
+    Padrão (Vinyoles et al. 2017):
+    \(T_{c,\odot}^{\rm real}\approx1{,}57\times10^7\,\mathrm K\). Para
+    \(M=M_\odot\), \(R=R_\odot\), \(\mu=0{,}50\): a estimativa fica no
+    fator <strong id="m6b-razaoT">—</strong> do valor real (consistente
+    com ser um limite superior, \(\lesssim\)).
+  </p>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Comparando com o Modelo Solar Padrão</div>
+  <div class="conteudo">
+    <p>As estimativas grosseiras acima,
+    \(P_{c,\odot}\approx7\times10^{15}\,\mathrm{dyn/cm^2}\) e
+    \(T_{c,\odot}\lesssim3\times10^7\,\mathrm K\), podem ser comparadas aos
+    valores obtidos por modelos solares detalhados, calibrados por
+    heliossismologia (que mede oscilações acústicas na superfície solar
+    para inferir a estrutura interna com grande precisão). O Modelo Solar
+    Padrão atual dá:</p>
+    \[
+    T_{c,\odot}^{\rm real} \approx 1{,}57\times10^7\ \mathrm K\,,
+    \qquad
+    P_{c,\odot}^{\rm real} \approx 2{,}4\times10^{17}\ \mathrm{dyn/cm^2}\,,
+    \tag{5.34}
+    \]
+    <p>segundo Vinyoles et al. (2017). A estimativa de \(T_c\) está na mesma
+    ordem de grandeza do valor real (um fator \(\sim2\) acima, consistente
+    com ser um limite superior, \(\lesssim\)). Já a estimativa de \(P_c\)
+    subestima o valor real por mais de uma ordem de grandeza
+    (\(7\times10^{15}\) contra \(2{,}4\times10^{17}\)). A razão é a
+    aproximação \(\Delta m=M/2\): ela trata o gradiente de pressão como se
+    fosse aproximadamente <em>linear</em> ao longo de toda a estrela,
+    quando, na verdade, o perfil real de \(P(m)\) é extremamente não
+    linear — a pressão cai muito mais rapidamente perto da superfície do
+    que perto do centro, porque a densidade e a temperatura também caem de
+    forma não linear. Uma diferença finita simples, com um único intervalo
+    \(\Delta m=M/2\), não consegue capturar essa concentração da queda de
+    pressão próxima ao centro, e por isso subestima sistematicamente
+    \(P_c\). Esse é exatamente o tipo de limitação que a integração
+    numérica completa das equações de estrutura estelar (usada em códigos
+    como o MESA) resolve, propagando as equações diferenciais camada a
+    camada em vez de usar uma única diferença finita grosseira. Para uma
+    discussão detalhada de como a composição química solar (o problema GS98
+    vs. AGSS09 de abundâncias) afeta esses valores centrais via a
+    opacidade e a equação de estado, ver a revisão de Basu &amp; Antia
+    (2008).</p>
+  </div>
+</div>
+
+<h2 id="exoplanetas">Suplemento — a mesma física vale para exoplanetas?</h2>
+
+<p><em>Esta seção é material suplementar deste HTML, não uma transcrição
+das notas de aula — não há equação numerada nova aqui, apenas uma
+aplicação das Equações (5.27) e (5.32) já deduzidas acima a objetos muito
+diferentes de uma estrela.</em></p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O equilíbrio hidrostático não sabe que material está segurando</div>
+  <div class="conteudo">
+    <p>Repare em algo importante na dedução do Módulo 6a: a Equação (5.27),
+    \(P_c\approx2GM^2/(\pi R^4)\), vem <em>apenas</em> do equilíbrio
+    hidrostático [Equação (5.22)] combinado com a equação da massa
+    [Equação (5.4)]. Em nenhum momento essa dedução assumiu que o material
+    é um gás ideal, ou mesmo que é um gás — ela vale igualmente para
+    qualquer corpo autogravitante em equilíbrio, seja ele uma estrela, um
+    gigante gasoso, um planeta rochoso ou uma anã marrom. Isso sugere uma
+    pergunta natural: será que a estimativa de \(P_c\) também funciona
+    para planetas? E a de \(T_c\)?</p>
+    <p>Escalando \(P_c\propto M^2/R^4\) a partir do valor solar deste
+    capítulo, e usando massa e raio reais de Júpiter
+    (\(M\approx9{,}546\times10^{-4}\,M_\odot\),
+    \(R\approx0{,}10045\,R_\odot\)) e da Terra
+    (\(M\approx3{,}003\times10^{-6}\,M_\odot\),
+    \(R\approx9{,}168\times10^{-3}\,R_\odot\)):</p>
+    <table class="tabela-simples">
+      <tr><td></td><td><strong>\(P_c\) estimado (Eq. 5.27)</strong></td><td><strong>\(P_c\) real (literatura)</strong></td></tr>
+      <tr><td>Sol</td><td>\(7\times10^{15}\,\mathrm{dyn/cm^2}\)</td><td>\(2{,}4\times10^{17}\,\mathrm{dyn/cm^2}\)</td></tr>
+      <tr><td>Júpiter</td><td>\(\approx6{,}4\times10^{13}\,\mathrm{dyn/cm^2}\) (\(\approx64\) Mbar)</td><td>\(50\)–\(100\) Mbar (Militzer et al. 2016)</td></tr>
+      <tr><td>Terra</td><td>\(\approx9{,}2\times10^{12}\,\mathrm{dyn/cm^2}\)</td><td>\(\approx3{,}6\times10^{12}\,\mathrm{dyn/cm^2}\) (360 GPa, Dziewonski &amp; Anderson 1981)</td></tr>
+    </table>
+    <p>Para Júpiter, a estimativa cai <strong>dentro</strong> da faixa
+    aceita pelos modelos de interior; para a Terra, ela erra por um fator
+    \(\sim2{,}5\) (aqui <em>superestimando</em>, ao contrário do Sol, onde
+    \(\Delta m=M/2\) <em>subestimava</em> — o sinal do erro depende de como
+    a massa e a densidade estão realmente distribuídas em cada objeto, não
+    é sempre no mesmo sentido). Para uma estimativa de ordem de grandeza
+    que atravessa <strong>seis ordens de grandeza em massa</strong>, do Sol
+    à Terra, esse é um resultado notável: o equilíbrio hidrostático
+    realmente não liga para o que está por baixo dele.</p>
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — mas a estimativa de \(T_c\) falha de forma espetacular</div>
+  <div class="conteudo">
+    <p>A Equação (5.32), ao contrário, depende de uma hipótese extra: gás
+    ideal. É exatamente essa hipótese que quebra para planetas:</p>
+    <table class="tabela-simples">
+      <tr><td></td><td><strong>\(T_c\) via gás ideal (Eq. 5.32)</strong></td><td><strong>\(T_c\) real</strong></td><td><strong>erro</strong></td></tr>
+      <tr><td>Sol (\(\mu=0{,}50\))</td><td>\(\approx3\times10^7\,\mathrm K\)</td><td>\(1{,}57\times10^7\,\mathrm K\)</td><td>fator \(\sim2\)</td></tr>
+      <tr><td>Júpiter (\(\mu\approx2{,}3\))</td><td>\(\approx1{,}3\times10^6\,\mathrm K\)</td><td>\(\approx2\)–\(2{,}5\times10^4\,\mathrm K\) (Militzer et al. 2016)</td><td>\(\sim60\)–\(65\times\)</td></tr>
+      <tr><td>Terra (\(\mu\approx22\))</td><td>\(\approx4\times10^5\,\mathrm K\)</td><td>\(\approx6\times10^3\,\mathrm K\) (Anzellini et al. 2013)</td><td>\(\sim70\times\)</td></tr>
+    </table>
+    <p>Para o Sol, o erro é o mesmo fator \(\sim2\) já discutido (a
+    estimativa é um limite superior razoável). Para Júpiter e a Terra, o
+    erro explode para mais de uma ordem de grandeza — a cadeia
+    "hidrostática \(\to P_c\to\) gás ideal \(\to T_c\)" se rompe
+    precisamente no último elo, não no primeiro.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — por que a temperatura deixa de importar: degenerescência</div>
+  <div class="conteudo">
+    <p>O motivo físico é o gancho conceitual mais valioso desta seção: em
+    Júpiter, o suporte contra a gravidade no interior profundo vem
+    majoritariamente de <strong>pressão de degenerescência
+    eletrônica</strong> — a mesma física do princípio de exclusão de Pauli
+    que aparece na condução térmica de anãs brancas
+    (Seção~"Transporte condutivo", acima). Sob as pressões de dezenas de
+    milhões de atmosferas do interior joviano, o hidrogênio assume uma
+    fase metálica cujos elétrons ficam degenerados, e a pressão resultante
+    depende principalmente da densidade, quase não da temperatura
+    (Militzer et al. 2016). O planeta simplesmente não <em>precisa</em>
+    estar quente para se sustentar. Na Terra, quem sustenta o interior
+    sólido são forças de Coulomb e a resistência do estado sólido/líquido
+    do ferro e dos silicatos sob pressão — de novo, uma física que não é a
+    de um gás ideal. Em ambos os casos, a equação de estado correta não é
+    \(P=\rho R T/\mu\), e é exatamente por isso que a Equação (5.32) — que
+    <em>assume</em> essa equação de estado — erra tão feio, mesmo com o
+    equilíbrio hidrostático subjacente [Equação (5.22)] continuando
+    perfeitamente válido.</p>
+    <p>Esse tema — equações de estado além do gás ideal, degenerescência
+    eletrônica parcial e completa, e como elas mudam a relação
+    \(P(\rho,T)\) — é precisamente o assunto dos capítulos futuros
+    <strong>Equações de Estado Estelar</strong> e <strong>Anãs
+    Brancas</strong> deste livro. O que este módulo mostra, de forma
+    antecipada, é <em>onde</em> e <em>por que</em> a hipótese de gás ideal
+    para de valer.</p>
+    <p>Vale destacar que a fronteira entre "estrela" e "planeta" não é
+    binária: <strong>anãs marrons</strong> (\(M\sim13\)–\(80\,M_{\rm
+    Jup}\)) são objetos parcialmente sustentados por degenerescência
+    eletrônica que nunca atingem temperatura central suficiente para
+    sustentar a fusão estável do hidrogênio comum — ficando exatamente na
+    fronteira entre os dois regimes discutidos aqui (Chabrier &amp;
+    Baraffe 2000). Um efeito notável dessa física: ao contrário das
+    estrelas de sequência principal (onde \(R\) cresce com \(M\)), gigantes
+    gasosos e anãs marrons têm raio quase <strong>constante</strong>
+    (\(\approx1\,R_{\rm Jup}\)) ao longo de quase duas ordens de grandeza
+    em massa, podendo até <em>diminuir</em> com o aumento de massa nas anãs
+    marrons mais massivas — a assinatura direta de uma equação de estado
+    dominada por degenerescência, em vez de gás ideal (Chabrier &amp;
+    Baraffe 2000).</p>
+  </div>
+</div>
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 7 — Sol, Júpiter, Terra: onde a hidrostática funciona sozinha, e onde precisa de gás ideal</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m7exo-objeto">Objeto</label>
+      <select id="m7exo-objeto" class="botao-modulo" style="width:100%;padding:0.5rem;">
+        <option value="sol">Sol</option>
+        <option value="jupiter" selected>Júpiter</option>
+        <option value="terra">Terra</option>
+        <option value="ana_marrom">Anã marrom (~50 M_Jup)</option>
+        <option value="custom">Personalizado (sliders abaixo)</option>
+      </select>
+    </div>
+    <div class="controle">
+      <label for="m7exo-M">Massa \(M/M_\odot\) (escala log) <span class="valor" id="m7exo-M-valor">—</span></label>
+      <input type="range" id="m7exo-M" min="-600" max="300" step="1" value="-303">
+    </div>
+    <div class="controle">
+      <label for="m7exo-R">Raio \(R/R_\odot\) (escala log) <span class="valor" id="m7exo-R-valor">—</span></label>
+      <input type="range" id="m7exo-R" min="-300" max="30" step="1" value="-100">
+    </div>
+    <div class="controle">
+      <label for="m7exo-mu">Peso molecular médio \(\mu\) <span class="valor" id="m7exo-mu-valor">—</span></label>
+      <input type="range" id="m7exo-mu" min="1" max="300" step="1" value="230">
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;flex-wrap:wrap;gap:.75rem;">
+    <div style="position:relative;width:49%;min-width:260px;height:280px;">
+      <canvas id="m7exo-canvas-P" role="img" aria-label="Barras comparando a pressão central estimada e a pressão central real para o objeto escolhido — as duas barras ficam próximas, mostrando que a estimativa hidrostática funciona bem."></canvas>
+    </div>
+    <div style="position:relative;width:49%;min-width:260px;height:280px;">
+      <canvas id="m7exo-canvas-T" role="img" aria-label="Barras comparando a temperatura central estimada via gás ideal e a temperatura central real para o objeto escolhido — para objetos planetários, as duas barras divergem por mais de uma ordem de grandeza."></canvas>
+    </div>
+  </div>
+  <p class="leitura-card">
+    Painel esquerdo: \(P_c\) estimado [Equação (5.27)] vs. \(P_c\) real —
+    repare que as barras ficam <strong>próximas</strong> para os três
+    objetos, mesmo variando a massa por seis ordens de grandeza. Painel
+    direito: \(T_c\) estimado via gás ideal [Equação (5.32)] vs.
+    \(T_c\) real — para o Sol as barras ficam próximas (fator \(\sim2\)),
+    mas para Júpiter e a Terra a barra estimada dispara para muito acima
+    da real. <strong>Isso não é erro de conta</strong> — é a física
+    dizendo que falta, precisamente ali, uma equação de estado adequada
+    (degenerescência eletrônica ou estado sólido, em vez de gás ideal).
+    \(P_c=\)<strong id="m7exo-Pc-est">—</strong> dyn/cm² (real:
+    <strong id="m7exo-Pc-real">—</strong>); \(T_c=\)<strong id="m7exo-Tc-est">—</strong> K
+    (real: <strong id="m7exo-Tc-real">—</strong>).
+  </p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 8 — Perfis \(P(r)\), \(m(r)\), \(\rho(r)\) e por que \(\Delta m=M/2\) subestima \(P_c\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m7-M">Massa da estrela \(M/M_\odot\) <span class="valor" id="m7-M-valor">1,00</span></label>
+      <input type="range" id="m7-M" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m7-R">Raio da estrela \(R/R_\odot\) <span class="valor" id="m7-R-valor">1,00</span></label>
+      <input type="range" id="m7-R" min="10" max="1000" step="1" value="100">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m7-canvas" role="img" aria-label="Painel com três curvas normalizadas P(r), m(r) e rho(r) em função de r/R para o perfil politrópico de referência, mostrando a concentração do gradiente de pressão perto do centro." style="width:100%;height:360px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Perfil declarado (o mesmo dos módulos 1, 4 e 5): \(\rho(r)=\rho_c[1-(r/R_\star)^2]\)
+    (um politropo simples de índice ilustrativo, escolhido por ter integral
+    analítica fechada e concentração de densidade central qualitativamente
+    realista). Note como \(P(r)/P_c\) cai muito mais rapidamente perto da
+    superfície do que perto do centro — o próprio motivo, discutido acima,
+    pelo qual a diferença finita \(\Delta m=M/2\) (que trataria essa queda
+    como linear) subestima \(P_c\): metade da massa está concentrada nas
+    camadas <em>internas</em>, onde \(P(r)\) ainda está próximo de
+    \(P_c\), então usar \(\Delta m=M/2\) como se fosse "metade do caminho
+    em pressão" já é uma aproximação grosseira. Em \(m/M=0{,}5\),
+    \(P/P_c=\)<strong id="m7-Pmeio">—</strong> — bem acima de \(1/2\),
+    confirmando que o gradiente real não é linear em \(m\).
+  </p>
+</div>
+
+<h2 id="escalas-de-tempo">Escalas de tempo</h2>
+
+<p>Podemos nos perguntar o que acontece se o equilíbrio hidrostático de uma
+estrela é perdido, ou o quão rápido mudanças na estrutura da estrela irão
+acontecer. Estas respostas são obtidas com a análise da equação de
+equilíbrio hidrostático.</p>
+
+<p>Por exemplo, supomos que o gradiente de pressão que está suportando a
+gravidade repentinamente caia, ou seja, \(\nabla P=\partial P/\partial
+r=0\).</p>
+
+<h3>Tempo de queda livre (<em>free-fall time</em>)</h3>
+
+<p>Nessa situação, a força de pressão desaparece e a Equação (5.21) — a
+versão dinâmica, fora do equilíbrio, do balanço de forças — perde o termo
+de pressão e se reduz a</p>
+\[
+-\frac{Gm\rho}{r^2} = \rho\,\frac{\mathrm d^2r}{\mathrm dt^2}
+\quad\Longrightarrow\quad
+\frac{\mathrm d^2r}{\mathrm dt^2} = -\frac{Gm}{r^2}\,,
+\tag{5.35}
+\]
+<p>ou seja, cada camada da estrela passa a cair livremente sob a ação
+exclusiva da gravidade — ocorre uma queda livre. O sinal negativo indica
+que a aceleração aponta para dentro da estrela (na direção do movimento de
+colapso).</p>
+
+<p>Podemos estimar a escala de tempo dessa queda livre, \(t_{\rm ff}\)
+(<em>free-fall</em>), com uma aproximação de ordem de grandeza,
+\(\mathrm d^2r/\mathrm dt^2\sim r/t_{\rm ff}^2\). Substituindo em (5.35):</p>
+\[
+\frac{r}{t_{\rm ff}^2} \sim \frac{Gm}{r^2}
+\quad\Longrightarrow\quad
+\boxed{t_{\rm ff} = \left(\frac{r^3}{Gm}\right)^{1/2}}\,.
+\tag{5.36}
+\]
+<p>Lembrando da definição da aceleração gravitacional local,
+\(g\equiv Gm/r^2\), podemos reescrever de forma equivalente</p>
+\[
+t_{\rm ff} = \left(\frac{r}{g}\right)^{1/2}\,.
+\tag{5.37}
+\]
+<p>Este é o tempo que a estrela levaria para colapsar sobre si mesma devido
+à ação exclusiva da força gravitacional.</p>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Confirmando \(t_{\rm ff}\approx27\) minutos para o Sol</div>
+  <div class="conteudo">
+    <p>Substituindo \(r=R_\odot\approx6{,}957\times10^{10}\,\mathrm{cm}\),
+    \(m=M_\odot=1{,}989\times10^{33}\,\mathrm g\) e
+    \(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\) na Equação
+    (5.36):</p>
+    \[
+    t_{\rm ff,\odot} = \left(\frac{(6{,}957\times10^{10})^3}
+    {6{,}674\times10^{-8}\times1{,}989\times10^{33}}\right)^{1/2}\mathrm{s}
+    \approx1{,}59\times10^3\,\mathrm{s}\,,
+    \tag{5.38}
+    \]
+    <p>ou seja, \(t_{\rm ff,\odot}\approx1590\,\mathrm s\approx27\,
+    \mathrm{min}\). Esse é o tempo que o Sol levaria para colapsar sobre si
+    mesmo caso a pressão que o sustenta desaparecesse repentinamente.</p>
+  </div>
+</div>
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 9 — Quando o equilíbrio quebra: a estrela entra em queda livre</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m8-M">Massa \(M/M_\odot\) <span class="valor" id="m8-M-valor">1,00</span></label>
+      <input type="range" id="m8-M" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m8-R">Raio \(R/R_\odot\) <span class="valor" id="m8-R-valor">1,00</span></label>
+      <input type="range" id="m8-R" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="m8-play" class="botao-modulo">▶ Iniciar colapso</button>
+      <button type="button" id="m8-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m8-canvas" role="img" aria-label="Animação de uma estrela colapsando radialmente em queda livre depois que o gradiente de pressão é removido, com o raio diminuindo ao longo do tempo até o tempo de queda livre calculado." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    No instante \(t=0\), removemos hipoteticamente \(\nabla P\): a estrela
+    (círculo) entra em colapso radial. Tempo de queda livre calculado ao
+    vivo pela Equação (5.37), \(g=GM/R^2\):
+    \(t_{\rm ff}=\)<strong id="m8-tff">—</strong> s
+    (\(\approx\)<strong id="m8-tff-min">—</strong> min). Para
+    \(M=M_\odot\), \(R=R_\odot\), isso reproduz os
+    \(\approx27\,\mathrm{min}\) do Sol [Equação (5.38)]. Esta é
+    precisamente a conexão entre a Seção "Equilíbrio hidrostático" e esta
+    seção: sem o gradiente de pressão, não há nada entre a estrela e o
+    colapso gravitacional além desta escala de tempo curtíssima — a razão
+    física de por que o equilíbrio hidrostático, quando satisfeito, é tão
+    robusto e onipresente nas estrelas observadas.
+  </p>
+</div>
+
+<h3>Tempo de explosão (caso hipotético, sem gravidade)</h3>
+
+<p>De forma análoga, podemos considerar o caso oposto: e se a gravidade
+desaparecesse repentinamente, mas o gradiente de pressão se mantivesse?
+Nesse caso a estrela se expandiria (explodiria) em vez de colapsar.
+Partindo da versão em massa da equação de movimento — combinando o termo
+gravitacional da Equação (5.25) com um termo inercial, de forma análoga à
+Equação (5.21) —</p>
+\[
+\frac{\partial P}{\partial m} - \frac{Gm}{4\pi r^4}
+= \frac{1}{4\pi r^2}\,\frac{\mathrm d^2r}{\mathrm dt^2}\,,
+\tag{5.39}
+\]
+<p>e impondo \(F_g=0\) (desprezando o termo gravitacional frente aos
+demais, já que agora a gravidade está ausente), obtemos</p>
+\[
+\frac{\partial P}{\partial m} = \frac{1}{4\pi r^2}\,\frac{\mathrm d^2r}{\mathrm dt^2}\,.
+\tag{5.40}
+\]
+<p>Usando de novo a aproximação de ordem de grandeza
+\(\mathrm d^2r/\mathrm dt^2\sim r/t^2\), e também \(\partial P/\partial
+r\sim P/r\) — de modo que, pela regra da cadeia e pela equação da
+continuidade [\(\partial r/\partial m=1/(4\pi r^2\rho)\), Equação (5.4)],
+\(\partial P/\partial m=(\partial r/\partial m)(\partial P/\partial
+r)\sim P/(4\pi r^3\rho)\) —, a Equação (5.40) se torna</p>
+\[
+\frac{1}{4\pi r^2\rho}\cdot\frac{P}{r} \sim \frac{1}{4\pi r^2}\cdot\frac{r}{t^2}
+\quad\Longrightarrow\quad
+\frac{P}{\rho r} \sim \frac{r}{t^2}
+\quad\Longrightarrow\quad
+t^2 \sim \frac{r^2\rho}{P}\,,
+\tag{5.41}
+\]
+<p>ou seja,</p>
+\[
+\boxed{t \sim r\left(\frac{\rho}{P}\right)^{1/2}}\,,
+\tag{5.42}
+\]
+<p>o <strong>tempo de explosão</strong>. Quanto maior a pressão frente à
+densidade, menor o tempo necessário para a estrela se desfazer.</p>
+
+<h3>Tempo hidrodinâmico</h3>
+
+<p>O <strong>tempo hidrodinâmico</strong>, ou tempo de quase equilíbrio
+(\(t_{\rm hid}\)), descreve o tempo que a estrela leva para retornar ao
+equilíbrio hidrostático após uma perturbação qualquer. Ele é obtido de
+forma análoga ao tempo de queda livre — assumindo também \(\nabla P=0\) —,
+de modo que \(t_{\rm ff}\simeq t_{\rm hid}\); a diferença é que agora
+expressamos o resultado em termos da densidade média da estrela,
+\(\bar\rho\equiv3m/(4\pi r^3)\). Substituindo \(r^3=3m/(4\pi\bar\rho)\) na
+Equação (5.36):</p>
+\[
+t_{\rm ff} = \left(\frac{r^3}{Gm}\right)^{1/2}
+= \left(\frac{3m/(4\pi\bar\rho)}{Gm}\right)^{1/2}
+= \left(\frac{3}{4\pi}\right)^{1/2}\frac{1}{\sqrt{G\bar\rho}}\,.
+\tag{5.43}
+\]
+<p>Como \(\sqrt{3/(4\pi)}\approx0{,}489\approx1/2\) — uma aproximação de
+ordem de grandeza razoável, no mesmo espírito das demais aproximações
+desta seção —, obtemos a forma final, amplamente usada na literatura:</p>
+\[
+\boxed{t_{\rm ff} \approx \frac{1}{2\sqrt{G\bar\rho}}}\,.
+\tag{5.44}
+\]
+<p>Para o Sol, \(\bar\rho_\odot=3M_\odot/(4\pi R_\odot^3)\approx
+1{,}41\,\mathrm{g/cm^3}\), o que dá \(t_{\rm ff,\odot}\approx1630\,
+\mathrm s\approx27\,\mathrm{min}\) — reproduzindo o mesmo resultado obtido
+diretamente da Equação (5.36), como esperado.</p>
+
+<p>Note que esse tempo é muito menor que a idade do Sol
+(\(\approx4{,}5\times10^9\,\mathrm{anos}\)); isso significa que, caso
+ocorram, mudanças na estrutura hidrostática do Sol nessa escala de tempo
+seriam facilmente observadas.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O tempo dinâmico e a pulsação de estrelas variáveis</div>
+  <div class="conteudo">
+    <p>A escala de tempo dinâmica que acabamos de deduzir,
+    \(t_{\rm din}\sim1/\sqrt{G\bar\rho}\), não é apenas um limite teórico de
+    colapso ou explosão — ela também governa a física das estrelas
+    <strong>pulsantes</strong>, como as Cefeidas clássicas e as RR Lyrae.
+    Nessas estrelas, uma zona de ionização parcial do hélio (o mecanismo
+    \(\kappa\), uma "válvula" de opacidade) atua como um motor térmico que
+    sustenta oscilações radiais periódicas em torno do equilíbrio
+    hidrostático, com período de pulsação \(\Pi\) da mesma ordem de
+    grandeza que \(t_{\rm din}\). Isso leva diretamente à famosa
+    <strong>relação período–densidade média</strong>,</p>
+    \[
+    \Pi\sqrt{\bar\rho} \approx \text{constante}\,,
+    \tag{5.45}
+    \]
+    <p>válida (com constantes numéricas diferentes) para toda uma classe de
+    pulsadores radiais. Combinada com a relação empírica entre período e
+    luminosidade das Cefeidas (descoberta por Henrietta Leavitt em 1908 a
+    partir de estrelas na Pequena Nuvem de Magalhães), essa física é a base
+    do primeiro degrau da escada de distâncias extragalácticas. Observações
+    recentes do <em>James Webb Space Telescope</em> (JWST) confirmaram a
+    robustez fotométrica das Cefeidas do projeto SH0ES em galáxias
+    hospedeiras de supernovas do tipo Ia, descartando a hipótese de que
+    aglomeração estelar não resolvida (<em>crowding</em>) nas imagens do
+    Telescópio Espacial Hubble viesasse a calibração da relação
+    período–luminosidade — e reforçando, assim, a atual tensão no valor da
+    constante de Hubble medido pela escada de distâncias local (Riess et
+    al. 2024).</p>
+  </div>
+</div>
+
+<h2 id="teorema-virial">Teorema do Virial</h2>
+
+<p>Uma consequência importante do equilíbrio hidrostático é o
+<strong>Teorema do Virial</strong>, de importância vital para entendermos
+as estrelas. O teorema conecta dois reservatórios de energia fundamentais
+em uma estrela — a energia interna (térmica) e a energia potencial
+gravitacional —, permitindo predições e interpretações sobre a estrutura
+interna estelar.</p>
+
+<h3>Energia potencial gravitacional</h3>
+
+<p>A força gravitacional que atua sobre uma casca de massa \(\mathrm dm\)
+[Equação (5.14), integrada sobre a casca] é</p>
+\[
+\mathrm d\vec F_g = -\frac{Gm\,\mathrm dm}{r^2}\,\hat r\,.
+\tag{5.46}
+\]
+<p>A energia potencial gravitacional dessa casca, \(\mathrm dM_g\), é, por
+definição, o trabalho necessário para levá-la do raio \(r\) até o
+infinito:</p>
+\[
+\mathrm dM_g = W(r\to\infty) = \int_r^\infty \mathrm d\vec F_g\cdot\mathrm d\vec r
+= -Gm\,\mathrm dm\int_r^\infty\frac{\mathrm dr'}{r'^2}
+= Gm\,\mathrm dm\left(\frac1{r'}\right)\bigg|_r^\infty
+= -\frac{Gm\,\mathrm dm}{r}\,.
+\tag{5.47}
+\]
+<p>Podemos escrever esse resultado como \(\mathrm dM_g=\phi\,\mathrm dm\),
+onde</p>
+\[
+\phi(r) \equiv -\frac{Gm}{r}
+\tag{5.48}
+\]
+<p>é o <strong>potencial gravitacional</strong> (negativo, como esperado
+para um sistema ligado gravitacionalmente).</p>
+
+<p>A energia potencial gravitacional total da estrela é a integral da
+Equação (5.47) sobre todas as cascas esféricas de massa \(\mathrm dm\), de
+0 a \(M\):</p>
+\[
+\boxed{E_g \equiv -\int_0^M \frac{Gm}{r}\,\mathrm dm}\,.
+\tag{5.49}
+\]
+<p>Como essa energia depende do raio, contrações e expansões da estrela
+modificam sua energia potencial gravitacional.</p>
+
+<h3>Dedução via a equação de equilíbrio hidrostático</h3>
+
+<p>Há uma segunda via, mais fundamental, para relacionar \(E_g\) às
+propriedades termodinâmicas locais do gás: integrar a própria equação de
+equilíbrio hidrostático. Partindo da forma em massa [Equação (5.25)],
+multiplicamos ambos os lados por \(4\pi r^3\) e integramos em
+\(\mathrm dm\), de 0 a \(M\):</p>
+\[
+\int_0^M 4\pi r^3\,\frac{\partial P}{\partial m}\,\mathrm dm
+= -\int_0^M \frac{Gm\cdot4\pi r^3}{4\pi r^4}\,\mathrm dm
+= -\int_0^M \frac{Gm}{r}\,\mathrm dm\,.
+\tag{5.50}
+\]
+<p>O lado direito é, pela própria definição (5.49), exatamente \(E_g\), logo</p>
+\[
+\int_0^M 4\pi r^3\,\frac{\partial P}{\partial m}\,\mathrm dm = E_g\,.
+\tag{5.51}
+\]
+
+<p>Resolvemos essa integral por partes, com \(u=4\pi r^3\)
+(\(\mathrm du=12\pi r^2\,\partial r/\partial m\,\mathrm dm\)) e
+\(\mathrm dv=(\partial P/\partial m)\,\mathrm dm\) (\(v=P\)):</p>
+\[
+\int_0^M 4\pi r^3\frac{\partial P}{\partial m}\,\mathrm dm
+= 4\pi r^3 P\Big|_0^M
+\;-\int_0^M P\cdot12\pi r^2\,\frac{\partial r}{\partial m}\,\mathrm dm\,.
+\tag{5.52}
+\]
+<p>O termo de contorno se anula nos <em>dois</em> limites de integração: em
+\(m=M\) (a superfície da estrela), a pressão é nula, \(P=0\); em \(m=0\) (o
+centro da estrela), o raio é nulo, \(r=0\), logo \(r^3=0\) também. Assim, o
+termo de contorno desaparece por completo, e</p>
+\[
+\int_0^M 4\pi r^3\frac{\partial P}{\partial m}\,\mathrm dm
+= -\int_0^M 12\pi r^2 P\,\frac{\partial r}{\partial m}\,\mathrm dm\,.
+\tag{5.53}
+\]
+<p>Combinando as Equações (5.51) e (5.53):</p>
+\[
+E_g = -\int_0^M 12\pi r^2 P\,\frac{\partial r}{\partial m}\,\mathrm dm\,.
+\tag{5.54}
+\]
+<p>Usando a equação da continuidade, \(\partial r/\partial m=1/(4\pi
+r^2\rho)\) [Equação (5.4)], o fator \(r^2\) se cancela:</p>
+\[
+E_g = -\int_0^M 12\pi r^2 P\cdot\frac{1}{4\pi r^2\rho}\,\mathrm dm
+= -3\int_0^M \frac{P}{\rho}\,\mathrm dm\,,
+\tag{5.55}
+\]
+<p>ou seja,</p>
+\[
+\boxed{\int_0^M \frac{3P}{\rho}\,\mathrm dm = -E_g}\,,
+\tag{5.56}
+\]
+<p>válida para <em>qualquer</em> gás — não apenas o gás ideal —, e por isso
+esta é a forma mais geral do Teorema do Virial aplicado a uma estrela em
+equilíbrio hidrostático.</p>
+
+<h3>Especialização para um gás ideal monoatômico</h3>
+
+<p>Se assumirmos que o gás estelar se comporta como um gás ideal, sua
+equação de estado é \(PV=nRT\) ou, por unidade de volume,</p>
+\[
+P = \frac{\rho RT}{\mu}
+\quad\Longrightarrow\quad
+\frac{P}{\rho} = \frac{RT}{\mu}\,,
+\tag{5.57}
+\]
+<p>onde \(R\) é a constante universal dos gases e \(\mu\) o peso molecular
+médio. Já vimos, no Capítulo 3, que para um gás ideal \(C_P-C_V=R/\mu\),
+logo</p>
+\[
+\frac{P}{\rho} = (C_P-C_V)\,T
+= C_V\left(\frac{C_P}{C_V}-1\right)T
+= C_V(\gamma-1)\,T\,,
+\tag{5.58}
+\]
+<p>onde \(\gamma\equiv C_P/C_V\). Para um gás ideal monoatômico,
+\(\gamma=5/3\), logo \(\gamma-1=2/3\) e</p>
+\[
+\frac{P}{\rho} = \frac{2}{3}\,C_V T\,.
+\tag{5.59}
+\]
+<p>Por definição, \(C_V\equiv(\partial u/\partial T)_V\), onde \(u\) é a
+energia interna específica do gás; integrando (a \(C_V\) constante,
+partindo de \(u=0\) em \(T=0\)),</p>
+\[
+\int_0^T C_V\,\mathrm dT' = \int_0^u \mathrm du'
+\quad\Longrightarrow\quad
+u = C_V T\,,
+\tag{5.60}
+\]
+<p>e portanto</p>
+\[
+\boxed{\frac{P}{\rho} = \frac{2}{3}\,u}\,.
+\tag{5.61}
+\]
+<p>Substituindo na Equação (5.56):</p>
+\[
+\int_0^M \frac{3P}{\rho}\,\mathrm dm
+= \int_0^M 3\cdot\frac{2}{3}\,u\,\mathrm dm
+= \int_0^M 2u\,\mathrm dm
+= -E_g\,.
+\tag{5.62}
+\]
+<p>A integral da energia interna específica sobre toda a massa da estrela
+é, por definição, a <strong>energia interna total</strong>,
+\(E_i\equiv\int_0^M u\,\mathrm dm\), de modo que</p>
+\[
+\boxed{2E_i = -E_g}\,,
+\tag{5.63}
+\]
+<p>a forma mais conhecida do Teorema do Virial, válida para um gás ideal
+monoatômico. Como a variação de energia deve ser conservada, o mesmo vale
+para variações entre dois estados quaisquer da estrela:</p>
+\[
+2\,\Delta E_i = -\Delta E_g\,.
+\tag{5.64}
+\]
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Dedução alternativa: momento de inércia e a identidade de Lagrange–Jacobi</div>
+  <div class="conteudo">
+    <p>O mesmo resultado, \(2E_i=-E_g\), pode ser obtido por um caminho
+    completamente diferente do usado acima — não via a equação de
+    equilíbrio hidrostático, mas via mecânica de sistemas autogravitantes.
+    Defina o momento de inércia do sistema em relação à origem,</p>
+    \[
+    I = \int_V \rho\,r^2\,\mathrm dV\,.
+    \tag{5.65}
+    \]
+    <p>Sua primeira derivada temporal é</p>
+    \[
+    \frac{\mathrm dI}{\mathrm dt} = 2\int_V \rho\,\vec r\cdot\vec v\,\mathrm dV\,,
+    \tag{5.66}
+    \]
+    <p>e derivando mais uma vez, usando \(\mathrm d(\vec r\cdot\vec v)/\mathrm dt
+    = \vec v\cdot\vec v+\vec r\cdot\vec a = v^2+\vec r\cdot\vec a\),</p>
+    \[
+    \frac{\mathrm d^2I}{\mathrm dt^2} = 2\int_V\rho\,v^2\,\mathrm dV
+    + 2\int_V\rho\,\vec r\cdot\vec a\,\mathrm dV
+    = 4T + 2\int_V\rho\,\vec r\cdot\vec a\,\mathrm dV\,,
+    \tag{5.67}
+    \]
+    <p>onde \(T\equiv\tfrac12\int_V\rho v^2\,\mathrm dV\) é a energia
+    cinética total do sistema. Substituindo a aceleração pela equação de
+    Euler do fluido, \(\rho\vec a=-\nabla P-\rho\nabla\Phi\) — equivalente,
+    em forma local, à equação de equilíbrio hidrostático já usada neste
+    capítulo —,</p>
+    \[
+    \int_V\rho\,\vec r\cdot\vec a\,\mathrm dV
+    = -\int_V\vec r\cdot\nabla P\,\mathrm dV - \int_V\rho\,\vec r\cdot\nabla\Phi\,\mathrm dV\,.
+    \tag{5.68}
+    \]
+    <p>O primeiro termo se resolve por integração por partes (Teorema da
+    Divergência, com \(P=0\) na superfície do sistema) e
+    \(\nabla\cdot\vec r=3\) em três dimensões, resultando em
+    \(3\int_V P\,\mathrm dV\); o segundo termo é, por definição, a energia
+    potencial gravitacional \(E_g\) do sistema, com o mesmo sinal já
+    estabelecido acima. Chegamos assim à <strong>identidade de
+    Lagrange–Jacobi</strong>, a forma mais geral do Teorema do Virial:</p>
+    \[
+    \boxed{\frac12\,\frac{\mathrm d^2I}{\mathrm dt^2} = 2T + 3\int_V P\,\mathrm dV + E_g}\,.
+    \tag{5.69}
+    \]
+    <p>Em equilíbrio estático (\(\mathrm d^2I/\mathrm dt^2=0\)), sem energia
+    cinética de massa em larga escala (\(T=0\), apenas suporte térmico), e
+    usando \(3\int_V P\,\mathrm dV=2E_i\) para o gás ideal monoatômico [como
+    já obtido acima, Equação (5.56) combinada com (5.61)], a Equação (5.69)
+    se reduz exatamente a \(2E_i+E_g=0\) — o mesmo resultado da Equação
+    (5.63), agora obtido sem qualquer referência à geometria esférica ou à
+    equação de equilíbrio hidrostático em forma radial. Essa é a virtude da
+    dedução via momento de inércia: ela vale para <em>qualquer</em> sistema
+    autogravitante em equilíbrio — um fluido contínuo (como uma estrela) ou
+    um conjunto discreto de partículas (basta trocar a integral por um
+    somatório, \(I=\sum_i m_i r_i^2\)) —, sem nenhuma suposição sobre
+    simetria ou forma.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O Teorema do Virial além de uma estrela isolada</div>
+  <div class="conteudo">
+    <p>A generalidade da identidade de Lagrange–Jacobi [Equação (5.69)]
+    permite aplicar o mesmo teorema em escalas muito distintas da de uma
+    estrela individual.</p>
+    <p>Para um sistema de \(N\) corpos gravitacionalmente ligados —
+    estrelas dentro de um aglomerado estelar, ou galáxias dentro de um
+    aglomerado de galáxias — não há termo de pressão de gás (o sistema não
+    é um fluido contínuo), e a identidade se reduz a \(2T+E_g=0\), com
+    \(T\) a energia cinética total do movimento das partículas. Foi
+    exatamente essa forma do teorema que Zwicky (1933) aplicou às
+    velocidades observadas de galáxias no aglomerado de Coma, encontrando
+    uma massa dinâmica quase uma ordem de grandeza maior que a massa
+    inferida da luminosidade — a primeira evidência observacional de
+    matéria escura em um sistema extragaláctico.</p>
+    <p>Na formação estelar, o teorema é usado para avaliar se uma nuvem
+    molecular está gravitacionalmente ligada e propensa ao colapso, através
+    do <strong>parâmetro virial</strong>,
+    \(\alpha_{\rm vir}\equiv2T/|E_g|\): valores \(\alpha_{\rm
+    vir}\lesssim1\)–\(2\) geralmente indicam uma nuvem dominada pela
+    gravidade, favorável ao colapso e à formação estelar (McKee &amp;
+    Ostriker 2007).</p>
+    <p>Existe ainda uma generalização mais completa, o <strong>teorema do
+    virial tensorial</strong>, que inclui termos de energia rotacional e
+    magnética além dos já vistos aqui — relevante para modelar estrelas em
+    rotação rápida, anãs brancas e estrelas de nêutrons magnetizadas
+    (Chandrasekhar 1969). Em suas várias formas, o Teorema do Virial é um
+    dos resultados mais universais da astrofísica, válido desde o interior
+    de uma única estrela até a escala de aglomerados de galáxias
+    inteiros.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Capacidade térmica negativa e a fase pré-sequência principal</div>
+  <div class="conteudo">
+    <p>A Equação (5.64) descreve um comportamento profundamente
+    contra-intuitivo: se a estrela <em>perde</em> energia total
+    (\(W=E_i+E_g\) diminui, como veremos a seguir), ela fica <em>mais
+    quente</em>, não mais fria. Isso ocorre porque um sistema autogravitante
+    tem <strong>capacidade térmica efetiva negativa</strong> — ao contrário
+    de um gás em uma caixa rígida, cuja temperatura cai quando ele perde
+    energia, uma estrela se contrai ao perder energia, e a contração libera
+    energia potencial gravitacional suficiente para não apenas repor a
+    energia perdida, mas também aumentar a energia interna (e portanto a
+    temperatura). Esse mecanismo governa toda a fase de contração
+    pré-sequência principal: uma protoestrela recém-formada, ainda incapaz
+    de sustentar fusão nuclear, irradia energia para o espaço e se contrai
+    lentamente em resposta, aquecendo seu interior — primeiro ao longo do
+    <strong>traço de Hayashi</strong> (quase vertical, a \(T_{\rm eff}\)
+    aproximadamente constante, com a estrela totalmente convectiva) e
+    depois do <strong>traço de Henyey</strong> (quase horizontal, quando um
+    núcleo radiativo se desenvolve) no diagrama HR, até que a temperatura
+    central atinja \(\sim10^7\,\mathrm K\) e a fusão do hidrogênio se
+    inicie, interrompendo a contração ao fornecer uma fonte de energia que
+    não depende mais da gravidade (Kippenhahn et al. 2012). É exatamente
+    essa mesma capacidade térmica negativa, atuando em sentido inverso, que
+    mais tarde impulsiona o aquecimento do núcleo estelar após o
+    esgotamento do hidrogênio central, permitindo o início da fusão do
+    hélio.</p>
+  </div>
+</div>
+
+<h3>Exemplo: contração estelar</h3>
+
+<p>Consideremos o caso de uma estrela em contração, isto é, com o raio
+diminuindo entre um instante inicial (\(i\)) e um instante final (\(f\)).
+Generalizando a Equação (5.64) para a diferença entre os dois estados,</p>
+\[
+E_g^f - E_g^i = -2\left(E_i^f - E_i^i\right)\,.
+\tag{5.70}
+\]
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 10 — Contração estelar: \(\phi\), \(u_g\) e o Teorema do Virial em tempo real</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m9-Ri">Raio inicial \(r_i/R_\odot\) <span class="valor" id="m9-Ri-valor">2,00</span></label>
+      <input type="range" id="m9-Ri" min="20" max="500" step="1" value="200">
+    </div>
+    <div class="controle">
+      <label for="m9-Rf">Raio final \(r_f/R_\odot\) <span class="valor" id="m9-Rf-valor">1,00</span></label>
+      <input type="range" id="m9-Rf" min="10" max="490" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m9-M">Massa \(M/M_\odot\) <span class="valor" id="m9-M-valor">1,00</span></label>
+      <input type="range" id="m9-M" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="m9-play" class="botao-modulo">▶ Animar contração</button>
+      <button type="button" id="m9-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m9-canvas" role="img" aria-label="Gráfico do potencial gravitacional phi proporcional a -1/r em função de r, com dois marcadores nos estados inicial e final da contração, e uma seta ligando os dois." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Trajetória no plano \((\phi,u_g)\) vs. \(r\) [mesma geometria da figura
+    das notas]: à medida que \(r\) diminui de \(r_i\) para \(r_f\), a curva
+    \(\propto-1/r\) desce (fica mais negativa). Energias calculadas com
+    \(E_g\approx-GM^2/R\) (ordem de grandeza, consistente com o restante
+    desta seção): \(E_g^i=\)<strong id="m9-Egi">—</strong> erg,
+    \(E_g^f=\)<strong id="m9-Egf">—</strong> erg,
+    \(\Delta E_g=\)<strong id="m9-dEg">—</strong> erg (negativo — a estrela
+    se liga mais fortemente). Pela Equação (5.64),
+    \(\Delta E_i=-\Delta E_g/2=\)<strong id="m9-dEi">—</strong> erg
+    (positivo): a contração <strong>aquece</strong> a estrela, exatamente
+    como descrito no texto — metade da energia gravitacional liberada vira
+    energia interna (a outra metade é irradiada, Equação (5.75) adiante).
+  </p>
+</div>
+
+<p>Se o raio da estrela diminui, a energia potencial gravitacional
+\(E_g\) torna-se mais negativa (aumenta em módulo), já que
+\(E_g\sim-1/r\) [Equação (5.49)], ou seja, \(\Delta E_g<0\). Pela Equação
+(5.64),</p>
+\[
+\Delta E_i = -\frac{\Delta E_g}{2} > 0\,,
+\tag{5.71}
+\]
+<p>logo se \(E_g\) diminui, \(E_i\) deve <em>aumentar</em>. Como a energia
+interna é proporcional à temperatura (\(\Delta E_i\propto\frac32 nR\,
+\Delta T\), para um gás ideal), o aumento de \(E_i\) implica um aumento da
+temperatura da estrela — a contração aquece a estrela. De forma simétrica,
+se há uma expansão, a temperatura diminui. É exatamente isso que acontece
+quando estrelas evoluem para fora da sequência principal.</p>
+
+<h3>Energia total e luminosidade</h3>
+
+<p>A energia total do sistema é definida pela soma das energias interna e
+gravitacional,</p>
+\[
+W = E_i + E_g\,.
+\tag{5.72}
+\]
+<p>Se a estrela tem luminosidade, ela irradia uma potência para o espaço;
+logo</p>
+\[
+L = -\frac{\mathrm dW}{\mathrm dt}\,.
+\tag{5.73}
+\]
+<p>Usando o Teorema do Virial [Equação (5.63), \(E_i=-E_g/2\)] para
+eliminar \(E_i\) em favor de \(E_g\),</p>
+\[
+L = -\frac{\mathrm d}{\mathrm dt}\left(E_i+E_g\right)
+= -\frac{\mathrm d}{\mathrm dt}\left(-\frac{E_g}{2}+E_g\right)
+= -\frac{\mathrm d}{\mathrm dt}\left(\frac{E_g}{2}\right)\,,
+\tag{5.74}
+\]
+<p>ou seja,</p>
+\[
+L \propto -\dot E_g
+\qquad\text{e, equivalentemente,}\qquad
+L \propto \dot E_i\,.
+\tag{5.75}
+\]
+<p>A luminosidade da estrela é, portanto, proporcional à taxa de variação
+temporal de sua energia (gravitacional ou interna).</p>
+
+<h2 id="kelvin-helmholtz">Escala de tempo de Kelvin–Helmholtz</h2>
+
+<p>Vimos na seção anterior que a luminosidade pode ser expressa por
+\(L=\frac{\partial}{\partial t}\left(-\frac12 E_g\right)\) [Equação
+(5.74)]. Podemos integrar essa expressão para obter uma escala de tempo
+característica,</p>
+\[
+\tau_{\rm KH} = \frac12\,\frac{E_g}{L}\,.
+\tag{5.76}
+\]
+<p>Como vimos anteriormente [Equação (5.49)], \(E_g=
+-\int_0^M(Gm/r)\,\mathrm dm\); para uma estimativa de ordem de grandeza,
+aproximamos \(|E_g|\approx GM^2/R\) (descartando o fator numérico exato da
+integração, da ordem da unidade), logo</p>
+\[
+\tau_{\rm KH} \approx \frac12\,\frac{GM^2}{LR}\,.
+\tag{5.77}
+\]
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Cálculo de \(\tau_{\rm KH}\) para o Sol</div>
+  <div class="conteudo">
+    <p>Substituindo diretamente os valores solares em cgs
+    (\(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\),
+    \(M_\odot=1{,}989\times10^{33}\,\mathrm g\),
+    \(L_\odot=3{,}828\times10^{33}\,\mathrm{erg/s}\),
+    \(R_\odot=6{,}957\times10^{10}\,\mathrm{cm}\)) na Equação (5.77):</p>
+    \[
+    \tau_{\rm KH,\odot} = \frac{GM_\odot^2}{2L_\odot R_\odot}
+    = \frac{6{,}674\times10^{-8}\times(1{,}989\times10^{33})^2}
+    {2\times3{,}828\times10^{33}\times6{,}957\times10^{10}}\,\mathrm s
+    \approx4{,}96\times10^{14}\,\mathrm s\approx1{,}57\times10^7\,
+    \mathrm{anos}\,.
+    \tag{5.78}
+    \]
+    <p>Generalizando para uma estrela qualquer, e lembrando que
+    \(\tau_{\rm KH}\propto M^2/(LR)\) — de modo que as razões de massa,
+    raio e luminosidade aparecem em relação aos valores solares como
+    \((M/M_\odot)^2\), \((R_\odot/R)\) e \((L_\odot/L)\), respectivamente
+    —, obtemos a forma final:</p>
+    \[
+    \boxed{\tau_{\rm KH} \approx 1{,}5\times10^7
+    \left(\frac{M}{M_\odot}\right)^2
+    \left(\frac{R_\odot}{R}\right)
+    \left(\frac{L_\odot}{L}\right)\ \mathrm{anos}}\,,
+    \tag{5.79}
+    \]
+    <p>que reproduz exatamente \(\tau_{\rm KH,\odot}\approx1{,}6\times10^7\,
+    \mathrm{anos}\) quando \(M=M_\odot\), \(R=R_\odot\), \(L=L_\odot\) —
+    dezenas de milhões de anos, e não frações de segundo.</p>
+  </div>
+</div>
+
+<p>Notemos que, para o Sol, esse tempo é da ordem de \(1{,}6\times10^7\)
+anos, ordens de magnitude maior que o tempo dinâmico (27 min). Assim, não
+é possível observar evidências diretas, em escalas de tempo humanas, de
+que estrelas estão em equilíbrio térmico.</p>
+
+<p>Essa escala de tempo levou os astrônomos do século XIX, sobretudo Lord
+Kelvin, a inferir uma idade limite superior para o Sol de algumas dezenas
+de milhões de anos — assumindo que toda a energia solar viesse da
+contração gravitacional. Entretanto, estudos geológicos apontavam que a
+idade da Terra deveria ser da ordem de bilhões de anos (\(10^9\)), o que
+gerava um problema, já que não fazia sentido a Terra ser mais velha que o
+Sol.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — A resolução do paradoxo de Kelvin</div>
+  <div class="conteudo">
+    <p>O impasse entre a idade solar estimada por Kelvin [Equação (5.79)] e
+    a idade da Terra estimada pela geologia (e, mais tarde, com grande
+    precisão, pela datação radiométrica) foi resolvido em duas etapas
+    históricas. Primeiro, a descoberta da <strong>radioatividade</strong>
+    por Henri Becquerel (1896) e o trabalho subsequente de Marie e Pierre
+    Curie e de Ernest Rutherford mostraram, já nas primeiras décadas do
+    século XX, que o decaimento radioativo no interior da Terra fornece uma
+    fonte de calor interna independente do Sol, e também um relógio
+    geológico preciso (a datação radiométrica), confirmando uma idade
+    terrestre de bilhões de anos — muito maior que qualquer \(\tau_{\rm
+    KH}\) plausível. Segundo, e mais fundamental, Arthur Eddington propôs
+    em 1920 que a fusão nuclear de hidrogênio em hélio, e não a contração
+    gravitacional, é a fonte dominante de energia das estrelas (ideia
+    detalhada em seu livro <em>The Internal Constitution of the Stars</em>,
+    de 1926); mas apenas em 1939 Hans Bethe conseguiu descrever, em detalhe
+    quantitativo, as reações nucleares responsáveis — a cadeia
+    próton–próton e o ciclo CNO —, trabalho pelo qual recebeu o Prêmio
+    Nobel de Física em 1967 (Bethe 1939). Com uma fonte de energia capaz de
+    sustentar o Sol por bilhões de anos [ver a próxima seção], o paradoxo
+    desapareceu: o Sol é, de fato, mais velho que qualquer \(\tau_{\rm KH}\)
+    ingenuamente calculado sugeriria, precisamente porque a contração
+    gravitacional não é sua fonte de energia dominante ao longo da maior
+    parte de sua vida.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 11 — Aplicação: \(\tau_{\rm KH}\) para uma estrela qualquer</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m10-M">Massa \(M/M_\odot\) (escala log) <span class="valor" id="m10-M-valor">1,0</span></label>
+      <input type="range" id="m10-M" min="-100" max="150" step="1" value="0">
+    </div>
+    <div class="controle">
+      <label for="m10-R">Raio \(R/R_\odot\) (escala log) <span class="valor" id="m10-R-valor">1,0</span></label>
+      <input type="range" id="m10-R" min="-100" max="150" step="1" value="0">
+    </div>
+    <div class="controle">
+      <label for="m10-L">Luminosidade \(L/L_\odot\) (escala log) <span class="valor" id="m10-L-valor">1,0</span></label>
+      <input type="range" id="m10-L" min="-200" max="500" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m10-canvas" role="img" aria-label="Barra logarítmica mostrando tau de Kelvin-Helmholtz calculado comparado com o valor solar de referência." style="width:100%;height:220px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(\tau_{\rm KH}=\)<strong id="m10-tauKH">—</strong> anos. Para uma
+    estrela de \(10\,M_\odot\) (\(R\approx4\,R_\odot\),
+    \(L\approx10^4\,L_\odot\), valores típicos de sequência principal),
+    \(\tau_{\rm KH}\) já cai para a ordem de <strong id="m10-exemplo">—</strong>
+    anos — muito mais curto que o do Sol, ilustrando por que estrelas
+    massivas atravessam a fase de contração pré-sequência principal muito
+    mais rapidamente.
+  </p>
+</div>
+
+<h2 id="tempo-nuclear">Escala de tempo nuclear</h2>
+
+<p>A escala de tempo de Kelvin–Helmholtz não descreve bem o tempo de vida
+do Sol. Além disso, uma estrela pode permanecer em equilíbrio térmico
+enquanto tiver "combustível" para gerar energia térmica por conta própria.
+Podemos supor que não é a energia gravitacional, mas sim a energia
+nuclear, que fornece a maior contribuição energética para a estrela.
+Assim, em equilíbrio térmico (\(L=L_{\rm nuc}=\dot E_{\rm nuc}\)),</p>
+\[
+\tau_{\rm nuc} = \frac{E_{\rm nuc}}{L}\,.
+\tag{5.80}
+\]
+
+<p>Assumindo que a energia da estrela vem da fusão (queima) de H em He, a
+energia liberada nesse processo é aproximadamente \(\phi=0{,}007\) da
+massa de repouso do hidrogênio convertido (a eficiência de conversão
+massa–energia da cadeia próton–próton), logo</p>
+\[
+E_{\rm nuc} = \phi\,M_{\rm nuc}\,c^2\,,
+\tag{5.81}
+\]
+<p>onde \(M_{\rm nuc}=f_{\rm nuc}\,M\), com \(f_{\rm nuc}\) a fração da
+massa da estrela que efetivamente participa da fusão nuclear (apenas o
+núcleo estelar atinge temperatura suficiente para isso — o restante da
+massa nunca é processado). Substituindo,</p>
+\[
+\tau_{\rm nuc} = \frac{\phi\,f_{\rm nuc}\,M\,c^2}{L}\,.
+\tag{5.82}
+\]
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Estimativa do tempo de vida nuclear do Sol</div>
+  <div class="conteudo">
+    <p>O coeficiente numérico da Equação (5.86) pode ser obtido calculando
+    diretamente \(\phi M_\odot c^2/L_\odot\) em unidades cgs
+    (\(c=2{,}998\times10^{10}\,\mathrm{cm/s}\),
+    \(M_\odot=1{,}989\times10^{33}\,\mathrm g\),
+    \(L_\odot=3{,}828\times10^{33}\,\mathrm{erg/s}\)):</p>
+    \[
+    \frac{M_\odot c^2}{L_\odot}
+    = \frac{1{,}989\times10^{33}\times(2{,}998\times10^{10})^2}
+    {3{,}828\times10^{33}}\,\mathrm s
+    \approx4{,}67\times10^{20}\,\mathrm s
+    \approx1{,}48\times10^{13}\,\mathrm{anos}\,.
+    \tag{5.83}
+    \]
+    <p>Multiplicando pela eficiência \(\phi=0{,}007\):</p>
+    \[
+    \phi\,\frac{M_\odot c^2}{L_\odot} \approx1{,}04\times10^{11}\,\mathrm{anos}\,,
+    \tag{5.84}
+    \]
+    <p>o tempo que o Sol duraria <em>se toda</em> a sua massa fosse
+    convertida em hélio — um cenário irrealista, já que apenas o núcleo
+    atinge temperatura e densidade suficientes para a fusão. Adotando
+    \(f_{\rm nuc}\approx0{,}1\) (aproximadamente 10% da massa estelar
+    participa da fusão de hidrogênio ao longo da vida de uma estrela como o
+    Sol na sequência principal — uma estimativa padrão para a extensão do
+    núcleo convectivo/radiativo onde a temperatura é suficiente para a
+    cadeia p–p; Kippenhahn et al. 2012):</p>
+    \[
+    \tau_{\rm nuc,\odot} \approx0{,}1\times1{,}04\times10^{11}\,\mathrm{anos}
+    \approx1{,}0\times10^{10}\,\mathrm{anos}\,,
+    \tag{5.85}
+    \]
+    <p>em excelente acordo com o valor conhecido na literatura para o tempo
+    de vida do Sol na sequência principal, \(\sim10^{10}\) anos. Assim, o
+    coeficiente numérico correto é</p>
+    \[
+    \boxed{\tau_{\rm nuc} \approx 1\times10^{10}
+    \left(\frac{M}{M_\odot}\right)\left(\frac{L_\odot}{L}\right)\ \mathrm{anos}}\,,
+    \tag{5.86}
+    \]
+    <p>com a razão \(L_\odot/L\) (e não \(L/L_\odot\)) pela mesma razão de
+    consistência dimensional discutida para \(\tau_{\rm KH}\) [Equação
+    (5.79)]: \(\tau_{\rm nuc}\propto M/L\), logo estrelas mais luminosas —
+    em geral, mais massivas — têm vidas <em>mais curtas</em>, não mais
+    longas.</p>
+  </div>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — A hierarquia de escalas de tempo e a aproximação quase-estática</div>
+  <div class="conteudo">
+    <p>Reunindo os três resultados desta seção para o Sol,</p>
+    \[
+    \tau_{\rm din}\sim27\,\mathrm{min}
+    \quad\ll\quad
+    \tau_{\rm KH}\sim1{,}6\times10^7\,\mathrm{anos}
+    \quad\ll\quad
+    \tau_{\rm nuc}\sim10^{10}\,\mathrm{anos}\,,
+    \tag{5.87}
+    \]
+    <p>uma hierarquia de aproximadamente 8 e 3 ordens de grandeza entre
+    escalas sucessivas. Essa separação enorme de escalas de tempo é o que
+    justifica, na prática, toda a modelagem padrão da evolução estelar: em
+    qualquer instante de sua vida na sequência principal (e na maior parte
+    das demais fases), uma estrela pode ser tratada como estando
+    simultaneamente em <strong>equilíbrio hidrostático</strong>
+    (\(\tau_{\rm din}\to0\) frente às demais escalas — a estrutura mecânica
+    se ajusta "instantaneamente") <em>e</em> em <strong>equilíbrio térmico
+    local</strong> (\(\tau_{\rm KH}\ll\tau_{\rm nuc}\) — a estrutura
+    térmica também se ajusta muito mais rápido do que o combustível nuclear
+    se esgota). Essa é a <strong>aproximação quase-estática</strong>: em
+    vez de resolver a hidrodinâmica completa e dependente do tempo, os
+    códigos de evolução estelar (como o MESA) resolvem, a cada passo
+    temporal \(\Delta t\sim\tau_{\rm nuc}/1000\), uma sequência de modelos
+    em equilíbrio hidrostático e térmico exato, com a composição química
+    evoluindo lentamente por queima nuclear — sem essa separação de
+    escalas, o problema seria computacionalmente inviável.</p>
+    <p>A hierarquia \(\tau_{\rm nuc}\propto M/L\) [Equação (5.86)] também
+    explica, de forma direta, por que estrelas mais massivas vivem muito
+    <em>menos</em> tempo. Combinando com a relação massa–luminosidade para
+    estrelas de sequência principal (\(L\propto M^{3{,}5}\),
+    aproximadamente, para \(M\sim M_\odot\)):</p>
+    \[
+    \tau_{\rm nuc} \propto \frac{M}{L} \propto \frac{M}{M^{3{,}5}} = M^{-2{,}5}\,.
+    \tag{5.88}
+    \]
+    <p>Uma estrela de \(10\,M_\odot\), por exemplo, tem \(\tau_{\rm nuc}\)
+    cerca de \(10^{2{,}5}\approx300\) vezes menor que o Sol — poucas
+    dezenas de milhões de anos, em vez de dezenas de bilhões. Esse é
+    precisamente o princípio físico por trás do <strong>método do ponto de
+    turnoff da sequência principal</strong> para datar aglomerados
+    estelares: em um aglomerado (onde todas as estrelas nasceram, com boa
+    aproximação, na mesma época), as estrelas mais massivas já esgotaram
+    seu hidrogênio central e saíram da sequência principal, enquanto as
+    menos massivas ainda estão nela. A massa (ou luminosidade/temperatura)
+    do ponto exato onde a sequência principal observada se curva para o
+    ramo das subgigantes — o <em>turnoff</em> — corresponde à massa cujo
+    \(\tau_{\rm nuc}\) é igual à idade do aglomerado, fornecendo uma
+    estimativa direta dessa idade ao ser comparada com isócronas teóricas
+    (Soderblom 2010). O satélite <em>Gaia</em>, com fotometria e paralaxes
+    de precisão sem precedentes para milhões de estrelas em aglomerados
+    abertos da Via Láctea, revolucionou recentemente a aplicação desse
+    método, tanto pela identificação de milhares de novos aglomerados
+    quanto pelo refinamento das idades derivadas por ajuste de isócronas
+    (Cantat-Gaudin et al. 2024).</p>
+  </div>
+</div>
+
+<p>Vale notar, para fechar esta seção, que a fonte de energia do Sol dá
+uma escala de tempo da ordem de 10 bilhões de anos, o que faz muito
+sentido frente à idade observada do Sol. Para a queima de He e de
+elementos ainda mais pesados, porém, o valor de \(\phi\) diminui por um
+fator 10 ou mais em relação à queima de H — cada estágio sucessivo de
+fusão libera menos energia por unidade de massa —, o que diminui
+proporcionalmente o tempo nuclear disponível nessas fases. Ainda assim, a
+hierarquia de escalas de tempo se mantém:</p>
+\[
+\tau_{\rm nuc} \gg \tau_{\rm KH} \gg \tau_{\rm din}\,.
+\tag{5.89}
+\]
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 12 — Comparador das quatro escalas de tempo estelares</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m11-M">Massa \(M/M_\odot\) <span class="valor" id="m11-M-valor">1,0</span></label>
+      <input type="range" id="m11-M" min="5" max="500" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="m11-R">Raio \(R/R_\odot\) <span class="valor" id="m11-R-valor">1,0</span></label>
+      <input type="range" id="m11-R" min="1" max="500" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="m11-L">Luminosidade \(L/L_\odot\) (escala log) <span class="valor" id="m11-L-valor">1,0</span></label>
+      <input type="range" id="m11-L" min="-100" max="500" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m11-canvas" role="img" aria-label="Gráfico de barras horizontal em escala logarítmica comparando as quatro escalas de tempo estelares: dinâmica, de mistura convectiva, de Kelvin-Helmholtz e nuclear, para os parâmetros escolhidos." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(t_{\rm din}=t_{\rm ff}\approx1/(2\sqrt{G\bar\rho})=\)<strong id="m11-tdin">—</strong> s;
+    \(\tau_{\rm mix}\approx3\times10^7\,\mathrm s\times(M_\odot/M)^{?}\) —
+    valor de referência solar usado como escala, ver seção "Escala de tempo
+    de mistura convectiva" adiante:
+    <strong id="m11-tmix">—</strong> s;
+    \(\tau_{\rm KH}=\)<strong id="m11-tkh">—</strong> anos;
+    \(\tau_{\rm nuc}=\)<strong id="m11-tnuc">—</strong> anos. Para
+    \(M=M_\odot\), \(R=R_\odot\), \(L=L_\odot\), a hierarquia
+    \(\tau_{\rm din}\ll\tau_{\rm mix}\lesssim\tau_{\rm KH}\ll\tau_{\rm
+    nuc}\) [Equação (5.87)] se reproduz com \(\approx8\) ordens de grandeza
+    entre a escala dinâmica e a nuclear. Arraste \(M\) para valores altos
+    (estrelas massivas, mais luminosas): \(\tau_{\rm KH}\) e \(\tau_{\rm
+    nuc}\) encolhem muito mais rápido que \(t_{\rm din}\), mas a
+    <em>ordem</em> da hierarquia se preserva em praticamente todo o
+    intervalo de massas estelares — a base física da aproximação
+    quase-estática discutida acima.
+  </p>
+</div>
+
+<h2 id="conservacao-energia">Conservação de energia</h2>
+
+<p>Vamos definir o termo \(l(r)\) como a <strong>luminosidade
+local</strong>, ou seja, a energia que atravessa uma esfera de raio \(r\)
+por unidade de tempo. A função \(l(r)\) é zero na origem (centro da
+estrela), \(l(0)=0\), e alcança o valor de \(L\) na superfície da estrela,
+\(l(R)=L\). Dentro desses limites, \(l\) pode ser uma função complicada,
+que depende da distribuição de energia e da composição química da
+região.</p>
+
+<p>Considerando uma casca esférica de massa \(m\) e raio \(r\), com
+elementos infinitesimais \(\mathrm dm\) e \(\mathrm dr\), podemos analisar
+a energia que entra na casca com luminosidade \(l\) e sai da casca com
+luminosidade \(l+\mathrm dl\).</p>
+
+<h3>Dedução via casca esférica</h3>
+
+<p>Supondo que a única fonte de energia da estrela sejam os processos de
+fusão nuclear, com taxa de geração de energia por unidade de massa e tempo
+\(\varepsilon\) (que depende, em geral, da temperatura, densidade e
+composição química local), podemos determinar a quantidade de energia que
+atravessa a casca esférica:</p>
+\[
+\mathrm dl = \underbrace{4\pi r^2\rho\,\mathrm dr}_{\text{elemento de volume}}\cdot\underbrace{\varepsilon}_{\text{energia liberada por unidade de massa}}\,.
+\tag{5.90}
+\]
+<p>Usando a equação da massa, \(\mathrm dm=4\pi r^2\rho\,\mathrm dr\)
+[Equação (5.4)], \(\mathrm dl\) pode ser expresso de forma mais compacta:</p>
+\[
+\boxed{\mathrm dl = \mathrm dm\,\varepsilon}
+\quad\Longrightarrow\quad
+\boxed{\frac{\partial l}{\partial m} = \varepsilon}\,,
+\tag{5.91}
+\]
+<p>a <strong>equação de conservação de energia</strong> (ou equação de
+geração de energia). Em geral, \(\varepsilon\) depende da temperatura, da
+densidade e da composição química da estrela.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 13 — Aplicação: construindo \(l(r)\) a partir de \(\partial l/\partial m=\varepsilon\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m12-L">Luminosidade total \(L/L_\odot\) <span class="valor" id="m12-L-valor">1,00</span></label>
+      <input type="range" id="m12-L" min="1" max="10000" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m12-fnuc">Fração da massa que gera energia \(f_{\rm nuc}\) <span class="valor" id="m12-fnuc-valor">0,10</span></label>
+      <input type="range" id="m12-fnuc" min="1" max="50" step="1" value="10">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m12-canvas" role="img" aria-label="Gráfico da luminosidade local l(m) em função da fração de massa m/M, mostrando l=0 no centro e l=L na superfície, com toda a subida concentrada na fração f_nuc do núcleo." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Perfil ilustrativo com \(\varepsilon\) uniforme e não nulo apenas no
+    núcleo (\(m/M\lt f_{\rm nuc}\)), zero fora dele — a idealização mais
+    simples consistente com \(\partial l/\partial m=\varepsilon\): 
+    \(\varepsilon=\)<strong id="m12-eps">—</strong> erg g\(^{-1}\)
+    s\(^{-1}\) dentro do núcleo, de modo que \(l(m)\) cresce linearmente até
+    \(m=f_{\rm nuc}M\) e depois permanece constante em \(l=L\) até a
+    superfície — exatamente a condição de contorno \(l(0)=0\), \(l(R)=L\)
+    citada no texto.
+  </p>
+</div>
+
+<h3>Forma alternativa: Teorema da Divergência de Gauss</h3>
+
+<p>Uma forma alternativa para obtermos a equação da conservação de energia
+é fazendo uso do <strong>Teorema da Divergência de Gauss</strong>. O
+teorema diz que</p>
+\[
+\iiint_V \vec\nabla\cdot\vec F\,\mathrm dV = \oint_S \vec F\cdot\hat n\,\mathrm dS\,,
+\tag{5.92}
+\]
+<p>onde \(\vec F\) é um fluxo (ou campo de radiação), e \(V\) e \(S\) são
+os elementos de volume e superfície, respectivamente.</p>
+
+<p>O fluxo de radiação que atravessa a superfície \(\mathrm dS\) é
+proporcional à densidade e à quantidade de energia gerada na região que
+essa superfície envolve, logo:</p>
+\[
+\oint_S \vec F\cdot\hat n\,\mathrm dS = \varepsilon\cdot\rho\,.
+\tag{5.93}
+\]
+<p>Assim, a forma diferencial do Teorema de Gauss se resume a</p>
+\[
+\vec\nabla\cdot\vec F = \varepsilon\rho\,,
+\tag{5.94}
+\]
+<p>que se assemelha muito à lei de Gauss do eletromagnetismo. Em
+coordenadas esféricas, podemos expressar</p>
+\[
+\vec\nabla\cdot\vec F = \frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left(r^2F\right)
+= \frac{1}{4\pi r^2}\frac{\mathrm d}{\mathrm dr}\left(4\pi r^2 F\right)\,,
+\tag{5.95}
+\]
+<p>mas \(F=l/(4\pi r^2)\) (o fluxo total através da esfera de raio \(r\)),
+logo</p>
+\[
+\vec\nabla\cdot\vec F = \frac{1}{4\pi r^2}\frac{\mathrm dl}{\mathrm dr}\,,
+\tag{5.96}
+\]
+<p>e, portanto,</p>
+\[
+\boxed{\frac{\mathrm dl}{\mathrm dr} = 4\pi r^2\rho\,\varepsilon}\,,
+\tag{5.97}
+\]
+<p>que é exatamente a mesma equação obtida anteriormente [derivando a
+Equação (5.91) em relação a \(r\) via a equação da massa].</p>
+
+<h3>Caso não-estacionário</h3>
+
+<p>Se desprezarmos a condição de independência temporal,
+\(\varepsilon-\partial l/\partial m\) pode ser diferente de zero mesmo que
+não haja reações nucleares, já que \(l=l(r,t)\). Uma casca não
+estacionária pode variar sua energia interna e trocar essa energia com a
+vizinhança através de trabalho mecânico. Assim, em um caso não
+estacionário, a quantidade de calor do meio (energia) é expressa por</p>
+\[
+\frac{\mathrm dq}{\mathrm dt} = \varepsilon - \frac{\partial l}{\partial m}\,,
+\qquad [\mathrm dq]=\mathrm{erg/g}\,.
+\tag{5.98}
+\]
+<p>Lembrando da primeira lei da termodinâmica,
+\(\mathrm dq=-P\,\mathrm dv+\mathrm du\) (com \(v\equiv1/\rho\) o volume
+específico e \(u\) a energia interna específica do gás):</p>
+\[
+-P\,\frac{\partial v}{\partial t} + \frac{\partial u}{\partial t}
+= \varepsilon - \frac{\partial l}{\partial m}
+\quad\Longrightarrow\quad
+\boxed{\frac{\partial l}{\partial m} = \varepsilon + P\,\frac{\partial v}{\partial t} - \frac{\partial u}{\partial t}}\,.
+\tag{5.99}
+\]
+<p>Sabendo que \(\mathrm dq\) também pode ser descrito em termos de
+\(C_P\) e \(\delta\) [Capítulo 3, forma alternativa da primeira lei],
+\(\mathrm dq=C_P\,\mathrm dT-(\delta/\rho)\,\mathrm dP\):</p>
+\[
+\frac{\partial q}{\partial t} = C_P\,\frac{\partial T}{\partial t} - \frac{\delta}{\rho}\,\frac{\partial P}{\partial t}\,.
+\tag{5.100}
+\]
+<p>Combinando com a Equação (5.98):</p>
+\[
+\frac{\partial l}{\partial m} = \varepsilon - \frac{\partial q}{\partial t}
+= \varepsilon - C_P\frac{\partial T}{\partial t} + \frac{\delta}{\rho}\frac{\partial P}{\partial t}\,,
+\tag{5.101}
+\]
+<p>ou seja,</p>
+\[
+\boxed{\frac{\partial l}{\partial m} = \varepsilon - C_P\frac{\partial T}{\partial t} + \frac{\delta}{\rho}\frac{\partial P}{\partial t}}\,,
+\tag{5.102}
+\]
+<p>onde \(\delta\equiv-(\partial\ln\rho/\partial\ln T)_P\) é o mesmo
+coeficiente termodinâmico já definido no Capítulo 3.</p>
+
+<h3>Perda de energia por neutrinos</h3>
+
+<p>Podemos incluir, também, a energia que atravessa a casca esférica na
+forma de neutrinos. Como os neutrinos praticamente não interagem com a
+matéria estelar (seu livre caminho médio é muitas ordens de grandeza maior
+que o raio da estrela), a energia que eles carregam escapa imediatamente,
+sem contribuir para o transporte local de energia. Ao incluir essa energia
+proveniente dos neutrinos, temos que diminuir essa quantidade da energia
+nuclear disponível, já que os neutrinos são formados nas próprias reações
+de fusão. Definimos</p>
+\[
+L_\nu = \int_0^M \varepsilon_\nu\,\mathrm dm\,,
+\tag{5.103}
+\]
+<p>onde \(\varepsilon_\nu\) é a taxa de perda de energia por neutrinos, por
+unidade de massa. Assim, a forma final da equação de conservação de
+energia é</p>
+\[
+\boxed{\frac{\partial l}{\partial m} = \varepsilon_{\rm nuc} - \varepsilon_\nu - C_P\frac{\partial T}{\partial t} + \frac{\delta}{\rho}\frac{\partial P}{\partial t}}\,,
+\tag{5.104}
+\]
+<p>a <strong>equação de conservação de energia</strong> completa. Note que
+a dependência das variáveis é em \((m,t)\). O termo
+\(-C_P\,\partial T/\partial t+(\delta/\rho)\,\partial P/\partial t\) é
+frequentemente chamado, na literatura, de \(\varepsilon_{\rm grav}\) — a
+taxa de geração (ou absorção) de energia associada à contração ou
+expansão da estrela [ver a discussão do Teorema do Virial, acima: é
+essencialmente o mesmo mecanismo de "capacidade térmica negativa"
+discutido ali, agora expresso localmente camada a camada em vez de para a
+estrela como um todo].</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — A detecção real dos neutrinos solares</div>
+  <div class="conteudo">
+    <p>A previsão de que o Sol emite um fluxo enorme de neutrinos [Equação
+    (5.103)] foi testada observacionalmente ao longo de mais de três
+    décadas, revelando um dos episódios mais instrutivos da física do
+    século XX: o <strong>problema dos neutrinos solares</strong>. O
+    experimento de Homestake (Dakota do Sul, operado por Raymond Davis Jr.
+    a partir de 1970, usando um tanque de percloroetileno sensível a
+    neutrinos do elétron) detectou sistematicamente apenas cerca de um
+    terço do fluxo previsto pelo Modelo Solar Padrão de John Bahcall. Por
+    décadas, não ficou claro se o problema estava na física
+    nuclear/estrutura estelar do modelo solar ou na física de partículas
+    dos neutrinos. A resolução veio de experimentos posteriores, sensíveis
+    a diferentes sabores de neutrino: o Super-Kamiokande (Japão) e,
+    principalmente, o Sudbury Neutrino Observatory (SNO, Canadá), que em
+    2001-2002 mediu separadamente o fluxo de neutrinos do elétron e o
+    fluxo total de todos os sabores, demonstrando que os neutrinos solares
+    mudam de sabor (<em>oscilação de neutrinos</em>) a caminho da Terra —
+    os neutrinos "faltantes" não estavam realmente faltando, apenas
+    haviam mudado de tipo e se tornado indetectáveis pelo método original
+    de Davis. Esse resultado confirmou simultaneamente o Modelo Solar
+    Padrão (o fluxo <em>total</em> de neutrinos batia exatamente com a
+    previsão) e demonstrou que neutrinos têm massa (exigida pela mecânica
+    quântica para que a oscilação ocorra), rendendo o Prêmio Nobel de
+    Física de 2002 (Davis) e de 2015 (Kajita e McDonald, pela descoberta da
+    oscilação) (Haxton et al. 2013).</p>
+  </div>
+</div>
+
+<p>Assim, temos as <strong>3 equações de estrutura estelar</strong>
+deduzidas até aqui:</p>
+\[
+\frac{\mathrm dm}{\mathrm dr} = 4\pi r^2\rho\,,
+\qquad
+\frac{\mathrm dP}{\mathrm dr} = -\frac{Gm\rho}{r^2}\,,
+\qquad
+\frac{\mathrm dl}{\mathrm dr} = 4\pi r^2\rho\,\varepsilon\,.
+\tag{5.105}
+\]
+<p>Elas descrevem com sucesso o processo de evolução estelar para fora da
+sequência principal do diagrama HR. Porém, ainda são insuficientes para
+descrever como a energia gerada no núcleo é transportada às regiões mais
+externas da estrela — falta ainda uma equação (ou conjunto de equações)
+para o <strong>transporte de energia</strong>, o assunto da próxima
+seção.</p>
+
+<p>Os processos que transformam H em He têm taxas de geração de energia
+com dependências muito diferentes com a temperatura: a cadeia
+próton–próton segue aproximadamente \(\varepsilon_{\rm pp}\propto T^4\)
+nas temperaturas típicas do núcleo solar (\(T\sim1{,}5\times10^7\,\mathrm
+K\)), enquanto o ciclo CNO, por depender de reações com barreiras
+coulombianas muito mais altas (núcleos de carbono e nitrogênio, com \(Z\)
+bem maior que o do hidrogênio), é muito mais sensível à temperatura,
+\(\varepsilon_{\rm CNO}\propto T^{15\text{–}20}\). Essa diferença de
+sensibilidade térmica é, fisicamente, a razão pela qual a cadeia pp domina
+em estrelas de baixa massa (núcleos mais frios) enquanto o ciclo CNO
+domina em estrelas mais massivas que o Sol (núcleos mais quentes, onde a
+forte dependência em \(T\) faz o CNO ultrapassar rapidamente a cadeia pp)
+— com consequências diretas para o regime de transporte de energia no
+núcleo dessas estrelas, como veremos adiante.</p>
+
+<h2 id="transporte-energia">Equações de transporte de energia</h2>
+
+<p>De forma geral, estrelas podem ser formadas por uma região interna
+radiativa e uma convectiva. A principal diferença entre essas zonas se dá
+pela forma como o transporte de energia é realizado, que são descritos por
+processos de <strong>radiação</strong>, <strong>condução</strong> e
+<strong>convecção</strong>.</p>
+
+<p>Em estrelas do tipo solar, \(\approx70\%\) (em raio) é dominado pela
+região radiativa e \(\approx30\%\) (em raio) pela região convectiva — o
+Sol tem a base de sua zona convectiva em \(r\approx0{,}71\,R_\odot\),
+segundo modelos solares calibrados por heliossismologia. Vale enfatizar
+que essa fração de \(\approx30\%\) é em <em>raio</em>, não em massa: como
+a densidade cresce muito rapidamente em direção ao centro, a fina camada
+convectiva externa contém apenas \(\approx2\%\) da massa total do Sol,
+mesmo ocupando quase um terço do seu raio.</p>
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 14 — Diagrama de zonas de transporte: como mudam com a massa estelar</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m13-M">Massa estelar \(M/M_\odot\) <span class="valor" id="m13-M-valor">1,0</span></label>
+      <input type="range" id="m13-M" min="2" max="200" step="1" value="10">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m13-canvas" role="img" aria-label="Diagrama de zonas de transporte de energia (núcleo, radiativa, convectiva) em função da massa estelar, mostrando a inversão de configuração entre estrelas de baixa massa (núcleo radiativo, envelope convectivo, como o Sol) e estrelas massivas (núcleo convectivo, envelope radiativo)." style="width:100%;height:380px;display:block;">
+      Diagrama esquemático de um corte transversal da estrela, com anéis coloridos representando núcleo, zona radiativa e zona convectiva, cuja extensão relativa muda de acordo com a massa selecionada.
+    </canvas>
+  </div>
+  <p class="leitura-card">
+    Para \(M<0{,}35\,M_\odot\): estrela <strong>totalmente
+    convectiva</strong>. Para \(0{,}35\lesssim M/M_\odot\lesssim1{,}3\)
+    (regime tipo Sol): núcleo <strong>radiativo</strong> e envelope
+    <strong>convectivo</strong> externo — a configuração das notas
+    (Figura "zonas de transporte"), com a zona convectiva ocupando
+    \(\approx30\%\) do raio (mas só \(\approx2\%\) da massa) no caso solar.
+    Para \(M\gtrsim1{,}3\,M_\odot\): a configuração <strong>se
+    inverte</strong> — núcleo <strong>convectivo</strong> (o ciclo CNO,
+    \(\varepsilon_{\rm CNO}\propto T^{15-20}\), concentra a geração de
+    energia demais para o transporte puramente radiativo sustentar) e
+    envelope <strong>radiativo</strong> — exatamente a segunda figura de
+    zonas das notas, discutida de novo na seção sobre o tempo de mistura,
+    adiante. Massa atual: <strong id="m13-regime">—</strong>.
+  </p>
+</div>
+
+<p>O transporte por condução é realizado majoritariamente na região
+radiativa, devido à alta taxa de colisões das partículas (pequeno caminho
+livre médio dos fótons).</p>
+
+<h3>Transporte radiativo</h3>
+
+<p>Anteriormente (Capítulo 4), vimos que o caminho livre médio de um fóton
+no núcleo solar (\(\ell_\gamma\approx2\,\mathrm{cm}\)) era muito menor que
+o tamanho da estrela (\(R_\odot\sim10^{10}\,\mathrm{cm}\)), o que
+possibilitava assumir que o transporte radiativo pode ser aproximado por
+uma equação de <strong>difusão</strong> — de forma inteiramente análoga à
+<strong>lei de Fick</strong> da difusão de partículas,</p>
+\[
+\vec J = -D\,\vec\nabla n\,,
+\tag{5.106}
+\]
+<p>onde \(\vec J\) é o fluxo difusivo por unidade de área e tempo, \(D\) é
+o coeficiente de difusão, e \(n\) é a densidade (de partículas, ou, no
+nosso caso, de energia). O sinal negativo desempenha o papel de uma
+resistência ao fluxo, no sentido do movimento.</p>
+
+<p>Transformando a Equação (5.106) para descrever o nosso problema, o
+coeficiente de difusão é definido por</p>
+\[
+D = \frac13\,\ell_\gamma\,v_p\,,
+\tag{5.107}
+\]
+<p>onde \(\ell_\gamma\) é o caminho livre médio dos fótons e \(v_p\) é a
+velocidade das partículas (aqui, fótons, \(v_p=c\)), com o movimento
+normalizado em três dimensões radiais (o fator 1/3). Como
+\(\ell_\gamma=1/(\rho\kappa_{\rm rad})\), onde \(\rho\) e \(\kappa_{\rm
+rad}\) são a densidade e a opacidade radiativa do gás [mesma opacidade
+\(\kappa\) do Capítulo 4, agora com o subscrito "rad" para distingui-la da
+opacidade condutiva, introduzida adiante], o coeficiente \(\vec J\)
+descreve o fluxo de radiação da estrela, logo \(\vec J\equiv\vec F\).</p>
+
+<p>Podemos expressar o divergente da densidade de energia por
+\(\vec\nabla n=\vec\nabla u=(\mathrm du/\mathrm dr)\,\hat r\). Substituindo
+os valores, temos:</p>
+\[
+\vec F = -\frac13\,\ell_\gamma v_p\,\frac{\mathrm du}{\mathrm dr}\,\hat r\,.
+\tag{5.108}
+\]
+<p>Trabalhando com \(\mathrm du/\mathrm dr\): como a densidade de energia
+\(u\) pode ser expressa por \(u=aT^4\) [equação termodinâmica de corpo
+negro, já estabelecida no Capítulo 4], a equação assume a forma</p>
+\[
+\vec F = -\frac13\,\ell_\gamma v_p\,\frac{\mathrm d}{\mathrm dr}(aT^4)
+= -\frac13\,\ell_\gamma v_p\cdot a\cdot4T^3\,\frac{\mathrm dT}{\mathrm dr}\,,
+\tag{5.109}
+\]
+<p>e, substituindo \(\ell_\gamma=1/(\rho\kappa_{\rm rad})\) e \(v_p=c\):</p>
+\[
+\boxed{\vec F = -\frac13\,\frac{4acT^3}{\kappa_{\rm rad}\rho}\,\frac{\mathrm dT}{\mathrm dr}}\,.
+\tag{5.110}
+\]
+<p>Note que essa expressão pode ser escrita como
+\(\vec F=\alpha\vec\nabla T\), com
+\(\alpha=-\frac13(4ac/\kappa_{\rm rad}\rho)T^3\) — ou seja, nada mais é que
+uma equação de condução de calor, com \(\alpha\) desempenhando o papel de
+uma condutividade térmica efetiva.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Consistência com a Aproximação de Rosseland</div>
+  <div class="conteudo">
+    <p>A Equação (5.110), obtida aqui por um argumento de difusão de fótons
+    (caminho livre médio × velocidade), é <em>exatamente</em> a mesma
+    equação já deduzida no Capítulo 4 por um caminho totalmente diferente —
+    a expansão em série de Taylor da função fonte em meios opticamente
+    espessos, seguida da integração sobre a frequência (a
+    <strong>Aproximação de Rosseland</strong>):</p>
+    \[
+    F = -\frac{16\sigma T^3}{3\kappa\rho}\,\frac{\mathrm dT}{\mathrm dr}
+    \qquad\text{[Capítulo 4]}\,.
+    \tag{5.111}
+    \]
+    <p>Usando a relação entre a constante de radiação e a constante de
+    Stefan–Boltzmann, \(\sigma=ac/4\) [já usada no Capítulo 4]:</p>
+    \[
+    F = -\frac{16\,(ac/4)\,T^3}{3\kappa\rho}\,\frac{\mathrm dT}{\mathrm dr}
+    = -\frac{4acT^3}{3\kappa\rho}\,\frac{\mathrm dT}{\mathrm dr}
+    = -\frac13\,\frac{4acT^3}{\kappa\rho}\,\frac{\mathrm dT}{\mathrm dr}\,,
+    \tag{5.112}
+    \]
+    <p>que reproduz exatamente a Equação (5.110) (com
+    \(\kappa\equiv\kappa_{\rm rad}\)). Essa coincidência não é uma
+    coincidência: os dois argumentos — difusão de fótons com caminho livre
+    médio \(\ell_\gamma=1/(\rho\kappa)\), e a expansão de Rosseland em
+    meios opticamente espessos — descrevem exatamente a mesma física do
+    transporte radiativo em regimes difusivos, e é reconfortante que as
+    duas deduções, feitas em capítulos diferentes deste livro com métodos
+    matemáticos distintos, cheguem ao mesmo resultado final. Essa é uma
+    verificação de consistência interna importante entre os Capítulos 4 e
+    5.</p>
+  </div>
+</div>
+
+<p>Sabendo que o fluxo de radiação total através de uma esfera de raio
+\(r\) é \(F=l/(4\pi r^2)\):</p>
+\[
+\frac{l}{4\pi r^2} = -\frac13\,\frac{4acT^3}{\kappa_{\rm rad}\rho}\,\frac{\mathrm dT}{\mathrm dr}
+\quad\Longrightarrow\quad
+\boxed{\frac{\mathrm dT}{\mathrm dr} = -\frac{3\kappa_{\rm rad}\rho\,l}{16\pi ac\,r^2T^3}}\,,
+\tag{5.113}
+\]
+<p>a equação de transporte radiativo em função do raio. Notem que: (i) o
+transporte de energia radiativo é proporcional a
+\(\mathrm dT/\mathrm dr\); (ii) o fluxo é maior para gases mais
+transparentes (menor \(\kappa_{\rm rad}\), o coeficiente de absorção).</p>
+
+<p>Para descrever a Equação (5.113) em função da massa total da estrela,
+usamos a equação da massa, \(\mathrm dr/\mathrm dm=1/(4\pi r^2\rho)\)
+[Equação (5.4)]:</p>
+\[
+\frac{\mathrm dT}{\mathrm dm} = \frac{\mathrm dT}{\mathrm dr}\cdot\frac{\mathrm dr}{\mathrm dm}
+= \left(-\frac{3\kappa_{\rm rad}\rho\,l}{16\pi ac\,r^2T^3}\right)\cdot\frac{1}{4\pi r^2\rho}
+= -\frac{3\kappa_{\rm rad}\,l}{64\pi^2 ac\,r^4T^3}\,,
+\tag{5.114}
+\]
+<p>ou seja,</p>
+\[
+\boxed{\frac{\mathrm dT}{\mathrm dm} = -\frac{3}{64\pi^2ac}\cdot\frac{\kappa_{\rm rad}\,l}{r^4T^3}}\,.
+\tag{5.115}
+\]
+<p>Dividindo a Equação (5.115) pela equação de equilíbrio hidrostático em
+massa, \(\mathrm dP/\mathrm dm=-Gm/(4\pi r^4)\) [Equação (5.25)]:</p>
+\[
+\frac{\mathrm dT}{\mathrm dP} = \frac{\mathrm dT/\mathrm dm}{\mathrm dP/\mathrm dm}
+= \frac{\displaystyle-\frac{3}{64\pi^2ac}\cdot\frac{\kappa_{\rm rad}\,l}{r^4T^3}}{\displaystyle-\frac{Gm}{4\pi r^4}}
+= \frac{3}{64\pi^2ac}\cdot\frac{4\pi}{G}\cdot\frac{\kappa_{\rm rad}\,l}{m\,T^3}\,,
+\tag{5.116}
+\]
+<p>ou seja,</p>
+\[
+\boxed{\frac{\mathrm dT}{\mathrm dP} = \frac{3}{16\pi ac G}\cdot\frac{\kappa_{\rm rad}\,l}{m\,T^3}}\,.
+\tag{5.117}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Consistência física dos sinais</div>
+  <div class="conteudo">
+    <p>Como verificação física, confirmamos que os sinais das Equações
+    (5.113)–(5.117) são consistentes com o comportamento esperado da
+    temperatura no interior estelar: \(T\) deve <em>decrescer</em> com
+    \(r\) (\(\mathrm dT/\mathrm dr<0\), pois a temperatura cai da região
+    central, mais quente, até a superfície) — o que já está correto na
+    Equação (5.113), já que todos os fatores do lado direito são positivos
+    exceto o sinal negativo explícito. Como \(\mathrm dm/\mathrm dr>0\)
+    sempre, o sinal de \(\mathrm dT/\mathrm dm\) [Equação (5.114)] também
+    deve ser negativo, e de fato é. Já \(T\) deve <em>crescer</em> com
+    \(P\) (\(\mathrm dT/\mathrm dP>0\)), pois tanto a temperatura quanto a
+    pressão aumentam em direção ao centro da estrela — e como
+    \(\mathrm dT/\mathrm dP\) é a razão de dois termos negativos
+    [\(\mathrm dT/\mathrm dm<0\) e \(\mathrm dP/\mathrm dm<0\), Equação
+    (5.25)], o resultado é de fato <em>positivo</em>, confirmando o sinal
+    "+" na Equação (5.117). Os três sinais, portanto, fazem sentido
+    físico.</p>
+  </div>
+</div>
+
+<p>Para altos valores de \(\kappa_{\rm rad}\), o fluxo de radiação tende a
+zero (\(F\propto1/\kappa_{\rm rad}\)), onde haverá uma grande resistência
+ao movimento, \(\mathrm dT/\mathrm dr\propto-\kappa_{\rm rad}\). Neste
+cenário, o movimento de energia no interior estelar é dominado pelo
+transporte por condução — ou, como veremos em uma seção futura, pode se
+tornar mais eficiente para a estrela transportar essa energia por
+<strong>convecção</strong> em vez de radiação: é precisamente esse tipo de
+situação (gradiente radiativo muito acentuado) que está por trás do
+<strong>critério de estabilidade convectiva de Schwarzschild</strong>, que
+discutiremos em breve.</p>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Da equação de transporte radiativo ao perfil \(T(r)\) real</div>
+  <div class="conteudo">
+    <p>A Equação (5.113) — ou, de forma equivalente, as Equações (5.115) e
+    (5.117) — não pode ser resolvida analiticamente para uma estrela real,
+    porque \(\kappa_{\rm rad}=\kappa_{\rm rad}(\rho,T,X_i)\) depende, de
+    forma extremamente não linear, da densidade, da temperatura e da
+    composição química local. Na prática, os códigos de evolução estelar
+    (como o MESA, já mencionado em capítulos anteriores) resolvem esse
+    problema numericamente: em cada camada da estrela e a cada passo
+    temporal, o código consulta uma <strong>tabela de opacidade</strong>
+    pré-calculada — tipicamente as tabelas <strong>OPAL</strong> (Iglesias
+    &amp; Rogers 1996) ou do <strong>Opacity Project</strong> (OP), já
+    mencionadas no Capítulo 4 —, interpolando \(\kappa_{\rm
+    rad}(\rho,T,X_i)\) para os valores locais de \(\rho\), \(T\) e
+    composição química \(X_i\) daquela camada. Combinando essa opacidade
+    interpolada com a Equação (5.113) (ou sua forma em massa) e as demais
+    equações de estrutura, o código integra numericamente o sistema
+    completo de equações diferenciais, camada a camada, construindo o
+    perfil \(T(r)\) (e \(\rho(r)\), \(P(r)\), \(l(r)\)) de toda a estrela.
+    É esse procedimento — repetido para milhares de passos temporais — que
+    produz os modelos de evolução estelar detalhados usados para comparar
+    com observações reais (diagramas HR, astrossismologia, etc.).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 15 — Calculadora do transporte radiativo</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m14-kappa">Opacidade \(\kappa_{\rm rad}\) (cm²/g) <span class="valor" id="m14-kappa-valor">1,0</span></label>
+      <input type="range" id="m14-kappa" min="1" max="300" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="m14-l">Luminosidade local \(l/L_\odot\) <span class="valor" id="m14-l-valor">1,00</span></label>
+      <input type="range" id="m14-l" min="1" max="100" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m14-T">Temperatura \(T\) (\(10^6\) K) <span class="valor" id="m14-T-valor">15,0</span></label>
+      <input type="range" id="m14-T" min="1" max="150" step="1" value="150">
+    </div>
+    <div class="controle">
+      <label for="m14-r">Raio \(r/R_\odot\) <span class="valor" id="m14-r-valor">0,50</span></label>
+      <input type="range" id="m14-r" min="5" max="99" step="1" value="50">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m14-canvas" role="img" aria-label="Barras mostrando o valor calculado de dT/dr e dT/dP para os parâmetros escolhidos." style="width:100%;height:260px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(\mathrm dT/\mathrm dr=\)<strong id="m14-dTdr">—</strong> K/cm
+    [Equação (5.113)]; \(\mathrm dT/\mathrm dP=\)<strong id="m14-dTdP">—</strong>
+    K·cm²/dyn [Equação (5.117), usando \(m\approx M_\odot\) fixo como
+    referência]. Ambos os sinais foram implementados de acordo com a
+    caixa de atenção acima — \(\mathrm dT/\mathrm dr\) sempre negativo,
+    \(\mathrm dT/\mathrm dP\) sempre positivo, para qualquer combinação de
+    parâmetros.
+  </p>
+</div>
+
+<h3>Transporte condutivo</h3>
+
+<p>O transporte por condução ocorre de forma mais eficiente em estrelas
+(ou regiões estelares) com alta opacidade, sendo <strong>anãs
+brancas</strong> um ótimo exemplo. O transporte de energia nesse caso é
+feito pela troca de energia proveniente de colisões macroscópicas das
+partículas de um gás.</p>
+
+<p>No caso do transporte radiativo, partimos de \(F_{\rm rad}=-D_{\rm
+rad}\,\mathrm dT/\mathrm dr\). De forma análoga, podemos supor que o
+transporte por condução seja descrito por uma função de difusão
+semelhante,</p>
+\[
+F_{\rm cond} = -D_{\rm cond}\,\frac{\mathrm dT}{\mathrm dr}\,,
+\qquad
+D_{\rm cond} = \frac13\,\ell_{\rm cond}\,v_p\,,
+\tag{5.118}
+\]
+<p>onde agora \(\ell_{\rm cond}\) e \(v_p\) são o caminho livre médio e a
+velocidade das partículas responsáveis pela condução (por exemplo,
+elétrons, no caso de um gás degenerado) — completamente análogo ao caso
+radiativo, mas com \(\ell_\gamma\to\ell_{\rm cond}\).</p>
+
+<p>Assim, o fluxo total de energia é a soma dos dois mecanismos,</p>
+\[
+F = F_{\rm rad} + F_{\rm cond} = -\left(D_{\rm rad}+D_{\rm cond}\right)\frac{\mathrm dT}{\mathrm dr}\,.
+\tag{5.119}
+\]
+<p>O desenvolvimento da Equação (5.119) leva à mesma resposta da equação
+do transporte radiativo em função de \(\mathrm dT/\mathrm dr\), onde a
+única diferença estará no coeficiente de absorção, que agora é descrito
+por uma <strong>opacidade condutiva</strong> \(\kappa_{\rm cond}\) análoga
+a \(\kappa_{\rm rad}\):</p>
+\[
+F = -\frac13\,\frac{4ac}{\rho}\,T^3\left(\frac{1}{\kappa_{\rm rad}}+\frac{1}{\kappa_{\rm cond}}\right)\vec\nabla T\,.
+\tag{5.120}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — A opacidade total combina como média harmônica, não como soma</div>
+  <div class="conteudo">
+    <p>A opacidade total combinada <em>não</em> é a soma direta
+    \(\kappa_T=\kappa_{\rm rad}+\kappa_{\rm cond}\). Isso fica claro ao
+    examinar a própria Equação (5.120): o termo entre parênteses é
+    \(1/\kappa_{\rm rad}+1/\kappa_{\rm cond}\), e para que isso seja igual a
+    \(1/\kappa_T\) (permitindo escrever o resultado final como uma única
+    opacidade efetiva) é necessário que</p>
+    \[
+    \boxed{\frac{1}{\kappa_T} = \frac{1}{\kappa_{\rm rad}} + \frac{1}{\kappa_{\rm cond}}}\,,
+    \tag{5.121}
+    \]
+    <p>ou seja, \(\kappa_T=\kappa_{\rm rad}\kappa_{\rm cond}/(\kappa_{\rm
+    rad}+\kappa_{\rm cond})\) — uma <strong>média harmônica</strong>, não
+    uma soma direta. Essa é exatamente a forma padrão encontrada na
+    literatura (Kippenhahn et al. 2012), e faz sentido físico: como em
+    resistências elétricas em paralelo, o mecanismo de transporte
+    <em>mais eficiente</em> (menor \(\kappa\)) domina o fluxo total, e
+    \(\kappa_T\) fica sempre menor que o menor dos dois \(\kappa\)'s
+    individuais — nunca maior, como a soma direta erroneamente sugeriria.</p>
+  </div>
+</div>
+
+<p>Usando a Equação (5.121), a forma final combinada do transporte de
+energia radiativo e condutivo é</p>
+\[
+\boxed{\vec F = -\frac{4acT^3}{3\rho}\cdot\frac{1}{\kappa_T}\,\vec\nabla T}\,,
+\tag{5.122}
+\]
+<p>válida em qualquer região da estrela, radiativa, condutiva, ou uma
+combinação dos dois regimes.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Condução por elétrons degenerados em anãs brancas</div>
+  <div class="conteudo">
+    <p>Por que a condução é tão eficiente em anãs brancas, ao ponto de
+    dominar completamente sobre a radiação em seus interiores? A resposta
+    está na natureza do gás de elétrons ali presente: em densidades
+    \(\rho\sim10^6\)–\(10^9\,\mathrm{g/cm^3}\), os elétrons formam um gás
+    <strong>degenerado</strong> (o princípio de exclusão de Pauli, não a
+    temperatura, determina sua pressão e sua energia cinética típica —
+    tema que será retomado no capítulo sobre Anãs Brancas). Elétrons
+    degenerados ocupam estados de momento muito bem definidos e viajam a
+    velocidades tipicamente relativísticas ou quase-relativísticas;
+    combinado com o fato de o espaço de fase disponível para espalhamento
+    ser extremamente restrito pelo próprio princípio de exclusão (um
+    elétron só pode ser espalhado para um estado desocupado, e a maioria
+    dos estados de baixa energia já está ocupada), o resultado é um
+    caminho livre médio efetivo muito longo para o transporte de energia —
+    exatamente como em um metal comum, onde os elétrons de condução
+    (também um gás quase-degenerado) são responsáveis pela altíssima
+    condutividade térmica e elétrica. É por isso que \(\ell_{\rm cond}\)
+    [Equação (5.118)] pode ser ordens de magnitude maior que \(\ell_\gamma\)
+    nessas condições, tornando \(\kappa_{\rm cond}\ll\kappa_{\rm rad}\) e
+    fazendo a condução dominar completamente na Equação (5.121). Essa
+    altíssima condutividade térmica tem uma consequência estrutural
+    importante: o núcleo degenerado de uma anã branca é, em ótima
+    aproximação, <strong>isotérmico</strong> — a condução é tão eficiente
+    que qualquer gradiente de temperatura ali é rapidamente suavizado —,
+    com praticamente todo o gradiente de temperatura da estrela
+    concentrado na fina envoltória externa não degenerada, onde a
+    opacidade radiativa volta a dominar. É esse núcleo quase isotérmico,
+    agindo como um reservatório de calor que esfria lentamente por difusão
+    através da envoltória, que governa as chamadas <strong>trajetórias de
+    resfriamento</strong> (<em>cooling tracks</em>) das anãs brancas — a
+    base dos métodos de datação de populações estelares antigas via a
+    sequência de resfriamento observada em aglomerados. Resultados
+    recentes mostram que esse resfriamento pode ainda ser
+    significativamente atrasado por processos de separação de fases
+    durante a cristalização do núcleo (cristais de \({}^{22}\)Ne mais
+    leves flutuando e liberando energia gravitacional adicional), o que
+    pode alongar o tempo de resfriamento em bilhões de anos para anãs
+    brancas massivas (Bédard, Blouin &amp; Cheng 2024).</p>
+  </div>
+</div>
+
+<p>Caso um dos termos, \(\kappa_{\rm rad}\) ou \(\kappa_{\rm cond}\), seja
+muito maior que o outro na soma \((1/\kappa_{\rm rad}+1/\kappa_{\rm
+cond})^{-1}\) [Equação (5.121)], podemos desprezar o termo menor (o
+inverso do maior domina a soma). Na prática, isso significa que, em
+qualquer região da estrela, basta considerar o mecanismo de transporte
+<em>mais eficiente</em> — radiativo ou condutivo — e não é necessário
+resolver os dois simultaneamente.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 16 — Combinando \(\kappa_{\rm rad}\) e \(\kappa_{\rm cond}\) por média harmônica</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m15-krad">\(\kappa_{\rm rad}\) (cm²/g, escala log) <span class="valor" id="m15-krad-valor">1,0</span></label>
+      <input type="range" id="m15-krad" min="-200" max="300" step="1" value="0">
+    </div>
+    <div class="controle">
+      <label for="m15-kcond">\(\kappa_{\rm cond}\) (cm²/g, escala log) <span class="valor" id="m15-kcond-valor">1,0</span></label>
+      <input type="range" id="m15-kcond" min="-500" max="300" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m15-canvas" role="img" aria-label="Comparação entre a soma direta incorreta e a média harmônica correta de duas opacidades, mostrando que a opacidade total fica sempre abaixo da menor das duas." style="width:100%;height:280px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(\kappa_T=(1/\kappa_{\rm rad}+1/\kappa_{\rm cond})^{-1}=\)<strong id="m15-kT">—</strong>
+    cm²/g — sempre \(\le\min(\kappa_{\rm rad},\kappa_{\rm cond})\), ao
+    contrário da soma direta (mostrada em cinza no gráfico só para
+    contraste, e nunca usada fisicamente). Reduza \(\kappa_{\rm cond}\)
+    para valores típicos de anã branca degenerada: \(\kappa_T\to\kappa_{\rm
+    cond}\), o mecanismo mais eficiente domina completamente, exatamente
+    como descrito na caixa de contexto acima.
+  </p>
+</div>
+
+<h3>Opacidade média de Rosseland</h3>
+
+<p>Na determinação das equações de transporte radiativo, não levamos em
+consideração que a opacidade é função da frequência do gás. Assumindo
+essa dependência, obtemos:</p>
+\[
+F_\nu = -\frac13\,\ell_\gamma v_p\,\frac{\partial}{\partial r}\left(\frac{4\pi}{c}B_\nu\right)\hat r\,,
+\tag{5.123}
+\]
+<p>onde \(\kappa_\nu\) é a opacidade em uma frequência \(\nu\) específica
+(em vez da opacidade bolométrica \(\kappa\) usada até aqui), e o termo
+entre parênteses, \(u_\nu\equiv(4\pi/c)B_\nu\), é o análogo espectral da
+densidade de energia \(u=aT^4\) usada anteriormente [Equação (5.108)] — a
+mesma relação \(u_\nu=4\pi J_\nu/c\), com \(J_\nu=B_\nu\) em ETL, que
+fundamenta \(u=aT^4=(4\pi/c)\int_0^\infty B_\nu\,\mathrm d\nu\). Usando
+\(\ell_\gamma=1/(\kappa_\nu\rho)\) e \(v_p=c\) — de modo que o fator
+\(v_p/c\) se cancela exatamente —, e aplicando a regra da cadeia
+[\(\partial B_\nu/\partial r=(\partial B_\nu/\partial T)(\partial
+T/\partial r)\), já que \(B_\nu=B_\nu(T)\)]:</p>
+\[
+F_\nu = -\frac{4\pi\ell_\gamma}{3}\,\frac{\partial B_\nu(T)}{\partial r}
+= -\frac{4\pi}{3\kappa_\nu\rho}\,\frac{\partial B_\nu}{\partial T}\,\frac{\partial T}{\partial r}\,.
+\tag{5.124}
+\]
+<p>Integrando dos dois lados em todo o espaço de frequências, temos:</p>
+\[
+\int_0^\infty F_\nu\,\mathrm d\nu
+= -\left(\frac{4\pi}{3\rho}\int_0^\infty\frac{1}{\kappa_\nu}\frac{\partial B_\nu}{\partial T}\,\mathrm d\nu\right)\frac{\partial T}{\partial r}\,,
+\tag{5.125}
+\]
+<p>ou seja,</p>
+\[
+F_{\rm bol} = -\frac{4\pi}{3\rho}\int_0^\infty\frac{1}{\kappa_\nu}\frac{\partial B_\nu}{\partial T}\,\mathrm d\nu\;\frac{\partial T}{\partial r}\,,
+\tag{5.126}
+\]
+<p>que é o fluxo <em>exato</em> de radiação que está transportando energia
+(sem assumir, a priori, que a opacidade é independente da frequência).</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Notação: \(F_\nu\) é um vetor radial</div>
+  <div class="conteudo">
+    <p>A Equação (5.123) termina com \(\hat r\): \(F_\nu\) é um vetor na
+    direção radial, exatamente como \(\vec F\) nas equações anteriores
+    desta seção — a mesma convenção já usada, por exemplo, na força
+    gravitacional volumétrica [Equação (5.14)].</p>
+  </div>
+</div>
+
+<p>Lembrando que, no equilíbrio termodinâmico local (ETL), já havíamos
+determinado que [Equação (5.110)]</p>
+\[
+F = -\frac13\,\frac{4ac}{\bar\kappa\rho}\,T^3\,\frac{\partial T}{\partial r}\,,
+\tag{5.127}
+\]
+<p>onde \(\bar\kappa\) denota agora a <strong>opacidade média</strong> (o
+análogo bolométrico de \(\kappa_\nu\)). Comparando a Equação (5.127) com a
+Equação (5.126) — ambas descrevem o mesmo fluxo físico, \(F=F_{\rm bol}\)
+—, e cancelando \(\partial T/\partial r\) dos dois lados:</p>
+\[
+\frac13\,\frac{4ac}{\bar\kappa\rho}\,T^3 = \frac{4\pi}{3\rho}\int_0^\infty\frac{1}{\kappa_\nu}\frac{\partial B_\nu}{\partial T}\,\mathrm d\nu\,,
+\tag{5.128}
+\]
+<p>e cancelando também os fatores comuns \(4/(3\rho)\):</p>
+\[
+\frac{1}{\bar\kappa} = \frac{\displaystyle\int_0^\infty\frac{1}{\kappa_\nu}\frac{\partial B_\nu}{\partial T}\,\mathrm d\nu}{\dfrac{acT^3}{\pi}}\,.
+\tag{5.129}
+\]
+<p>É possível mostrar que</p>
+\[
+\int_0^\infty \frac{\partial B_\nu}{\partial T}\,\mathrm d\nu = \frac{acT^3}{\pi}\,,
+\tag{5.130}
+\]
+<p>uma identidade auxiliar que decorre diretamente da integração da lei de
+Planck [de forma análoga à identidade \(\int_0^\infty
+B_\nu\,\mathrm d\nu=\sigma T^4/\pi\), já usada no Capítulo 4, bastando
+derivar ambos os lados em relação a \(T\) e usar \(\sigma=ac/4\)].
+Substituindo na Equação (5.129):</p>
+\[
+\boxed{\frac{1}{\bar\kappa} = \frac{\displaystyle\int_0^\infty\dfrac{1}{\kappa_\nu}\dfrac{\partial B_\nu}{\partial T}\,\mathrm d\nu}{\displaystyle\int_0^\infty\dfrac{\partial B_\nu}{\partial T}\,\mathrm d\nu}}\,,
+\tag{5.131}
+\]
+<p>que é definida como a <strong>opacidade média de Rosseland</strong>.
+Podemos expressar a opacidade de qualquer gás como uma média harmônica,
+ponderada pela derivada da função de Planck em relação à temperatura,
+\(\partial B_\nu/\partial T\) — que dá mais peso às frequências onde o gás
+é mais transparente (menor \(\kappa_\nu\)) e onde a função de Planck varia
+mais rapidamente com \(T\), exatamente como já antecipado na discussão da
+Aproximação de Rosseland no Capítulo 4.</p>
+
+<h2 id="transporte-convectivo">Transporte convectivo de energia</h2>
+
+<p>O estudo do transporte de energia por convecção tende a ser bastante
+complexo, por possuir dependência em todas as variáveis termodinâmicas.
+Neste caso, vamos considerar a existência de regiões de instabilidade, ou
+<strong>bolhas</strong> de gás, e vamos analisar se elas permanecem
+presentes a partir de alguns vínculos. A ideia intuitiva é simples: regiões
+internas com maior densidade tendem a ter maior temperatura, expandir-se e
+subir em direção às regiões mais externas — e a recíproca também é
+verdadeira (regiões mais frias e densas tendem a afundar).</p>
+
+<h3>Hipóteses termodinâmicas da bolha</h3>
+
+<p>Consideremos os estados termodinâmicos \((P_B,T_B,\rho_B)\) da bolha e
+\((P_A,T_A,\rho_A)\) do ambiente (\(A\to\) ambiente, \(B\to\) bolha),
+sujeitos às seguintes condições iniciais:</p>
+<ul>
+  <li>\(\rho_B>\rho_A\), \(T_B>T_A\), \(P_B>P_A\);</li>
+  <li>a bolha está em expansão, \(P_B\to P_A\);</li>
+  <li>assumimos que \(T_B>T_A\) mesmo após a expansão;</li>
+  <li>a expansão é adiabática, \(\mathrm dq=0\).</li>
+</ul>
+<p>No final da transformação termodinâmica, teremos \(P_B\equiv P_A\) e
+\(T_B>T_A\). Considerando um gás ideal,</p>
+\[
+P = nRT\rho\,,
+\tag{5.132}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Sobre a notação \(n\equiv1/\mu\) na Equação (5.132)</div>
+  <div class="conteudo">
+    <p>À primeira vista, \(P=nRT\rho\) parece ter um fator \(\rho\) a mais
+    frente à forma usual do gás ideal. Se \(n\) denotasse a concentração
+    molar (mol/volume), a equação de estado já seria \(P=nRT\), sem
+    densidade adicional. A leitura consistente com o restante do livro —
+    onde a equação de estado do gás ideal é sempre escrita como
+    \(P=\rho RT/\mu\) [Capítulo 3] — é que aqui \(n\equiv1/\mu\), o
+    <strong>número de mols por unidade de massa</strong> (o inverso do peso
+    molecular médio), e não a concentração molar. Com essa identificação,
+    \(P=nRT\rho=(1/\mu)RT\rho=\rho RT/\mu\), exatamente a forma padrão —
+    não há inconsistência, apenas uma escolha de símbolo (\(n\) em vez de
+    \(1/\mu\)) que vale a pena deixar explícita, já que \(n\) (assim
+    definido) reaparece no Critério de Ledoux, adiante, como uma forma de
+    codificar diferenças de composição química entre a bolha e o
+    ambiente.</p>
+  </div>
+</div>
+
+<p>Como no final do processo \(P_B=P_A\), temos</p>
+\[
+n_BRT_B\rho_B = n_ART_A\rho_A\,,
+\tag{5.133}
+\]
+<p>e, como \(T_B>T_A\), para que essa igualdade seja válida, devemos ter</p>
+\[
+n_B\rho_B < n_A\rho_A\,.
+\tag{5.134}
+\]
+<p>Se a composição química for homogênea (\(n_B=n_A\), a mesma hipótese
+por trás do Critério de Schwarzschild, adiante), segue diretamente que
+\(\rho_B<\rho_A\).</p>
+
+<h3>Forças na bolha e no ambiente: o empuxo</h3>
+
+<p>Considerando que existem a força gravitacional e a força de pressão
+atuando no sistema, temos, tanto para a bolha quanto para o ambiente,</p>
+\[
+\frac{\partial P_B}{\partial z} + \frac{Gm\rho_B}{r^2}\,\hat z = \rho_B\,\frac{\partial^2 z}{\partial t^2}\,\hat z\,,
+\qquad
+\frac{\partial P_A}{\partial z} + \frac{Gm\rho_A}{r^2}\,\hat z = \rho_A\,\frac{\partial^2 z}{\partial t^2}\,\hat z\,,
+\tag{5.135}
+\]
+<p>que serão exatamente iguais à equação de equilíbrio hidrostático
+[Equação (5.21)] caso não haja aceleração.</p>
+
+<p>Mas note que existe a mesma magnitude de forças sendo aplicada tanto na
+bolha quanto no ambiente. Isso indica que a resultante das forças deveria
+ser nula, e o sistema permaneceria em repouso. No entanto, existe um
+movimento — a bolha sobe! Esse movimento só pode ser explicado pela ação
+de uma força externa adicional, atuando de baixo para cima na bolha: é a
+<strong>força de empuxo</strong>.</p>
+
+<h3>Critério de instabilidade de Schwarzschild</h3>
+
+<p>A ação do empuxo faz o movimento continuar. Temos, então, um critério de
+instabilidade.</p>
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 17 — A bolha sobe ou afunda? Critério de Schwarzschild em ação</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m16-nablarad">Gradiente real \(\nabla\) (ambiente/radiativo) <span class="valor" id="m16-nablarad-valor">0,45</span></label>
+      <input type="range" id="m16-nablarad" min="10" max="90" step="1" value="45">
+    </div>
+    <div class="controle">
+      <label for="m16-nablaad">Gradiente adiabático \(\nabla_{\rm ad}\) (bolha) <span class="valor" id="m16-nablaad-valor">0,40</span></label>
+      <input type="range" id="m16-nablaad" min="10" max="90" step="1" value="40">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="m16-play" class="botao-modulo">▶ Soltar a bolha</button>
+      <button type="button" id="m16-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;flex-wrap:wrap;gap:.75rem;">
+    <canvas id="m16-canvas-bolha" role="img" aria-label="Animação de uma bolha de gás subindo ou afundando dependendo do critério de Schwarzschild, comparando o gradiente adiabático da bolha com o gradiente radiativo do ambiente." style="width:49%;min-width:260px;height:320px;display:block;"></canvas>
+    <canvas id="m16-canvas-tz" role="img" aria-label="Gráfico de temperatura versus altura z para a bolha e para o ambiente, do interior ao exterior, mostrando qual dos dois esfria mais devagar." style="width:49%;min-width:260px;height:320px;display:block;"></canvas>
+  </div>
+  <p class="leitura-card">
+    Painel esquerdo: reconstrução da figura da bolha subindo/afundando das
+    notas. Painel direito: reconstrução da figura \(T\) vs. \(z\)
+    (bolha menos inclinada = mais estável termicamente / ambiente mais
+    inclinado), do interior (int) ao exterior (ext). Critério de
+    Schwarzschild [Equação (5.142)]: instabilidade quando
+    \(\nabla_{\rm ad}<\nabla_{\rm rad}\). Estado atual:
+    \(\nabla_{\rm ad}=\)<strong id="m16-nablaad-texto">—</strong>,
+    \(\nabla_{\rm rad}=\)<strong id="m16-nablarad-texto">—</strong> →
+    <strong id="m16-veredito">—</strong>. Ajuste os sliders até
+    \(\nabla_{\rm ad}>\nabla_{\rm rad}\) para ver a bolha afundar em vez de
+    subir — a estrela está estável contra convecção nesse caso.
+  </p>
+</div>
+
+<p>A instabilidade pode ser descrita pela diferença</p>
+\[
+\left(\frac{\mathrm dT}{\mathrm dz}\right)_B < \left(\frac{\mathrm dT}{\mathrm dz}\right)_A\,.
+\tag{5.136}
+\]
+<p>Se temos uma força de empuxo atuando na bolha, ela deverá esfriar
+<em>menos</em> para conseguir chegar às camadas superiores, em comparação
+com o gás do ambiente — isso gera a desigualdade da Equação (5.136).
+Sabendo que \(\mathrm dT/\mathrm dz=(\mathrm dP/\mathrm dz)(\mathrm
+dT/\mathrm dP)\), temos:</p>
+\[
+\left(\frac{\mathrm dP}{\mathrm dz}\frac{\mathrm dT}{\mathrm dP}\right)_B
+< \left(\frac{\mathrm dP}{\mathrm dz}\frac{\mathrm dT}{\mathrm dP}\right)_A\,.
+\tag{5.137}
+\]
+<p>Usando a equação de equilíbrio hidrostático, \(\mathrm dP/\mathrm dz=
+-Gm\rho/r^2\) [Equação (5.22)] — a mesma em ambos os lados, já que bolha e
+ambiente estão, a cada instante, na mesma posição \(z\) (mesmo \(m\),
+mesmo \(r\)) —, o fator comum \(-Gm/r^2\) é negativo; cancelá-lo dos dois
+lados da desigualdade <em>inverte o sentido da desigualdade</em>:</p>
+\[
+\left(\frac{\mathrm dT}{\mathrm dP}\,\rho\right)_B > \left(\frac{\mathrm dT}{\mathrm dP}\,\rho\right)_A\,.
+\tag{5.138}
+\]
+<p>Usando \(\rho=P/(nRT)\) [Equação (5.132)] e supondo composição
+homogênea (\(n_B=n_A\), cancelando \(nR\) dos dois lados):</p>
+\[
+\left(\frac{\mathrm dT}{\mathrm dP}\,\frac{P}{T}\right)_B < \left(\frac{\mathrm dT}{\mathrm dP}\,\frac{P}{T}\right)_A\,,
+\tag{5.139}
+\]
+<p>onde a desigualdade retorna ao sentido original: os <em>dois</em>
+cancelamentos de sinal — o de \(-Gm/r^2\) (negativo) e o da inversão ao
+isolar \(\mathrm dT/\mathrm dP\) multiplicando por \(\rho>0\) — se
+compensam, e o resultado final é consistente com a Equação (5.136), como
+deve ser. Definindo</p>
+\[
+\nabla \equiv \frac{\mathrm d\ln T}{\mathrm d\ln P}\,,
+\tag{5.140}
+\]
+<p>a Equação (5.139) se torna, de forma compacta,</p>
+\[
+(\nabla)_B < (\nabla)_A\,,
+\tag{5.141}
+\]
+<p>que pode ser interpretado como</p>
+\[
+\boxed{\nabla_{\rm ad} < \nabla_{\rm rad}}
+\qquad\longrightarrow\qquad
+\textbf{Critério de Schwarzschild}\,,
+\tag{5.142}
+\]
+<p>já que a bolha, em expansão adiabática, segue o gradiente adiabático
+\(\nabla_{\rm ad}\), enquanto o ambiente segue o gradiente que resultaria
+do transporte puramente radiativo, \(\nabla_{\rm rad}\) [Equação (5.117),
+reescrita em forma logarítmica].</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Interpretação física do Critério de Schwarzschild</div>
+  <div class="conteudo">
+    <p>Fisicamente, o critério \(\nabla_{\rm ad}<\nabla_{\rm rad}\) [Equação
+    (5.142)] define a condição de instabilidade convectiva: ela ocorre
+    quando o gradiente que resultaria do transporte puramente radiativo,
+    \(\nabla_{\rm rad}\), é maior que o gradiente adiabático,
+    \(\nabla_{\rm ad}\). Isso significa que a estrela "gostaria" de
+    estabelecer um gradiente de temperatura tão acentuado que uma bolha
+    deslocada adiabaticamente para cima chegaria mais quente — e portanto
+    menos densa — que o ambiente ao seu redor, sofrendo empuxo positivo e
+    continuando a subir.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Evidência observacional da convecção estelar</div>
+  <div class="conteudo">
+    <p>A convecção não é apenas uma dedução teórica — ela é observada
+    diretamente na superfície do Sol na forma da <strong>granulação
+    solar</strong>: um padrão de células poligonais brilhantes (o topo de
+    colunas de gás quente ascendente, com \(\sim1000\,\mathrm{km}\) de
+    diâmetro típico) cercadas por estreitos canais escuros (gás mais frio
+    descendo), toda a estrutura se renovando em poucos minutos. Observações
+    de altíssima resolução espacial, como as obtidas pelo satélite
+    <em>Hinode</em> e, mais recentemente, pelo telescópio solar terrestre
+    <em>Daniel K. Inouye Solar Telescope</em> (DKIST, com espelho de
+    \(4\,\mathrm m\), o maior do mundo dedicado à observação solar),
+    permitem medir diretamente a temperatura e a velocidade
+    (linha-de-visada) do gás em grânulos e intergrânulos individuais,
+    testando quantitativamente as previsões da teoria de convecção (Crowley
+    et al. 2025). A extensão radial dessa zona convectiva — cuja
+    profundidade a heliossismologia fixa em \(r\approx0{,}71\,R_\odot\) —
+    já foi discutida anteriormente neste capítulo e no Capítulo 3.</p>
+  </div>
+</div>
+
+<h3>Processo adiabático e o cálculo de \(\nabla_{\rm ad}\)</h3>
+
+<p>Em processos adiabáticos, não há troca de calor, ou seja,
+\(\mathrm dq=0\). Com isso, temos, da primeira lei da termodinâmica, que
+\(\mathrm du+\mathrm dw=\mathrm dq\Rightarrow\mathrm du+\mathrm dw=0\).
+Como vimos anteriormente, \(\mathrm dw=+P\,\mathrm dV\), logo</p>
+\[
+\mathrm du = -P\,\mathrm dV\,.
+\tag{5.143}
+\]
+<p>Lembrando que \(C_V=(\partial u/\partial T)_V\), podemos integrar e
+obter que \(u=C_VT+u_0\) (\(u_0\) constante), ou seja,
+\(\mathrm du=C_V\,\mathrm dT\); para \(n\) moles,
+\(\mathrm du=nC_V\,\mathrm dT\). Substituindo na Equação (5.143):</p>
+\[
+-P\,\mathrm dV = nC_V\,\mathrm dT\,,
+\tag{5.144}
+\]
+<p>que descreve a variação de energia em termos de \(P\), \(V\), \(T\).
+Utilizando a equação de um gás ideal, \(PV=nRT\), e diferenciando dos dois
+lados:</p>
+\[
+\mathrm d(PV) = nR\,\mathrm dT
+\quad\Longrightarrow\quad
+P\,\mathrm dV+V\,\mathrm dP = nR\,\mathrm dT\,,
+\tag{5.145}
+\]
+\[
+V\,\mathrm dP = -P\,\mathrm dV+nR\,\mathrm dT\,,
+\tag{5.146}
+\]
+<p>substituindo a Equação (5.144):</p>
+\[
+V\,\mathrm dP = nC_V\,\mathrm dT+nR\,\mathrm dT = n(C_V+R)\,\mathrm dT\,.
+\tag{5.147}
+\]
+<p>Mas, como vimos [Capítulo 3], \(C_P=C_V+R\), logo</p>
+\[
+V\,\mathrm dP = nC_P\,\mathrm dT\,.
+\tag{5.148}
+\]
+<p>Substituindo \(\mathrm dT\) da Equação (5.144)
+[\(\mathrm dT=-P\,\mathrm dV/(nC_V)\)] na Equação (5.148):</p>
+\[
+V\,\mathrm dP = nC_P\left(\frac{-P\,\mathrm dV}{nC_V}\right)
+\quad\Longrightarrow\quad
+\frac{\mathrm dP}{P} = -\frac{C_P}{C_V}\,\frac{\mathrm dV}{V} = -\gamma\,\frac{\mathrm dV}{V}\,,
+\tag{5.149}
+\]
+<p>onde \(\gamma\equiv C_P/C_V\). Integrando a Equação (5.149):</p>
+\[
+\int_{P_0}^P\frac{\mathrm dP'}{P'} = -\gamma\int_{V_0}^V\frac{\mathrm dV'}{V'}
+\quad\Longrightarrow\quad
+\ln\left(\frac{P}{P_0}\right) = -\gamma\ln\left(\frac{V}{V_0}\right)\,,
+\tag{5.150}
+\]
+<p>ou seja, \(P/P_0=(V_0/V)^\gamma\), e portanto</p>
+\[
+\boxed{PV^\gamma = \text{cte} = P_0V_0^\gamma}\,.
+\tag{5.151}
+\]
+<p>Dessa forma, \(P\propto V^{-\gamma}\), ou, em termos da densidade
+(\(\rho\propto1/V\)),</p>
+\[
+P\propto\rho^\gamma\,.
+\tag{5.152}
+\]
+<p>Usando a equação de estado, \(PV\propto T\):</p>
+\[
+T\propto\rho^\gamma\cdot\rho^{-1}
+\quad\Longrightarrow\quad
+T\propto\rho^{\gamma-1}\,.
+\tag{5.153}
+\]
+<p>Podemos obter o gradiente adiabático assumindo que o gás seja ideal.
+Logo, como \(\nabla_{\rm ad}=\mathrm d\ln T/\mathrm d\ln P\), e das
+Equações (5.152) e (5.153), \(\mathrm d\ln T\propto(\gamma-1)\,
+\mathrm d\ln\rho\) e \(\mathrm d\ln P=\gamma\,\mathrm d\ln\rho\), temos:</p>
+\[
+\boxed{\nabla_{\rm ad} = \frac{\gamma-1}{\gamma}}\,,
+\tag{5.154}
+\]
+<p>para um gás monoatômico ideal, \(\gamma=5/3\), logo</p>
+\[
+\nabla_{\rm ad} = \frac{5/3-1}{5/3} = \frac{2/3}{5/3} = \frac25 = 0{,}4\,.
+\tag{5.155}
+\]
+<p>Esse é exatamente o mesmo valor já obtido no Capítulo 3, ali por um
+caminho independente — via a entropia e a forma alternativa da primeira
+lei, \(\mathrm dq=C_P\,\mathrm dT-\delta\,\mathrm dP/\rho=0\) — em vez do
+argumento via \(PV^\gamma={\rm cte}\) usado aqui. As duas deduções
+coincidirem é uma verificação de consistência bem-vinda entre os dois
+capítulos.</p>
+
+<p>Então, o critério [Equação (5.142)] pode ser reescrito, neste caso,
+como</p>
+\[
+\boxed{\nabla_{\rm rad} > \frac{\gamma-1}{\gamma} \equiv \nabla_{\rm ad}}\,.
+\tag{5.156}
+\]
+<p>Se essa desigualdade é verdadeira, o transporte de energia (e matéria)
+é feito por convecção.</p>
+
+<p>Processos de movimento por convecção ocorrem em regiões pouco ou
+parcialmente ionizadas, e também em regiões com \(C_V\) muito alto.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Onde a convecção domina no diagrama HR</div>
+  <div class="conteudo">
+    <p>Já vimos, no Capítulo 3, por que a zona de ionização parcial do
+    hidrogênio empurra \(\nabla_{\rm ad}\) para baixo e desencadeia a
+    convecção no envelope solar. Vale generalizar essa ideia para toda a
+    sequência principal. Em estrelas de <strong>baixa massa</strong> (tipos
+    K e M, \(M\lesssim0{,}8\,M_\odot\)), esse mesmo mecanismo é ainda mais
+    efetivo — os envelopes são convectivos em quase toda sua extensão, e
+    estrelas com \(M\lesssim0{,}35\,M_\odot\) são, na prática, totalmente
+    convectivas. Já em estrelas <strong>massivas</strong> (tipos O e B,
+    \(M\gtrsim1{,}3\,M_\odot\)), é o <em>núcleo</em> que é convectivo, não
+    o envelope: a forte dependência do ciclo CNO com a temperatura
+    (\(\varepsilon_{\rm CNO}\propto T^{15-20}\)) concentra a geração de
+    energia em um volume muito pequeno no centro, exigindo um
+    \(\nabla_{\rm rad}\) enorme ali para transportar toda essa luminosidade
+    radiativamente — grande o suficiente para violar o critério de
+    Schwarzschild e desencadear convecção no núcleo, enquanto o envelope,
+    mais rarefeito e com opacidade menor, permanece radiativo. O Sol, com
+    massa intermediária, ilustra a transição: núcleo radiativo e envelope
+    convectivo, como já discutido neste capítulo (ver também o Módulo
+    interativo 13, acima).</p>
+  </div>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — \(\nabla_{\rm ad}\) para outras composições</div>
+  <div class="conteudo">
+    <p>A Equação (5.154) depende apenas de \(\gamma\), o que permite
+    calcular \(\nabla_{\rm ad}\) para qualquer gás ideal. Para um gás
+    <strong>diatômico</strong> ideal (ex. H\(_2\) molecular, relevante em
+    atmosferas frias e planetas), \(\gamma=7/5\), logo</p>
+    \[
+    \nabla_{\rm ad} = \frac{7/5-1}{7/5} = \frac{2/7}{1}\cdot\frac{5}{5}= \frac27 \approx 0{,}286\,,
+    \tag{5.157}
+    \]
+    <p>um valor menor que \(0{,}4\) — gases diatômicos têm um gradiente
+    adiabático mais raso, o que os torna mais suscetíveis à instabilidade
+    convectiva (mais fácil satisfazer \(\nabla_{\rm rad}>\nabla_{\rm ad}\))
+    que um gás monoatômico equivalente. Nas zonas de ionização parcial de H
+    e He no envelope solar, a situação é ainda mais extrema: parte da
+    energia da compressão/expansão da bolha vai para ionizar (ou
+    recombinar) átomos em vez de mudar a temperatura, o que reduz o
+    \(\gamma\) <em>efetivo</em> do gás para bem abaixo de \(5/3\) — em
+    geral, \(\gamma_{\rm eff}\) pode cair para próximo de 1 no pico de uma
+    zona de ionização. Como \(\nabla_{\rm ad}=(\gamma-1)/\gamma\to0\)
+    quando \(\gamma\to1\), isso torna a instabilidade convectiva ainda mais
+    provável precisamente nessas zonas — reforçando, por um caminho
+    termodinâmico diferente, a mesma conclusão física do contexto
+    anterior.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 18 — \(\nabla_{\rm ad}=(\gamma-1)/\gamma\) para qualquer gás</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m17-gamma">Índice adiabático \(\gamma\) <span class="valor" id="m17-gamma-valor">1,667</span></label>
+      <input type="range" id="m17-gamma" min="101" max="200" step="1" value="167">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m17-canvas" role="img" aria-label="Gráfico de nabla_ad em função de gamma, com marcadores nos valores de gás monoatômico, diatômico e no limite de ionização parcial." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(\gamma=\)<strong id="m17-gamma-texto">—</strong> →
+    \(\nabla_{\rm ad}=(\gamma-1)/\gamma=\)<strong id="m17-nablaad">—</strong>.
+    Marcadores de referência: monoatômico (\(\gamma=5/3\),
+    \(\nabla_{\rm ad}=0{,}4\)); diatômico (\(\gamma=7/5\),
+    \(\nabla_{\rm ad}\approx0{,}286\)); \(\gamma\to1\) (zona de ionização
+    parcial, \(\nabla_{\rm ad}\to0\) — a mesma conclusão do exemplo acima).
+    Esta mesma dedução, por um caminho diferente (entropia), aparece no
+    <a href="cap03_termodinamica.html">Capítulo 3</a> — não duplicamos a
+    interatividade aqui além desta calculadora simples.
+  </p>
+</div>
+
+<h3>Critério de instabilidade de Ledoux</h3>
+
+<p>Uma outra forma de escrever o critério de instabilidade é por</p>
+\[
+\left(\frac{\partial\rho}{\partial r}\right)_B < \left(\frac{\partial\rho}{\partial r}\right)_A\,.
+\tag{5.158}
+\]
+<p>Mas anteriormente definimos que [Capítulo 3]</p>
+\[
+\frac{\mathrm d\rho}{\rho} = \alpha\,\frac{\mathrm dP}{P} - \delta\,\frac{\mathrm dT}{T}\,.
+\tag{5.159}
+\]
+<p>Se temos que a composição química do gás pode variar, obtemos
+\(F(\rho,P,T,\mu)=0\) (uma dimensão extra). Neste caso, a Equação (5.159)
+assume a forma</p>
+\[
+\frac{\mathrm d\rho}{\rho} = \alpha\,\frac{\mathrm dP}{P} - \delta\,\frac{\mathrm dT}{T} + \phi\,\frac{\mathrm d\mu}{\mu}\,,
+\qquad
+\phi \equiv \frac{\mathrm d\ln\rho}{\mathrm d\ln\mu}\,.
+\tag{5.160}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Ledoux vs. Schwarzschild, e a semiconvecção</div>
+  <div class="conteudo">
+    <p>A Equação (5.160) generaliza o Critério de Schwarzschild [Equação
+    (5.142)] para o caso em que a composição química <em>não</em> é
+    homogênea — precisamente a hipótese que havíamos assumido ao cancelar
+    \(n_B=n_A\) na dedução de Schwarzschild. Quando
+    \(\nabla_\mu\equiv\mathrm d\ln\mu/\mathrm d\ln P=0\) (composição
+    homogênea), o termo extra desaparece e o <strong>Critério de
+    Ledoux</strong> se reduz exatamente ao de Schwarzschild. Quando há um
+    gradiente de peso molecular médio <em>estabilizante</em> (tipicamente
+    \(\mu\) crescente em direção ao centro, como ocorre acima de um núcleo
+    convectivo que converte H em He — mais pesado), surge uma possibilidade
+    nova: uma região pode ser formalmente instável pelo critério de
+    Schwarzschild (que ignora a composição) mas estável pelo critério de
+    Ledoux (que a inclui) — a chamada <strong>semiconvecção</strong>.
+    Fisicamente, o gradiente de \(\mu\) atua como um freio adicional à
+    flutuabilidade da bolha, permitindo apenas uma mistura lenta e parcial,
+    em vez de convecção plenamente desenvolvida. A semiconvecção é
+    especialmente relevante na evolução de estrelas massivas, na borda do
+    núcleo convectivo de H, onde a escolha entre os dois critérios (e entre
+    diferentes prescrições para a difusão semiconvectiva) afeta
+    significativamente a massa final do núcleo de hélio, as trajetórias no
+    diagrama HR e até o destino da estrela como supernova (Sibony et al.
+    2023).</p>
+  </div>
+</div>
+
+<h3>Fluxo convectivo de energia (Teoria do Comprimento de Mistura)</h3>
+
+<p>Podemos descrever o fluxo de energia carregado pelas bolhas como</p>
+\[
+F_{\rm conv} = \rho_B\,v_B\,u_B\,,
+\tag{5.161}
+\]
+<p>onde \(v_B\) é a velocidade das partículas e \(u_B\) é a energia
+específica (por unidade de massa) transportada pela bolha, em excesso
+frente ao ambiente. Como \(u_B=C_P\Delta T\), e \(\Delta T\equiv
+T_B-T_A\), precisamos de uma expressão fechada para \(\Delta T\) em termos
+das grandezas já conhecidas. Isso nos leva à <strong>Teoria do Comprimento
+de Mistura</strong> (<em>mixing length theory</em>, MLT): supomos que a
+bolha percorre uma distância característica \(\ell_m\) (o
+<strong>comprimento de mistura</strong>) antes de se dissolver no
+ambiente, acumulando ao longo desse percurso uma diferença de temperatura
+proporcional a \((\nabla-\nabla_{\rm ad})\) — o excesso do gradiente real
+sobre o adiabático — e à escala de altura de pressão,</p>
+\[
+H_P \equiv -\frac{\mathrm dr}{\mathrm d\ln P} = -P\,\frac{\mathrm dr}{\mathrm dP}\,.
+\tag{5.162}
+\]
+<p>O fluxo convectivo é então</p>
+\[
+\boxed{F_{\rm conv} = \rho_B v_B C_P\left[-\ell_m\,\frac{T}{H_P}\left(\nabla-\nabla_{\rm ad}\right)\right]}\,,
+\tag{5.163}
+\]
+<p>onde definimos</p>
+\[
+\Delta T = -\ell_m\,\frac{T}{H_P}\left(\nabla-\nabla_{\rm ad}\right)\,.
+\tag{5.164}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Conferência dimensional da Equação (5.164)</div>
+  <div class="conteudo">
+    <p>Vale a pena conferir essa expressão termo a termo. \(\nabla\) e
+    \(\nabla_{\rm ad}\) são adimensionais [Equação (5.140)]; \(T/H_P\) tem
+    dimensão de temperatura sobre comprimento; multiplicando por
+    \(\ell_m\) (um comprimento), obtemos dimensão de temperatura — como
+    deve ser para \(\Delta T\). A Equação (5.164) é, portanto,
+    dimensionalmente correta, e algebricamente idêntica a
+    \((\ell_m/H_P)(\nabla-\nabla_{\rm ad})\,T\), a maneira mais comum de
+    escrevê-la na literatura. A única discrepância frente à dedução
+    completa da MLT (ex. Kippenhahn &amp; Weigert) é a <strong>ausência do
+    fator 1/2</strong>: a forma padrão na literatura é
+    \(\Delta T\approx(\ell_m/2H_P)(\nabla-\nabla_{\rm ad})\,T\), com o 1/2
+    surgindo de uma média sobre o deslocamento da bolha ao longo de todo o
+    seu percurso (que vai de 0 a \(\ell_m\), com deslocamento médio
+    \(\ell_m/2\)), em vez de usar o deslocamento total \(\ell_m\)
+    diretamente. Como a dedução aqui apresentada é uma estimativa de ordem
+    de grandeza — não uma média formal sobre a trajetória —, mantemos o
+    resultado sem inserir o fator 1/2, mas vale sinalizar essa diferença
+    frente à literatura mais rigorosa.</p>
+  </div>
+</div>
+
+<h3>Estimativa da velocidade convectiva e do comprimento de mistura</h3>
+
+<p>Podemos obter uma estimativa para a velocidade convectiva das
+partículas. Se a diferença entre a densidade dos elementos do gás e a sua
+vizinhança é \(\Delta\rho\), podemos expressar a aceleração por</p>
+\[
+a = -g\,\frac{\Delta\rho}{\rho} \approx g\,\frac{\Delta T}{T}\,,
+\tag{5.165}
+\]
+<p>assumindo que \(P\) é constante e que \(\rho\propto1/T\) (gás ideal a
+pressão fixa, \(P\propto\rho T\Rightarrow\rho\propto1/T\)).</p>
+
+<p>Também podemos descrever a distância \(\ell_m\) pela lei fundamental do
+deslocamento vertical, onde</p>
+\[
+\ell_m = v_0t + \frac12at^2\,.
+\tag{5.166}
+\]
+<p>Assumindo que \(v_0\equiv0\) (a bolha parte do repouso), temos</p>
+\[
+\boxed{\ell_m = \frac12at^2}\,.
+\tag{5.167}
+\]
+
+<p>Como a velocidade média é descrita por</p>
+\[
+v_B = \frac{\ell_m}{t} = \frac{\frac12at^2}{t} = \frac12at\,,
+\tag{5.168}
+\]
+<p>podemos escrever \(v_B\) em função da distância, em vez do tempo.
+Isolando \(t\) na Equação (5.167), \(t=(2\ell_m/a)^{1/2}\), e substituindo
+na Equação (5.168):</p>
+\[
+v_B = \frac12a\left(\frac{2\ell_m}{a}\right)^{1/2}
+= \left(\frac{a^2}{2^2}\cdot\frac{2\ell_m}{a}\right)^{1/2}
+\approx \left(\frac12\,\ell_m a\right)^{1/2}\,.
+\tag{5.169}
+\]
+<p>Substituindo \(a=g\Delta T/T\) [Equação (5.165)] e, em seguida,
+\(\Delta T\) na forma da MLT [Equação (5.164)]:</p>
+\[
+v_B \approx \left(\frac12\,\ell_m g\,\frac{\Delta T}{T}\right)^{1/2}
+= \left[\frac12\,\ell_m g\,\frac{1}{T}\cdot\frac{T}{H_P}\left(\nabla-\nabla_{\rm ad}\right)\ell_m\right]^{1/2}\,,
+\tag{5.170}
+\]
+<p>ou seja,</p>
+\[
+\boxed{v_B \approx \left[\frac{\ell_m^2\,g}{2H_P}\left(\nabla-\nabla_{\rm ad}\right)\right]^{1/2}}\,.
+\tag{5.171}
+\]
+<p>Substituindo na expressão de \(F_{\rm conv}\) [Equação (5.163)]:</p>
+\[
+F_{\rm conv} = \rho_B C_P\left[\frac{\ell_m^2g}{2H_P}\left(\nabla-\nabla_{\rm ad}\right)\right]^{1/2}
+\cdot\left[-\ell_m\,\frac{T}{H_P}\left(\nabla-\nabla_{\rm ad}\right)\right]\,,
+\tag{5.172}
+\]
+<p>que, reorganizando os fatores, chega na forma final:</p>
+\[
+\boxed{F_{\rm conv} = \rho_B C_P T\left(\frac{\ell_m}{H_P}\right)^2
+\left(\frac12gH_P\right)^{1/2}\left(\nabla-\nabla_{\rm ad}\right)^{3/2}}\,.
+\tag{5.173}
+\]
+<p>O termo \((\nabla-\nabla_{\rm ad})\) é chamado de <strong>termo
+superadiabático</strong>: ele mede o quanto o gradiente real de
+temperatura excede o gradiente adiabático, e funciona como um termo de
+resistência ao movimento convectivo — quanto maior o excesso, mais
+vigorosa a convecção [Equação (5.173), onde
+\(F_{\rm conv}\propto(\nabla-\nabla_{\rm ad})^{3/2}\)].</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 19 — Calculadora do fluxo convectivo (MLT)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m18-lmHp">Razão \(\ell_m/H_P\) (α<sub>MLT</sub>) <span class="valor" id="m18-lmHp-valor">1,8</span></label>
+      <input type="range" id="m18-lmHp" min="50" max="300" step="1" value="180">
+    </div>
+    <div class="controle">
+      <label for="m18-excesso">Excesso \(\nabla-\nabla_{\rm ad}\) (escala log) <span class="valor" id="m18-excesso-valor">1e-4</span></label>
+      <input type="range" id="m18-excesso" min="-1200" max="0" step="1" value="-400">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m18-canvas" role="img" aria-label="Gráfico de F_conv em função do excesso nabla menos nabla_ad, em escala log-log, mostrando a lei de potência 3/2." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Usando valores de referência solares para \(\rho_B\), \(C_P\), \(T\),
+    \(g\), \(H_P\) na base da zona convectiva:
+    \(v_B=\)<strong id="m18-vB">—</strong> cm/s,
+    \(F_{\rm conv}=\)<strong id="m18-Fconv">—</strong> erg/(s·cm²)
+    [Equação (5.173)]. Compare com \(F_\odot=L_\odot/(4\pi R_\odot^2)
+    \approx6{,}3\times10^{10}\,\mathrm{erg/(s\,cm^2)}\): valores razoáveis
+    de \(\alpha_{\rm MLT}\) e um excesso pequeno já bastam para
+    \(F_{\rm conv}\) transportar todo o fluxo solar — antecipando a
+    conclusão da próxima subseção.
+  </p>
+</div>
+
+<h3>Estimativa do gradiente de temperatura convectivo</h3>
+
+<p>Qual o valor de \(\nabla-\nabla_{\rm ad}\) necessário para transportar
+<em>todo</em> o fluxo de energia de uma estrela por convecção pura,
+\(F=L/(4\pi r^2)\)? Podemos obter essa estimativa fazendo as seguintes
+aproximações de ordem de grandeza:</p>
+<ul>
+  <li>\(\rho\approx\bar\rho=3M/(4\pi R^3)\) (densidade média);</li>
+  <li>uma estimativa de ordem de grandeza para \(\bar T\), obtida do
+  equilíbrio hidrostático: \(\mathrm dP/\mathrm dr\sim-P/R\sim
+  -GM\rho/R^2\), ou seja, \(P/\rho\sim GM/R\); usando a equação do gás
+  ideal, \(P/\rho=\mathcal R T/\mu\), temos
+  \(\bar T\sim(\mu/\mathcal R)(GM/R)\);</li>
+  <li>\(C_P=\tfrac52(\mathcal R/\mu)\), válido para um gás monoatômico
+  ideal [Capítulo 3];</li>
+  <li>\(\sqrt{gH_P}=(P/\rho)^{1/2}\sim(GM/R)^{1/2}\), usando novamente
+  \(P/\rho\sim GM/R\).</li>
+</ul>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Estimativas de ordem de grandeza para \(\bar T\) e \(\sqrt{gH_P}\)</div>
+  <div class="conteudo">
+    <p>Do equilíbrio hidrostático, em ordem de grandeza,
+    \(\mathrm dP/\mathrm dr\sim P/R\sim Gm\rho/r^2\sim GM\rho/R^2\)
+    (substituindo \(m\to M\), \(r\to R\), a estimativa mais grosseira
+    possível), ou seja, \(P/\rho\sim GM/R\). Combinando com a equação do
+    gás ideal, \(P=\rho\mathcal R T/\mu\) [Capítulo 3], ou seja,
+    \(P/\rho=\mathcal R T/\mu\), igualamos as duas expressões:
+    \(\mathcal R\bar T/\mu\sim GM/R\), logo
+    \(\bar T\sim(\mu/\mathcal R)(GM/R)\). Já para \(\sqrt{gH_P}\), partindo
+    de \(gH_P=(GM/R^2)\cdot H_P\) e usando a definição de \(H_P\) [Equação
+    (5.162)] em ordem de grandeza (\(H_P\sim P/(\rho g)\), a própria
+    definição de escala de altura de pressão), obtemos diretamente
+    \(gH_P\sim P/\rho\sim GM/R\), e portanto
+    \(\sqrt{gH_P}\sim(GM/R)^{1/2}\).</p>
+  </div>
+</div>
+
+<p>Substituindo essas aproximações na Equação (5.173) e desprezando termos
+numéricos de ordem unitária (como 5/2, \(\sqrt2\), e a razão
+\(\ell_m/H_P\), todos tratados como \(\sim1\) nesta estimativa), obtemos</p>
+\[
+F_{\rm conv} \sim \frac{M}{R^3}\left(\frac{GM}{R}\right)^{3/2}\left(\nabla-\nabla_{\rm ad}\right)^{3/2}\,.
+\tag{5.174}
+\]
+<p>Considerando que \(F_{\rm conv}=L/(4\pi r^2)\sim L/R^2\) (usando
+\(r\sim R\), e descartando o fator \(4\pi\) como de ordem unidade):</p>
+\[
+\frac{L}{R^2} \sim \frac{M}{R^3}\left(\frac{GM}{R}\right)^{3/2}\left(\nabla-\nabla_{\rm ad}\right)^{3/2}\,,
+\tag{5.175}
+\]
+<p>isolando \((\nabla-\nabla_{\rm ad})\):</p>
+\[
+\left(\nabla-\nabla_{\rm ad}\right)^{3/2} \sim \frac{LR}{M}\left(\frac{R}{GM}\right)^{3/2}
+\quad\Longrightarrow\quad
+\boxed{\nabla-\nabla_{\rm ad} \sim \left(\frac{LR}{M}\right)^{2/3}\frac{R}{GM}}\,.
+\tag{5.176}
+\]
+<p>Substituindo os valores de referência para o Sol
+(\(L_\odot=3{,}828\times10^{33}\,\mathrm{erg/s}\),
+\(R_\odot=6{,}957\times10^{10}\,\mathrm{cm}\),
+\(M_\odot=1{,}989\times10^{33}\,\mathrm g\),
+\(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\)), confirmamos
+numericamente:</p>
+\[
+\nabla-\nabla_{\rm ad} \sim 10^{-8}\,.
+\tag{5.177}
+\]
+<p>Assim, a convecção é tão eficiente que apenas uma fração ínfima de
+desvio do processo adiabático é necessária para transportar todo o fluxo
+estelar. Ou seja, nas regiões convectivas do interior estelar,</p>
+\[
+\nabla \approx \nabla_{\rm ad}
+\tag{5.178}
+\]
+<p>é uma excelente aproximação. Isso permite simplificar a equação de
+transporte radiativo em massa [Equação (5.115), generalizada para incluir
+ambos os regimes] usando diretamente \(\nabla\equiv\nabla_{\rm ad}\)
+sempre que a camada for convectivamente instável:</p>
+\[
+\frac{\mathrm dT}{\mathrm dm} = -\frac{Gm}{4\pi r^4}\,\frac{T}{P}\,\nabla\,,
+\qquad
+\nabla=\nabla_{\rm ad}\ \text{(regiões convectivas)}\,.
+\tag{5.179}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 20 — Confirmando \(\nabla-\nabla_{\rm ad}\sim10^{-8}\) para qualquer estrela</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m19-M">Massa \(M/M_\odot\) <span class="valor" id="m19-M-valor">1,00</span></label>
+      <input type="range" id="m19-M" min="10" max="500" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m19-R">Raio \(R/R_\odot\) <span class="valor" id="m19-R-valor">1,00</span></label>
+      <input type="range" id="m19-R" min="10" max="1000" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m19-L">Luminosidade \(L/L_\odot\) <span class="valor" id="m19-L-valor">1,00</span></label>
+      <input type="range" id="m19-L" min="1" max="10000" step="1" value="100">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m19-canvas" role="img" aria-label="Barra logarítmica mostrando o valor calculado de nabla menos nabla_ad para os parâmetros escolhidos, comparado com 10 elevado a -8." style="width:100%;height:220px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(\nabla-\nabla_{\rm ad}\sim\)<strong id="m19-valor">—</strong>
+    [Equação (5.176), em unidades cgs]. Para \(M=R=L=1\) (Sol), reproduz
+    \(\sim10^{-8}\) [Equação (5.177)]. Mesmo variando \(M\), \(R\), \(L\)
+    por uma ou duas ordens de grandeza, o resultado permanece
+    extraordinariamente pequeno — a convecção profunda é, na prática,
+    sempre adiabática.
+  </p>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — \(\nabla\approx\nabla_{\rm ad}\) vale para o interior, não para a superfície</div>
+  <div class="conteudo">
+    <p>A aproximação \(\nabla-\nabla_{\rm ad}\sim10^{-8}\) [Equação (5.177)]
+    vale para o <strong>interior profundo</strong> da zona convectiva, onde
+    a densidade é alta e a convecção transporta o fluxo com enorme
+    eficiência. Ela <em>não</em> se aplica às camadas mais superficiais
+    (próximas à fotosfera), onde a densidade cai drasticamente, o tempo
+    dinâmico da bolha se torna comparável ao tempo de resfriamento
+    radiativo, e a convecção deixa de ser eficiente — é precisamente ali
+    que o desvio \(\nabla-\nabla_{\rm ad}\) pode se tornar grande (não
+    desprezível), e a forma completa da MLT [Equação (5.173)], com o
+    parâmetro livre \(\alpha_{\rm MLT}=\ell_m/H_P\), continua sendo
+    necessária. Em outras palavras: no interior profundo,
+    \(\nabla\approx\nabla_{\rm ad}\) torna a MLT quase dispensável (o
+    gradiente já é conhecido <em>a priori</em>); perto da superfície, é
+    exatamente o oposto, e a escolha de \(\alpha_{\rm MLT}\) afeta
+    diretamente observáveis como o raio estelar.</p>
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Limitações da Teoria do Comprimento de Mistura</div>
+  <div class="conteudo">
+    <p>Apesar de sua utilidade prática — a MLT é, ainda hoje, o método
+    padrão para tratar convecção na grande maioria dos códigos de evolução
+    estelar 1D —, vale destacar suas limitações. O parâmetro
+    \(\alpha_{\rm MLT}\equiv\ell_m/H_P\) é um <strong>parâmetro
+    livre</strong>, sem justificativa física rigorosa a partir de
+    primeiros princípios; ele é tipicamente calibrado ajustando um modelo
+    solar para reproduzir o raio e a luminosidade observados do Sol na
+    idade solar (tipicamente \(\alpha_{\rm MLT}\approx1{,}8\)–\(2{,}0\)), e
+    então aplicado, com o mesmo valor, a estrelas de massa, composição e
+    estágio evolutivo muito diferentes — uma extrapolação nem sempre
+    justificada. Simulações hidrodinâmicas 3D modernas de convecção
+    estelar (<em>radiative hydrodynamics</em>, RHD — ex. os trabalhos de
+    Trampedach, Magic e Freytag, entre outros) mostram que o quadro físico
+    simples da MLT (bolhas discretas, isoladas, subindo uma distância fixa
+    \(\ell_m\)) não corresponde à estrutura real da convecção, que é
+    fortemente assimétrica (estreitas colunas ascendentes cercadas por um
+    fluxo descendente mais amplo e difuso — exatamente o padrão observado
+    na granulação solar); essas simulações mostram ainda que o valor
+    efetivo de \(\alpha_{\rm MLT}\) que melhor reproduz o comportamento 3D
+    varia sistematicamente com a temperatura efetiva, a gravidade
+    superficial e a metalicidade da estrela (Magic, Weiss &amp; Asplund
+    2015). Uma revisão recente e acessível sobre o estado da arte da MLT —
+    incluindo suas limitações e tentativas de superá-las — pode ser
+    encontrada em Joyce &amp; Tayar (2023).</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar — Teoria do Comprimento de Mistura e critérios de convecção</div>
+  <div class="conteudo">
+    <p>Para uma dedução completa e rigorosa da Teoria do Comprimento de
+    Mistura, incluindo o cálculo do gradiente real \(\nabla\) (que, ao
+    contrário de \(\nabla_{\rm ad}\) e \(\nabla_{\rm rad}\), depende da
+    eficiência da convecção e não pode ser obtido sem resolver
+    simultaneamente as equações de transporte convectivo e radiativo), ver
+    o capítulo de convecção de Kippenhahn, Weigert &amp; Weiss (2012). Para
+    uma revisão moderna, didática e atualizada especificamente sobre MLT em
+    modelagem estelar 1D — incluindo sua história, formulação completa e
+    as principais tentativas de calibração e substituição por simulações
+    3D — ver Joyce &amp; Tayar (2023), e, para a calibração quantitativa de
+    \(\alpha_{\rm MLT}\) contra simulações RHD 3D, Magic, Weiss &amp;
+    Asplund (2015). Para a distinção entre os critérios de Schwarzschild e
+    Ledoux e suas consequências para a evolução de estrelas massivas
+    (incluindo semiconvecção), ver Sibony et al. (2023).</p>
+  </div>
+</div>
+
+<p>E podemos, então, simplesmente escrever o transporte de energia por
+convecção como</p>
+\[
+\frac{\mathrm dT}{\mathrm dm} = -\frac{Gm}{4\pi r^4}\,\frac{T}{P}\,\nabla\,,
+\qquad\text{onde agora }\nabla\equiv\nabla_{\rm ad}\,.
+\tag{5.180}
+\]
+
+<h2 id="resumo-quatro-equacoes">Resumo: as quatro equações de estrutura estelar</h2>
+
+<p>Temos, assim, que as 4 equações de estrutura estelar são:</p>
+<div class="caixa-resumo-equacoes">
+<table class="tabela-resumo">
+<tr><td>\(\dfrac{\partial r}{\partial m} = \dfrac{1}{4\pi r^2\rho}\)</td><td>(conservação de massa)</td><td>(5.181)</td></tr>
+<tr><td>\(\dfrac{\partial P}{\partial m} = -\dfrac{Gm}{4\pi r^4} - \dfrac{1}{4\pi r^2}\,\dfrac{\partial^2 r}{\partial t^2}\)</td><td>(equilíbrio hidrostático, caso não-estático)</td><td>(5.182)</td></tr>
+<tr><td>\(\dfrac{\partial l}{\partial m} = \varepsilon_{\rm nuc}-\varepsilon_\nu - C_P\dfrac{\partial T}{\partial t} + \dfrac{\delta}{\rho}\dfrac{\partial P}{\partial t}\)</td><td>(geração/perda de energia)</td><td>(5.183)</td></tr>
+<tr><td>\(\dfrac{\partial T}{\partial m} = -\dfrac{GmT}{4\pi r^4\rho}\,\nabla\)</td><td>(transporte de energia)</td><td>(5.184)</td></tr>
+</table>
+</div>
+<p>onde, no caso radiativo,</p>
+\[
+\nabla=\nabla_{\rm rad}=\left(\frac{\mathrm d\ln T}{\mathrm d\ln P}\right)\,,
+\tag{5.185}
+\]
+<p>e, no caso convectivo,</p>
+\[
+\nabla=\nabla_{\rm ad}=\left(\frac{P}{T}\frac{\mathrm dT}{\mathrm dP}\right)_S=\frac{P\delta}{T\rho C_P}
+\qquad\text{[Capítulo 3]}\,,
+\tag{5.186}
+\]
+<p>com o Critério de Schwarzschild [Equação (5.142)] decidindo qual dos
+dois usar em cada camada da estrela. A Equação (5.182) se reduz ao
+equilíbrio hidrostático usual [Equação (5.25)] quando
+\(\partial^2r/\partial t^2=0\) (caso estático).</p>
+
+<h2 id="tempo-mistura">Escala de tempo de mistura convectiva</h2>
+
+<p>Além de transportar energia, processos convectivos podem transportar
+elementos químicos de camadas internas às externas das estrelas, e
+vice-versa. Podemos definir o <strong>tempo de mistura</strong>
+(\(\tau_{\rm mix}\)) como sendo o tempo gasto por uma bolha para chegar a
+uma área convectiva.</p>
+
+<p>Vamos considerar o caso de uma estrela massiva que tem a energia sendo
+gerada pelo ciclo CNO. Neste caso, a zona convectiva é mais interna na
+estrela — o oposto do Sol (ver o Módulo interativo 14, acima, com o
+slider de massa cobrindo justamente esse regime).</p>
+
+<p>Podemos expressar o tempo de mistura por</p>
+\[
+\tau_{\rm mix} = \frac{d}{v_B}\,,
+\tag{5.187}
+\]
+<p>onde \(d\) é a distância que é definida por \(d=q\,R_\star\), onde
+\(q\) é a fração do raio da estrela incluída na zona convectiva.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Colisão de notação em "\(q\)"</div>
+  <div class="conteudo">
+    <p>O símbolo \(q\) é usado com três significados diferentes em páginas
+    próximas das notas manuscritas. Aqui, \(q\) é a <strong>fração do raio
+    estelar</strong> contida na zona convectiva [Equação (5.187)]. Mais
+    adiante nesta seção (na dedução da 5ª equação da estrutura interna), os
+    subscritos \(p,q\) passam a rotular os <strong>núcleos atômicos</strong>
+    envolvidos em uma transição nuclear \(p\to q\), e
+    \(q_{p,q}\equiv e_{p,q}/m_p\) denota a <strong>energia gerada por
+    unidade de massa</strong> nessa transição. São usos totalmente
+    independentes do mesmo símbolo — mantidos como nas notas originais,
+    mas sinalizados aqui para evitar confusão.</p>
+  </div>
+</div>
+
+<p>\(v_B\), como definimos anteriormente, é
+\(v_B\approx\left[(\ell_m^2g)/(2H_P)(\nabla-\nabla_{\rm
+ad})\right]^{1/2}\) [Equação (5.171)]. Substituindo os valores de
+referência para o Sol, obtemos que o tempo de mistura é da ordem de</p>
+\[
+\tau_{\rm mix} \approx 3\times10^7\ \mathrm s\,,
+\tag{5.188}
+\]
+<p>e, assim, temos que</p>
+\[
+\tau_{\rm mix} \ll \tau_{\rm KH} \ll \tau_{\rm nuc}\,.
+\tag{5.189}
+\]
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Por que a mistura convectiva pode ser tratada como instantânea</div>
+  <div class="conteudo">
+    <p>A hierarquia \(\tau_{\rm mix}\ll\tau_{\rm KH}\ll\tau_{\rm nuc}\) tem
+    uma consequência prática importante para a modelagem da evolução
+    estelar: como o tempo de mistura (\(\sim10^7\,\mathrm s\), comparável
+    ao próprio tempo dinâmico em ordem de grandeza) é muitas ordens de
+    magnitude menor que o tempo nuclear (\(\sim10^{10}\) anos, a escala em
+    que a composição química <em>muda</em> de fato), uma zona convectiva
+    pode ser tratada, em qualquer instante da evolução, como tendo
+    composição química <strong>perfeitamente homogênea</strong> (bem
+    misturada) em toda a sua extensão. Isso justifica uma simplificação
+    numérica central dos códigos de evolução estelar: em vez de resolver o
+    transporte de cada elemento químico camada a camada dentro de uma zona
+    convectiva (o que exigiria acoplar a mistura turbulenta, muito mais
+    rápida, à evolução nuclear, muito mais lenta), basta impor
+    instantaneamente a mesma composição química em toda a região
+    identificada como convectivamente instável, e evoluir essa composição
+    média com a taxa de queima nuclear integrada sobre toda a zona.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Núcleos convectivos e a extensão da sequência principal</div>
+  <div class="conteudo">
+    <p>Em estrelas massivas como no caso discutido acima, o núcleo
+    convectivo tem um efeito evolutivo importante: a mistura convectiva
+    homogeneíza continuamente a composição de <em>todo</em> o núcleo,
+    trazendo hidrogênio "fresco" das bordas do núcleo para o centro (onde a
+    queima é mais rápida) e redistribuindo o hélio já produzido por todo o
+    volume convectivo, em vez de deixá-lo se acumular apenas no centro. O
+    efeito líquido é que uma fração maior da massa total da estrela
+    participa da queima de H do que participaria se o núcleo fosse
+    puramente radiativo (sem mistura) — o "reservatório" de combustível
+    disponível é efetivamente estendido a todo o volume convectivo,
+    prolongando o tempo de vida na sequência principal. Esse efeito é ainda
+    amplificado, na prática, pelo fenômeno do <strong><em>overshooting</em>
+    convectivo</strong>: correntes convectivas que ultrapassam por inércia
+    o limite formal do Critério de Schwarzschild, misturando uma camada
+    adicional de material nominalmente estável. A extensão real do núcleo
+    convectivo (incluindo o <em>overshooting</em>) permanece um dos
+    parâmetros mais incertos dos modelos de evolução estelar, e vem sendo
+    cada vez mais restringida por dados de astrossismologia — as missões
+    <em>Kepler</em> e <em>TESS</em> mediram frequências de pulsação
+    (incluindo modos-g, sensíveis à estrutura profunda) de milhares de
+    estrelas com núcleos convectivos, permitindo inferir a extensão da
+    mistura ao redor do núcleo de forma muito mais direta do que através
+    apenas de trajetórias no diagrama HR (Lindsay et al. 2024).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 21 — Calculadora do tempo de mistura \(\tau_{\rm mix}\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m20-preset">Estrela de referência</label>
+      <select id="m20-preset" class="botao-modulo" style="width:100%;padding:0.5rem;background:#fff;color:#16233a;border:1px solid var(--borda);">
+        <option value="massiva" selected>Estrela massiva (~10 M_☉, núcleo convectivo CNO) — exemplo do texto</option>
+        <option value="sol">Sol (envelope convectivo externo)</option>
+        <option value="custom">Personalizado (sliders abaixo)</option>
+      </select>
+    </div>
+  </div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m20-q">Fração do raio na zona convectiva \(q\) <span class="valor" id="m20-q-valor">0,20</span></label>
+      <input type="range" id="m20-q" min="1" max="99" step="1" value="20">
+    </div>
+    <div class="controle">
+      <label for="m20-R">Raio da estrela \(R/R_\odot\) <span class="valor" id="m20-R-valor">4,50</span></label>
+      <input type="range" id="m20-R" min="10" max="500" step="1" value="450">
+    </div>
+    <div class="controle">
+      <label for="m20-vB">Velocidade convectiva \(v_B\) (cm/s) <span class="valor" id="m20-vB-valor">2000</span></label>
+      <input type="range" id="m20-vB" min="100" max="50000" step="100" value="2000">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m20-canvas" role="img" aria-label="Barra logarítmica comparando o tempo de mistura calculado com as demais escalas de tempo do capítulo." style="width:100%;height:240px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(d=qR_\star=\)<strong id="m20-d">—</strong> cm;
+    \(\tau_{\rm mix}=d/v_B=\)<strong id="m20-taumix">—</strong> s.
+  </p>
+  <p class="leitura-card">
+    O exemplo do texto [Equação (5.188)] é o de uma <strong>estrela
+    massiva com núcleo convectivo alimentado pelo ciclo CNO</strong>
+    (Figura da Seção~5.9, zona convectiva mais interna que a do Sol) —
+    não o Sol. Com \(R_\star\approx4{,}5\,R_\odot\) (raio típico de
+    sequência principal para \(\sim10\,M_\odot\)), zona convectiva
+    central \(q\approx0{,}20\) e \(v_B\approx2000\) cm/s (mais lenta que
+    o valor tipicamente citado para a base da zona convectiva solar,
+    consistente com convecção mais profunda e menos vigorosa no núcleo),
+    reproduz-se \(\tau_{\rm mix}\approx3{,}1\times10^7\,\mathrm s\) —
+    o mesmo valor do texto, intermediário entre o tempo dinâmico e o
+    tempo de Kelvin–Helmholtz [Equação (5.189)]. O preset "Sol" usa os
+    valores de referência solares originais deste módulo
+    ($R=1\,R_\odot$, $q=0{,}30$, $v_B=5000$ cm/s), que dão
+    \(\tau_{\rm mix}\approx4{,}2\times10^6\,\mathrm s\) — mais curto,
+    porque a zona convectiva solar é externa e mais rasa. Os valores de
+    \(R_\star\), \(q\) e \(v_B\) da estrela massiva são estimativas
+    ilustrativas (a dedução original das notas não explicita os números
+    intermediários, só o resultado final $\approx3\times10^7$s) —
+    ajustadas para reproduzir esse resultado, não medidas de um modelo
+    estelar específico.
+  </p>
+</div>
+
+<h2 id="quinta-equacao">A 5<sup>a</sup> equação da estrutura interna</h2>
+
+<p>A composição química das estrelas é muito importante: ela influencia
+diretamente propriedades básicas, como os coeficientes de absorção e
+emissão, e a própria fonte de geração de energia das estrelas.</p>
+
+<p>A composição estelar é bem mais simples que a dos corpos na Terra. Por
+causa das altas temperaturas e pressões, não existem moléculas complexas
+no núcleo das estrelas, e a grande maioria dos átomos está completamente
+ionizada.</p>
+
+<p>Podemos definir a fração de unidade de massa de um núcleo como sendo</p>
+\[
+\sum_i X_i = 1\,,
+\tag{5.190}
+\]
+<p>a soma de massa de todos os elementos químicos de uma estrela é 1. A
+composição química da estrela em um tempo \(t\) com uma massa \(m\) é
+definida por:</p>
+\[
+X_i = X(m,t)\,,
+\qquad
+X_i \equiv \frac{m_in_i}{\rho}\,,
+\tag{5.191}
+\]
+<p>onde \(n_i\) é o número de partículas por volume e \(m_i\) é a massa do
+núcleo do átomo. De forma geral, define-se</p>
+\[
+X\equiv X_H\,,\qquad Y\equiv X_{He}\,,\qquad Z\equiv1-X-Y\,,
+\tag{5.192}
+\]
+<p>onde \(Z\) é a soma de todos os elementos além de H e He (os
+<strong>metais</strong>, na convenção usual da astrofísica estelar).</p>
+
+<p>Para a equação de estrutura, vamos considerar a fusão do elemento "\(i\)"
+em outros elementos, e de outros elementos para "\(i\)". Assim, podemos
+expressar a variação da composição química com o tempo da forma</p>
+\[
+\frac{\partial X_i}{\partial t} = \frac{m_i}{\rho}\left(\sum_j r_{ji} - \sum_k r_{ik}\right)\,,
+\tag{5.193}
+\]
+<p>onde \(r\) é o número de reações por segundo (pode transformar
+\(j\to i\), e depois \(i\) em \(k\)).</p>
+
+<p>Em alguns casos, é mais conveniente escrever a equação em função da
+energia trocada em cada reação. Considerando que uma transição \(p\to q\)
+libera uma energia definida por \(e_{p,q}\), podemos escrever uma
+expressão de conservação de energia onde</p>
+\[
+E = \sum_{p,q}E_{p,q} = \frac{1}{\rho}\sum_{p,q}r_{p,q}e_{p,q}\,.
+\tag{5.194}
+\]
+<p>Introduzindo um termo de energia gerada quando uma unidade de massa de
+um núcleo \(p\) se transforma em \(q\), por</p>
+\[
+q_{p,q} \equiv \frac{e_{p,q}}{m_p}\,,
+\tag{5.195}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Colisão de notação em "\(q_{p,q}\)"</div>
+  <div class="conteudo">
+    <p>Como já sinalizado acima, o símbolo \(q\) reaparece aqui com um
+    significado completamente diferente do usado para a fração do raio na
+    zona convectiva: agora, \(p\) e \(q\) rotulam os <strong>núcleos
+    atômicos</strong> envolvidos em uma transição \(p\to q\), e
+    \(q_{p,q}\) [Equação (5.195)] é a energia liberada por unidade de massa
+    nessa transição — análogo ao \(\phi\) (eficiência de conversão
+    massa-energia) já usado na seção de escala de tempo nuclear para a
+    cadeia p-p, mas agora definido de forma mais geral, transição a
+    transição.</p>
+  </div>
+</div>
+
+<p>podemos reescrever a Equação (5.195) como \(e_{p,q}=m_p\,q_{p,q}\); como
+\(E=(1/\rho)\sum_{p,q}r_{p,q}e_{p,q}\) [Equação (5.194)], temos</p>
+\[
+\sum_{p,q}E_{p,q} = \frac{m_p}{\rho}\sum_{p,q}r_{p,q}\,q_{p,q}\,,
+\tag{5.196}
+\]
+<p>ou seja, termo a termo, \(E_{p,q}=(m_p/\rho)\,r_{p,q}\,q_{p,q}\).
+Isolando \(r_{p,q}\) e somando sobre todas as transições:</p>
+\[
+\sum_{p,q}\frac{E_{p,q}}{q_{p,q}} = \frac{m_p}{\rho}\sum_{p,q}r_{p,q}\,,
+\tag{5.197}
+\]
+<p>logo, substituindo na Equação (5.193), temos</p>
+\[
+\boxed{\frac{\partial X_i}{\partial t} = \sum_j\frac{E_{j,i}}{q_{j,i}} - \sum_k\frac{E_{i,k}}{q_{i,k}}}\,.
+\tag{5.198}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Passo intermediário: isolando \(r_{p,q}\)</div>
+  <div class="conteudo">
+    <p>A passagem da Equação (5.196) para a Equação (5.197) segue da
+    identificação termo a termo, \(E_{p,q}=(m_p/\rho)\,r_{p,q}\,q_{p,q}\),
+    isolando \(r_{p,q}=\dfrac{\rho}{m_p}\dfrac{E_{p,q}}{q_{p,q}}\) e
+    somando sobre todos os pares \((p,q)\).</p>
+  </div>
+</div>
+
+<div class="modulo-card modulo-destaque">
+  <div class="rotulo-card">Módulo interativo 22 — Aplicação: evolução de \(X\) (H→He) e a taxa de consumo do Sol</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m21-L">Luminosidade \(L/L_\odot\) <span class="valor" id="m21-L-valor">1,00</span></label>
+      <input type="range" id="m21-L" min="1" max="10000" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="m21-X0">\(X_0\) inicial (fração de H) <span class="valor" id="m21-X0-valor">0,70</span></label>
+      <input type="range" id="m21-X0" min="10" max="90" step="1" value="70">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m21-canvas" role="img" aria-label="Gráfico da fração de hidrogênio X diminuindo linearmente com o tempo, dado o consumo constante necessário para sustentar a luminosidade escolhida." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(q_H=\phi c^2=6{,}3\times10^{18}\,\mathrm{erg/g}\) [energia liberada
+    por grama de H convertido em He, Equação (5.200) abaixo]. Taxa de
+    consumo de massa de H necessária para sustentar a luminosidade
+    escolhida: \(\dot M_H=L/q_H=\)<strong id="m21-mdot">—</strong> g/s. Para
+    \(L=L_\odot\), isso reproduz \(\approx6\times10^{14}\,\mathrm{g/s}\)
+    (\(\approx600\) milhões de toneladas por segundo), exatamente o número
+    citado no texto. Tempo estimado para consumir toda a fração disponível
+    de H no núcleo (\(f_{\rm nuc}\approx0{,}1\) da massa estelar, \(X_0\)
+    escolhido): <strong id="m21-tempo">—</strong> anos — na mesma ordem de
+    grandeza de \(\tau_{\rm nuc}\) [Equação (5.86)], como deveria ser.
+  </p>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — A energia da fusão H→He e a luminosidade solar</div>
+  <div class="conteudo">
+    <p>Para a transformação mais simples possível, a fusão de H em He, a
+    Equação (5.198) se reduz a um único termo de perda (o hidrogênio, sendo
+    primordial, não é produzido por nenhuma reação anterior nesta cadeia
+    simplificada):</p>
+    \[
+    \boxed{\frac{\partial X}{\partial t} = -\frac{E_H}{q_H}}\,,
+    \tag{5.199}
+    \]
+    <p>que descreve a perda de hidrogênio (e da energia associada) da
+    estrela para o meio. O valor de \(q_H\) já apareceu neste livro, ainda
+    que com outro símbolo: é exatamente \(\phi c^2\) [Equação (5.81)], com
+    \(\phi=0{,}007\) a fração da massa de repouso convertida em energia.
+    Numericamente,</p>
+    \[
+    q_H = \phi c^2 = 0{,}007\times(2{,}998\times10^{10}\,\mathrm{cm/s})^2
+    \approx 6{,}3\times10^{18}\ \mathrm{erg/g}\,,
+    \tag{5.200}
+    \]
+    <p>um número de referência importante: é a energia liberada por grama
+    de hidrogênio convertido em hélio. Como checagem de ordem de grandeza,
+    multiplicar esse valor pela taxa de consumo de H no núcleo solar
+    necessária para sustentar \(L_\odot=3{,}828\times10^{33}\,
+    \mathrm{erg/s}\) — cerca de \(6\times10^{14}\,\mathrm g/\mathrm s\),
+    ou seja, cerca de 600 milhões de toneladas por segundo — reproduz
+    exatamente a luminosidade observada do Sol, fechando o ciclo entre a
+    física nuclear microscópica desta seção e a escala de tempo nuclear
+    macroscópica já discutida acima.</p>
+  </div>
+</div>
+
+<p>Voltaremos a analisar os processos químicos no interior estelar com
+mais detalhe adiante (provavelmente no capítulo dedicado à Geração de
+Energia).</p>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar — Redes de reações nucleares e a 5ª equação</div>
+  <div class="conteudo">
+    <p>A formulação de redes de reações nucleares apresentada aqui, em
+    termos de taxas \(r_{p,q}\) e energias por transição \(q_{p,q}\), é
+    apenas o esqueleto do problema — em uma estrela real, dezenas de
+    espécies nucleares e centenas de reações competem simultaneamente.
+    Para a formulação completa de redes de reações nucleares estelares,
+    incluindo as cadeias pp, o ciclo CNO e a nucleossíntese de elementos
+    mais pesados, ver Clayton (1983), a referência clássica sobre o tema.
+    Para a conexão entre essas redes de reação e as equações de estrutura
+    estelar completas (incluindo a evolução acoplada de composição química
+    e estrutura), ver o capítulo correspondente de Kippenhahn, Weigert
+    &amp; Weiss (2012).</p>
+  </div>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 5.
+</footer>
+
+<script src="assets/cap05_modulos.js"></script>

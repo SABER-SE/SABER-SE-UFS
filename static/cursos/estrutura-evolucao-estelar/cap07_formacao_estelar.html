@@ -1,0 +1,2693 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Formação Estelar e Planetária</title>
+<meta name="description" content="Módulo interativo do Capítulo 7: instabilidade de Jeans, colapso inside-out de Shu, o problema do momento angular e a formação do disco, evolução pré-sequência principal, classes observacionais, estrutura e evolução de discos protoplanetários, acréscimo magnetosférico e formação planetária — com colapso e formação de disco animados.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      sen: '\\operatorname{sen}'
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 7 — Formação Estelar e Planetária</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, da nuvem molecular ao disco protoplanetário e à bifurcação entre formação estelar e planetária, com o colapso <em>inside-out</em> de Shu e a formação do disco por conservação de momento angular animados.</p>
+
+<h2 id="fe-introducao">Introdução</h2>
+
+<p>Nos capítulos anteriores construímos o formalismo de uma estrela em
+<strong>equilíbrio</strong>: as equações de estrutura estelar (<a
+href="cap05_equacoes_estrutura.html">Capítulo 5</a>) mostraram como
+gravidade e pressão se equilibram hidrostaticamente, e o Teorema do
+Virial, \(2E_i=-E_g\), revelou a relação entre energia interna e
+gravitacional que sustenta esse equilíbrio. Mas nenhuma estrela nasce em
+equilíbrio: toda estrela se forma pelo colapso gravitacional de uma
+região de gás e poeira interestelar, e é o mesmo Teorema do Virial —
+agora aplicado à condição em que o equilíbrio <em>deixa</em> de existir —
+que determina quando esse colapso começa. Neste capítulo estudamos os
+primeiros estágios da formação estelar, da nuvem molecular ao núcleo
+pré-estelar em colapso, com a instabilidade de Jeans que os conecta, até
+a formação de um disco circunstelar por conservação de momento angular —
+o berçário da formação planetária, tema com que encerramos o capítulo.</p>
+
+<h2 id="fe-nuvens-moleculares">Nuvens moleculares e núcleos pré-estelares</h2>
+
+<p>Estrelas se formam a partir do meio interestelar frio e denso, das
+<strong>nuvens moleculares</strong>, onde a densidade é alta o suficiente
+para o hidrogênio existir predominantemente como H\(_2\) em vez de
+atômico ou ionizado. As <strong>nuvens moleculares gigantes</strong>
+(GMCs) são as maiores estruturas autogravitantes da Galáxia: massas de
+\(10^4\)&ndash;\(10^6\,M_\odot\), dezenas de parsecs, \(T\sim10\)&ndash;\(30\,\)K,
+\(n\sim10^2\)&ndash;\(10^3\,\mathrm{cm^{-3}}\) (Heyer &amp; Dame, 2015). Como o
+H\(_2\) é homonuclear, sem dipolo permanente, suas transições rotacionais
+são proibidas por dipolo e ele não irradia eficientemente no frio — por
+isso as GMCs são mapeadas via <strong>traçadores químicos</strong>,
+sobretudo CO (\(J{=}1{\to}0\), \(E/k_B\approx5{,}5\,\)K, facilmente populada
+a \(T\sim10\,\)K). A abundância de CO é pequena
+(\(\mathrm{CO/H_2}\sim10^{-4}\)), mas suficiente como traçador padrão via
+o fator \(X_{\rm CO}\equiv N(\mathrm{H_2})/W_{\rm CO}\) (Heyer &amp; Dame,
+2015).</p>
+
+<p>Dentro das GMCs, o gás se organiza em filamentos e, nos pontos mais
+densos, em <strong>núcleos densos</strong>. Um núcleo denso
+gravitacionalmente ligado sem protoestrela detectável é um <strong>núcleo
+pré-estelar</strong> — o objeto deste capítulo. O <em>Herschel</em> Gould
+Belt Survey caracterizou uma amostra grande desses núcleos: tamanhos
+\(\sim0{,}1\,\)pc, \(T\sim10\,\)K, \(n\sim10^4\)&ndash;\(10^5\,\mathrm{cm^{-3}}\),
+massa mediana \(\sim0{,}5\,M_\odot\) (André et al., 2010) (até
+\(n\sim10^6\,\mathrm{cm^{-3}}\) em núcleos mais concentrados, antes da
+contração dinâmica). É essa faixa — \(T\sim10\,\)K,
+\(n\sim10^4\,\mathrm{cm^{-3}}\) — que usaremos como referência na próxima
+seção.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — De onde vem o frio das nuvens moleculares</div>
+  <div class="conteudo">
+    <p>Um núcleo pré-estelar a \(T\sim10\,\)K e
+    \(n\sim10^4\,\mathrm{cm^{-3}}\) está entre os ambientes mais frios do
+    universo observável fora do fundo cósmico de micro-ondas —
+    resfriamento essencial para o colapso, já que a massa de Jeans
+    decresce com \(T^{3/2}\) (próxima seção): gás quente (\(T\sim10^4\,\)K,
+    como o meio ionizado difuso) exigiria massas ordens de grandeza
+    maiores. O resfriamento ocorre por emissão rotacional molecular nas
+    regiões externas e, nos núcleos mais densos e opticamente espessos a
+    essa emissão, por emissão térmica contínua da poeira no infravermelho
+    distante (André et al., 2010).</p>
+  </div>
+</div>
+
+<h2 id="fe-instabilidade-jeans">A instabilidade de Jeans</h2>
+
+<p>Uma nuvem de gás autogravitante permanece em equilíbrio hidrostático
+enquanto a pressão térmica for capaz de sustentar seu próprio peso. O
+critério preciso para quando esse equilíbrio deixa de ser possível — a
+<strong>instabilidade de Jeans</strong> — pode ser obtido por dois
+caminhos independentes: um argumento energético, baseado diretamente no
+Teorema do Virial já estabelecido no Capítulo 5, e um tratamento
+hidrodinâmico completo, baseado na relação de dispersão de perturbações
+lineares em um fluido autogravitante. Os dois devem concordar a menos de
+fatores numéricos de ordem unidade, já que descrevem a mesma física por
+caminhos distintos.</p>
+
+<h3>Método energético: o Teorema do Virial</h3>
+
+<p>Já vimos, na forma mais geral do Teorema do Virial aplicado a uma
+esfera de gás autogravitante em equilíbrio hidrostático, que</p>
+\[
+\int_0^M\frac{3P}{\rho}\,\mathrm{d}m = -E_g\,,
+\tag{7.1}
+\]
+<p>válida para qualquer gás em equilíbrio hidrostático, independente de
+sua composição — a dedução usa apenas a equação de equilíbrio
+hidrostático e a definição de energia gravitacional, nunca a equação de
+estado do gás. Isso é conveniente aqui: uma nuvem molecular fria é
+composta majoritariamente de H\(_2\) <em>molecular</em>, com peso
+molecular médio \(\mu\approx2{,}3\) (em vez do \(\mu\approx0{,}6\) do
+plasma estelar ionizado), mas a Equação (7.1) continua válida porque a
+pressão de um gás ideal, \(P=nk_BT\), depende apenas dos graus de
+liberdade translacionais — os graus rotacionais e vibracionais de
+H\(_2\) contribuem à energia interna, não à pressão.</p>
+
+<p>Para uma nuvem esférica, uniforme, isotérmica e composta de gás ideal,
+\(P/\rho=k_BT/(\mu m_{\mathrm H})\) é constante em toda a nuvem, de modo
+que a integral do lado esquerdo da Equação (7.1) se resolve
+trivialmente:</p>
+\[
+\int_0^M\frac{3P}{\rho}\,\mathrm{d}m
+= \frac{3k_BT}{\mu m_{\mathrm H}}\int_0^M\mathrm{d}m
+= \frac{3Mk_BT}{\mu m_{\mathrm H}}\,.
+\tag{7.2}
+\]
+<p>Para o lado direito, precisamos da energia gravitacional de uma esfera
+uniforme de massa \(M\), raio \(R\) e densidade \(\rho=3M/(4\pi R^3)\):</p>
+\[
+E_g = -\int_0^M\frac{Gm}{r}\,\mathrm{d}m
+= -\int_0^R\frac{G\left(\frac{4}{3}\pi r^3\rho\right)}{r}\,4\pi r^2\rho\,\mathrm{d}r
+= -\frac{16\pi^2G\rho^2}{3}\int_0^R r^4\,\mathrm{d}r
+= -\frac{16\pi^2G\rho^2R^5}{15}\,.
+\tag{7.3}
+\]
+<p>Substituindo \(\rho=3M/(4\pi R^3)\),</p>
+\[
+E_g = -\frac{16\pi^2GR^5}{15}\cdot\frac{9M^2}{16\pi^2R^6}
+= \boxed{-\frac{3}{5}\frac{GM^2}{R}}\,,
+\tag{7.4}
+\]
+<p>o resultado padrão para a energia gravitacional de uma esfera
+homogênea — o fator \(3/5\) (em vez do \(1\) da aproximação grosseira
+\(E_g\sim-GM^2/R\) usada no Capítulo 5) vem da integração sobre o perfil
+de densidade uniforme.</p>
+
+<p>O equilíbrio hidrostático deixa de ser possível quando \(|E_g|\)
+excede o lado esquerdo da Equação (7.1) no limite marginal. Igualando as
+Equações (7.2) e (7.4):</p>
+\[
+\frac{3Mk_BT}{\mu m_{\mathrm H}} = \frac{3}{5}\frac{GM^2}{R}
+\quad\Longrightarrow\quad
+\frac{GM}{R} = \frac{5k_BT}{\mu m_{\mathrm H}}\,.
+\tag{7.5}
+\]
+<p>Usando \(R=(3M/4\pi\rho)^{1/3}\) para eliminar \(R\) em favor de
+\(M\) e \(\rho\), e isolando \(M\), obtemos a <strong>massa de
+Jeans</strong>:</p>
+\[
+\boxed{M_J = \left(\frac{5k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\left(\frac{3}{4\pi\rho}\right)^{1/2}}\,.
+\tag{7.6}
+\]
+<p>Nuvens com \(M>M_J\) têm energia gravitacional maior, em módulo, do
+que a pressão térmica sustenta, e colapsam; com \(M<M_J\), a pressão
+vence. Este é exatamente o resultado já citado como estimativa de ordem
+de grandeza no Capítulo 5 — aqui obtido como resultado <em>exato</em>
+para uma esfera uniforme e isotérmica.</p>
+
+<h3>Método da relação de dispersão</h3>
+
+<p>O argumento energético acima é elegante, mas trata a nuvem como um
+único objeto e não diz nada sobre <em>escalas espaciais</em>: por que o
+colapso ocorre em pedaços de certo tamanho, e não na nuvem inteira de uma
+vez? Para responder isso — e para obter o critério de Jeans de forma
+independente, sem usar o Teorema do Virial — partimos das equações da
+hidrodinâmica de um fluido autogravitante: a equação da continuidade, a
+equação de Euler (conservação de momento) e a equação de Poisson para o
+potencial gravitacional,</p>
+\[
+\frac{\partial\rho}{\partial t} + \nabla\cdot(\rho\vec v) = 0\,,
+\tag{7.7}
+\]
+\[
+\frac{\partial\vec v}{\partial t} + (\vec v\cdot\nabla)\vec v
+= -\frac{\nabla P}{\rho} - \nabla\phi\,,
+\tag{7.8}
+\]
+\[
+\nabla^2\phi = 4\pi G\rho\,.
+\tag{7.9}
+\]
+<p>Consideramos um estado de equilíbrio de fundo, homogêneo e estático
+(\(\rho_0\), \(P_0\), \(\vec v_0=0\), \(\phi_0\) constantes), e
+perturbamos linearmente: \(\rho=\rho_0+\delta\rho\),
+\(P=P_0+\delta P\), \(\vec v=\delta\vec v\), \(\phi=\phi_0+\delta\phi\),
+com \(\delta\rho,\delta P,\delta\vec v,\delta\phi\ll\) suas
+contrapartes não perturbadas.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — O artifício de Jeans (<em>Jeans swindle</em>)</div>
+  <div class="conteudo">
+    <p>Estritamente, um meio infinito e homogêneo com \(\rho_0\neq0\) não
+    pode estar em equilíbrio hidrostático: a Equação (7.9) aplicada a
+    \(\phi_0\) exigiria \(\nabla^2\phi_0=4\pi G\rho_0\neq0\) em todo o
+    espaço, incompatível com um campo de fundo nulo ou uniforme. A
+    prática usual — adotada aqui — é ignorar \(\phi_0\) e reter apenas a
+    perturbação \(\delta\phi\) via Poisson linearizada. Essa
+    inconsistência formal é aceita porque o resultado final concorda, a
+    menos de fatores de ordem unidade, com tratamentos mais cuidadosos
+    (fundo em expansão ou geometria finita), e porque estamos
+    interessados em perturbações de comprimento de onda muito menor que
+    o tamanho real (finito) da nuvem, onde a curvatura do potencial de
+    fundo é desprezível.</p>
+  </div>
+</div>
+
+<p>Linearizando as Equações (7.7)&ndash;(7.9) (descartando termos
+quadráticos), usando \(\delta P=c_s^2\,\delta\rho\)
+[\(c_s^2\equiv(\partial P/\partial\rho)\)] e buscando soluções de onda
+plana, \(\delta\rho,\delta\vec v,\delta\phi\propto e^{i(kx-\omega t)}\)
+(logo \(\partial/\partial t\to-i\omega\), \(\nabla\to ik\hat x\)), as três
+equações tornam-se algébricas em \(\delta\rho\), \(\delta v\) e
+\(\delta\phi\). Eliminando \(\delta\phi\) (via Poisson) e \(\delta v\)
+(via continuidade) em favor de \(\delta\rho\), chega-se à <strong>relação
+de dispersão</strong>:</p>
+\[
+\boxed{\omega^2 = c_s^2k^2 - 4\pi G\rho_0}\,.
+\tag{7.10}
+\]
+<p>Essa é a equação central do critério de Jeans hidrodinâmico: descreve
+como a frequência \(\omega\) de uma perturbação de número de onda \(k\)
+depende da competição entre o termo \(c_s^2k^2\), de origem
+<em>acústica</em> (a pressão tenta restaurar o equilíbrio, gerando ondas
+sonoras), e o termo \(-4\pi G\rho_0\), <em>gravitacional</em> e
+independente de \(k\) (a autogravidade tende a amplificar a perturbação,
+não a restaurá-la).</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Oscilação estável vs. colapso: o papel do sinal de \(\omega^2\)</div>
+  <div class="conteudo">
+    <p>Se \(\omega^2>0\), \(\omega\) é real e a perturbação oscila no
+    tempo como \(e^{\mp i\omega t}\) — uma onda sonora comum, que se
+    propaga sem crescer. Mas se \(\omega^2<0\), então
+    \(\omega=\pm i|\omega|\) é <em>imaginário puro</em>, e a solução
+    \(e^{-i\omega t}=e^{\mp|\omega|t}\) contém um ramo que cresce
+    exponencialmente no tempo: a perturbação de densidade \(\delta\rho\)
+    não oscila, ela se amplifica sem limite (na aproximação linear) — o
+    colapso gravitacional. A condição de instabilidade é, portanto,
+    simplesmente \(\omega^2<0\) na Equação (7.10).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 1 — Relação de dispersão \(\omega^2(k)\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mj2-T">Temperatura \(T\) (K) <span class="valor" id="mj2-T-valor">10</span></label>
+      <input type="range" id="mj2-T" min="5" max="100" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="mj2-n">Densidade numérica \(\log_{10}(n/\mathrm{cm^{-3}})\) <span class="valor" id="mj2-n-valor">4,0</span></label>
+      <input type="range" id="mj2-n" min="10" max="60" step="1" value="40">
+    </div>
+    <div class="controle">
+      <label for="mj2-mu">Peso molecular médio \(\mu\) <span class="valor" id="mj2-mu-valor">2,30</span></label>
+      <input type="range" id="mj2-mu" min="60" max="260" step="1" value="230">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mj2-canvas" role="img" aria-label="Grafico de omega ao quadrado, normalizado, em funcao de k, mostrando a regiao instavel com omega ao quadrado negativo para k menor que k_J, e o corte em k_J marcado." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Número de onda de Jeans: \(k_J=\)<strong id="mj2-kJ">—</strong> cm⁻¹
+    [ponto onde a curva cruza zero]. À esquerda do marcador
+    (\(k<k_J\)), \(\omega^2<0\): a perturbação é instável e colapsa. À
+    direita (\(k>k_J\)), \(\omega^2>0\): oscilação sonora estável. O
+    comprimento de onda de Jeans \(\lambda_J=2\pi/k_J\) [Eq. (7.12)] é o
+    mesmo critério do método energético acima (Eq. (7.6)), agora obtido
+    sem usar o Teorema do Virial — a concordância entre os dois métodos,
+    a menos de um fator de ordem unidade, confirma que descrevem a mesma
+    física.
+  </p>
+</div>
+
+<p>Da condição \(\omega^2<0\) na Equação (7.10),</p>
+\[
+c_s^2k^2 < 4\pi G\rho_0
+\quad\Longrightarrow\quad
+k < k_J\equiv\sqrt{\frac{4\pi G\rho_0}{c_s^2}}\,,
+\tag{7.11}
+\]
+<p>ou seja, perturbações de número de onda <em>menor</em> que o número de
+onda crítico de Jeans \(k_J\) (comprimento de onda <em>maior</em> que o
+<strong>comprimento de onda de Jeans</strong>) são instáveis:</p>
+\[
+\boxed{\lambda_J = \frac{2\pi}{k_J} = c_s\sqrt{\frac{\pi}{G\rho_0}}}\,.
+\tag{7.12}
+\]
+<p>Para uma nuvem molecular fria, o resfriamento por poeira e linhas
+moleculares (ver caixa anterior) é suficientemente eficiente para que a
+temperatura permaneça aproximadamente constante durante a compressão
+inicial — o colapso é, nessa fase, bem aproximado como <em>isotérmico</em>,
+de modo que a velocidade do som relevante na Equação (7.12) é a
+velocidade do som <strong>isotérmica</strong>, \(c_s^2=k_BT/(\mu
+m_{\mathrm H})\) (e não a adiabática, \(c_s^2=\gamma k_BT/\mu
+m_{\mathrm H}\), que só se aplicaria a um colapso rápido o bastante para
+impedir o escape do calor gerado pela compressão).</p>
+
+<p>Para obter a massa de Jeans a partir do comprimento de Jeans, tomamos
+a massa contida em uma esfera de diâmetro \(\lambda_J\) (convenção usual
+na literatura; outras convenções, com fatores numéricos ligeiramente
+diferentes, também aparecem):</p>
+\[
+M_J = \frac{4}{3}\pi\rho_0\left(\frac{\lambda_J}{2}\right)^3
+= \frac{\pi}{6}\rho_0\lambda_J^3\,.
+\tag{7.13}
+\]
+<p>Substituindo a Equação (7.12) e \(c_s^2=k_BT/(\mu m_{\mathrm H})\):</p>
+\[
+M_J = \frac{\pi}{6}\rho_0\left[\frac{k_BT}{\mu m_{\mathrm H}}\cdot\frac{\pi}{G\rho_0}\right]^{3/2}
+= \frac{\pi^{5/2}}{6}\left(\frac{k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\rho_0^{-1/2}\,.
+\tag{7.14}
+\]
+
+<h3>Comparação entre os dois métodos</h3>
+
+<p>As Equações (7.6) e (7.14) têm exatamente a mesma dependência
+funcional em \(T\), \(\mu\) e \(\rho\) — ambas escalam como
+\(T^{3/2}\rho^{-1/2}\mu^{-3/2}\) —, diferindo apenas no coeficiente
+numérico adimensional:</p>
+\[
+\frac{M_J^{\text{virial}}}{M_J^{\text{dispersão}}}
+= \frac{5^{3/2}\sqrt{3/(4\pi)}}{\pi^{5/2}/6}
+= \frac{6\cdot5^{3/2}\sqrt{3}}{2\pi^3}
+\approx \frac{5{,}46}{2{,}92}
+\approx 1{,}9\,.
+\tag{7.15}
+\]
+<p>Os dois métodos concordam a menos de um fator \(\approx2\) —
+esperado, já que o método energético usa uma esfera <em>uniforme e
+isolada</em> em equilíbrio marginal, enquanto a relação de dispersão
+descreve uma perturbação de comprimento de onda infinito (o artifício de
+Jeans) e a conversão \(\lambda_J\to M_J\) carrega sua própria escolha de
+geometria. Fatores de ordem unidade assim são inerentes a qualquer
+estimativa de massa de Jeans — a física essencial é a escala
+\(M_J\propto T^{3/2}\rho^{-1/2}\), não o coeficiente exato.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 2 — Massa e comprimento de Jeans</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mj1-T">Temperatura \(T\) (K) <span class="valor" id="mj1-T-valor">10</span></label>
+      <input type="range" id="mj1-T" min="5" max="100" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="mj1-n">Densidade numérica \(\log_{10}(n/\mathrm{cm^{-3}})\) <span class="valor" id="mj1-n-valor">4,0</span></label>
+      <input type="range" id="mj1-n" min="10" max="60" step="1" value="40">
+    </div>
+    <div class="controle">
+      <label for="mj1-mu">Peso molecular médio \(\mu\) <span class="valor" id="mj1-mu-valor">2,30</span></label>
+      <input type="range" id="mj1-mu" min="60" max="260" step="1" value="230">
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;justify-content:center;padding:1rem;">
+    <div style="text-align:center;">
+      <div style="font-size:0.85rem;color:#666;">Massa de Jeans</div>
+      <div style="font-size:1.6rem;color:#17805f;font-variant-numeric:tabular-nums;"><strong id="mj1-MJ">—</strong> M<sub>☉</sub></div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:0.85rem;color:#666;">Comprimento de Jeans</div>
+      <div style="font-size:1.6rem;color:#7F77DD;font-variant-numeric:tabular-nums;"><strong id="mj1-lJ">—</strong> pc</div>
+    </div>
+  </div>
+  <p class="leitura-card" id="mj1-status">—</p>
+  <p class="leitura-card">
+    Os valores padrão dos sliders (\(T=10\,\)K, \(n=10^4\,\mathrm{cm^{-3}}\),
+    \(\mu\approx2{,}3\)) reproduzem as condições típicas de um núcleo
+    pré-estelar citadas acima — mova os sliders e observe \(M_J\propto
+    T^{3/2}\rho^{-1/2}\): aquecer a nuvem ou reduzir sua densidade
+    aumenta a massa necessária para o colapso [Eq. (7.6)].
+  </p>
+</div>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Massa de Jeans de um núcleo pré-estelar típico</div>
+  <div class="conteudo">
+    <p>Tomemos as condições físicas típicas de um núcleo pré-estelar
+    discutidas acima: \(T=10\,\mathrm K\), \(n(\mathrm{H_2})=
+    10^4\,\mathrm{cm^{-3}}\), e peso molecular médio \(\mu\approx2{,}3\)
+    (gás molecular com traços de hélio). A densidade de massa
+    correspondente é</p>
+    \[
+    \rho = n\mu m_{\mathrm H}
+    = 10^4\,\mathrm{cm^{-3}}\times2{,}3\times1{,}6726\times10^{-24}\,\mathrm g
+    \approx3{,}85\times10^{-20}\,\mathrm{g/cm^3}\,.
+    \tag{7.16}
+    \]
+    <p>Usando a Equação (7.6) (método energético) com
+    \(k_B=1{,}381\times10^{-16}\,\mathrm{erg/K}\) e
+    \(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\):</p>
+    \[
+    \frac{5k_BT}{G\mu m_{\mathrm H}}
+    \approx2{,}69\times10^{16}\,\mathrm{g/cm}\,,
+    \tag{7.17}
+    \]
+    \[
+    M_J^{\rm virial}
+    = \left(\frac{5k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\left(\frac{3}{4\pi\rho}\right)^{1/2}
+    \approx1{,}10\times10^{34}\,\mathrm g
+    \approx5{,}5\,M_\odot\,.
+    \tag{7.18}
+    \]
+    <p>Pelo método da relação de dispersão [Equação (7.14)], usando a
+    razão \(\approx1{,}9\) obtida acima,</p>
+    \[
+    M_J^{\text{dispersão}} \approx \frac{5{,}5\,M_\odot}{1{,}9} \approx 2{,}9\,M_\odot\,.
+    \tag{7.19}
+    \]
+    <p>Os dois métodos concordam, portanto, em prever uma massa de Jeans
+    de <strong>poucas massas solares</strong> para um núcleo pré-estelar
+    típico — exatamente a ordem de grandeza da faixa de massas estelares
+    mais populosa da função de massa inicial (IMF), que tem seu pico (em
+    número por intervalo logarítmico de massa) entre \(\sim0{,}1\) e
+    \(\sim1\,M_\odot\) e se estende até algumas dezenas de \(M_\odot\)
+    (Hennebelle &amp; Grudić, 2024). O resultado é consistente também
+    com a massa mediana de \(\sim0{,}5\,M_\odot\) observada diretamente
+    nos núcleos pré-estelares do <em>Herschel</em> Gould Belt Survey
+    (André et al., 2010) — a diferença de fator poucas unidades é
+    esperada, já que núcleos reais não são esferas uniformes isoladas
+    (suporte adicional por turbulência e campo magnético tende a reduzir
+    a massa que efetivamente colapsa frente à Jeans térmica pura
+    calculada aqui).</p>
+  </div>
+</div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O problema da fragmentação</div>
+  <div class="conteudo">
+    <p>Uma GMC típica tem massa de \(10^4\)&ndash;\(10^6\,M_\odot\) (Heyer
+    &amp; Dame, 2015) — muitas ordens de grandeza acima da massa de
+    Jeans de poucas massas solares calculada acima. Se a nuvem
+    colapsasse como um único objeto, o resultado seria uma única estrela
+    supermassiva, não o aglomerado de milhares de estrelas que de fato
+    observamos se formando em regiões como a Nebulosa de Órion. A
+    resolução está em que, à medida que a nuvem colapsa, a própria massa
+    de Jeans <em>diminui</em> (\(M_J\propto\rho^{-1/2}\)): regiões cada
+    vez menores tornam-se individualmente instáveis e se destacam
+    dinamicamente, um processo hierárquico chamado
+    <strong>fragmentação</strong> que se repete em cascata, gerando
+    muitos núcleos de massa \(\sim M_J\) local em vez de um único objeto
+    supermassivo. Observações do ALMA, com resolução de
+    \(\sim1000\,\mathrm{au}\), confirmam diretamente esse quadro:
+    núcleos massivos se fragmentam em subnúcleos cujo número e separação
+    são consistentes com o comprimento de Jeans local [Eq. (7.12)]
+    (Motte, Bontemps &amp; Louvet, 2018).</p>
+    <p>A fragmentação não explica, por si só, por que a
+    <strong>eficiência de formação estelar</strong> — a fração da massa
+    de uma GMC que efetivamente vira estrelas, em vez de ser dispersa
+    por turbulência, campos magnéticos e retroalimentação estelar — é
+    tipicamente baixa, de apenas alguns por cento por tempo de queda
+    livre (McKee &amp; Ostriker, 2007): um dos problemas centrais, ainda
+    em aberto, da teoria moderna de formação estelar.</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Revisão observacional atualizada de nuvens moleculares na Via
+    Láctea: Heyer &amp; Dame (2015). Resultados iniciais do
+    <em>Herschel</em> Gould Belt Survey sobre núcleos pré-estelares e
+    função de massa inicial: André et al. (2010). Fragmentação e
+    formação de aglomerados via ALMA: Motte, Bontemps &amp; Louvet
+    (2018). Teoria física de formação estelar, turbulência e eficiência
+    de conversão: McKee &amp; Ostriker (2007).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Diagrama — Nuvem molecular gigante e núcleo pré-estelar em colapso</div>
+  <svg id="mnuvem-svg" role="img" aria-label="Nuvem molecular gigante com densidade entre 10 elevado a 2 e 10 elevado a 3 por centimetro cubico, contendo um nucleo denso pre-estelar com densidade entre 10 elevado a 4 e 10 elevado a 6 por centimetro cubico, com setas de colapso convergindo para uma protoestrela em formacao." style="width:100%;max-width:520px;display:block;margin:0 auto;height:auto;">
+    <defs>
+      <radialGradient id="gradNuvem" cx="50%" cy="50%" r="60%">
+        <stop offset="0%" stop-color="#1c4878" stop-opacity="0.06"></stop>
+        <stop offset="100%" stop-color="#1c4878" stop-opacity="0"></stop>
+      </radialGradient>
+    </defs>
+    <ellipse cx="240" cy="190" rx="220" ry="170" fill="url(#gradNuvem)"></ellipse>
+    <path d="M 240 40 C 320 55, 400 90, 430 160 C 450 220, 420 290, 350 320 C 280 350, 190 345, 120 300 C 60 265, 35 190, 65 120 C 90 65, 170 30, 240 40 Z"
+      fill="none" stroke="#1c4878" stroke-width="2.2" stroke-dasharray="7 5"></path>
+    <text x="240" y="20" text-anchor="middle" font-size="13" fill="#1c4878">nuvem molecular gigante (n ~ 10² – 10³ cm⁻³, T ~ 10–30 K, dezenas de pc)</text>
+    <path d="M 260 130 C 300 138, 320 165, 310 200 C 302 232, 270 250, 235 245 C 200 240, 180 210, 190 175 C 198 145, 228 122, 260 130 Z"
+      fill="#3c6e3c" fill-opacity="0.12" stroke="#3c6e3c" stroke-width="2.2"></path>
+    <text x="245" y="365" text-anchor="middle" font-size="13" fill="#3c6e3c">núcleo denso pré-estelar (n ~ 10⁴ – 10⁶ cm⁻³, T ~ 10 K, ~0,1 pc)</text>
+    <g stroke="#963c1e" stroke-width="1.8" fill="#963c1e">
+      <line x1="245" y1="125" x2="245" y2="155"></line>
+      <line x1="290" y1="140" x2="272" y2="163"></line>
+      <line x1="312" y1="185" x2="285" y2="190"></line>
+      <line x1="300" y1="225" x2="278" y2="205"></line>
+      <line x1="255" y1="243" x2="250" y2="215"></line>
+      <line x1="205" y1="235" x2="222" y2="210"></line>
+      <line x1="188" y1="195" x2="215" y2="192"></line>
+      <line x1="200" y1="150" x2="222" y2="170"></line>
+    </g>
+    <circle cx="248" cy="190" r="4.5" fill="#963c1e"></circle>
+    <text x="248" y="270" text-anchor="middle" font-size="12" fill="#963c1e">protoestrela em formação</text>
+  </svg>
+  <p class="leitura-card">
+    Representação esquemática (com escalas indicadas) de uma nuvem
+    molecular gigante (contorno tracejado, densidade traçada por CO)
+    contendo um núcleo denso pré-estelar (contorno interno) em colapso
+    gravitacional: à medida que a densidade aumenta localmente, a massa
+    de Jeans [Eq. (7.6)] diminui, favorecendo a fragmentação hierárquica
+    discutida acima.
+  </p>
+</div>
+
+<h2 id="fe-dinamica-colapso">Dinâmica do colapso: colapso <em>inside-out</em> e taxa de acréscimo</h2>
+
+<p>Uma vez que a massa de Jeans é ultrapassada, o que acontece em
+detalhe? A resposta ingênua — <strong>colapso homólogo</strong>, toda a
+nuvem caindo simultaneamente com o mesmo
+\(t_{\rm ff}\approx1/(2\sqrt{G\bar\rho})\), densidade permanecendo
+uniforme — não é o que ocorre: \(t_{\rm ff}(r)\propto[r^3/M(r)]^{1/2}\)
+depende do perfil interno, e um núcleo real não é uniforme. Sua
+estrutura de equilíbrio hidrostático isotérmica aproxima-se da
+<strong>esfera isotérmica singular</strong> (SIS), obtida da equação de
+equilíbrio hidrostático com \(P=c_s^2\rho\) e \(\rho=Ar^{-2}\):</p>
+\[
+\frac{\mathrm dP}{\mathrm dr} = c_s^2\frac{\mathrm d\rho}{\mathrm dr}
+= -2Ac_s^2r^{-3}
+\overset{!}{=} -\frac{GM(r)\rho}{r^2}
+= -\frac{G\left(4\pi Ar\right)\left(Ar^{-2}\right)}{r^2}
+= -4\pi GA^2r^{-3}\,,
+\tag{7.20}
+\]
+<p>onde usamos \(M(r)=\int_0^r4\pi r'^2\rho(r')\,\mathrm dr'=4\pi Ar\).
+Igualando os coeficientes, \(2c_s^2=4\pi GA\), ou seja,</p>
+\[
+\boxed{\rho_{\rm SIS}(r) = \frac{c_s^2}{2\pi Gr^2}}\,,
+\tag{7.21}
+\]
+<p>um perfil que diverge em \(r\to0\) ("singular"), com massa crescendo
+linearmente, \(M(r)=2c_s^2r/G\). Como \(M(r)\propto r\), o tempo de queda
+livre local \(t_{\rm ff}(r)\propto\sqrt{r^3/M(r)}\propto r\) é
+<em>menor</em> no centro: o núcleo "sabe" que deve colapsar antes do
+envelope. O resultado, formalizado por Shu (1977), é o <strong>colapso
+<em>inside-out</em></strong>: o centro entra em queda livre primeiro,
+formando a protoestrela, enquanto uma <strong>frente de
+rarefação</strong> se propaga para fora a \(\sim c_s\). Interior a ela
+(\(r<c_st\)), o gás já está em queda livre (\(\rho\propto r^{-3/2}\),
+\(v\propto r^{-1/2}\)); exterior (\(r>c_st\)), permanece na estrutura
+estática original — a informação de que a pressão central caiu ainda
+não chegou ali. Esse quadro — infall estendido, com fronteira nítida
+entre gás em colapso e estático — é exatamente o observado em envelopes
+de Classe~0, e é por isso que o modelo de Shu (1977) substituiu o
+colapso homólogo como paradigma padrão da formação estelar de baixa
+massa (Stahler &amp; Palla, 2004).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 3 — Perfil da esfera isotérmica singular (SIS)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="ms1-T">Temperatura \(T\) (K) <span class="valor" id="ms1-T-valor">10</span></label>
+      <input type="range" id="ms1-T" min="5" max="50" step="1" value="10">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="ms1-canvas" role="img" aria-label="Grafico log-log de rho_SIS(r) e t_ff(r) em funcao de r, mostrando que a densidade cai com r ao quadrado e o tempo de queda livre cresce linearmente com r." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Velocidade do som isotérmica: \(c_s=\)<strong id="ms1-cs">—</strong>
+    km/s (\(\mu=2{,}3\)). A densidade \(\rho_{\rm SIS}\propto r^{-2}\)
+    [Eq. (7.21), curva verde] diverge no centro; o tempo de queda livre
+    local \(t_{\rm ff}(r)\) (curva roxa) <strong>cresce</strong> com
+    \(r\), porque \(M(r)\propto r\) implica densidade média decrescente
+    para fora — exatamente por isso o centro colapsa primeiro, dando
+    origem ao colapso <em>inside-out</em> ilustrado no módulo animado
+    abaixo.
+  </p>
+</div>
+
+<p>Uma consequência notável do caráter autossimilar da solução de Shu é
+que a <strong>taxa de acréscimo</strong> \(\dot M\equiv\mathrm
+dM_\star/\mathrm dt\) é <em>constante</em> no tempo e depende só de
+\(c_s\) e \(G\): como a SIS [Equação (7.21)] não introduz escala de
+massa ou comprimento independente, a única combinação dimensional de
+\(c_s\) e \(G\) com dimensão de taxa de massa é</p>
+\[
+\dot M \sim \frac{c_s^3}{G}\,,
+\tag{7.22}
+\]
+<p>já que \([c_s^3/G] = (\mathrm{cm^3\,s^{-3}})/(\mathrm{cm^3\,g^{-1}\,s^{-2}}) = \mathrm{g\,s^{-1}}\).
+A solução autossimilar completa de Shu (1977) confirma essa escala e
+fornece o coeficiente numérico exato, para o caso não-magnético e sem
+rotação:</p>
+\[
+\boxed{\dot M = 0{,}975\,\frac{c_s^3}{G}}\,.
+\tag{7.23}
+\]
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Taxa de acréscimo de Shu para um núcleo típico</div>
+  <div class="conteudo">
+    <p>Usando a mesma temperatura de referência da seção anterior
+    (\(T=10\,\mathrm K\)) e \(\mu\approx2{,}3\), a velocidade do som
+    isotérmica é</p>
+    \[
+    c_s = \sqrt{\frac{k_BT}{\mu m_{\mathrm H}}}
+    \approx1{,}89\times10^4\,\mathrm{cm/s} = 0{,}19\,\mathrm{km/s}\,,
+    \tag{7.24}
+    \]
+    <p>valor típico citado para nuvens moleculares frias. Substituindo
+    na Equação (7.23):</p>
+    \[
+    \dot M = 0{,}975\,\frac{(1{,}89\times10^4\,\mathrm{cm/s})^3}{6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}}
+    \approx9{,}9\times10^{19}\,\mathrm{g/s}
+    \approx1{,}6\times10^{-6}\,M_\odot/\mathrm{ano}\,.
+    \tag{7.25}
+    \]
+    <p>Integrando ao longo da escala de tempo característica de
+    formação de uma estrela de baixa massa, \(t\sim10^5\)&ndash;\(10^6\,
+    \mathrm{anos}\) (Stahler &amp; Palla, 2004), obtemos massa final
+    acretada \(M_\star\sim\dot Mt\sim0{,}16\)&ndash;\(1{,}6\,M_\odot\) —
+    exatamente a ordem de grandeza de uma estrela de tipo solar, uma
+    confirmação de consistência interna notável, já que a escala de
+    tempo não foi usada como entrada no cálculo de \(\dot M\) (que
+    depende só de \(c_s\)).</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 4 — Taxa de acréscimo de Shu e massa acumulada</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="ms2-T">Temperatura \(T\) (K) <span class="valor" id="ms2-T-valor">10</span></label>
+      <input type="range" id="ms2-T" min="5" max="50" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="ms2-t">Tempo decorrido \(\log_{10}(t/\mathrm{ano})\) <span class="valor" id="ms2-t-valor">1,00×10⁵</span></label>
+      <input type="range" id="ms2-t" min="300" max="650" step="1" value="500">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;">
+    <p class="leitura-card" style="margin:0;">
+      \(c_s=\)<strong id="ms2-cs">—</strong> \(\times10^4\) cm/s &middot;
+      \(\dot M=\)<strong id="ms2-mdot">—</strong> &middot;
+      massa acretada: \(M_\star=\dot M\,t=\)<strong id="ms2-mstar">—</strong> \(M_\odot\)
+    </p>
+  </div>
+  <p class="leitura-card">
+    Com os valores padrão (\(T=10\,\)K, \(t=10^5\,\)anos) este módulo
+    reproduz exatamente o Exemplo acima: \(c_s\approx1{,}89\), \(\dot
+    M\approx1{,}6\times10^{-6}\,M_\odot\)/ano. Mova o slider de tempo até
+    \(10^6\,\)anos para ver \(M_\star\to1{,}6\,M_\odot\), reproduzindo a
+    conclusão do Exemplo — se os números não baterem, há um erro de
+    unidades no módulo.
+  </p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 5 (destaque) — Colapso <em>inside-out</em> de Shu, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    A frente de rarefação (círculo laranja) se propaga a \(r=c_st\)
+    [texto acima]. Dentro dela, o gás está em queda livre
+    (\(\rho\propto r^{-3/2}\), setas verdes convergindo); fora dela, o
+    envelope permanece na estrutura estática original da SIS
+    (\(\rho\propto r^{-2}\), Eq. (7.21), contorno tracejado roxo). A
+    protoestrela central (ponto laranja) cresce continuamente enquanto a
+    frente avança, à taxa constante de Shu [Eq. (7.23)].
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mshu-T">Temperatura \(T\) (K) <span class="valor" id="mshu-T-valor">10</span></label>
+      <input type="range" id="mshu-T" min="5" max="30" step="1" value="10">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mshu-play" class="botao-modulo">▶ Iniciar colapso</button>
+      <button type="button" id="mshu-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mshu-canvas" role="img" aria-label="Animacao do colapso inside-out de Shu: a frente de rarefacao se propaga para fora a velocidade cs, com a regiao interna em queda livre e a regiao externa ainda estatica, e a protoestrela central crescendo continuamente." style="width:100%;height:360px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Tempo decorrido: \(t=\)<strong id="mshu-t">—</strong> anos &middot;
+    massa da protoestrela: \(M_\star=\)<strong id="mshu-mstar">—</strong> \(M_\odot\).
+    A janela de tempo mostrada vai até \(5\times10^4\,\)anos — repare que
+    a frente de rarefação avança a velocidade <em>constante</em>
+    \(c_s\), enquanto a massa da protoestrela cresce de forma constante
+    no tempo [Eq. (7.23)], não acelerada.
+  </p>
+</div>
+
+<h2 id="fe-momento-angular">O problema do momento angular</h2>
+
+<p>O modelo de colapso <em>inside-out</em> da seção anterior é
+esfericamente simétrico — mas núcleos reais não são estáticos:
+observações de linhas moleculares (NH\(_3\)) revelam gradientes de
+velocidade sistemáticos, interpretados como rotação lenta de corpo
+rígido, com gradientes típicos de
+\(\sim1\)&ndash;\(2\,\mathrm{km\,s^{-1}\,pc^{-1}}\) (Goodman et al.,
+1993) — numericamente igual a \(\Omega\), o que dá
+\(\Omega\sim3\)&ndash;\(6\times10^{-14}\,\mathrm{s^{-1}}\), consistente com
+o valor fiducial \(\Omega_0\sim10^{-14}\,\mathrm{s^{-1}}\) adotado na
+literatura. Rotações dessa magnitude são pequenas —
+\(\beta\equiv T_{\rm rot}/|E_g|\sim0{,}02\) (Goodman et al., 1993), longe
+de afetar o equilíbrio hidrostático do núcleo. O problema, como veremos,
+não é a rotação em si, mas o que acontece com ela durante um colapso de
+várias ordens de grandeza em escala.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — O problema do momento angular: um colapso "ingênuo" é impossível</div>
+  <div class="conteudo">
+    <p>Considere um elemento de gás na borda de um núcleo típico, com
+    raio \(R_0\sim0{,}1\,\mathrm{pc}\approx3{,}09\times10^{17}\,\mathrm{cm}\)
+    e velocidade angular \(\Omega_0\sim10^{-14}\,\mathrm{s^{-1}}\). Se
+    esse elemento caísse <em>radialmente</em>, conservando seu momento
+    angular específico \(j=\Omega_0R_0^2\) (na ausência de torques
+    externos — a mesma física por trás da patinadora que gira mais
+    rápido ao recolher os braços), sua velocidade angular ao alcançar um
+    raio estelar \(R_\star\sim R_\odot\approx6{,}96\times10^{10}\,
+    \mathrm{cm}\) seria</p>
+    \[
+    \Omega_\star = \Omega_0\left(\frac{R_0}{R_\star}\right)^2
+    \approx10^{-14}\,\mathrm{s^{-1}}\times\left(\frac{3{,}09\times10^{17}}{6{,}96\times10^{10}}\right)^2
+    \approx0{,}20\,\mathrm{s^{-1}}\,,
+    \tag{7.26}
+    \]
+    <p>correspondendo a uma velocidade equatorial
+    \(v_\star=\Omega_\star R_\star\approx1{,}4\times10^5\,\mathrm{km/s}\) —
+    quase metade da velocidade da luz. Compare isso com a velocidade
+    angular <strong>crítica</strong> (de <em>breakup</em>), o limite
+    acima do qual a força centrífuga na superfície excede a gravidade e
+    a estrela se desintegra:</p>
+    \[
+    \Omega_{\rm crit} = \sqrt{\frac{GM_\odot}{R_\odot^3}}
+    \approx6{,}3\times10^{-4}\,\mathrm{s^{-1}}
+    \quad\Longrightarrow\quad
+    v_{\rm crit}=\Omega_{\rm crit}R_\odot\approx437\,\mathrm{km/s}\,,
+    \tag{7.27}
+    \]
+    <p>valor que reproduz corretamente a velocidade de <em>breakup</em>
+    equatorial de um objeto com massa e raio solares. A razão entre os
+    dois resultados,</p>
+    \[
+    \frac{\Omega_\star}{\Omega_{\rm crit}} \approx \frac{0{,}20}{6{,}3\times10^{-4}} \approx 320\,,
+    \tag{7.28}
+    \]
+    <p>mostra que o colapso radial ingênuo produziria uma estrela
+    girando <strong>mais de duas ordens de grandeza acima</strong> da
+    velocidade de ruptura — fisicamente impossível. Esse é o
+    <strong>problema do momento angular</strong> clássico: o momento
+    angular específico observado em núcleos pré-estelares é grande
+    demais, por muitas ordens de grandeza, para ser carregado até a
+    superfície de uma estrela de sequência principal (na prática o
+    problema é ainda mais severo: T~Tauri jovens giram tipicamente a
+    poucos por cento de \(\Omega_{\rm crit}\), não perto dele — a maior
+    parte do momento angular precisa ser <em>removida</em>, não apenas
+    impedida de causar ruptura).</p>
+  </div>
+</div>
+
+<p>A resolução é, ao mesmo tempo, simples e central neste capítulo: o
+colapso <em>não</em> é radial. Como o momento angular específico
+\(j=\Omega r^2\) de cada camada é conservado durante a queda e
+<em>cresce</em> com o raio inicial da camada, cada elemento de gás cai
+apenas até o raio onde a força centrífuga associada ao seu próprio
+\(j\) equilibra a atração gravitacional da massa central já acretada.
+Esse <strong>raio centrífugo</strong> \(R_c\) é obtido igualando a
+aceleração centrífuga \(v_\phi^2/r=j^2/r^3\) (com \(v_\phi=j/r\)) à
+aceleração gravitacional \(GM_\star/r^2\):</p>
+\[
+\frac{j^2}{R_c^3} = \frac{GM_\star}{R_c^2}
+\quad\Longrightarrow\quad
+\boxed{R_c = \frac{j^2}{GM_\star}}\,.
+\tag{7.29}
+\]
+<p>Como \(j\) cresce com o raio inicial da camada, material vindo de
+\(R_0\) maior se deposita em raios centrífugos progressivamente
+<em>maiores</em>. O resultado não é uma estrela girando de forma
+absurda, mas um <strong>disco de acréscimo circunstelar</strong>: a
+matéria se acumula em um disco fino, em rotação kepleriana, que
+armazena a grande maioria do momento angular do sistema. Apenas a
+fração de massa que perde momento angular suficiente — por viscosidade
+interna e outros processos de transporte (caixa a seguir) — atravessa o
+disco e é acrescida pela protoestrela. A física detalhada desse disco
+será desenvolvida adiante neste capítulo.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 6 — Raio centrífugo</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mrc-R0">Raio inicial da camada \(R_0\) (pc) <span class="valor" id="mrc-R0-valor">0,100</span></label>
+      <input type="range" id="mrc-R0" min="1" max="30" step="1" value="10">
+    </div>
+    <div class="controle">
+      <label for="mrc-Om0">Velocidade angular \(\log_{10}(\Omega_0/\mathrm{s^{-1}})\) <span class="valor" id="mrc-Om0-valor">1,00×10⁻¹⁴</span></label>
+      <input type="range" id="mrc-Om0" min="-145" max="-130" step="1" value="-140">
+    </div>
+    <div class="controle">
+      <label for="mrc-Mstar">Massa central acretada \(M_\star/M_\odot\) <span class="valor" id="mrc-Mstar-valor">1,00</span></label>
+      <input type="range" id="mrc-Mstar" min="10" max="300" step="1" value="100">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;">
+    <p class="leitura-card" style="margin:0;">
+      Momento angular específico: \(j=\Omega_0R_0^2=\)<strong id="mrc-j">—</strong> cm²/s
+      &middot; Raio centrífugo: \(R_c=j^2/(GM_\star)=\)<strong id="mrc-Rc">—</strong> UA
+    </p>
+  </div>
+  <p class="leitura-card">
+    Com os valores padrão (\(R_0=0{,}1\,\)pc, \(\Omega_0=10^{-14}\,
+    \mathrm{s^{-1}}\), \(M_\star=1\,M_\odot\)) este módulo reproduz o
+    valor do Exemplo abaixo, \(R_c\approx460\,\)UA. Como
+    \(R_c\propto R_0^4\) (via \(j\propto R_0^2\)), reduza \(R_0\) à
+    metade e observe \(R_c\) cair por um fator \(16\).
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Outros mecanismos de transporte de momento angular</div>
+  <div class="conteudo">
+    <p>A formação de um disco resolve o problema de <em>onde</em> o
+    momento angular vai, mas não o remove do sistema como um todo. A
+    literatura identifica múltiplos processos adicionais, de
+    importância relativa ainda em pesquisa ativa: <strong>frenagem
+    magnética</strong>, em que linhas de campo ancoradas no meio
+    interestelar exercem torques já nas escalas do núcleo;
+    <strong>ventos e jatos protoestelares</strong>, lançados
+    magnetocentrifugamente do disco interno; e <strong>torques
+    gravitacionais</strong> em discos massivos não-axissimétricos, que
+    redistribuem momento angular sem removê-lo. Revisão desses
+    mecanismos: Li et al. (2014); evolução do momento angular do núcleo
+    ao disco em sistemas individuais: Lee et al. (2026).</p>
+  </div>
+</div>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Escala do raio centrífugo</div>
+  <div class="conteudo">
+    <p>Estimemos \(R_c\) para a camada mais externa de um núcleo típico
+    (\(R_0=0{,}1\,\mathrm{pc}\), \(\Omega_0=10^{-14}\,\mathrm{s^{-1}}\)),
+    caindo sobre uma protoestrela já com \(M_\star\approx1\,M_\odot\) de
+    massa central acretada (situação representativa de estágios mais
+    avançados do colapso, quando a maior parte do núcleo já foi
+    processada). O momento angular específico dessa camada é</p>
+    \[
+    j = \Omega_0R_0^2 \approx10^{-14}\,\mathrm{s^{-1}}\times\left(3{,}09\times10^{17}\,\mathrm{cm}\right)^2
+    \approx9{,}5\times10^{20}\,\mathrm{cm^2/s}\,.
+    \tag{7.30}
+    \]
+    <p>Pela Equação (7.29),</p>
+    \[
+    R_c = \frac{j^2}{GM_\star}
+    \approx\frac{\left(9{,}5\times10^{20}\right)^2}{6{,}674\times10^{-8}\times1{,}989\times10^{33}}\,\mathrm{cm}
+    \approx6{,}8\times10^{15}\,\mathrm{cm}
+    \approx460\,\mathrm{UA}\,.
+    \tag{7.31}
+    \]
+    <p>Esse é o raio em que o material mais externo (maior \(j\)) se
+    deposita — comparável aos maiores discos observados. Camadas mais
+    internas, com \(R_0\) menor, caem em raios proporcionalmente
+    menores: como \(R_c\propto R_0^4\) [via \(j\propto R_0^2\)], uma
+    camada com metade do raio inicial se deposita \(16\times\) mais
+    perto, \(R_c/16\approx29\,\mathrm{UA}\) — a escala do Sistema Solar
+    até Netuno. O disco formado pela deposição sucessiva de camadas
+    cobre, portanto, naturalmente toda a faixa de <strong>dezenas a
+    centenas de UA</strong> observada em discos protoplanetários
+    reais.</p>
+  </div>
+</div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Evidência direta desta seção, via ALMA: o levantamento
+    <em>eDisk</em> (resolução \(\sim0{,}04''\) em protoestrelas de
+    Classe~0/I) está em Ohashi et al. (2023); a primeira detecção
+    inequívoca de disco kepleriano ao redor de uma protoestrela de
+    Classe~0 (sistema L1527 IRS, \(\approx0{,}2\,M_\odot\)), confirmando
+    o mecanismo do raio centrífugo, está em Tobin et al. (2012).
+    Evolução do momento angular específico do núcleo ao disco: Lee et
+    al. (2026).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 7 (destaque) — Formação do disco por deposição de material, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Cada trajetória (ponto verde) representa um elemento de gás em
+    queda, conservando seu momento angular específico \(j\): elementos
+    com \(j\) maior (que caem de ângulos mais afastados do eixo)
+    depositam-se em raios centrífugos maiores [Eq. (7.29)], enquanto os
+    de \(j\) pequeno caem quase direto sobre a protoestrela. O resultado
+    final é o disco fino (verde, achatado) em rotação kepleriana.
+  </p>
+  <div class="controles">
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mdisco-play" class="botao-modulo">▶ Animar deposição</button>
+      <button type="button" id="mdisco-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdisco-canvas" role="img" aria-label="Animacao de trajetorias de material caindo sobre uma protoestrela e se depositando em raios centrifugos crescentes conforme o momento angular especifico de cada trajetoria, formando um disco fino em rotacao kepleriana." style="width:100%;height:360px;display:block;"></canvas></div>
+</div>
+
+<h2 id="fe-pms">Da protoestrela à pré-sequência principal</h2>
+
+<p>À medida que o acréscimo prossegue e a frente de rarefação varre todo
+o núcleo original, a taxa de infall sobre o sistema protoestrela+disco
+diminui, e o envelope circundante — cada vez menos massivo — vai se
+tornando opticamente fino. A protoestrela central, antes obscurecida,
+torna-se gradualmente visível no óptico e infravermelho próximo, ainda
+cercada por um disco de acréscimo remanescente e, por vezes, por
+vestígios do envelope. Esse objeto — uma estrela quase totalmente
+formada em massa, ainda contraindo-se gravitacionalmente, sem fusão
+nuclear estável de hidrogênio no núcleo — é uma <strong>estrela de
+pré-sequência principal</strong> (PMS, do inglês
+<em>pre-main-sequence</em>). Sua evolução no diagrama HR, da fase mais
+jovem até a ZAMS, segue um padrão em duas etapas bem definidas: primeiro
+o <strong>traço de Hayashi</strong>, depois o <strong>traço de
+Henyey</strong>.</p>
+
+<h3>O traço de Hayashi</h3>
+
+<p>Uma protoestrela recém-revelada é, em praticamente toda a sua massa,
+<strong>totalmente convectiva</strong>. A razão está diretamente ligada
+ao critério de Schwarzschild e à forma explícita do gradiente radiativo
+já deduzida no Capítulo 5,</p>
+\[
+\nabla_{\rm rad} = \frac{P}{T}\frac{\mathrm dT}{\mathrm dP}
+= \frac{3}{16\pi acG}\cdot\frac{\kappa_{\rm rad}\,l\,P}{m\,T^4}
+\tag{7.32}
+\]
+<p>[reescrita em forma logarítmica a partir da equação já vista no
+Capítulo 5]: \(\nabla_{\rm rad}\) é diretamente proporcional à opacidade
+\(\kappa_{\rm rad}\). Nas camadas externas, relativamente frias
+(\(T\sim4000\)&ndash;\(8000\,\mathrm K\)), de uma protoestrela ou estrela
+PMS de baixa massa, a opacidade é dominada pela absorção contínua do
+<strong>íon negativo de hidrogênio</strong>, H\(^-\), cuja forma
+aproximada padrão é</p>
+\[
+\kappa_{\mathrm H^-} \approx 1{,}1\times10^{-25}\,Z^{1/2}\rho^{1/2}T^{7{,}7}\;\mathrm{cm^2/g}\,,
+\tag{7.33}
+\]
+<p>válida aproximadamente no intervalo \(4\times10^3\lesssim T\lesssim
+10^4\,\mathrm K\). Ao contrário da opacidade de Kramers do interior
+profundo (que <em>decresce</em> com \(T\)), \(\kappa_{\mathrm H^-}\)
+<em>cresce</em> rapidamente com a temperatura: mais \(T\) ioniza mais
+elétrons dos metais residuais, que se associam a H neutro formando mais
+H\(^-\). Via \(\nabla_{\rm rad}\propto\kappa_{\rm rad}\), \(\nabla_{\rm
+rad}\) cresce abruptamente logo abaixo da fotosfera, ultrapassando
+\(\nabla_{\rm ad}=2/5\) e disparando convecção de Schwarzschild em
+praticamente toda a estrela — não apenas em uma fina camada superficial,
+como no Sol atual.</p>
+
+<p>Uma estrela inteiramente convectiva tem uma propriedade notável: o
+transporte convectivo é tão eficiente que toda a estrutura segue de
+perto um único adiabata (politrópica \(n=3/2\)), de modo que, fixada a
+massa \(M\), a estrutura inteira fica determinada pela condição de
+contorno na fotosfera, onde a opacidade H\(^-\) conecta o interior
+convectivo à atmosfera radiativa. Como \(\kappa_{\mathrm H^-}\) [Equação
+(7.33)] depende tão fortemente de \(T\), essa condição só admite
+soluções em uma faixa estreita de temperatura efetiva,
+\(T_{\rm eff}\sim4000\,\mathrm K\) (<strong>temperatura de
+Hayashi</strong>, fracamente dependente da massa), <em>qualquer que
+seja</em> \(L\) — o raio se ajusta para manter \(T_{\rm eff}\) fixa. No
+diagrama HR, isso é uma trajetória quase <strong>vertical</strong>: a
+protoestrela se contrai e \(L\) cai (perdendo energia gravitacional, ver
+Teorema do Virial no Capítulo 5), com \(T_{\rm eff}\) quase fixa — o
+<strong>traço de Hayashi</strong> (Hayashi, 1961), que define um
+<strong>limite à direita</strong> do diagrama HR: nenhuma estrela em
+quase-equilíbrio hidrostático pode ser mais fria que essa linha, a
+qualquer \(L\).</p>
+
+<h3>O traço de Henyey</h3>
+
+<p>À medida que a protoestrela se contrai ao longo do traço de Hayashi,
+sua temperatura central sobe (capacidade térmica efetiva negativa, ver
+Teorema do Virial). Em algum momento — mais cedo para estrelas massivas,
+cujo interior é mais quente — a temperatura interna fica alta o bastante
+para a opacidade cair (regime de Kramers, \(\kappa\propto\rho
+T^{-3{,}5}\), decrescente com \(T\), ao contrário do regime H\(^-\)
+anterior) e \(\nabla_{\rm rad}\) voltar a ficar abaixo de \(\nabla_{\rm
+ad}\) no interior: um <strong>núcleo radiativo</strong> se forma e
+cresce, envolto por um envelope convectivo cada vez mais delgado. A
+estrela deixa o traço de Hayashi e passa ao <strong>traço de
+Henyey</strong> (Henyey et al., 1955): evolução a <strong>luminosidade
+quase constante</strong>, contraindo-se e aquecendo — movimento
+predominantemente <strong>horizontal</strong> no diagrama HR — até que
+\(T_c\) atinja \(\sim1\)&ndash;\(1{,}5\times10^7\,\mathrm K\), suficiente
+para fusão estável de hidrogênio, estabelecendo a estrela na
+<strong>ZAMS</strong>. A escala de tempo dessa contração radiativa é a
+<strong>escala de Kelvin-Helmholtz</strong>
+\(\tau_{\rm KH}\approx\tfrac12GM^2/(LR)\) (já vista no Capítulo 5), o
+mesmo mecanismo que regula a contração pré-nuclear do Sol atual.</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Tempos de contração até a ZAMS: dependência forte com a massa</div>
+  <div class="conteudo">
+    <p>Como \(\tau_{\rm KH}\propto M^2/(LR)\), e \(L\) e \(R\) crescem
+    com a massa na ZAMS, o tempo de contração decresce rapidamente com
+    \(M\) — mas o expoente exato de \(\tau_{\rm KH}\propto M^n\) é
+    sensível às relações massa-luminosidade/raio adotadas (\(n\)
+    tipicamente entre \(-1{,}8\) e \(-3\)). Por isso a fórmula de
+    \(\tau_{\rm KH}\) serve aqui só como guia de ordem de grandeza; os
+    valores abaixo vêm de trajetórias PMS completas tabuladas por
+    Stahler &amp; Palla (2004):</p>
+    <ul>
+      <li>\(M=0{,}5\,M_\odot\): \(\sim1{,}6\times10^8\) anos (160
+      milhões de anos) — a estrela nunca desenvolve um núcleo radiativo
+      significativo antes da ZAMS e permanece quase inteiramente no
+      traço de Hayashi durante toda a contração;</li>
+      <li>\(M=2\,M_\odot\): \(\sim10^7\) anos (10 milhões de anos) — a
+      estrela sai do traço de Hayashi cedo, após desenvolver um núcleo
+      radiativo ainda com luminosidade alta, e a maior parte do tempo de
+      contração transcorre já no traço de Henyey.</li>
+    </ul>
+    <p>A diferença de mais de uma ordem de grandeza entre os dois tempos
+    ilustra por que aglomerados estelares jovens mostram uma população
+    estelar tão heterogênea: as estrelas mais massivas já atingiram a
+    sequência principal e começaram a fundir hidrogênio establemente
+    enquanto as de massa solar ou menor ainda estão em plena contração
+    pré-sequência principal.</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 8 — Traços de Hayashi e Henyey no diagrama HR</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mhr-M">Massa \(M/M_\odot\) <span class="valor" id="mhr-M-valor">1,00</span></label>
+      <input type="range" id="mhr-M" min="20" max="400" step="1" value="100">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mhr-canvas" role="img" aria-label="Diagrama HR esquematico mostrando a trajetoria evolutiva de uma protoestrela: traço de Hayashi vertical seguido do traço de Henyey ate a ZAMS, com marcadores no ponto inicial e na ZAMS." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Tempo total de contração até a ZAMS:
+    \(\tau_{\rm KH}(M)\approx\)<strong id="mhr-tau">—</strong> anos —
+    ajuste \(\tau_{\rm KH}=4\times10^7\,M^{-2}\) anos (\(M\) em
+    \(M_\odot\)), calibrado para reproduzir <em>exatamente</em> as duas
+    âncoras do Exemplo acima: em \(M=0{,}5\,M_\odot\), dá
+    \(1{,}6\times10^8\) anos; em \(M=2\,M_\odot\), dá \(1{,}0\times
+    10^7\) anos. <strong>Este é um modelo esquemático</strong> (não uma
+    trilha PMS tabulada): reproduz o comportamento qualitativo —
+    traço de Hayashi quase vertical seguido de um traço de Henyey quase
+    horizontal até a ZAMS, com o segmento de Henyey desprezível em baixa
+    massa e proeminente em massa mais alta — descrito no texto, mas os
+    valores intermediários de \(T_{\rm eff}\) e \(L\) ao longo da
+    trajetória não devem ser lidos como uma trilha evolutiva precisa.
+  </p>
+</div>
+
+<h2 id="fe-classes-sed">Classificação observacional: Classes 0, I, II e III</h2>
+
+<p>Do ponto de vista observacional — antes que se pudesse resolver
+espacialmente discos e envelopes individualmente —, o estágio evolutivo
+de um objeto estelar jovem (YSO, <em>young stellar object</em>) é
+inferido da forma de sua <strong>distribuição espectral de energia</strong>
+(SED, \(\nu F_\nu\) versus comprimento de onda), quantificada pelo
+<strong>índice espectral infravermelho</strong></p>
+\[
+\alpha_{\rm IR} \equiv \frac{\mathrm d\log(\nu F_\nu)}{\mathrm d\log\nu}\,,
+\tag{7.34}
+\]
+<p>tipicamente medido entre \(2\) e \(10\)&ndash;\(25\,\mu\mathrm m\)
+(Lada, 1987). Esse esquema, refinado por Greene et al. (1994) com a
+adição da classe "espectro plano", define quatro categorias
+observacionais:</p>
+<ul>
+  <li><strong>Classe 0</strong>: SED dominada pelo envelope denso e
+  frio, pico no submilimétrico/FIR; quase nenhuma luz estelar escapa.
+  Definida originalmente pela razão \(L_{\rm smm}/L_{\rm bol}>0{,}5\%\)
+  (não por \(\alpha_{\rm IR}\), indefinido) (André, Ward-Thompson &amp;
+  Barsony, 1993);</li>
+  <li><strong>Classe I</strong>: \(\alpha_{\rm IR}\geq0{,}3\).
+  Protoestrela detectável, disco e envelope remanescente ainda
+  substancial;</li>
+  <li><strong>Classe II</strong>: \(-1{,}6\leq\alpha_{\rm IR}<-0{,}3\).
+  Envelope dissipado; disco fino e opticamente espesso ao redor de uma
+  T~Tauri clássica (CTTS) já visível;</li>
+  <li><strong>Classe III</strong>: \(\alpha_{\rm IR}<-1{,}6\). Disco
+  dissipado ou residual; T~Tauri de linhas fracas (WTTS), SED
+  essencialmente fotosférica.</li>
+</ul>
+<p>(A faixa \(-0{,}3\leq\alpha_{\rm IR}<0{,}3\), "espectro plano", ocupa
+a transição Classe~I~\(\to\)~II.)</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Classes observacionais como sequência de massa decrescente do envelope</div>
+  <div class="conteudo">
+    <p>A classificação por SED reflete a razão física \(M_{\rm
+    env}/M_\star\) entre massa ainda infalente e massa já incorporada ao
+    sistema estrela+disco: \(\gtrsim1\) na Classe~0, \(\lesssim1\) mas
+    ainda relevante na Classe~I, \(\ll1\) (só disco) na Classe~II, e
+    residual na Classe~III. A sequência \(0\to\)I\(\to\)II\(\to\)III é,
+    em essência, de massa decrescente do envelope — consistente com o
+    colapso <em>inside-out</em> e a formação do disco (André,
+    Ward-Thompson &amp; Barsony, 1993).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 9 — SEDs esquemáticas das Classes 0/I/II/III</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="msed-classe">Classe observacional</label>
+      <select id="msed-classe" style="padding:.4rem;border-radius:6px;border:1px solid #ccc;">
+        <option value="0">Classe 0</option>
+        <option value="1">Classe I</option>
+        <option value="2" selected>Classe II</option>
+        <option value="3">Classe III</option>
+      </select>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="msed-canvas" role="img" aria-label="SED esquematica log nu F nu versus log lambda para a classe selecionada, decomposta em contribuicoes do envelope (terracota), disco (verde) e fotosfera (roxo), com a curva total em preto." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Curva preta: SED total. Componentes tracejados:
+    <span style="color:#963c1e;">envelope</span> (frio, domina em
+    comprimentos de onda longos),
+    <span style="color:#17805f;">disco</span> (morno, infravermelho
+    médio) e <span style="color:#7F77DD;">fotosfera</span> (quente,
+    óptico/infravermelho próximo). Troque a classe e observe o pico se
+    deslocar de \(\lambda\) longos (Classe 0, envelope domina) para
+    \(\lambda\) curtos (Classe III, só fotosfera) — a mesma sequência de
+    \(M_{\rm env}/M_\star\) decrescente da caixa acima. As curvas são
+    esquemáticas (formas gaussianas em escala log-log), não SEDs
+    sintéticas de um modelo de transporte radiativo real.
+  </p>
+</div>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Escalas de tempo evolutivas para uma protoestrela de \(1\,M_\odot\)</div>
+  <div class="conteudo">
+    <p>Combinando resultados do levantamento <em>Spitzer</em> c2d (Evans
+    et al., 2009) com a revisão de Dunham et al. (2014), as durações
+    típicas de cada classe, para uma protoestrela de \(\sim1\,M_\odot\),
+    são aproximadamente:</p>
+    <ul>
+      <li><strong>Classe 0</strong>: \(\lesssim3\times10^5\) anos
+      (frequentemente citada como \(\sim10^4\)&ndash;\(10^5\) anos em
+      estudos individuais, mas com limite superior populacional de
+      \(\sim0{,}3\,\mathrm{Myr}\));</li>
+      <li><strong>Classe I</strong>: a duração combinada
+      Classe~0~+~Classe~I é \(\sim0{,}44\)&ndash;\(0{,}5\,\mathrm{Myr}\),
+      de modo que a Classe~I isolada dura tipicamente
+      \(\sim(1\)&ndash;\(2)\times10^5\) anos;</li>
+      <li><strong>Classe II</strong>: meia-vida de
+      \(\sim2\,\mathrm{Myr}\) (Evans et al., 2009), com discos
+      protoplanetários individuais persistindo, em geral, por
+      \(\sim1\)&ndash;\(10\,\mathrm{Myr}\);</li>
+      <li><strong>Classe III</strong>: fase de transição final, sem
+      disco detectável, que se estende até a estrela atingir a ZAMS —
+      para \(1\,M_\odot\), o próprio Sol, esse tempo total de contração
+      pré-sequência principal é \(\tau_{\rm KH,\odot}\approx1{,}5\times
+      10^7\,\mathrm{anos}\) (já calculado no Capítulo 5), ou seja, a
+      fase Classe~III em si pode se estender por cerca de \(15\)
+      milhões de anos para uma estrela de tipo solar — consistente com
+      os tempos, muito maiores, obtidos no Exemplo anterior para
+      \(0{,}5\,M_\odot\) e o tempo, muito menor, obtido para
+      \(2\,M_\odot\).</li>
+    </ul>
+    <p>Note a hierarquia: da Classe~0 à Classe~II, as escalas de tempo
+    crescem por mais de uma ordem de grandeza a cada estágio —
+    consistente com a imagem de um envelope que se dissipa rapidamente
+    nas fases iniciais, seguido por um disco muito mais duradouro.</p>
+  </div>
+</div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Grades modernas de modelos evolutivos pré-sequência principal:
+    Baraffe et al. (2015). O programa JWST <em>JOYS</em> (espectroscopia
+    \(5\)&ndash;\(28\,\mu\)m de jatos, ventos e química de protoestrelas
+    de Classe~0/I): van Dishoeck et al. (2025). Revisão de escalas de
+    tempo, funções de luminosidade e classes observacionais de
+    protoestrelas: Dunham et al. (2014).</p>
+  </div>
+</div>
+
+<h2 id="fe-discos">Estrutura e evolução de discos protoplanetários</h2>
+
+<p>A seção anterior sobre o problema do momento angular mostrou que a
+conservação do momento angular força a formação de um disco de
+acréscimo em torno da protoestrela — o reservatório que alimenta o
+crescimento estelar por toda a vida das Classes~0, I e~II, e também o
+berço físico dos sistemas planetários (última seção do capítulo). Esta
+seção descreve a estrutura de equilíbrio do disco, seu mecanismo de
+evolução/acréscimo, e o perfil de temperatura que determina onde
+diferentes sólidos condensam.</p>
+
+<h3>Geometria do disco: rotação kepleriana e escala de altura</h3>
+
+<p>Um disco de acréscimo é, geometricamente, <em>fino</em>:
+\(H/r\ll1\) em praticamente todo o raio, consequência do equilíbrio
+entre duas forças distintas — no plano radial, a gravidade domina
+amplamente sobre a pressão (dinamicamente desprezível), e o gás gira em
+órbitas quase keplerianas,</p>
+\[
+\Omega(r) \approx \Omega_K(r) = \sqrt{\frac{GM_\star}{r^3}}\,;
+\tag{7.35}
+\]
+<p>já na direção vertical, é a pressão do gás que sustenta o disco
+contra a gravidade estelar.</p>
+
+<p>Para obter \(H(r)\), considere o equilíbrio hidrostático vertical a
+uma altura \(z\ll r\) acima do plano médio, onde a componente vertical
+da gravidade é</p>
+\[
+g_z = \frac{GM_\star\,z}{(r^2+z^2)^{3/2}} \approx \frac{GM_\star}{r^3}\,z
+= \Omega_K^2(r)\,z\,,
+\tag{7.36}
+\]
+<p>isto é, a gravidade vertical se comporta, para \(z\ll r\), como um
+oscilador harmônico de frequência \(\Omega_K\). O equilíbrio
+hidrostático vertical,</p>
+\[
+\frac{\mathrm dP}{\mathrm dz} = -\rho\,g_z = -\rho\,\Omega_K^2\,z\,,
+\tag{7.37}
+\]
+<p>fechado com a equação de estado isotérmica local \(P=\rho c_s^2\)
+[\(c_s^2=k_BT/(\mu m_H)\), a mesma relação de gás ideal usada em todo o
+Capítulo 5, aqui aplicada à temperatura local do disco \(T(r)\)],
+fornece</p>
+\[
+c_s^2\,\frac{\mathrm d\rho}{\mathrm dz} = -\rho\,\Omega_K^2\,z
+\quad\Longrightarrow\quad
+\frac{\mathrm d\rho}{\rho} = -\frac{\Omega_K^2}{c_s^2}\,z\,\mathrm dz\,.
+\tag{7.38}
+\]
+<p>Integrando,</p>
+\[
+\rho(r,z) = \rho_0(r)\,\exp\!\left(-\frac{z^2}{2H^2}\right)\,,
+\qquad
+H(r) \equiv \frac{c_s(r)}{\Omega_K(r)}\,,
+\tag{7.39}
+\]
+<p>um perfil vertical gaussiano com escala de altura \(H\). Dividindo
+por \(r\) e usando a velocidade kepleriana \(v_K=\Omega_K r\),</p>
+\[
+\frac{H}{r} = \frac{c_s}{\Omega_K r} = \frac{c_s}{v_K}\,,
+\tag{7.40}
+\]
+<p>confirmando que a razão de aspecto é essencialmente a razão entre a
+velocidade do som local (agitação térmica) e a velocidade orbital. Como
+\(c_s\ll v_K\) para um disco frio (verificado numericamente adiante), o
+disco é necessariamente fino.</p>
+
+<p>O disco é caracterizado, além de \(H(r)\), por dois perfis radiais: a
+densidade superficial \(\Sigma(r)=\int\rho\,\mathrm dz\approx
+\sqrt{2\pi}\rho_0(r)H(r)\) e a temperatura \(T(r)\) (ambos decrescentes
+com \(r\)). O perfil de referência da Nebulosa Solar de Massa Mínima
+(MMSN), construído por Hayashi (1981) a partir da massa e composição
+hoje presas nos planetas do Sistema Solar, adota</p>
+\[
+\Sigma(r) \approx 1700\left(\frac{r}{1\,\mathrm{UA}}\right)^{-3/2}
+\mathrm{g\,cm^{-2}}\,,
+\qquad
+T(r) \approx 280\left(\frac{r}{1\,\mathrm{UA}}\right)^{-1/2}\mathrm K\,,
+\tag{7.41}
+\]
+<p>que usaremos como referência numérica ao longo desta seção.</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Razão de aspecto de um disco protoplanetário a \(1\,\mathrm{UA}\)</div>
+  <div class="conteudo">
+    <p>Para uma protoestrela de \(1\,M_\odot\) e o perfil MMSN da
+    Equação (7.41), avaliado em \(r=1\,\mathrm{UA}\): com \(T=280\,
+    \mathrm K\) e peso molecular médio \(\mu\approx2{,}3\) (gás
+    molecular H\(_2\)+He), a velocidade do som é</p>
+    \[
+    c_s = \sqrt{\frac{k_BT}{\mu m_H}}
+    \approx\sqrt{\frac{(1{,}381\times10^{-16})(280)}{(2{,}3)(1{,}673\times10^{-24})}}
+    \approx1{,}0\times10^5\,\mathrm{cm/s} \approx1{,}0\,\mathrm{km/s}\,.
+    \tag{7.42}
+    \]
+    <p>A velocidade kepleriana, com \(GM_\odot\approx1{,}327\times
+    10^{26}\,\mathrm{cm^3/s^2}\) e \(r=1\,\mathrm{UA}\approx1{,}496\times
+    10^{13}\,\mathrm{cm}\), é</p>
+    \[
+    v_K = \sqrt{\frac{GM_\odot}{r}} \approx3{,}0\times10^6\,\mathrm{cm/s}
+    \approx30\,\mathrm{km/s}
+    \tag{7.43}
+    \]
+    <p>(o mesmo valor da velocidade orbital da Terra, como deveria ser,
+    já que \(r=1\,\)UA é literalmente a órbita terrestre). Logo, pela
+    Equação (7.40),</p>
+    \[
+    \frac{H}{r}\bigg|_{1\,\mathrm{UA}} \approx \frac{1{,}0}{30}
+    \approx0{,}034\,,
+    \tag{7.44}
+    \]
+    <p>ou seja, \(H\approx0{,}034\,\mathrm{UA}\approx5\times10^{11}\,
+    \mathrm{cm}\): a escala de altura é cerca de \(3\,\%\) do raio
+    orbital, confirmando quantitativamente que o disco é fino. A
+    densidade no plano médio correspondente é</p>
+    \[
+    \rho_0 = \frac{\Sigma}{\sqrt{2\pi}\,H}
+    \approx\frac{1700}{\sqrt{2\pi}\,(5{,}0\times10^{11})}
+    \approx1{,}3\times10^{-9}\,\mathrm{g/cm^3}\,,
+    \tag{7.45}
+    \]
+    <p>correspondendo a uma densidade numérica
+    \(n=\rho_0/(\mu m_H)\approx3{,}5\times10^{14}\,\mathrm{cm^{-3}}\) —
+    este número será usado na próxima subseção para estimar o livre
+    caminho médio molecular do gás do disco.</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 10 — Rotação kepleriana e estrutura vertical \(H(r)\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mdgeo-M">Massa da protoestrela \(M_\star/M_\odot\) <span class="valor" id="mdgeo-M-valor">1,00</span></label>
+      <input type="range" id="mdgeo-M" min="20" max="300" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="mdgeo-r">Raio \(r\) (UA) <span class="valor" id="mdgeo-r-valor">1,00</span></label>
+      <input type="range" id="mdgeo-r" min="30" max="6000" step="10" value="100">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdgeo-canvas" role="img" aria-label="Grafico log-log de H/r em funcao de r, mostrando que o disco e mais fino perto da estrela e abre (flaring) para raios maiores." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(c_s=\)<strong id="mdgeo-cs">—</strong> km/s &middot;
+    \(v_K=\)<strong id="mdgeo-vK">—</strong> km/s &middot;
+    \(H=\)<strong id="mdgeo-H">—</strong> cm &middot;
+    \(H/r=\)<strong id="mdgeo-Hr">—</strong>. Com os valores padrão
+    (\(M_\star=1\,M_\odot\), \(r=1\,\)UA), este módulo reproduz o
+    Exemplo acima (\(H/r\approx0{,}034\)). A curva mostra o disco
+    <em>flaring</em>: \(H/r\) cresce lentamente com \(r\) (perfil MMSN,
+    \(T\propto r^{-1/2}\)), a mesma geometria da estrutura vertical
+    ilustrada no texto — disco mais fino perto da estrela, abrindo para
+    fora.
+  </p>
+</div>
+
+<h3>O problema da viscosidade e o modelo de disco-\(\alpha\)</h3>
+
+<p>Um disco puramente kepleriano, sem transporte de momento angular,
+seria eterno: nenhuma massa cairia sobre a protoestrela — o que
+contradiz as taxas de acréscimo observadas em T~Tauri clássicas
+(\(\dot M_\star\sim10^{-9}\)&ndash;\(10^{-7}\,M_\odot/\mathrm{ano}\)),
+exigindo um mecanismo que transporte massa para dentro e momento angular
+para fora.</p>
+
+<p>O candidato óbvio é a viscosidade microscópica do gás — o atrito
+molecular entre anéis adjacentes. O problema é que essa viscosidade é
+absurdamente pequena: \(\nu_{\rm mol}\sim\ell\,c_s\), com
+\(\ell=1/(n\sigma)\) o livre caminho médio (\(\sigma\approx2\times
+10^{-15}\,\mathrm{cm^2}\) para H\(_2\)). Usando os valores do Exemplo
+anterior (\(n\approx3{,}5\times10^{14}\,\mathrm{cm^{-3}}\),
+\(c_s\approx1{,}0\times10^5\,\mathrm{cm/s}\)) a \(1\,\)UA,</p>
+\[
+\ell = \frac{1}{n\sigma} \approx
+\frac{1}{(3{,}5\times10^{14})(2\times10^{-15})} \approx1{,}4\,\mathrm{cm}\,,
+\tag{7.46}
+\]
+\[
+\nu_{\rm mol}\sim\ell\,c_s\approx(1{,}4)(1{,}0\times10^5)
+\approx1{,}4\times10^5\,\mathrm{cm^2/s}\,.
+\tag{7.47}
+\]
+<p>Para avaliar se esse valor é dinamicamente relevante, forma-se o
+número de Reynolds do escoamento, \(\mathrm{Re}=v L/\nu\), usando como
+velocidade e comprimento característicos do cisalhamento orbital a
+própria velocidade kepleriana e o raio do disco, \(v\sim v_K\),
+\(L\sim r\):</p>
+\[
+\mathrm{Re} = \frac{v_K\,r}{\nu_{\rm mol}}
+\approx\frac{(3{,}0\times10^6)(1{,}5\times10^{13})}{1{,}4\times10^5}
+\approx3\times10^{14}\,.
+\tag{7.48}
+\]
+<p>Este é um número absurdamente grande: escoamentos de laboratório já
+turbulentam para \(\mathrm{Re}\gtrsim10^3\)&ndash;\(10^4\). O tempo
+viscoso associado, \(t_{\nu,{\rm mol}}\sim r^2/\nu_{\rm
+mol}\approx1{,}6\times10^{21}\,\mathrm s\approx5\times10^{13}\,
+\mathrm{anos}\) — cerca de <em>quatro mil vezes a idade do
+Universo</em> — deixa claro que a viscosidade molecular é fisicamente
+irrelevante para o acréscimo observado.</p>
+
+<p>É preciso, portanto, uma viscosidade <em>efetiva</em> muito maior,
+tipicamente identificada com turbulência no gás (o transporte turbulento
+funciona como a viscosidade microscópica, mas com "parcelas de fluido"
+turbulentas no lugar de moléculas, e livre caminho/velocidade efetivos
+muito maiores). A parametrização clássica é a de Shakura &amp; Sunyaev
+(1973), que — sem especificar a origem física da turbulência — escreve
+a viscosidade efetiva como</p>
+\[
+\nu = \alpha\,c_s\,H\,,
+\qquad 0<\alpha\lesssim1\,,
+\tag{7.49}
+\]
+<p>o modelo de disco-\(\alpha\): \(c_s\) é a velocidade característica
+do movimento turbulento subsônico esperado (o supersônico seria
+amortecido por choques) e \(H\) é o maior comprimento disponível
+verticalmente, de modo que \(\alpha\) mede a eficiência da turbulência
+em transportar momento angular como fração desse limite superior.</p>
+
+<p>Comparando a Equação (7.49) com a estimativa de
+\(\nu_{\rm mol}\approx1{,}4\times10^5\,\mathrm{cm^2/s}\) acima: usando
+\(H\approx5\times10^{11}\,\mathrm{cm}\) e \(c_s\approx1{,}0\times
+10^5\,\mathrm{cm/s}\) a \(1\,\)UA, mesmo um \(\alpha\) tão pequeno quanto
+\(10^{-4}\) já corresponde a \(\nu=\alpha c_sH\approx5\times
+10^{12}\,\mathrm{cm^2/s}\) — cerca de \(3{,}6\times10^7\) vezes maior
+que \(\nu_{\rm mol}\); para \(\alpha\sim10^{-2}\), o fator de
+amplificação chega a \(\sim3{,}6\times10^9\). A pergunta física central
+passa a ser, então: qual mecanismo hidrodinâmico ou magnetohidrodinâmico
+gera essa turbulência?</p>
+
+<p>O mecanismo hoje considerado dominante em discos suficientemente
+ionizados é a <strong>instabilidade magnetorrotacional</strong> (MRI):
+um campo magnético fraco torna um disco em rotação diferencial
+(kepleriana) linearmente instável, gerando turbulência MHD com
+eficiência \(\alpha\sim10^{-3}\)&ndash;\(10^{-1}\) em simulações
+idealizadas. O problema é que a MRI exige acoplamento razoável entre
+campo e gás (ionização mínima) — insuficiente no plano médio frio e
+blindado das regiões internas/intermediárias
+(\(\sim1\)&ndash;\(20\,\)UA), as chamadas <strong>zonas mortas</strong>
+(<em>dead zones</em>), onde a MRI é suprimida. Mecanismos hidrodinâmicos
+alternativos, que não dependem de ionização — como a
+<strong>instabilidade de convecção vertical</strong> (VSI), que explora
+o gradiente radial de temperatura do disco —, tornam-se então
+relevantes. Uma revisão desses mecanismos está em Turner et al. (2014).</p>
+
+<p>Observacionalmente, valores de \(\alpha\) inferidos de taxas de
+acréscimo e massas de disco (ALMA) não se agrupam em um único valor:
+Rafikov (2017), em 26 discos, encontra \(\alpha\sim10^{-4}\)&ndash;\(0{,}04\),
+sem correlação clara com massa/tamanho/parâmetros estelares —
+consistente com a coexistência de regiões dominadas por MRI e por zona
+morta. Este intervalo, \(\alpha\sim10^{-4}\)&ndash;\(10^{-2}\), será
+usado como referência adiante.</p>
+
+<h3>Evolução viscosa: acréscimo e espalhamento do disco</h3>
+
+<p>Fisicamente, a viscosidade efetiva atua exercendo um torque entre
+anéis adjacentes do disco: o anel mais interno, girando ligeiramente
+mais rápido, "arrasta" o anel externo para frente (acelerando-o), ao
+passo que o anel externo "freia" o interno. Pela terceira lei de
+Newton, esse par de torques transporta momento angular do interior para
+o exterior do disco — sem alterar a energia total do sistema apenas por
+esse mecanismo — enquanto a massa, para conservar momento angular ao
+perder parte dele, migra na direção oposta, para dentro. O resultado
+líquido é exatamente o que a observação exige: acréscimo de massa sobre
+a protoestrela, acompanhado por um espalhamento radial do disco (a
+maior parte da massa se concentra progressivamente mais perto do
+centro, enquanto uma fração cada vez menor de massa, carregando uma
+fração cada vez maior do momento angular total, se afasta para raios
+grandes). Formalmente, esse processo é descrito por uma equação de
+difusão para \(\Sigma(r,t)\) com coeficiente de difusão proporcional a
+\(\nu\) (cuja dedução completa foge do escopo destas notas, mas cujo
+comportamento qualitativo — evolução difusiva, com acréscimo interno e
+espalhamento externo — é exatamente o que a intuição acima sugere).</p>
+
+<p>A escala de tempo característica dessa evolução difusiva é o tempo
+viscoso,</p>
+\[
+t_{\rm visc}(r) \sim \frac{r^2}{\nu(r)} = \frac{r^2}{\alpha\,c_s(r)\,H(r)}
+= \frac{1}{\alpha\,\Omega_K(r)}\left(\frac{r}{H(r)}\right)^{2}\,,
+\tag{7.50}
+\]
+<p>onde a última forma usa \(\nu=\alpha c_sH\) e \(H/r=c_s/v_K\)
+[Equações (7.49) e (7.40)]. Como \((r/H)^2\gg1\) para um disco fino,
+\(t_{\rm visc}\) é muito mais longo que o período orbital local
+\(2\pi/\Omega_K\) — o acréscimo viscoso é um processo lento comparado à
+dinâmica orbital, o que justifica a priori tratar o disco, em cada
+instante, como aproximadamente kepleriano (Equação (7.35)).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 11 — Disco-\(\alpha\): viscosidade e tempo viscoso</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mdvisc-alpha">\(\log_{10}\alpha\) <span class="valor" id="mdvisc-alpha-valor">1,00×10⁻²</span></label>
+      <input type="range" id="mdvisc-alpha" min="-400" max="-100" step="1" value="-200">
+    </div>
+    <div class="controle">
+      <label for="mdvisc-r">Raio \(r\) (UA) <span class="valor" id="mdvisc-r-valor">1,00</span></label>
+      <input type="range" id="mdvisc-r" min="-52" max="200" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;">
+    <p class="leitura-card" style="margin:0;">
+      \(\nu=\alpha c_sH=\)<strong id="mdvisc-nu">—</strong> cm²/s
+      &middot;
+      \(t_{\rm visc}\sim r^2/\nu=\)<strong id="mdvisc-tvisc">—</strong> anos
+    </p>
+  </div>
+  <p class="leitura-card">
+    Com \(r=1\,\)UA e \(\alpha=10^{-2}\) (valores padrão), reproduz a
+    linha \(1\,\)UA do Exemplo abaixo (\(\nu\approx5{,}0\times
+    10^{14}\,\mathrm{cm^2/s}\), \(t_{\rm visc}\approx1{,}4\times
+    10^4\) anos); mude para \(r=30\,\)UA e \(\alpha=10^{-3}\) para
+    reproduzir a segunda linha (\(t_{\rm visc}\approx4\times10^6\)
+    anos).
+  </p>
+</div>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Tempo viscoso nas regiões interna e externa do disco</div>
+  <div class="conteudo">
+    <p>Comparando \(r\sim1\,\)UA (onde a MRI opera com
+    \(\alpha\sim10^{-2}\), usando \(c_s\approx1{,}0\times10^5\,
+    \mathrm{cm/s}\), \(H\approx5{,}0\times10^{11}\,\mathrm{cm}\) do
+    Exemplo anterior) com \(r\sim30\,\)UA (região mais neutra, afetada
+    pela zona morta, \(\alpha\sim10^{-3}\); pelo perfil MMSN,
+    \(T\approx51\,\)K, \(c_s\approx4{,}3\times10^4\,\mathrm{cm/s}\),
+    \(H\approx3{,}5\times10^{13}\,\mathrm{cm}\), com \(H/r\approx0{,}08\)
+    maior que a \(1\,\)UA — o disco é <em>flaring</em>, sua razão de
+    aspecto cresce com o raio):</p>
+    <table>
+      <thead><tr><th>\(r\)</th><th>\(\nu=\alpha c_sH\)</th><th>\(t_{\rm visc}\sim r^2/\nu\)</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>\(1\,\)UA (\(\alpha=10^{-2}\))</td><td>\(5{,}0\times10^{14}\,\mathrm{cm^2/s}\)</td><td>\(4{,}5\times10^{11}\,\mathrm s\)</td><td>\(\approx1{,}4\times10^4\) anos</td></tr>
+        <tr><td>\(30\,\)UA (\(\alpha=10^{-3}\))</td><td>\(1{,}5\times10^{15}\,\mathrm{cm^2/s}\)</td><td>\(1{,}3\times10^{14}\,\mathrm s\)</td><td>\(\approx4\times10^6\) anos</td></tr>
+      </tbody>
+    </table>
+    <p>A região interna processa e acreta sua massa rapidamente; a
+    externa evolui em poucos milhões de anos, em excelente concordância
+    de ordem de grandeza com o tempo de vida observado dos discos
+    protoplanetários (adiante) — sustentando a interpretação de que é a
+    evolução viscosa das regiões <em>externas</em>, mais lentas, que
+    regula por quanto tempo um disco sobrevive como reservatório de
+    gás.</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 12 (destaque) — Evolução viscosa do disco, animada</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Representação esquemática (não a solução exata da equação de
+    difusão) do comportamento qualitativo descrito no texto: o anel
+    inicial de matéria se espalha no tempo — o pico migra para dentro
+    (acréscimo) enquanto a cauda externa cresce (espalhamento),
+    carregando o momento angular removido do material acretado.
+  </p>
+  <div class="controles">
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mdevol-play" class="botao-modulo">▶ Animar evolução viscosa</button>
+      <button type="button" id="mdevol-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdevol-canvas" role="img" aria-label="Animacao esquematica da evolucao viscosa de um disco: um anel inicial de materia se espalha no tempo, com o pico de densidade migrando para dentro (acrescimo) e uma cauda externa crescendo (espalhamento)." style="width:100%;height:340px;display:block;"></canvas></div>
+</div>
+
+<h3>Perfil de temperatura: aquecimento viscoso vs. irradiação estelar</h3>
+
+<p>O perfil \(T(r)\) de um disco protoplanetário resulta, em geral, da
+competição entre duas fontes de energia com geometrias muito
+diferentes.</p>
+
+<p>Nas fases iniciais e regiões internas, onde a densidade e a taxa de
+acréscimo são altas, a própria dissipação viscosa — o "atrito"
+turbulento entre anéis — converte energia orbital em calor a uma taxa
+\(\sim\nu\Sigma\Omega_K^2\) por unidade de área, reirradiada localmente:
+o regime de <strong>disco aquecido internamente</strong>, formalmente
+idêntico ao transporte radiativo estelar (Capítulo 5), com \(T\)
+crescendo com a dissipação viscosa local. Em regime estacionário, o
+balanço entre dissipação viscosa e reemissão de corpo negro das duas
+faces do disco dá o perfil clássico (Pringle, 1981)</p>
+\[
+T_{\rm visc}(r) \approx \left[\frac{3GM_\star\dot M}{8\pi\sigma r^3}\right]^{1/4}\,,
+\]
+<p>onde \(\dot M\) é a taxa de acréscimo local (aproximadamente
+constante no disco interno, em estado quase-estacionário) — usado no
+módulo abaixo.</p>
+
+<p>Já nas regiões externas e fases mais avançadas (acréscimo já em
+declínio), a fonte dominante passa a ser a <strong>irradiação
+estelar</strong>. Como o disco é opticamente fino ali, cada elemento de
+área absorve uma fração da luz estelar e a reemite como corpo negro. A
+geometria fina é essencial: como \(H/r\ll1\), a luz de uma fonte quase
+pontual no plano médio incide em ângulo <em>rasante</em> — não
+perpendicular —, de modo que apenas uma fração \(\sim H/r\) do fluxo
+estelar é interceptada por unidade de área do disco.</p>
+
+<p>O balanço de energia por unidade de área — fluxo estelar
+\(L_\star/(4\pi r^2)\) vezes o fator geométrico rasante
+\(\gamma\sim H/r\) (tratado como constante, na aproximação de ordem
+zero), igualado à reemissão de corpo negro das duas faces,
+\(2\sigma T^4\) —</p>
+\[
+\gamma\,\frac{L_\star}{4\pi r^2} = 2\sigma T^4\,,
+\qquad \gamma\approx\text{constante}
+\quad\Longrightarrow\quad
+T^4\propto\frac{1}{r^2}
+\quad\Longrightarrow\quad
+\boxed{T(r)\propto r^{-1/2}}\,,
+\tag{7.51}
+\]
+<p>exatamente o expoente do perfil MMSN [Equação (7.41)] — o mesmo
+balanço que Hayashi (1981) usou para calibrar \(T(1\,{\rm
+UA})\approx280\,\)K.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Sobre a constância de \(\gamma\)</div>
+  <div class="conteudo">
+    <p>Essa aproximação é de ordem zero. Como \(H/r\) cresce lentamente
+    com \(r\) (o disco é <em>flaring</em>), um tratamento
+    autoconsistente — em que \(\gamma\sim H/r\) é calculado a partir do
+    próprio perfil de temperatura que ele ajuda a determinar — leva a
+    \(T\propto r^{-3/7}\) (Chiang &amp; Goldreich, 1997). A diferença
+    entre \(-1/2\) e \(-3/7\) é pequena o suficiente para não afetar
+    qualitativamente as conclusões desta seção, e por isso mantemos o
+    perfil MMSN mais simples.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 13 — Perfil de temperatura: aquecimento viscoso vs. irradiação</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mdtemp-mdot">\(\log_{10}(\dot M/(M_\odot/\mathrm{ano}))\) <span class="valor" id="mdtemp-mdot-valor">1,00×10⁻⁸</span></label>
+      <input type="range" id="mdtemp-mdot" min="-1100" max="-600" step="1" value="-800">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdtemp-canvas" role="img" aria-label="Grafico log-log de T(r) mostrando as duas componentes: aquecimento viscoso (terracota, decrescente rapidamente) e irradiacao estelar (verde, r elevado a menos 1 meio), com o ponto de cruzamento marcado." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    <span style="color:#D85A30;">Terracota</span>: \(T_{\rm
+    visc}(r)\propto\dot M^{1/4}r^{-3/4}\) — cai mais rápido que a
+    irradiação e domina só nas regiões internas, onde \(\dot M\) é
+    maior. <span style="color:#17805f;">Verde</span>: \(T_{\rm
+    irrad}(r)\propto r^{-1/2}\) [Eq. (7.51), perfil MMSN] — domina nas
+    regiões externas independente de \(\dot M\). Raio de cruzamento:
+    \(r_{\rm cross}\approx\)<strong id="mdtemp-rcross">—</strong> UA.
+    Para taxas de acréscimo típicas de Classe~0/I (\(\dot M\sim
+    10^{-6}\,M_\odot\)/ano), o aquecimento viscoso domina até vários UA;
+    para taxas de CTTS (\(\dot M\sim10^{-8}\,M_\odot\)/ano), a
+    irradiação já domina a partir de frações de UA.
+  </p>
+</div>
+
+<h3>A linha de gelo</h3>
+
+<p>O fato de \(T(r)\) decrescer monotonicamente para fora tem
+consequência direta para a composição química dos sólidos que se
+condensam no disco — e, adiante, dos planetas que se acumulam a partir
+deles. Diferentes espécies condensam em diferentes temperaturas,
+definindo para cada uma um raio no disco abaixo do qual permanecem
+gasosas e acima do qual condensam sobre os grãos. A mais importante
+dessas fronteiras é a <strong>linha de gelo</strong> (<em>snow
+line</em>), o raio \(r_{\rm gelo}\) onde \(T\) cai abaixo da temperatura
+de condensação da água — tipicamente \(T_{\rm gelo}\approx170\,\)K
+(faixa plausível \(\sim145\)&ndash;\(170\,\)K, dependendo da pressão
+parcial local) (Hayashi, 1981).</p>
+
+<p>A linha de gelo separa o disco em duas regiões de composição
+radicalmente diferentes: <strong>interior</strong> (\(T>T_{\rm
+gelo}\)), onde só materiais refratários (silicatos, óxidos,
+ferro-níquel) condensam e a água permanece gasosa; e
+<strong>exterior</strong> (\(T<T_{\rm gelo}\)), onde a água também
+condensa como gelo, aumentando por um fator \(\sim3\)&ndash;\(4\) a
+densidade superficial de sólidos disponíveis — já que o oxigênio
+(majoritariamente H\(_2\)O) é várias vezes mais abundante, em massa, do
+que todos os elementos refratários somados.</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Posição numérica da linha de gelo</div>
+  <div class="conteudo">
+    <p>Usando o perfil de temperatura MMSN [Equação (7.41), com o mesmo
+    expoente \(-1/2\) deduzido acima na Equação (7.51)] e
+    \(T_{\rm gelo}=170\,\)K,</p>
+    \[
+    T(r_{\rm gelo}) = 280\left(\frac{r_{\rm gelo}}{1\,\mathrm{UA}}\right)^{-1/2}
+    \mathrm K = 170\,\mathrm K
+    \quad\Longrightarrow\quad
+    r_{\rm gelo} = \left(\frac{280}{170}\right)^{2}\mathrm{UA}
+    \approx2{,}7\,\mathrm{UA}\,.
+    \tag{7.52}
+    \]
+    <p>Esse valor concorda muito bem com a posição inferida para a
+    linha de gelo do Sistema Solar primitivo, a partir de meteoritos e
+    da distribuição de tipos espectrais no cinturão de asteroides
+    (\(\sim2{,}7\)&ndash;\(3\,\)UA) — próxima do próprio semieixo maior
+    médio do cinturão, consistente com a transição entre asteroides
+    tipo~S (rochosos, internos) e tipo~C (hidratados, externos).</p>
+  </div>
+</div>
+</div>
+
+<p>A posição da linha de gelo em discos reais só começou a ser medida
+diretamente na década passada, com o ALMA. No disco de V883~Orionis, um
+surto de acréscimo tipo FU~Orionis empurra a linha de gelo para
+\(\sim40\)&ndash;\(42\,\)UA, resolvida espacialmente por uma
+descontinuidade abrupta na emissão contínua da poeira entre duas bandas
+do ALMA (Cieza et al., 2016) — confirmando o mecanismo da Equação
+(7.51), e servindo de ponte para a última seção do capítulo: planetas
+gigantes gasosos se formam preferencialmente além da linha de gelo
+precisamente por causa do salto na densidade superficial de sólidos ali
+disponível, o ingrediente que faltava para núcleos rochosos internos
+atingirem a massa crítica de acreção de gás antes da dissipação do
+disco.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 14 — A linha de gelo</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mgelo-L">Luminosidade estelar \(L_\star/L_\odot\) <span class="valor" id="mgelo-L-valor">1,00</span></label>
+      <input type="range" id="mgelo-L" min="-100" max="150" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mgelo-canvas" role="img" aria-label="Grafico de T(r) com a linha de gelo marcada, junto com marcadores de referencia do Sistema Solar (cinturao de asteroides, Jupiter, Saturno)." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Linha de gelo: \(r_{\rm gelo}=\)<strong id="mgelo-rgelo">—</strong>
+    UA. Com \(L_\star=L_\odot\) (padrão), reproduz o Exemplo acima
+    (\(\approx2{,}7\,\)UA). Aumente \(L_\star\) (protoestrela mais
+    jovem/luminosa, ou um surto FU~Orionis) e observe a linha de gelo se
+    deslocar para fora — \(r_{\rm gelo}\propto L_\star^{1/2}\) — como
+    observado em V883~Orionis. O cinturão de asteroides do Sistema
+    Solar (\(\sim2{,}1\)&ndash;\(3{,}3\,\)UA) e as órbitas de Júpiter
+    (\(5{,}2\,\)UA) e Saturno (\(9{,}5\,\)UA) ficam, com \(L_\star=L_\odot\),
+    logo além da linha de gelo calculada — consistente com a formação
+    dos gigantes gasosos além dela.
+  </p>
+</div>
+
+<h3>Tempo de vida dos discos protoplanetários</h3>
+
+<p>Levantamentos infravermelhos de aglomerados jovens (idades via
+isócronas PMS) medem a <strong>fração de disco</strong> — fração de
+estrelas com excesso infravermelho de disco — como função da idade:
+\(\sim40\)&ndash;\(50\%\) em \(2\)&ndash;\(3\,\)Myr, \(\lesssim20\%\) em
+\(5\,\)Myr, \(\lesssim5\%\) entre \(8\)&ndash;\(10\,\)Myr (Evans et al.,
+2009). Isso dá \(\tau_{\rm disco}\sim2\)&ndash;\(4\,\)Myr, embora discos
+individuais variem de \(<1\,\)Myr a dezenas de Myr conforme massa
+estelar, massa inicial do disco e ambiente — consistente com
+\(t_{\rm visc}(30\,{\rm UA})\sim4\,\)Myr (subseção anterior).</p>
+
+<p>A dissipação resulta da combinação de três mecanismos: o
+<strong>acréscimo viscoso</strong> desta seção, que drena massa para a
+protoestrela em \(t_{\rm visc}\) e espalha o restante para raios
+maiores; a <strong>fotoevaporação</strong>, fótons UV/raios-X (da
+própria protoestrela, ou de estrelas OB vizinhas) que ionizam as camadas
+superiores a ponto de torná-las não-ligadas, dominante nas fases finais
+e responsável pela transição abrupta disco/sem-disco em Classe~II
+tardia/III; e o <strong>consumo pela formação planetária</strong>,
+subdominante em massa mas responsável por parte da estrutura fina
+(anéis, lacunas) observada em discos bem resolvidos.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 15 — Tempo de vida dos discos protoplanetários</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mdvida-t">Idade do aglomerado (Myr) <span class="valor" id="mdvida-t-valor">0,0</span></label>
+      <input type="range" id="mdvida-t" min="0" max="150" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdvida-canvas" role="img" aria-label="Grafico da fracao de estrelas com disco em funcao da idade do aglomerado, curva de decaimento exponencial com pontos de referencia observacionais marcados em 2, 3, 5 e 9 Myr." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Fração de estrelas com disco na idade escolhida:
+    <strong id="mdvida-frac">—</strong>%. A curva
+    \(f(t)=e^{-t/\tau}\) com \(\tau=3{,}1\,\)Myr (pontos roxos: valores
+    de referência citados no texto — \(\sim45\%\) em \(2\)&ndash;\(3\,
+    \)Myr, \(\sim20\%\) em \(5\,\)Myr, \(\sim5\%\) em \(9\,\)Myr) passa
+    muito perto de todos eles com um único valor de \(\tau\),
+    consistente com a faixa \(\tau_{\rm disco}\sim2\)&ndash;\(4\,\)Myr
+    citada no texto.
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Estrutura de discos em alta resolução: o disco de HL~Tauri</div>
+  <div class="conteudo">
+    <p>Um dos resultados mais icônicos da astronomia de discos
+    protoplanetários é a imagem do disco de HL~Tauri (Classe~I/II,
+    \(\sim1\,\)Myr), obtida pelo ALMA em 2014 (ALMA Partnership et al.,
+    2015): em vez do disco liso esperado por modelos simples, revelou um
+    padrão de <strong>anéis brilhantes e lacunas escuras
+    concêntricas</strong> na poeira em milímetro (pelo menos sete anéis;
+    lacunas mais profundas em \(\sim13\), \(\sim32\) e \(\sim74\,\)UA,
+    com densidade reduzida por \(\gtrsim10\times\)). A interpretação
+    mais imediata é que planetas em formação abrem órbitas livres de
+    poeira por torques de maré (a lacuna a \(\sim32\,\)UA seria
+    consistente com \(\sim0{,}3\)&ndash;\(0{,}4\,M_{\rm Jup}\)), mas a
+    interpretação não é unívoca: armadilhas de poeira em linhas de
+    condensação (gelo de H\(_2\)O, CO, NH\(_3\)), instabilidades
+    hidrodinâmicas do gás e efeitos de opacidade também produzem anéis.
+    Levantamentos subsequentes do ALMA mostraram que essas subestruturas
+    são, na verdade, a norma — não a exceção — entre discos resolvidos,
+    tornando sua origem física um tema ativo de pesquisa.</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Estrutura observada em discos protoplanetários (anéis, lacunas,
+    espirais): Andrews (2020). Transporte de momento angular em discos
+    (MRI, zonas mortas, mecanismos hidrodinâmicos alternativos): Turner
+    et al. (2014). Parametrização original de disco-\(\alpha\): Shakura
+    &amp; Sunyaev (1973). Valores de \(\alpha\) inferidos de discos
+    resolvidos pelo ALMA: Rafikov (2017).</p>
+  </div>
+</div>
+
+<h2 id="fe-acrescimo-magnetosferico">Acréscimo magnetosférico e a fase de T Tauri</h2>
+
+<p>A seção anterior descreveu como o disco viscoso transporta matéria
+para dentro — mas esse quadro hidrodinâmico não pode valer até a
+superfície estelar: próximo à protoestrela, o campo magnético estelar
+passa a dominar a dinâmica do gás. Esta seção descreve essa transição,
+caracteriza a fase de T~Tauri resultante, e fecha, com os ventos/jatos,
+o último mecanismo de transporte de momento angular deixado em aberto
+na seção sobre o problema do momento angular.</p>
+
+<h3>Do disco viscoso ao acréscimo magnetosférico</h3>
+
+<p>Estrelas T~Tauri têm campos magnéticos de superfície
+surpreendentemente intensos: medidas espectropolarimétricas indicam
+campos médios de \(1\)&ndash;\(3\,\mathrm{kG}\) (até \(\sim6\,\)kG
+local) — ordens de grandeza acima do Sol (\(\sim1\)&ndash;\(2\,\)G). Um
+campo dessa intensidade trunca o disco viscoso antes que alcance a
+superfície: dentro desse raio de truncamento (raio magnetosférico), a
+pressão magnética supera a pressão de aríete do gás em acréscimo, e o
+material é capturado pelas linhas de campo em vez de seguir órbitas
+keplerianas.</p>
+
+<p>Para estimar esse raio de ordem de grandeza, aproxime o campo
+estelar por um dipolo, \(B(r)=B_\star(R_\star/r)^3\), com pressão
+magnética associada \(P_{\rm mag}=B(r)^2/(8\pi)\). Do lado do gás, a
+pressão de aríete de um fluxo em acréscimo quase radial, com taxa
+\(\dot M\), é \(P_{\rm ram}=\rho v^2\); usando a continuidade de massa
+(\(\dot M=4\pi r^2\rho v\)) para eliminar \(\rho\), e aproximando a
+velocidade de queda por queda livre, \(v\approx v_{\rm
+ff}(r)=\sqrt{2GM_\star/r}\) (a mesma forma já usada para o colapso do
+núcleo),</p>
+\[
+P_{\rm ram}(r) = \frac{\dot M}{4\pi r^2}\,v_{\rm ff}(r)
+= \frac{\dot M}{4\pi r^2}\sqrt{\frac{2GM_\star}{r}}\,.
+\tag{7.53}
+\]
+<p>Igualando \(P_{\rm mag}=P_{\rm ram}\) e isolando \(r\), obtém-se o
+<strong>raio de truncamento</strong> (ou raio magnetosférico) \(R_A\):</p>
+\[
+\frac{B_\star^2R_\star^6}{8\pi r^6} = \frac{\dot M}{4\pi r^2}
+\sqrt{\frac{2GM_\star}{r}}
+\quad\Longrightarrow\quad
+R_A = \left(\frac{B_\star^4R_\star^{12}}{8\,GM_\star\dot M^2}\right)^{1/7}\,.
+\tag{7.54}
+\]
+<p>O expoente \(1/7\), incomum, é assinatura desse balanço entre um
+campo dipolar (\(\propto r^{-3}\), ao quadrado na pressão magnética) e
+um fluxo de queda livre — o mesmo resultado (a menos de um fator de
+eficiência \(\xi\sim0{,}5\)&ndash;\(1\), aqui tomado como \(1\)) de
+tratamentos mais completos, incluindo geometria não-esférica.</p>
+
+<p>O segundo raio relevante é o <strong>raio de corrotação</strong>
+\(R_{\rm co}\), onde a velocidade angular kepleriana do disco iguala a
+velocidade angular de rotação da própria estrela,
+\(\Omega_K(R_{\rm co})=\Omega_\star=2\pi/P_\star\):</p>
+\[
+R_{\rm co} = \left(\frac{GM_\star}{\Omega_\star^2}\right)^{1/3}
+= \left(\frac{GM_\star P_\star^2}{4\pi^2}\right)^{1/3}\,.
+\tag{7.55}
+\]
+<p>A posição relativa de \(R_A\) e \(R_{\rm co}\) determina o regime de
+interação estrela-disco: quando \(R_A\lesssim R_{\rm co}\) (o regime
+observado na grande maioria das T~Tauri clássicas, chamado
+<em>disk-locking</em>), o material é capturado pelo campo magnético já
+em rotação sub-kepleriana em relação à estrela e cai em direção a ela;
+quando \(R_A\gtrsim R_{\rm co}\), a estrela gira mais rápido que o
+disco naquele raio, e o material pode ser magneto-centrifugamente
+ejetado em vez de acretado (o regime de "propulsor", ou
+<em>propeller</em>).</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Raios de truncamento e corrotação de uma T~Tauri típica</div>
+  <div class="conteudo">
+    <p>Para uma T~Tauri clássica de \(M_\star=0{,}5\,M_\odot\),
+    \(R_\star=2\,R_\odot\approx1{,}39\times10^{11}\,\mathrm{cm}\),
+    \(B_\star=1\,\mathrm{kG}=10^3\,\mathrm G\) e taxa de acréscimo
+    fiducial \(\dot M=10^{-8}\,M_\odot/\mathrm{ano}\approx6{,}3\times
+    10^{17}\,\mathrm{g/s}\) (valor típico de CTTS, ver adiante), a
+    Equação (7.54) dá</p>
+    \[
+    R_A = \left(\frac{(10^3)^4(1{,}39\times10^{11})^{12}}
+    {8\,(6{,}674\times10^{-8})(9{,}95\times10^{32})(6{,}3\times10^{17})^2}
+    \right)^{1/7}
+    \approx8{,}2\times10^{11}\,\mathrm{cm}\approx5{,}9\,R_\star\,.
+    \tag{7.56}
+    \]
+    <p>Para o raio de corrotação, usando um período de rotação típico
+    de CTTS \(P_\star\approx8\,\)dias — próximo ao pico de maior
+    período da distribuição bimodal observada por Herbst et al. (2002)
+    para T~Tauri de período mais longo — a Equação (7.55) dá</p>
+    \[
+    R_{\rm co} = \left(\frac{(6{,}674\times10^{-8})(9{,}95\times10^{32})
+    (6{,}91\times10^5)^2}{4\pi^2}\right)^{1/3}
+    \approx9{,}3\times10^{11}\,\mathrm{cm}\approx6{,}7\,R_\star\,.
+    \tag{7.57}
+    \]
+    <p>Os dois raios são, portanto, ambos da ordem de <strong>poucos
+    raios estelares</strong> e muito próximos entre si, com \(R_A\)
+    ligeiramente menor que \(R_{\rm co}\) — o regime de
+    <em>disk-locking</em> esperado, consistente com raios medidos
+    diretamente em sistemas bem estudados (ex. \(\sim8\,R_\star\) em
+    TW~Hya). O disco viscoso, que se estende por dezenas a centenas de
+    UA, é portanto truncado a uma distância milhares de vezes menor que
+    seu próprio raio externo — um "buraco" magnetosférico minúsculo,
+    mas dinamicamente decisivo, na borda interna do disco.</p>
+  </div>
+</div>
+</div>
+
+<h3>Colunas de acréscimo e pontos quentes</h3>
+
+<p>Dentro do raio de truncamento, o gás deixa o equilíbrio centrífugo e
+é <strong>canalizado</strong> pelas linhas de campo magnético (a
+densidade de energia magnética domina ali). O material é acelerado em
+queda aproximadamente livre até atingir a superfície em <strong>altas
+latitudes</strong>, próximas aos polos magnéticos. O impacto
+supersônico contra a fotosfera produz um <strong>choque de
+acréscimo</strong> que converte energia cinética em calor, aquecendo
+pequenas regiões — os <strong>pontos quentes</strong> (<em>hot
+spots</em>).</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Velocidade de impacto e temperatura de choque</div>
+  <div class="conteudo">
+    <p>A velocidade de queda livre entre o raio de truncamento e a
+    superfície estelar, usando os valores do Exemplo anterior
+    (\(R_A\approx8{,}2\times10^{11}\,\mathrm{cm}\),
+    \(R_\star\approx1{,}39\times10^{11}\,\mathrm{cm}\),
+    \(M_\star=0{,}5\,M_\odot\)), é</p>
+    \[
+    v_{\rm imp} = \sqrt{2GM_\star\left(\frac{1}{R_\star}-\frac{1}{R_A}\right)}
+    \approx2{,}8\times10^7\,\mathrm{cm/s}\approx280\,\mathrm{km/s}\,,
+    \tag{7.58}
+    \]
+    <p>em excelente concordância com velocidades de impacto observadas
+    e modeladas em colunas de acréscimo de T~Tauri clássicas,
+    tipicamente \(\sim200\)&ndash;\(500\,\mathrm{km/s}\) (Bouvier et
+    al., 2007; Hartmann, Herczeg &amp; Calvet, 2016). No choque forte
+    resultante, a condição de salto de Rankine-Hugoniot para um gás
+    monoatômico (\(\gamma=5/3\)) converte a energia cinética de impacto
+    em temperatura pós-choque</p>
+    \[
+    T_{\rm choque} \approx \frac{3\mu m_H v_{\rm imp}^2}{16\,k_B}\,,
+    \tag{7.59}
+    \]
+    <p>que, usando \(\mu\approx0{,}6\) (plasma ionizado pós-choque),</p>
+    \[
+    T_{\rm choque} \approx\frac{3(0{,}6)(1{,}673\times10^{-24})
+    (2{,}8\times10^7)^2}{16(1{,}381\times10^{-16})}
+    \approx1{,}1\times10^6\,\mathrm K\,,
+    \tag{7.60}
+    \]
+    <p>da mesma ordem de grandeza — poucos milhões de kelvin — das
+    temperaturas de choque de fato inferidas espectroscopicamente
+    (sobretudo em raios~X e~UV) em pontos quentes de T~Tauri clássicas
+    (Bouvier et al., 2007). A pequena diferença numérica em relação a
+    valores mais detalhados da literatura (\(\sim2\times10^6\,\)K)
+    reflete efeitos adicionais de estrutura pós-choque (reprocessamento
+    radiativo, geometria não-uniforme da coluna) omitidos nesta
+    estimativa de ordem de grandeza.</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 16 — T~Tauri: truncamento, corrotação, impacto e luminosidade de acréscimo</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mtt-B">Campo estelar \(B_\star\) (G) <span class="valor" id="mtt-B-valor">1,00×10³</span></label>
+      <input type="range" id="mtt-B" min="250" max="360" step="1" value="300">
+    </div>
+    <div class="controle">
+      <label for="mtt-Mdot">\(\log_{10}(\dot M/(M_\odot/\mathrm{ano}))\) <span class="valor" id="mtt-Mdot-valor">1,00×10⁻⁸</span></label>
+      <input type="range" id="mtt-Mdot" min="-1100" max="-700" step="1" value="-800">
+    </div>
+    <div class="controle">
+      <label for="mtt-M">Massa estelar \(M_\star/M_\odot\) <span class="valor" id="mtt-M-valor">0,50</span></label>
+      <input type="range" id="mtt-M" min="10" max="150" step="1" value="50">
+    </div>
+    <div class="controle">
+      <label for="mtt-R">Raio estelar \(R_\star/R_\odot\) <span class="valor" id="mtt-R-valor">2,00</span></label>
+      <input type="range" id="mtt-R" min="50" max="500" step="1" value="200">
+    </div>
+    <div class="controle">
+      <label for="mtt-P">Período de rotação \(P_\star\) (dias) <span class="valor" id="mtt-P-valor">8,0</span></label>
+      <input type="range" id="mtt-P" min="10" max="200" step="1" value="80">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem 1.5rem;">
+    <p class="leitura-card" style="margin:0;">\(R_A=\)<strong id="mtt-RA">—</strong> cm (<strong id="mtt-RA-Rstar">—</strong> \(R_\star\))</p>
+    <p class="leitura-card" style="margin:0;">\(R_{\rm co}=\)<strong id="mtt-Rco">—</strong> cm (<strong id="mtt-Rco-Rstar">—</strong> \(R_\star\))</p>
+    <p class="leitura-card" style="margin:0;">\(v_{\rm imp}=\)<strong id="mtt-vimp">—</strong> km/s</p>
+    <p class="leitura-card" style="margin:0;">\(T_{\rm choque}=\)<strong id="mtt-Tchoque">—</strong> K</p>
+    <p class="leitura-card" style="margin:0;grid-column:1/-1;">\(L_{\rm acc}=GM_\star\dot M/R_\star=\)<strong id="mtt-Lacc">—</strong> \(L_\odot\)</p>
+  </div>
+  <p class="leitura-card" id="mtt-regime" style="font-weight:600;">—</p>
+  <p class="leitura-card">
+    Com os valores padrão (\(B_\star=1\,\)kG, \(\dot M=10^{-8}\,
+    M_\odot\)/ano, \(M_\star=0{,}5\,M_\odot\), \(R_\star=2\,R_\odot\),
+    \(P_\star=8\,\)dias) este módulo reproduz simultaneamente os dois
+    Exemplos acima: \(R_A\approx5{,}9\,R_\star\), \(R_{\rm co}\approx
+    6{,}7\,R_\star\), \(v_{\rm imp}\approx280\,\)km/s,
+    \(T_{\rm choque}\approx1{,}1\times10^6\,\)K. Aumente \(\dot M\) por
+    duas ordens de grandeza (até a taxa de Shu de Classe~0/I,
+    \(\sim1{,}6\times10^{-6}\,M_\odot\)/ano) para ver
+    \(L_{\rm acc}\to13\,L_\odot\), reproduzindo o Exemplo de luminosidade
+    de acréscimo abaixo.
+  </p>
+</div>
+
+<h3>Estrelas T~Tauri clássicas e de linha fraca</h3>
+
+<p>Observacionalmente, as estrelas T~Tauri — protoestrelas de baixa
+massa já opticamente visíveis, correspondendo grosso modo às
+Classes~II e~III já definidas anteriormente — dividem-se em duas
+categorias com base direta na presença ou ausência de acréscimo ativo:</p>
+<ul>
+  <li><strong>T~Tauri clássicas</strong> (CTTS): disco e acréscimo
+  magnetosférico ativos; forte emissão em H\(\alpha\) (largura
+  equivalente \(\gtrsim10\,\)Å, critério clássico de seleção) e excesso
+  UV/azul do choque de acréscimo, além de variabilidade fotométrica
+  irregular. Correspondem, em essência, à Classe~II;</li>
+  <li><strong>T~Tauri de linha fraca</strong> (WTTS): disco dissipado
+  ou residual, sem acréscimo detectável; H\(\alpha\) fraca (origem
+  cromosférica/coronal), sem excesso UV. Correspondem à Classe~III.</li>
+</ul>
+<p>Como a largura de H\(\alpha\) e o excesso UV escalam com a
+luminosidade de acréscimo, ambos servem como <strong>diagnósticos
+quantitativos</strong> de \(\dot M_{\rm acc}\), não só indicadores
+qualitativos. A literatura converge para \(\dot M_{\rm acc}\sim
+10^{-11}\)&ndash;\(10^{-7}\,M_\odot/\mathrm{ano}\) (menor para objetos
+de massa baixa/idade avançada, maior para jovens/massivos em acréscimo
+vigoroso), decrescendo com a idade e crescendo com a massa estelar
+(Hartmann, Herczeg &amp; Calvet, 2016).</p>
+
+<h3>Ventos e jatos protoestelares</h3>
+
+<p>A seção sobre o problema do momento angular já havia citado os
+<strong>ventos e jatos protoestelares</strong> lançados
+magnetocentrifugamente do disco interno — mecanismo que agora situamos
+fisicamente na mesma região de interação campo-gás desta seção: as
+linhas de campo que canalizam parte do material para dentro também
+lançam outra parte para fora ao longo do eixo de rotação, extraindo
+momento angular e energia.</p>
+
+<p>Observacionalmente aparecem duas formas: <strong>jatos
+colimados</strong> (\(\sim100\)&ndash;\(400\,\mathrm{km/s}\), alinhados
+ao eixo), traçados por <strong>objetos Herbig-Haro</strong> (nós de
+choque em [S~<span style="font-variant:small-caps;">ii</span>]/H\(\alpha\)
+que se afastam ao longo de anos-décadas); e <strong>ventos
+discais</strong> mais amplos, lentos e menos colimados, lançados de um
+intervalo maior de raios. Ambos são observados de Classe~0 até
+T~Tauri clássica, diminuindo com o reservatório de acréscimo — fechando
+o ponto deixado em aberto na seção sobre momento angular a respeito de
+como o momento angular efetivamente <em>escapa</em> do sistema
+estrela-disco.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 17 (destaque) — Acréscimo magnetosférico, animado</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Mesma geometria da Figura das notas: o disco viscoso (verde) é
+    truncado em \(R_A\) [Eq. (7.54)]; dentro dele, o material (pontos
+    laranja) é canalizado pelas linhas de campo dipolar (azul) até os
+    <em>hot spots</em> (pontos amarelos pulsantes) próximos aos polos
+    magnéticos; ventos/jatos (setas azul-escuras) são lançados ao longo
+    do eixo de rotação.
+  </p>
+  <div class="controles">
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mmag-play" class="botao-modulo">▶ Animar fluxo</button>
+      <button type="button" id="mmag-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mmag-canvas" role="img" aria-label="Diagrama animado de acrescimo magnetosferico: disco truncado, linhas de campo dipolar canalizando material ate hot spots na superficie estelar, e jatos/ventos ao longo do eixo de rotacao." style="width:100%;height:360px;display:block;"></canvas></div>
+</div>
+
+<h3>Chegada à sequência principal</h3>
+
+<p>A fase de T~Tauri termina, por definição, quando a protoestrela
+atinge a ZAMS: o momento em que a fusão estável de hidrogênio passa a
+fornecer, por si só, toda a luminosidade irradiada. Formalmente, é
+quando \(\varepsilon_{\rm nuc}\) na equação de conservação de energia
+passa a balancear sozinho \(\partial l/\partial m\), sem os termos de
+contração gravitacional que dominaram os traços de Hayashi/Henyey.</p>
+
+<p>Esse momento coincide, tipicamente, com a dissipação final do disco
+— não por coincidência, mas porque os mecanismos de dissipação do
+disco operam em escalas de poucos milhões de anos, comparáveis à
+contração PMS. O resultado observacional é a transição de CTTS
+(Classe~II, com disco) para WTTS (Classe~III, sem disco) — o intervalo
+final de contração rumo à ZAMS, já sem o disco que caracterizou toda a
+evolução anterior.</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Luminosidade de acréscimo vs. luminosidade fotosférica</div>
+  <div class="conteudo">
+    <p>A energia liberada pelo material em queda desde o raio de
+    truncamento até a superfície estelar aparece, em grande parte, como
+    radiação no próprio choque de acréscimo. Como \(R_A\gg R_\star\)
+    (Exemplo anterior), a energia potencial gravitacional liberada por
+    unidade de massa é dominada pelo último trecho da queda, de modo
+    que a <strong>luminosidade de acréscimo</strong> pode ser estimada,
+    a menos de um fator geométrico de ordem unidade absorvido na
+    aproximação \(R_A\gg R_\star\), por</p>
+    \[
+    L_{\rm acc} \approx \frac{GM_\star\dot M_{\rm acc}}{R_\star}\,.
+    \tag{7.61}
+    \]
+    <p>Para os mesmos parâmetros fiduciais de CTTS usados acima
+    (\(M_\star=0{,}5\,M_\odot\), \(R_\star=2\,R_\odot\),
+    \(\dot M_{\rm acc}=10^{-8}\,M_\odot/\mathrm{ano}\)),</p>
+    \[
+    L_{\rm acc} \approx\frac{(6{,}674\times10^{-8})(9{,}95\times10^{32})
+    (6{,}3\times10^{17})}{1{,}39\times10^{11}}
+    \approx3{,}0\times10^{32}\,\mathrm{erg/s}\approx0{,}08\,L_\odot\,.
+    \tag{7.62}
+    \]
+    <p>Comparando com a luminosidade fotosférica "normal" de uma
+    protoestrela de \(0{,}5\,M_\odot\) nessa fase (décimas a poucas
+    unidades de \(L_\odot\)), \(L_{\rm acc}\) contribui aqui com uma
+    fração minoritária mas mensurável do brilho total — parte do
+    excesso azul/UV e da variabilidade discutidos acima, o regime
+    esperado de uma CTTS de Classe~II tardia.</p>
+    <p>A situação é radicalmente diferente nas fases mais jovens: com a
+    taxa de acréscimo de Shu [Eq. (7.23), \(\dot M\approx1{,}6\times
+    10^{-6}\,M_\odot/\mathrm{ano}\), \(\sim160\) vezes maior que a taxa
+    fiducial de CTTS], a mesma Equação (7.61) escala linearmente com
+    \(\dot M\) e dá \(L_{\rm acc}|_{\rm Classe~0/I}\approx160\times
+    0{,}08\,L_\odot\approx13\,L_\odot\) — uma a duas ordens de grandeza
+    <em>maior</em> que qualquer luminosidade fotosférica plausível para
+    um objeto tão jovem. Este é o motivo físico, já antecipado sem
+    justificativa quantitativa antes, de que nas fases mais embebidas
+    (Classe 0/I) o brilho observado é dominado pelo acréscimo, não pela
+    fotosfera — só voltando a esta última quando \(\dot M_{\rm acc}\)
+    cai, ao longo da evolução Classe~0~\(\to\)~I~\(\to\)~II~\(\to\)~III,
+    na situação de T~Tauri de linha fraca descrita acima.</p>
+  </div>
+</div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Acréscimo episódico: FUors e EXors</div>
+  <div class="conteudo">
+    <p>A imagem de \(\dot M_{\rm acc}\) suave e constante é uma
+    idealização conveniente — a variabilidade fotométrica de T~Tauri
+    clássicas mostra que o acréscimo real está longe de ser suave. No
+    extremo dessa variabilidade estão os <strong>FUors</strong>
+    (FU~Orionis): surtos em que a luminosidade sobe
+    \(\gtrsim4\)&ndash;\(6\) magnitudes por décadas, com
+    \(\dot M_{\rm acc}\gtrsim10^{-4}\,M_\odot/\mathrm{ano}\) — ordens de
+    grandeza acima até da taxa de Classe~0/I —, contribuindo
+    significativamente à massa final acretada; e os
+    <strong>EXors</strong> (EX~Lupi), surtos menores
+    (\(\gtrsim2\)&ndash;\(3\) mag), repetidos, de duração mais curta. A
+    origem física ainda é pesquisa ativa (instabilidades no disco
+    interno, perturbações por companheiras), mas evidencia que o
+    acréscimo é, em muitos sistemas, <strong>episódico</strong>:
+    revisões recentes sugerem que a maior parte da massa final pode ser
+    acretada em surtos, não de forma suave, com implicações para a
+    evolução PMS (Audard et al., 2014; Fischer et al., 2023).</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Acréscimo em estrelas pré-sequência principal (diagnósticos,
+    taxas, modelos magnetosféricos): Hartmann, Herczeg &amp; Calvet
+    (2016). Modelo de acréscimo magnetosférico em detalhe (colunas,
+    choques, diagnósticos espectroscópicos): Bouvier et al. (2007).
+    Variabilidade de acréscimo (FUors, EXors, monitoramento
+    <em>Kepler</em>/K2, TESS): Audard et al. (2014); Fischer et al.
+    (2023).</p>
+  </div>
+</div>
+
+<h2 id="fe-sintese">Síntese: da formação estelar à formação planetária</h2>
+
+<p>O disco descrito nas seções anteriores — estrutura vertical, perfis
+de densidade/temperatura, e a linha de gelo — não é só o mecanismo que
+alimenta o acréscimo estelar: é também o berço de qualquer sistema
+planetário. A mesma física deste capítulo (autogravidade vs. suporte,
+instabilidade de Jeans; momento angular; disco kepleriano viscoso)
+continua relevante, mas agora compete com um processo qualitativamente
+novo: o <strong>crescimento colisional de sólidos</strong>, que
+converte poeira microscópica em corpos macroscópicos e, eventualmente,
+planetas. Esta seção final percorre esse caminho — da poeira aos
+planetesimais, a embriões planetários e, por fim, a planetas rochosos e
+gigantes gasosos.</p>
+
+<h3>Do gás ao sólido: poeira e crescimento por coagulação</h3>
+
+<p>O disco herda do meio interestelar grãos de poeira submicrométricos
+(silicatos e, além da linha de gelo, mantos de gelo sobre núcleos
+refratários), \(a\sim0{,}1\,\mu\)m. O primeiro passo rumo à formação
+planetária é o crescimento por colisões sucessivas: a baixa velocidade
+relativa, forças de van der Waals entre as superfícies unem os grãos
+permanentemente (<em>sticking</em>) em vez de ricochetear — o mesmo
+mecanismo por trás da adesão de poeira doméstica.</p>
+
+<p>Para o tempo característico de coagulação, considere um grão de
+raio \(a\) e densidade interna \(\rho_s\sim1\,\mathrm{g/cm^3}\),
+varrendo grãos menores de densidade \(\rho_d\) (densidade de sólidos no
+disco) a velocidade relativa \(\Delta v\). Pela seção de choque
+geométrica \(\pi a^2\), a taxa de acréscimo de massa é</p>
+\[
+\frac{\mathrm dm}{\mathrm dt} \sim \rho_d\,\pi a^2\,\Delta v\,,
+\tag{7.63}
+\]
+<p>e, como \(m=\tfrac43\pi a^3\rho_s\) implica \(\mathrm dm/\mathrm
+dt=4\pi a^2\rho_s\,\mathrm da/\mathrm dt\), segue que</p>
+\[
+\frac{\mathrm da}{\mathrm dt} \sim \frac{\rho_d\,\Delta v}{4\rho_s}\,,
+\tag{7.64}
+\]
+<p>uma taxa de crescimento <em>constante</em> (independente de
+\(a\)!) — resultado direto de a seção de choque crescer como \(a^2\)
+enquanto a massa cresce como \(a^3\). O raio cresce, portanto,
+aproximadamente de forma <em>linear</em> no tempo, e o tempo
+característico para atingir um tamanho \(a\) (a partir de um grão
+inicial microscópico, \(a_0\ll a\)) é</p>
+\[
+t_{\rm cresc}(a) \sim \frac{a}{\mathrm da/\mathrm dt}
+\sim \frac{4\rho_s\,a}{\rho_d\,\Delta v}\,.
+\tag{7.65}
+\]
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Tempo de crescimento por coagulação a \(1\,\)UA</div>
+  <div class="conteudo">
+    <p>Usando a densidade de gás a \(1\,\)UA (\(\rho_0\approx1{,}3\times
+    10^{-9}\,\mathrm{g/cm^3}\)) e razão poeira/gás \(\sim1\%\) (valor
+    do meio interestelar), \(\rho_d\approx1{,}3\times10^{-11}\,
+    \mathrm{g/cm^3}\). Para agitação turbulenta subsônica de agregados
+    centimétricos (\(\alpha\sim10^{-3}\)&ndash;\(10^{-2}\)), tome
+    \(\Delta v\sim10\,\mathrm{cm/s}\ll c_s\approx1{,}0\times10^5\,
+    \mathrm{cm/s}\). Pela Equação (7.65), com
+    \(\rho_s\approx1\,\mathrm{g/cm^3}\):</p>
+    \[
+    t_{\rm cresc}(1\,\mathrm{cm}) \sim
+    \frac{4(1)(1)}{(1{,}3\times10^{-11})(10)} \,\mathrm s
+    \approx3{,}1\times10^{10}\,\mathrm s\approx1\times10^3\,\mathrm{anos}\,,
+    \tag{7.66}
+    \]
+    \[
+    t_{\rm cresc}(1\,\mathrm m) \sim100\times t_{\rm cresc}(1\,\mathrm{cm})
+    \approx1\times10^5\,\mathrm{anos}\,,
+    \tag{7.67}
+    \]
+    <p>já que \(t_{\rm cresc}\propto a\). Ambos os valores são muito
+    menores que o tempo de vida do disco, \(\tau_{\rm disco}\sim2\)&ndash;\(4\,\)Myr
+    — a coagulação simples é, de fato, um mecanismo extremamente
+    eficiente para levar grãos submicrométricos a tamanhos de
+    centímetros a metros, consumindo tipicamente menos de \(10\,\%\) do
+    tempo de vida do disco.</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 18 — Tempo de crescimento por coagulação</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mcoag-a">Tamanho do grão \(a\) (cm), \(\log_{10}a\) <span class="valor" id="mcoag-a-valor">1,00×10⁰</span></label>
+      <input type="range" id="mcoag-a" min="-400" max="300" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;">
+    <p class="leitura-card" style="margin:0;">
+      \(t_{\rm cresc}(a)=\)<strong id="mcoag-t">—</strong> anos
+    </p>
+  </div>
+  <p class="leitura-card">
+    Com \(a=1\,\)cm, reproduz \(t_{\rm cresc}\approx1000\) anos [Eq.
+    (7.66)]; com \(a=1\,\)m, reproduz \(\approx10^5\) anos [Eq. (7.67)]
+    — o crescimento é <em>linear</em> em \(a\), consistente com a taxa
+    \(\mathrm da/\mathrm dt\) constante [Eq. (7.64)].
+  </p>
+</div>
+
+<h3>A barreira do metro</h3>
+
+<p>Se a coagulação simples leva grãos a tamanhos de metro tão rápido,
+por que a formação planetária não prossegue trivialmente até
+planetesimais (\(\gtrsim1\,\)km)? A resposta é a <strong>barreira do
+metro</strong>, um problema central e ainda ativo da teoria de
+formação planetária (Weidenschilling, 1977): corpos de centímetros a
+dezenas de metros sofrem <strong>deriva radial</strong> rápida,
+perdendo-se no disco antes que a coagulação os leve ao tamanho em que a
+autogravidade os desacopla do gás.</p>
+
+<p>A origem física é a mesma sub-keplerianidade do gás introduzida
+acima: sustentado parcialmente por pressão, o gás orbita a
+\(v_{\rm gas}=v_K(1-\eta)\), com</p>
+\[
+\eta \equiv -\frac12\left(\frac Hr\right)^2\frac{\mathrm d\ln P}
+{\mathrm d\ln r}\,,
+\tag{7.68}
+\]
+<p>tipicamente \(\eta\sim10^{-3}\) para um disco fino. Sólidos não
+sentem a pressão do gás e tenderiam a orbitar exatamente a \(v_K\) —
+mas o atrito aerodinâmico com o gás mais lento os freia continuamente,
+fazendo-os espiralar para dentro. Esse atrito é mais eficiente para
+corpos de tamanho intermediário (pequenos o suficiente para sentir o
+arrasto, grandes o suficiente para ter inércia considerável), com
+deriva máxima quando o tempo de acoplamento iguala o período orbital
+(número de Stokes \(\mathrm{St}\sim1\)) — a condição de corpos de
+\(\sim0{,}1\)&ndash;\(1\,\)m a \(1\,\)UA em um disco MMSN. Nesse
+regime,</p>
+\[
+v_{\rm deriva} \sim \eta\,v_K\,.
+\tag{7.69}
+\]
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Velocidade e tempo de deriva radial a \(1\,\)UA</div>
+  <div class="conteudo">
+    <p>Usando o perfil MMSN, com \(\Sigma\propto r^{-3/2}\),
+    \(T\propto r^{-1/2}\) e, portanto, \(H\propto r^{5/4}\) (já que
+    \(H/r=c_s/v_K\propto T^{1/2}r^{1/2}\)), a densidade no plano médio
+    \(\rho_{\rm mid}=\Sigma/(\sqrt{2\pi}H)\) escala como
+    \(\rho_{\rm mid}\propto r^{-11/4}\) e a pressão
+    \(P=\rho_{\rm mid}c_s^2\propto r^{-13/4}\), ou seja
+    \(\mathrm d\ln P/\mathrm d\ln r\approx-3{,}25\). Com
+    \(H/r\approx0{,}034\) a \(1\,\)UA,</p>
+    \[
+    \eta \approx\frac12(0{,}034)^2(3{,}25)\approx1{,}9\times10^{-3}\,.
+    \tag{7.70}
+    \]
+    <p>Usando \(v_K\approx3{,}0\times10^6\,\mathrm{cm/s}\) a \(1\,\)UA,
+    a Equação (7.69) dá</p>
+    \[
+    v_{\rm deriva} \approx(1{,}9\times10^{-3})(3{,}0\times10^6)
+    \approx5{,}6\times10^3\,\mathrm{cm/s}\approx56\,\mathrm{m/s}\,,
+    \tag{7.71}
+    \]
+    <p>em excelente concordância com o valor clássico
+    \(\sim50\,\mathrm{m/s}\) citado para corpos métricos a \(1\,\)UA
+    (Weidenschilling, 1977). O tempo característico de deriva radial —
+    o tempo para o corpo espiralar uma distância da ordem do próprio
+    raio orbital — é então</p>
+    \[
+    t_{\rm deriva} \sim\frac{r}{v_{\rm deriva}}
+    \approx\frac{1{,}5\times10^{13}\,\mathrm{cm}}{5{,}6\times10^3\,
+    \mathrm{cm/s}}\approx2{,}7\times10^9\,\mathrm s\approx85\,\mathrm{anos}\,,
+    \tag{7.72}
+    \]
+    <p>uma escala de tempo <em>extraordinariamente curta</em> — apenas
+    dezenas a centenas de órbitas —, e da mesma ordem de grandeza,
+    \(\sim100\)&ndash;\(1000\,\)anos, do valor clássico da literatura em
+    raios comparáveis do disco (Weidenschilling, 1977).</p>
+  </div>
+</div>
+</div>
+
+<p>O problema é, então, de escala de tempo: \(t_{\rm deriva}\sim10^2\,
+\)anos é ordens de grandeza menor que \(t_{\rm cresc}(1\,\mathrm m)\sim
+10^5\,\)anos — a própria coagulação que leva os grãos ao tamanho de
+metro é \(\sim1000\times\) mais lenta que a deriva que os remove do
+disco assim que o atingem. A formação de planetesimais quilométricos
+por coagulação sequencial pura é, portanto, inviável: um mecanismo
+qualitativamente diferente precisa atravessar essa janela rapidamente.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 19 (destaque) — A barreira do metro: tempo de deriva vs. número de Stokes</div>
+  <div class="grafico-card"><canvas id="mbarreira-canvas" role="img" aria-label="Grafico log-log do tempo de deriva radial em funcao do numero de Stokes, mostrando um minimo catastrofico em St aproximadamente igual a 1, onde a deriva e mais rapida." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Usando \(v_{\rm deriva}=2\eta v_K\,\mathrm{St}/(1+\mathrm{St}^2)\)
+    (forma completa de Nakagawa, Sekiya &amp; Hayashi, 1986, que se
+    reduz à Eq. (7.69) para \(\mathrm{St}\sim1\)), o tempo de deriva
+    \(t_{\rm deriva}=r/v_{\rm deriva}\) tem um <strong>mínimo
+    catastrófico em \(\mathrm{St}\approx1\)</strong> — o ponto conceitual
+    central desta seção: corpos de \(\mathrm{St}\sim1\) (dezenas de
+    centímetros a poucos metros a \(1\,\)UA) são removidos do disco
+    <em>mais rápido</em> que qualquer outro tamanho, exatamente a faixa
+    que a coagulação simples precisa atravessar para chegar a
+    planetesimais. Tempo mínimo de deriva:
+    <strong id="mbarreira-min">—</strong>.
+  </p>
+</div>
+
+<h3>Resoluções propostas: instabilidade de fluxo e acréscimo de seixos</h3>
+
+<p>A pesquisa moderna identifica dois mecanismos complementares para
+superar a barreira do metro sem depender de coagulação sequencial:</p>
+<ul>
+  <li><strong>Instabilidade de fluxo</strong> (<em>streaming
+  instability</em>): partículas parcialmente acopladas ao gás
+  (\(\mathrm{St}\sim0{,}01\)&ndash;\(1\), seixos de mm a dezenas de cm,
+  antes do pico da barreira) concentram-se espontaneamente via
+  retroalimentação instável entre arrasto e movimento do gás — pequenas
+  concentrações reduzem a deriva local, atraindo mais partículas
+  (processo <em>runaway</em>). Quando a densidade local de sólidos
+  cresce o suficiente (exigindo enriquecimento acima do valor cósmico
+  \(\sim1\%\), favorecido perto da linha de gelo), a autogravidade da
+  concentração supera a dispersão de velocidades e colapsa diretamente
+  em planetesimais de dezenas a centenas de km (Youdin &amp; Goodman,
+  2005; Johansen et al., 2014);</li>
+  <li><strong>Acréscimo de seixos</strong> (<em>pebble accretion</em>):
+  uma vez existindo planetesimais/embriões maiores, eles capturam
+  seixos derivando pelo disco não por colisão balística (ineficiente),
+  mas porque o arrasto aerodinâmico ao redor do embrião curva e captura
+  seixos dentro de um raio de captura muito maior que seu raio físico —
+  ordens de grandeza mais rápido que acréscimo de planetesimais
+  sólidos, permitindo núcleos de massa planetária mesmo a grandes
+  distâncias orbitais (Johansen &amp; Lambrechts, 2017).</li>
+</ul>
+<p>Esses dois mecanismos — concentração via instabilidade de fluxo,
+seguida de crescimento via acréscimo de seixos — constituem o quadro
+hoje favorecido para a travessia da barreira do metro, substituindo o
+antigo modelo de coagulação sequencial pura.</p>
+
+<h3>De planetesimais a planetas: acréscimo de núcleo</h3>
+
+<p>Uma vez formados planetesimais quilométricos — grandes o suficiente
+para que a gravidade mútua, não o arrasto do gás, domine sua dinâmica
+—, o crescimento prossegue em duas fases: <strong>crescimento
+descontrolado</strong> (<em>runaway growth</em>), em que corpos
+ligeiramente maiores crescem desproporcionalmente mais rápido (a seção
+de choque gravitacional, ampliada por <em>focagem gravitacional</em>,
+cresce mais que linearmente com a massa), gerando rapidamente poucos
+corpos muito maiores; seguido por <strong>crescimento
+oligárquico</strong>, em que esses embriões planetários (até massa
+terrestre/super-terrestre) competem por material em suas zonas de
+alimentação, crescendo de forma mais igualitária até esgotar o material
+sólido local.</p>
+
+<p>É precisamente aqui que a linha de gelo entra de forma decisiva:
+além dela, a densidade superficial de sólidos é \(3\)&ndash;\(4\times\)
+maior que na região interna, permitindo que embriões cresçam mais e
+mais rápido do que só com material rochoso — a condição necessária para
+o próximo passo, a formação de um gigante gasoso.</p>
+
+<h3>Formação de gigantes gasosos: acréscimo descontrolado de gás</h3>
+
+<p>Um embrião rochoso/gelado suficientemente massivo, ainda embebido
+no disco, mantém uma envoltória gasosa em equilíbrio hidrostático — a
+mesma física estelar do Capítulo 5, agora sobre um núcleo sólido.
+Enquanto o núcleo é pequeno, esse equilíbrio é estável e o envelope
+cresce lentamente por resfriamento radiativo quase-estático (análogo à
+contração PMS). Existe, porém, uma <strong>massa crítica do
+núcleo</strong>, \(M_{\text{crít}}\), acima da qual o envelope não se
+sustenta mais: colapsa dinamicamente e o planeta passa a acretar gás a
+taxa descontrolada (<em>runaway gas accretion</em>), limitada só pela
+capacidade do disco de fornecer gás — formando um gigante gasoso. O
+valor clássico, \(M_{\text{crít}}\approx10\)&ndash;\(12\,M_\oplus\)
+(Mizuno, 1980), é pouco sensível às condições externas, embora
+refinamentos modernos apontem \(\sim1\)&ndash;\(40\,M_\oplus\)
+dependendo da opacidade e do enriquecimento em metais do envelope.</p>
+
+<p>O relógio que limita esse processo é o tempo de vida do disco
+(\(\tau_{\rm disco}\sim2\)&ndash;\(4\,\)Myr): um núcleo que atinja
+\(M_{\text{crít}}\) só depois de o gás já ter se dissipado fica
+condenado a permanecer um núcleo rochoso/gelado massivo — o destino de
+núcleos que se formam tarde ou longe demais da linha de gelo. A
+competição entre essas duas escalas de tempo é o fator determinante de
+<em>onde</em> e <em>quando</em> gigantes gasosos se formam.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 20 — Massa crítica do núcleo e acréscimo descontrolado de gás</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mnucleo-Mc">Massa do núcleo \(M_{\rm núcleo}\) (\(M_\oplus\)) <span class="valor" id="mnucleo-Mc-valor">5,0</span></label>
+      <input type="range" id="mnucleo-Mc" min="10" max="400" step="1" value="50">
+    </div>
+  </div>
+  <p class="leitura-card" id="mnucleo-status" style="font-weight:600;">—</p>
+  <p class="leitura-card">
+    O valor de referência \(M_{\text{crít}}\approx10\)&ndash;\(12\,
+    M_\oplus\) (Mizuno, 1980) marca a transição: abaixo dele, o
+    envelope gasoso do núcleo cresce lentamente em equilíbrio
+    quase-hidrostático; acima, o envelope colapsa dinamicamente e o
+    planeta acreta gás sem limite interno, formando um gigante gasoso —
+    desde que o disco ainda tenha gás disponível (ver \(\tau_{\rm
+    disco}\) acima).
+  </p>
+</div>
+
+<h3>Canal alternativo: instabilidade gravitacional do disco</h3>
+
+<p>Existe um segundo canal, fisicamente distinto: em vez de crescer um
+núcleo sólido e só depois acretar gás, o próprio disco pode se
+fragmentar sob sua autogravidade, colapsando diretamente em um objeto
+de massa planetária ou de anã marrom, sem núcleo pré-existente. O
+critério de estabilidade local de um disco fino em rotação diferencial
+é o <strong>critério de Toomre</strong>,</p>
+\[
+Q \equiv \frac{c_s\,\Omega}{\pi G\Sigma}\,,
+\tag{7.73}
+\]
+<p>com fragmentação favorecida para \(Q\lesssim1\) (na prática,
+\(Q\lesssim1{,}3\)&ndash;\(2\) com resfriamento radiativo finito). A
+analogia com a instabilidade de Jeans é direta: autogravidade
+(\(G\Sigma\) vs. \(G\rho\)) compete com suporte de pressão (\(c_s\), em
+ambos os casos), mas aqui a rotação diferencial \(\Omega\) (via a
+frequência epicíclica \(\kappa\approx\Omega\)) faz o papel
+estabilizador que a pressão sozinha fazia na nuvem não-rotante —
+\(Q\lesssim1\) é, em essência, o mesmo "massa de Jeans local menor que
+a perturbação" da condição \(M>M_J\), agora para uma perturbação 2D em
+um disco girante.</p>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — O parâmetro de Toomre do disco MMSN é grande — o disco é estável</div>
+  <div class="conteudo">
+    <p>Avaliando \(Q\) a \(r=50\,\)UA usando o perfil MMSN:
+    \(\Sigma(50\,\mathrm{UA})\approx4{,}8\,\mathrm{g/cm^2}\),
+    \(T(50\,\mathrm{UA})\approx40\,\)K
+    (\(c_s\approx3{,}8\times10^4\,\mathrm{cm/s}\)), e
+    \(\Omega_K(50\,\mathrm{UA})\approx5{,}6\times10^{-10}\,
+    \mathrm{s^{-1}}\) (pela Equação (7.35)). Pela Equação (7.73),</p>
+    \[
+    Q\approx\frac{(3{,}8\times10^4)(5{,}6\times10^{-10})}
+    {\pi(6{,}674\times10^{-8})(4{,}8)}\approx21\,,
+    \tag{7.74}
+    \]
+    <p>fortemente estável (\(Q\gg1\)): um disco com a densidade
+    superficial "padrão" do MMSN está longe da fragmentação
+    gravitacional mesmo a \(50\,\)UA. Fragmentar exigiria \(\Sigma\)
+    cerca de \(20\) vezes maior que o valor MMSN nesse raio, ou seja,
+    um disco substancialmente mais massivo (e, tipicamente, mais jovem)
+    que o valor de referência adotado neste capítulo.</p>
+  </div>
+</div>
+</div>
+
+<p>Esse resultado ilustra por que a instabilidade gravitacional é hoje
+um canal <strong>secundário</strong> frente ao acréscimo de núcleo:
+discos com massa MMSN "padrão" não satisfazem \(Q\lesssim1\) em nenhum
+raio razoável. O canal permanece relevante em discos excepcionalmente
+massivos e jovens, e especialmente a grandes raios (dezenas a centenas
+de UA, onde \(\Omega\) pequeno dá à autogravidade mais "tempo" antes de
+ser cisalhada) — condições associadas à população de gigantes/anãs
+marrons em órbitas largas (\(\sim10\)&ndash;\(100\,\)UA) vista em
+imageamento direto (Nielsen et al., 2019). A demografia geral de
+exoplanetas gigantes — mais numerosos em órbitas próximas,
+correlacionados com massa/metalicidade da estrela hospedeira,
+assinatura do acréscimo de núcleo — é interpretada como evidência de
+que esse mecanismo domina na maioria dos sistemas, com a instabilidade
+gravitacional contribuindo principalmente para companheiras de órbita
+muito larga (Nielsen et al., 2019; Johansen &amp; Lambrechts, 2017).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 21 — Critério de Toomre \(Q\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mtoomre-r">Raio \(r\) (UA) <span class="valor" id="mtoomre-r-valor">50,0</span></label>
+      <input type="range" id="mtoomre-r" min="0" max="250" step="1" value="170">
+    </div>
+    <div class="controle">
+      <label for="mtoomre-f">Fator de massa do disco (× MMSN) <span class="valor" id="mtoomre-f-valor">1,00</span></label>
+      <input type="range" id="mtoomre-f" min="-100" max="170" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;">
+    <p class="leitura-card" style="margin:0;">\(Q=\)<strong id="mtoomre-Q">—</strong></p>
+  </div>
+  <p class="leitura-card" id="mtoomre-status" style="font-weight:600;">—</p>
+  <p class="leitura-card">
+    Com os valores padrão (\(r=50\,\)UA, fator \(=1\times\)MMSN),
+    reproduz o Exemplo acima, \(Q\approx21\). Aumente o fator de massa
+    do disco (\(\Sigma\) proporcionalmente maior) até
+    \(\sim20\)&ndash;\(25\times\) para ver \(Q\) cruzar o limiar de
+    fragmentação — consistente com a conclusão do texto de que
+    fragmentar exige um disco muito mais massivo que o MMSN padrão.
+  </p>
+</div>
+
+<h3>Síntese comparativa: o que é comum e o que é distinto</h3>
+
+<p>Tendo percorrido, neste capítulo, tanto a formação estelar quanto a
+formação planetária a partir do mesmo colapso e do mesmo disco, vale a
+pena tornar explícita a comparação entre os dois processos.</p>
+
+<p><strong>O que é comum:</strong> ambos têm origem no mesmo evento
+físico — o colapso de um núcleo pré-estelar e a formação do disco
+resultante —, não sendo, a rigor, fenômenos independentes, mas etapas
+de uma única cadeia evolutiva. Ambos são governados pela competição
+entre autogravidade e suporte (pressão térmica na instabilidade de
+Jeans; pressão e rotação no critério de Toomre); ambos dependem da
+conservação e transporte de momento angular, o mesmo problema que
+forçou a formação do disco reaparecendo em escala menor para qualquer
+material orbitando dentro dele; e ambos dependem de processos
+dissipativos análogos — a viscosidade turbulenta que transporta massa e
+momento angular é, formalmente, o mesmo tipo de redistribuição por
+interações locais que, em escala microscópica e via colisões
+grão-a-grão, permite o crescimento e a migração de sólidos no disco.</p>
+
+<p><strong>O que é distinto:</strong> a formação estelar, do colapso do
+núcleo até a ZAMS, é dominada do início ao fim pela autogravidade
+contínua de um <strong>fluido</strong>, evoluindo suavemente (traços de
+Hayashi/Henyey) até o equilíbrio hidrostático autoluminoso. A formação
+planetária por acréscimo de núcleo, em contraste, é dominada por física
+<strong>colisional e discreta</strong> de corpos sólidos individuais —
+coagulação, instabilidade de fluxo e acréscimo de seixos, crescimento
+descontrolado/oligárquico — sem análogo na formação estelar; só na
+etapa <em>final</em> de um gigante gasoso a física hidrostática de
+fluido reaparece, agora sobre um núcleo sólido pré-existente.</p>
+
+<p>A <strong>instabilidade gravitacional do disco</strong> é o único
+canal planetário genuinamente <em>análogo</em> à formação estelar —
+mesma classe de instabilidade linear (autogravidade vs. suporte, com o
+parâmetro de Toomre \(Q\) no papel de \(M/M_J\)) —, e talvez não seja
+coincidência que seja precisamente esse canal, formando um planeta
+gigante "como uma estrela em miniatura" sem passar pela física
+colisional discreta, que produz os objetos de massa mais próxima ao
+limite entre planetas e estrelas (anãs marrons em órbitas largas).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Fluxograma navegável — Síntese do capítulo</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Clique em qualquer caixa para ir direto à seção correspondente —
+    este fluxograma resume o capítulo inteiro e funciona como um índice
+    visual: do colapso de um núcleo pré-estelar até a bifurcação entre
+    o ramo estelar (contração PMS até a ZAMS) e o ramo planetário
+    (poeira a planetas rochosos ou gigantes gasosos, com a linha de
+    gelo determinando o destino). O canal tracejado (instabilidade
+    gravitacional do disco) contorna a física colisional do ramo
+    planetário principal.
+  </p>
+  <div class="fluxograma" role="img" aria-label="Fluxograma navegavel resumindo o capitulo: nuvem molecular, colapso de Jeans, protoestrela mais disco, bifurcando em ramo estelar (contracao PMS ate ZAMS) e ramo planetario (poeira, planetesimais, embrioes, planeta rochoso ou gigante gasoso), com um canal alternativo tracejado de instabilidade gravitacional do disco.">
+    <a class="no" href="#fe-nuvens-moleculares" style="grid-area:nuvem;">Nuvem molecular</a>
+    <a class="no cor-atencao" href="#fe-instabilidade-jeans" style="grid-area:colapso;">Colapso de Jeans</a>
+    <a class="no cor-exemplo" href="#fe-momento-angular" style="grid-area:proto;">Protoestrela + disco</a>
+
+    <a class="no cor-exemplo" href="#fe-pms" style="grid-area:pms;">Contração PMS (Hayashi/Henyey)</a>
+    <a class="no cor-exemplo" href="#fe-chegada-zams" style="grid-area:zams;">ZAMS</a>
+
+    <a class="no cor-atencao" href="#fe-poeira-coagulacao" style="grid-area:poeira;">Poeira → coagulação</a>
+    <a class="no cor-atencao" href="#fe-resolucoes-barreira" style="grid-area:planetesimais;">Instabilidade de fluxo → planetesimais</a>
+    <a class="no cor-atencao" href="#fe-core-accretion" style="grid-area:embrioes;">Runaway/oligárquico → embriões</a>
+
+    <a class="no cor-contexto" href="#fe-linha-gelo" style="grid-area:rochoso;">Planeta rochoso (interior à linha de gelo)</a>
+    <a class="no cor-contexto" href="#fe-runaway-gas" style="grid-area:gigante;">Gigante gasoso (M_núcleo ≳ 10 M⊕)</a>
+
+    <a class="no cor-contexto tracejado" href="#fe-instabilidade-gravitacional-disco" style="grid-area:gi;">Instabilidade gravitacional do disco (Q≲1)</a>
+
+    <svg class="fluxograma-setas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs><marker id="setaFluxo" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#888"></path></marker></defs>
+    </svg>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Formação de planetesimais via instabilidade de fluxo e
+    concentração de sólidos: Johansen et al. (2014). Acréscimo de
+    seixos e formação de núcleos/gigantes gasosos: Johansen &amp;
+    Lambrechts (2017). Trabalho original da instabilidade de fluxo:
+    Youdin &amp; Goodman (2005). Deriva radial e barreira do metro
+    (original): Weidenschilling (1977). Massa crítica do núcleo e
+    acréscimo descontrolado de gás: Mizuno (1980). Demografia
+    observacional de exoplanetas gigantes em órbitas largas (imageamento
+    direto): Nielsen et al. (2019).</p>
+  </div>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 7.
+</footer>
+
+<script src="assets/cap07_modulos.js"></script>

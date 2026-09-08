@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Anãs Brancas</title>
+<meta name="description" content="Módulo interativo do Capítulo 9: a teoria de Chandrasekhar, a equação diferencial de Chandrasekhar como generalização da equação de Lane–Emden, a relação massa-raio de anãs brancas e a massa de Chandrasekhar — com o integrador ao vivo, a curva massa-raio construída dinamicamente e a simulação de acréscimo até a instabilidade.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      sen: '\\operatorname{sen}'
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 9 — Anãs Brancas</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, com o integrador da equação diferencial de Chandrasekhar ao vivo — a grande unificação que mostra a equação de Lane–Emden (Capítulo 6) e a equação de estado degenerada (Capítulo 8) como duas faces do mesmo problema.</p>
+
+<h2 id="anb-introducao">Introdução</h2>
+
+<p>Estrelas anãs brancas são o produto final da evolução estelar de
+estrelas de massa baixa ou intermediária. Será o destino do nosso Sol,
+por exemplo. Uma das características das anãs brancas é que o seu
+núcleo é um estado degenerado de elétrons, o que facilita a análise em
+alguns aspectos — é exatamente a física deduzida no
+<a href="cap08_equacoes_estado.html">Capítulo 8</a> que usaremos aqui.</p>
+
+<p>A estrutura de uma anã branca segue o esquema da figura abaixo: uma
+camada externa de estados degenerados de elétrons, uma camada de
+hélio, e um núcleo de carbono e oxigênio (C/O), onde ocorre a
+cristalização discutida na
+<a href="cap08_equacoes_estado.html#eee-cristalizacao-neutronizacao">Seção
+de Cristalização e Neutronização</a> do capítulo anterior.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Diagrama — Estrutura em camadas de uma anã branca, em escala</div>
+  <svg id="mcamadas-svg" viewBox="0 0 480 320" role="img" aria-label="Corte transversal de uma ana branca mostrando o nucleo de carbono e oxigenio, a camada de helio e a camada externa de eletrons degenerados, com uma comparacao de escala com o raio da Terra ao lado." style="width:100%;max-width:520px;display:block;margin:0 auto;height:auto;">
+    <circle cx="170" cy="160" r="120" fill="#ebf2fa" stroke="#1c4878" stroke-width="2"></circle>
+    <circle cx="170" cy="160" r="88" fill="#edf6ed" stroke="#3c6e3c" stroke-width="2"></circle>
+    <circle cx="170" cy="160" r="52" fill="#faeee8" stroke="#963c1e" stroke-width="2"></circle>
+    <text x="170" y="66" text-anchor="middle" font-size="13" fill="#1c4878">e⁻ degenerados</text>
+    <text x="170" y="98" text-anchor="middle" font-size="13" fill="#3c6e3c">He</text>
+    <text x="170" y="164" text-anchor="middle" font-size="13" fill="#963c1e">C, O</text>
+    <text x="170" y="180" text-anchor="middle" font-size="11" fill="#963c1e">(cristalização)</text>
+    <!-- comparação de escala com a Terra -->
+    <circle cx="400" cy="270" r="30" fill="#ebf2fa" stroke="#1c4878" stroke-width="2"></circle>
+    <text x="400" y="230" text-anchor="middle" font-size="12" fill="#333">anã branca (R~R⊕)</text>
+    <circle cx="400" cy="270" r="30" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="3 2"></circle>
+    <text x="400" y="316" text-anchor="middle" font-size="11" fill="#666">Terra (R⊕), mesma escala</text>
+  </svg>
+  <p class="leitura-card">
+    Corte transversal esquemático da estrutura em camadas de uma anã
+    branca: camada externa de elétrons degenerados, camada de hélio, e
+    núcleo de carbono e oxigênio, onde ocorre a cristalização discutida
+    no Capítulo 8. O contraste \(R_\star\sim R_\oplus\) com
+    \(M\sim M_\odot\) — todo o Sol comprimido no volume da Terra — é o
+    fato mais impactante deste capítulo: uma anã branca típica tem
+    densidade média \(\sim10^6\,\mathrm{g/cm^3}\), um milhão de vezes a
+    densidade da água.
+  </p>
+</div>
+
+<h2 id="anb-teoria-chandrasekhar">Teoria de Chandrasekhar</h2>
+
+<p>Até agora vimos que a densidade de partículas e a pressão eletrônica
+em um gás degenerado totalmente e relativístico são</p>
+\[
+n_e(p) = \int F(p)\,\mathrm dp\,,
+\qquad
+P = \frac13\int_0^\infty F(p)\,p\,v(p)\,\mathrm dp\,,
+\tag{9.1}
+\]
+<p>onde</p>
+\[
+P = \frac{\pi m_e^4c^5}{3h^3}\,F(x)\,,
+\qquad
+F(x) = x(2x^2-3)(x^2+1)^{1/2}+3\operatorname{senh}^{-1}(x)\,,
+\qquad
+x \equiv \frac{p_0}{m_ec}\,,
+\tag{9.2}
+\]
+<p>resultado já deduzido em detalhe no
+<a href="cap08_equacoes_estado.html">Capítulo 8</a> [Equações (8.58) e
+(8.59)].</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Sobre o sinal dentro da raiz em \(F(x)\)</div>
+  <div class="conteudo">
+    <p>O sinal dentro da primeira raiz de \(F(x)\) deve ser positivo,
+    \((x^2+1)^{1/2}\), não \((x^2-1)^{1/2}\) — com sinal negativo, a
+    expressão fica indefinida (raiz de número negativo) para todo
+    \(x<1\), o que não faz sentido físico, já que \(x=p_0/m_ec\) deve
+    variar continuamente a partir de \(0\). Vale notar também a
+    identidade
+    \(\operatorname{senh}^{-1}(x)=\ln\!\left[x+(1+x^2)^{1/2}\right]\),
+    com a raiz dentro do logaritmo — a forma usada aqui [Equação (9.2)]
+    é a já deduzida e verificada no Capítulo 8.</p>
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — A densidade eletrônica \(n_e\)</div>
+  <div class="conteudo">
+    <p>Usamos aqui, de forma consistente, a densidade eletrônica já
+    estabelecida no Capítulo 8 [Equação (8.25)],
+    \(n_e=8\pi p_0^3/(3h^3)\) — resultado da integração
+    \(n_e=\int_0^{p_0}(8\pi p^2/h^3)\,\mathrm dp\).</p>
+  </div>
+</div>
+
+<p>Utilizando estas equações de estado em conjunto com as equações de
+equilíbrio hidrostático, podemos determinar o raio e a massa de uma
+estrela anã branca.</p>
+
+<h2 id="anb-combinando">Combinando a equação de estado com o equilíbrio hidrostático</h2>
+
+<p>Lembrando as equações já estabelecidas no
+<a href="cap06_estrelas_politropicas.html">Capítulo 6</a>,</p>
+\[
+\frac{\mathrm dP}{\mathrm dr} = -\rho\,\frac{\mathrm d\Phi}{\mathrm dr}\,,
+\qquad
+\frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left(r^2\frac{\mathrm d\Phi}{\mathrm dr}\right) = 4\pi G\rho\,,
+\tag{9.3}
+\]
+<p>substituindo \(\mathrm d\Phi/\mathrm dr=-(1/\rho)\,\mathrm
+dP/\mathrm dr\) (isolado da primeira equação) na segunda, eliminamos
+\(\Phi\) e obtemos uma única EDO de segunda ordem envolvendo apenas
+\(\rho\) e \(P\):</p>
+\[
+\frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left[r^2\left(-\frac1\rho\frac{\mathrm dP}{\mathrm dr}\right)\right] = 4\pi G\rho\,.
+\tag{9.4}
+\]
+
+<p>Vamos considerar que a equação de estado de um gás de Fermi–Dirac
+relativístico é</p>
+\[
+P = c_1F(x)\,,
+\qquad
+\rho = c_2x^3\,,
+\qquad
+x \equiv \frac{p_0}{m_ec}\,,
+\tag{9.5}
+\]
+<p>onde \(c_1\equiv\pi m_e^4c^5/3h^3\) e
+\(c_2\equiv8\pi\mu_em_a(m_ec)^3/3h^3\) reúnem os prefatores físicos
+constantes [comparando com Equação (9.2) e a relação
+\(\rho=n_e\mu_em_a=(8\pi p_0^3/3h^3)\mu_em_a\)]. Substituindo na
+Equação (9.4),</p>
+\[
+-\frac{c_1}{c_2}\,\frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left[\frac{r^2}{x^3}\frac{\mathrm d}{\mathrm dr}\big(F(x)\big)\right] = 4\pi Gc_2x^3\,.
+\tag{9.6}
+\]
+
+<h2 id="anb-equacao-chandrasekhar">A equação diferencial de Chandrasekhar</h2>
+
+<p>O termo \(\mathrm dF(x)/\mathrm dr\) pode ser obtido diferenciando
+diretamente a integral fechada já resolvida no Capítulo 8 [Equação
+(8.57)],</p>
+\[
+\int_0^X\frac{Y^4\,\mathrm dY}{(1+Y^2)^{1/2}}
+= \frac18\left[X(2X^2-3)(X^2+1)^{1/2}+3\operatorname{senh}^{-1}(X)\right]
+= \frac18F(X)\,.
+\tag{9.7}
+\]
+<p>Derivando \(F(x)=x(2x^2-3)(x^2+1)^{1/2}+3\operatorname{senh}^{-1}(x)\)
+em relação a \(x\), com \(z\equiv(x^2+1)^{1/2}\) (logo
+\(\mathrm dz/\mathrm dx=x/z\) e
+\(\mathrm d[\operatorname{senh}^{-1}(x)]/\mathrm dx=1/z\)),</p>
+\[
+\frac{\mathrm dF}{\mathrm dx}
+= (6x^2-3)z + (2x^3-3x)\frac{x}{z} + \frac3z
+= \frac{(6x^2-3)z^2+2x^4-3x^2+3}{z}
+= \frac{8x^4}{z}\,,
+\tag{9.8}
+\]
+<p>já que \((6x^2-3)z^2=(6x^2-3)(x^2+1)=6x^4+3x^2-3\), que somado a
+\(2x^4-3x^2+3\) dá exatamente \(8x^4\). Como
+\(8x^4/z=8x^3\cdot(x/z)=8x^3\,(\mathrm dz/\mathrm dx)\), obtemos a
+identidade elegante</p>
+\[
+\frac{1}{x^3}\frac{\mathrm dF(x)}{\mathrm dr} = 8\,\frac{\mathrm dz}{\mathrm dr}\,,
+\qquad z\equiv(x^2+1)^{1/2}\,.
+\tag{9.9}
+\]
+
+<p>Substituindo a Equação (9.9) na Equação (9.6),</p>
+\[
+-\frac{8c_1}{c_2}\,\frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left[r^2\frac{\mathrm dz}{\mathrm dr}\right] = 4\pi Gc_2x^3
+\quad\Longrightarrow\quad
+\frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left[r^2\frac{\mathrm dz}{\mathrm dr}\right] = -\frac{\pi Gc_2^2}{2c_1}\,x^3\,.
+\tag{9.10}
+\]
+<p>Invertendo a definição de \(z\), \(x=(z^2-1)^{1/2}\), e substituindo
+de volta,</p>
+\[
+\frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left[r^2\frac{\mathrm dz}{\mathrm dr}\right] = -\frac{\pi Gc_2^2}{2c_1}\left(z^2-1\right)^{3/2}\,.
+\tag{9.11}
+\]
+
+<p>Definimos agora as variáveis adimensionais</p>
+\[
+\psi \equiv \frac{z}{z_c}\,,
+\qquad
+y \equiv \frac{r}{\alpha}\,,
+\qquad
+\alpha^2 \equiv \frac{2c_1}{\pi Gc_2^2z_c^2}\,,
+\tag{9.12}
+\]
+<p>onde \(z_c\) é o valor central de \(z\) (relacionado ao momento de
+Fermi central, portanto à densidade central da estrela). Note
+explicitamente a semelhança estrutural com as variáveis definidas para
+a equação de Lane–Emden no <a href="cap06_estrelas_politropicas.html">Capítulo
+6</a> [Equação (6.27)] — o mesmo tipo de adimensionalização, aplicado
+agora à equação de estado do gás degenerado relativístico.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Confirmando o coeficiente numérico \(2\) em \(\alpha^2\)</div>
+  <div class="conteudo">
+    <p>Vale conferir que o coeficiente numérico na Equação (9.10) e no
+    numerador de \(\alpha^2\) [Equação (9.12)] é, de fato, \(2\), não
+    \(z_c\): substituindo \(z=z_c\psi\) e \(r=\alpha y\) na Equação
+    (9.11) e exigindo que o resultado se reduza exatamente à forma
+    final [Equação (9.13) adiante, sem nenhum fator numérico sobrando],
+    o coeficiente numérico é necessariamente \(2\) — apenas essa
+    escolha cancela todos os fatores de \(z_c\) e deixa a equação final
+    na forma limpa esperada. Usamos consistentemente "\(2c_1\)" (não
+    "\(z_cc_1\)") na Equação (9.10) e na definição de \(\alpha^2\)
+    [Equação (9.12)], e mais adiante na Equação (9.20).</p>
+  </div>
+</div>
+
+<p>Substituindo \(z=z_c\psi\), \(r=\alpha y\) na Equação (9.11) —
+usando \(\mathrm dz/\mathrm dr=(z_c/\alpha)\,\mathrm d\psi/\mathrm dy\)
+e \(r^2\,\mathrm dz/\mathrm dr=\alpha z_cy^2\,\mathrm d\psi/\mathrm dy\)
+— e usando a definição de \(\alpha^2\) para cancelar os fatores comuns,
+chegamos à forma final:</p>
+\[
+\frac1{y^2}\frac{\mathrm d}{\mathrm dy}\left(y^2\frac{\mathrm d\psi}{\mathrm dy}\right) = -\left(\psi^2-\frac1{z_c^2}\right)^{3/2}\,,
+\qquad\text{ou, de forma expandida,}
+\tag{9.13}
+\]
+\[
+\boxed{\psi''+\frac2y\psi'+\left(\psi^2-\frac1{z_c^2}\right)^{3/2}=0}\,,
+\tag{9.14}
+\]
+<p>a <strong>equação diferencial de Chandrasekhar</strong> para a
+estrutura interna de uma estrela anã branca.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — A unificação dos dois regimes degenerados</div>
+  <div class="conteudo">
+    <p>Note que a Equação (9.13) se assemelha à equação de Lane–Emden
+    [Equação (6.30) do Capítulo 6] para um politropo. De fato, ela se
+    reduz exatamente aos dois casos deduzidos independentemente no
+    Capítulo 8 nos limites apropriados: quando \(z_c\to\infty\)
+    (\(x\to\infty\)), o termo \(1/z_c^2\) desaparece e recuperamos a
+    equação de Lane–Emden com \(n=3\) (\(\gamma=4/3\), caso
+    ultra-relativístico); quando \(z_c\to1\) (\(x\to0\)), recuperamos o
+    índice \(n=3/2\) (\(\gamma=5/3\), caso não-relativístico). Essa é a
+    <strong>grande unificação</strong> deste capítulo: os dois regimes
+    degenerados deduzidos separadamente no Capítulo 8 são, na verdade,
+    dois limites de uma única equação mestra, parametrizada por
+    \(z_c\) — uma quantidade diretamente ligada ao momento de Fermi
+    central e, portanto, à densidade central da estrela. O módulo
+    abaixo torna essa unificação visível: a curva calculada da equação
+    de Chandrasekhar migra continuamente entre as duas soluções de
+    Lane–Emden conforme \(z_c\) varia.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 1 (central) — Integrador da equação de Chandrasekhar</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Generalização direta do integrador de Lane–Emden do Capítulo 6
+    (mesmo motor numérico RK4, agora resolvendo \(\psi''+\frac2y\psi'+
+    (\psi^2-1/z_c^2)^{3/2}=0\)) até a superfície, onde
+    \(\psi(y_1)^2=1/z_c^2\) (densidade nula) — em vez de \(\psi=0\)
+    como em Lane–Emden.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mch-zc">Parâmetro central \(z_c\) <span class="valor" id="mch-zc-valor">1,001</span></label>
+      <input type="range" id="mch-zc" min="0" max="1000" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mch-canvas" role="img" aria-label="Grafico do perfil de densidade normalizado rho/rhoc versus raio normalizado y/y1 da solucao de Chandrasekhar (verde), sobreposto as solucoes de Lane-Emden n=3/2 (cinza tracejado) e n=3 (roxo tracejado), mostrando a curva verde migrar entre os dois limites conforme z_c varia." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card" style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1rem;">
+    <span>\(y_1=\)<strong id="mch-y1">—</strong></span>
+    <span>\((y^2\mathrm d\psi/\mathrm dy)_{y_1}=-\)<strong id="mch-dpsi">—</strong></span>
+    <span>\(M=\)<strong id="mch-M">—</strong> \(M_\odot\)</span>
+    <span>\(R=\)<strong id="mch-R">—</strong> \(R_\oplus\)</span>
+  </p>
+  <p class="leitura-card" id="mch-nota">—</p>
+</div>
+
+<h2 id="anb-massa-raio">Condições de contorno, massa e raio</h2>
+
+<p>As condições de contorno centrais, análogas às da equação de
+Lane–Emden, são</p>
+\[
+y=0\,,
+\qquad
+\psi(0)=1\,,
+\qquad
+\psi'(0)=0\,,
+\tag{9.15}
+\]
+<p>regularidade no centro da estrela. Essas condições, junto com a
+Equação (9.13), descrevem totalmente a região central de uma anã
+branca. Em termos de \(\psi(y)\), a densidade é</p>
+\[
+\rho = c_2x^3 = c_2(z^2-1)^{3/2} = c_2z_c^3\left(\psi^2-\frac1{z_c^2}\right)^{3/2}\,.
+\tag{9.16}
+\]
+
+<p>Podemos determinar a massa da anã branca a partir da equação de
+conservação da massa,</p>
+\[
+M = \int_0^R4\pi r^2\rho\,\mathrm dr
+= 4\pi\alpha^3z_c^3c_2\int_0^{y_1}y^2\left(\psi^2-\frac1{z_c^2}\right)^{3/2}\mathrm dy\,,
+\tag{9.17}
+\]
+<p>onde \(y_1\) é o valor de \(y\) na superfície da estrela (onde a
+densidade se anula, \(\psi(y_1)^2=1/z_c^2\)). Comparando o termo
+dentro da integral com a própria Equação (9.13) — o mesmo truque
+algébrico já usado para a equação de massa de Lane–Emden no Capítulo 6
+[Equação (6.38)] —,</p>
+\[
+-\frac{\mathrm d}{\mathrm dy}\left[y^2\frac{\mathrm d\psi}{\mathrm dy}\right] = y^2\left(\psi^2-\frac1{z_c^2}\right)^{3/2}\,,
+\tag{9.18}
+\]
+<p>de modo que a integral é uma derivada exata,</p>
+\[
+M = -4\pi\alpha^3z_c^3c_2\int_0^{y_1}\frac{\mathrm d}{\mathrm dy}\left[y^2\frac{\mathrm d\psi}{\mathrm dy}\right]\mathrm dy
+= \boxed{-4\pi\alpha^3z_c^3c_2\left(y^2\frac{\mathrm d\psi}{\mathrm dy}\right)_{y_1}}\,.
+\tag{9.19}
+\]
+
+<p>Podemos facilmente obter o raio da anã branca usando a definição
+\(y=r/\alpha\): em \(r=R\), \(y=y_1\), logo \(R=\alpha y_1\).
+Substituindo \(\alpha\) explicitamente [Equação (9.12)],</p>
+\[
+R = \sqrt{\frac{2c_1}{\pi G}}\,\frac{1}{z_cc_2}\,y_1\,.
+\tag{9.20}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 2 — Perfis internos \(\psi(y)\) e \(\rho(y)\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mperfil-zc">Parâmetro central \(z_c\) <span class="valor" id="mperfil-zc-valor">1,001</span></label>
+      <input type="range" id="mperfil-zc" min="0" max="1000" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mperfil-canvas" role="img" aria-label="Grafico de psi(y) e rho(y)/rhoc em funcao de y, mostrando o perfil interno da estrela para o z_c escolhido." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Aumente \(z_c\) (densidade central maior) e observe a estrela ficar
+    mais concentrada: o perfil de densidade cai mais abruptamente perto
+    da superfície, exatamente como visto para índices politrópicos
+    maiores no Capítulo 6.
+  </p>
+</div>
+
+<h2 id="anb-massa-chandrasekhar">Limites, relação massa-raio e a massa de Chandrasekhar</h2>
+
+<p>Nos limites onde \(x\to\infty\) (\(z_c\to\infty\)), temos o caso
+ultra-relativístico; quando \(x\to0\) (\(z_c\to1\)), voltamos para o
+caso clássico não-relativístico.</p>
+
+<p>A <strong>relação massa-raio</strong> de estrelas anãs brancas segue
+o comportamento esquematizado na figura abaixo: uma curva decrescente
+no plano \(R\) vs. \(M\). Para uma anã branca em qualquer ponto
+<em>sobre</em> a curva, o equilíbrio hidrostático é satisfeito
+(\(F_{\rm pr}=F_{\rm gr}\), força de pressão degenerada equilibrando a
+força gravitacional). Para qualquer ponto <em>fora</em> da curva,
+temos a quebra do regime hidrostático, levando a estrela a uma
+instabilidade: abaixo/dentro da curva domina a pressão degenerada
+(\(F_{\rm pr}>F_{\rm gr}\)), acima domina a gravidade
+(\(F_{\rm gr}>F_{\rm pr}\)), levando ao colapso.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Nomenclatura do diagrama</div>
+  <div class="conteudo">
+    <p>Os eixos deste diagrama são \(R\) (raio) e \(M\) (massa) — o
+    conteúdo é a <strong>relação massa-raio</strong> de anãs brancas,
+    nomenclatura padrão na literatura para esse tipo de diagrama, e é o
+    nome usado aqui no texto.</p>
+  </div>
+</div>
+
+<p>A massa limite que uma anã branca pode alcançar é denominada
+<strong>massa de Chandrasekhar</strong>,</p>
+\[
+\boxed{M_{\rm ch} = \left(\frac2{\mu_e}\right)^2\times1{,}459\,M_\odot}\,,
+\tag{9.21}
+\]
+<p>obtida para o caso onde \(z_c\to\infty\), que coincide com um
+politropo com \(n=3\). Estrelas anãs brancas que superam este limite
+de massa se desestabilizam e podem explodir em supernova tipo Ia.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 3 — Relação massa-raio construída ao vivo</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mmr-mue">\(\mu_e\) <span class="valor" id="mmr-mue-valor">2,00</span></label>
+      <input type="range" id="mmr-mue" min="150" max="230" step="1" value="200">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mmr-play" class="botao-modulo">▶ Construir curva M–R</button>
+      <button type="button" id="mmr-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mmr-canvas" role="img" aria-label="Curva massa-raio de anas brancas construida ponto a ponto pela integracao da equacao de Chandrasekhar para uma sequencia de z_c, com Sirius B marcada como ponto observacional e a massa de Chandrasekhar marcada como assintota vertical." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(M_{\rm ch}=\)<strong id="mmr-Mch">—</strong> \(M_\odot\) (linha
+    tracejada vertical). Cada ponto da curva vem de um valor de
+    \(z_c\) diferente — a mesma física do Módulo 1, varrida
+    automaticamente. O ponto laranja é <strong>Sirius B</strong>
+    (\(M\approx1{,}0\,M_\odot\), \(R\sim R_\oplus\)), a primeira anã
+    branca confirmada — repare como cai muito perto da curva teórica.
+    Abaixo/à esquerda da curva, \(F_{\rm pr}>F_{\rm gr}\) (estável);
+    acima/à direita, \(F_{\rm gr}>F_{\rm pr}\) (instável, colapso). Mude
+    \(\mu_e\) e veja a curva inteira — e \(M_{\rm ch}\) — se deslocar.
+  </p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 4 (destaque) — Simulação: acréscimo até o limite de Chandrasekhar</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Cenário <em>single-degenerate</em>: uma anã branca acreta matéria
+    de uma estrela companheira não-degenerada, ganhando massa e
+    <strong>encolhendo</strong> ao longo da curva massa-raio calculada
+    acima.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="macre-M0">Massa inicial \(M_0/M_\odot\) <span class="valor" id="macre-M0-valor">0,60</span></label>
+      <input type="range" id="macre-M0" min="40" max="120" step="1" value="60">
+    </div>
+    <div class="controle">
+      <label for="macre-taxa">Taxa de acréscimo \(\log_{10}(\dot M/(M_\odot/\mathrm{ano}))\) <span class="valor" id="macre-taxa-valor">1,00×10⁻⁸</span></label>
+      <input type="range" id="macre-taxa" min="-1000" max="-500" step="1" value="-800">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="macre-play" class="botao-modulo">▶ Acretar massa</button>
+      <button type="button" id="macre-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="macre-canvas" role="img" aria-label="Animacao de uma ana branca acretando massa e encolhendo ao longo da curva massa-raio, com o ponto se aproximando do limite de Chandrasekhar marcado por uma linha vertical tracejada." style="width:100%;height:360px;display:block;"></canvas></div>
+  <p class="leitura-card" style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1rem;">
+    <span>\(M=\)<strong id="macre-M">—</strong> \(M_\odot\)</span>
+    <span>\(R=\)<strong id="macre-R">—</strong> \(R_\oplus\)</span>
+    <span>\(\rho_c=\)<strong id="macre-rhoc">—</strong> g/cm³</span>
+    <span>tempo decorrido: \(t\approx\)<strong id="macre-t">—</strong> anos</span>
+  </p>
+  <p class="leitura-card" id="macre-status">—</p>
+  <p class="leitura-card">
+    <strong>Atenção ao que esta simulação não mostra:</strong> a
+    distribuição observada de massas de anãs brancas isoladas tem pico
+    em torno de \(\sim0{,}6\,M_\odot\) (o valor inicial padrão acima),
+    bem abaixo de \(M_{\rm ch}\) — a <strong>maioria</strong> das anãs
+    brancas isoladas nunca passa perto desse limite. O caminho animado
+    aqui é um cenário <em>possível</em>, não o destino típico, e exige
+    uma companheira binária ativa. Existe também o cenário
+    <em>double-degenerate</em> (fusão de duas anãs brancas, não
+    simulado aqui) — qual dos dois canais domina a produção real de
+    SNe Ia é uma <strong>questão em aberto</strong>, sem consenso na
+    literatura atual (Ruiter &amp; Seitenzahl, 2025).
+  </p>
+</div>
+
+<div class="exemplo-card">
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — \(M_{\rm ch}\) para diferentes composições</div>
+  <div class="conteudo">
+    <p>Para uma composição típica de He/C/O totalmente ionizados, onde
+    \(Z_i/\mu_i\approx1/2\) para todos os elementos relevantes (He, C,
+    O), \(\mu_e\approx2\), e</p>
+    \[
+    M_{\rm ch} = \left(\frac22\right)^2\times1{,}459\,M_\odot = 1{,}459\,M_\odot\,,
+    \tag{9.22}
+    \]
+    <p>recuperando o valor clássico \(M_{\rm ch}\approx1{,}4\,M_\odot\).
+    Núcleos de O, Ne e Mg totalmente ionizados têm exatamente a mesma
+    razão \(Z_i/\mu_i\approx1/2\) (são todos núcleos com \(Z=N\)), de
+    modo que anãs brancas O/Ne/Mg têm \(\mu_e\approx2\) também —
+    praticamente o mesmo \(M_{\rm ch}\) do caso C/O. Já para uma
+    composição hipotética muito mais rica em elementos do pico do
+    ferro (\(^{56}\)Fe: \(Z=26\), \(\mu_i=56\),
+    \(Z_i/\mu_i\approx0{,}464\), logo
+    \(\mu_e=1/(Z_i/\mu_i)\approx2{,}15\)),</p>
+    \[
+    M_{\rm ch} = \left(\frac2{2{,}15}\right)^2\times1{,}459\,M_\odot \approx 1{,}26\,M_\odot\,,
+    \tag{9.23}
+    \]
+    <p>uma massa limite sensivelmente menor — mostrando que
+    \(M_{\rm ch}\) não é um número absolutamente universal, mas depende
+    da composição química através de \(\mu_e\), que cresce à medida
+    que a matéria degenerada fica mais rica em nêutrons (menor
+    \(Z/A\)).</p>
+  </div>
+</div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 5 — \(M_{\rm ch}\) vs. composição</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="mcomp-mue">\(\mu_e\) <span class="valor" id="mcomp-mue-valor">2,00</span></label>
+      <input type="range" id="mcomp-mue" min="150" max="230" step="1" value="200">
+    </div>
+  </div>
+  <div class="grafico-card" style="padding:1rem;text-align:center;">
+    <div style="font-size:1.7rem;color:#17805f;font-variant-numeric:tabular-nums;"><strong id="mcomp-Mch">—</strong> \(M_\odot\)</div>
+  </div>
+  <p class="leitura-card" id="mcomp-nota">—</p>
+  <p class="leitura-card">
+    Mova o slider até \(\mu_e=2{,}00\) e depois \(\mu_e=2{,}15\) para
+    reproduzir exatamente os dois valores do Exemplo acima. Este efeito
+    de composição é <strong>distinto</strong> do mecanismo de
+    neutronização dependente de densidade discutido a seguir: anãs
+    brancas O/Ne/Mg têm o mesmo \(\mu_e\approx2\) do caso C/O, mas
+    colapsam a uma massa levemente menor
+    (\(\approx1{,}38\,M_\odot\)) por captura eletrônica pelo
+    \(^{24}\)Mg e \(^{20}\)Ne em densidades centrais altas — não por
+    uma diferença na composição média.
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Sirius B: a primeira anã branca confirmada</div>
+  <div class="conteudo">
+    <p>O primeiro objeto identificado como anã branca foi Sirius B, a
+    companheira da estrela mais brilhante do céu noturno, Sirius A.
+    Com massa \(\approx1{,}0\,M_\odot\) e raio comparável ao da Terra,
+    Sirius B é exatamente o tipo de objeto que motivou a abertura do
+    Capítulo 8 — uma estrela compacta e extremamente quente
+    (\(R_\star\sim R_\oplus\)) que exige o tratamento do gás de
+    elétrons como um gás de Fermi–Dirac degenerado. A determinação de
+    sua massa e raio, no início do século XX, junto com o desvio
+    gravitacional para o vermelho detectado em seu espectro, forneceu
+    alguns dos primeiros testes observacionais da física de
+    degenerescência eletrônica deduzida neste capítulo.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Composição real de anãs brancas</div>
+  <div class="conteudo">
+    <p>A maioria das anãs brancas observadas tem núcleo de carbono e
+    oxigênio (C/O), como no esquema da figura no início do capítulo —
+    remanescentes de estrelas que terminaram a queima de hélio no
+    núcleo sem atingir temperatura e densidade suficientes para a
+    ignição do carbono. Anãs brancas originadas de estrelas
+    progenitoras mais massivas (que chegam a queimar carbono e neônio,
+    mas não o suficiente para o colapso do núcleo) podem ter núcleos de
+    oxigênio, neônio e magnésio (O/Ne/Mg) — com \(\mu_e\approx2\),
+    essencialmente igual ao caso C/O, já que O, Ne e Mg são todos
+    núcleos com \(Z=N\). Mesmo assim, anãs brancas O/Ne/Mg reais tendem
+    a colapsar em uma estrela de nêutrons a uma massa um pouco menor
+    que a massa de Chandrasekhar clássica (\(\approx1{,}38\,M_\odot\),
+    contra \(\approx1{,}4\,M_\odot\)) — não por uma diferença de
+    composição <em>média</em> como a ilustrada no exemplo acima, mas
+    porque, a densidades centrais altas o suficiente, a captura
+    eletrônica pelo \(^{24}\)Mg e pelo \(^{20}\)Ne remove elétrons
+    degenerados do gás, reduzindo localmente a pressão de sustentação
+    antes que o limite clássico seja atingido — um mecanismo de
+    neutronização dependente da densidade, distinto do efeito de
+    composição fixa discutido acima, e que será retomado em capítulos
+    futuros sobre objetos compactos.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Supernovas tipo Ia como velas-padrão</div>
+  <div class="conteudo">
+    <p>A uniformidade física de \(M_{\rm ch}\) como gatilho da ignição
+    termonuclear descontrolada do carbono é a base física por trás da
+    relativa uniformidade da luminosidade de pico das supernovas tipo
+    Ia — o que as torna <strong>velas-padrão</strong> extremamente
+    úteis em cosmologia observacional. Foi justamente o uso de SNe Ia
+    como indicadores de distância que levou à descoberta da expansão
+    acelerada do universo, reconhecida com o Prêmio Nobel de Física de
+    2011 (Perlmutter, Schmidt e Riess).</p>
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Nem toda anã branca está perto de \(M_{\rm ch}\)</div>
+  <div class="conteudo">
+    <p>É importante notar que a distribuição observada de massas de
+    anãs brancas isoladas tem pico em torno de \(\sim0{,}6\,M_\odot\),
+    bem abaixo do limite de Chandrasekhar. Para uma anã branca atingir
+    \(M_{\rm ch}\) e detonar como SN Ia, é necessário um mecanismo de
+    acréscimo de massa: o cenário <em>single-degenerate</em> (acréscimo
+    de matéria de uma companheira não-degenerada em um sistema
+    binário) ou o cenário <em>double-degenerate</em> (fusão de duas
+    anãs brancas). Qual desses canais domina a produção real de SNe Ia
+    observadas — ou se ambos contribuem de forma comparável — é uma
+    questão ainda em aberto e ativamente debatida na literatura atual,
+    sem consenso definitivo (Ruiter &amp; Seitenzahl, 2025).</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Para o trabalho original desta dedução, ver Chandrasekhar (1935)
+    (reforçando a citação já feita no Capítulo 8) e o tratamento
+    clássico em Chandrasekhar (1939). Para uma revisão contemporânea e
+    abrangente do debate entre os cenários <em>single-degenerate</em> e
+    <em>double-degenerate</em> como progenitores de supernovas tipo Ia,
+    ver Ruiter &amp; Seitenzahl (2025). Para um tratamento didático
+    completo de anãs brancas, incluindo a estrutura interna e a relação
+    massa-raio, ver o capítulo dedicado em Hansen, Kawaler &amp;
+    Trimble (2004). Sobre testes observacionais modernos da relação
+    massa-raio teórica, combinando astrometria e fotometria do
+    <em>Gaia</em>, ver Tremblay et al. (2024).</p>
+  </div>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 9.
+</footer>
+
+<script src="assets/cap09_modulos.js"></script>

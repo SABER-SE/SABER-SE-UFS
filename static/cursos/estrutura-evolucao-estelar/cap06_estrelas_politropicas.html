@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Estrelas Politrópicas</title>
+<meta name="description" content="Módulo interativo do Capítulo 6: modelos politrópicos, o potencial gravitacional e a equação de Poisson, dedução completa da equação de Lane–Emden, distribuição de massa, casos politrópicos importantes e suas soluções — com integrador de Lane–Emden ao vivo (RK4) e seis módulos interativos.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      sen: '\\operatorname{sen}'
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 6 — Estrelas Politrópicas</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, com integrador numérico de Lane–Emden ao vivo (o módulo central deste capítulo) e módulos complementares para perfis de densidade/pressão, distribuição de massa, a relação politrópica e a massa de Chandrasekhar.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — notação deste capítulo: \(z\), \(\omega\) e \(z_R\)</div>
+  <div class="conteudo">
+    <p>Este capítulo usa \(z\) e \(\omega\) onde a literatura padrão de
+    Lane&ndash;Emden usa \(\xi\) e \(\theta\), e \(z_R\) onde a literatura usa
+    \(\xi_1\) (o primeiro zero da função de Lane&ndash;Emden). A notação do
+    professor é preservada integralmente ao longo deste módulo — a
+    equivalência com a notação padrão é indicada nos pontos em que o texto
+    original já a menciona.</p>
+  </div>
+</div>
+
+<h2>Introdução</h2>
+
+<p>Um <strong>processo politrópico</strong> descreve uma transformação
+termodinâmica na qual a pressão é função apenas da densidade,
+\(P=P(\rho)\), mais precisamente:</p>
+\[
+PV^\gamma = K\,,
+\qquad\text{ou}\qquad
+P = K\rho^\gamma\,,
+\tag{6.1}
+\]
+<p>onde \(K\) e \(\gamma\) são constantes.</p>
+
+<p>Modelos estelares politrópicos foram importantes para descrever a teoria
+da estrutura estelar historicamente, embora atualmente modelos mais
+robustos sejam utilizados para uma descrição mais realista da estrutura
+estelar.</p>
+
+<h2>Fechando o sistema de equações</h2>
+
+<p>Vimos em aulas anteriores que a dinâmica de uma estrela é descrita por</p>
+\[
+\frac{\partial P}{\partial r} = -\frac{Gm\rho}{r^2}
+\qquad\text{e}\qquad
+\frac{\partial m}{\partial r} = 4\pi r^2\rho\,,
+\tag{6.2}
+\]
+<p>válido para um caso estático.</p>
+
+<p>Nesse caso, temos que as variáveis do sistema são \((P,\rho,m)\), ou
+seja, \(3\) incógnitas para apenas \(2\) equações. Mas sabemos também que
+processos termodinâmicos dependem de \(3\) variáveis, \(F(P,\rho,T)=0\), o
+que implica em mais uma incógnita a ser obtida. Uma forma de reduzir o grau
+de liberdade nesse tratamento é assumir o caso politrópico, onde</p>
+\[
+P = K\rho^\gamma = K\rho^{1+1/n}\,,
+\tag{6.3}
+\]
+<table class="tabela-simples">
+  <tr><td>\(K\)</td><td>&rarr; constante politrópica</td></tr>
+  <tr><td>\(\gamma\)</td><td>&rarr; expoente politrópico</td></tr>
+  <tr><td>\(n\)</td><td>&rarr; índice politrópico</td></tr>
+</table>
+<p>com</p>
+\[
+\gamma = 1+\frac1n\,.
+\tag{6.4}
+\]
+
+<p>Para um gás ideal isotérmico, temos</p>
+\[
+P = \frac{\rho\mathcal{R}T}{\mu}
+\quad\Longrightarrow\quad
+P = K\rho\,,
+\tag{6.5}
+\]
+<p>que teria o caso onde \(K=\mathcal{R}T/\mu\) — em um processo isotérmico,
+com \(n\to\infty\), \(\rho^{1+1/n}\to\rho\).</p>
+
+<p>Se temos o caso politrópico, ficamos com duas equações e duas incógnitas
+quando adicionamos a equação do equilíbrio hidrostático, onde:</p>
+\[
+\frac{\mathrm{d}P}{\mathrm{d}r} = -\frac{Gm\rho}{r^2}\,,
+\tag{6.6}
+\]
+<p>podemos definir o <strong>potencial gravitacional</strong> como</p>
+\[
+\Phi(r) = \int_0^r \frac{Gm}{r'^2}\,\mathrm{d}r'\,,
+\qquad\text{ou}\qquad
+\frac{\mathrm{d}\Phi}{\mathrm{d}r} = \frac{Gm}{r^2}\,.
+\tag{6.7}
+\]
+<p>Substituindo na equação do equilíbrio hidrostático, temos:</p>
+\[
+\boxed{\frac{\mathrm{d}P}{\mathrm{d}r} = -\rho\,\frac{\mathrm{d}\Phi}{\mathrm{d}r}}\,.
+\tag{6.8}
+\]
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Panorama histórico: dos politropos a Lane&ndash;Emden</div>
+  <div class="conteudo">
+    <p>Os modelos politrópicos têm uma longa história na astrofísica
+    estelar, remontando a trabalhos de Jonathan Homer Lane e Robert Emden no
+    século&nbsp;XIX, que primeiro estudaram sistemas autogravitantes com a
+    relação \(P=K\rho^{1+1/n}\) — a equação diferencial resultante para a
+    estrutura desses sistemas (que veremos na próxima parte deste capítulo)
+    leva o nome de <strong>equação de Lane&ndash;Emden</strong>. Arthur
+    Eddington popularizou o uso de politropos na década de 1920 como uma
+    forma de obter soluções analíticas (ou semianalíticas) tratáveis para a
+    estrutura estelar antes da era dos computadores — o chamado
+    <strong>modelo padrão de Eddington</strong> usa especificamente o índice
+    \(n=3\) (\(\gamma=4/3\)), apropriado para uma estrela em equilíbrio
+    radiativo dominado por pressão de radiação. O índice \(n=3\) também
+    descreve, notavelmente, o caso relativístico do gás de elétrons
+    degenerados, diretamente ligado ao <strong>limite de
+    Chandrasekhar</strong> para a massa máxima de uma anã branca (tema do
+    futuro capítulo sobre Anãs Brancas). Já o índice \(n=3/2\)
+    (\(\gamma=5/3\)) descreve o caso não-relativístico do mesmo gás
+    degenerado, relevante para anãs brancas de baixa massa e para o núcleo
+    de gigantes vermelhas. Modelos politrópicos com esses índices
+    específicos continuam sendo usados hoje como aproximações rápidas e
+    pedagogicamente importantes, mesmo quando modelos numéricos completos
+    são necessários para precisão observacional (Chandrasekhar, 1939).</p>
+  </div>
+</div>
+
+<h2 id="potencial-gravitacional">Potencial gravitacional em simetria esférica</h2>
+
+<p>Consideremos duas cascas esféricas, de elementos de massa \(\mathrm{d}m\)
+(na posição \(\vec r\)) e \(\mathrm{d}m'\) (na posição \(\vec r\,'\)).</p>
+
+<figure>
+<svg viewBox="0 0 400 300" role="img" aria-label="Duas cascas esféricas concêntricas em torno da origem O, com vetores r' até dm e r até dm, ilustrando a geometria usada na dedução do potencial gravitacional." style="width:100%;max-width:420px;display:block;margin:0 auto;height:auto;">
+  <circle cx="200" cy="150" r="55" fill="none" stroke="#1c4878" stroke-width="2"></circle>
+  <circle cx="200" cy="150" r="105" fill="none" stroke="#963c1e" stroke-width="2"></circle>
+  <circle cx="200" cy="150" r="2.5" fill="#333"></circle>
+  <text x="185" y="185" font-size="13" fill="#333">O</text>
+  <line x1="200" y1="150" x2="243" y2="116" stroke="#1c4878" stroke-width="1.6" marker-end="url(#seta1)"></line>
+  <line x1="200" y1="150" x2="282" y2="84" stroke="#963c1e" stroke-width="1.6" marker-end="url(#seta2)"></line>
+  <circle cx="243" cy="116" r="3" fill="#1c4878"></circle>
+  <circle cx="282" cy="84" r="3" fill="#963c1e"></circle>
+  <text x="215" y="122" font-size="14" fill="#1c4878">r'</text>
+  <text x="253" y="92" font-size="14" fill="#963c1e">r</text>
+  <text x="220" y="120" font-size="13" fill="#1c4878">dm'</text>
+  <text x="288" y="80" font-size="13" fill="#963c1e">dm</text>
+  <defs>
+    <marker id="seta1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1c4878"></path></marker>
+    <marker id="seta2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#963c1e"></path></marker>
+  </defs>
+</svg>
+<figcaption>Duas cascas esféricas concêntricas, de elementos de massa \(\mathrm{d}m\) (raio \(r\)) e \(\mathrm{d}m'\) (raio \(r'\)), usadas na dedução do potencial gravitacional em simetria esférica.</figcaption>
+</figure>
+
+<p>Como \(\vec F=m\vec a\),</p>
+\[
+\vec F = m\vec a\,,
+\tag{6.9}
+\]
+<p>é verdade que</p>
+\[
+\mathrm{d}\vec F = m\,\delta\vec g\,,
+\tag{6.10}
+\]
+<p>e, por definição,</p>
+\[
+\delta\vec g = -G\,\mathrm{d}m'\,\frac{\vec r-\vec r\,'}{|\vec r-\vec r\,'|^3}\,.
+\tag{6.11}
+\]
+<p>Sabendo que \(\rho=\mathrm{d}m'/\mathrm{d}^3r'\), ou seja,
+\(\mathrm{d}m'=\rho\,\mathrm{d}^3r'\), substituindo na Equação (6.11) e
+integrando, temos</p>
+\[
+\vec g(\vec r) = \int\delta\vec g = -G\int\rho(\vec r\,')\,\frac{\vec r-\vec r\,'}{|\vec r-\vec r\,'|^3}\,\mathrm{d}^3r'\,,
+\tag{6.12}
+\]
+<p>onde podemos assumir que a densidade depende apenas de \(r'\) (não da
+direção), por aproximação de simetria esférica.</p>
+
+<p>Aplicando o divergente dos dois lados da equação, temos:</p>
+\[
+\vec\nabla\cdot\vec g(\vec r) = -G\int\rho(\vec r\,')\,
+\vec\nabla\cdot\left[\frac{\vec r-\vec r\,'}{|\vec r-\vec r\,'|^3}\right]\mathrm{d}^3r'\,.
+\tag{6.13}
+\]
+
+<p>Essa passagem aponta diretamente para uma identidade fundamental do
+potencial newtoniano,</p>
+\[
+\vec\nabla\cdot\left[\frac{\vec r-\vec r\,'}{|\vec r-\vec r\,'|^3}\right] = 4\pi\,\delta(\vec r-\vec r\,')\,.
+\tag{6.14}
+\]
+
+<h2>A equação de Poisson gravitacional</h2>
+
+<p>Substituindo a Equação (6.14) na Equação (6.13) e usando a propriedade
+de filtragem da função delta de Dirac na integração em \(\mathrm{d}^3r'\),
+obtemos</p>
+\[
+\vec\nabla\cdot\vec g(\vec r) = -4\pi G\int\rho(\vec r\,')\,\delta(\vec r-\vec r\,')\,\mathrm{d}^3r'
+= -4\pi G\rho(\vec r)\,.
+\tag{6.15}
+\]
+<p>O lado direito da Equação (6.15) é exatamente a expressão da
+<strong>equação de Poisson no caso gravitacional</strong>,</p>
+\[
+\vec\nabla\cdot\vec g(r) = -4\pi G\rho\,.
+\tag{6.16}
+\]
+
+<p>Podemos verificar que essa aceleração \(g\) tem exatamente a mesma
+magnitude do potencial gravitacional já definido na Equação (6.7): para uma
+partícula de teste em equilíbrio orbital, \(F_g=F\Rightarrow
+mg=\dfrac{GMm}{r^2}\Rightarrow g=\dfrac{Gm}{r^2}\), que é exatamente
+\(\mathrm{d}\Phi/\mathrm{d}r\). Como a força gravitacional é central, a
+aceleração aponta na direção contrária ao crescimento radial do potencial,
+ou seja,</p>
+\[
+\vec g = -\vec\nabla\Phi\,.
+\tag{6.17}
+\]
+<p>Substituindo a Equação (6.17) na Equação (6.16), chegamos à
+<strong>equação de Poisson da gravitação</strong>,</p>
+\[
+\boxed{\nabla^2\Phi = 4\pi G\rho}\,,
+\tag{6.18}
+\]
+<p>que, assumindo simetria esférica, se escreve</p>
+\[
+\frac{1}{r^2}\frac{\mathrm{d}}{\mathrm{d}r}\left(r^2\frac{\mathrm{d}\Phi}{\mathrm{d}r}\right) = 4\pi G\rho\,.
+\tag{6.19}
+\]
+
+<p>Com a Equação (6.19), temos finalmente um sistema fechado de três
+equações para as três incógnitas \((P,\rho,\Phi)\):</p>
+\[
+\left\{
+\begin{aligned}
+\frac{\mathrm{d}P}{\mathrm{d}r} &= -\rho\,\frac{\mathrm{d}\Phi}{\mathrm{d}r}\,,\\[4pt]
+\frac{1}{r^2}\frac{\mathrm{d}}{\mathrm{d}r}\left(r^2\frac{\mathrm{d}\Phi}{\mathrm{d}r}\right) &= 4\pi G\rho\,,\\[4pt]
+P &= K\rho^\gamma\,.
+\end{aligned}
+\right.
+\tag{6.20}
+\]
+<p>É esse sistema que resolveremos a seguir para chegar à equação de
+Lane&ndash;Emden.</p>
+
+<h2 id="lane-emden">Dedução da equação de Lane&ndash;Emden</h2>
+
+<p>Substituindo a relação politrópica \(P=K\rho^\gamma\) na primeira equação
+do sistema (6.20),</p>
+\[
+K\gamma\rho^{\gamma-1}\frac{\mathrm{d}\rho}{\mathrm{d}r} = -\rho\,\frac{\mathrm{d}\Phi}{\mathrm{d}r}
+\quad\Longrightarrow\quad
+\mathrm{d}\Phi = -K\gamma\,\rho^{\gamma-2}\,\mathrm{d}\rho\,.
+\tag{6.21}
+\]
+<p>Integrando os dois lados, com a condição de contorno \(\Phi=0\) onde
+\(\rho=0\) (a superfície da estrela),</p>
+\[
+\int_0^\Phi \mathrm{d}\Phi' = -K\gamma\int_0^\rho \rho'^{\,\gamma-2}\,\mathrm{d}\rho'
+\quad\Longrightarrow\quad
+\Phi = -\frac{K\gamma}{\gamma-1}\,\rho^{\gamma-1}\,.
+\tag{6.22}
+\]
+<p>Usando \(\gamma=1+1/n\) (logo \(\gamma-1=1/n\)) e \(\gamma n=n+1\),</p>
+\[
+\Phi = -K\gamma\cdot n\,\rho^{1/n} = -(n+1)K\rho^{1/n}\,.
+\tag{6.23}
+\]
+<p>Invertendo a Equação (6.23), obtemos a densidade em função do potencial,</p>
+\[
+\rho = \left[-\frac{\Phi}{(n+1)K}\right]^n\,.
+\tag{6.24}
+\]
+
+<p>Substituindo a Equação (6.24) de volta na equação de Poisson em simetria
+esférica (6.19),</p>
+\[
+\frac{1}{r^2}\frac{\mathrm{d}}{\mathrm{d}r}\left(r^2\frac{\mathrm{d}\Phi}{\mathrm{d}r}\right)
+= 4\pi G\left[-\frac{\Phi}{(n+1)K}\right]^n\,,
+\tag{6.25}
+\]
+<p>ou, expandindo a derivada do lado esquerdo,</p>
+\[
+\frac{\mathrm{d}^2\Phi}{\mathrm{d}r^2} + \frac{2}{r}\frac{\mathrm{d}\Phi}{\mathrm{d}r}
+= 4\pi G\left[-\frac{\Phi}{(n+1)K}\right]^n\,.
+\tag{6.26}
+\]
+
+<p>Definimos agora as variáveis adimensionais que simplificam a Equação (6.26):</p>
+\[
+z = A\,r\,,\qquad
+\omega = \frac{\Phi}{\Phi_c}\,,\qquad
+A^2 = \frac{4\pi G}{(n+1)^nK^n}\,(-\Phi_c)^{n-1}\,,
+\tag{6.27}
+\]
+<p>onde \(\Phi_c\) é o potencial no centro da estrela. Assim,</p>
+\[
+\frac{\mathrm{d}\Phi}{\mathrm{d}r} = A\Phi_c\,\frac{\mathrm{d}\omega}{\mathrm{d}z}\,,
+\qquad
+\frac{\mathrm{d}^2\Phi}{\mathrm{d}r^2} = A^2\Phi_c\,\frac{\mathrm{d}^2\omega}{\mathrm{d}z^2}\,.
+\tag{6.28}
+\]
+<p>Substituindo na Equação (6.26),</p>
+\[
+A^2\Phi_c\,\omega'' + \frac{2A^2\Phi_c}{z}\,\omega'
+= 4\pi G\left[\frac{-\Phi_c\,\omega}{(n+1)K}\right]^n\,,
+\tag{6.29}
+\]
+<p>e dividindo por \(A^2\Phi_c\) e usando a definição de \(A^2\) da Equação
+(6.27) para cancelar os fatores comuns, chegamos à forma final:</p>
+\[
+\omega'' + \frac{2}{z}\,\omega' = -\omega^n\,,
+\qquad\text{ou, de forma equivalente,}\qquad
+\frac{1}{z^2}\frac{\mathrm{d}}{\mathrm{d}z}\left(z^2\frac{\mathrm{d}\omega}{\mathrm{d}z}\right) = -\omega^n\,,
+\tag{6.30}
+\]
+<p>as <strong>equações de Lane&ndash;Emden</strong>. A segunda forma se
+obtém diretamente expandindo a derivada do produto na primeira:</p>
+\[
+\frac{1}{z^2}\frac{\mathrm{d}}{\mathrm{d}z}\left(z^2\frac{\mathrm{d}\omega}{\mathrm{d}z}\right)
+= \frac{1}{z^2}\left(2z\,\omega' + z^2\,\omega''\right)
+= \omega'' + \frac{2}{z}\,\omega'\,,
+\tag{6.31}
+\]
+<p>que é idêntica ao lado esquerdo da primeira forma — confirmando a
+equivalência das duas.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 1 (central) — Integrador de Lane&ndash;Emden ao vivo</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Este módulo resolve numericamente a equação de Lane&ndash;Emden
+    \(\omega''+\tfrac2z\omega'=-\omega^n\) [Eq. (6.30)] em tempo real, para
+    qualquer índice \(n\) entre 0 e 5. As condições iniciais são
+    \(\omega(0)=1\), \(\omega'(0)=0\) e \(\omega''(0)=-1/3\) — este último
+    valor vem diretamente da expansão em série de Taylor discutida na caixa
+    de atenção logo abaixo, e é o ponto de partida real usado pelo
+    integrador (via a série \(\omega(z)\approx1-z^2/6+nz^4/120\), que evita
+    a indeterminação \(0/0\) do termo \(2\omega'/z\) em \(z=0\)). O método
+    numérico usado aqui é <strong>Runge-Kutta de 4ª ordem (RK4)</strong> —
+    mais preciso que o método de diferenças finitas descrito nas notas
+    [Eq. (6.47)], mas resolvendo exatamente a mesma equação diferencial.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="m1-n">Índice politrópico \(n\) <span class="valor" id="m1-n-valor">0,00</span></label>
+      <input type="range" id="m1-n" min="0" max="500" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m1-canvas" role="img" aria-label="Gráfico de omega(z) obtido pela integração numérica da equação de Lane-Emden, com marcador no primeiro zero z_R e, para n=0, 1 ou 5, a solução analítica sobreposta em linha tracejada." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Primeiro zero: \(z_R=\)<strong id="m1-zR">—</strong>. Inclinação na
+    superfície: \(-z_R^2\,\omega'(z_R)=\)<strong id="m1-slope">—</strong>
+    [usada na Eq. (6.42)]. Razão de densidades
+    \(\bar\rho/\rho_c=\)<strong id="m1-razao">—</strong>. Para \(n=0\), \(1\)
+    ou \(5\), a curva tracejada roxa mostra a solução analítica fechada
+    [Eqs. (6.44)&ndash;(6.46)] sobreposta à numérica — a coincidência das
+    duas curvas valida o integrador. Para \(n=5\), \(z_R\to\infty\) (raio
+    infinito, massa finita): o integrador não encontra zero, como esperado.
+  </p>
+  <p class="leitura-card" id="m1-ref-nota" style="min-height:1.2em;"></p>
+  <p class="leitura-card" id="m1-diverge-nota" style="display:none;"></p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 1B — Integração de Lane&ndash;Emden, passo a passo</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Mesmo integrador RK4 do Módulo 1 acima, mas aqui a curva é
+    <strong>traçada progressivamente</strong>, com o passo atual
+    destacado — para ver o método <em>construindo</em> a solução, em vez
+    de já entregar o resultado pronto. <strong>O que é calculado de
+    verdade:</strong> a trajetória completa \(\omega(z)\) vem exatamente
+    do mesmo integrador RK4 (`ShootingODE`) do Módulo 1, com o mesmo
+    passo \(\mathrm dz=0{,}01\) — nenhum atalho, nenhuma curva
+    pré-desenhada por fora. <strong>O que é apenas ilustrativo:</strong>
+    a velocidade de reprodução (slider abaixo) é só uma conveniência
+    visual, sem significado físico — o integrador já calculou a
+    trajetória inteira antes de a animação começar (não há como
+    "animar" um cálculo de milissegundos em tempo real de forma visível
+    ao olho humano); o que muda com a velocidade é apenas a taxa de
+    revelação de pontos já calculados, não o cálculo em si.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="m1b-n">Índice politrópico \(n\) <span class="valor" id="m1b-n-valor">3,00</span></label>
+      <input type="range" id="m1b-n" min="0" max="500" step="1" value="300">
+    </div>
+    <div class="controle">
+      <label for="m1b-vel">Velocidade <span class="valor" id="m1b-vel-valor">1,0×</span></label>
+      <input type="range" id="m1b-vel" min="25" max="400" step="25" value="100">
+    </div>
+    <div class="controle" style="display:flex;gap:0.5rem;align-items:flex-end;">
+      <button type="button" id="m1b-play" class="botao-modulo">▶ Integrar passo a passo</button>
+      <button type="button" id="m1b-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m1b-canvas" role="img" aria-label="Gráfico de omega(z) sendo traçado progressivamente pela integração de Lane-Emden, com o passo atual destacado por um marcador." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Passo atual: \(z=\)<strong id="m1b-z">—</strong>,
+    \(\omega(z)=\)<strong id="m1b-w">—</strong>,
+    \(\omega'(z)=\)<strong id="m1b-dw">—</strong>.
+  </p>
+</div>
+
+<p>A partir das definições de \(\omega\) e da densidade central
+\(\rho_c=\left[-\Phi_c/((n+1)K)\right]^n\) [Equação (6.24) avaliada em
+\(r=0\)], e comparando com a Equação (6.24),</p>
+\[
+\frac{\rho}{\rho_c} = \left(\frac{\Phi}{\Phi_c}\right)^n
+\quad\Longrightarrow\quad
+\rho = \rho_c\,\omega^n\,.
+\tag{6.32}
+\]
+<p>Usando \(P=K\rho^\gamma=K\rho^{(n+1)/n}\), o valor no centro é</p>
+\[
+P_c = K\rho_c^{(n+1)/n}\,,
+\tag{6.33}
+\]
+<p>e dividindo \(P\) por \(P_c\),</p>
+\[
+\frac{P}{P_c} = \left(\frac{\rho}{\rho_c}\right)^{1+1/n}\,.
+\tag{6.34}
+\]
+
+<p>Usando a Equação (6.32) na Equação (6.34),</p>
+\[
+\frac{P}{P_c} = \left(\omega^n\right)^{1+1/n} = \omega^{n}\cdot\omega = \boxed{\omega^{n+1}}\,,
+\tag{6.35}
+\]
+<p>que é conhecida como <strong>outra solução da equação de
+Lane&ndash;Emden</strong>: conhecendo \(\omega(z)\), obtemos tanto o perfil
+de densidade [Equação (6.32)] quanto o de pressão [Equação (6.35)] da
+estrela politrópica.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 2 — Perfis de densidade e pressão</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m2-n">Índice politrópico \(n\) <span class="valor" id="m2-n-valor">0,00</span></label>
+      <input type="range" id="m2-n" min="0" max="500" step="1" value="150">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m2-canvas" role="img" aria-label="Gráfico de rho sobre rho_c (=omega^n) e P sobre P_c (=omega^(n+1)) em função de z/z_R, mostrando a concentração central crescente com n." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Curva verde: \(\rho/\rho_c=\omega^n\) [Eq. (6.32)]. Curva roxa:
+    \(P/P_c=\omega^{n+1}\) [Eq. (6.35)]. Razão de densidades para este
+    índice: \(\bar\rho/\rho_c=\)<strong id="m2-razao">—</strong> [Eq.
+    (6.42)]. Quanto maior \(n\), mais rapidamente \(\omega\) cai perto do
+    centro, e portanto mais <strong>centralmente concentrado</strong> é o
+    politropo — visível tanto no achatamento das curvas perto de
+    \(z/z_R=1\) quanto na queda de \(\bar\rho/\rho_c\) com \(n\) crescente
+    (compare, por exemplo, \(n=0\) com \(\bar\rho/\rho_c=1\), estrela de
+    densidade uniforme, com \(n=3\), onde \(\bar\rho/\rho_c\approx0{,}054\)).
+  </p>
+</div>
+
+<h2 id="massa-lane-emden">Distribuição de massa e condições de contorno</h2>
+
+<p>Podemos usar a solução de Lane&ndash;Emden para obter diretamente a
+distribuição de massa do politropo. Partindo da definição de massa em
+cascas esféricas e da Equação (6.32),</p>
+\[
+m(r) = \int_0^r 4\pi r'^2\rho\,\mathrm{d}r' = 4\pi\rho_c\int_0^r r'^2\,\omega^n\,\mathrm{d}r'\,.
+\tag{6.36}
+\]
+<p>Trocando a variável de integração para \(z=Ar\) (logo \(r'=z/A\),
+\(\mathrm{d}r'=\mathrm{d}z/A\)),</p>
+\[
+m(r) = \frac{4\pi\rho_c}{A^3}\int_0^{z} z'^2\,\omega^n\,\mathrm{d}z'\,,
+\qquad z=Ar\,.
+\tag{6.37}
+\]
+<p>Da própria equação de Lane&ndash;Emden (6.30),
+\(\mathrm{d}(z^2\omega')/\mathrm{d}z=-z^2\omega^n\), de modo que o
+integrando é uma derivada exata:</p>
+\[
+\int_0^{z} z'^2\,\omega^n\,\mathrm{d}z' = -\Big[z'^2\,\omega'\Big]_0^{z} = -z^2\,\frac{\mathrm{d}\omega}{\mathrm{d}z}\,.
+\tag{6.38}
+\]
+<p>Substituindo na Equação (6.37) e usando \(1/A^3=r^3/z^3\),</p>
+\[
+\boxed{m(r) = -4\pi\rho_c\,r^3\left(\frac{1}{z}\frac{\mathrm{d}\omega}{\mathrm{d}z}\right)_{r=z/A}}\,,
+\tag{6.39}
+\]
+<p>a solução de massa para o caso politrópico.</p>
+
+<p><strong>Condições de contorno.</strong> Impondo densidade nula na
+superfície, \(\rho(r=R)=0\), e usando a Equação (6.32),</p>
+\[
+\rho_c\,\omega^n(z_R) = 0 \quad\Longrightarrow\quad \omega(z_R)=0\,,
+\tag{6.40}
+\]
+<p>onde \(z_R\equiv AR\) é o valor de \(z\) na superfície da estrela — o
+chamado <strong>primeiro zero</strong> da função de Lane&ndash;Emden,
+denotado \(\xi_1\) na notação padrão da literatura.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Notação: \(z_R\) vs. \(R\)</div>
+  <div class="conteudo">
+    <p>\(z\) e \(r\) são variáveis diferentes, relacionadas por \(z=Ar\)
+    [Equação (6.27)]. A condição de contorno na superfície da estrela
+    corresponde a \(\omega\) se anular em \(z=z_R\equiv AR\), o valor de
+    \(z\) correspondente ao raio estelar \(R\) — não em "\(z=R\)"
+    diretamente, já que isso misturaria uma variável adimensional com uma
+    dimensão de comprimento. Usamos \(z_R\) (equivalente ao \(\xi_1\) da
+    literatura padrão, ver Chandrasekhar 1939; Horedt 2004) de forma
+    consistente daqui em diante.</p>
+  </div>
+</div>
+
+<p>A figura abaixo ilustra o comportamento de \(\omega(z)\): decrescente a
+partir de \(\omega(0)=1\) no centro da estrela até se anular em \(z=z_R\),
+o <strong>raio politrópico</strong>.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 3 — Versão interativa da Figura \(\omega(z)\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m3-n">Índice politrópico \(n\) <span class="valor" id="m3-n-valor">0,00</span></label>
+      <input type="range" id="m3-n" min="0" max="500" step="1" value="0">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m3-canvas" role="img" aria-label="Versão interativa da figura de omega(z): curva real calculada pelo integrador, decrescendo de 1 no centro até 0 no raio politropico z_R, que se move conforme n muda." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Mesma geometria e leitura da Figura esquemática das notas — mas aqui a
+    curva é a solução <em>real</em> de Lane&ndash;Emden (não uma forma
+    ilustrativa), calculada pelo integrador do Módulo 1. Raio politrópico
+    atual: \(z_R=\)<strong id="m3-zR">—</strong>. Mova o slider e observe
+    \(z_R\) se deslocar: quanto maior \(n\), mais distante o zero (a estrela
+    "adimensional" fica mais estendida em \(z\), embora isso não corresponda
+    diretamente ao raio físico \(R\), que depende também de \(K\) e
+    \(\rho_c\) via a Equação (6.27)).
+  </p>
+</div>
+
+<p>Avaliando a Equação (6.39) em \(r=R\) (a massa total, \(M\)) e comparando
+com a densidade média \(\bar\rho=3M/(4\pi R^3)\),</p>
+\[
+\frac{M}{m(r)}=1 = \frac{4\pi R^3\bar\rho/3}{-4\pi R^3\rho_c\left(\frac1z\dfrac{\mathrm{d}\omega}{\mathrm{d}z}\right)_{z_R}}\,,
+\tag{6.41}
+\]
+<p>ou seja,</p>
+\[
+\boxed{\frac{\bar\rho}{\rho_c} = \left(-\frac{3}{z}\frac{\mathrm{d}\omega}{\mathrm{d}z}\right)_{z_R}}\,.
+\tag{6.42}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Sinal de \(\mathrm{d}\omega/\mathrm{d}z\) na equação de massa</div>
+  <div class="conteudo">
+    <p>A equação de massa avaliada na superfície,
+    \(m(r)=-4\pi r^3\rho_c\!\left(\frac1z\frac{\mathrm{d}\omega}{\mathrm{d}z}\right)\)
+    [Equação (6.39)], tem o sinal de menos explícito por construção. Como
+    \(\omega\) decresce monotonicamente de \(1\) até \(0\) entre \(z=0\) e
+    \(z=z_R\) (figura acima), temos sempre \(\mathrm{d}\omega/\mathrm{d}z<0\)
+    para soluções fisicamente aceitáveis — logo
+    \(-\rho_c(1/z)(\mathrm{d}\omega/\mathrm{d}z)\) é sempre uma quantidade
+    <em>positiva</em>, como exige uma massa física. A Equação (6.42), que
+    usa consistentemente essa mesma forma, confirma essa leitura.</p>
+  </div>
+</div>
+
+<p>Assim, conhecendo \(M\) e \(R\) observados de uma estrela, a Equação
+(6.42) permite determinar \(\rho_c\) (desde que se conheça a solução
+numérica de \(\omega(z)\) para o índice \(n\) escolhido) e, em seguida, a
+escala radial</p>
+\[
+A = \frac{z}{r} = \frac{z_R}{R}\,.
+\tag{6.43}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 4 — Distribuição de massa \(m(z)/M\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m4-n">Índice politrópico \(n\) <span class="valor" id="m4-n-valor">0,00</span></label>
+      <input type="range" id="m4-n" min="0" max="500" step="1" value="150">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m4-canvas" role="img" aria-label="Gráfico de m(z)/M em função de z/z_R para o indice n escolhido (curva verde), com curvas de referencia tracejadas para n=0 (cinza) e n=3 (roxo), mostrando a concentração de massa no núcleo conforme n cresce." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Curva verde: índice \(n\) escolhido pelo slider, usando
+    \(m(z)/M=z^2(-\omega'(z))\big/\left[z_R^2(-\omega'(z_R))\right]\)
+    [razão direta das Eqs. (6.39) e (6.42)]. Curvas tracejadas de
+    referência: \(n=0\) (cinza — densidade uniforme, massa cresce quase
+    linearmente com \(z^3\)) e \(n=3\) (roxo — modelo padrão de Eddington).
+    Quanto maior \(n\), mais a massa se concentra perto do centro: para
+    \(n=3\), mais da metade da massa está dentro de uma fração pequena do
+    raio politrópico, em contraste com a distribuição quase uniforme de
+    \(n=0\).
+  </p>
+</div>
+
+<h2 id="casos-politropicos">Casos politrópicos importantes</h2>
+
+<p>Alguns índices politrópicos aparecem com frequência em astrofísica
+estelar:</p>
+
+<table>
+  <thead>
+    <tr><th></th><th>Caso físico</th><th>\(\gamma\)</th><th>\(n\)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>(i)</td><td>Gás degenerado não-relativístico</td><td>\(5/3\)</td><td>\(3/2\)</td></tr>
+    <tr><td>(ii)</td><td>Gás degenerado relativístico</td><td>\(4/3\)</td><td>\(3\)</td></tr>
+    <tr><td>(iii)</td><td>Gás ideal isotérmico</td><td>\(1\)</td><td>\(n\to\infty\)</td></tr>
+    <tr><td>(iv)</td><td>Estrela inteiramente convectiva</td><td>\(5/3\)</td><td>\(3/2\)</td></tr>
+    <tr><td>(v)</td><td>Modelo padrão de Eddington (\(P_T=P_{\rm gas}+P_{\rm rad}\))</td><td>\(4/3\)</td><td>\(3\)</td></tr>
+  </tbody>
+</table>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Sobre a origem física de \(\gamma=4/3\)</div>
+  <div class="conteudo">
+    <p>Um gás ideal (não-degenerado) monoatômico sempre tem \(\gamma=5/3\),
+    independentemente da composição química — o valor \(\gamma=4/3\) nunca
+    surge da idealidade do gás em si. Ele aparece em apenas dois contextos
+    físicos distintos: pressão de radiação dominante (caso (v), modelo
+    padrão de Eddington) ou um gás de elétrons degenerado relativístico
+    (caso (ii)).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 5 — Relação politrópica \(P=K\rho^\gamma\)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="m5-gamma">Expoente \(\gamma\) <span class="valor" id="m5-gamma-valor">1,667</span></label>
+      <input type="range" id="m5-gamma" min="1000" max="2000" step="1" value="1667">
+    </div>
+    <div class="controle">
+      <label for="m5-K">Constante \(K\) (escala log) <span class="valor" id="m5-K-valor">1,00×10⁰</span></label>
+      <input type="range" id="m5-K" min="0" max="1000" step="1" value="250">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m5-canvas" role="img" aria-label="Grafico log-log de P versus rho para o gamma e K escolhidos (curva verde), com tres retas de referencia tracejadas marcando gamma=5/3, gamma=4/3 e gamma=1." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    A curva verde é \(\log P=\log K+\gamma\log\rho\) — uma reta em escala
+    log-log, de inclinação \(\gamma\). As três retas tracejadas marcam os
+    casos da tabela acima: <span style="color:#D85A30;">terracota</span>
+    \(\gamma=5/3\) (degenerado não-relativístico / totalmente convectiva),
+    <span style="color:#7F77DD;">roxo</span> \(\gamma=4/3\) (degenerado
+    relativístico / modelo padrão de Eddington) e cinza \(\gamma=1\)
+    (isotérmico). Ver a caixa de atenção acima sobre a origem física
+    específica de \(\gamma=4/3\): nunca vem de um gás ideal monoatômico
+    comum.
+  </p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Os índices \(n=3/2\) e \(n=3\) na astrofísica estelar moderna</div>
+  <div class="conteudo">
+    <p>Os dois índices politrópicos mais usados continuam relevantes hoje.
+    O índice \(n=3/2\) (\(\gamma=5/3\)) descreve bem estrelas totalmente
+    convectivas de baixa massa (incluindo objetos sub-estelares) e anãs
+    brancas degeneradas não-relativísticas. Já o índice \(n=3\)
+    (\(\gamma=4/3\)) descreve tanto o modelo padrão de Eddington quanto anãs
+    brancas degeneradas relativísticas — e é a base da dedução clássica da
+    <strong>massa de Chandrasekhar</strong>: usando a solução numérica da
+    equação de Lane&ndash;Emden para \(n=3\), cujo primeiro zero é
+    \(\xi_1\approx6{,}897\) e cuja derivada nesse ponto é
+    \(-\xi_1^2\,\omega'(\xi_1)\approx2{,}018\), obtém-se
+    \(M_{\rm Ch}\approx1{,}4\,M_\odot\) — o limite de massa acima do qual a
+    pressão de degenerescência relativística de elétrons não consegue mais
+    sustentar uma anã branca contra o colapso gravitacional (Chandrasekhar,
+    1939). Esse resultado será revisitado com mais detalhe no futuro
+    capítulo sobre Anãs Brancas.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo 6 — Massa de Chandrasekhar</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Usando a solução \(n=3\) do integrador do Módulo 1 (que reproduz
+    \(z_R\approx6{,}897\) e \(-z_R^2\omega'(z_R)\approx2{,}018\), conforme
+    citado acima), a dedução clássica da massa de Chandrasekhar para um gás
+    de elétrons degenerado relativístico dá
+    \(M_{\rm Ch}=0{,}7212\,(2/\mu_e)^2\,\big[z_R^2|\omega'(z_R)|\big]_{n=3}\,M_\odot\),
+    onde \(\mu_e\) é o peso molecular médio por elétron (a constante
+    numérica \(0{,}7212\) vem das constantes físicas \(\hbar\), \(c\), \(G\)
+    e \(m_H\) que entram na pressão de degenerescência relativística — ver
+    Chandrasekhar, 1939). Este resultado fecha o gancho aberto na caixa de
+    contexto acima: o mesmo índice \(n=3\) que descreve o modelo padrão de
+    Eddington também fixa a massa máxima de uma anã branca, tema que será
+    aprofundado no futuro capítulo sobre Anãs Brancas.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="m6-mue">Peso molecular médio por elétron \(\mu_e\) <span class="valor" id="m6-mue-valor">2,00</span></label>
+      <input type="range" id="m6-mue" min="150" max="230" step="1" value="200">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="m6-canvas" role="img" aria-label="Grafico da massa de Chandrasekhar em massas solares em funcao de mu_e, com marcador no valor escolhido pelo slider." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    \(M_{\rm Ch}=\)<strong id="m6-mch">—</strong> \(M_\odot\). Para
+    \(\mu_e=2\) (composição típica de C/O, apropriada para a maioria das
+    anãs brancas), o resultado é \(\approx1{,}4\,M_\odot\), consistente com
+    o valor citado no texto. Núcleos mais ricos em elementos pesados (maior
+    \(\mu_e\), por exemplo O/Ne/Mg) têm massa de Chandrasekhar
+    <em>menor</em> — quanto maior o peso molecular médio por elétron, menos
+    elétrons (por unidade de massa) sustentam a pressão de degenerescência.
+  </p>
+</div>
+
+<h2 id="solucoes-lane-emden">Soluções das equações de Lane&ndash;Emden</h2>
+
+<p>A equação de Lane&ndash;Emden possui uma singularidade em \(z=0\) (o
+termo \(2\omega'/z\) diverge ali, a menos que \(\omega'(0)=0\)). Além
+disso, a equação só possui solução analítica fechada para três valores de
+\(n\):</p>
+\[
+\begin{aligned}
+n=0:&\quad \omega(z) = 1-\frac{z^2}{6}\,,\\
+n=1:&\quad \omega(z) = \frac{\sen z}{z}\,,\\
+n=5:&\quad \omega(z) = \left(1+\frac{z^2}{3}\right)^{-1/2}\,.
+\end{aligned}
+\tag{6.44&ndash;6.46}
+\]
+
+<p>Para os demais valores de \(n\) — os fisicamente mais relevantes, como
+\(n=3/2\) e \(n=3\) — é necessário resolver a equação numericamente. Uma
+forma simples de fazer isso é pelo método de diferenças finitas, usando</p>
+\[
+\omega'' \approx \frac{\omega'(z+\Delta z)-\omega'(z)}{\Delta z}\,,
+\tag{6.47}
+\]
+<p>combinada com a própria equação de Lane&ndash;Emden [Equação (6.30)]
+para obter \(\omega''\) em cada passo, e integrada a partir das condições
+iniciais em \(z=0\):</p>
+\[
+\omega(z=0) = \frac{\Phi(z=0)}{\Phi_c} = 1\,,
+\qquad
+\omega'(z=0) = 0\,,
+\tag{6.48}
+\]
+<p>correspondendo ao potencial central (\(\Phi(0)=\Phi_c\), por definição)
+e à ausência de gradiente de potencial no centro da estrela, por simetria.</p>
+
+<p class="leitura-card" style="margin:0.6rem 0;background:#f4f4ef;border-radius:8px;padding:0.7rem 1rem;">
+Ver o <strong>Módulo interativo 1</strong>, no início da seção de dedução
+acima, para a integração numérica ao vivo desta equação (RK4, com validação
+contra as três soluções analíticas acima e contra os valores de referência
+para \(n=3/2\) e \(n=3\)).
+</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — A condição inicial \(\omega''(0)\)</div>
+  <div class="conteudo">
+    <p>Além de \(\omega(0)=1\) e \(\omega'(0)=0\), a integração numérica da
+    equação de Lane&ndash;Emden precisa do valor de \(\omega''(0)\), obtido
+    diretamente da própria equação: como o termo \(2\omega'/z\) é uma
+    indeterminação \(0/0\) em \(z=0\) (já que \(\omega'(0)=0\)),
+    expandimos \(\omega(z)\) em série de Taylor em torno de \(z=0\),</p>
+    \[
+    \omega(z) \approx \omega(0) + \frac12\omega''(0)\,z^2 + \cdots
+    = 1 + \frac12\omega''(0)\,z^2+\cdots\,,
+    \tag{6.49}
+    \]
+    <p>e exigimos que a equação de Lane&ndash;Emden seja satisfeita nesse
+    limite. Substituindo essa expansão na forma
+    \(\omega''+\frac{2}{z}\omega'=-\omega^n\) e usando
+    \(\omega'(z)\approx\omega''(0)\,z\), o termo \(\frac2z\omega'\to2\omega''(0)\),
+    levando a \(3\,\omega''(0)=-\omega(0)^n=-1\), ou seja,
+    \(\omega''(0)=-1/3\) — um resultado padrão usado como ponto de partida
+    em qualquer integração numérica da equação de Lane&ndash;Emden
+    (Chandrasekhar, 1939; Horedt, 2004), e exatamente o valor usado pelo
+    integrador do Módulo 1.</p>
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Politropos como idealização</div>
+  <div class="conteudo">
+    <p>Modelos politrópicos são construções matematicamente elegantes, mas
+    representam uma idealização: assumem uma relação simples
+    \(P=K\rho^\gamma\) que ignora o acoplamento detalhado entre transporte
+    de energia, composição química e taxas de reação nuclear que governam
+    uma estrela real. Na prática, a construção de modelos estelares
+    realistas exige integração numérica completa das quatro equações de
+    estrutura estelar (massa, hidrostática, transporte de energia e geração
+    de energia) acopladas a uma equação de estado e opacidades tabeladas.
+    Ainda assim, politropos continuam extremamente úteis hoje: como
+    aproximações analíticas de boa qualidade para objetos bem específicos
+    (anãs brancas, estrelas totalmente convectivas de baixa massa) e, na
+    prática computacional, como <em>estimativa inicial</em> (<em>initial
+    guess</em>) para inicializar a integração de códigos de evolução
+    estelar modernos — por exemplo, o código MESA (<em>Modules for
+    Experiments in Stellar Astrophysics</em>) usa modelos politrópicos
+    homogêneos para construir a configuração inicial de uma estrela
+    pré-sequência principal, antes de relaxá-la para um modelo totalmente
+    consistente (Paxton et al., 2011).</p>
+  </div>
+</div>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leitura complementar</div>
+  <div class="conteudo">
+    <p>Para o tratamento clássico e completo dos modelos politrópicos e a
+    dedução detalhada da equação de Lane&ndash;Emden (incluindo suas
+    soluções analíticas para \(n=0,1,5\) e numéricas para os demais
+    índices), ver Chandrasekhar (1939) — ainda hoje a referência de partida
+    sobre o tema, apesar de suas quase nove décadas — e o capítulo
+    correspondente de Kippenhahn, Weigert &amp; Weiss (2012), com notação
+    mais próxima da usada neste livro. Para uma referência moderna e
+    abrangente, cobrindo aplicações de politropos muito além do contexto
+    estelar clássico (incluindo sistemas relativísticos e problemas de
+    física de plasmas), ver Horedt (2004). Sobre o uso de politropos como
+    condição inicial em códigos de evolução estelar modernos, ver a
+    documentação do código MESA em Paxton et al. (2011).</p>
+  </div>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 6.
+</footer>
+
+<script src="assets/cap06_modulos.js"></script>

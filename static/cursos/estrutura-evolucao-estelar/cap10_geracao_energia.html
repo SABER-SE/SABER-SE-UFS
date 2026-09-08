@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Processos de Geração de Energia</title>
+<meta name="description" content="Módulo interativo do Capítulo 10: seção de choque e taxa de reação, dedução completa de ⟨σv⟩, o fator e o pico de Gamow, blindagem eletrônica de Debye–Hückel, formalismo de rede de reações e a cadeia próton-próton — com o pico de Gamow, o tunelamento, a cadeia pp, o ciclo CNO e o triplo-alfa/ressonância de Hoyle animados.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: {
+      pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+      sen: '\\operatorname{sen}'
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 10 — Processos de Geração de Energia (Nucleossíntese)</h1>
+<p class="subtitulo">
+  Transcrição fiel das notas de aula — seção de choque, taxa de reação,
+  fator e pico de Gamow, blindagem eletrônica e a cadeia próton-próton —
+  com o pico de Gamow, o tunelamento quântico, a cadeia pp, o ciclo CNO e
+  o triplo-alfa/ressonância de Hoyle animados. O exercício proposto pelo
+  professor (equações diferenciais do CNO II–IV e PP II/III) é preservado
+  <strong>sem solução</strong>, exatamente como no original.
+</p>
+
+<h2 id="ge-introducao">Introdução: nucleossíntese estelar</h2>
+
+<p>A nucleossíntese estelar é o principal mecanismo de geração de
+elementos químicos mais pesados no universo atual. Os processos
+próton-próton, ciclo CNO e triplo-alfa são os principais processos
+nucleossintéticos das estrelas — os dois primeiros serão detalhados em
+blocos futuros deste capítulo.</p>
+
+<p>Na nucleossíntese primordial (Big Bang), foram criados H, He e Li;
+todos os demais elementos foram produzidos por explosões de supernova
+ou no núcleo ou na atmosfera de estrelas evoluídas.</p>
+
+<p>Quando estamos estudando elementos químicos, temos também muitos
+<strong>isótopos</strong>, que são elementos químicos com o mesmo
+número atômico \(Z\) mas com diferente massa, ou seja, diferentes
+quantidades de nêutrons. Vejamos: \(^{13}_{\ 6}\mathrm C\) possui 6
+prótons e \(13-6=7\) nêutrons. Elementos mais estáveis tendem a ter
+uma quantidade semelhante de prótons e nêutrons.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O vale de estabilidade nuclear</div>
+  <div class="conteudo">
+    <p>A proporção próton-nêutron de núcleos estáveis é a base do
+    chamado <strong>vale de estabilidade nuclear</strong>: ao plotar
+    todos os núcleos conhecidos no plano (\(Z\), \(N\)), os núcleos
+    estáveis formam uma faixa estreita e contínua — para elementos
+    leves, próxima da reta \(N=Z\); para elementos mais pesados, com
+    um excesso crescente de nêutrons, já que a repulsão coulombiana
+    entre prótons exige mais nêutrons (que não sentem essa repulsão)
+    para manter o núcleo ligado pela força forte. Núcleos fora desse
+    vale são instáveis e decaem (por emissão \(\beta^-\), \(\beta^+\),
+    ou outros processos) até atingir um isótopo estável ou
+    quase-estável do mesmo número de massa \(A\). Esse mapa de
+    estabilidade é, em essência, o roteiro que a nucleossíntese
+    estelar percorre: reações de fusão levam núcleos leves em direção
+    a configurações mais estáveis (maior energia de ligação por
+    núcleon), liberando energia no processo — até o pico de
+    estabilidade em torno do ferro e do níquel.</p>
+  </div>
+</div>
+
+<h2 id="ge-formalismo">Formalismo das reações nucleares</h2>
+
+<p>Vamos definir alguns conceitos para entendermos o processo de
+geração de energia. Quando estudamos as equações de estrutura interna
+no <a href="cap05_equacoes_estrutura.html">Capítulo 5</a>, vimos que</p>
+\[
+\frac{\partial X_i}{\partial t} = \frac{m_i}{\rho}\left(\sum_jr_{ji}-\sum_kr_{ik}\right)\,,
+\tag{10.1}
+\]
+<p>ou, na forma equivalente em termos de energia por transição
+(já estabelecida naquele mesmo capítulo). A partir dessas relações,
+podemos determinar a energia e a taxa das transições atômicas
+realizadas no núcleo.</p>
+
+<p>A notação utilizada para descrever uma reação nuclear é</p>
+\[
+X + a \to Y + b\,,
+\qquad\text{ou}\qquad
+X(a,b)Y\,,
+\tag{10.2}
+\]
+<p>onde a quantidade de energia liberada em cada reação é</p>
+\[
+Q = (M_X+M_a-M_Y-M_b)\,c^2\,,
+\qquad
+\begin{cases}
+Q>0\,, & \text{processo exotérmico}\,,\\
+Q<0\,, & \text{processo endotérmico}\,.
+\end{cases}
+\tag{10.3}
+\]
+
+<p>Uma das maiores dificuldades no estudo da nucleossíntese estelar é a
+determinação/obtenção da <strong>seção de choque</strong> de cada
+reação.</p>
+
+<h2 id="ge-secao-choque">Seção de choque e taxa de reação</h2>
+
+<p>Em meio quântico, temos que a seção de choque segue a equação</p>
+\[
+\sigma = \pi\lambda^2\,,
+\qquad
+\lambda = \left(\frac{m_p+m_t}{m_t}\right)^{1/2}\frac{h}{(2m_pE)^{1/2}}\,,
+\tag{10.4}
+\]
+<p>onde \(m_p\) é a massa da partícula incidente (projétil) e \(m_t\)
+a massa total (alvo).</p>
+
+<p>A seção de choque varia fortemente para cada reação. Para
+transições governadas pela força fraca, como \(p(p,e^+\nu)d\) (o
+primeiro passo da cadeia próton-próton), a seção de choque é
+muitíssimo menor do que para casos relacionados com a força forte,
+como \(^{15}\mathrm N(p,\alpha)^{12}\mathrm C\) — a diferença de
+muitas ordens de grandeza entre os dois casos é o ponto pedagógico
+central aqui.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Unidades dos valores numéricos de seção de choque</div>
+  <div class="conteudo">
+    <p>Seções de choque nucleares se medem tipicamente em
+    <strong>barns</strong> (\(1\,\mathrm{barn}=10^{-24}\,\mathrm{cm^2}\)),
+    a escala natural do tamanho de um núcleo atômico. A forma mais
+    justa de comparar a "força" intrínseca de duas reações mediadas
+    por interações diferentes é através do <strong>fator
+    astrofísico</strong> \(S(E)\) (Equação 10.16, adiante), que já
+    remove a supressão coulombiana comum a ambas:
+    \(S_{pp}(0)\approx4\times10^{-25}\,\mathrm{MeV\,barn}\) para
+    \(p(p,e^+\nu)d\) (força fraca) contra
+    \(S(0)\approx70\,\mathrm{MeV\,barn}\) para
+    \(^{15}\mathrm N(p,\alpha)^{12}\mathrm C\) (força forte, Iliadis,
+    2015) — uma diferença de \(\sim26\) ordens de grandeza que não
+    depende da energia escolhida para a comparação.</p>
+    <p>A <strong>seção de choque real</strong> \(\sigma(E)\), que já
+    inclui a supressão de Gamow, é ainda menor e varia fortemente com
+    a energia. No pico de Gamow solar da cadeia p-p
+    (\(E_0\approx6\,\mathrm{keV}\), ver a seção do fator de Gamow
+    adiante), \(2\pi\eta\approx9\) e
+    \(\sigma_{pp}(E_0)\approx8\times10^{-27}\,\mathrm{barn}\)
+    (\(\approx8\times10^{-51}\,\mathrm{cm^2}\)) — muitas ordens de
+    grandeza menor que a escala nuclear típica do barn, refletindo a
+    extrema raridade de uma colisão \(p\)-\(p\) resultar em fusão a
+    essas energias tão baixas. Já
+    \(^{15}\mathrm N(p,\alpha)^{12}\mathrm C\), próximo às suas
+    ressonâncias fortes (\(E_p\approx429\) e \(897\,\mathrm{keV}\)),
+    atinge \(\sigma\sim0{,}5\,\mathrm{barn}\)
+    (\(\approx5\times10^{-25}\,\mathrm{cm^2}\)) — mas essa comparação
+    direta de \(\sigma\) mistura duas energias muito diferentes (o
+    pico de Gamow da cadeia p-p, \(\sim6\,\mathrm{keV}\), contra uma
+    ressonância a centenas de \(\mathrm{keV}\)), de modo que o
+    contraste de \(S(0)\) acima é o número pedagogicamente mais limpo
+    para comparar as duas interações.</p>
+  </div>
+</div>
+
+<p>O principal parâmetro dessa descrição é a taxa de reações nucleares
+\(r_{ij}\), que pode ser definida por</p>
+\[
+r_{ij} = N_iN_j\,v\,\sigma(v)\,,
+\tag{10.5}
+\]
+<p>onde \(N_i,N_j\) são os números de densidade de partículas \(i\) e
+\(j\) por \(\mathrm{cm^3}\), \(v\) é a velocidade relativa entre \(i\)
+e \(j\), e \(\sigma\) é a seção de choque. Em alguns livros, podemos
+ver a forma alternativa</p>
+\[
+r_{ij} = \frac{1}{1+\delta_{ij}}N_iN_j\langle\sigma v\rangle\,,
+\qquad
+\delta_{ij} =
+\begin{cases}
+0\,, & i\neq j\,,\\
+1\,, & i=j\,,
+\end{cases}
+\tag{10.6}
+\]
+<p>que evita a contagem dupla de colisões quando \(i=j\) (partículas
+idênticas).</p>
+
+<p>Em um gás estelar, a distribuição de velocidades segue uma
+Maxwelliana, de modo que</p>
+\[
+r_{ij} = N_iN_j\langle\sigma v\rangle\,,
+\qquad
+\langle\sigma v\rangle = \int_0^\infty\phi(v)\,v\,\sigma(v)\,\mathrm dv\,.
+\tag{10.7}
+\]
+
+<h2 id="ge-sigma-v">Dedução de \(\langle\sigma v\rangle\) e os três fatores físicos</h2>
+
+<p>A distribuição de Maxwell–Boltzmann de velocidades é</p>
+\[
+\phi(v) = 4\pi v^2\left(\frac{m}{2\pi kT}\right)^{3/2}e^{-mv^2/2kT}\,,
+\qquad
+m \equiv \frac{m_im_j}{m_i+m_j}\ \text{(massa reduzida)}\,.
+\tag{10.8}
+\]
+<p>Sabendo que \(E=\tfrac12mv^2\) (logo \(v=(2E/m)^{1/2}\)), podemos
+obter o termo \(\langle\sigma v\rangle\) como</p>
+\[
+\langle\sigma v\rangle = \int_0^\infty4\pi v^2\left(\frac{m}{2\pi kT}\right)^{3/2}e^{-mv^2/2kT}\,v\,\sigma(v)\,\mathrm dv\,,
+\tag{10.9}
+\]
+<p>e, substituindo \(v=(2E/m)^{1/2}\), \(v^2=2E/m\) e
+\(\mathrm dv=\mathrm dE/(2mE)^{1/2}\),</p>
+\[
+\langle\sigma v\rangle
+= \int_0^\infty4\pi\,\frac{2E}{m}\left(\frac{m}{2\pi kT}\right)^{3/2}e^{-E/kT}\,\sigma(E)\,\left(\frac{2E}{m}\right)^{1/2}\frac{\mathrm dE}{(2mE)^{1/2}}\,.
+\tag{10.10}
+\]
+<p>Reunindo a dependência em \(E\),
+\((2E/m)\cdot(2E/m)^{1/2}\cdot(2mE)^{-1/2}=2E/m^2\), e simplificando
+os fatores numéricos e de \(m\) e \(\pi\) restantes,</p>
+\[
+4\pi\cdot\frac{2}{m^2}\left(\frac{m}{2\pi kT}\right)^{3/2}
+= \frac{8\pi\,m^{3/2}}{m^2\,(2\pi kT)^{3/2}}
+= \frac{8\pi}{m^{1/2}(2\pi)^{3/2}(kT)^{3/2}}
+= \left(\frac8{\pi m}\right)^{1/2}\frac{1}{(kT)^{3/2}}\,,
+\tag{10.11}
+\]
+<p>chegando à <strong>forma geral para a seção de choque em função da
+energia das partículas</strong>:</p>
+\[
+\langle\sigma v\rangle = \left(\frac{8}{\pi m}\right)^{1/2}\frac{1}{(kT)^{3/2}}\int_0^\infty\sigma(E)\,E\,e^{-E/kT}\,\mathrm dE\,.
+\tag{10.12}
+\]
+
+<p>O valor \(\langle\sigma v\rangle\) depende de três fatores físicos:</p>
+<ul>
+  <li>a probabilidade de romper a barreira de Coulomb;</li>
+  <li>a probabilidade de interação quântica;</li>
+  <li>se a reação ocorre perto de um núcleo ressonante.</li>
+</ul>
+
+<p>A barreira de Coulomb, de altura</p>
+\[
+V_c = \frac{Z_iZ_je^2}{r}\,,
+\tag{10.13}
+\]
+<p>é ilustrada na figura abaixo: um poço nuclear atrativo de curto
+alcance (força forte, dentro do raio nuclear) e uma barreira
+repulsiva de longo alcance (repulsão eletromagnética entre os núcleos
+carregados positivamente), com a energia do projétil tipicamente
+muito abaixo do topo da barreira — daí a necessidade do tunelamento
+quântico discutido na próxima seção.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Tunelamento através da barreira coulombiana</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Animação do potencial coulombiano \(V(r)\propto Z_iZ_j/r\) com o
+    poço nuclear, e um "pacote de onda" incidindo com energia
+    \(E\ll E_C\): a opacidade do marcador dentro da barreira é
+    proporcional a \(\sqrt P\), tornando visível o quão raro é o
+    evento. Um contador de "tentativas × sucessos" (sorteio aleatório
+    com probabilidade \(P=e^{-2\pi\eta}\)) torna concreto quão raro é
+    tunelar — conecta diretamente com a caixa "Por que o Sol queima
+    devagar", adiante.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mtunel-E">Energia \(E\) [keV] <span class="valor" id="mtunel-E-valor">10,0</span></label>
+      <input type="range" id="mtunel-E" min="5" max="990" step="1" value="60">
+    </div>
+    <div class="controle">
+      <label for="mtunel-z1z2">\(Z_j\) (núcleo alvo, \(Z_i=1\)) <span class="valor" id="mtunel-z1z2-valor">1</span></label>
+      <input type="range" id="mtunel-z1z2" min="1" max="26" step="1" value="1">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+      <button type="button" id="mtunel-play" class="botao-modulo">▶ Aproximar núcleo</button>
+      <button type="button" id="mtunel-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mtunel-canvas" role="img" aria-label="Barreira coulombiana com um marcador animado se aproximando e tunelando, com opacidade proporcional a raiz da probabilidade de tunelamento." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mtunel-nota">—</p>
+  <p class="leitura-card"><strong>P = e⁻²ᵖⁱᵉᵗᵃ:</strong> <span id="mtunel-P">—</span>
+    &nbsp;&nbsp;<button type="button" id="mtunel-tentar" class="botao-modulo">🎲 Tentar 200.000 vezes (amostragem aleatória)</button></p>
+  <p class="leitura-card" id="mtunel-contador">Nenhuma tentativa ainda.</p>
+</div>
+
+<h2 id="ge-gamow">Fator de Gamow e o pico de Gamow</h2>
+
+<p>A probabilidade de uma partícula (transição) romper a barreira de
+Coulomb é dada por</p>
+\[
+P = e^{-2\pi\eta}\,,
+\qquad
+\eta = \frac{Z_iZ_je^2}{\hbar v}\,,
+\tag{10.14}
+\]
+<p>onde \(\eta\) é o <strong>parâmetro de Sommerfeld</strong>, ou, em
+forma numérica prática,</p>
+\[
+2\pi\eta = 31{,}29\,Z_iZ_j\left(\frac{A}{E}\right)^{1/2}\,,
+\tag{10.15}
+\]
+<p>onde \(A\) é a massa reduzida (em unidades de massa atômica) e
+\(E\) é a energia da partícula em \(\mathrm{keV}\).</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Unidade de \(E\) na Equação 10.15</div>
+  <div class="conteudo">
+    <p>O coeficiente numérico \(31{,}29\) está de acordo com a
+    literatura (a forma padrão usa \(31{,}335\), com pequena diferença
+    por causa de valores atualizados das constantes fundamentais —
+    ver Iliadis, 2015), e a unidade de energia associada a esse
+    coeficiente é \(\mathrm{keV}\): essa é a convenção usual em física
+    nuclear estelar de baixa energia, já que as energias térmicas
+    típicas do interior estelar (poucos \(\mathrm{keV}\)) são muito
+    menores que \(1\,\mathrm{MeV}\). Usamos \(E\) em \(\mathrm{keV}\)
+    de forma consistente daqui em diante — <strong>inclusive em todos
+    os módulos interativos deste capítulo</strong>.</p>
+  </div>
+</div>
+
+<p>Se não houver ressonâncias entre as partículas, podemos definir o
+termo de <strong>seção de choque astrofísica</strong> \(S(E)\) (ou
+fator astrofísico), onde</p>
+\[
+\sigma(E) = \frac{S(E)}{E}\,e^{-2\pi\eta}\,,
+\tag{10.16}
+\]
+<p>que isola a física nuclear (que varia suavemente com \(E\), contida
+em \(S(E)\)) do efeito dominante e rapidamente variável da barreira
+coulombiana (contido no fator exponencial). Substituindo na Equação
+10.12,</p>
+\[
+\langle\sigma v\rangle = \left(\frac{8}{\pi m}\right)^{1/2}\frac{1}{(kT)^{3/2}}\int_0^\infty S(E)\,\exp\!\left(-\frac{E}{kT}-\frac{b}{E^{1/2}}\right)\mathrm dE\,,
+\tag{10.17}
+\]
+<p>onde</p>
+\[
+b = \frac{(2m)^{1/2}\pi e^2Z_iZ_j}{\hbar}\,.
+\tag{10.18}
+\]
+
+<p>Temos uma distribuição onde a cauda maxwelliana decrescente,
+\(e^{-E/kT}\), compete com a probabilidade de tunelamento crescente,
+\(e^{-bE^{-1/2}}\) — a maior parte das reações ocorre entre as duas
+funções, em um pico estreito conhecido como <strong>pico de
+Gamow</strong>. A energia desse pico é definida por</p>
+\[
+E_0 = \left(\frac{bkT}{2}\right)^{2/3}\,.
+\tag{10.19}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Pico de Gamow</div>
+  <p class="leitura-card" style="margin-top:0;">
+    As três curvas: cauda maxwelliana \(e^{-E/kT}\) (decrescente,
+    vermelho), probabilidade de tunelamento \(e^{-bE^{-1/2}}\)
+    (crescente, verde), e o produto (o pico, área sombreada roxa) —
+    mesmas cores da figura original do capítulo. Mova os sliders de
+    \(T\), \(Z_iZ_j\) e da massa reduzida \(A\) para ver as três
+    curvas e \(E_0\) se atualizarem ao vivo.
+    <strong>Alvos numéricos de validação</strong> (citados no texto):
+    \(T_c=1{,}5\times10^7\) K → \(kT_c\approx1{,}3\) keV; pico de
+    Gamow da cadeia pp (\(Z_i=Z_j=1\)) em \(\approx5\)–\(10\) keV;
+    reações CNO em \(\approx20\)–\(35\) keV. Se o módulo não
+    reproduzir essas faixas, há erro de unidade — o coeficiente
+    \(31{,}29\) pressupõe \(E\) em keV (ver caixa acima).
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mgamow-T">Temperatura \(T\) [K] <span class="valor" id="mgamow-T-valor">3,16×10⁷</span></label>
+      <input type="range" id="mgamow-T" min="600" max="900" step="1" value="718">
+    </div>
+    <div class="controle">
+      <label for="mgamow-z1z2">\(Z_j\) (núcleo alvo, \(Z_i=1\)) <span class="valor" id="mgamow-z1z2-valor">1</span></label>
+      <input type="range" id="mgamow-z1z2" min="1" max="26" step="1" value="1">
+    </div>
+    <div class="controle">
+      <label for="mgamow-A">Massa reduzida \(A\) [amu] <span class="valor" id="mgamow-A-valor">0,50</span></label>
+      <input type="range" id="mgamow-A" min="10" max="2000" step="1" value="50">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mgamow-canvas" role="img" aria-label="Grafico do pico de Gamow: cauda maxwelliana decrescente, probabilidade de tunelamento crescente, e o produto das duas formando um pico estreito." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card" style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1rem;">
+    <span>\(kT=\)<strong id="mgamow-kT">—</strong></span>
+    <span>\(E_0=\)<strong id="mgamow-E0">—</strong></span>
+  </p>
+  <p class="leitura-card" id="mgamow-nota">—</p>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Faixa numérica de \(E_0\) e \(kT\)</div>
+  <div class="conteudo">
+    <p>A temperatura central do Sol, \(T_c\approx1{,}5\times10^7\,\mathrm K\),
+    corresponde a \(kT_c\approx1{,}3\,\mathrm{keV}\), dentro da faixa
+    característica \(kT\sim1\)–\(3\,\mathrm{keV}\) de plasmas
+    estelares típicos. O pico de Gamow correspondente fica em
+    \(E_0\sim15\)–\(30\,\mathrm{keV}\) para reações de \(Z\) moderado
+    (como as do ciclo CNO; a literatura confirma, por exemplo,
+    \(E_0\approx20\)–\(35\,\mathrm{keV}\) para a reação
+    \(^{14}\mathrm N(p,\gamma)^{15}\mathrm O\) em temperaturas
+    solares). Para a própria cadeia p-p (\(Z_i=Z_j=1\)), o pico de
+    Gamow fica em uma faixa ainda mais baixa, tipicamente
+    \(5\)–\(10\,\mathrm{keV}\) (Iliadis, 2015).</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Origem histórica: Gamow, Atkinson e Houtermans</div>
+  <div class="conteudo">
+    <p>A aplicação do tunelamento quântico a reações nucleares
+    estelares foi proposta por George Gamow (1928), e logo em seguida
+    aplicada ao contexto estelar por Atkinson e Houtermans (1929).
+    Antes dessa percepção, a física clássica não permitia explicar
+    como o Sol poderia brilhar: classicamente, a energia térmica do
+    núcleo solar (\(kT_c\approx1{,}3\,\mathrm{keV}\)) é centenas de
+    vezes menor que a altura da barreira de Coulomb entre dois
+    prótons (da ordem de \(\mathrm{MeV}\)) — sem o tunelamento
+    quântico, a fusão nuclear seria classicamente proibida nas
+    temperaturas estelares típicas. O reconhecimento de que partículas
+    podem atravessar essa barreira mesmo sem energia suficiente para
+    superá-la classicamente foi um dos primeiros grandes sucessos da
+    mecânica quântica aplicada à astrofísica.</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — Por que o Sol queima devagar: um ponto quase antrópico</div>
+  <div class="conteudo">
+    <p>A seção de choque extremamente pequena da reação
+    \(p+p\to d+e^++\nu\) (Seção "Seção de choque e taxa de reação"),
+    mediada pela força fraca, é a razão física direta pela qual o Sol
+    (e estrelas semelhantes) queimam hidrogênio de forma lenta e
+    estável ao longo de bilhões de anos, em vez de fundir todo o
+    combustível quase instantaneamente. Esse é um ponto quase
+    "antrópico": se a seção de choque dessa reação fosse ordens de
+    grandeza maior, estrelas como o Sol teriam vidas muito mais curtas
+    — possivelmente incompatíveis com o tempo necessário para a
+    evolução da vida complexa na Terra (\(\sim4\) bilhões de anos). O
+    mesmo tipo de argumento aparece na discussão de ajuste fino do
+    processo triplo-alfa, mencionado adiante.</p>
+  </div>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — O pico de Gamow no núcleo solar</div>
+  <div class="conteudo">
+    <p>Para o núcleo do Sol, \(T_c\approx1{,}5\times10^7\,\mathrm K\),
+    logo</p>
+    \[ kT_c \approx 1{,}3\,\mathrm{keV}\,. \tag{10.20} \]
+    <p>Situando esse valor no gráfico do módulo acima: a cauda
+    maxwelliana já decai fortemente acima de poucos \(\mathrm{keV}\),
+    mas a probabilidade de tunelamento para a reação \(p+p\) (com
+    \(Z_i=Z_j=1\)) só se torna apreciável em energias um pouco
+    maiores — o pico de Gamow resultante para a cadeia p-p no Sol fica
+    tipicamente entre \(5\) e \(10\,\mathrm{keV}\), ou seja, poucas
+    vezes \(kT_c\). Isso ilustra concretamente por que apenas uma
+    pequena fração das partículas no núcleo solar (as do extremo
+    energético da distribuição maxwelliana, combinado com
+    tunelamento) efetivamente participa da fusão a cada instante —
+    reforçando o ponto da queima lenta discutido no contexto acima.</p>
+  </div>
+</div>
+
+<h2 id="ge-blindagem">Blindagem eletrônica (<em>electron shielding</em>)</h2>
+
+<p>Para a ocorrência das reações nos núcleos dos átomos, devemos levar
+em conta o <em>electron shielding</em> (blindagem eletrônica). As
+camadas de elétrons na parte externa dos átomos funcionam como um
+escudo: esses elétrons alteram a energia potencial de cada íon do
+átomo e podem aumentar a taxa de reação de determinadas transições.</p>
+
+<p>Para estimar a magnitude deste efeito, consideremos a equação de
+Boltzmann,</p>
+\[
+\frac{n}{\bar n} = e^{-E/kT}\,,
+\tag{10.21}
+\]
+<p>onde \(n\) e \(\bar n\) são as densidades em diferentes estados e
+\(E\) é a diferença de energia entre eles.</p>
+
+<p>Na presença de um potencial eletrostático \(\phi\), a densidade de
+partículas se relaciona à densidade de referência \(\bar n\) por</p>
+\[
+n = \bar n\,e^{-Ze\phi/kT}\,,
+\tag{10.22}
+\]
+<p>com \(\bar n\) multiplicando a exponencial.</p>
+
+<p>Para estrelas "normais", temos que \(Ze\phi\ll kT\), logo podemos
+linearizar a exponencial,</p>
+\[
+n = \bar n\,e^{-Ze\phi/kT} \approx \bar n\left(1-\frac{Ze\phi}{kT}\right)\,.
+\tag{10.23}
+\]
+<p>Podemos então separar os íons dos elétrons, onde</p>
+\[
+n_i = \bar n_i\left(1-\frac{Z_ie\phi}{kT}\right)\,,
+\qquad
+n_e = \bar n_e\left(1+\frac{e\phi}{kT}\right)\,.
+\tag{10.24}
+\]
+
+<p>Podemos definir a densidade de carga como</p>
+\[
+\rho_{\rm carga} = Ze\,n_x\,,
+\tag{10.25}
+\]
+<p>que, em função do potencial, assume a forma</p>
+\[
+\rho_{\rm carga} = \sum_i\bar n_i\left(Z_ie-\frac{Z_i^2e^2\phi}{kT}\right) - \bar n_e\left(1+\frac{e^2\phi}{kT}\right)e\,.
+\tag{10.26}
+\]
+<p>Note que, para um gás neutro com \(\phi=0\), temos
+\(\bar\rho_{\rm carga}=0\), logo</p>
+\[
+\bar\rho_{\rm carga} = \sum_i(Z_ie)\bar n_i - e\bar n_e = 0\,.
+\tag{10.27}
+\]
+<p>Para \(\phi\neq0\), substituindo \(n_i\) e \(n_e\) (Equação 10.24) e
+mantendo apenas os termos dependentes do potencial,</p>
+\[
+\rho_{\rm carga} = -\sum_i\frac{Z_i^2e^2\phi}{kT}\,\bar n_i - \frac{e^2\phi}{kT}\,\bar n_e
+= -\frac{e^2\phi}{kT}\left(\sum_iZ_i^2\bar n_i+\bar n_e\right)\,.
+\tag{10.28}
+\]
+
+<p>Lembrando que podemos relacionar a densidade de íons com a fração
+de massa e a densidade,</p>
+\[
+\bar n_i = \frac{\rho N_AX_i}{A_i}\,,
+\tag{10.29}
+\]
+<p>onde \(X_i\) é a fração de massa, \(N_A\) o número de Avogadro,
+\(\rho\) a densidade e \(A_i\) o peso atômico de cada partícula. Já a
+densidade de elétrons, para um gás completamente ionizado, se
+relaciona à mesma soma através de um fator de ionização \(F_i\) (a
+fração de elétrons liberados por íon \(i\) em relação ao total
+possível, \(Z_i\)):</p>
+\[
+\bar n_e = \sum_i\rho N_AF_i\,\frac{Z_iX_i}{A_i}\,.
+\tag{10.30}
+\]
+<p>Substituindo as Equações 10.29 e 10.30 na Equação 10.28,</p>
+\[
+\rho_{\rm carga} = -\frac{e^2\phi}{kT}\left\{\sum_i\rho N_A\frac{Z_i^2X_i}{A_i} + \sum_i\rho N_AF_i\,\frac{Z_iX_i}{A_i}\right\}\,,
+\tag{10.31}
+\]
+<p>e, tirando as constantes do somatório,</p>
+\[
+\rho_{\rm carga} = -\frac{e^2\phi}{kT}\,\rho N_A\sum_i\frac{Z_i\left(Z_i+F_i\right)X_i}{A_i}\,.
+\tag{10.32}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — A hipótese de ionização completa, \(F_i=1\)</div>
+  <div class="conteudo">
+    <p>O fator de ionização \(F_i\) (Equação 10.30) descreve a fração
+    de elétrons liberados por íon \(i\) em relação ao total possível,
+    \(Z_i\). Assumindo <strong>ionização completa</strong>, \(F_i=1\)
+    — ou seja, cada íon \(i\) contribui exatamente \(Z_i\) elétrons
+    livres ao plasma, a mesma hipótese já usada em todo o
+    <a href="cap08_equacoes_estado.html">Capítulo 8</a> —, a Equação
+    10.31 se torna</p>
+    \[
+    \rho_{\rm carga} = -\frac{e^2\phi}{kT}\,\rho N_A\sum_i\frac{Z_i(Z_i+1)X_i}{A_i}\,.
+    \tag{10.33}
+    \]
+  </div>
+</div>
+
+<p>Podemos definir</p>
+\[
+\zeta \equiv \sum_i\frac{Z_i(Z_i+1)X_i}{A_i}\,,
+\tag{10.34}
+\]
+<p>de modo que</p>
+\[
+\rho_{\rm carga} = -\frac{e^2\phi}{kT}\,\rho N_A\zeta\,,
+\tag{10.35}
+\]
+<p>a densidade final de carga resultante da interação dos elétrons
+com os íons dos átomos.</p>
+
+<p>Com esta densidade de carga, podemos substituir na equação de
+Poisson em simetria esférica (já estabelecida nos Capítulos
+<a href="cap06_estrelas_politropicas.html">6</a> e
+<a href="cap09_anas_brancas.html">9</a>) e obter</p>
+\[
+\nabla^2\phi = \frac{1}{r^2}\frac{\mathrm d}{\mathrm dr}\left(r^2\frac{\mathrm d\phi}{\mathrm dr}\right) = -4\pi\rho_{\rm carga}\,.
+\tag{10.36}
+\]
+<p>A resolução desta EDO nos leva a obter</p>
+\[
+r_D = \left(\frac{kT}{4\pi e^2\rho N_A\zeta}\right)^{1/2}\,,
+\qquad
+\phi = \frac{Ze}{r}\,e^{-r/r_D}\,,
+\tag{10.37}
+\]
+<p>onde \(r_D\) é conhecido como o <strong>comprimento de
+Debye–Hückel</strong>, e \(\phi\), a solução da EDO. Podemos
+interpretar \(r_D\) como o raio de uma "nuvem eletrônica" que envolve
+e "blinda" o núcleo de partículas externas — efeito que
+<strong>aumenta</strong> a taxa de reação nuclear ao reduzir a
+barreira de Coulomb efetiva sentida por um núcleo incidente.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Blindagem eletrônica (Debye–Hückel)</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Potencial coulombiano nu (vermelho) vs. blindado (verde), Equação
+    10.36. Aumente a densidade eletrônica (via \(\rho\)) para ver
+    \(r_D\) encolher e o potencial blindado cair mais rapidamente com
+    \(r\) — reduzindo a barreira efetiva sentida a curto alcance e
+    aumentando a taxa de reação.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mblindagem-ne">Densidade \(\rho\) [g/cm³] <span class="valor" id="mblindagem-ne-valor">10⁰</span></label>
+      <input type="range" id="mblindagem-ne" min="0" max="100" step="1" value="30">
+    </div>
+    <div class="controle">
+      <label for="mblindagem-T">Temperatura \(T\) [K] <span class="valor" id="mblindagem-T-valor">10⁷</span></label>
+      <input type="range" id="mblindagem-T" min="0" max="100" step="1" value="50">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mblindagem-canvas" role="img" aria-label="Potencial coulombiano nu e blindado em funcao da distancia, mostrando o efeito da blindagem eletronica de Debye-Huckel." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">Comprimento de Debye–Hückel: <strong id="mblindagem-rD">—</strong></p>
+  <p class="leitura-card" id="mblindagem-nota">—</p>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Blindagem fraca vs. blindagem forte</div>
+  <div class="conteudo">
+    <p>A dedução de Debye–Hückel apresentada aqui vale no regime de
+    blindagem <em>fraca</em>, apropriado para plasmas estelares
+    "normais" — não-degenerados, como assumido ao longo desta seção
+    (\(Ze\phi\ll kT\)). Em matéria muito densa e degenerada, como o
+    interior de anãs brancas (<a href="cap09_anas_brancas.html">Capítulo
+    9</a>), o regime de blindagem <em>forte</em> exige tratamentos
+    mais sofisticados, que vão além do Debye–Hückel simples — a
+    energia de interação coulombiana entre íons vizinhos deixa de ser
+    uma pequena perturbação térmica (é exatamente essa mesma
+    competição, mas em sentido contrário, que leva à cristalização
+    discutida naquele capítulo). O formalismo original de blindagem
+    eletrônica em plasmas estelares foi desenvolvido por Salpeter
+    (1954), que tratou tanto o limite de blindagem fraca quanto o de
+    blindagem forte.</p>
+  </div>
+</div>
+
+<div class="leitura-card">
+  <div class="rotulo-card">Leituras complementares</div>
+  <p style="margin:0 0 .6rem;">
+    Para o tratamento moderno e completo de taxas de reação nuclear,
+    do fator astrofísico \(S(E)\) ao pico de Gamow, ver Iliadis
+    (2015) — referência padrão atual em física nuclear estelar. Para
+    o trabalho original sobre blindagem eletrônica em plasmas
+    estelares, ver Salpeter (1954). Sobre o formalismo geral de taxas
+    de reação e nucleossíntese, ver também Clayton (1983). Para
+    medições modernas de fatores astrofísicos \(S(E)\) em laboratórios
+    subterrâneos — que medem diretamente seções de choque nucleares
+    em energias próximas às estelares, reduzindo a necessidade de
+    extrapolação teórica —, ver a revisão do experimento LUNA (Gran
+    Sasso) em Broggini et al. (2010).
+  </p>
+</div>
+
+<h2 id="ge-rede-reacoes">Formalismo de rede de reações nucleares</h2>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Nível de detalhe deste capítulo</div>
+  <div class="conteudo">
+    <p>Como o próprio professor ressalva nas notas (com referência a
+    uma aula com slides não reproduzidos por escrito): a descrição
+    física completa dos processos de geração de energia envolve EDOs,
+    mecânica estatística e mecânica quântica. Este curso <strong>não</strong>
+    cobre esses processos em detalhe, pois fogem um pouco do escopo —
+    apenas uma abordagem superficial é apresentada aqui. O leitor deve
+    calibrar suas expectativas de acordo: o que segue é o formalismo
+    geral de rede de reações e um exemplo trabalhado completo (cadeia
+    próton-próton), não um tratado completo de nucleossíntese
+    estelar.</p>
+  </div>
+</div>
+
+<p>Todo processo de geração de energia é primariamente descrito pela
+5ª equação de estrutura estelar (já estabelecida no
+<a href="cap05_equacoes_estrutura.html">Capítulo 5</a>).</p>
+
+<p>Podemos considerar também um caso onde temos uma primeira reação
+entre dois núcleos, 0 e 1. A taxa de reação está relacionada com o
+tempo de vida médio dos núcleos 0 no plasma; assim, podemos expressar
+a transição como</p>
+\[
+\left(\frac{\mathrm dN_0}{\mathrm dt}\right) = -\lambda_1N_0 = -\frac{N_0}{\tau_1(0)}\,,
+\tag{10.38}
+\]
+<p>onde \(N_0\) é a densidade de núcleos 0, \(\tau_1(0)\) descreve o
+tempo médio de vida dos núcleos 0 contra reação com a espécie 1
+(início para final), e \(\lambda\equiv1/\tau\) é a constante (ou
+taxa) de decaimento.</p>
+
+<p>Da Equação 10.5, podemos escrever que</p>
+\[
+\left(\frac{\mathrm dN_0}{\mathrm dt}\right) = -(1+\delta_{01})\,r_{01}
+= -(1+\delta_{01})\,\frac{N_0N_1\langle\sigma v\rangle_{01}}{1+\delta_{01}}
+= -N_0N_1\langle\sigma v\rangle_{01}\,.
+\tag{10.39}
+\]
+<p>Como o lado direito da Equação 10.38 é o mesmo da Equação 10.39,
+temos que</p>
+\[
+\lambda_1(0) = N_1\langle\sigma v\rangle_{01}
+\quad\Longrightarrow\quad
+\tau_1(0) = \frac{1}{N_1\langle\sigma v\rangle_{01}}\,.
+\tag{10.40}
+\]
+
+<p>Lembrando que a fração de massa se relaciona com a densidade de
+núcleos por</p>
+\[
+X_i = \frac{N_iA_i}{\rho N_A}\,,
+\tag{10.41}
+\]
+<p>onde \(N_i\) é a densidade de núcleos e \(A_i\) é a <strong>massa
+atômica</strong> da espécie \(i\), temos</p>
+\[
+\tau_1(0) = \frac{1}{\langle\sigma v\rangle_{01}}\cdot\frac{1}{\dfrac{X_1\rho N_A}{A_1}}
+= \left(\rho\,\frac{X_1}{A_1}\,N_A\langle\sigma v\rangle_{01}\right)^{-1}\,,
+\tag{10.42}
+\]
+<p>e, como \(1/\tau_1(0)=\lambda_1(0)\),</p>
+\[
+\lambda_1(0) = \rho\,\frac{X_1}{A_1}\,N_A\langle\sigma v\rangle_{01} = N_1\langle\sigma v\rangle_{01}\,.
+\tag{10.43}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Notação \(X_i=N_iA_i/(\rho N_A)\)</div>
+  <div class="conteudo">
+    <p>Na Equação 10.41, \(A_i\) é a <strong>massa atômica</strong> da
+    espécie \(i\) (numericamente igual ao peso atômico em unidades de
+    massa atômica, ou à massa molar em g/mol) — não deve ser
+    confundido com \(X_i\), do lado esquerdo da mesma equação, que é a
+    fração de massa. Notação consistente com o uso já estabelecido no
+    <a href="cap08_equacoes_estado.html">Capítulo 8</a>.</p>
+  </div>
+</div>
+
+<h2 id="ge-exemplo-al25">Exemplo: destruição do \(^{25}\mathrm{Al}\)</h2>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Tempo médio de captura de próton pelo \(^{25}\mathrm{Al}\)</div>
+  <div class="conteudo">
+    <p>Em um plasma astrofísico, o núcleo de \(^{25}\mathrm{Al}\) pode
+    ser destruído pela captura de próton e transformado em Si, onde
+    \(^{25}\mathrm{Al}(p,\gamma)^{26}\mathrm{Si}\). Negligenciando
+    outros processos, determine o tempo médio da reação, sabendo que</p>
+    \[
+    N_A\langle\sigma v\rangle = 1{,}3\times10^3\ \mathrm{cm^3\,mol^{-1}s^{-1}}\,,\qquad
+    \rho = 10^1\ \mathrm{g/cm^3}\,,\qquad
+    X_H = 0{,}7\,.
+    \]
+    <p>Usando a Equação 10.42,</p>
+    \[
+    \tau_p(^{25}\mathrm{Al}) = \left(\rho\,\frac{X_H}{A_H}\,N_A\langle\sigma v\rangle\right)^{-1}\,.
+    \tag{10.44}
+    \]
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Valor de \(\rho\) usado no cálculo (p. 160)</div>
+  <div class="conteudo">
+    <p>O enunciado das notas declara \(\rho=10^1\,\mathrm{g/cm^3}\),
+    mas o cálculo mostrado logo abaixo usa literalmente \(0{,}1\) (ou
+    seja, \(10^{-1}\)) no lugar de \(\rho\):
+    "\(\tau_p(^{25}\mathrm{Al})=
+    (0{,}1\cdot0{,}7/1{,}0078\cdot1{,}3\times10^3)^{-1}=0{,}08\,\mathrm s\)".
+    Há, portanto, uma inconsistência de sinal no expoente entre o
+    enunciado e o cálculo. Recalculando diretamente com
+    \(\rho=10^{-1}\,\mathrm{g/cm^3}\) (o valor efetivamente usado na
+    conta mostrada), \(X_H=0{,}7\), \(A_H\approx1{,}0078\,\mathrm{g/mol}\)
+    e \(N_A\langle\sigma v\rangle=1{,}3\times10^3\,\mathrm{cm^3\,mol^{-1}s^{-1}}\),</p>
+    \[
+    \tau_p(^{25}\mathrm{Al}) = \left(0{,}1\times\frac{0{,}7}{1{,}0078}\times1{,}3\times10^3\right)^{-1}
+    \approx \frac{1}{90{,}3}\ \mathrm s \approx 0{,}011\ \mathrm s\,.
+    \tag{10.45}
+    \]
+    <p>Esse recálculo confirma que \(\rho=10^{-1}\,\mathrm{g/cm^3}\)
+    (não \(10^1\)) é o valor fisicamente consistente com a conta
+    mostrada — adotamos essa correção (e é o valor usado como padrão
+    no módulo interativo abaixo). Ainda assim, resta uma pequena
+    discrepância residual entre nosso recálculo
+    (\(\approx0{,}011\,\mathrm s\)) e o valor final registrado nas
+    notas (\(0{,}08\,\mathrm s\)): mesma ordem de grandeza, mas não
+    idênticos, possivelmente por arredondamento intermediário na conta
+    manuscrita original. Como não é possível reconstruir com certeza
+    absoluta o caminho exato até \(0{,}08\,\mathrm s\), sinalizamos
+    essa discrepância residual explicitamente em vez de forçar uma
+    concordância exata.</p>
+  </div>
+</div>
+
+<p>A seção de choque, embora seja um parâmetro difícil de ser
+determinado teoricamente, é possível determiná-lo em laboratório.</p>
+
+<p>Vamos continuar analisando um exemplo com o Al. Assumindo que o
+\(^{25}\mathrm{Al}\) pode ser criado ou aniquilado por vários
+processos (reações de fusão, fotodissociação, decaimento \(\beta\),
+dentre outros) durante o seu processo evolutivo, deveríamos
+introduzir todas essas transições para definir a abundância deste
+elemento na estrela. A figura abaixo ilustra todas as reações
+possíveis envolvendo o \(^{25}\mathrm{Al}\), resumindo o esquema geral
+dos quatro tipos de transição usados: captura de próton
+\((p,\gamma)\), captura de partícula alfa \((\alpha,p)\),
+fotodissociação com emissão de próton \((\gamma,p)\), e decaimento
+\(\beta^+\) com emissão de neutrino \((\beta^+\nu)\).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Diagrama — Fragmento da carta de nuclídeos centrado em \(^{25}\mathrm{Al}\)</div>
+  <p class="leitura-card" style="margin-top:0;">Setas verdes indicam reações que <em>geram</em> \(^{25}\mathrm{Al}\); setas vermelhas indicam reações que o <em>destroem</em>. (Diagrama estático, reproduzindo a Figura do capítulo original em TikZ.)</p>
+  <div class="grafico-card" style="min-height:280px;">
+    <svg viewBox="0 0 620 300" style="width:100%;height:280px;" role="img" aria-label="Carta de nuclideos ao redor do 25-Al mostrando reacoes de geracao em verde e de destruicao em vermelho.">
+      <g font-family="sans-serif" font-size="13" text-anchor="middle">
+        <rect x="20" y="130" width="70" height="45" fill="none" stroke="#1c4878"/><text x="55" y="157">²²Mg</text>
+        <rect x="130" y="130" width="70" height="45" fill="none" stroke="#1c4878"/><text x="165" y="157">²³Mg</text>
+        <rect x="240" y="130" width="70" height="45" fill="none" stroke="#1c4878"/><text x="275" y="157">²⁴Mg</text>
+        <rect x="350" y="130" width="70" height="45" fill="none" stroke="#1c4878"/><text x="385" y="157">²⁵Mg</text>
+        <rect x="130" y="60" width="70" height="45" fill="none" stroke="#1c4878"/><text x="165" y="87">²⁴Al</text>
+        <rect x="235" y="55" width="80" height="55" fill="none" stroke="#963c1e" stroke-width="2.5"/><text x="275" y="87">²⁵Al</text>
+        <rect x="350" y="60" width="70" height="45" fill="none" stroke="#1c4878"/><text x="385" y="87">²⁶Al</text>
+        <rect x="240" y="0" width="70" height="45" fill="none" stroke="#1c4878"/><text x="275" y="27">²⁵Si</text>
+        <rect x="350" y="0" width="70" height="45" fill="none" stroke="#1c4878"/><text x="385" y="27">²⁶Si</text>
+        <rect x="460" y="0" width="70" height="45" fill="none" stroke="#1c4878"/><text x="495" y="27">²⁷Si</text>
+        <rect x="530" y="0" width="70" height="45" fill="none" stroke="#1c4878" transform="translate(30,0)"/><text x="595" y="27" transform="translate(30,0)">²⁸Si</text>
+      </g>
+      <g stroke="#3c6e3c" stroke-width="2" marker-end="url(#seta-verde)">
+        <line x1="275" y1="45" x2="275" y2="55"/>
+        <line x1="385" y1="45" x2="300" y2="70"/>
+        <line x1="310" y1="150" x2="275" y2="112"/>
+        <line x1="90" y1="150" x2="240" y2="95"/>
+      </g>
+      <g stroke="#963c1e" stroke-width="2" marker-end="url(#seta-vermelha)">
+        <line x1="315" y1="75" x2="350" y2="70"/>
+        <line x1="315" y1="90" x2="590" y2="30" transform="translate(-30,0)"/>
+        <line x1="270" y1="110" x2="350" y2="150"/>
+        <line x1="240" y1="90" x2="200" y2="145"/>
+      </g>
+      <defs>
+        <marker id="seta-verde" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3c6e3c"/></marker>
+        <marker id="seta-vermelha" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#963c1e"/></marker>
+      </defs>
+    </svg>
+  </div>
+</div>
+
+<p>Com o diagrama, podemos definir que todas as transições que geram
+\(^{25}\mathrm{Al}\) são</p>
+\[
+^{25}\mathrm{Si}(\beta^+\nu)\,^{25}\mathrm{Al}\,,
+\quad
+^{26}\mathrm{Si}(\gamma,p)\,^{25}\mathrm{Al}\,,
+\quad
+^{24}\mathrm{Mg}(p,\gamma)\,^{25}\mathrm{Al}\,,
+\quad
+^{22}\mathrm{Mg}(\alpha,p)\,^{25}\mathrm{Al}\,,
+\tag{10.46}
+\]
+<p>enquanto as que o destroem são</p>
+\[
+^{25}\mathrm{Al}(p,\gamma)\,^{26}\mathrm{Si}\,,
+\quad
+^{25}\mathrm{Al}(\alpha,p)\,^{28}\mathrm{Si}\,,
+\quad
+^{25}\mathrm{Al}(\beta^+\nu)\,^{25}\mathrm{Mg}\,,
+\quad
+^{25}\mathrm{Al}(\gamma,p)\,^{24}\mathrm{Mg}\,.
+\tag{10.47}
+\]
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Balanço de massa em \(^{22}\mathrm{Mg}(\alpha,p)^{25}\mathrm{Al}\)</div>
+  <div class="conteudo">
+    <p>O balanço de número de massa desta reação fecha exatamente:
+    \(22+4-1=25\), consistente com o restante do diagrama, que lista
+    exatamente esta reação como uma das quatro geradoras de
+    \(^{25}\mathrm{Al}\) (Equação 10.46).</p>
+  </div>
+</div>
+
+<p>Com isto, para escrever a variação da densidade total de núcleos de
+\(^{25}\mathrm{Al}\), devemos ter que</p>
+\[
+\begin{aligned}
+\frac{\mathrm dN_{^{25}\mathrm{Al}}}{\mathrm dt} =\ &
+N_{^{25}\mathrm{Si}}\,\lambda_{^{25}\mathrm{Si}(\beta^+\nu)}
++ N_{^{26}\mathrm{Si}}\,\lambda_{^{26}\mathrm{Si}(\gamma,p)}
++ N_HN_{^{24}\mathrm{Mg}}\langle\sigma v\rangle_{^{24}\mathrm{Mg}(p,\gamma)}
++ N_\alpha N_{^{22}\mathrm{Mg}}\langle\sigma v\rangle_{^{22}\mathrm{Mg}(\alpha,p)}\\
+&- N_{^{25}\mathrm{Al}}\,\lambda_{^{25}\mathrm{Al}(\beta^+\nu)}
+- N_{^{25}\mathrm{Al}}\,\lambda_{^{25}\mathrm{Al}(\gamma,p)}
+- N_HN_{^{25}\mathrm{Al}}\langle\sigma v\rangle_{^{25}\mathrm{Al}(p,\gamma)}
+- N_\alpha N_{^{25}\mathrm{Al}}\langle\sigma v\rangle_{^{25}\mathrm{Al}(\alpha,p)}\,,
+\end{aligned}
+\tag{10.48}
+\]
+<p>onde os termos de captura (com seção de choque, envolvendo colisão
+com \(N_H\) ou \(N_\alpha\)) descrevem reações de fusão, e os termos
+sem seção de choque descrevem reações de decaimento (\(\beta\) ou
+fotodissociação). Se houvessem outras formas de criação ou
+aniquilação, deveriam ser incluídas nesta equação para determinar a
+taxa de ocorrência e a abundância deste elemento.</p>
+
+<p>Assim, de forma geral, podemos descrever a taxa de geração de
+qualquer partícula pelo somatório, onde</p>
+\[
+\begin{aligned}
+\frac{\mathrm dN_i}{\mathrm dt} =\ &
+\left[\sum_{j,k}N_jN_k\langle\sigma v\rangle_{jk\to i}
++ \sum_l\lambda_{\beta,l\to i}N_l
++ \sum_m\lambda_{\gamma,m\to i}N_m\right]\\
+&-\left[\sum_nN_nN_i\langle\sigma v\rangle_{ni}
++ \sum_o\lambda_{\beta,i\to o}N_i
++ \sum_p\lambda_{\gamma,i\to p}N_i\right]\,,
+\end{aligned}
+\tag{10.49}
+\]
+<p>a <strong>equação mestra de rede de reações</strong>. O primeiro,
+segundo e terceiro termo do colchete positivo descrevem a soma de
+todas as reações produzindo o núcleo \(i\) a partir de colisões, o
+segundo termo descreve os elementos criados por decaimentos
+\(\beta\), e o terceiro descreve a fotodissociação; o colchete
+negativo descreve os processos análogos que destroem o núcleo
+\(i\).</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Integração ao vivo do exemplo do \(^{25}\mathrm{Al}\)</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Aproximação de canal único (apenas destruição por captura de
+    próton, como no exemplo do texto — o decaimento exponencial
+    \(N(t)=N_0e^{-t/\tau}\) segue diretamente da Equação 10.42
+    aplicada isoladamente, sem os demais termos de criação/destruição
+    da rede completa da Equação 10.48). Ajuste \(\rho\), \(X_H\) e
+    \(N_A\langle\sigma v\rangle\) e veja \(\tau\) e a curva de
+    decaimento se atualizarem — os valores-padrão reproduzem o
+    exemplo do texto.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mal25-rho">\(\rho\) [g/cm³] <span class="valor" id="mal25-rho-valor">10⁻¹</span></label>
+      <input type="range" id="mal25-rho" min="0" max="100" step="1" value="0">
+    </div>
+    <div class="controle">
+      <label for="mal25-XH">\(X_H\) <span class="valor" id="mal25-XH-valor">0,70</span></label>
+      <input type="range" id="mal25-XH" min="0" max="100" step="1" value="70">
+    </div>
+    <div class="controle">
+      <label for="mal25-sigmav">\(N_A\langle\sigma v\rangle\) [10² cm³mol⁻¹s⁻¹] <span class="valor" id="mal25-sigmav-valor">1,30×10³</span></label>
+      <input type="range" id="mal25-sigmav" min="1" max="30" step="1" value="13">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mal25-canvas" role="img" aria-label="Decaimento exponencial da abundancia de aluminio-25 por captura de proton, com o tempo de vida medio marcado." style="width:100%;height:280px;display:block;"></canvas></div>
+  <p class="leitura-card">\(\tau_p(^{25}\mathrm{Al})=\)<strong id="mal25-tau">—</strong></p>
+  <p class="leitura-card" id="mal25-nota">—</p>
+</div>
+
+<h2 id="ge-cadeia-pp">Cadeia Próton-Próton</h2>
+
+<p>Como mencionado várias vezes, a cadeia próton-próton é a mais
+fundamental forma de geração de energia estelar. Ela segue três
+ramificações, da forma:</p>
+
+<div class="tabela-scroll">
+<table>
+<thead><tr><th>PP I</th><th>PP II</th><th>PP III</th></tr></thead>
+<tbody>
+<tr><td>\(p(p,e^+\nu)d\)</td><td>\(^3\mathrm{He}(\alpha,\gamma)^7\mathrm{Be}\)</td><td>\(^3\mathrm{He}(\alpha,\gamma)^7\mathrm{Be}\)</td></tr>
+<tr><td>\(d(p,\gamma)^3\mathrm{He}\)</td><td>\(^7\mathrm{Be}(e^-,\nu)^7\mathrm{Li}\)</td><td>\(^7\mathrm{Be}(p,\gamma)^8\mathrm B\)</td></tr>
+<tr><td>\(^3\mathrm{He}(^3\mathrm{He},2p)\alpha\)</td><td>\(^7\mathrm{Li}(p,\alpha)\alpha\)</td><td>\(^8\mathrm B(\beta^+\nu)^8\mathrm{Be}\)</td></tr>
+<tr><td></td><td></td><td>\(^8\mathrm{Be}(\alpha)\alpha\)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Cadeia pp animada com ramificações PP I / II / III</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Cada clique em "play" sorteia o ramo (86% PP I, ~14% PP II, ~0,1%
+    PP III, condições do núcleo solar) e anima um marcador seguindo o
+    caminho escolhido pela rede acima. Use "Simular 5.000 eventos" para
+    acumular estatística rapidamente e ver as frações empíricas
+    convergirem para os valores esperados.
+  </p>
+  <div class="controles" style="display:flex;gap:.6rem;flex-wrap:wrap;">
+    <button type="button" id="mppchain-play" class="botao-modulo">▶ Sortear e seguir uma partícula</button>
+    <button type="button" id="mppchain-reset" class="botao-modulo">↺ Reiniciar</button>
+    <button type="button" id="mppchain-simular" class="botao-modulo">🎲 Simular 5.000 eventos</button>
+  </div>
+  <div class="grafico-card"><canvas id="mppchain-canvas" role="img" aria-label="Rede da cadeia proton-proton mostrando as tres ramificacoes PP I, PP II e PP III, com um marcador animado seguindo o ramo sorteado." style="width:100%;height:340px;display:block;"></canvas></div>
+  <p class="leitura-card">Ramo desta partícula: <strong id="mppchain-ramo-atual">—</strong></p>
+  <p class="leitura-card" id="mppchain-stats">—</p>
+</div>
+
+<p>Utilizando a mesma ideia que no exemplo com o \(^{25}\mathrm{Al}\),
+podemos expressar a variação dos elementos em função do tempo, ou
+seja, a sua evolução. Temos inicialmente que, para o deutério
+(produzido por \(p(p,e^+\nu)d\) e destruído por
+\(d(p,\gamma)^3\mathrm{He}\), usando a notação \(H\equiv N_H\),
+\(D\equiv N_D\) para não confundir com o hidrogênio),</p>
+\[
+\frac{\mathrm dD}{\mathrm dt} = \Gamma_{pp} - (1+\delta_{pd})\,\Gamma_{dp}
+= \frac{N_HN_H\langle\sigma v\rangle_{pp}}{1+\delta_{pp}}
+- (1+\delta_{dp})\,\frac{N_HN_D\langle\sigma v\rangle_{dp}}{1+\delta_{dp}}\,,
+\tag{10.50}
+\]
+<p>logo,</p>
+\[
+\frac{\mathrm dD}{\mathrm dt} = \frac{H^2}{2}\langle\sigma v\rangle_{pp} - HD\langle\sigma v\rangle_{dp}\,,
+\tag{10.51}
+\]
+<p>onde o fator \(1/2\) vem de \(\delta_{pp}=1\) (partículas
+idênticas, \(p+p\)) e \(\delta_{dp}=0\) (\(d\neq p\)).</p>
+
+<p>Para \(^3\mathrm{He}\) (produzido pela mesma reação
+\(d(p,\gamma)^3\mathrm{He}\) já obtida acima, e destruído por
+\(^3\mathrm{He}(^3\mathrm{He},2p)\alpha\)),</p>
+\[
+\frac{\mathrm d\,^3\mathrm{He}}{\mathrm dt}
+= \Gamma_{dp} - (1+\delta_{^3\mathrm{He}\,^3\mathrm{He}})\,\Gamma_{^3\mathrm{He}\,^3\mathrm{He}}
+= HD\langle\sigma v\rangle_{dp}
+- (1+\delta_{^3\mathrm{He}\,^3\mathrm{He}})\,\frac{(^3\mathrm{He})^2\langle\sigma v\rangle_{^3\mathrm{He}\,^3\mathrm{He}}}{1+\delta_{^3\mathrm{He}\,^3\mathrm{He}}}\,,
+\tag{10.52}
+\]
+<p>logo,</p>
+\[
+\frac{\mathrm d\,^3\mathrm{He}}{\mathrm dt} = HD\langle\sigma v\rangle_{dp} - (^3\mathrm{He})^2\langle\sigma v\rangle_{^3\mathrm{He}\,^3\mathrm{He}}\,.
+\tag{10.53}
+\]
+
+<p>Temos então a evolução das partículas em função de sua seção de
+choque. Podemos analisar um caso onde todo o deutério tenha sido
+convertido em outras partículas, de forma que, atualmente,
+\(\mathrm dD/\mathrm dt=0\). Com isto, temos que</p>
+\[
+\frac{H^2}{2}\langle\sigma v\rangle_{pp} = HD\langle\sigma v\rangle_{dp}
+\quad\Longrightarrow\quad
+\frac{D}{H} = \frac{\langle\sigma v\rangle_{pp}}{2\langle\sigma v\rangle_{dp}}
+= \frac{N_A\langle\sigma v\rangle_{pp}}{2N_A\langle\sigma v\rangle_{dp}}\,.
+\tag{10.54}
+\]
+<p>Usando a Equação 10.42, podemos reescrever essa razão em termos de
+tempos de reação,</p>
+\[
+\frac{D}{H} = \frac{\tau_p(p)}{2\,\tau_p(d)}\,,
+\tag{10.55}
+\]
+<p>onde \(\tau_p(X)\) denota o <strong>tempo médio de vida da espécie
+\(X\) contra captura de próton</strong> — a mesma notação e
+interpretação já introduzidas na Equação 10.42 e usadas no exemplo do
+\(^{25}\mathrm{Al}\): \(\tau_p(p)\) é o tempo médio até um próton
+reagir com outro próton (a própria reação \(p(p,e^+\nu)d\)), e
+\(\tau_p(d)\) é o tempo médio até um dêuteron capturar um próton
+[\(d(p,\gamma)^3\mathrm{He}\)]. Com isto, é possível determinar o
+tempo de decaimento do D.</p>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Equilíbrio D/H (Equação 10.55)</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Ajuste os dois tempos de reação (escala log) e veja a razão de
+    equilíbrio \(D/H=\tau_p(p)/[2\tau_p(d)]\) — como
+    \(\tau_p(d)\ll\tau_p(p)\) no interior estelar (o dêuteron reage
+    muito mais rápido que dois prótons colidem), o deutério é
+    destruído quase tão logo é formado, mantendo \(D/H\ll1\).
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mdh-taup-p">\(\tau_p(p)\) [s] <span class="valor" id="mdh-taup-p-valor">—</span></label>
+      <input type="range" id="mdh-taup-p" min="60" max="120" step="1" value="100">
+    </div>
+    <div class="controle">
+      <label for="mdh-taup-d">\(\tau_p(d)\) [s] <span class="valor" id="mdh-taup-d-valor">—</span></label>
+      <input type="range" id="mdh-taup-d" min="0" max="60" step="1" value="18">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mdh-canvas" role="img" aria-label="Grafico de barras comparando os tempos de reacao tau_p(p) e tau_p(d) em escala logaritmica." style="width:100%;height:220px;display:block;"></canvas></div>
+  <p class="leitura-card">\(D/H=\)<strong id="mdh-razao">—</strong></p>
+</div>
+
+<p>A partir desta ideia, é possível construir as equações diferenciais
+evolutivas para todas as transições possíveis. Por exemplo, as cadeias
+PP II, PP III, ciclo CNO e assim por diante. Note que essas equações
+são diferenciais no tempo, de forma que podemos integrá-las e saber a
+composição química de certa espécie em função do tempo. A energia
+liberada em cada transição é função da seção de choque. O
+enriquecimento químico da galáxia pode ser explicado a partir dessas
+reações.</p>
+
+<div class="caixa atencao">
+  <div class="rotulo">Atenção — Exercício proposto pelo professor</div>
+  <div class="conteudo">
+    <p>As notas manuscritas terminam com um convite explícito do
+    professor: "como exercícios adicionais de fixação, escrevam as
+    equações diferenciais referentes ao ciclo CNO I, II, III e IV e à
+    cadeia PP II e PP III". Preservamos esse convite aqui como
+    registro pedagógico — propositalmente <strong>não</strong>
+    resolvemos esse exercício no corpo principal do texto (nem em
+    nenhum módulo interativo abaixo), deixando-o como exercício de
+    fixação para o leitor, exatamente como o professor propôs. Os
+    módulos de CNO e triplo-alfa a seguir ilustram apenas o
+    <em>conceito</em> qualitativo de cada processo (catálise, e a
+    ressonância de Hoyle) — nenhum deles escreve ou integra as
+    equações diferenciais completas que o exercício pede.</p>
+  </div>
+</div>
+
+<h2 id="ge-panorama">Panorama comparativo dos processos de geração de energia</h2>
+
+<p>Como o próprio professor ressaltou (Seção "Formalismo de rede de
+reações nucleares"), este curso cobre os processos de geração de
+energia apenas superficialmente. Fechamos o capítulo com um panorama
+comparativo dos três processos principais, complementando a cadeia pp
+já detalhada acima com uma visão geral do ciclo CNO e do processo
+triplo-alfa — material de enriquecimento, fora do texto original das
+notas.</p>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — A cadeia pp completa: ramificações e taxas</div>
+  <div class="conteudo">
+    <p>A cadeia próton-próton detalhada acima (Seção "Cadeia
+    Próton-Próton") tem três ramificações que competem entre si
+    dependendo da abundância local de \(^3\mathrm{He}\) e
+    \(^4\mathrm{He}\). Em condições do núcleo solar,
+    aproximadamente \(86\%\) das reações seguem PP I, \(\sim14\%\) PP
+    II, e apenas \(\sim0{,}1\%\) PP III — a ramificação mais rara, mas
+    a mais relevante historicamente, pois é a fonte dos neutrinos de
+    mais alta energia (do \(^8\mathrm B\)), os primeiros detectados
+    nos experimentos pioneiros de neutrinos solares (Acharya et al.,
+    2025). A reação líquida de todas as ramificações é</p>
+    \[
+    4\,^1\mathrm H \to\,^4\mathrm{He} + 2e^+ + 2\nu + \gamma\,,
+    \tag{10.56}
+    \]
+    <p>liberando \(\approx26{,}7\,\mathrm{MeV}\) (valor \(Q\) total)
+    por núcleo de hélio formado. Uma pequena fração dessa energia
+    (\(\sim2\%\), um pouco maior nas ramificações PP II/PP III, cujos
+    neutrinos têm energia mais alta) escapa como neutrinos e não é
+    depositada termicamente na estrela, de modo que a energia
+    efetivamente depositada é \(\approx26{,}2\,\mathrm{MeV}\) por
+    núcleo de hélio formado. A cadeia pp domina a geração de energia
+    em estrelas de sequência principal de baixa massa como o Sol, em
+    temperaturas centrais na faixa \(T\sim4\)–\(15\times10^6\,\mathrm K\).</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O ciclo CNO: catálise e forte dependência com \(T\)</div>
+  <div class="conteudo">
+    <p>O ciclo CNO usa carbono, nitrogênio e oxigênio como
+    <strong>catalisadores</strong> — esses núcleos participam das
+    reações intermediárias mas não são consumidos líquidamente, apenas
+    processados ciclicamente através de quatro ramificações (CNO
+    I–IV), sendo CNO I dominante na maioria das condições estelares.
+    Diferentemente da cadeia pp, o ciclo CNO tem uma dependência
+    extremamente forte com a temperatura,
+    \(\varepsilon_{\rm CNO}\propto T^{15\text{–}20}\) — já discutida no
+    <a href="cap05_equacoes_estrutura.html">Capítulo 5</a>, onde essa
+    sensibilidade extrema foi identificada como a causa física de
+    núcleos convectivos em estrelas massivas (a geração de energia se
+    concentra em um volume tão pequeno que o gradiente radiativo
+    necessário viola o critério de Schwarzschild). O ciclo CNO domina
+    a geração de energia em estrelas mais massivas que o Sol,
+    tipicamente com \(T\gtrsim1{,}7\times10^7\,\mathrm K\). Uma
+    medição direta e relativamente recente de neutrinos solares do
+    ciclo CNO, obtida pelo experimento Borexino, confirmou que esse
+    ciclo já opera no Sol atual — ainda que sub-dominante, respondendo
+    por apenas \(\sim1\%\) da energia solar — abrindo uma nova via
+    observacional para medir diretamente a metalicidade do núcleo
+    solar (Borexino Collaboration, 2020).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Ciclo CNO como catálise</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Animação em loop fechado (ciclo CNO-I): quatro prótons entram, um
+    \(^4\mathrm{He}\) sai (na última captura, \(^{15}\mathrm N(p,\alpha)^{12}\mathrm C\)),
+    e os núcleos C/N/O voltam exatamente ao ponto de partida — o
+    ponto conceitual central de catálise.
+  </p>
+  <div class="controles" style="display:flex;gap:.6rem;">
+    <button type="button" id="mcno-play" class="botao-modulo">▶ Girar o ciclo (1 volta = 4 capturas)</button>
+    <button type="button" id="mcno-reset" class="botao-modulo">↺ Reiniciar</button>
+  </div>
+  <div class="grafico-card"><canvas id="mcno-canvas" role="img" aria-label="Ciclo CNO desenhado como um laco fechado com seis nucleos (carbono, nitrogenio, oxigenio em suas variantes isotopicas), com um marcador animado percorrendo o ciclo." style="width:100%;height:320px;display:block;"></canvas></div>
+  <p class="leitura-card">Voltas completas: <strong id="mcno-voltas">0</strong></p>
+  <p class="leitura-card" id="mcno-nota">—</p>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto — O processo triplo-alfa e a ressonância de Hoyle</div>
+  <div class="conteudo">
+    <p>O processo triplo-alfa, \(3\,^4\mathrm{He}\to\,^{12}\mathrm C\),
+    ocorre em dois passos: primeiro, dois núcleos de hélio se fundem
+    formando o instável \(^8\mathrm{Be}\) (meia-vida
+    \(\sim10^{-16}\,\mathrm s\)); antes de decair de volta, uma
+    pequena fração captura um terceiro núcleo de hélio, formando
+    \(^{12}\mathrm C\). Esse processo só é eficiente porque
+    \(^{12}\mathrm C\) possui um estado excitado ressonante em
+    \(\approx7{,}65\,\mathrm{MeV}\) acima do estado fundamental —
+    muito próximo da energia combinada de \(^8\mathrm{Be}+\,^4\mathrm{He}\)
+    nas temperaturas típicas de queima de hélio. Fred Hoyle previu a
+    existência dessa ressonância em 1954 por um argumento
+    quase-antrópico: a abundância observada de carbono no universo
+    seria impossível de explicar sem ela, já que sem a ressonância a
+    taxa do processo triplo-alfa seria baixa demais para produzir
+    quantidades apreciáveis de carbono (Hoyle, 1954). A ressonância
+    foi confirmada experimentalmente pouco depois — um dos exemplos
+    mais citados de previsão teórica bem-sucedida guiada por
+    raciocínio astrofísico em física nuclear. O processo triplo-alfa
+    ocorre em núcleos de queima de hélio, \(T\sim10^8\,\mathrm K\),
+    sendo central para o <em>flash</em> do hélio em gigantes
+    vermelhas e para a queima estável de hélio em estrelas do ramo
+    horizontal e AGB.</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo (destaque) — Triplo-alfa e a ressonância de Hoyle</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Dois núcleos de \(^4\mathrm{He}\) se fundem formando o instável
+    \(^8\mathrm{Be}\) — a barra mostra sua "vida" se esgotando antes
+    de decair de volta. Alterne "com/sem a ressonância de Hoyle" e
+    veja a taxa de formação de \(^{12}\mathrm C\) despencar sem ela —
+    o argumento de Hoyle (1954) virando experimento visual.
+    <strong>As probabilidades usadas aqui são esquemáticas</strong>
+    (escolhidas para tornar o efeito visível em poucas tentativas), não
+    as seções de choque nucleares reais, que são muito menores.
+  </p>
+  <div class="controles" style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:flex-end;">
+    <div class="controle" style="display:flex;gap:.4rem;">
+      <button type="button" id="m3alfa-hoyle-on" class="botao-modulo botao-modo-toggle ativo">com ressonância (7,65 MeV)</button>
+      <button type="button" id="m3alfa-hoyle-off" class="botao-modulo botao-modo-toggle">sem ressonância</button>
+    </div>
+    <button type="button" id="m3alfa-play" class="botao-modulo">▶ Colidir dois núcleos de ⁴He</button>
+    <button type="button" id="m3alfa-reset" class="botao-modulo">↺ Reiniciar estatísticas</button>
+  </div>
+  <div class="grafico-card"><canvas id="m3alfa-canvas" role="img" aria-label="Animacao de dois nucleos de helio-4 se fundindo em berilio-8 instavel, com uma barra mostrando sua vida antes de decair, e possivel captura de um terceiro alfa formando carbono-12." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card" id="m3alfa-resultado"></p>
+  <p class="leitura-card" id="m3alfa-stats">Nenhum evento simulado ainda.</p>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Comparador de dependência com \(T\) (pp vs. CNO vs. triplo-α)</div>
+  <p class="leitura-card" style="margin-top:0;">
+    \(\varepsilon_{\rm pp}\propto T^4\) vs.
+    \(\varepsilon_{\rm CNO}\propto T^{15\text{–}20}\) (expoente
+    ajustável) vs. \(\varepsilon_{3\alpha}\propto T^{40}\), em
+    log–log. Mova o slider de \(T\) para ver qual processo domina em
+    cada regime, e o cruzamento pp→CNO em \(T\gtrsim1{,}7\times10^7\)
+    K citado no texto. <strong>Link cruzado</strong>: essa dependência
+    extrema do CNO é a mesma discutida no
+    <a href="cap05_equacoes_estrutura.html">Capítulo 5</a> para
+    explicar os núcleos convectivos de estrelas massivas.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mcompT-T">Temperatura \(T\) [K] <span class="valor" id="mcompT-T-valor">—</span></label>
+      <input type="range" id="mcompT-T" min="0" max="100" step="1" value="28">
+    </div>
+    <div class="controle">
+      <label for="mcompT-nCNO">Expoente do CNO <span class="valor" id="mcompT-nCNO-valor">18</span></label>
+      <input type="range" id="mcompT-nCNO" min="15" max="20" step="1" value="18">
+    </div>
+  </div>
+  <div class="grafico-card"><canvas id="mcompT-canvas" role="img" aria-label="Grafico log-log comparando a dependencia com a temperatura das taxas de energia da cadeia pp, ciclo CNO e processo triplo-alfa." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mcompT-dominante">—</p>
+</div>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Tabela comparativa dos três processos</div>
+  <div class="conteudo">
+    <div class="tabela-scroll">
+    <table>
+      <thead><tr><th>Processo</th><th>Reagentes</th><th>Produto líquido</th><th>\(T\) típica</th><th>Domina em</th></tr></thead>
+      <tbody>
+        <tr id="linha-pp"><td>Cadeia pp</td><td>\(4\,^1\mathrm H\)</td><td>\(^4\mathrm{He}\)</td><td>\(4\)–\(15\times10^6\,\mathrm K\)</td><td>estrelas de baixa massa (tipo Sol)</td></tr>
+        <tr id="linha-cno"><td>Ciclo CNO</td><td>\(4\,^1\mathrm H\) (C/N/O catalisam)</td><td>\(^4\mathrm{He}\)</td><td>\(\gtrsim1{,}7\times10^7\,\mathrm K\)</td><td>estrelas massivas (\(M\gtrsim1{,}3\,M_\odot\))</td></tr>
+        <tr id="linha-3alfa"><td>Triplo-alfa</td><td>\(3\,^4\mathrm{He}\)</td><td>\(^{12}\mathrm C\)</td><td>\(\sim10^8\,\mathrm K\)</td><td>núcleos de queima de He (RGB/HB/AGB)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>A dependência aproximada com a temperatura também distingue os
+    três processos: \(\varepsilon_{\rm pp}\propto T^4\),
+    \(\varepsilon_{\rm CNO}\propto T^{15\text{–}20}\), e
+    \(\varepsilon_{3\alpha}\propto T^{40}\) (esta última, uma das
+    dependências mais extremas em toda a astrofísica estelar, reflexo
+    da necessidade de três corpos colidirem em rápida sucessão).</p>
+  </div>
+</div>
+
+<div class="modulo-card">
+  <div class="rotulo-card">Módulo interativo — Tabela comparativa: destaque a linha aplicável</div>
+  <p class="leitura-card" style="margin-top:0;">Ajuste \(T\) e a massa estelar e veja qual linha da tabela acima é destacada (usa as mesmas regras de domínio citadas no texto: \(T\gtrsim1{,}7\times10^7\) K ou \(M\gtrsim1{,}3\,M_\odot\) → CNO; \(T\gtrsim9\times10^7\) K → triplo-α).</p>
+  <div class="controles">
+    <div class="controle">
+      <label for="mtabcomp-T">Temperatura \(T\) [K] <span class="valor" id="mtabcomp-T-valor">—</span></label>
+      <input type="range" id="mtabcomp-T" min="0" max="100" step="1" value="15">
+    </div>
+    <div class="controle">
+      <label for="mtabcomp-M">Massa \(M\) [\(M_\odot\)] <span class="valor" id="mtabcomp-M-valor">—</span></label>
+      <input type="range" id="mtabcomp-M" min="1" max="200" step="1" value="10">
+    </div>
+  </div>
+</div>
+
+<div class="leitura-card">
+  <div class="rotulo-card">Leituras complementares</div>
+  <p style="margin:0 0 .6rem;">
+    Para o tratamento completo e moderno da cadeia pp, do ciclo CNO e
+    do processo triplo-alfa, incluindo todas as ramificações e
+    incertezas nucleares associadas, ver Iliadis (2015). Para uma
+    revisão recente e abrangente especificamente da cadeia pp e da
+    física nuclear de estrelas que queimam hidrogênio, incluindo as
+    frações de ramificação PP I/II/III usadas acima, ver Acharya et
+    al. (2025). Para o trabalho original de Hoyle sobre nucleossíntese
+    em estrelas massivas e a previsão da ressonância do \(^{12}\mathrm C\),
+    ver Hoyle (1954). Para a primeira detecção direta de neutrinos
+    solares do ciclo CNO, ver Borexino Collaboration (2020).
+  </p>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 10.
+</footer>
+
+<script src="assets/cap10_modulos.js"></script>

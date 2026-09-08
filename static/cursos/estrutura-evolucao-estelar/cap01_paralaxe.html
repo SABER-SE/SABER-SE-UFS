@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Distância por Paralaxe</title>
+<meta name="description" content="Módulo interativo do Capítulo 1: geometria da paralaxe, aproximação de pequenos ângulos e definição do parsec.">
+<link rel="stylesheet" href="assets/estilo.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    macros: { sen: '\\operatorname{sen}' }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="assets/comuns.js"></script>
+
+<div class="topo">
+  <div class="miolo">
+    <a href="index.html">&larr; Índice do livro</a>
+    <span class="sep">·</span>
+    <span class="titulo-livro">Estrutura e Evolução Estelar — Notas de Aula (UFS)</span>
+    <span class="sep">·</span>
+    <!-- TODO: confirmar URL do GitHub Pages / repositório -->
+    <a href="#" id="link-repo" title="TODO: confirmar link do repositório no GitHub">Repositório no GitHub</a>
+  </div>
+</div>
+
+<div class="pagina">
+
+<h1>Capítulo 1 — Distância por Paralaxe</h1>
+<p class="subtitulo">Transcrição fiel das notas de aula, com módulos interativos de exploração.</p>
+
+<p>A distância de um astro é uma das mais importantes grandezas físicas
+astronômicas. A forma mais fácil de se obter a distância de um corpo
+astronômico de forma direta é por meio da <strong>paralaxe</strong>. O método
+consiste em observar um objeto — uma estrela, por exemplo — a partir de
+dois pontos diferentes. Como os astrônomos, a princípio, sabiam que a Terra
+gira ao redor do Sol em uma órbita quase circular, seria possível observar
+um astro pelo menos duas vezes em um período de seis meses, de modo que a
+Terra estaria do lado oposto em relação à primeira medida.</p>
+
+<h2>Módulo interativo 1 — Geometria da paralaxe</h2>
+
+<p>Uma vez que se conheça a distância do Sol até a Terra, é possível usar
+trigonometria simples para determinar a distância entre o astro e a Terra
+(ou, de forma equivalente e mais usual, entre o astro e o Sol), de modo que:</p>
+
+\[
+\tan\alpha = \frac{1\,\mathrm{UA}}{d}
+\quad\Longrightarrow\quad
+d = \frac{1\,\mathrm{UA}}{\tan\alpha}.
+\tag{1.1}
+\]
+
+<div class="modulo-card">
+  <div class="rotulo-card">Diagrama Sol–Terra–estrela: ajuste a distância</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="p1-dist">Distância da estrela <span class="valor" id="p1-dist-valor">50 pc</span></label>
+      <input type="range" id="p1-dist" min="1" max="1000" step="1" value="50">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="p1-diagrama" role="img" aria-label="Diagrama esquemático Sol-Terra-estrela mostrando o triângulo de paralaxe: a Terra em duas posições da órbita (separadas por seis meses), o Sol no centro, e a estrela-alvo distante, com o ângulo de paralaxe alfa marcado no vértice da estrela." style="width:100%;height:380px;display:block;"></canvas>
+  </div>
+  <div class="saida">
+    Ângulo de paralaxe: <strong id="p1-alpha-arcsec">—</strong> arcsegundos
+    (<span id="p1-alpha-rad">—</span> rad).
+    Note que o diagrama exagera enormemente o ângulo real para que ele
+    seja visível — na prática, mesmo a estrela mais próxima do Sol tem
+    $\alpha < 1''$, um ângulo tão pequeno quanto o diâmetro de uma moeda
+    vista a mais de 4 km de distância.
+  </div>
+</div>
+
+<h2>Aproximação de pequenos ângulos</h2>
+
+<p>Como \(\tan\alpha = \sen\alpha/\cos\alpha\), e os ângulos de paralaxe
+estelar são sempre extremamente pequenos (menores que \(1''\) mesmo para as
+estrelas mais próximas), podemos aproximar \(\sen\alpha\) e \(\cos\alpha\) por
+uma expansão em série de Taylor de primeira ordem em torno de \(\alpha=0\).
+Lembrando a forma geral da série de Taylor,</p>
+
+\[
+f(x) = \sum_{n=0}^{\infty} a_n (x-a)^n, \qquad a_n = \frac{f^{(n)}(a)}{n!},
+\]
+
+<p>os primeiros termos são</p>
+
+\[
+f(x) = f(a)\big|_{n=0} + f'(a)\,\frac{(x-a)^1}{1!}\bigg|_{n=1} + f''(a)\,\frac{(x-a)^2}{2!} + \cdots
+\]
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — Expansão de sen α e cos α em torno de α = 0</div>
+  <div class="conteudo">
+    <p>Para \(f(\alpha)=\sen\alpha\):</p>
+    \[
+    f(0)=\sen(0)=0, \quad f'(0)=\cos(0)=1, \quad f''(0)=-\sen(0)=0
+    \quad\Longrightarrow\quad
+    f(\alpha) \approx 0 + \frac{1\cdot\alpha}{1!} + \cdots \approx \alpha.
+    \]
+    <p>Para \(f(\alpha)=\cos\alpha\):</p>
+    \[
+    f(0)=\cos(0)=1, \quad f'(0)=-\sen(0)=0, \quad f''(0)=-\cos(0)=-1
+    \quad\Longrightarrow\quad
+    f(\alpha) \approx 1 + \frac{0\cdot\alpha}{1!} + \frac{(-1)\alpha^2}{2!} \approx 1.
+    \]
+    <p>Logo, em aproximação de primeira ordem,</p>
+    \[
+    \sen\alpha \approx \alpha, \qquad \cos\alpha \approx 1,
+    \qquad\Longrightarrow\qquad
+    \boxed{\tan\alpha \approx \alpha \quad \text{(em radianos)}.}
+    \tag{1.2}
+    \]
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Observação — Validade da aproximação</div>
+  <div class="conteudo">
+    <p>A aproximação \(\tan\alpha\approx\alpha\) só é boa para ângulos pequenos
+    <em>expressos em radianos</em>. O erro relativo é da ordem de \(\alpha^2/3\);
+    para o maior ângulo de paralaxe estelar conhecido (Proxima Centauri,
+    \(\alpha \approx 0{,}768''\approx 3{,}7\times10^{-6}\,\mathrm{rad}\)), esse
+    erro é completamente desprezível — da ordem de \(10^{-12}\). A aproximação é,
+    portanto, excelente para qualquer estrela.</p>
+  </div>
+</div>
+
+<h2>Módulo interativo 2 — Erro da aproximação de pequenos ângulos</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">tan α exato vs. aproximação α (radianos)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="p2-max">Ângulo máximo do gráfico <span class="valor" id="p2-max-valor">30°</span></label>
+      <input type="range" id="p2-max" min="1" max="60" step="1" value="30">
+    </div>
+  </div>
+  <div class="grafico-card">
+    <canvas id="p2-grafico" role="img" aria-label="Gráfico de tan alfa (exato) e alfa em radianos (aproximação) em função de alfa em graus, mostrando as duas curvas divergindo para ângulos grandes." style="width:100%;height:340px;display:block;"></canvas>
+  </div>
+  <div class="saida">
+    No ângulo limite escolhido, o erro percentual de
+    \(\alpha \approx \tan\alpha\) é de <strong id="p2-erro">—</strong>.
+    Compare com o erro para paralaxes estelares reais (bem abaixo de
+    \(1''=2{,}78\times10^{-4}\) graus): nessa escala o erro é tão pequeno
+    que a curva de \(\tan\alpha\) e a reta \(\alpha\) são indistinguíveis.
+  </div>
+</div>
+
+<h2>Definição do parsec</h2>
+
+<p>Combinando a Equação (1.1) com a aproximação de pequenos
+ângulos (Equação (1.2)), a distância de um astro pode ser
+expressa de forma geral por</p>
+
+\[
+\boxed{d = \frac{1}{\alpha}}\,, \qquad \text{com } d \text{ em parsecs e } \alpha \text{ em segundos de arco.}
+\tag{1.3}
+\]
+
+<p>A unidade de medida da distância por paralaxe é o <strong>parsec</strong>
+(<em>parallax</em> + <em>second of arc</em>). Um objeto astronômico que possui
+\(\alpha = 1''\) está, por definição, a uma distância de \(1\) parsec.</p>
+
+<div class="caixa exemplo">
+  <div class="rotulo">Exemplo — De onde vem o valor de 1 parsec em UA</div>
+  <div class="conteudo">
+    <p>O ângulo de \(1''\) (um segundo de arco), expresso em radianos, vale:</p>
+    \[
+    1'' = \left(\frac{1}{3600}\right)\left(\frac{2\pi}{360}\right)
+    = 4{,}848\times 10^{-6}\,\mathrm{rad}.
+    \]
+    <p>Logo,</p>
+    \[
+    1\,\mathrm{pc} = \frac{1\,\mathrm{UA}}{4{,}848\times 10^{-6}}
+    \approx 206\,265\,\mathrm{UA}.
+    \]
+  </div>
+</div>
+
+<h2>Módulo interativo 3 — Calculadora de paralaxe ↔ distância</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">d(pc) = 1 / α(arcsec)</div>
+  <div class="controles">
+    <div class="controle">
+      <label for="p3-alpha-num">Paralaxe α <span class="valor">(arcsegundos)</span></label>
+      <input type="number" id="p3-alpha-num" min="0.0005" max="1" step="0.0001" value="0.1">
+      <input type="range" id="p3-alpha-range" aria-label="Paralaxe α, em arcsegundos (escala log)" min="-3.3" max="0" step="0.001" value="-1">
+    </div>
+    <div class="controle">
+      <label for="p3-d-num">Distância d <span class="valor">(parsecs)</span></label>
+      <input type="number" id="p3-d-num" min="1" max="2000" step="0.1" value="10">
+      <input type="range" id="p3-d-range" aria-label="Distância d, em parsecs (escala log)" min="0" max="3.3" step="0.001" value="1">
+    </div>
+  </div>
+  <div class="saida">
+    Os dois pares de controles estão vinculados por \(d = 1/\alpha\):
+    ajuste qualquer um dos quatro campos e os outros três se atualizam.
+    Estrelas reais de referência: Proxima Centauri
+    (\(\alpha\approx0{,}768''\), \(d\approx1{,}30\,\mathrm{pc}\)),
+    Sirius (\(\alpha\approx0{,}379''\), \(d\approx2{,}64\,\mathrm{pc}\)),
+    Vega (\(\alpha\approx0{,}130''\), \(d\approx7{,}68\,\mathrm{pc}\)).
+  </div>
+</div>
+
+<div class="caixa atencao">
+  <div class="rotulo">Observação — A definição oficial moderna do parsec</div>
+  <div class="conteudo">
+    <p>A dedução acima — motivar o parsec a partir da relação geométrica de
+    pequenos ângulos \(d=1/\alpha\) — é a origem histórica e conceitual da
+    unidade, e reproduz corretamente o valor numérico usado ao longo deste
+    livro. Desde 2015, porém, a União Astronômica Internacional (IAU) fixa o
+    parsec por uma definição puramente numérica, independente de qualquer
+    aproximação geométrica: as notas da Resolução B2 da IAU (2015) definem
+    \(1\,\mathrm{pc}\equiv648\,000/\pi\,\mathrm{UA}\) como um valor
+    <em>exato</em> — apoiada, por sua vez, na Resolução B2 da XXVIII<sup>a</sup> Assembleia
+    Geral da IAU (2012), que fixou a unidade astronômica em
+    \(1\,\mathrm{UA}=149\,597\,870\,700\,\mathrm{m}\) exatamente. Numericamente,
+    isso coincide com o valor obtido pela relação geométrica de pequenos
+    ângulos (\(206\,264{,}806\ldots\) UA, arredondado para \(206\,265\) UA no
+    Exemplo acima), então nenhum resultado deste livro é afetado — mas vale
+    saber que, formalmente, o parsec de hoje não depende mais da aproximação
+    \(\tan\alpha\approx\alpha\) que o originou historicamente
+    (Mamajek et al. 2015).</p>
+  </div>
+</div>
+
+<div class="caixa contexto">
+  <div class="rotulo">Contexto astrofísico — Alcance do método e missões astrométricas</div>
+  <div class="conteudo">
+    <p>A paralaxe trigonométrica é o único método de determinação de distâncias
+    verdadeiramente <em>direto</em> em astronomia — todos os demais indicadores de
+    distância (paralaxe espectroscópica, relação período–luminosidade de
+    Cefeidas, supernovas tipo Ia, etc.) são calibrados, direta ou
+    indiretamente, a partir dela. Da Terra, o satélite <em>Hipparcos</em>
+    (1989–1993) mediu paralaxes com precisão de milissegundos de arco para
+    cerca de 118 mil estrelas (Perryman et al. 1997). A missão <em>Gaia</em>, da
+    ESA, revolucionou o método ao medir paralaxes com precisão de dezenas de
+    microssegundos de arco para mais de 1,5 bilhão de estrelas
+    (Gaia Collaboration, DR3), alcançando distâncias diretas para estrelas a dezenas de
+    milhares de parsecs. Um ponto importante: para \(\alpha\) muito pequeno (ou
+    seja, estrelas muito distantes) e ainda mais na presença de ruído
+    observacional, a relação \(d=1/\alpha\) não deve ser invertida ingenuamente —
+    é necessário um tratamento estatístico (bayesiano) apropriado, como
+    discutido em Bailer-Jones et al. (2021), e correções sistemáticas ao zero-point
+    da própria paralaxe medida (Lindegren et al. 2021).</p>
+  </div>
+</div>
+
+<h2>Módulo interativo 4 — A paralaxe acontecendo</h2>
+
+<div class="modulo-card">
+  <div class="rotulo-card">A Terra orbitando o Sol, com a estrela-alvo oscilando contra o fundo de estrelas distantes</div>
+  <p class="leitura-card" style="margin-top:0;">
+    Os Módulos 1 e 3 mostram a geometria da paralaxe num instante fixo.
+    Aqui, a Terra orbita o Sol ao longo de um ano, e a posição aparente
+    da estrela-alvo (próxima) é comparada à posição fixa de estrelas de
+    fundo (muito mais distantes, praticamente sem paralaxe perceptível)
+    — a paralaxe deixa de ser um ângulo estático e passa a ser o
+    <em>movimento de vaivém</em> que de fato se observa ao longo do ano.
+  </p>
+  <div class="controles">
+    <div class="controle">
+      <label for="p4-dist">Distância da estrela-alvo <span class="valor" id="p4-dist-valor">2 pc</span></label>
+      <input type="range" id="p4-dist" min="1" max="20" step="0.5" value="2">
+    </div>
+    <div class="controle" style="display:flex;gap:0.5rem;align-items:flex-end;">
+      <button type="button" id="p4-play" class="botao-modulo">▶ Iniciar órbita</button>
+      <button type="button" id="p4-reset" class="botao-modulo">↺ Reiniciar</button>
+    </div>
+  </div>
+  <div class="grafico-card" style="display:flex;flex-wrap:wrap;gap:1rem;">
+    <div style="flex:1 1 260px;height:280px;">
+      <canvas id="p4-orbita" role="img" aria-label="Animação da Terra orbitando o Sol ao longo de um ano." style="width:100%;height:280px;display:block;"></canvas>
+    </div>
+    <div style="flex:1 1 260px;height:280px;">
+      <canvas id="p4-ceu" role="img" aria-label="Posição aparente da estrela-alvo contra o fundo de estrelas distantes, oscilando ao longo do ano conforme a Terra orbita." style="width:100%;height:280px;display:block;"></canvas>
+    </div>
+  </div>
+  <p class="leitura-card">
+    Mês: <strong id="p4-mes">jan</strong>. Deslocamento aparente da
+    estrela-alvo em relação ao centro (posição média):
+    \(\Delta\theta=\)<strong id="p4-desloc">—</strong> arcsegundos.
+  </p>
+  <p class="leitura-card">
+    <strong>O que é calculado de verdade:</strong> a amplitude da
+    oscilação vem exatamente de \(\alpha=1/d\) (mesma fórmula do Módulo
+    3), com a posição da Terra na órbita determinando a fase (projeção
+    da posição orbital na direção perpendicular à linha de visada).
+    <strong>O que é apenas ilustrativo:</strong> a escala do desenho — a
+    amplitude real do vaivém no céu é <em>muitíssimo</em> menor que o
+    desenho sugere (por isso o próprio Módulo 1 já avisa que exagera o
+    ângulo); aqui a oscilação no painel direito é normalizada para
+    ocupar todo o painel, não está na escala real do céu. As estrelas de
+    fundo são posições fixas ilustrativas, não um campo estelar real.
+  </p>
+</div>
+
+<h2>Magnitudes</h2>
+
+<p>As magnitudes estelares — e, também, de todos os astros — são um parâmetro
+muito importante na caracterização de objetos astronômicos, pois são de
+fácil determinação e carregam muitas informações sobre os corpos. Esse
+tema é desenvolvido em detalhe no <a href="cap02_magnitudes.html">Capítulo 2 — Magnitudes Estelares</a>.</p>
+
+<div class="caixa leitura">
+  <div class="rotulo">Leituras complementares e referências atuais</div>
+  <div class="conteudo">
+    <p>Para a conexão entre paralaxe, distância e magnitude absoluta (o chamado
+    <em>módulo de distância</em>, \(m-M = 5\log_{10} d_{\mathrm{pc}} - 5\)), ver o
+    Capítulo 3 de Oliveira &amp; Saraiva (2017) e o Capítulo 2 de
+    Christensen-Dalsgaard (2008).</p>
+  </div>
+</div>
+
+</div>
+
+<footer class="rodape">
+  Estrutura e Evolução Estelar — Notas de Aula, Programa de Pós-Graduação em
+  Física, Universidade Federal de Sergipe (UFS). Módulo HTML interativo
+  gerado como complemento ao texto em LaTeX/PDF do Capítulo 1.
+</footer>
+
+<script src="assets/cap01_modulos.js"></script>
