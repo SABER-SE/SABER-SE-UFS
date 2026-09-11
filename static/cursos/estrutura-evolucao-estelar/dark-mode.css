@@ -1,0 +1,133 @@
+/* ========================================
+   MODO ESCURO — Material do curso Saber-SE
+   Paleta idêntica à do site principal
+   ======================================== */
+
+body.dark-mode {
+  background-color: #0a0f1e !important;
+  color: #e8edf5 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #e8edf5 !important;
+}
+
+body.dark-mode a {
+  color: #4a9eca !important;
+}
+
+body.dark-mode a:hover {
+  color: #f5c842 !important;
+}
+
+/* Blocos de conteúdo e caixas */
+body.dark-mode div,
+body.dark-mode section,
+body.dark-mode article,
+body.dark-mode aside,
+body.dark-mode main,
+body.dark-mode header,
+body.dark-mode footer,
+body.dark-mode nav {
+  background-color: transparent !important;
+  border-color: rgba(74, 158, 202, 0.25) !important;
+}
+
+/* Caixas com fundo claro explícito */
+body.dark-mode .box,
+body.dark-mode .card,
+body.dark-mode .panel,
+body.dark-mode blockquote {
+  background-color: #1a2a4a !important;
+  color: #e8edf5 !important;
+  border-color: rgba(74, 158, 202, 0.3) !important;
+}
+
+/* Código */
+body.dark-mode pre,
+body.dark-mode code {
+  background-color: #111a2e !important;
+  color: #e8edf5 !important;
+  border: 1px solid rgba(74, 158, 202, 0.2) !important;
+}
+
+/* Tabelas */
+body.dark-mode table {
+  background-color: transparent !important;
+  color: #e8edf5 !important;
+}
+
+body.dark-mode th {
+  background-color: #1a2a4a !important;
+  color: #e8edf5 !important;
+}
+
+body.dark-mode td,
+body.dark-mode th {
+  border-color: rgba(74, 158, 202, 0.25) !important;
+}
+
+body.dark-mode tr:nth-child(even) {
+  background-color: rgba(26, 42, 74, 0.4) !important;
+}
+
+/* Inputs de módulos interativos */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode button {
+  background-color: #1a2a4a !important;
+  color: #e8edf5 !important;
+  border: 1px solid rgba(74, 158, 202, 0.4) !important;
+}
+
+body.dark-mode input[type="range"] {
+  background-color: transparent !important;
+}
+
+/* Fórmulas MathJax/KaTeX */
+body.dark-mode .MathJax,
+body.dark-mode .katex,
+body.dark-mode mjx-container {
+  color: #e8edf5 !important;
+}
+
+/* Canvas e SVG de gráficos — inverter fundo branco */
+body.dark-mode canvas,
+body.dark-mode svg {
+  filter: none;
+}
+
+body.dark-mode img.invert-on-dark,
+body.dark-mode .plot-light-bg {
+  filter: invert(0.92) hue-rotate(180deg);
+}
+
+/* Botão de alternância */
+#saberse-theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  background-color: #4a9eca;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.5rem 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease;
+}
+
+#saberse-theme-toggle:hover {
+  background-color: #f5c842;
+  color: #0a0f1e;
+}
