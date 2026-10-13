@@ -1,26 +1,32 @@
-{{/* Navbar: transparente APENAS sobre hero, sólida em todo o resto */}}
+{{/* Navbar: transparente APENAS sobre hero, sólida em todo o resto.
+     Usa IntersectionObserver em um sentinela no topo (sem listener de scroll). */}}
 <script>
 (function () {
   var navbar = document.getElementById('navbar-main');
   if (!navbar) return;
 
-  // Só ativa modo transparente se a página tem um bloco hero
-  var hasHero = document.querySelector('.wg-hero') !== null;
-
-  function updateNavbar() {
-    var atTop = window.scrollY < 60;
-    if (hasHero && atTop) {
-      navbar.classList.add('navbar-hero');
-      navbar.classList.remove('navbar-scrolled');
-    } else {
-      navbar.classList.remove('navbar-hero');
-      navbar.classList.add('navbar-scrolled');
-    }
+  function setHero(on) {
+    navbar.classList.toggle('navbar-hero', on);
+    navbar.classList.toggle('navbar-scrolled', !on);
   }
 
-  // Aplica imediatamente — sem flash
-  updateNavbar();
-  window.addEventListener('scroll', updateNavbar, { passive: true });
+  // Só ativa modo transparente se a página tem um bloco hero
+  var hasHero = document.querySelector('.wg-hero') !== null;
+  if (!hasHero || !('IntersectionObserver' in window)) {
+    setHero(false);
+    return;
+  }
+
+  // Sentinela de 60px no topo da página: visível = no topo
+  var sentinel = document.createElement('div');
+  sentinel.setAttribute('aria-hidden', 'true');
+  sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:60px;pointer-events:none;';
+  document.body.insertBefore(sentinel, document.body.firstChild);
+
+  setHero(true);
+  new IntersectionObserver(function (entries) {
+    setHero(entries[0].isIntersecting);
+  }).observe(sentinel);
 })();
 </script>
 

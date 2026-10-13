@@ -1,37 +1,61 @@
-{{/* Rodapé customizado — Grupo Saber-SE */}}
+{{/* Rodapé customizado: Grupo Saber-SE (3 blocos) */}}
 
 <div class="footer-inner">
 
-  {{/* Linha 1 — Logo/nome + links sociais */}}
-  <div class="footer-brand">
-    <span class="footer-title">Saber-SE</span>
-    <span class="footer-subtitle">Grupo de Astrofísica · UFS</span>
+  <div class="footer-grid">
+
+    <div class="footer-col footer-brand">
+      <span class="footer-title">Saber-SE</span>
+      <p class="footer-about">
+        Grupo de Astrofísica Estelar e Exoplanetária da Universidade Federal de Sergipe.
+      </p>
+    </div>
+
+    <nav class="footer-col" aria-label="Rodapé">
+      <span class="footer-heading">Navegação</span>
+      <ul class="footer-links">
+        <li><a href="{{ "research/" | relURL }}">Pesquisa</a></li>
+        <li><a href="{{ "people/" | relURL }}">Membros</a></li>
+        <li><a href="{{ "publication/" | relURL }}">Publicações</a></li>
+        <li><a href="{{ "opportunities/" | relURL }}">Oportunidades</a></li>
+        <li><a href="{{ "contact/" | relURL }}">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-col">
+      <span class="footer-heading">Perfis</span>
+      <ul class="footer-links">
+        <li>
+          <a href="https://scholar.google.com/citations?user=n-B4YeYAAAAJ"
+             target="_blank" rel="noopener" title="Google Scholar">
+            <i class="ai ai-google-scholar"></i> Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0001-8437-5469"
+             target="_blank" rel="noopener" title="ORCID">
+            <i class="ai ai-orcid"></i> ORCID
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/SABER-SE"
+             target="_blank" rel="noopener" title="GitHub">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 
-  <div class="footer-social">
-    <a href="https://scholar.google.com/citations?user=n-B4YeYAAAAJ"
-       target="_blank" rel="noopener" title="Google Scholar" class="footer-social-link">
-      <i class="ai ai-google-scholar"></i> Scholar
-    </a>
-    <a href="https://orcid.org/0000-0001-8437-5469"
-       target="_blank" rel="noopener" title="ORCID" class="footer-social-link">
-      <i class="ai ai-orcid"></i> ORCID
-    </a>
-    <a href="https://github.com/SABER-SE"
-       target="_blank" rel="noopener" title="GitHub" class="footer-social-link">
-      <i class="fab fa-github"></i> GitHub
-    </a>
-  </div>
-
-  {{/* Linha 2 — Crédito da imagem + copyright */}}
   <div class="footer-bottom">
-    <span class="footer-image-credit">
-      Imagem hero: Pilares da Criação &middot;
-      <a href="https://hubblesite.org" target="_blank" rel="noopener">NASA/ESA Hubble</a>
-      &middot; Domínio Público
-    </span>
     <span class="footer-copyright">
-      &copy; {{ now.Year }} Grupo Saber-SE &middot; Universidade Federal de Sergipe
+      &copy; {{ now.Year }} Grupo Saber-SE, Universidade Federal de Sergipe
+    </span>
+    <span class="footer-image-credit">
+      Imagem do topo: Pilares da Criação, 
+      <a href="https://hubblesite.org" target="_blank" rel="noopener">NASA/ESA Hubble</a>
+      (domínio público)
     </span>
   </div>
 
