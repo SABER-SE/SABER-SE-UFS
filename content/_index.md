@@ -14,11 +14,9 @@ sections:
       title: |
         Saber-SE
       text: |
-        **Stellar Abundances · Exoplanets · Red Giants & Stellar Evolution**
+        **Stellar Abundances, Exoplanets, Red Giants & Stellar Evolution**
 
-        Grupo de Astrofísica Estelar da Universidade Federal de Sergipe, Brasil.
-        Investigamos estrelas, seus planetas e a evolução química da Galáxia
-        por meio de espectroscopia de alta resolução no infravermelho.
+        Grupo de Astrofísica Estelar da UFS. Estudamos estrelas, seus planetas e a evolução química da Galáxia com espectroscopia infravermelha.
 
         <p class="hero-cta-group">
           <a class="btn btn-saberse-primary btn-lg" href="./research/">
@@ -27,10 +25,6 @@ sections:
           <a class="btn btn-saberse-outline btn-lg" href="./publication/">
             Publicações
           </a>
-        </p>
-
-        <p class="hero-image-credit">
-          Imagem: Pilares da Criação · NASA/ESA/Hubble Heritage Team (STScI/AURA) · Domínio Público
         </p>
       cta:
         url: ''

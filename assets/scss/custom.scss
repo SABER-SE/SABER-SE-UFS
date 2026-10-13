@@ -2117,3 +2117,60 @@ body:not(.dark) .metric-value { color: var(--saberse-navy); }
 .wg-collection .row > .col-12 > .card-simple.view-card:first-child {
   align-content: center;
 }
+
+// ═══════════════════════════════════════════════════════════════
+//  HERO ALINHADO À ESQUERDA (etapa isolada: reverter este bloco
+//  e o texto do hero em content/_index.md restaura o layout centralizado)
+// ═══════════════════════════════════════════════════════════════
+#section-hero.wg-hero {
+  justify-content: flex-start;
+  text-align: left;
+  padding-top: 5rem !important;   // máx. 6rem (navbar fixa + respiro)
+  padding-bottom: 4rem !important;
+}
+#section-hero.wg-hero::after {
+  background: linear-gradient(
+    to right,
+    rgba(10, 15, 30, 0.86) 0%,
+    rgba(10, 15, 30, 0.62) 50%,
+    rgba(10, 15, 30, 0.30) 100%
+  );
+}
+#section-hero.wg-hero > .container {
+  width: 100%;
+  max-width: 1100px !important;
+}
+#section-hero .hero-title {
+  font-size: clamp(2.75rem, calc(1.6rem + 4vw), 4.5rem);
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin-bottom: var(--space-4);
+}
+#section-hero .hero-lead {
+  max-width: 38rem;
+  margin: 0;
+  text-align: left;
+}
+#section-hero .hero-lead p {
+  margin-bottom: var(--space-4);
+}
+// Tagline: linha discreta acima do texto (único elemento "eyebrow" do hero)
+#section-hero .hero-lead > p:first-child {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--saberse-cyan) !important;
+}
+#section-hero .hero-lead > p:first-child strong {
+  font-weight: 600;
+}
+#section-hero .hero-cta-group {
+  justify-content: flex-start;
+  margin-top: var(--space-5);
+}
+.btn-saberse-primary,
+.btn-saberse-outline {
+  border-radius: var(--radius-pill);
+}
+@media (max-width: 768px) {
+  #section-hero.wg-hero { padding-top: 5.5rem !important; }
+}
