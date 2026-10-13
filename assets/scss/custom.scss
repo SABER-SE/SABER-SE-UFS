@@ -2174,3 +2174,154 @@ body:not(.dark) .metric-value { color: var(--saberse-navy); }
 @media (max-width: 768px) {
   #section-hero.wg-hero { padding-top: 5.5rem !important; }
 }
+
+// ═══════════════════════════════════════════════════════════════
+//  PÁGINAS DE LISTAGEM: publicações, trabalhos, eventos, divulgação
+// ═══════════════════════════════════════════════════════════════
+
+// Introdução da página em medida de leitura
+.universal-wrapper > .article-style {
+  margin-bottom: var(--space-6);
+}
+
+// ── Publicações ────────────────────────────────────────────────
+.pub-list-item .article-metadata.li-cite-author {
+  font-size: 0.85rem !important;
+  line-height: 1.5;
+  color: var(--saberse-muted-strong) !important;
+  // lista longa de autores: 3 linhas; completa ao passar o mouse/foco
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.pub-list-item:hover .article-metadata.li-cite-author,
+.pub-list-item:focus-within .article-metadata.li-cite-author {
+  -webkit-line-clamp: unset;
+}
+.pub-list-item {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  box-shadow: none !important;
+  transform: none !important;
+  border-radius: var(--radius);
+}
+.pub-list-item > a {
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+.pub-list-item .pub-icon {
+  float: left;
+  margin: 0.2rem 0.6rem 0 0;
+}
+.pub-list-item p {
+  margin: var(--space-2) 0 0;
+}
+.pub-list-item .btn.btn-outline-primary,
+.pub-list-item .btn-page-header {
+  border-radius: var(--radius-pill);
+  padding: 0.15rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+// ── Itens sem imagem (trabalhos): linhas com filete, sem caixa ──
+.universal-wrapper .card-simple.view-card:not(:has(.article-banner)) {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: var(--space-2) 0;
+  margin: 0;
+}
+.universal-wrapper .card-simple.view-card:not(:has(.article-banner)):hover {
+  transform: none;
+  box-shadow: none;
+}
+
+// ── Itens com imagem (divulgação, eventos): imagem ao lado do texto ──
+.universal-wrapper .card-simple.view-card:has(.article-banner) {
+  background: var(--saberse-surface);
+  border: 1px solid var(--saberse-line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: none;
+  transition: border-color 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
+}
+.universal-wrapper .card-simple.view-card:has(.article-banner):hover {
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(74, 158, 202, 0.45);
+  background: var(--saberse-surface-hi);
+}
+@media (min-width: 768px) {
+  .universal-wrapper .card-simple.view-card:has(.article-banner) {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--space-5);
+    align-items: start;
+  }
+  .universal-wrapper .card-simple.view-card:has(.article-banner) > * {
+    grid-column: 2;
+  }
+  .universal-wrapper .card-simple.view-card:has(.article-banner) > a:has(.img-hover-zoom) {
+    grid-column: 1;
+    grid-row: 1 / span 6;
+  }
+}
+.universal-wrapper .card-simple .article-banner {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 2px);
+}
+// Logos de eventos: sem recorte
+.universal-wrapper .media.stream-item,
+#talk_list .card-simple .article-banner {
+  object-fit: contain;
+}
+
+// ── Título e resumo nos cards/linhas ───────────────────────────
+.universal-wrapper .card-simple .article-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  margin-top: var(--space-2) !important;
+}
+.universal-wrapper .card-simple .article-title a {
+  color: var(--saberse-text);
+}
+body:not(.dark) .universal-wrapper .card-simple .article-title a {
+  color: var(--saberse-night);
+}
+.universal-wrapper .card-simple .article-title a:hover {
+  color: var(--saberse-cyan);
+}
+.universal-wrapper .card-simple .summary-link {
+  color: var(--saberse-muted-strong) !important;
+}
+.universal-wrapper .card-simple .summary-link .article-style p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin: var(--space-2) 0 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--saberse-muted-strong);
+}
+.universal-wrapper .card-simple .article-metadata {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+// ── Divisores gradiente (identidade): mais compactos nas listagens ──
+.universal-wrapper > .block-divider {
+  margin: var(--space-5) 0;
+  height: 2px;
+}
+#talk_list .block-divider {
+  margin: var(--space-4) 0;
+}
