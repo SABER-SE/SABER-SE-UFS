@@ -23,7 +23,7 @@ th,
 .universal-wrapper {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.7;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,7 +31,18 @@ th,
 
 // Espaçamento entre parágrafos
 p {
-  margin-bottom: 1.6em;
+  margin-bottom: 1.2em;
+}
+
+// Listas, tabelas e metadados: entrelinha mais compacta que a prosa
+li, td, th {
+  line-height: 1.55;
+}
+
+// Texto corrido com medida de leitura confortável
+.article-style p,
+.article-style li {
+  max-width: 68ch;
 }
 
 // Títulos: Playfair Display com letter-spacing elegante
@@ -41,23 +52,23 @@ h1, h2, h3, h4, h5, h6,
 .section-heading h2 {
   font-family: "Playfair Display", "Georgia", "Times New Roman", serif;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.25;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-// Hierarquia de tamanhos
-h1 { font-size: 2.8rem; }
-h2 { font-size: 2.0rem; }
-h3 { font-size: 1.4rem; }
+// Hierarquia de tamanhos (fluida: sem salto brusco no celular)
+h1 { font-size: clamp(2rem, calc(1.4rem + 2.4vw), 2.8rem); }
+h2 { font-size: clamp(1.6rem, calc(1.2rem + 1.4vw), 2.0rem); }
+h3 { font-size: clamp(1.2rem, calc(1.1rem + 0.5vw), 1.4rem); }
 h4 { font-size: 1.15rem; }
 h5 { font-size: 1.0rem; }
 h6 { font-size: 0.9rem;  font-weight: 600; }
 
 // Título principal da página de artigo/publicação
 .article-title {
-  font-size: 2.4rem;
+  font-size: clamp(1.9rem, calc(1.3rem + 2vw), 2.4rem);
   font-weight: 900;
-  letter-spacing: 0.015em;
+  letter-spacing: -0.01em;
 }
 
 // Subtítulo / lead: Inter semi-bold
@@ -141,9 +152,6 @@ figcaption,
 // Responsividade tipográfica
 @media (max-width: 768px) {
   html  { font-size: 15px; }
-  h1    { font-size: 2.2rem; }
-  h2    { font-size: 1.7rem; }
-  h3    { font-size: 1.25rem; }
 }
 
 // ── Variáveis CSS globais (disponíveis em ambos os modos) ──────
@@ -156,6 +164,39 @@ figcaption,
   --saberse-text:     #e8edf5;
   --saberse-muted:    #a0aec0;
   --saberse-light-bg: #f8f9fc;
+
+  // Papéis de cor (ciano = ação/links; dourado = hover, divisor, estado ativo)
+  --saberse-surface:        #111827;   // superfície elevada (modo escuro)
+  --saberse-surface-hi:     #162036;   // destaque / hover de superfície
+  --saberse-line:           rgba(74, 158, 202, 0.18);
+  --saberse-muted-strong:   #b4bfd0;   // metadados (contraste AA sobre #0a0f1e)
+
+  // Escala de espaçamento
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2.5rem;
+  --space-7: 4rem;
+  --space-section: clamp(3rem, 6vw, 5.5rem);
+
+  // Raio único: 8px para superfícies, pílula só para botões/tags
+  --radius:      8px;
+  --radius-pill: 999px;
+
+  // Sombras com matiz azul (nunca preto puro)
+  --shadow-soft: 0 4px 20px rgba(10, 15, 30, 0.18);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body:not(.dark) {
+  --saberse-surface:      #ffffff;
+  --saberse-surface-hi:   #eef2f7;
+  --saberse-line:         rgba(26, 42, 74, 0.14);
+  --saberse-muted:        #4a5568;
+  --saberse-muted-strong: #3b4658;
+  --shadow-soft:          0 4px 20px rgba(26, 42, 74, 0.10);
 }
 
 // ── MODO ESCURO ────────────────────────────────────────────────
@@ -405,8 +446,8 @@ html {
 
 // Seções da homepage com padding generoso
 .home-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
 }
 
 // Separador entre seções com linha gradiente
@@ -431,6 +472,7 @@ html {
 // Seção hero: full viewport height
 .wg-hero {
   min-height: 92vh;
+  min-height: 92dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1137,6 +1179,7 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
 .wg-slider .carousel-item,
 .wg-slider .carousel-item.fullscreen {
   height: 80vh !important;
+  height: 80dvh !important;
   min-height: 500px !important;
   max-height: 750px !important;
 }
@@ -1282,6 +1325,7 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   .wg-slider .carousel-item,
   .wg-slider .carousel-item.fullscreen {
     height: 65vh !important;
+    height: 65dvh !important;
     min-height: 450px !important;
     max-height: none !important;
   }
@@ -1309,6 +1353,7 @@ body:not(.dark) #navbar-main.navbar-hero .navbar-toggler {
   .wg-slider .carousel-item,
   .wg-slider .carousel-item.fullscreen {
     height: 60vh !important;
+    height: 60dvh !important;
     min-height: 400px !important;
   }
 
@@ -1825,4 +1870,69 @@ a.group-member-highlight:hover {
 
 .dark .thesis-item {
   border-bottom-color: rgba(74, 158, 202, 0.12);
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  FUNDAMENTOS GLOBAIS: foco, toque, movimento reduzido
+// ═══════════════════════════════════════════════════════════════
+
+// Foco visível e consistente (acessibilidade de teclado)
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--saberse-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+// Feedback tátil nos botões
+.btn:active {
+  transform: translateY(1px);
+}
+.btn {
+  transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out),
+              color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), transform 0.15s var(--ease-out);
+}
+
+// Raio único nas superfícies
+.card,
+.card-simple,
+pre,
+.form-control {
+  border-radius: var(--radius);
+}
+
+// Metadados com contraste AA
+.article-metadata,
+.card-meta,
+.article-style small,
+.text-muted {
+  color: var(--saberse-muted-strong) !important;
+}
+
+// Rodapé sempre ao fim da janela em páginas curtas
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+body > .page-footer,
+body > footer {
+  margin-top: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
