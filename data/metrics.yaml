@@ -1,0 +1,12 @@
+# Métricas exibidas na homepage (bloco "metrics" em content/_index.md).
+# Para atualizar, edite apenas os valores abaixo.
+# Última atualização: 2026-10
+items:
+  - value: "55+"
+    label: "Publicações científicas"
+  - value: "9.000+"
+    label: "Citações (Google Scholar)"
+  - value: "20+"
+    label: "Membros ativos"
+  - value: "2019"
+    label: "Ano de fundação"

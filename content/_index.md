@@ -3,7 +3,7 @@
 title:
 date: 2022-10-24
 type: landing
-summary: "Grupo de Astrofísica Estelar da UFS — pesquisa em exoplanetas, estrelas anãs-M, abundâncias químicas e evolução química da Galáxia via espectroscopia de alta resolução no infravermelho."
+summary: "Grupo de Astrofísica Estelar da UFS: pesquisa em exoplanetas, estrelas anãs-M, abundâncias químicas e evolução química da Galáxia via espectroscopia de alta resolução no infravermelho."
 
 sections:
   # ============================================================
@@ -170,21 +170,10 @@ sections:
       interval: 5000
 
   # ============================================================
-  # MÉTRICAS — Contadores (usando markdown com HTML)
+  # MÉTRICAS (valores em data/metrics.yaml)
   # ============================================================
-  - block: markdown
-    content:
-      title:
-      subtitle:
-      text: |
-        <div style="display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding:2rem 0;text-align:center;">
-          <div><div style="font-size:2.5rem;font-weight:700;">30+</div><div style="opacity:.7;">Publicações<br>científicas</div></div>
-          <div><div style="font-size:2.5rem;font-weight:700;">500+</div><div style="opacity:.7;">Citações<br>(Google Scholar)</div></div>
-          <div><div style="font-size:2.5rem;font-weight:700;">15+</div><div style="opacity:.7;">Alunos<br>ativos</div></div>
-          <div><div style="font-size:2.5rem;font-weight:700;">2019</div><div style="opacity:.7;">Ano de<br>fundação</div></div>
-        </div>
-    design:
-      columns: '1'
+  - block: metrics
+    content: {}
 
   # ============================================================
   # ÚLTIMAS PUBLICAÇÕES

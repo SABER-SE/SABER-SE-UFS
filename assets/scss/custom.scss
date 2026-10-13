@@ -1958,3 +1958,162 @@ pre,
     scroll-behavior: auto !important;
   }
 }
+
+
+// ═══════════════════════════════════════════════════════════════
+//  HOMEPAGE: métricas, slider e grades de coleções
+// ═══════════════════════════════════════════════════════════════
+
+// ── Métricas (data/metrics.yaml) ───────────────────────────────
+.wg-metrics {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin: 0;
+}
+.metric {
+  text-align: center;
+  padding: 0 var(--space-3);
+}
+.metric + .metric {
+  border-left: 1px solid var(--saberse-line);
+}
+.metric-value {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, calc(1.4rem + 2.4vw), 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--saberse-text);
+}
+body:not(.dark) .metric-value { color: var(--saberse-navy); }
+.metric-label {
+  margin: var(--space-2) 0 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--saberse-muted-strong);
+}
+@media (max-width: 768px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-5); }
+  .metric:nth-child(odd) { border-left: none; }
+}
+
+// ── Slider: sem caixa interna, controles com contraste ─────────
+.wg-slider .wg-hero.container {
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+.wg-slider .wg-hero.container::after,
+.wg-slider .wg-hero::after {
+  display: none;
+}
+.wg-slider .carousel-item:first-child::after {
+  background: rgba(10, 15, 30, 0.62);
+}
+.wg-slider .btn-light {
+  color: var(--saberse-night) !important;
+  i { color: var(--saberse-night) !important; }
+  border-radius: var(--radius-pill) !important;
+  padding: 0.6rem 1.5rem !important;
+  font-weight: 600 !important;
+  transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), transform 0.15s var(--ease-out) !important;
+}
+.wg-slider .carousel-control-prev,
+.wg-slider .carousel-control-next {
+  width: 4.5rem !important;
+  opacity: 1;
+}
+.wg-slider .carousel-control-prev-icon,
+.wg-slider .carousel-control-next-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background-color: rgba(10, 15, 30, 0.55);
+  background-size: 40%;
+  border: 1px solid rgba(232, 237, 245, 0.45);
+  filter: none !important;
+  transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+.wg-slider .carousel-control-prev:hover .carousel-control-prev-icon,
+.wg-slider .carousel-control-next:hover .carousel-control-next-icon {
+  background-color: rgba(74, 158, 202, 0.55);
+  border-color: var(--saberse-cyan);
+}
+.wg-slider .carousel-indicators li {
+  width: 10px !important;
+  height: 10px !important;
+}
+@media (max-width: 768px) {
+  .wg-slider .carousel-control-prev,
+  .wg-slider .carousel-control-next { width: 3rem !important; }
+  .wg-slider .carousel-control-prev-icon,
+  .wg-slider .carousel-control-next-icon { width: 2.25rem; height: 2.25rem; }
+}
+
+// ── Coleções da home: título em cima, itens em grade ───────────
+@media (min-width: 992px) {
+  .wg-collection .row > .section-heading.col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    align-items: flex-start !important;
+    margin-bottom: var(--space-5) !important;
+  }
+  .wg-collection .row > .col-lg-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-5);
+    align-items: start;
+  }
+}
+.wg-collection .article-banner {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+// ── Divulgação na home: destaque + grade de 2 colunas ──────────
+@media (min-width: 992px) {
+  .wg-collection .row > .col-12:has(> .card-simple.view-card) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-5);
+    align-items: start;
+  }
+  .wg-collection .row > .col-12 > .card-simple.view-card:first-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    column-gap: var(--space-5);
+    align-items: start;
+  }
+  .wg-collection .row > .col-12 > .card-simple.view-card:first-child > * {
+    grid-column: 2;
+  }
+  .wg-collection .row > .col-12 > .card-simple.view-card:first-child > a:has(.img-hover-zoom) {
+    grid-column: 1;
+    grid-row: 1 / span 6;
+  }
+  .wg-collection .row > .col-12 > :not(.card-simple) {
+    grid-column: 1 / -1;
+  }
+}
+
+// Slider: o container interno herda .wg-hero.dark (gradiente + estrelas); sem fundo próprio
+.dark .wg-slider .wg-hero,
+.wg-slider .wg-hero.dark {
+  background: none !important;
+  box-shadow: none !important;
+}
+.wg-slider .wg-hero::before {
+  display: none;
+}
+.wg-collection .row > .col-12 > .card-simple.view-card:first-child {
+  align-content: center;
+}

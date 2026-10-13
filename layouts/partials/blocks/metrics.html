@@ -1,0 +1,12 @@
+{{/* Bloco "metrics": números de destaque lidos de data/metrics.yaml */}}
+{{ $metrics := site.Data.metrics }}
+<div class="container">
+  <dl class="metrics-grid">
+    {{ range $metrics.items }}
+    <div class="metric">
+      <dt class="metric-value">{{ .value }}</dt>
+      <dd class="metric-label">{{ .label }}</dd>
+    </div>
+    {{ end }}
+  </dl>
+</div>
