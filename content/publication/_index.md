@@ -1,6 +1,6 @@
 ---
 title: Publicações
-summary: "Publicações científicas do Saber-SE em revistas como ApJ, AJ, A&A e MNRAS, com mais de 500 citações. Pesquisa em abundâncias químicas estelares, exoplanetas e evolução da Via Láctea."
+summary: "Publicações científicas do Saber-SE em revistas como ApJ, AJ, A&A e MNRAS, com mais de 9.000 citações. Pesquisa em abundâncias químicas estelares, exoplanetas e evolução da Via Láctea."
 
 # Listing view
 view: citation

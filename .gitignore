@@ -5,3 +5,7 @@
 /resources/
 public/
 assets/jsconfig.json
+
+# Arquivos soltos de trabalho (fotos, PDFs, scripts) aguardando serem copiados ao site
+/_entrada/
+/resources/_gen/
