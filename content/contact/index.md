@@ -12,7 +12,7 @@ sections:
         Para informações sobre pesquisa, colaborações, oportunidades de IC/Mestrado/Doutorado ou qualquer outro assunto, entre em contato diretamente com o Prof. Dr. Diogo Souto. Respondemos a todas as mensagens dentro de 2 semanas úteis.
       email: diogodusouto@gmail.com
       address:
-        street: "Departamento de Física (DFI) — Cidade Universitária Prof. José Aloísio de Campos"
+        street: "Departamento de Física (DFI), Cidade Universitária Prof. José Aloísio de Campos"
         city: São Cristóvão
         region: Sergipe
         postcode: '49100-000'
@@ -21,7 +21,7 @@ sections:
       coordinates:
         latitude: '-10.9247'
         longitude: '-37.1059'
-      directions: "Departamento de Física (DFI) — Centro de Ciências Exatas e Tecnologia (CCET), Campus São Cristóvão"
+      directions: "Departamento de Física (DFI), Centro de Ciências Exatas e Tecnologia (CCET), Campus São Cristóvão"
       office_hours:
         - 'Segunda-feira: 10:00 às 12:00'
         - 'Quarta-feira: 14:00 às 16:00'

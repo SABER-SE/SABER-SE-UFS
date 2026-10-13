@@ -2500,3 +2500,117 @@ body:not(.dark) .rl__text { color: #3b4658; }
 .article-container .article-header .article-title {
   margin-bottom: var(--space-2);
 }
+
+// ═══════════════════════════════════════════════════════════════
+//  OPORTUNIDADES, CURSOS E CONTATO
+// ═══════════════════════════════════════════════════════════════
+
+// ── Oportunidades: vagas em grade 2x2 ──────────────────────────
+.opp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin: var(--space-5) 0 var(--space-6);
+}
+.opp-card {
+  margin-bottom: 0;
+  border-radius: var(--radius);
+  background: var(--saberse-surface);
+  border-color: var(--saberse-line);
+  padding: var(--space-5);
+  font-size: 0.95rem;
+
+  h3 {
+    font-size: 1.15rem;
+    i { margin-right: 0.4rem; font-size: 0.95em; }
+  }
+  p { line-height: 1.6; }
+}
+body:not(.dark) .opp-card { background: #fff; }
+@media (max-width: 768px) {
+  .opp-grid { grid-template-columns: 1fr; }
+}
+.opp-urgent { border-radius: var(--radius); }
+h2 > i.fas { font-size: 0.8em; margin-right: 0.35rem; color: var(--saberse-cyan); }
+
+// Botões de download no conteúdo (inclui os com estilo inline dos cursos):
+// texto escuro sobre ciano garante contraste AA
+.article-style a.btn-primary,
+.article-style a[style*="background-color: #4a9eca"] {
+  background-color: var(--saberse-cyan) !important;
+  color: var(--saberse-night) !important;
+  border-radius: var(--radius-pill) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+.article-style a.btn-primary:hover,
+.article-style a[style*="background-color: #4a9eca"]:hover {
+  background-color: var(--saberse-yellow) !important;
+  color: var(--saberse-night) !important;
+}
+.opp-download { margin: var(--space-3) 0; }
+.opp-download i { margin-right: 0.4rem; }
+
+
+// ── Contato: informações à esquerda, mapa à direita ────────────
+@media (min-width: 992px) {
+  .wg-contact .row > .col-12 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-6);
+    align-items: start;
+  }
+  .wg-contact .row > .col-12 > p { grid-column: 1 / -1; max-width: 62ch; }
+  .wg-contact .row > .col-12 > ul.fa-ul { grid-column: 1; margin-top: 0; }
+  .wg-contact .row > .col-12 > #map { grid-column: 2; grid-row: 2; height: 24rem; }
+}
+.wg-contact ul.fa-ul li {
+  margin-bottom: var(--space-4);
+  line-height: 1.5;
+}
+.wg-contact ul.fa-ul .fa-li {
+  font-size: 1.1rem;
+  color: var(--saberse-cyan);
+}
+#map { border-radius: var(--radius); }
+
+// ── Cursos: cartões em grade ───────────────────────────────────
+.courses-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--space-5);
+}
+.courses-list .card-simple.view-card:not(:has(.article-banner)) {
+  background: var(--saberse-surface);
+  border: 1px solid var(--saberse-line);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  transition: border-color 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
+}
+body:not(.dark) .courses-list .card-simple.view-card:not(:has(.article-banner)) {
+  background: #fff;
+}
+.courses-list .card-simple.view-card:not(:has(.article-banner)):hover {
+  border-color: rgba(74, 158, 202, 0.5);
+}
+.courses-list .card-simple .article-title {
+  font-size: 1.3rem;
+}
+.courses-list .card-simple .summary-link .article-style p {
+  -webkit-line-clamp: 4;
+}
+.courses-list .card-simple::after {
+  content: "Abrir material \2192";
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--saberse-cyan);
+}
+
+.wg-contact .section-heading {
+  text-align: left;
+  align-items: flex-start !important;
+}

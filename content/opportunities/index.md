@@ -11,8 +11,10 @@ O grupo Saber-SE é um ambiente de pesquisa ativo e internacionalmente conectado
 
 ## Vagas Abertas
 
+<div class="opp-grid">
+
 <div class="opp-card">
-<h3>🔭 Iniciação Científica (IC)</h3>
+<h3><i class="fas fa-seedling" aria-hidden="true"></i> Iniciação Científica (IC)</h3>
 
 <p><strong>Pré-requisitos:</strong> estar regularmente matriculado em Astrofísica, Física ou área afim na UFS, com bom desempenho acadêmico.</p>
 
@@ -22,7 +24,7 @@ O grupo Saber-SE é um ambiente de pesquisa ativo e internacionalmente conectado
 </div>
 
 <div class="opp-card">
-<h3>📚 Mestrado</h3>
+<h3><i class="fas fa-book" aria-hidden="true"></i> Mestrado</h3>
 
 <p><strong>Programa:</strong> Pós-Graduação em Física (<a href="https://www.ufs.br/ppgfi" target="_blank" rel="noopener">PPGFI/UFS</a>), área de concentração em Astrofísica.</p>
 
@@ -32,7 +34,7 @@ O grupo Saber-SE é um ambiente de pesquisa ativo e internacionalmente conectado
 </div>
 
 <div class="opp-card">
-<h3>🎓 Doutorado</h3>
+<h3><i class="fas fa-graduation-cap" aria-hidden="true"></i> Doutorado</h3>
 
 <p><strong>Programa:</strong> Doutorado em Física (<a href="https://www.ufs.br/ppgfi" target="_blank" rel="noopener">PPGFI/UFS</a>), área de concentração em Astrofísica.</p>
 
@@ -42,14 +44,16 @@ O grupo Saber-SE é um ambiente de pesquisa ativo e internacionalmente conectado
 </div>
 
 <div class="opp-card">
-<h3>🌟 Pós-Doutorado</h3>
+<h3><i class="fas fa-microscope" aria-hidden="true"></i> Pós-Doutorado</h3>
 
 <p><strong>Pré-requisitos:</strong> doutorado concluído em Astrofísica ou área afim, com produção científica compatível com as linhas de pesquisa do grupo.</p>
 
 <p><strong>Bolsa:</strong> sujeita à aprovação de projetos com financiamento (PRONEM-FAPITEC, Universal-CNPq, ou similar) — consulte disponibilidade atual diretamente com o Prof. Diogo Souto.</p>
 </div>
 
-## 📋 Regimento Interno do Grupo
+</div>
+
+## <i class="fas fa-file-lines" aria-hidden="true"></i> Regimento Interno do Grupo
 
 O grupo Saber-SE possui um regimento interno que define as diretrizes, responsabilidades e expectativas para todos os membros — desde a Iniciação Científica até o Pós-Doutorado. Recomendamos fortemente a leitura antes de ingressar no grupo.
 
@@ -63,15 +67,9 @@ O documento cobre temas como:
 - Procedimentos para ingresso e desligamento
 
 <a href="/SABER-SE-UFS/files/regimento-interno-saber-se.pdf"
-   target="_blank"
-   class="btn btn-primary btn-lg"
-   style="background-color: #4a9eca; border: none;
-          padding: 0.7rem 1.6rem; border-radius: 4px;
-          color: white; text-decoration: none;
-          font-family: 'Inter', sans-serif;
-          font-weight: 500; display: inline-block;
-          margin: 1rem 0;">
-  📄 Baixar Regimento Interno (PDF)
+   target="_blank" rel="noopener"
+   class="btn btn-primary btn-lg opp-download">
+  <i class="fas fa-file-pdf" aria-hidden="true"></i> Baixar Regimento Interno (PDF)
 </a>
 
 ## Como se candidatar
@@ -86,7 +84,7 @@ O processo de ingresso no grupo segue edital formal e seleção, de acordo com o
 
 **Em todos os casos**, recomendamos fortemente um contato prévio por e-mail antes de qualquer submissão formal, para conversarmos sobre disponibilidade de vagas e alinhamento de interesses de pesquisa.
 
-📧 **Contato:** [diogosouto@academico.ufs.br](mailto:diogosouto@academico.ufs.br)
+<i class="fas fa-envelope" aria-hidden="true"></i> **Contato:** [diogosouto@academico.ufs.br](mailto:diogosouto@academico.ufs.br)
 
 ## Linhas de pesquisa disponíveis
 
