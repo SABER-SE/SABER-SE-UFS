@@ -511,3 +511,6 @@ footer.rodape {
 .figura-cap11 img, .figura-cap11 object { max-width: 100%; height: auto; border: 1px solid var(--borda); border-radius: 8px; background: #fff; }
 .figura-cap11 figcaption { font-size: .85rem; color: var(--texto-suave); margin-top: .5rem; text-align: left; padding: 0 .3rem; }
 .figura-cap11 .figura-num { font-weight: 700; color: var(--texto); }
+
+/* subtítulos dos passos de dedução (Cap. 7: \paragraph do .tex) */
+.pagina h4 { font-size: 1.02rem; margin: 1.4rem 0 .4rem; color: var(--cor-contexto, #1c4878); }

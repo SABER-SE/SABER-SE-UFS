@@ -19,8 +19,6 @@ window.MathJax = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="assets/comuns.js"></script>
-<link rel="stylesheet" href="dark-mode.css">
-<script src="dark-mode.js" defer></script>
 
 <div class="topo">
   <div class="miolo">
@@ -134,53 +132,123 @@ liberdade translacionais — os graus rotacionais e vibracionais de
 H\(_2\) contribuem à energia interna, não à pressão.</p>
 
 <p>Para uma nuvem esférica, uniforme, isotérmica e composta de gás ideal,
-\(P/\rho=k_BT/(\mu m_{\mathrm H})\) é constante em toda a nuvem, de modo
-que a integral do lado esquerdo da Equação (7.1) se resolve
-trivialmente:</p>
+o integrando \(P/\rho\) é simples. Com \(n\) partículas por unidade de
+volume, cada uma de massa média \(\mu m_{\mathrm H}\), temos \(P=nk_BT\) e
+\(\rho=n\mu m_{\mathrm H}\); dividindo uma pela outra, \(n\) se cancela:</p>
+\[
+\frac{P}{\rho} = \frac{nk_BT}{n\mu m_{\mathrm H}} = \frac{k_BT}{\mu m_{\mathrm H}}\,.
+\tag{7.2}
+\]
+<p>Como \(T\) e \(\mu\) são os mesmos em toda a nuvem, \(P/\rho\) é uma
+constante e sai da integral do lado esquerdo da Equação (7.1), que fica
+apenas \(\int_0^M\mathrm{d}m=M\):</p>
 \[
 \int_0^M\frac{3P}{\rho}\,\mathrm{d}m
 = \frac{3k_BT}{\mu m_{\mathrm H}}\int_0^M\mathrm{d}m
 = \frac{3Mk_BT}{\mu m_{\mathrm H}}\,.
-\tag{7.2}
-\]
-<p>Para o lado direito, precisamos da energia gravitacional de uma esfera
-uniforme de massa \(M\), raio \(R\) e densidade \(\rho=3M/(4\pi R^3)\):</p>
-\[
-E_g = -\int_0^M\frac{Gm}{r}\,\mathrm{d}m
-= -\int_0^R\frac{G\left(\frac{4}{3}\pi r^3\rho\right)}{r}\,4\pi r^2\rho\,\mathrm{d}r
-= -\frac{16\pi^2G\rho^2}{3}\int_0^R r^4\,\mathrm{d}r
-= -\frac{16\pi^2G\rho^2R^5}{15}\,.
 \tag{7.3}
 \]
-<p>Substituindo \(\rho=3M/(4\pi R^3)\),</p>
+<p>Para o lado direito, precisamos da energia gravitacional de uma esfera
+uniforme de massa \(M\), raio \(R\) e densidade \(\rho=3M/(4\pi R^3)\).
+Vamos construir a esfera camada por camada. Uma casca de raio \(r\) e
+espessura \(\mathrm{d}r\) tem massa</p>
 \[
-E_g = -\frac{16\pi^2GR^5}{15}\cdot\frac{9M^2}{16\pi^2R^6}
-= \boxed{-\frac{3}{5}\frac{GM^2}{R}}\,,
+\mathrm{d}m = (\text{área})\times(\text{espessura})\times(\text{densidade})
+= 4\pi r^2\,\mathrm{d}r\;\rho\,,
 \tag{7.4}
 \]
-<p>o resultado padrão para a energia gravitacional de uma esfera
-homogênea — o fator \(3/5\) (em vez do \(1\) da aproximação grosseira
-\(E_g\sim-GM^2/R\) usada no Capítulo 5) vem da integração sobre o perfil
-de densidade uniforme.</p>
-
-<p>O equilíbrio hidrostático deixa de ser possível quando \(|E_g|\)
-excede o lado esquerdo da Equação (7.1) no limite marginal. Igualando as
-Equações (7.2) e (7.4):</p>
+<p>e sente apenas a atração da massa já contida dentro dela (as camadas
+externas não exercem força líquida sobre ela — teorema das cascas de
+Newton), que para densidade uniforme é</p>
 \[
-\frac{3Mk_BT}{\mu m_{\mathrm H}} = \frac{3}{5}\frac{GM^2}{R}
-\quad\Longrightarrow\quad
-\frac{GM}{R} = \frac{5k_BT}{\mu m_{\mathrm H}}\,.
+m(r) = \frac{4}{3}\pi r^3\rho\,.
 \tag{7.5}
 \]
-<p>Usando \(R=(3M/4\pi\rho)^{1/3}\) para eliminar \(R\) em favor de
-\(M\) e \(\rho\), e isolando \(M\), obtemos a <strong>massa de
-Jeans</strong>:</p>
+<p>A energia potencial dessa casca é \(-Gm(r)\,\mathrm{d}m/r\), e a energia
+gravitacional total é a soma sobre todas as cascas, de \(r=0\) a
+\(r=R\):</p>
 \[
-\boxed{M_J = \left(\frac{5k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\left(\frac{3}{4\pi\rho}\right)^{1/2}}\,.
+\begin{aligned}
+E_g &= -\int_0^M\frac{Gm}{r}\,\mathrm{d}m
+= -\int_0^R\frac{G}{r}\left(\frac{4}{3}\pi r^3\rho\right)\left(4\pi r^2\rho\,\mathrm{d}r\right)\\
+&= -G\left(\frac{4\pi}{3}\right)(4\pi)\,\rho^2\int_0^R\frac{r^3\cdot r^2}{r}\,\mathrm{d}r
+= -\frac{16\pi^2G\rho^2}{3}\int_0^R r^4\,\mathrm{d}r\\
+&= -\frac{16\pi^2G\rho^2}{3}\cdot\frac{R^5}{5}
+= -\frac{16\pi^2G\rho^2R^5}{15}\,.
+\end{aligned}
 \tag{7.6}
 \]
-<p>Nuvens com \(M>M_J\) têm energia gravitacional maior, em módulo, do
-que a pressão térmica sustenta, e colapsam; com \(M<M_J\), a pressão
+<p>Agora eliminamos \(\rho\) em favor de \(M\). Elevando
+\(\rho=3M/(4\pi R^3)\) ao quadrado, \(\rho^2=9M^2/(16\pi^2R^6)\), e
+substituindo:</p>
+\[
+E_g = -\frac{16\pi^2GR^5}{15}\cdot\frac{9M^2}{16\pi^2R^6}
+= -\frac{9}{15}\,\frac{GM^2R^5}{R^6}
+= \boxed{-\frac{3}{5}\frac{GM^2}{R}}\,,
+\tag{7.7}
+\]
+<p>onde os fatores \(16\pi^2\) se cancelam, \(9/15=3/5\) e
+\(R^5/R^6=1/R\); este é o resultado padrão para a energia gravitacional
+de uma esfera homogênea — o fator \(3/5\) (em vez do \(1\) da aproximação
+grosseira \(E_g\sim-GM^2/R\) usada no Capítulo 5) vem da integração sobre
+o perfil de densidade uniforme.</p>
+
+<p>O equilíbrio hidrostático deixa de ser possível quando \(|E_g|\)
+excede o lado esquerdo da Equação (7.1) no limite marginal. O raciocínio
+é o seguinte: o lado esquerdo mede quanta “energia térmica” a nuvem tem
+disponível para resistir à gravidade (ele é \(2E_i\) para um gás
+monoatômico); o lado direito mede quanto a gravidade a comprime. Se a
+gravidade ganha, não há configuração de equilíbrio possível e a nuvem
+colapsa. O limite entre os dois casos é a igualdade. Igualando as
+Equações (7.3) e (7.7) (com \(-E_g=+\frac35GM^2/R\)):</p>
+\[
+\frac{3Mk_BT}{\mu m_{\mathrm H}} = \frac{3}{5}\frac{GM^2}{R}\,.
+\tag{7.8}
+\]
+<p>Dividindo os dois lados por \(3M/5\):</p>
+\[
+\frac{5k_BT}{\mu m_{\mathrm H}} = \frac{GM}{R}
+\quad\Longleftrightarrow\quad
+\frac{GM}{R} = \frac{5k_BT}{\mu m_{\mathrm H}}\,.
+\tag{7.9}
+\]
+<p>Essa forma já tem uma leitura física clara: \(GM/R\) é (a menos de
+fatores) o quadrado da velocidade de escape da nuvem, e \(k_BT/\mu
+m_{\mathrm H}\) é o quadrado da velocidade térmica típica das
+partículas. A nuvem colapsa quando as partículas são lentas demais para
+escapar do próprio poço gravitacional.</p>
+
+<p>Para obter uma massa crítica, eliminamos \(R\). Da definição de
+densidade média, \(M=\frac43\pi R^3\rho\), logo</p>
+\[
+R = \left(\frac{3M}{4\pi\rho}\right)^{1/3}
+\quad\Longrightarrow\quad
+\frac{1}{R} = \left(\frac{4\pi\rho}{3M}\right)^{1/3}\,.
+\tag{7.10}
+\]
+<p>Substituindo na Equação (7.9):</p>
+\[
+GM\left(\frac{4\pi\rho}{3M}\right)^{1/3} = \frac{5k_BT}{\mu m_{\mathrm H}}
+\quad\Longrightarrow\quad
+G\,M^{2/3}\left(\frac{4\pi\rho}{3}\right)^{1/3} = \frac{5k_BT}{\mu m_{\mathrm H}}\,,
+\tag{7.11}
+\]
+<p>já que \(M\cdot M^{-1/3}=M^{2/3}\). Isolando \(M^{2/3}\):</p>
+\[
+M^{2/3} = \frac{5k_BT}{G\mu m_{\mathrm H}}\left(\frac{3}{4\pi\rho}\right)^{1/3}\,.
+\tag{7.12}
+\]
+<p>Finalmente, elevando os dois lados a \(3/2\) [note que
+\((M^{2/3})^{3/2}=M\) e \(\big((\ldots)^{1/3}\big)^{3/2}=(\ldots)^{1/2}\)],
+obtemos a <strong>massa de Jeans</strong>:</p>
+\[
+\boxed{M_J = \left(\frac{5k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\left(\frac{3}{4\pi\rho}\right)^{1/2}}\,.
+\tag{7.13}
+\]
+<p>Vale ler a dependência: \(M_J\propto T^{3/2}\) (gás mais quente resiste
+melhor) e \(M_J\propto\rho^{-1/2}\) (gás mais denso colapsa com menos
+massa). Nuvens com \(M>M_J\) têm energia gravitacional maior, em módulo,
+do que a pressão térmica sustenta, e colapsam; com \(M&lt;M_J\), a pressão
 vence. Este é exatamente o resultado já citado como estimativa de ordem
 de grandeza no Capítulo 5 — aqui obtido como resultado <em>exato</em>
 para uma esfera uniforme e isotérmica.</p>
@@ -197,16 +265,16 @@ equação de Euler (conservação de momento) e a equação de Poisson para o
 potencial gravitacional,</p>
 \[
 \frac{\partial\rho}{\partial t} + \nabla\cdot(\rho\vec v) = 0\,,
-\tag{7.7}
+\tag{7.14}
 \]
 \[
 \frac{\partial\vec v}{\partial t} + (\vec v\cdot\nabla)\vec v
 = -\frac{\nabla P}{\rho} - \nabla\phi\,,
-\tag{7.8}
+\tag{7.15}
 \]
 \[
 \nabla^2\phi = 4\pi G\rho\,.
-\tag{7.9}
+\tag{7.16}
 \]
 <p>Consideramos um estado de equilíbrio de fundo, homogêneo e estático
 (\(\rho_0\), \(P_0\), \(\vec v_0=0\), \(\phi_0\) constantes), e
@@ -219,7 +287,7 @@ contrapartes não perturbadas.</p>
   <div class="rotulo">Atenção — O artifício de Jeans (<em>Jeans swindle</em>)</div>
   <div class="conteudo">
     <p>Estritamente, um meio infinito e homogêneo com \(\rho_0\neq0\) não
-    pode estar em equilíbrio hidrostático: a Equação (7.9) aplicada a
+    pode estar em equilíbrio hidrostático: a Equação (7.16) aplicada a
     \(\phi_0\) exigiria \(\nabla^2\phi_0=4\pi G\rho_0\neq0\) em todo o
     espaço, incompatível com um campo de fundo nulo ou uniforme. A
     prática usual — adotada aqui — é ignorar \(\phi_0\) e reter apenas a
@@ -233,18 +301,99 @@ contrapartes não perturbadas.</p>
   </div>
 </div>
 
-<p>Linearizando as Equações (7.7)&ndash;(7.9) (descartando termos
-quadráticos), usando \(\delta P=c_s^2\,\delta\rho\)
-[\(c_s^2\equiv(\partial P/\partial\rho)\)] e buscando soluções de onda
-plana, \(\delta\rho,\delta\vec v,\delta\phi\propto e^{i(kx-\omega t)}\)
-(logo \(\partial/\partial t\to-i\omega\), \(\nabla\to ik\hat x\)), as três
-equações tornam-se algébricas em \(\delta\rho\), \(\delta v\) e
-\(\delta\phi\). Eliminando \(\delta\phi\) (via Poisson) e \(\delta v\)
-(via continuidade) em favor de \(\delta\rho\), chega-se à <strong>relação
-de dispersão</strong>:</p>
+<h4>A dedução tem quatro passos</h4>
+
+<h4>Passo 1: linearizar</h4>
+<p>“Linearizar” significa substituir cada variável por (fundo
+\(+\) perturbação) e jogar fora todo termo que seja produto de duas
+perturbações (se \(\delta\rho\) e \(\delta v\) são pequenos,
+\(\delta\rho\,\delta v\) é muito menor ainda). Vejamos cada equação.</p>
+
+<p><em>Continuidade.</em> Como \(\rho_0\) é constante no tempo,
+\(\partial\rho/\partial t=\partial\delta\rho/\partial t\). No segundo
+termo,</p>
+\[
+\nabla\cdot(\rho\vec v)=\nabla\cdot\big[(\rho_0+\delta\rho)\,\delta\vec v\big]
+=\rho_0\,\nabla\cdot\delta\vec v+\underbrace{\nabla\cdot(\delta\rho\,\delta\vec v)}_{\text{2ª ordem: descarta}}\,,
+\tag{7.17}
+\]
+<p>onde usamos que \(\rho_0\) é uniforme (sai do divergente). Logo</p>
+\[
+\frac{\partial\delta\rho}{\partial t}+\rho_0\,\nabla\cdot\delta\vec v=0\,.
+\tag{7.18}
+\]
+
+<p><em>Euler.</em> O termo
+\((\vec v\cdot\nabla)\vec v=(\delta\vec v\cdot\nabla)\delta\vec v\) é de
+segunda ordem e é descartado. No termo de pressão, usamos que \(P\) é
+função de \(\rho\) (gás isotérmico), de modo que uma pequena variação de
+densidade produz \(\delta P=(\partial P/\partial\rho)\,\delta\rho\equiv
+c_s^2\,\delta\rho\), onde \(c_s\) é a velocidade do som. Então
+\(\nabla P=\nabla\delta P=c_s^2\nabla\delta\rho\) e, em primeira ordem,
+\(\nabla P/\rho\approx c_s^2\nabla\delta\rho/\rho_0\). Pelo artifício de
+Jeans, \(\nabla\phi\to\nabla\delta\phi\). Assim:</p>
+\[
+\frac{\partial\delta\vec v}{\partial t}=-\frac{c_s^2}{\rho_0}\nabla\delta\rho-\nabla\delta\phi\,.
+\tag{7.19}
+\]
+
+<p><em>Poisson.</em> Retendo só a parte perturbada:</p>
+\[
+\nabla^2\delta\phi=4\pi G\,\delta\rho\,.
+\tag{7.20}
+\]
+
+<h4>Passo 2: eliminar \(\delta\vec v\)</h4>
+<p>Derivamos a Equação (7.18) em relação ao tempo,</p>
+\[
+\frac{\partial^2\delta\rho}{\partial t^2}+\rho_0\,\nabla\cdot\frac{\partial\delta\vec v}{\partial t}=0\,,
+\tag{7.21}
+\]
+<p>e substituímos \(\partial\delta\vec v/\partial t\) pela Equação
+(7.19):</p>
+\[
+\frac{\partial^2\delta\rho}{\partial t^2}
++\rho_0\,\nabla\cdot\left(-\frac{c_s^2}{\rho_0}\nabla\delta\rho-\nabla\delta\phi\right)=0
+\quad\Longrightarrow\quad
+\frac{\partial^2\delta\rho}{\partial t^2}
+-c_s^2\nabla^2\delta\rho-\rho_0\nabla^2\delta\phi=0\,,
+\tag{7.22}
+\]
+<p>usando \(\nabla\cdot\nabla=\nabla^2\).</p>
+
+<h4>Passo 3: eliminar \(\delta\phi\)</h4>
+<p>Pela Equação (7.20), \(\nabla^2\delta\phi=4\pi
+G\delta\rho\). Substituindo:</p>
+\[
+\boxed{\frac{\partial^2\delta\rho}{\partial t^2}
+= c_s^2\nabla^2\delta\rho+4\pi G\rho_0\,\delta\rho}\,.
+\tag{7.23}
+\]
+<p>Esta é uma equação de onda “com um termo extra”. Sem gravidade
+(\(G=0\)) ela é a equação de onda sonora usual; o termo \(+4\pi
+G\rho_0\delta\rho\) é a autogravidade, que reforça qualquer excesso de
+densidade.</p>
+
+<h4>Passo 4: testar uma onda plana</h4>
+<p>Procuramos soluções da forma \(\delta\rho=A\,e^{i(kx-\omega t)}\),
+com \(k=2\pi/\lambda\) o número de onda e \(\omega\) a frequência.
+Derivar essa função é multiplicá-la por uma constante:</p>
+\[
+\frac{\partial^2\delta\rho}{\partial t^2}=(-i\omega)^2\delta\rho=-\omega^2\,\delta\rho\,,
+\qquad
+\nabla^2\delta\rho=\frac{\partial^2\delta\rho}{\partial x^2}=(ik)^2\delta\rho=-k^2\,\delta\rho\,.
+\tag{7.24}
+\]
+<p>Substituindo na Equação (7.23):</p>
+\[
+-\omega^2\,\delta\rho=-c_s^2k^2\,\delta\rho+4\pi G\rho_0\,\delta\rho\,.
+\tag{7.25}
+\]
+<p>Dividindo por \(-\delta\rho\) (que não é nulo), chega-se à
+<strong>relação de dispersão</strong>:</p>
 \[
 \boxed{\omega^2 = c_s^2k^2 - 4\pi G\rho_0}\,.
-\tag{7.10}
+\tag{7.26}
 \]
 <p>Essa é a equação central do critério de Jeans hidrodinâmico: descreve
 como a frequência \(\omega\) de uma perturbação de número de onda \(k\)
@@ -265,7 +414,7 @@ não a restaurá-la).</p>
     exponencialmente no tempo: a perturbação de densidade \(\delta\rho\)
     não oscila, ela se amplifica sem limite (na aproximação linear) — o
     colapso gravitacional. A condição de instabilidade é, portanto,
-    simplesmente \(\omega^2<0\) na Equação (7.10).</p>
+    simplesmente \(\omega^2<0\) na Equação (7.26).</p>
   </div>
 </div>
 
@@ -285,43 +434,82 @@ não a restaurá-la).</p>
       <input type="range" id="mj2-mu" min="60" max="260" step="1" value="230">
     </div>
   </div>
-  <div class="grafico-card"><canvas id="mj2-canvas" role="img" aria-label="Grafico de omega ao quadrado, normalizado, em funcao de k, mostrando a regiao instavel com omega ao quadrado negativo para k menor que k_J, e o corte em k_J marcado." style="width:100%;height:300px;display:block;"></canvas></div>
+  <div class="grafico-card"><canvas id="mj2-canvas" role="img" aria-label="Grafico de omega ao quadrado, normalizado, em funcao de k, mostrando a regiao instavel com omega ao quadrado negativo para k menor que k_J, o corte em k_J marcado, e as duas parcelas, pressao e gravidade, em tracejado." style="width:100%;height:300px;display:block;"></canvas></div>
+  <p class="leitura-card">
+    Curva verde cheia: \(\omega^2\) total. Tracejados:
+    <span style="color:#7F77DD;">pressão</span>, \(c_s^2k^2\) (origem acústica,
+    Passo 3 da dedução: cresce com \(k^2\) e estabiliza escalas pequenas) e
+    <span style="color:#963c1e;">gravidade</span>, \(-4\pi G\rho_0\) (a
+    autogravidade, termo \(+4\pi G\rho_0\,\delta\rho\) da equação de
+    onda, constante em \(k\)). A curva cheia é a soma das duas; ela cruza
+    zero exatamente onde os dois tracejados têm o mesmo módulo, em \(k_J\).
+  </p>
   <p class="leitura-card">
     Número de onda de Jeans: \(k_J=\)<strong id="mj2-kJ">—</strong> cm⁻¹
     [ponto onde a curva cruza zero]. À esquerda do marcador
-    (\(k<k_J\)), \(\omega^2<0\): a perturbação é instável e colapsa. À
+    (\(k&lt;k_J\)), \(\omega^2<0\): a perturbação é instável e colapsa. À
     direita (\(k>k_J\)), \(\omega^2>0\): oscilação sonora estável. O
-    comprimento de onda de Jeans \(\lambda_J=2\pi/k_J\) [Eq. (7.12)] é o
-    mesmo critério do método energético acima (Eq. (7.6)), agora obtido
+    comprimento de onda de Jeans \(\lambda_J=2\pi/k_J\) [Eq. (7.28)] é o
+    mesmo critério do método energético acima (Eq. (7.13)), agora obtido
     sem usar o Teorema do Virial — a concordância entre os dois métodos,
     a menos de um fator de ordem unidade, confirma que descrevem a mesma
     física.
   </p>
 </div>
 
-<p>Da condição \(\omega^2<0\) na Equação (7.10),</p>
+<p>Da condição \(\omega^2<0\) na Equação (7.26),</p>
 \[
-c_s^2k^2 < 4\pi G\rho_0
+c_s^2k^2-4\pi G\rho_0<0
 \quad\Longrightarrow\quad
-k < k_J\equiv\sqrt{\frac{4\pi G\rho_0}{c_s^2}}\,,
-\tag{7.11}
+k^2 < \frac{4\pi G\rho_0}{c_s^2}
+\quad\Longrightarrow\quad
+k < k_J\equiv\frac{\sqrt{4\pi G\rho_0}}{c_s}\,,
+\tag{7.27}
 \]
 <p>ou seja, perturbações de número de onda <em>menor</em> que o número de
-onda crítico de Jeans \(k_J\) (comprimento de onda <em>maior</em> que o
-<strong>comprimento de onda de Jeans</strong>) são instáveis:</p>
+onda crítico de Jeans \(k_J\) — isto é, de comprimento de onda
+\(\lambda=2\pi/k\) <em>maior</em> — são instáveis. O comprimento de onda
+crítico é o <strong>comprimento de onda de Jeans</strong>:</p>
 \[
-\boxed{\lambda_J = \frac{2\pi}{k_J} = c_s\sqrt{\frac{\pi}{G\rho_0}}}\,.
-\tag{7.12}
+\lambda_J = \frac{2\pi}{k_J} = \frac{2\pi\,c_s}{\sqrt{4\pi G\rho_0}}
+= \frac{2\pi}{2\sqrt{\pi}}\,\frac{c_s}{\sqrt{G\rho_0}}
+= \sqrt{\pi}\,\frac{c_s}{\sqrt{G\rho_0}}
+\quad\Longrightarrow\quad
+\boxed{\lambda_J = c_s\sqrt{\frac{\pi}{G\rho_0}}}\,,
+\tag{7.28}
 \]
-<p>Para uma nuvem molecular fria, o resfriamento por poeira e linhas
-moleculares (ver caixa anterior) é suficientemente eficiente para que a
-temperatura permaneça aproximadamente constante durante a compressão
-inicial — o colapso é, nessa fase, bem aproximado como <em>isotérmico</em>,
-de modo que a velocidade do som relevante na Equação (7.12) é a
-velocidade do som <strong>isotérmica</strong>, \(c_s^2=k_BT/(\mu
-m_{\mathrm H})\) (e não a adiabática, \(c_s^2=\gamma k_BT/\mu
-m_{\mathrm H}\), que só se aplicaria a um colapso rápido o bastante para
-impedir o escape do calor gerado pela compressão).</p>
+<p>onde usamos \(\sqrt{4\pi}=2\sqrt\pi\) e \(2\pi/(2\sqrt\pi)=\sqrt\pi\).</p>
+
+<p>Interpretação: uma perturbação de tamanho \(\lambda\) é “atravessada”
+por uma onda sonora num tempo \(\sim\lambda/c_s\); se esse tempo é menor
+que o tempo de colapso gravitacional \(\sim1/\sqrt{G\rho_0}\), a pressão
+tem tempo de reagir e a perturbação oscila. Igualar os dois tempos dá
+\(\lambda\sim c_s/\sqrt{G\rho_0}\) — exatamente a forma de \(\lambda_J\),
+a menos do fator \(\sqrt\pi\).</p>
+
+<h4>Quão rápido o colapso cresce?</h4>
+<p>Para perturbações muito grandes (\(k\to0\)), a Equação (7.26) dá
+\(\omega^2\to-4\pi G\rho_0\), ou seja,
+\(|\omega|=\sqrt{4\pi G\rho_0}\), e a perturbação cresce como
+\(e^{t/\tau}\) com</p>
+\[
+\tau = \frac{1}{\sqrt{4\pi G\rho_0}}\,,
+\tag{7.29}
+\]
+<p>que é da mesma ordem do tempo de queda livre. Para a densidade de um
+núcleo pré-estelar (\(\rho_0\approx3{,}85\times10^{-20}\,\mathrm{g/cm^3}\),
+Exemplo adiante), \(4\pi G\rho_0\approx3{,}2\times10^{-26}\,\mathrm{s^{-2}}\)
+e \(\tau\approx5{,}6\times10^{12}\,\mathrm s\approx1{,}8\times10^5\) anos:
+o colapso, uma vez iniciado, leva centenas de milhares de anos. Para uma
+nuvem molecular fria, o resfriamento por poeira e linhas moleculares (ver
+caixa anterior) é suficientemente eficiente para que a temperatura
+permaneça aproximadamente constante durante a compressão inicial — o
+colapso é, nessa fase, bem aproximado como <em>isotérmico</em>, de modo
+que a velocidade do som relevante na Equação (7.28) é a velocidade do
+som <strong>isotérmica</strong>, \(c_s^2=k_BT/(\mu m_{\mathrm H})\) (e
+não a adiabática, \(c_s^2=\gamma k_BT/\mu m_{\mathrm H}\), que só se
+aplicaria a um colapso rápido o bastante para impedir o escape do calor
+gerado pela compressão).</p>
 
 <p>Para obter a massa de Jeans a partir do comprimento de Jeans, tomamos
 a massa contida em uma esfera de diâmetro \(\lambda_J\) (convenção usual
@@ -329,29 +517,58 @@ na literatura; outras convenções, com fatores numéricos ligeiramente
 diferentes, também aparecem):</p>
 \[
 M_J = \frac{4}{3}\pi\rho_0\left(\frac{\lambda_J}{2}\right)^3
+= \frac{4}{3}\pi\rho_0\,\frac{\lambda_J^3}{8}
 = \frac{\pi}{6}\rho_0\lambda_J^3\,.
-\tag{7.13}
+\tag{7.30}
 \]
-<p>Substituindo a Equação (7.12) e \(c_s^2=k_BT/(\mu m_{\mathrm H})\):</p>
+<p>Precisamos de \(\lambda_J^3\). Elevando a Equação (7.28) ao cubo, e
+escrevendo \(c_s^3=(c_s^2)^{3/2}\):</p>
 \[
-M_J = \frac{\pi}{6}\rho_0\left[\frac{k_BT}{\mu m_{\mathrm H}}\cdot\frac{\pi}{G\rho_0}\right]^{3/2}
+\lambda_J^3 = c_s^3\left(\frac{\pi}{G\rho_0}\right)^{3/2}
+= \left(c_s^2\,\frac{\pi}{G\rho_0}\right)^{3/2}
+= \left(\frac{k_BT}{\mu m_{\mathrm H}}\cdot\frac{\pi}{G\rho_0}\right)^{3/2}\,,
+\tag{7.31}
+\]
+<p>onde, no último passo, usamos \(c_s^2=k_BT/(\mu m_{\mathrm H})\).
+Separando os fatores dentro do parêntese,</p>
+\[
+\lambda_J^3 = \pi^{3/2}\left(\frac{k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\rho_0^{-3/2}\,.
+\tag{7.32}
+\]
+<p>Multiplicando por \(\frac{\pi}{6}\rho_0\), as potências de \(\pi\) se
+somam (\(\pi^1\cdot\pi^{3/2}=\pi^{5/2}\)) e as de \(\rho_0\) também
+(\(\rho_0^1\cdot\rho_0^{-3/2}=\rho_0^{-1/2}\)):</p>
+\[
+M_J = \frac{\pi}{6}\rho_0\cdot\pi^{3/2}\left(\frac{k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\rho_0^{-3/2}
 = \frac{\pi^{5/2}}{6}\left(\frac{k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\rho_0^{-1/2}\,.
-\tag{7.14}
+\tag{7.33}
 \]
 
 <h3>Comparação entre os dois métodos</h3>
 
-<p>As Equações (7.6) e (7.14) têm exatamente a mesma dependência
+<p>As Equações (7.13) e (7.33) têm exatamente a mesma dependência
 funcional em \(T\), \(\mu\) e \(\rho\) — ambas escalam como
 \(T^{3/2}\rho^{-1/2}\mu^{-3/2}\) —, diferindo apenas no coeficiente
-numérico adimensional:</p>
+numérico adimensional. Para ver isso, reescrevemos a Equação (7.13)
+separando o mesmo fator \((k_BT/G\mu m_{\mathrm H})^{3/2}\rho^{-1/2}\):</p>
+\[
+M_J^{\text{virial}}
+= 5^{3/2}\left(\frac{3}{4\pi}\right)^{1/2}\left(\frac{k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\rho^{-1/2}\,.
+\tag{7.34}
+\]
+<p>Os coeficientes numéricos são, portanto,</p>
+\[
+5^{3/2}\sqrt{\frac{3}{4\pi}} = 11{,}18\times0{,}4886\approx5{,}46
+\qquad\text{e}\qquad
+\frac{\pi^{5/2}}{6}=\frac{17{,}49}{6}\approx2{,}92\,,
+\tag{7.35}
+\]
+<p>e a razão entre eles é</p>
 \[
 \frac{M_J^{\text{virial}}}{M_J^{\text{dispersão}}}
-= \frac{5^{3/2}\sqrt{3/(4\pi)}}{\pi^{5/2}/6}
-= \frac{6\cdot5^{3/2}\sqrt{3}}{2\pi^3}
 \approx \frac{5{,}46}{2{,}92}
 \approx 1{,}9\,.
-\tag{7.15}
+\tag{7.36}
 \]
 <p>Os dois métodos concordam a menos de um fator \(\approx2\) —
 esperado, já que o método energético usa uma esfera <em>uniforme e
@@ -394,7 +611,7 @@ estimativa de massa de Jeans — a física essencial é a escala
     \(\mu\approx2{,}3\)) reproduzem as condições típicas de um núcleo
     pré-estelar citadas acima — mova os sliders e observe \(M_J\propto
     T^{3/2}\rho^{-1/2}\): aquecer a nuvem ou reduzir sua densidade
-    aumenta a massa necessária para o colapso [Eq. (7.6)].
+    aumenta a massa necessária para o colapso [Eq. (7.13)].
   </p>
 </div>
 
@@ -406,35 +623,77 @@ estimativa de massa de Jeans — a física essencial é a escala
     discutidas acima: \(T=10\,\mathrm K\), \(n(\mathrm{H_2})=
     10^4\,\mathrm{cm^{-3}}\), e peso molecular médio \(\mu\approx2{,}3\)
     (gás molecular com traços de hélio). A densidade de massa
-    correspondente é</p>
+    correspondente é o número de partículas por volume vezes a massa
+    média de cada partícula:</p>
     \[
     \rho = n\mu m_{\mathrm H}
     = 10^4\,\mathrm{cm^{-3}}\times2{,}3\times1{,}6726\times10^{-24}\,\mathrm g
-    \approx3{,}85\times10^{-20}\,\mathrm{g/cm^3}\,.
-    \tag{7.16}
+    = 3{,}85\times10^{-20}\,\mathrm{g/cm^3}\,.
+    \tag{7.37}
     \]
-    <p>Usando a Equação (7.6) (método energético) com
+    <p>(Aqui tratamos \(n\) como a densidade numérica total de partículas,
+    consistente com o uso de \(\mu=2{,}3\) como massa média por
+    partícula.) Usamos a Equação (7.13) (método energético) com
     \(k_B=1{,}381\times10^{-16}\,\mathrm{erg/K}\) e
-    \(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\):</p>
+    \(G=6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}\), calculando
+    cada fator separadamente.</p>
+    <p><em>Primeiro fator.</em> Numerador e denominador:</p>
     \[
-    \frac{5k_BT}{G\mu m_{\mathrm H}}
-    \approx2{,}69\times10^{16}\,\mathrm{g/cm}\,,
-    \tag{7.17}
+    \begin{aligned}
+    5k_BT &= 5\times(1{,}381\times10^{-16})\times10 = 6{,}91\times10^{-15}\,\mathrm{erg}\,,\\
+    G\mu m_{\mathrm H} &= (6{,}674\times10^{-8})\times2{,}3\times(1{,}6726\times10^{-24})\\
+    &= 2{,}57\times10^{-31}\,\mathrm{cm^3\,s^{-2}}\,,\\
+    \frac{5k_BT}{G\mu m_{\mathrm H}} &= \frac{6{,}91\times10^{-15}}{2{,}57\times10^{-31}}
+    \approx2{,}69\times10^{16}\,\mathrm{g/cm}\,.
+    \end{aligned}
+    \tag{7.38}
     \]
+    <p>(Conferindo a unidade:
+    erg\(/(\mathrm{cm^3\,s^{-2}})=(\mathrm{g\,cm^2\,s^{-2}})/(\mathrm{cm^3\,s^{-2}})=\mathrm{g/cm}\).)
+    Elevando a \(3/2\): \((2{,}69\times10^{16})^{3/2}=2{,}69^{3/2}\times10^{24}
+    \approx4{,}41\times10^{24}\,\mathrm{g^{3/2}\,cm^{-3/2}}\).</p>
+    <p><em>Segundo fator.</em></p>
     \[
-    M_J^{\rm virial}
-    = \left(\frac{5k_BT}{G\mu m_{\mathrm H}}\right)^{3/2}\left(\frac{3}{4\pi\rho}\right)^{1/2}
-    \approx1{,}10\times10^{34}\,\mathrm g
-    \approx5{,}5\,M_\odot\,.
-    \tag{7.18}
+    \begin{aligned}
+    \left(\frac{3}{4\pi\rho}\right)^{1/2}
+    &=\left(\frac{3}{4\pi\times3{,}85\times10^{-20}}\right)^{1/2}
+    =\left(6{,}20\times10^{18}\right)^{1/2}\\
+    &\approx2{,}49\times10^{9}\,\mathrm{cm^{3/2}\,g^{-1/2}}\,.
+    \end{aligned}
+    \tag{7.39}
     \]
-    <p>Pelo método da relação de dispersão [Equação (7.14)], usando a
-    razão \(\approx1{,}9\) obtida acima,</p>
+    <p><em>Produto.</em></p>
+    \[
+    \begin{aligned}
+    M_J^{\rm virial}&\approx(4{,}41\times10^{24})(2{,}49\times10^{9})
+    \approx1{,}10\times10^{34}\,\mathrm g\\
+    &=\frac{1{,}10\times10^{34}}{1{,}989\times10^{33}}\,M_\odot
+    \approx5{,}5\,M_\odot\,,
+    \end{aligned}
+    \tag{7.40}
+    \]
+    <p>com unidade
+    \(\mathrm{g^{3/2}cm^{-3/2}}\cdot\mathrm{cm^{3/2}g^{-1/2}}=\mathrm g\),
+    como deve ser. Pelo método da relação de dispersão [Equação (7.33)],
+    usando a razão \(\approx1{,}9\) obtida acima,</p>
     \[
     M_J^{\text{dispersão}} \approx \frac{5{,}5\,M_\odot}{1{,}9} \approx 2{,}9\,M_\odot\,.
-    \tag{7.19}
+    \tag{7.41}
     \]
-    <p>Os dois métodos concordam, portanto, em prever uma massa de Jeans
+    <p>O comprimento de Jeans correspondente [Equação (7.28)], com
+    \(c_s=\sqrt{k_BT/\mu m_{\mathrm H}}\approx1{,}89\times10^4\,\mathrm{cm/s}\)
+    (calculado na seção seguinte), é</p>
+    \[
+    \begin{aligned}
+    \lambda_J &= c_s\sqrt{\frac{\pi}{G\rho}}
+    =1{,}89\times10^4\sqrt{\frac{3{,}1416}{(6{,}674\times10^{-8})(3{,}85\times10^{-20})}}\\
+    &\approx6{,}6\times10^{17}\,\mathrm{cm}\approx0{,}21\,\mathrm{pc}\,,
+    \end{aligned}
+    \tag{7.42}
+    \]
+    <p>da ordem do tamanho observado dos núcleos pré-estelares
+    (\(\sim0{,}1\,\)pc, seção anterior). Os dois métodos concordam,
+    portanto, em prever uma massa de Jeans
     de <strong>poucas massas solares</strong> para um núcleo pré-estelar
     típico — exatamente a ordem de grandeza da faixa de massas estelares
     mais populosa da função de massa inicial (IMF), que tem seu pico (em
@@ -470,7 +729,7 @@ estimativa de massa de Jeans — a física essencial é a escala
     supermassivo. Observações do ALMA, com resolução de
     \(\sim1000\,\mathrm{au}\), confirmam diretamente esse quadro:
     núcleos massivos se fragmentam em subnúcleos cujo número e separação
-    são consistentes com o comprimento de Jeans local [Eq. (7.12)]
+    são consistentes com o comprimento de Jeans local [Eq. (7.28)]
     (Motte, Bontemps &amp; Louvet, 2018).</p>
     <p>A fragmentação não explica, por si só, por que a
     <strong>eficiência de formação estelar</strong> — a fração da massa
@@ -529,7 +788,7 @@ estimativa de massa de Jeans — a física essencial é a escala
     molecular gigante (contorno tracejado, densidade traçada por CO)
     contendo um núcleo denso pré-estelar (contorno interno) em colapso
     gravitacional: à medida que a densidade aumenta localmente, a massa
-    de Jeans [Eq. (7.6)] diminui, favorecendo a fragmentação hierárquica
+    de Jeans [Eq. (7.13)] diminui, favorecendo a fragmentação hierárquica
     discutida acima.
   </p>
 </div>
@@ -543,38 +802,91 @@ nuvem caindo simultaneamente com o mesmo
 uniforme — não é o que ocorre: \(t_{\rm ff}(r)\propto[r^3/M(r)]^{1/2}\)
 depende do perfil interno, e um núcleo real não é uniforme. Sua
 estrutura de equilíbrio hidrostático isotérmica aproxima-se da
-<strong>esfera isotérmica singular</strong> (SIS), obtida da equação de
-equilíbrio hidrostático com \(P=c_s^2\rho\) e \(\rho=Ar^{-2}\):</p>
+<strong>esfera isotérmica singular</strong> (SIS). Vamos obtê-la
+testando, na equação de equilíbrio hidrostático, um perfil em lei de
+potência \(\rho=Ar^{-2}\) (com \(A\) uma constante a determinar) e um
+gás isotérmico, \(P=c_s^2\rho\) com \(c_s\) constante.</p>
+
+<p><em>Lado esquerdo (pressão).</em> Como \(c_s^2\) é constante,</p>
 \[
 \frac{\mathrm dP}{\mathrm dr} = c_s^2\frac{\mathrm d\rho}{\mathrm dr}
-= -2Ac_s^2r^{-3}
-\overset{!}{=} -\frac{GM(r)\rho}{r^2}
-= -\frac{G\left(4\pi Ar\right)\left(Ar^{-2}\right)}{r^2}
-= -4\pi GA^2r^{-3}\,,
-\tag{7.20}
+= c_s^2\frac{\mathrm d}{\mathrm dr}\left(Ar^{-2}\right)
+= -2Ac_s^2\,r^{-3}\,.
+\tag{7.43}
 \]
-<p>onde usamos \(M(r)=\int_0^r4\pi r'^2\rho(r')\,\mathrm dr'=4\pi Ar\).
-Igualando os coeficientes, \(2c_s^2=4\pi GA\), ou seja,</p>
+
+<p><em>Lado direito (gravidade).</em> Precisamos da massa interna:</p>
+\[
+M(r)=\int_0^r4\pi r'^2\rho(r')\,\mathrm dr'
+=\int_0^r4\pi r'^2\,A\,r'^{-2}\,\mathrm dr'
+=4\pi A\int_0^r\mathrm dr'
+=4\pi A\,r\,.
+\tag{7.44}
+\]
+<p>Então</p>
+\[
+-\frac{GM(r)\rho}{r^2}
+= -\frac{G\left(4\pi Ar\right)\left(Ar^{-2}\right)}{r^2}
+= -4\pi GA^2\,\frac{r\cdot r^{-2}}{r^2}
+= -4\pi GA^2r^{-3}\,.
+\tag{7.45}
+\]
+
+<p><em>Igualando.</em> Os dois lados têm a mesma dependência
+\(r^{-3}\) (é isso que torna \(\rho\propto r^{-2}\) uma solução válida).
+Basta igualar os coeficientes:</p>
+\[
+-2Ac_s^2 = -4\pi GA^2
+\quad\Longrightarrow\quad
+2c_s^2 = 4\pi GA
+\quad\Longrightarrow\quad
+A=\frac{c_s^2}{2\pi G}\,,
+\tag{7.46}
+\]
+<p>onde dividimos os dois lados por \(-A\). Portanto</p>
 \[
 \boxed{\rho_{\rm SIS}(r) = \frac{c_s^2}{2\pi Gr^2}}\,,
-\tag{7.21}
+\tag{7.47}
 \]
-<p>um perfil que diverge em \(r\to0\) ("singular"), com massa crescendo
-linearmente, \(M(r)=2c_s^2r/G\). Como \(M(r)\propto r\), o tempo de queda
-livre local \(t_{\rm ff}(r)\propto\sqrt{r^3/M(r)}\propto r\) é
-<em>menor</em> no centro: o núcleo "sabe" que deve colapsar antes do
-envelope. O resultado, formalizado por Shu (1977), é o <strong>colapso
-<em>inside-out</em></strong>: o centro entra em queda livre primeiro,
-formando a protoestrela, enquanto uma <strong>frente de
-rarefação</strong> se propaga para fora a \(\sim c_s\). Interior a ela
-(\(r<c_st\)), o gás já está em queda livre (\(\rho\propto r^{-3/2}\),
-\(v\propto r^{-1/2}\)); exterior (\(r>c_st\)), permanece na estrutura
-estática original — a informação de que a pressão central caiu ainda
-não chegou ali. Esse quadro — infall estendido, com fronteira nítida
-entre gás em colapso e estático — é exatamente o observado em envelopes
-de Classe~0, e é por isso que o modelo de Shu (1977) substituiu o
-colapso homólogo como paradigma padrão da formação estelar de baixa
-massa (Stahler &amp; Palla, 2004).</p>
+<p>um perfil que diverge em \(r\to0\) (“singular”), com massa crescendo
+linearmente, \(M(r)=4\pi Ar=4\pi\frac{c_s^2}{2\pi G}r=2c_s^2r/G\).</p>
+
+<p>Por que isso faz o centro colapsar primeiro? O tempo de queda livre
+de uma camada de raio \(r\) é \(t_{\rm ff}(r)\sim\sqrt{r^3/[GM(r)]}\).
+Substituindo \(M(r)=2c_s^2r/G\):</p>
+\[
+t_{\rm ff}(r)\sim\sqrt{\frac{r^3}{G\cdot2c_s^2r/G}}=\sqrt{\frac{r^2}{2c_s^2}}=\frac{r}{\sqrt2\,c_s}\propto r\,.
+\tag{7.48}
+\]
+<p>O tempo de queda livre é <em>menor</em> no centro: o núcleo “sabe” que
+deve colapsar antes do envelope. O resultado, formalizado por Shu
+(1977), é o <strong>colapso <em>inside-out</em></strong>: o centro entra
+em queda livre primeiro, formando a protoestrela, enquanto uma
+<strong>frente de rarefação</strong> se propaga para fora a
+\(\sim c_s\). Interior a ela (\(r&lt;c_st\)), o gás já está em queda livre;
+exterior (\(r>c_st\)), permanece na estrutura estática original — a
+informação de que a pressão central caiu ainda não chegou ali.</p>
+
+<p>Os expoentes da região em queda livre saem de duas contas simples.
+Perto da protoestrela, de massa \(M_\star\), um elemento que cai do
+repouso de muito longe tem, pela conservação de energia,
+\(\frac12v^2=GM_\star/r\), logo</p>
+\[
+v=\sqrt{\frac{2GM_\star}{r}}\propto r^{-1/2}\,.
+\tag{7.49}
+\]
+<p>Se a massa atravessa cada esfera de raio \(r\) à mesma taxa \(\dot M\)
+(fluxo estacionário), a continuidade dá \(\dot M=4\pi r^2\rho v\), e
+portanto</p>
+\[
+\rho=\frac{\dot M}{4\pi r^2v}\propto\frac{1}{r^2\cdot r^{-1/2}}=r^{-3/2}\,.
+\tag{7.50}
+\]
+<p>Esse quadro — infall estendido, com fronteira nítida entre gás em
+colapso e estático — é exatamente o observado em envelopes de Classe~0, e
+é por isso que o modelo de Shu (1977) substituiu o colapso homólogo como
+paradigma padrão da formação estelar de baixa massa (Stahler &amp;
+Palla, 2004).</p>
 
 <div class="modulo-card">
   <div class="rotulo-card">Módulo interativo 3 — Perfil da esfera isotérmica singular (SIS)</div>
@@ -588,7 +900,7 @@ massa (Stahler &amp; Palla, 2004).</p>
   <p class="leitura-card">
     Velocidade do som isotérmica: \(c_s=\)<strong id="ms1-cs">—</strong>
     km/s (\(\mu=2{,}3\)). A densidade \(\rho_{\rm SIS}\propto r^{-2}\)
-    [Eq. (7.21), curva verde] diverge no centro; o tempo de queda livre
+    [Eq. (7.47), curva verde] diverge no centro; o tempo de queda livre
     local \(t_{\rm ff}(r)\) (curva roxa) <strong>cresce</strong> com
     \(r\), porque \(M(r)\propto r\) implica densidade média decrescente
     para fora — exatamente por isso o centro colapsa primeiro, dando
@@ -600,20 +912,31 @@ massa (Stahler &amp; Palla, 2004).</p>
 <p>Uma consequência notável do caráter autossimilar da solução de Shu é
 que a <strong>taxa de acréscimo</strong> \(\dot M\equiv\mathrm
 dM_\star/\mathrm dt\) é <em>constante</em> no tempo e depende só de
-\(c_s\) e \(G\): como a SIS [Equação (7.21)] não introduz escala de
+\(c_s\) e \(G\): como a SIS [Equação (7.47)] não introduz escala de
 massa ou comprimento independente, a única combinação dimensional de
 \(c_s\) e \(G\) com dimensão de taxa de massa é</p>
 \[
 \dot M \sim \frac{c_s^3}{G}\,,
-\tag{7.22}
+\tag{7.51}
 \]
-<p>já que \([c_s^3/G] = (\mathrm{cm^3\,s^{-3}})/(\mathrm{cm^3\,g^{-1}\,s^{-2}}) = \mathrm{g\,s^{-1}}\).
-A solução autossimilar completa de Shu (1977) confirma essa escala e
-fornece o coeficiente numérico exato, para o caso não-magnético e sem
-rotação:</p>
+<p>já que \([c_s^3/G] = (\mathrm{cm^3\,s^{-3}})/(\mathrm{cm^3\,g^{-1}\,s^{-2}}) = \mathrm{g\,s^{-1}}\).</p>
+
+<p>Há também um argumento físico direto para essa escala. A frente de
+rarefação está em \(r_f=c_st\) no instante \(t\); toda a massa interna a
+ela já entrou em colapso. Pela SIS, essa massa é</p>
+\[
+M(r_f)=\frac{2c_s^2r_f}{G}=\frac{2c_s^2(c_st)}{G}=\frac{2c_s^3}{G}\,t\,,
+\tag{7.52}
+\]
+<p>que cresce linearmente com \(t\). Derivando em relação ao tempo,
+\(\mathrm dM/\mathrm dt=2c_s^3/G\): uma taxa constante. Nem toda essa
+massa já chegou ao centro no instante \(t\) (parte ainda está caindo),
+por isso o valor exato é menor que \(2c_s^3/G\). A solução autossimilar
+completa de Shu (1977) confirma essa escala e fornece o coeficiente
+numérico exato, para o caso não-magnético e sem rotação:</p>
 \[
 \boxed{\dot M = 0{,}975\,\frac{c_s^3}{G}}\,.
-\tag{7.23}
+\tag{7.53}
 \]
 
 <div class="exemplo-card">
@@ -624,17 +947,34 @@ rotação:</p>
     (\(T=10\,\mathrm K\)) e \(\mu\approx2{,}3\), a velocidade do som
     isotérmica é</p>
     \[
-    c_s = \sqrt{\frac{k_BT}{\mu m_{\mathrm H}}}
+    \begin{aligned}
+    c_s &= \sqrt{\frac{k_BT}{\mu m_{\mathrm H}}}
+    =\sqrt{\frac{(1{,}381\times10^{-16})(10)}{(2{,}3)(1{,}6726\times10^{-24})}}
+    =\sqrt{\frac{1{,}381\times10^{-15}}{3{,}847\times10^{-24}}}\\
+    &=\sqrt{3{,}59\times10^{8}}
     \approx1{,}89\times10^4\,\mathrm{cm/s} = 0{,}19\,\mathrm{km/s}\,,
-    \tag{7.24}
+    \end{aligned}
+    \tag{7.54}
     \]
-    <p>valor típico citado para nuvens moleculares frias. Substituindo
-    na Equação (7.23):</p>
+    <p>valor típico citado para nuvens moleculares frias. Para a Equação
+    (7.53), calculamos primeiro
+    \(c_s^3=(1{,}89\times10^4)^3=6{,}80\times10^{12}\,\mathrm{cm^3/s^3}\) e
+    então</p>
     \[
-    \dot M = 0{,}975\,\frac{(1{,}89\times10^4\,\mathrm{cm/s})^3}{6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}}
-    \approx9{,}9\times10^{19}\,\mathrm{g/s}
+    \begin{aligned}
+    \dot M &= 0{,}975\,\frac{6{,}80\times10^{12}\,\mathrm{cm^3\,s^{-3}}}{6{,}674\times10^{-8}\,\mathrm{cm^3\,g^{-1}\,s^{-2}}}\\
+    &\approx0{,}975\times1{,}02\times10^{20}
+    \approx9{,}9\times10^{19}\,\mathrm{g/s}\,.
+    \end{aligned}
+    \tag{7.55}
+    \]
+    <p>Para converter em massas solares por ano, multiplicamos pelo número
+    de segundos em um ano (\(3{,}156\times10^7\)) e dividimos pela massa
+    solar:</p>
+    \[
+    \dot M\approx\frac{9{,}9\times10^{19}\times3{,}156\times10^7}{1{,}989\times10^{33}}\,M_\odot/\mathrm{ano}
     \approx1{,}6\times10^{-6}\,M_\odot/\mathrm{ano}\,.
-    \tag{7.25}
+    \tag{7.56}
     \]
     <p>Integrando ao longo da escala de tempo característica de
     formação de uma estrela de baixa massa, \(t\sim10^5\)&ndash;\(10^6\,
@@ -684,9 +1024,9 @@ rotação:</p>
     [texto acima]. Dentro dela, o gás está em queda livre
     (\(\rho\propto r^{-3/2}\), setas verdes convergindo); fora dela, o
     envelope permanece na estrutura estática original da SIS
-    (\(\rho\propto r^{-2}\), Eq. (7.21), contorno tracejado roxo). A
+    (\(\rho\propto r^{-2}\), Eq. (7.47), contorno tracejado roxo). A
     protoestrela central (ponto laranja) cresce continuamente enquanto a
-    frente avança, à taxa constante de Shu [Eq. (7.23)].
+    frente avança, à taxa constante de Shu [Eq. (7.53)].
   </p>
   <div class="controles">
     <div class="controle">
@@ -705,7 +1045,7 @@ rotação:</p>
     A janela de tempo mostrada vai até \(5\times10^4\,\)anos — repare que
     a frente de rarefação avança a velocidade <em>constante</em>
     \(c_s\), enquanto a massa da protoestrela cresce de forma constante
-    no tempo [Eq. (7.23)], não acelerada.
+    no tempo [Eq. (7.53)], não acelerada.
   </p>
 </div>
 
@@ -717,10 +1057,20 @@ observações de linhas moleculares (NH\(_3\)) revelam gradientes de
 velocidade sistemáticos, interpretados como rotação lenta de corpo
 rígido, com gradientes típicos de
 \(\sim1\)&ndash;\(2\,\mathrm{km\,s^{-1}\,pc^{-1}}\) (Goodman et al.,
-1993) — numericamente igual a \(\Omega\), o que dá
-\(\Omega\sim3\)&ndash;\(6\times10^{-14}\,\mathrm{s^{-1}}\), consistente com
-o valor fiducial \(\Omega_0\sim10^{-14}\,\mathrm{s^{-1}}\) adotado na
-literatura. Rotações dessa magnitude são pequenas —
+1993). Para rotação de corpo rígido, \(v=\Omega r\), de modo que o
+gradiente de velocidade \(\mathrm dv/\mathrm dr\) é numericamente igual
+a \(\Omega\). Convertendo as unidades
+(\(1\,\mathrm{km/s}=10^5\,\mathrm{cm/s}\) e
+\(1\,\mathrm{pc}=3{,}086\times10^{18}\,\mathrm{cm}\)),</p>
+\[
+1\,\mathrm{km\,s^{-1}\,pc^{-1}}=\frac{10^5\,\mathrm{cm/s}}{3{,}086\times10^{18}\,\mathrm{cm}}
+\approx3{,}2\times10^{-14}\,\mathrm{s^{-1}}\,,
+\tag{7.57}
+\]
+<p>o que dá \(\Omega\sim3\)&ndash;\(6\times10^{-14}\,\mathrm{s^{-1}}\),
+consistente com o valor fiducial
+\(\Omega_0\sim10^{-14}\,\mathrm{s^{-1}}\) adotado na literatura.
+Rotações dessa magnitude são pequenas —
 \(\beta\equiv T_{\rm rot}/|E_g|\sim0{,}02\) (Goodman et al., 1993), longe
 de afetar o equilíbrio hidrostático do núcleo. O problema, como veremos,
 não é a rotação em si, mas o que acontece com ela durante um colapso de
@@ -735,34 +1085,55 @@ várias ordens de grandeza em escala.</p>
     esse elemento caísse <em>radialmente</em>, conservando seu momento
     angular específico \(j=\Omega_0R_0^2\) (na ausência de torques
     externos — a mesma física por trás da patinadora que gira mais
-    rápido ao recolher os braços), sua velocidade angular ao alcançar um
-    raio estelar \(R_\star\sim R_\odot\approx6{,}96\times10^{10}\,
-    \mathrm{cm}\) seria</p>
+    rápido ao recolher os braços). [Para um elemento de massa
+    \(\delta m\) girando a distância \(r\) do eixo com velocidade
+    tangencial \(v_\phi=\Omega r\), o momento angular é
+    \(\delta m\,r\,v_\phi=\delta m\,\Omega r^2\); por unidade de massa,
+    \(j=\Omega r^2\).] Conservar \(j\) entre o raio inicial e o final
+    significa</p>
     \[
-    \Omega_\star = \Omega_0\left(\frac{R_0}{R_\star}\right)^2
-    \approx10^{-14}\,\mathrm{s^{-1}}\times\left(\frac{3{,}09\times10^{17}}{6{,}96\times10^{10}}\right)^2
+    \Omega_0R_0^2=\Omega_\star R_\star^2
+    \quad\Longrightarrow\quad
+    \Omega_\star = \Omega_0\left(\frac{R_0}{R_\star}\right)^2\,.
+    \tag{7.58}
+    \]
+    <p>Com \(R_\star\sim R_\odot\approx6{,}96\times10^{10}\,\mathrm{cm}\),
+    a razão de raios é
+    \(R_0/R_\star\approx3{,}09\times10^{17}/6{,}96\times10^{10}
+    \approx4{,}44\times10^6\), cujo quadrado é
+    \(\approx1{,}97\times10^{13}\), e portanto</p>
+    \[
+    \Omega_\star
+    \approx10^{-14}\,\mathrm{s^{-1}}\times1{,}97\times10^{13}
     \approx0{,}20\,\mathrm{s^{-1}}\,,
-    \tag{7.26}
+    \tag{7.59}
     \]
     <p>correspondendo a uma velocidade equatorial
-    \(v_\star=\Omega_\star R_\star\approx1{,}4\times10^5\,\mathrm{km/s}\) —
-    quase metade da velocidade da luz. Compare isso com a velocidade
+    \(v_\star=\Omega_\star R_\star\approx0{,}20\times6{,}96\times10^{10}
+    \approx1{,}4\times10^{10}\,\mathrm{cm/s}=1{,}4\times10^5\,\mathrm{km/s}\)
+    — quase metade da velocidade da luz. Compare isso com a velocidade
     angular <strong>crítica</strong> (de <em>breakup</em>), o limite
     acima do qual a força centrífuga na superfície excede a gravidade e
-    a estrela se desintegra:</p>
+    a estrela se desintegra. Ela sai de igualar, no equador, a aceleração
+    centrífuga \(\Omega^2R\) à aceleração gravitacional \(GM/R^2\):</p>
     \[
-    \Omega_{\rm crit} = \sqrt{\frac{GM_\odot}{R_\odot^3}}
-    \approx6{,}3\times10^{-4}\,\mathrm{s^{-1}}
+    \begin{aligned}
+    &\Omega_{\rm crit}^2R_\odot=\frac{GM_\odot}{R_\odot^2}
     \quad\Longrightarrow\quad
-    v_{\rm crit}=\Omega_{\rm crit}R_\odot\approx437\,\mathrm{km/s}\,,
-    \tag{7.27}
+    \Omega_{\rm crit} = \sqrt{\frac{GM_\odot}{R_\odot^3}}\,,\\
+    &\Omega_{\rm crit}=\sqrt{\frac{1{,}327\times10^{26}}{(6{,}96\times10^{10})^3}}
+    \approx6{,}3\times10^{-4}\,\mathrm{s^{-1}}\,,
+    \end{aligned}
+    \tag{7.60}
     \]
-    <p>valor que reproduz corretamente a velocidade de <em>breakup</em>
+    <p>e a velocidade equatorial correspondente é
+    \(v_{\rm crit}=\Omega_{\rm crit}R_\odot\approx4{,}37\times10^7\,\mathrm{cm/s}=437\,\mathrm{km/s}\),
+    valor que reproduz corretamente a velocidade de <em>breakup</em>
     equatorial de um objeto com massa e raio solares. A razão entre os
     dois resultados,</p>
     \[
     \frac{\Omega_\star}{\Omega_{\rm crit}} \approx \frac{0{,}20}{6{,}3\times10^{-4}} \approx 320\,,
-    \tag{7.28}
+    \tag{7.61}
     \]
     <p>mostra que o colapso radial ingênuo produziria uma estrela
     girando <strong>mais de duas ordens de grandeza acima</strong> da
@@ -785,14 +1156,35 @@ colapso <em>não</em> é radial. Como o momento angular específico
 apenas até o raio onde a força centrífuga associada ao seu próprio
 \(j\) equilibra a atração gravitacional da massa central já acretada.
 Esse <strong>raio centrífugo</strong> \(R_c\) é obtido igualando a
-aceleração centrífuga \(v_\phi^2/r=j^2/r^3\) (com \(v_\phi=j/r\)) à
-aceleração gravitacional \(GM_\star/r^2\):</p>
+aceleração centrífuga à aceleração gravitacional. Como \(j=rv_\phi\), a
+velocidade tangencial de um elemento com momento angular específico
+\(j\) no raio \(r\) é \(v_\phi=j/r\), e a aceleração centrífuga é</p>
+\[
+\frac{v_\phi^2}{r}=\frac{(j/r)^2}{r}=\frac{j^2}{r^3}\,.
+\tag{7.62}
+\]
+<p>Igualando à gravidade \(GM_\star/r^2\) no raio \(r=R_c\):</p>
 \[
 \frac{j^2}{R_c^3} = \frac{GM_\star}{R_c^2}
 \quad\Longrightarrow\quad
+j^2 = GM_\star\,\frac{R_c^3}{R_c^2}=GM_\star R_c
+\quad\Longrightarrow\quad
 \boxed{R_c = \frac{j^2}{GM_\star}}\,.
-\tag{7.29}
+\tag{7.63}
 \]
+<p>Note que a aceleração centrífuga cai como \(r^{-3}\) e a gravidade
+como \(r^{-2}\): longe do centro a gravidade domina e o gás cai; ao se
+aproximar, a centrífuga cresce mais rápido e acaba igualando a gravidade
+em \(R_c\), onde o gás para de cair e passa a orbitar. Como \(j\) cresce
+com o raio inicial da camada, material vindo de \(R_0\) maior se deposita
+em raios centrífugos progressivamente <em>maiores</em>. O resultado não
+é uma estrela girando de forma absurda, mas um <strong>disco de
+acréscimo circunstelar</strong>: a matéria se acumula em um disco fino,
+em rotação kepleriana, que armazena a grande maioria do momento angular
+do sistema. Apenas a fração de massa que perde momento angular
+suficiente — por viscosidade interna e outros processos de transporte
+(caixa a seguir) — atravessa o disco e é acrescida pela protoestrela. A
+física detalhada desse disco será desenvolvida adiante neste capítulo.</p>
 <p>Como \(j\) cresce com o raio inicial da camada, material vindo de
 \(R_0\) maior se deposita em raios centrífugos progressivamente
 <em>maiores</em>. O resultado não é uma estrela girando de forma
@@ -864,28 +1256,40 @@ será desenvolvida adiante neste capítulo.</p>
     avançados do colapso, quando a maior parte do núcleo já foi
     processada). O momento angular específico dessa camada é</p>
     \[
-    j = \Omega_0R_0^2 \approx10^{-14}\,\mathrm{s^{-1}}\times\left(3{,}09\times10^{17}\,\mathrm{cm}\right)^2
+    \begin{aligned}
+    j &= \Omega_0R_0^2 \approx10^{-14}\,\mathrm{s^{-1}}\times\left(3{,}09\times10^{17}\,\mathrm{cm}\right)^2\\
+    &=10^{-14}\times9{,}55\times10^{34}
     \approx9{,}5\times10^{20}\,\mathrm{cm^2/s}\,.
-    \tag{7.30}
+    \end{aligned}
+    \tag{7.64}
     \]
-    <p>Pela Equação (7.29),</p>
+    <p>Pela Equação (7.63), com
+    \(j^2\approx9{,}1\times10^{41}\,\mathrm{cm^4/s^2}\) e
+    \(GM_\odot=6{,}674\times10^{-8}\times1{,}989\times10^{33}\approx1{,}33\times10^{26}\,\mathrm{cm^3/s^2}\),</p>
     \[
-    R_c = \frac{j^2}{GM_\star}
-    \approx\frac{\left(9{,}5\times10^{20}\right)^2}{6{,}674\times10^{-8}\times1{,}989\times10^{33}}\,\mathrm{cm}
-    \approx6{,}8\times10^{15}\,\mathrm{cm}
+    \begin{aligned}
+    R_c &= \frac{j^2}{GM_\star}
+    \approx\frac{9{,}1\times10^{41}}{1{,}33\times10^{26}}\,\mathrm{cm}
+    \approx6{,}8\times10^{15}\,\mathrm{cm}\\
+    &=\frac{6{,}8\times10^{15}}{1{,}496\times10^{13}}\,\mathrm{UA}
     \approx460\,\mathrm{UA}\,.
-    \tag{7.31}
+    \end{aligned}
+    \tag{7.65}
     \]
     <p>Esse é o raio em que o material mais externo (maior \(j\)) se
     deposita — comparável aos maiores discos observados. Camadas mais
     internas, com \(R_0\) menor, caem em raios proporcionalmente
-    menores: como \(R_c\propto R_0^4\) [via \(j\propto R_0^2\)], uma
-    camada com metade do raio inicial se deposita \(16\times\) mais
-    perto, \(R_c/16\approx29\,\mathrm{UA}\) — a escala do Sistema Solar
-    até Netuno. O disco formado pela deposição sucessiva de camadas
-    cobre, portanto, naturalmente toda a faixa de <strong>dezenas a
-    centenas de UA</strong> observada em discos protoplanetários
-    reais.</p>
+    menores. Combinando \(j=\Omega_0R_0^2\) com \(R_c=j^2/GM_\star\),</p>
+    \[
+    R_c=\frac{(\Omega_0R_0^2)^2}{GM_\star}=\frac{\Omega_0^2R_0^4}{GM_\star}\propto R_0^4\,,
+    \tag{7.66}
+    \]
+    <p>de modo que uma camada com metade do raio inicial se deposita
+    \(2^4=16\) vezes mais perto, \(R_c/16\approx29\,\mathrm{UA}\) — a
+    escala do Sistema Solar até Netuno. O disco formado pela deposição
+    sucessiva de camadas cobre, portanto, naturalmente toda a faixa de
+    <strong>dezenas a centenas de UA</strong> observada em discos
+    protoplanetários reais.</p>
   </div>
 </div>
 </div>
@@ -907,20 +1311,68 @@ será desenvolvida adiante neste capítulo.</p>
 <div class="modulo-card">
   <div class="rotulo-card">Módulo interativo 7 (destaque) — Formação do disco por deposição de material, animado</div>
   <p class="leitura-card" style="margin-top:0;">
-    Cada trajetória (ponto verde) representa um elemento de gás em
-    queda, conservando seu momento angular específico \(j\): elementos
-    com \(j\) maior (que caem de ângulos mais afastados do eixo)
-    depositam-se em raios centrífugos maiores [Eq. (7.29)], enquanto os
-    de \(j\) pequeno caem quase direto sobre a protoestrela. O resultado
-    final é o disco fino (verde, achatado) em rotação kepleriana.
+    Esta é a versão animada da Equação (7.63), \(R_c=j^2/GM_\star\). Visão
+    meridional (o eixo de rotação é vertical). O fundo mostra centenas de
+    elementos de gás em queda, cada um conservando seu momento angular
+    específico \(j\); quatro <strong>traçadoras</strong> (círculos escuros), com
+    \(j/j_{\max}=0{,}25;\,0{,}5;\,0{,}75;\,1\), carregam os vetores. Acompanhe:
   </p>
+  <ol class="leitura-card" style="margin-top:0;">
+    <li>a <span style="color:#963c1e;">aceleração gravitacional</span>
+    \(GM_\star/r^2\) cai como \(r^{-2}\); a
+    <span style="color:#17805f;">aceleração centrífuga</span>
+    \(j^2/\varpi^3\) (Eq. 7.62), como \(\varpi^{-3}\), <em>cresce mais depressa</em>
+    à medida que a partícula se aproxima do eixo e do centro;</li>
+    <li>no plano médio, as duas setas ficam do mesmo tamanho exatamente em
+    \(R_c\): ali a queda radial cessa e o gás passa a orbitar;</li>
+    <li>o <span style="color:#5b4fc4;">vetor \(\vec j\)</span> (tracejado,
+    axial, perpendicular ao plano do disco) <strong>não é uma força</strong>:
+    é uma grandeza conservada e seu comprimento não muda em momento algum.
+    É ele que decide onde cada traçadora estaciona: \(R_c\propto j^2\).</li>
+  </ol>
   <div class="controles">
-    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;">
+    <div class="controle">
+      <label for="mdisco-dens">Partículas de fundo <span class="valor" id="mdisco-dens-valor">800</span></label>
+      <input type="range" id="mdisco-dens" min="100" max="2000" step="100" value="800">
+    </div>
+    <div class="controle">
+      <label for="mdisco-Om">Velocidade angular \(\log_{10}(\Omega_0/\mathrm{s^{-1}})\) <span class="valor" id="mdisco-Om-valor">1,00×10⁻¹⁴</span></label>
+      <input type="range" id="mdisco-Om" min="-145" max="-130" step="1" value="-140">
+    </div>
+    <div class="controle">
+      <label for="mdisco-M">Massa central \(M_\star/M_\odot\) <span class="valor" id="mdisco-M-valor">1,00</span></label>
+      <input type="range" id="mdisco-M" min="10" max="300" step="1" value="100">
+    </div>
+    <div class="controle" style="display:flex;gap:.5rem;align-items:flex-end;flex-wrap:wrap;">
+      <label style="display:flex;gap:.4rem;align-items:center;"><input type="checkbox" id="mdisco-vet" checked> mostrar vetores</label>
       <button type="button" id="mdisco-play" class="botao-modulo">▶ Animar deposição</button>
       <button type="button" id="mdisco-reset" class="botao-modulo">↺ Reiniciar</button>
     </div>
   </div>
-  <div class="grafico-card"><canvas id="mdisco-canvas" role="img" aria-label="Animacao de trajetorias de material caindo sobre uma protoestrela e se depositando em raios centrifugos crescentes conforme o momento angular especifico de cada trajetoria, formando um disco fino em rotacao kepleriana." style="width:100%;height:360px;display:block;"></canvas></div>
+  <div class="grafico-card"><canvas id="mdisco-canvas" role="img" aria-label="Simulacao meridional de gas em queda conservando momento angular especifico: quatro tracadoras com setas de gravidade, forca centrifuga e momento angular, estacionando em raios centrifugos diferentes, e centenas de particulas formando um disco fino." style="width:100%;height:400px;display:block;"></canvas></div>
+  <p class="leitura-card" id="mdisco-leitura">—</p>
+  <p class="leitura-card">
+    <strong>Valores:</strong> com os padrões (\(R_0=0{,}1\,\)pc,
+    \(\Omega_0=10^{-14}\,\mathrm{s^{-1}}\), \(M_\star=1\,M_\odot\)) a linha acima
+    reproduz o Exemplo do capítulo, \(R_c\approx460\,\)UA (a conta direta dá
+    456 UA; o texto arredonda). Os controles de \(\Omega_0\) e \(M_\star\)
+    reescalam \(R_c\) e a unidade de tempo; a forma da animação é
+    adimensional e, por isso, não muda.
+    <strong>Escala dos vetores:</strong> o comprimento é proporcional à
+    <em>raiz quarta</em> da aceleração, normalizada pelo valor em \(R_c\) de
+    cada traçadora (onde gravidade e centrífuga coincidem). Os comprimentos
+    são comparáveis entre si, mas <em>não</em> lineares no valor absoluto. O
+    vetor \(\vec j\) tem comprimento fixo, justamente por ser constante, e
+    não é comparável às acelerações. As setas de gravidade e centrífuga só
+    têm o mesmo módulo no plano médio; fora dele, a gravidade tem também
+    componente vertical.
+    <strong>Modelo:</strong> a dinâmica é integrada de verdade
+    (\(\ddot\varpi=-GM\varpi/r^3+j^2/\varpi^3\), \(\ddot z=-GMz/r^3\)). Ao
+    cruzar o plano médio o gás sofre choque (\(z\) e \(v_z\) zerados) e um
+    arrasto radial, que é o que o leva a estacionar. O raio inicial
+    (\(2{,}2\,R_c\)) está fora de escala: no exemplo real a queda começa em
+    \(\sim\)43 \(R_c\).
+  </p>
 </div>
 
 <h2 id="fe-pms">Da protoestrela à pré-sequência principal</h2>
@@ -945,22 +1397,39 @@ Henyey</strong>.</p>
 <p>Uma protoestrela recém-revelada é, em praticamente toda a sua massa,
 <strong>totalmente convectiva</strong>. A razão está diretamente ligada
 ao critério de Schwarzschild e à forma explícita do gradiente radiativo
-já deduzida no Capítulo 5,</p>
+já deduzida no Capítulo 5. Vale refazer a conta. Em coordenada de massa,
+o transporte radiativo e o equilíbrio hidrostático são</p>
+\[
+\frac{\mathrm dT}{\mathrm dm}=-\frac{3\kappa_{\rm rad}\,l}{64\pi^2ac\,r^4T^3}\,,
+\qquad
+\frac{\mathrm dP}{\mathrm dm}=-\frac{Gm}{4\pi r^4}\,.
+\tag{7.67}
+\]
+<p>Dividindo uma pela outra (regra da cadeia,
+\(\mathrm dT/\mathrm dP=(\mathrm dT/\mathrm dm)/(\mathrm dP/\mathrm dm)\)),
+os sinais negativos e o fator \(r^4\) se cancelam:</p>
+\[
+\frac{\mathrm dT}{\mathrm dP}
+=\frac{3\kappa_{\rm rad}\,l}{64\pi^2ac\,T^3}\cdot\frac{4\pi}{Gm}
+=\frac{3\kappa_{\rm rad}\,l}{16\pi acG\,m\,T^3}\,,
+\tag{7.68}
+\]
+<p>usando \(4\pi/(64\pi^2)=1/(16\pi)\). Multiplicando por \(P/T\)
+obtemos o gradiente logarítmico</p>
 \[
 \nabla_{\rm rad} = \frac{P}{T}\frac{\mathrm dT}{\mathrm dP}
-= \frac{3}{16\pi acG}\cdot\frac{\kappa_{\rm rad}\,l\,P}{m\,T^4}
-\tag{7.32}
+= \frac{3}{16\pi acG}\cdot\frac{\kappa_{\rm rad}\,l\,P}{m\,T^4}\,.
+\tag{7.69}
 \]
-<p>[reescrita em forma logarítmica a partir da equação já vista no
-Capítulo 5]: \(\nabla_{\rm rad}\) é diretamente proporcional à opacidade
-\(\kappa_{\rm rad}\). Nas camadas externas, relativamente frias
-(\(T\sim4000\)&ndash;\(8000\,\mathrm K\)), de uma protoestrela ou estrela
-PMS de baixa massa, a opacidade é dominada pela absorção contínua do
-<strong>íon negativo de hidrogênio</strong>, H\(^-\), cuja forma
-aproximada padrão é</p>
+<p>O ponto importante para esta seção: \(\nabla_{\rm rad}\) é
+diretamente proporcional à opacidade \(\kappa_{\rm rad}\). Nas camadas
+externas, relativamente frias (\(T\sim4000\)&ndash;\(8000\,\mathrm K\)),
+de uma protoestrela ou estrela PMS de baixa massa, a opacidade é
+dominada pela absorção contínua do <strong>íon negativo de
+hidrogênio</strong>, H\(^-\), cuja forma aproximada padrão é</p>
 \[
 \kappa_{\mathrm H^-} \approx 1{,}1\times10^{-25}\,Z^{1/2}\rho^{1/2}T^{7{,}7}\;\mathrm{cm^2/g}\,,
-\tag{7.33}
+\tag{7.70}
 \]
 <p>válida aproximadamente no intervalo \(4\times10^3\lesssim T\lesssim
 10^4\,\mathrm K\). Ao contrário da opacidade de Kramers do interior
@@ -979,7 +1448,7 @@ perto um único adiabata (politrópica \(n=3/2\)), de modo que, fixada a
 massa \(M\), a estrutura inteira fica determinada pela condição de
 contorno na fotosfera, onde a opacidade H\(^-\) conecta o interior
 convectivo à atmosfera radiativa. Como \(\kappa_{\mathrm H^-}\) [Equação
-(7.33)] depende tão fortemente de \(T\), essa condição só admite
+(7.70)] depende tão fortemente de \(T\), essa condição só admite
 soluções em uma faixa estreita de temperatura efetiva,
 \(T_{\rm eff}\sim4000\,\mathrm K\) (<strong>temperatura de
 Hayashi</strong>, fracamente dependente da massa), <em>qualquer que
@@ -1078,16 +1547,41 @@ mesmo mecanismo que regula a contração pré-nuclear do Sol atual.</p>
 espacialmente discos e envelopes individualmente —, o estágio evolutivo
 de um objeto estelar jovem (YSO, <em>young stellar object</em>) é
 inferido da forma de sua <strong>distribuição espectral de energia</strong>
-(SED, \(\nu F_\nu\) versus comprimento de onda), quantificada pelo
-<strong>índice espectral infravermelho</strong></p>
+(SED, \(\lambda F_\lambda\) versus comprimento de onda), quantificada
+pelo <strong>índice espectral infravermelho</strong></p>
 \[
-\alpha_{\rm IR} \equiv \frac{\mathrm d\log(\nu F_\nu)}{\mathrm d\log\nu}\,,
-\tag{7.34}
+\alpha_{\rm IR} \equiv \frac{\mathrm d\log(\lambda F_\lambda)}{\mathrm d\log\lambda}\,,
+\tag{7.71}
 \]
 <p>tipicamente medido entre \(2\) e \(10\)&ndash;\(25\,\mu\mathrm m\)
-(Lada, 1987). Esse esquema, refinado por Greene et al. (1994) com a
-adição da classe "espectro plano", define quatro categorias
-observacionais:</p>
+(Lada, 1987). Na prática, com fluxos medidos em dois comprimentos de
+onda \(\lambda_1<\lambda_2\), a derivada vira uma inclinação:</p>
+\[
+\alpha_{\rm IR}\approx\frac{\log(\lambda_2F_{\lambda_2})-\log(\lambda_1F_{\lambda_1})}{\log\lambda_2-\log\lambda_1}\,.
+\tag{7.72}
+\]
+<p>O sinal tem leitura direta: \(\alpha_{\rm IR}>0\) significa SED
+<em>subindo</em> para o infravermelho (emissão de material frio
+dominando), \(\alpha_{\rm IR}<0\) significa SED <em>descendo</em>
+(fotosfera dominando). (Como \(\lambda F_\lambda=\nu F_\nu\) e
+\(\log\lambda=\log c-\log\nu\), definir a derivada em relação a
+\(\log\nu\) em vez de \(\log\lambda\) apenas troca o sinal de
+\(\alpha\); a convenção de Lada (1987) é a em \(\lambda\), usada
+aqui.)</p>
+
+<h4>Referência: uma fotosfera pura</h4>
+<p>No infravermelho, a cauda de Rayleigh&ndash;Jeans de um corpo negro
+dá \(F_\lambda\propto\lambda^{-4}\), logo
+\(\lambda F_\lambda\propto\lambda^{-3}\) e</p>
+\[
+\alpha_{\rm IR}=\frac{\mathrm d\log(\lambda^{-3})}{\mathrm d\log\lambda}=-3\,.
+\tag{7.73}
+\]
+<p>Uma estrela sem disco nem envelope tem, portanto,
+\(\alpha_{\rm IR}\approx-3\); quanto mais material frio ao redor, mais
+\(\alpha_{\rm IR}\) sobe a partir desse valor. Esse esquema, refinado
+por Greene et al. (1994) com a adição da classe "espectro plano", define
+quatro categorias observacionais:</p>
 <ul>
   <li><strong>Classe 0</strong>: SED dominada pelo envelope denso e
   frio, pico no submilimétrico/FIR; quase nenhuma luz estelar escapa.
@@ -1099,10 +1593,12 @@ observacionais:</p>
   substancial;</li>
   <li><strong>Classe II</strong>: \(-1{,}6\leq\alpha_{\rm IR}<-0{,}3\).
   Envelope dissipado; disco fino e opticamente espesso ao redor de uma
-  T~Tauri clássica (CTTS) já visível;</li>
+  T~Tauri clássica (CTTS) já visível — o estágio detalhado adiante no
+  capítulo;</li>
   <li><strong>Classe III</strong>: \(\alpha_{\rm IR}<-1{,}6\). Disco
   dissipado ou residual; T~Tauri de linhas fracas (WTTS), SED
-  essencialmente fotosférica.</li>
+  essencialmente fotosférica (próxima do valor
+  \(\alpha_{\rm IR}\approx-3\) de corpo negro calculado acima).</li>
 </ul>
 <p>(A faixa \(-0{,}3\leq\alpha_{\rm IR}<0{,}3\), "espectro plano", ocupa
 a transição Classe~I~\(\to\)~II.)</p>
@@ -1222,48 +1718,75 @@ amplamente sobre a pressão (dinamicamente desprezível), e o gás gira em
 órbitas quase keplerianas,</p>
 \[
 \Omega(r) \approx \Omega_K(r) = \sqrt{\frac{GM_\star}{r^3}}\,;
-\tag{7.35}
+\tag{7.74}
 \]
 <p>já na direção vertical, é a pressão do gás que sustenta o disco
 contra a gravidade estelar.</p>
 
+<p>A Equação (7.74) vem de igualar a aceleração centrípeta de uma órbita
+circular, \(\Omega^2r\), à gravidade da estrela, \(GM_\star/r^2\):
+\(\Omega^2r=GM_\star/r^2\Rightarrow\Omega^2=GM_\star/r^3\).</p>
+
 <p>Para obter \(H(r)\), considere o equilíbrio hidrostático vertical a
-uma altura \(z\ll r\) acima do plano médio, onde a componente vertical
-da gravidade é</p>
+uma altura \(z\) acima do plano médio, a uma distância \(r\) do eixo. A
+distância até a estrela é \(d=\sqrt{r^2+z^2}\), e a gravidade total
+aponta para a estrela, com módulo \(GM_\star/d^2\). Só nos interessa a
+componente vertical, que é essa força vezes o seno do ângulo de
+elevação, \(z/d\):</p>
 \[
-g_z = \frac{GM_\star\,z}{(r^2+z^2)^{3/2}} \approx \frac{GM_\star}{r^3}\,z
+g_z = \frac{GM_\star}{d^2}\cdot\frac{z}{d}
+= \frac{GM_\star\,z}{(r^2+z^2)^{3/2}}\,.
+\tag{7.75}
+\]
+<p>Para um disco fino, \(z\ll r\), de modo que \(r^2+z^2\approx r^2\) e
+\((r^2+z^2)^{3/2}\approx r^3\):</p>
+\[
+g_z \approx \frac{GM_\star}{r^3}\,z
 = \Omega_K^2(r)\,z\,,
-\tag{7.36}
+\tag{7.76}
 \]
-<p>isto é, a gravidade vertical se comporta, para \(z\ll r\), como um
-oscilador harmônico de frequência \(\Omega_K\). O equilíbrio
-hidrostático vertical,</p>
+<p>isto é, a gravidade vertical cresce linearmente com a altura, como a
+força restauradora de uma mola (um oscilador harmônico de frequência
+\(\Omega_K\)). O equilíbrio hidrostático vertical é</p>
 \[
-\frac{\mathrm dP}{\mathrm dz} = -\rho\,g_z = -\rho\,\Omega_K^2\,z\,,
-\tag{7.37}
+\frac{\mathrm dP}{\mathrm dz} = -\rho\,g_z = -\rho\,\Omega_K^2\,z\,.
+\tag{7.77}
 \]
-<p>fechado com a equação de estado isotérmica local \(P=\rho c_s^2\)
+<p>Fechamos com a equação de estado isotérmica local \(P=\rho c_s^2\)
 [\(c_s^2=k_BT/(\mu m_H)\), a mesma relação de gás ideal usada em todo o
-Capítulo 5, aqui aplicada à temperatura local do disco \(T(r)\)],
-fornece</p>
+Capítulo 5, aqui aplicada à temperatura local do disco \(T(r)\), que não
+varia com \(z\)]. Como \(c_s\) não depende de \(z\),
+\(\mathrm dP/\mathrm dz=c_s^2\,\mathrm d\rho/\mathrm dz\), e</p>
 \[
 c_s^2\,\frac{\mathrm d\rho}{\mathrm dz} = -\rho\,\Omega_K^2\,z
 \quad\Longrightarrow\quad
 \frac{\mathrm d\rho}{\rho} = -\frac{\Omega_K^2}{c_s^2}\,z\,\mathrm dz\,.
-\tag{7.38}
+\tag{7.78}
 \]
-<p>Integrando,</p>
+<p>Integrando os dois lados, do plano médio (\(z=0\), densidade
+\(\rho_0\)) até a altura \(z\):</p>
+\[
+\int_{\rho_0}^{\rho}\frac{\mathrm d\rho'}{\rho'}
+=-\frac{\Omega_K^2}{c_s^2}\int_0^z z'\,\mathrm dz'
+\quad\Longrightarrow\quad
+\ln\frac{\rho}{\rho_0}=-\frac{\Omega_K^2}{c_s^2}\,\frac{z^2}{2}\,.
+\tag{7.79}
+\]
+<p>Definindo \(H\equiv c_s/\Omega_K\), o expoente é
+\(-\Omega_K^2z^2/(2c_s^2)=-z^2/(2H^2)\), e exponenciando:</p>
 \[
 \rho(r,z) = \rho_0(r)\,\exp\!\left(-\frac{z^2}{2H^2}\right)\,,
 \qquad
 H(r) \equiv \frac{c_s(r)}{\Omega_K(r)}\,,
-\tag{7.39}
+\tag{7.80}
 \]
-<p>um perfil vertical gaussiano com escala de altura \(H\). Dividindo
-por \(r\) e usando a velocidade kepleriana \(v_K=\Omega_K r\),</p>
+<p>um perfil vertical gaussiano com escala de altura \(H\) (em
+\(z=H\), a densidade caiu para \(e^{-1/2}\approx61\%\) do valor no plano
+médio; em \(z=3H\), para \(1\%\)). Dividindo por \(r\) e usando a
+velocidade kepleriana \(v_K=\Omega_K r\),</p>
 \[
 \frac{H}{r} = \frac{c_s}{\Omega_K r} = \frac{c_s}{v_K}\,,
-\tag{7.40}
+\tag{7.81}
 \]
 <p>confirmando que a razão de aspecto é essencialmente a razão entre a
 velocidade do som local (agitação térmica) e a velocidade orbital. Como
@@ -1271,17 +1794,30 @@ velocidade do som local (agitação térmica) e a velocidade orbital. Como
 disco é necessariamente fino.</p>
 
 <p>O disco é caracterizado, além de \(H(r)\), por dois perfis radiais: a
-densidade superficial \(\Sigma(r)=\int\rho\,\mathrm dz\approx
-\sqrt{2\pi}\rho_0(r)H(r)\) e a temperatura \(T(r)\) (ambos decrescentes
-com \(r\)). O perfil de referência da Nebulosa Solar de Massa Mínima
-(MMSN), construído por Hayashi (1981) a partir da massa e composição
-hoje presas nos planetas do Sistema Solar, adota</p>
+densidade superficial \(\Sigma(r)\) (massa por unidade de área,
+integrada na vertical) e a temperatura \(T(r)\) (ambos decrescentes com
+\(r\)). A relação entre \(\Sigma\) e a densidade no plano médio sai da
+integral gaussiana
+\(\int_{-\infty}^{\infty}e^{-x^2/2}\,\mathrm dx=\sqrt{2\pi}\), com a
+troca de variável \(x=z/H\) (\(\mathrm dz=H\,\mathrm dx\)):</p>
+\[
+\begin{aligned}
+\Sigma(r)&=\int_{-\infty}^{\infty}\rho\,\mathrm dz
+=\rho_0\int_{-\infty}^{\infty}e^{-z^2/2H^2}\,\mathrm dz\\
+&=\rho_0H\int_{-\infty}^{\infty}e^{-x^2/2}\,\mathrm dx
+=\sqrt{2\pi}\,\rho_0(r)H(r)\,.
+\end{aligned}
+\tag{7.82}
+\]
+<p>O perfil de referência da Nebulosa Solar de Massa Mínima (MMSN),
+construído por Hayashi (1981) a partir da massa e composição hoje presas
+nos planetas do Sistema Solar, adota</p>
 \[
 \Sigma(r) \approx 1700\left(\frac{r}{1\,\mathrm{UA}}\right)^{-3/2}
 \mathrm{g\,cm^{-2}}\,,
 \qquad
 T(r) \approx 280\left(\frac{r}{1\,\mathrm{UA}}\right)^{-1/2}\mathrm K\,,
-\tag{7.41}
+\tag{7.83}
 \]
 <p>que usaremos como referência numérica ao longo desta seção.</p>
 
@@ -1290,44 +1826,58 @@ T(r) \approx 280\left(\frac{r}{1\,\mathrm{UA}}\right)^{-1/2}\mathrm K\,,
   <div class="rotulo">Exemplo — Razão de aspecto de um disco protoplanetário a \(1\,\mathrm{UA}\)</div>
   <div class="conteudo">
     <p>Para uma protoestrela de \(1\,M_\odot\) e o perfil MMSN da
-    Equação (7.41), avaliado em \(r=1\,\mathrm{UA}\): com \(T=280\,
+    Equação (7.83), avaliado em \(r=1\,\mathrm{UA}\): com \(T=280\,
     \mathrm K\) e peso molecular médio \(\mu\approx2{,}3\) (gás
     molecular H\(_2\)+He), a velocidade do som é</p>
     \[
-    c_s = \sqrt{\frac{k_BT}{\mu m_H}}
-    \approx\sqrt{\frac{(1{,}381\times10^{-16})(280)}{(2{,}3)(1{,}673\times10^{-24})}}
+    \begin{aligned}
+    c_s &= \sqrt{\frac{k_BT}{\mu m_H}}
+    =\sqrt{\frac{(1{,}381\times10^{-16})(280)}{(2{,}3)(1{,}673\times10^{-24})}}
+    =\sqrt{\frac{3{,}87\times10^{-14}}{3{,}85\times10^{-24}}}\\
+    &\approx\sqrt{1{,}0\times10^{10}}
     \approx1{,}0\times10^5\,\mathrm{cm/s} \approx1{,}0\,\mathrm{km/s}\,.
-    \tag{7.42}
+    \end{aligned}
+    \tag{7.84}
     \]
     <p>A velocidade kepleriana, com \(GM_\odot\approx1{,}327\times
     10^{26}\,\mathrm{cm^3/s^2}\) e \(r=1\,\mathrm{UA}\approx1{,}496\times
     10^{13}\,\mathrm{cm}\), é</p>
     \[
-    v_K = \sqrt{\frac{GM_\odot}{r}} \approx3{,}0\times10^6\,\mathrm{cm/s}
+    \begin{aligned}
+    v_K &= \Omega_Kr=\sqrt{\frac{GM_\odot}{r^3}}\,r=\sqrt{\frac{GM_\odot}{r}}
+    =\sqrt{\frac{1{,}327\times10^{26}}{1{,}496\times10^{13}}}\\
+    &=\sqrt{8{,}87\times10^{12}}
+    \approx3{,}0\times10^6\,\mathrm{cm/s}
     \approx30\,\mathrm{km/s}
-    \tag{7.43}
+    \end{aligned}
+    \tag{7.85}
     \]
     <p>(o mesmo valor da velocidade orbital da Terra, como deveria ser,
     já que \(r=1\,\)UA é literalmente a órbita terrestre). Logo, pela
-    Equação (7.40),</p>
+    Equação (7.81),</p>
     \[
     \frac{H}{r}\bigg|_{1\,\mathrm{UA}} \approx \frac{1{,}0}{30}
     \approx0{,}034\,,
-    \tag{7.44}
+    \tag{7.86}
     \]
-    <p>ou seja, \(H\approx0{,}034\,\mathrm{UA}\approx5\times10^{11}\,
-    \mathrm{cm}\): a escala de altura é cerca de \(3\,\%\) do raio
-    orbital, confirmando quantitativamente que o disco é fino. A
-    densidade no plano médio correspondente é</p>
+    <p>ou seja, \(H\approx0{,}034\times1{,}496\times10^{13}\,\mathrm{cm}
+    \approx5\times10^{11}\,\mathrm{cm}\): a escala de altura é cerca de
+    \(3\,\%\) do raio orbital, confirmando quantitativamente que o disco
+    é fino. A densidade no plano médio sai de inverter
+    \(\Sigma=\sqrt{2\pi}\rho_0H\), com \(\sqrt{2\pi}\approx2{,}51\):</p>
     \[
     \rho_0 = \frac{\Sigma}{\sqrt{2\pi}\,H}
-    \approx\frac{1700}{\sqrt{2\pi}\,(5{,}0\times10^{11})}
+    \approx\frac{1700\,\mathrm{g/cm^2}}{2{,}51\times(5{,}0\times10^{11}\,\mathrm{cm})}
     \approx1{,}3\times10^{-9}\,\mathrm{g/cm^3}\,,
-    \tag{7.45}
+    \tag{7.87}
     \]
-    <p>correspondendo a uma densidade numérica
-    \(n=\rho_0/(\mu m_H)\approx3{,}5\times10^{14}\,\mathrm{cm^{-3}}\) —
-    este número será usado na próxima subseção para estimar o livre
+    <p>correspondendo a uma densidade numérica</p>
+    \[
+    n=\frac{\rho_0}{\mu m_H}\approx\frac{1{,}35\times10^{-9}}{2{,}3\times1{,}673\times10^{-24}}
+    \approx3{,}5\times10^{14}\,\mathrm{cm^{-3}}
+    \tag{7.88}
+    \]
+    <p>— este número será usado na próxima subseção para estimar o livre
     caminho médio molecular do gás do disco.</p>
   </div>
 </div>
@@ -1371,20 +1921,27 @@ para fora.</p>
 
 <p>O candidato óbvio é a viscosidade microscópica do gás — o atrito
 molecular entre anéis adjacentes. O problema é que essa viscosidade é
-absurdamente pequena: \(\nu_{\rm mol}\sim\ell\,c_s\), com
-\(\ell=1/(n\sigma)\) o livre caminho médio (\(\sigma\approx2\times
-10^{-15}\,\mathrm{cm^2}\) para H\(_2\)). Usando os valores do Exemplo
-anterior (\(n\approx3{,}5\times10^{14}\,\mathrm{cm^{-3}}\),
+absurdamente pequena. Pela teoria cinética, a viscosidade cinemática é
+um coeficiente de difusão de momento: cada molécula carrega o momento do
+anel onde estava por uma distância típica igual ao livre caminho médio
+\(\ell\), viajando a uma velocidade típica \(\sim c_s\); um coeficiente
+de difusão tem sempre a forma (distância por passo) \(\times\)
+(velocidade), de modo que \(\nu_{\rm mol}\sim\ell\,c_s\) (em
+\(\mathrm{cm^2/s}\)). O livre caminho médio é a distância em que uma
+molécula de seção de choque \(\sigma\) varre, em média, um alvo:
+\(n\sigma\ell=1\), isto é, \(\ell=1/(n\sigma)\), com
+\(\sigma\approx2\times10^{-15}\,\mathrm{cm^2}\) para H\(_2\). Usando os
+valores do Exemplo anterior (\(n\approx3{,}5\times10^{14}\,\mathrm{cm^{-3}}\),
 \(c_s\approx1{,}0\times10^5\,\mathrm{cm/s}\)) a \(1\,\)UA,</p>
 \[
 \ell = \frac{1}{n\sigma} \approx
 \frac{1}{(3{,}5\times10^{14})(2\times10^{-15})} \approx1{,}4\,\mathrm{cm}\,,
-\tag{7.46}
+\tag{7.89}
 \]
 \[
 \nu_{\rm mol}\sim\ell\,c_s\approx(1{,}4)(1{,}0\times10^5)
 \approx1{,}4\times10^5\,\mathrm{cm^2/s}\,.
-\tag{7.47}
+\tag{7.90}
 \]
 <p>Para avaliar se esse valor é dinamicamente relevante, forma-se o
 número de Reynolds do escoamento, \(\mathrm{Re}=v L/\nu\), usando como
@@ -1395,15 +1952,27 @@ própria velocidade kepleriana e o raio do disco, \(v\sim v_K\),
 \mathrm{Re} = \frac{v_K\,r}{\nu_{\rm mol}}
 \approx\frac{(3{,}0\times10^6)(1{,}5\times10^{13})}{1{,}4\times10^5}
 \approx3\times10^{14}\,.
-\tag{7.48}
+\tag{7.91}
 \]
 <p>Este é um número absurdamente grande: escoamentos de laboratório já
-turbulentam para \(\mathrm{Re}\gtrsim10^3\)&ndash;\(10^4\). O tempo
-viscoso associado, \(t_{\nu,{\rm mol}}\sim r^2/\nu_{\rm
-mol}\approx1{,}6\times10^{21}\,\mathrm s\approx5\times10^{13}\,
-\mathrm{anos}\) — cerca de <em>quatro mil vezes a idade do
-Universo</em> — deixa claro que a viscosidade molecular é fisicamente
-irrelevante para o acréscimo observado.</p>
+turbulentam para \(\mathrm{Re}\gtrsim10^3\)&ndash;\(10^4\).</p>
+
+<p>O tempo viscoso é o tempo que a difusão leva para espalhar algo por
+uma distância \(r\). Para qualquer processo difusivo com coeficiente
+\(\nu\), a distância percorrida cresce como \(\sqrt{\nu t}\); igualando a
+\(r\), \(t\sim r^2/\nu\). Com a viscosidade molecular,</p>
+\[
+t_{\nu,{\rm mol}}\sim\frac{r^2}{\nu_{\rm mol}}
+\approx\frac{(1{,}5\times10^{13})^2}{1{,}4\times10^5}\,\mathrm s
+=\frac{2{,}25\times10^{26}}{1{,}4\times10^5}\,\mathrm s
+\approx1{,}6\times10^{21}\,\mathrm s
+\approx5\times10^{13}\,\mathrm{anos}
+\tag{7.92}
+\]
+<p>(dividindo por \(3{,}156\times10^7\,\)s/ano) — cerca de <em>quatro mil
+vezes a idade do Universo</em> (\(1{,}38\times10^{10}\,\)anos). Isso
+deixa claro que a viscosidade molecular é fisicamente irrelevante para o
+acréscimo observado.</p>
 
 <p>É preciso, portanto, uma viscosidade <em>efetiva</em> muito maior,
 tipicamente identificada com turbulência no gás (o transporte turbulento
@@ -1415,7 +1984,7 @@ a viscosidade efetiva como</p>
 \[
 \nu = \alpha\,c_s\,H\,,
 \qquad 0<\alpha\lesssim1\,,
-\tag{7.49}
+\tag{7.93}
 \]
 <p>o modelo de disco-\(\alpha\): \(c_s\) é a velocidade característica
 do movimento turbulento subsônico esperado (o supersônico seria
@@ -1423,13 +1992,20 @@ amortecido por choques) e \(H\) é o maior comprimento disponível
 verticalmente, de modo que \(\alpha\) mede a eficiência da turbulência
 em transportar momento angular como fração desse limite superior.</p>
 
-<p>Comparando a Equação (7.49) com a estimativa de
-\(\nu_{\rm mol}\approx1{,}4\times10^5\,\mathrm{cm^2/s}\) acima: usando
-\(H\approx5\times10^{11}\,\mathrm{cm}\) e \(c_s\approx1{,}0\times
-10^5\,\mathrm{cm/s}\) a \(1\,\)UA, mesmo um \(\alpha\) tão pequeno quanto
-\(10^{-4}\) já corresponde a \(\nu=\alpha c_sH\approx5\times
-10^{12}\,\mathrm{cm^2/s}\) — cerca de \(3{,}6\times10^7\) vezes maior
-que \(\nu_{\rm mol}\); para \(\alpha\sim10^{-2}\), o fator de
+<p>Comparando a Equação (7.93) com a estimativa de
+\(\nu_{\rm mol}\approx1{,}4\times10^5\,\mathrm{cm^2/s}\) acima: a
+\(1\,\)UA, \(c_sH\approx(1{,}0\times10^5)(5\times10^{11})=5\times10^{16}\,\mathrm{cm^2/s}\).
+Mesmo um \(\alpha\) tão pequeno quanto \(10^{-4}\) já dá</p>
+\[
+\nu=\alpha c_sH\approx10^{-4}\times5\times10^{16}=5\times10^{12}\,\mathrm{cm^2/s}\,,
+\tag{7.94}
+\]
+<p>e portanto</p>
+\[
+\frac{\nu}{\nu_{\rm mol}}\approx\frac{5\times10^{12}}{1{,}4\times10^5}\approx3{,}6\times10^7\,;
+\tag{7.95}
+\]
+<p>para \(\alpha\sim10^{-2}\), \(\nu\) é cem vezes maior e o fator de
 amplificação chega a \(\sim3{,}6\times10^9\). A pergunta física central
 passa a ser, então: qual mecanismo hidrodinâmico ou magnetohidrodinâmico
 gera essa turbulência?</p>
@@ -1479,18 +2055,24 @@ comportamento qualitativo — evolução difusiva, com acréscimo interno e
 espalhamento externo — é exatamente o que a intuição acima sugere).</p>
 
 <p>A escala de tempo característica dessa evolução difusiva é o tempo
-viscoso,</p>
+viscoso, \(t_{\rm visc}\sim r^2/\nu\) (pelo mesmo argumento de difusão
+usado acima para \(\nu_{\rm mol}\)). Substituindo \(\nu=\alpha c_sH\)
+[Equação (7.93)] e, em seguida, \(c_s=H\Omega_K\) [que é só a definição
+\(H=c_s/\Omega_K\) da Equação (7.80), invertida]:</p>
 \[
-t_{\rm visc}(r) \sim \frac{r^2}{\nu(r)} = \frac{r^2}{\alpha\,c_s(r)\,H(r)}
-= \frac{1}{\alpha\,\Omega_K(r)}\left(\frac{r}{H(r)}\right)^{2}\,,
-\tag{7.50}
+t_{\rm visc}(r) \sim \frac{r^2}{\nu(r)} = \frac{r^2}{\alpha\,c_s\,H}
+= \frac{r^2}{\alpha\,(H\Omega_K)\,H}
+= \frac{1}{\alpha\,\Omega_K(r)}\left(\frac{r}{H(r)}\right)^{2}\,.
+\tag{7.96}
 \]
-<p>onde a última forma usa \(\nu=\alpha c_sH\) e \(H/r=c_s/v_K\)
-[Equações (7.49) e (7.40)]. Como \((r/H)^2\gg1\) para um disco fino,
-\(t_{\rm visc}\) é muito mais longo que o período orbital local
-\(2\pi/\Omega_K\) — o acréscimo viscoso é um processo lento comparado à
-dinâmica orbital, o que justifica a priori tratar o disco, em cada
-instante, como aproximadamente kepleriano (Equação (7.35)).</p>
+<p>Essa última forma separa três fatores com significado claro:
+\(1/\Omega_K\) é o período orbital (dividido por \(2\pi\)), \(1/\alpha\)
+mede quão ineficiente é a turbulência e \((r/H)^2\) mede quão fino é o
+disco. Como \((r/H)^2\gg1\) para um disco fino, \(t_{\rm visc}\) é muito
+mais longo que o período orbital local \(2\pi/\Omega_K\) — o acréscimo
+viscoso é um processo lento comparado à dinâmica orbital, o que
+justifica a priori tratar o disco, em cada instante, como
+aproximadamente kepleriano (Equação (7.74)).</p>
 
 <div class="modulo-card">
   <div class="rotulo-card">Módulo interativo 11 — Disco-\(\alpha\): viscosidade e tempo viscoso</div>
@@ -1533,8 +2115,17 @@ instante, como aproximadamente kepleriano (Equação (7.35)).</p>
     \(T\approx51\,\)K, \(c_s\approx4{,}3\times10^4\,\mathrm{cm/s}\),
     \(H\approx3{,}5\times10^{13}\,\mathrm{cm}\), com \(H/r\approx0{,}08\)
     maior que a \(1\,\)UA — o disco é <em>flaring</em>, sua razão de
-    aspecto cresce com o raio):</p>
-    <table>
+    aspecto cresce com o raio).</p>
+    <p>Os valores a \(30\,\)UA saem por escalas de potência a partir de
+    \(1\,\)UA, sem recalcular tudo:</p>
+    <ul>
+      <li>\(T\propto r^{-1/2}\): \(T(30)=280/\sqrt{30}=280/5{,}48\approx51\,\)K;</li>
+      <li>\(c_s\propto T^{1/2}\propto r^{-1/4}\): \(c_s(30)=1{,}0\times10^5/30^{1/4}=1{,}0\times10^5/2{,}34\approx4{,}3\times10^4\,\mathrm{cm/s}\);</li>
+      <li>\(v_K\propto r^{-1/2}\), logo \(H/r=c_s/v_K\propto r^{-1/4}/r^{-1/2}=r^{1/4}\): \(H/r(30)=0{,}034\times2{,}34\approx0{,}08\);</li>
+      <li>\(H=(H/r)\,r=0{,}08\times30\times1{,}496\times10^{13}\approx3{,}5\times10^{13}\,\mathrm{cm}\).</li>
+    </ul>
+    <p>Com isso, \(\nu=\alpha c_sH\) e \(t_{\rm visc}=r^2/\nu\) (dividindo
+    por \(3{,}156\times10^7\) para obter anos):</p>
       <thead><tr><th>\(r\)</th><th>\(\nu=\alpha c_sH\)</th><th>\(t_{\rm visc}\sim r^2/\nu\)</th><th></th></tr></thead>
       <tbody>
         <tr><td>\(1\,\)UA (\(\alpha=10^{-2}\))</td><td>\(5{,}0\times10^{14}\,\mathrm{cm^2/s}\)</td><td>\(4{,}5\times10^{11}\,\mathrm s\)</td><td>\(\approx1{,}4\times10^4\) anos</td></tr>
@@ -1594,30 +2185,71 @@ módulo abaixo.</p>
 
 <p>Já nas regiões externas e fases mais avançadas (acréscimo já em
 declínio), a fonte dominante passa a ser a <strong>irradiação
-estelar</strong>. Como o disco é opticamente fino ali, cada elemento de
-área absorve uma fração da luz estelar e a reemite como corpo negro. A
-geometria fina é essencial: como \(H/r\ll1\), a luz de uma fonte quase
-pontual no plano médio incide em ângulo <em>rasante</em> — não
-perpendicular —, de modo que apenas uma fração \(\sim H/r\) do fluxo
-estelar é interceptada por unidade de área do disco.</p>
+estelar</strong>. Há dois casos limite, e vale fazer os dois porque levam
+ao mesmo expoente.</p>
 
-<p>O balanço de energia por unidade de área — fluxo estelar
-\(L_\star/(4\pi r^2)\) vezes o fator geométrico rasante
-\(\gamma\sim H/r\) (tratado como constante, na aproximação de ordem
-zero), igualado à reemissão de corpo negro das duas faces,
-\(2\sigma T^4\) —</p>
+<h4>Caso 1: grão de poeira isolado (meio opticamente fino)</h4>
+<p>É a hipótese usada por Hayashi (1981) para a MMSN: cada grão “vê” a
+estrela diretamente. Um grão esférico de raio \(a\) a uma distância
+\(r\) intercepta o fluxo estelar \(F=L_\star/(4\pi r^2)\) com sua seção
+transversal \(\pi a^2\), e reemite como corpo negro por toda a sua
+superfície \(4\pi a^2\). No equilíbrio, energia absorvida \(=\) energia
+emitida:</p>
 \[
-\gamma\,\frac{L_\star}{4\pi r^2} = 2\sigma T^4\,,
-\qquad \gamma\approx\text{constante}
+\begin{aligned}
+&\pi a^2\,\frac{L_\star}{4\pi r^2} = 4\pi a^2\,\sigma T^4
+\quad\Longrightarrow\quad
+T^4=\frac{L_\star}{16\pi\sigma r^2}\\
+&\quad\Longrightarrow\quad
+T=\left(\frac{L_\star}{16\pi\sigma r^2}\right)^{1/4}\propto r^{-1/2}\,.
+\end{aligned}
+\tag{7.97}
+\]
+<p>O raio do grão se cancela. Numericamente, a \(1\,\)UA do Sol
+(\(F=L_\odot/4\pi r^2\approx1{,}36\times10^6\,\mathrm{erg\,s^{-1}cm^{-2}}\),
+a constante solar):</p>
+\[
+T=\left(\frac{F}{4\sigma}\right)^{1/4}
+=\left(\frac{1{,}36\times10^6}{4\times5{,}67\times10^{-5}}\right)^{1/4}
+=\left(6{,}0\times10^{9}\right)^{1/4}
+\approx278\,\mathrm K\,,
+\tag{7.98}
+\]
+<p>exatamente a normalização \(T(1\,\mathrm{UA})\approx280\,\)K da MMSN
+[Equação (7.83)]. É a mesma temperatura de equilíbrio de um corpo negro
+que gira rápido em órbita da Terra.</p>
+
+<h4>Caso 2: superfície de um disco opticamente espesso</h4>
+<p>Se o disco é espesso à luz estelar, a radiação não penetra: ela é
+absorvida numa camada superficial. A geometria fina é essencial: como
+\(H/r\ll1\), a luz de uma fonte quase pontual no plano médio incide em
+ângulo <em>rasante</em> — não perpendicular —, de modo que apenas uma
+fração \(\gamma\sim H/r\) do fluxo estelar é interceptada por unidade de
+área do disco. O disco reemite pelas duas faces (\(2\sigma T^4\) por
+unidade de área). O balanço é</p>
+\[
+\gamma\,\frac{L_\star}{4\pi r^2} = 2\sigma T^4\,.
+\tag{7.99}
+\]
+<p>Tratando \(\gamma\) como constante (aproximação de ordem zero) e
+isolando \(T\),</p>
+\[
+T^4=\frac{\gamma L_\star}{8\pi\sigma}\,\frac{1}{r^2}
 \quad\Longrightarrow\quad
 T^4\propto\frac{1}{r^2}
 \quad\Longrightarrow\quad
 \boxed{T(r)\propto r^{-1/2}}\,,
-\tag{7.51}
+\tag{7.100}
 \]
-<p>exatamente o expoente do perfil MMSN [Equação (7.41)] — o mesmo
-balanço que Hayashi (1981) usou para calibrar \(T(1\,{\rm
-UA})\approx280\,\)K.</p>
+<p>o mesmo expoente do Caso 1 e do perfil MMSN. A normalização, porém, é
+mais baixa: comparando os dois casos, \(T_2^4/T_1^4=2\gamma\), e com
+\(\gamma\sim0{,}03\) isso dá \(T_2\approx(0{,}06)^{1/4}\,T_1\approx0{,}5\,T_1\),
+ou \(\sim140\,\)K a \(1\,\)UA. A superfície de um disco espesso é mais
+fria que um grão isolado na mesma distância porque recebe a luz “de
+lado”. Neste capítulo seguimos a convenção da MMSN (Caso 1, \(280\,\)K a
+\(1\,\)UA) como referência numérica; a incerteza na normalização de
+\(T\) é um dos motivos pelos quais a posição da linha de gelo em discos
+reais varia (ver adiante).</p>
 
 <div class="caixa atencao">
   <div class="rotulo">Atenção — Sobre a constância de \(\gamma\)</div>
@@ -1647,7 +2279,7 @@ UA})\approx280\,\)K.</p>
     visc}(r)\propto\dot M^{1/4}r^{-3/4}\) — cai mais rápido que a
     irradiação e domina só nas regiões internas, onde \(\dot M\) é
     maior. <span style="color:#17805f;">Verde</span>: \(T_{\rm
-    irrad}(r)\propto r^{-1/2}\) [Eq. (7.51), perfil MMSN] — domina nas
+    irrad}(r)\propto r^{-1/2}\) [Eq. (7.100), perfil MMSN] — domina nas
     regiões externas independente de \(\dot M\). Raio de cruzamento:
     \(r_{\rm cross}\approx\)<strong id="mdtemp-rcross">—</strong> UA.
     Para taxas de acréscimo típicas de Classe~0/I (\(\dot M\sim
@@ -1675,7 +2307,7 @@ parcial local) (Hayashi, 1981).</p>
 radicalmente diferentes: <strong>interior</strong> (\(T>T_{\rm
 gelo}\)), onde só materiais refratários (silicatos, óxidos,
 ferro-níquel) condensam e a água permanece gasosa; e
-<strong>exterior</strong> (\(T<T_{\rm gelo}\)), onde a água também
+<strong>exterior</strong> (\(T&lt;T_{\rm gelo}\)), onde a água também
 condensa como gelo, aumentando por um fator \(\sim3\)&ndash;\(4\) a
 densidade superficial de sólidos disponíveis — já que o oxigênio
 (majoritariamente H\(_2\)O) é várias vezes mais abundante, em massa, do
@@ -1685,16 +2317,27 @@ que todos os elementos refratários somados.</p>
 <div class="caixa exemplo">
   <div class="rotulo">Exemplo — Posição numérica da linha de gelo</div>
   <div class="conteudo">
-    <p>Usando o perfil de temperatura MMSN [Equação (7.41), com o mesmo
-    expoente \(-1/2\) deduzido acima na Equação (7.51)] e
-    \(T_{\rm gelo}=170\,\)K,</p>
+    <p>Usando o perfil de temperatura MMSN [Equação (7.83), com o mesmo
+    expoente \(-1/2\) deduzido acima na Equação (7.100)] e
+    \(T_{\rm gelo}=170\,\)K, igualamos a temperatura do disco à de
+    condensação:</p>
     \[
-    T(r_{\rm gelo}) = 280\left(\frac{r_{\rm gelo}}{1\,\mathrm{UA}}\right)^{-1/2}
-    \mathrm K = 170\,\mathrm K
+    \begin{aligned}
+    &280\left(\frac{r_{\rm gelo}}{1\,\mathrm{UA}}\right)^{-1/2}\mathrm K = 170\,\mathrm K
     \quad\Longrightarrow\quad
+    \left(\frac{r_{\rm gelo}}{1\,\mathrm{UA}}\right)^{-1/2}=\frac{170}{280}\\
+    &\quad\Longrightarrow\quad
+    \left(\frac{r_{\rm gelo}}{1\,\mathrm{UA}}\right)^{1/2}=\frac{280}{170}\,,
+    \end{aligned}
+    \tag{7.101}
+    \]
+    <p>onde invertemos os dois lados para trocar o sinal do expoente.
+    Elevando ao quadrado:</p>
+    \[
     r_{\rm gelo} = \left(\frac{280}{170}\right)^{2}\mathrm{UA}
+    =(1{,}65)^2\,\mathrm{UA}
     \approx2{,}7\,\mathrm{UA}\,.
-    \tag{7.52}
+    \tag{7.102}
     \]
     <p>Esse valor concorda muito bem com a posição inferida para a
     linha de gelo do Sistema Solar primitivo, a partir de meteoritos e
@@ -1712,7 +2355,7 @@ surto de acréscimo tipo FU~Orionis empurra a linha de gelo para
 \(\sim40\)&ndash;\(42\,\)UA, resolvida espacialmente por uma
 descontinuidade abrupta na emissão contínua da poeira entre duas bandas
 do ALMA (Cieza et al., 2016) — confirmando o mecanismo da Equação
-(7.51), e servindo de ponte para a última seção do capítulo: planetas
+(7.100), e servindo de ponte para a última seção do capítulo: planetas
 gigantes gasosos se formam preferencialmente além da linha de gelo
 precisamente por causa do salto na densidade superficial de sólidos ali
 disponível, o ingrediente que faltava para núcleos rochosos internos
@@ -1847,25 +2490,54 @@ keplerianas.</p>
 estelar por um dipolo, \(B(r)=B_\star(R_\star/r)^3\), com pressão
 magnética associada \(P_{\rm mag}=B(r)^2/(8\pi)\). Do lado do gás, a
 pressão de aríete de um fluxo em acréscimo quase radial, com taxa
-\(\dot M\), é \(P_{\rm ram}=\rho v^2\); usando a continuidade de massa
-(\(\dot M=4\pi r^2\rho v\)) para eliminar \(\rho\), e aproximando a
-velocidade de queda por queda livre, \(v\approx v_{\rm
-ff}(r)=\sqrt{2GM_\star/r}\) (a mesma forma já usada para o colapso do
-núcleo),</p>
+\(\dot M\), é \(P_{\rm ram}=\rho v^2\). Usando a continuidade de massa,
+\(\dot M=4\pi r^2\rho v\), isolamos \(\rho=\dot M/(4\pi r^2v)\) e
+substituímos:</p>
 \[
-P_{\rm ram}(r) = \frac{\dot M}{4\pi r^2}\,v_{\rm ff}(r)
-= \frac{\dot M}{4\pi r^2}\sqrt{\frac{2GM_\star}{r}}\,.
-\tag{7.53}
+P_{\rm ram}=\rho v^2=\frac{\dot M}{4\pi r^2v}\,v^2=\frac{\dot M}{4\pi r^2}\,v\,.
+\tag{7.103}
 \]
-<p>Igualando \(P_{\rm mag}=P_{\rm ram}\) e isolando \(r\), obtém-se o
-<strong>raio de truncamento</strong> (ou raio magnetosférico) \(R_A\):</p>
+<p>Aproximando a velocidade de queda por queda livre,
+\(v\approx v_{\rm ff}(r)=\sqrt{2GM_\star/r}\) (a mesma forma já usada
+para o colapso do núcleo na seção sobre a dinâmica do colapso),</p>
 \[
-\frac{B_\star^2R_\star^6}{8\pi r^6} = \frac{\dot M}{4\pi r^2}
-\sqrt{\frac{2GM_\star}{r}}
+P_{\rm ram}(r) = \frac{\dot M}{4\pi r^2}\sqrt{\frac{2GM_\star}{r}}
+=\frac{\dot M\sqrt{2GM_\star}}{4\pi}\,r^{-5/2}\,,
+\tag{7.104}
+\]
+<p>já que \(r^{-2}\cdot r^{-1/2}=r^{-5/2}\). Do lado magnético,
+\(B^2=B_\star^2R_\star^6r^{-6}\), logo
+\(P_{\rm mag}=B_\star^2R_\star^6/(8\pi)\,r^{-6}\).</p>
+
+<p>Igualamos \(P_{\rm mag}=P_{\rm ram}\) no raio \(r=R_A\):</p>
+\[
+\frac{B_\star^2R_\star^6}{8\pi}\,R_A^{-6} = \frac{\dot M\sqrt{2GM_\star}}{4\pi}\,R_A^{-5/2}\,.
+\tag{7.105}
+\]
+<p>Multiplicando os dois lados por \(R_A^6\) e por \(8\pi\), e usando
+\(R_A^{6-5/2}=R_A^{7/2}\):</p>
+\[
+B_\star^2R_\star^6 = 2\dot M\sqrt{2GM_\star}\;R_A^{7/2}
 \quad\Longrightarrow\quad
-R_A = \left(\frac{B_\star^4R_\star^{12}}{8\,GM_\star\dot M^2}\right)^{1/7}\,.
-\tag{7.54}
+R_A^{7/2}=\frac{B_\star^2R_\star^6}{2\dot M\sqrt{2GM_\star}}\,.
+\tag{7.106}
 \]
+<p>Para isolar \(R_A\), elevamos os dois lados a \(2/7\). É mais fácil
+elevar primeiro ao quadrado (o que elimina a raiz) e depois a
+\(1/7\):</p>
+\[
+R_A^7=\frac{B_\star^4R_\star^{12}}{4\dot M^2\,(2GM_\star)}
+=\frac{B_\star^4R_\star^{12}}{8\,GM_\star\dot M^2}
+\quad\Longrightarrow\quad
+R_A = \left(\frac{B_\star^4R_\star^{12}}{8\,GM_\star\dot M^2}\right)^{1/7}\,,
+\tag{7.107}
+\]
+<p>o <strong>raio de truncamento</strong> (ou raio magnetosférico). O
+expoente \(1/7\), incomum, é assinatura desse balanço entre um campo
+dipolar (\(\propto r^{-3}\), ao quadrado na pressão magnética) e um
+fluxo de queda livre — o mesmo resultado (a menos de um fator de
+eficiência \(\xi\sim0{,}5\)&ndash;\(1\), aqui tomado como \(1\)) de
+tratamentos mais completos, incluindo geometria não-esférica.</p>
 <p>O expoente \(1/7\), incomum, é assinatura desse balanço entre um
 campo dipolar (\(\propto r^{-3}\), ao quadrado na pressão magnética) e
 um fluxo de queda livre — o mesmo resultado (a menos de um fator de
@@ -1875,12 +2547,22 @@ tratamentos mais completos, incluindo geometria não-esférica.</p>
 <p>O segundo raio relevante é o <strong>raio de corrotação</strong>
 \(R_{\rm co}\), onde a velocidade angular kepleriana do disco iguala a
 velocidade angular de rotação da própria estrela,
-\(\Omega_K(R_{\rm co})=\Omega_\star=2\pi/P_\star\):</p>
+\(\Omega_K(R_{\rm co})=\Omega_\star=2\pi/P_\star\). Usando
+\(\Omega_K^2=GM_\star/r^3\) [Equação (7.74)]:</p>
+\[
+\frac{GM_\star}{R_{\rm co}^3}=\Omega_\star^2
+\quad\Longrightarrow\quad
+R_{\rm co}^3=\frac{GM_\star}{\Omega_\star^2}=\frac{GM_\star}{(2\pi/P_\star)^2}=\frac{GM_\star P_\star^2}{4\pi^2}\,,
+\tag{7.108}
+\]
+<p>e tirando a raiz cúbica,</p>
 \[
 R_{\rm co} = \left(\frac{GM_\star}{\Omega_\star^2}\right)^{1/3}
 = \left(\frac{GM_\star P_\star^2}{4\pi^2}\right)^{1/3}\,.
-\tag{7.55}
+\tag{7.109}
 \]
+<p>(É a terceira lei de Kepler: \(R_{\rm co}\) é o raio da órbita cujo
+período é igual ao período de rotação da estrela.)</p>
 <p>A posição relativa de \(R_A\) e \(R_{\rm co}\) determina o regime de
 interação estrela-disco: quando \(R_A\lesssim R_{\rm co}\) (o regime
 observado na grande maioria das T~Tauri clássicas, chamado
@@ -1899,24 +2581,47 @@ ejetado em vez de acretado (o regime de "propulsor", ou
     \(R_\star=2\,R_\odot\approx1{,}39\times10^{11}\,\mathrm{cm}\),
     \(B_\star=1\,\mathrm{kG}=10^3\,\mathrm G\) e taxa de acréscimo
     fiducial \(\dot M=10^{-8}\,M_\odot/\mathrm{ano}\approx6{,}3\times
-    10^{17}\,\mathrm{g/s}\) (valor típico de CTTS, ver adiante), a
-    Equação (7.54) dá</p>
+    10^{17}\,\mathrm{g/s}\) (valor típico de CTTS, como veremos na
+    próxima subseção). A conversão da taxa é
+    \(10^{-8}\times1{,}989\times10^{33}\,\mathrm g/(3{,}156\times10^7\,\mathrm s)
+    \approx6{,}3\times10^{17}\,\mathrm{g/s}\), e
+    \(M_\star=0{,}5\times1{,}989\times10^{33}\approx9{,}95\times10^{32}\,\)g.
+    Com números tão grandes, é mais seguro trabalhar com logaritmos
+    (base 10), calculando numerador e denominador da Equação (7.107):</p>
     \[
-    R_A = \left(\frac{(10^3)^4(1{,}39\times10^{11})^{12}}
-    {8\,(6{,}674\times10^{-8})(9{,}95\times10^{32})(6{,}3\times10^{17})^2}
-    \right)^{1/7}
-    \approx8{,}2\times10^{11}\,\mathrm{cm}\approx5{,}9\,R_\star\,.
-    \tag{7.56}
+    \begin{aligned}
+    \log\big[B_\star^4R_\star^{12}\big]&=4\log(10^3)+12\log(1{,}39\times10^{11})\\
+    &=12+12\times11{,}143=145{,}72\,,\\
+    \log\big[8GM_\star\dot M^2\big]&=\log8+\log(6{,}674\times10^{-8})\\
+    &\quad+\log(9{,}95\times10^{32})+2\log(6{,}3\times10^{17})\\
+    &=0{,}903-7{,}176+32{,}998+35{,}599=62{,}32\,.
+    \end{aligned}
+    \tag{7.110}
     \]
-    <p>Para o raio de corrotação, usando um período de rotação típico
-    de CTTS \(P_\star\approx8\,\)dias — próximo ao pico de maior
-    período da distribuição bimodal observada por Herbst et al. (2002)
-    para T~Tauri de período mais longo — a Equação (7.55) dá</p>
+    <p>A razão tem logaritmo \(145{,}72-62{,}32=83{,}40\); a raiz sétima
+    divide o logaritmo por 7: \(83{,}40/7=11{,}914\). Portanto</p>
     \[
-    R_{\rm co} = \left(\frac{(6{,}674\times10^{-8})(9{,}95\times10^{32})
-    (6{,}91\times10^5)^2}{4\pi^2}\right)^{1/3}
-    \approx9{,}3\times10^{11}\,\mathrm{cm}\approx6{,}7\,R_\star\,.
-    \tag{7.57}
+    R_A=10^{11{,}914}\,\mathrm{cm}
+    \approx8{,}2\times10^{11}\,\mathrm{cm}
+    =\frac{8{,}2\times10^{11}}{1{,}39\times10^{11}}\,R_\star
+    \approx5{,}9\,R_\star\,.
+    \tag{7.111}
+    \]
+    <p>Para o raio de corrotação, usando um período de rotação típico de
+    CTTS \(P_\star\approx8\,\)dias — próximo ao pico de maior período da
+    distribuição bimodal observada por Herbst et al. (2002) para T~Tauri
+    de período mais longo —, com
+    \(P_\star=8\times86\,400\,\mathrm s=6{,}91\times10^5\,\mathrm s\), a
+    Equação (7.109) dá</p>
+    \[
+    \begin{aligned}
+    R_{\rm co}^3 &= \frac{(6{,}674\times10^{-8})(9{,}95\times10^{32})
+    (6{,}91\times10^5)^2}{4\pi^2}\\
+    &=\frac{(6{,}64\times10^{25})(4{,}78\times10^{11})}{39{,}48}\\
+    &\approx8{,}0\times10^{35}\,\mathrm{cm^3}\,,\\
+    R_{\rm co}&=(8{,}0\times10^{35})^{1/3}\approx9{,}3\times10^{11}\,\mathrm{cm}\approx6{,}7\,R_\star\,.
+    \end{aligned}
+    \tag{7.112}
     \]
     <p>Os dois raios são, portanto, ambos da ordem de <strong>poucos
     raios estelares</strong> e muito próximos entre si, com \(R_A\)
@@ -1947,33 +2652,67 @@ spots</em>).</p>
 <div class="caixa exemplo">
   <div class="rotulo">Exemplo — Velocidade de impacto e temperatura de choque</div>
   <div class="conteudo">
-    <p>A velocidade de queda livre entre o raio de truncamento e a
-    superfície estelar, usando os valores do Exemplo anterior
+    <p>A velocidade de impacto sai da conservação de energia. O gás parte
+    de \(R_A\) praticamente sem velocidade radial e cai até \(R_\star\); a
+    energia cinética ganha é igual à energia potencial perdida:</p>
+    \[
+    \frac12v_{\rm imp}^2=\left(-\frac{GM_\star}{R_A}\right)-\left(-\frac{GM_\star}{R_\star}\right)
+    =GM_\star\left(\frac{1}{R_\star}-\frac{1}{R_A}\right)\,.
+    \tag{7.113}
+    \]
+    <p>Usando os valores do Exemplo anterior
     (\(R_A\approx8{,}2\times10^{11}\,\mathrm{cm}\),
     \(R_\star\approx1{,}39\times10^{11}\,\mathrm{cm}\),
-    \(M_\star=0{,}5\,M_\odot\)), é</p>
+    \(M_\star=0{,}5\,M_\odot\)), o parêntese vale
+    \(1/(1{,}39\times10^{11})-1/(8{,}2\times10^{11})=7{,}19\times10^{-12}-1{,}22\times10^{-12}
+    =5{,}97\times10^{-12}\,\mathrm{cm^{-1}}\), e</p>
     \[
-    v_{\rm imp} = \sqrt{2GM_\star\left(\frac{1}{R_\star}-\frac{1}{R_A}\right)}
-    \approx2{,}8\times10^7\,\mathrm{cm/s}\approx280\,\mathrm{km/s}\,,
-    \tag{7.58}
+    \begin{aligned}
+    v_{\rm imp} &= \sqrt{2GM_\star\left(\frac{1}{R_\star}-\frac{1}{R_A}\right)}\\
+    &\approx\sqrt{2(6{,}674\times10^{-8})(9{,}95\times10^{32})
+    (5{,}97\times10^{-12})}\\
+    &=\sqrt{7{,}9\times10^{14}}\\
+    &\approx2{,}8\times10^7\,\mathrm{cm/s}\approx280\,\mathrm{km/s}\,,
+    \end{aligned}
+    \tag{7.114}
     \]
     <p>em excelente concordância com velocidades de impacto observadas
     e modeladas em colunas de acréscimo de T~Tauri clássicas,
     tipicamente \(\sim200\)&ndash;\(500\,\mathrm{km/s}\) (Bouvier et
     al., 2007; Hartmann, Herczeg &amp; Calvet, 2016). No choque forte
-    resultante, a condição de salto de Rankine-Hugoniot para um gás
-    monoatômico (\(\gamma=5/3\)) converte a energia cinética de impacto
-    em temperatura pós-choque</p>
+    resultante, as condições de salto de Rankine-Hugoniot convertem a
+    energia cinética de impacto em temperatura. Chamando de 1 o gás antes
+    do choque (velocidade \(v_1=v_{\rm imp}\), densidade \(\rho_1\),
+    pressão desprezível) e de 2 o gás logo depois, a conservação de massa
+    e de momento através do choque dá</p>
     \[
-    T_{\rm choque} \approx \frac{3\mu m_H v_{\rm imp}^2}{16\,k_B}\,,
-    \tag{7.59}
+    \rho_1v_1=\rho_2v_2\,,\qquad
+    \rho_1v_1^2=P_2+\rho_2v_2^2\,.
+    \tag{7.115}
     \]
-    <p>que, usando \(\mu\approx0{,}6\) (plasma ionizado pós-choque),</p>
+    <p>Para um choque forte num gás monoatômico (\(\gamma=5/3\)), o gás é
+    comprimido por um fator \((\gamma+1)/(\gamma-1)=4\): \(\rho_2=4\rho_1\)
+    e, pela conservação de massa, \(v_2=v_1/4\). Substituindo na equação
+    de momento:</p>
+    \[
+    P_2=\rho_1v_1^2-\rho_2v_2^2=\rho_1v_1^2-4\rho_1\frac{v_1^2}{16}
+    =\rho_1v_1^2\left(1-\frac14\right)=\frac34\rho_1v_1^2\,.
+    \tag{7.116}
+    \]
+    <p>A temperatura vem do gás ideal, \(P_2=\rho_2k_BT_2/(\mu m_H)\):</p>
+    \[
+    T_{\rm choque}=\frac{\mu m_H\,P_2}{k_B\,\rho_2}
+    =\frac{\mu m_H}{k_B}\cdot\frac{\frac34\rho_1v_1^2}{4\rho_1}
+    \quad\Longrightarrow\quad
+    T_{\rm choque} \approx \frac{3\mu m_H v_{\rm imp}^2}{16\,k_B}\,.
+    \tag{7.117}
+    \]
+    <p>Usando \(\mu\approx0{,}6\) (plasma ionizado pós-choque),</p>
     \[
     T_{\rm choque} \approx\frac{3(0{,}6)(1{,}673\times10^{-24})
     (2{,}8\times10^7)^2}{16(1{,}381\times10^{-16})}
     \approx1{,}1\times10^6\,\mathrm K\,,
-    \tag{7.60}
+    \tag{7.118}
     \]
     <p>da mesma ordem de grandeza — poucos milhões de kelvin — das
     temperaturas de choque de fato inferidas espectroscopicamente
@@ -2084,7 +2823,7 @@ estrela-disco.</p>
   <div class="rotulo-card">Módulo interativo 17 (destaque) — Acréscimo magnetosférico, animado</div>
   <p class="leitura-card" style="margin-top:0;">
     Mesma geometria da Figura das notas: o disco viscoso (verde) é
-    truncado em \(R_A\) [Eq. (7.54)]; dentro dele, o material (pontos
+    truncado em \(R_A\) [Eq. (7.107)]; dentro dele, o material (pontos
     laranja) é canalizado pelas linhas de campo dipolar (azul) até os
     <em>hot spots</em> (pontos amarelos pulsantes) próximos aos polos
     magnéticos; ventos/jatos (setas azul-escuras) são lançados ao longo
@@ -2124,22 +2863,36 @@ evolução anterior.</p>
     truncamento até a superfície estelar aparece, em grande parte, como
     radiação no próprio choque de acréscimo. Como \(R_A\gg R_\star\)
     (Exemplo anterior), a energia potencial gravitacional liberada por
-    unidade de massa é dominada pelo último trecho da queda, de modo
-    que a <strong>luminosidade de acréscimo</strong> pode ser estimada,
-    a menos de um fator geométrico de ordem unidade absorvido na
-    aproximação \(R_A\gg R_\star\), por</p>
+    unidade de massa é dominada pelo último trecho da queda. Cada grama
+    que cai de \(R_A\) até \(R_\star\) libera a energia
+    \(GM_\star(1/R_\star-1/R_A)\) (a mesma do Exemplo anterior); como
+    chegam \(\dot M_{\rm acc}\) gramas por segundo, a potência liberada
+    é</p>
+    \[
+    L_{\rm acc}=\frac{GM_\star\dot M_{\rm acc}}{R_\star}\left(1-\frac{R_\star}{R_A}\right)\,.
+    \tag{7.119}
+    \]
+    <p>Com \(R_\star/R_A\approx1/5{,}9\approx0{,}17\), o parêntese vale
+    \(\approx0{,}83\), um fator de ordem unidade. Desprezando-o (o que
+    superestima \(L_{\rm acc}\) em \(\sim20\%\)), a <strong>luminosidade
+    de acréscimo</strong> fica</p>
     \[
     L_{\rm acc} \approx \frac{GM_\star\dot M_{\rm acc}}{R_\star}\,.
-    \tag{7.61}
+    \tag{7.120}
     \]
     <p>Para os mesmos parâmetros fiduciais de CTTS usados acima
     (\(M_\star=0{,}5\,M_\odot\), \(R_\star=2\,R_\odot\),
     \(\dot M_{\rm acc}=10^{-8}\,M_\odot/\mathrm{ano}\)),</p>
     \[
-    L_{\rm acc} \approx\frac{(6{,}674\times10^{-8})(9{,}95\times10^{32})
+    \begin{aligned}
+    L_{\rm acc} &\approx\frac{(6{,}674\times10^{-8})(9{,}95\times10^{32})
     (6{,}3\times10^{17})}{1{,}39\times10^{11}}
-    \approx3{,}0\times10^{32}\,\mathrm{erg/s}\approx0{,}08\,L_\odot\,.
-    \tag{7.62}
+    =\frac{4{,}18\times10^{43}}{1{,}39\times10^{11}}\\
+    &\approx3{,}0\times10^{32}\,\mathrm{erg/s}
+    =\frac{3{,}0\times10^{32}}{3{,}828\times10^{33}}\,L_\odot
+    \approx0{,}08\,L_\odot\,.
+    \end{aligned}
+    \tag{7.121}
     \]
     <p>Comparando com a luminosidade fotosférica "normal" de uma
     protoestrela de \(0{,}5\,M_\odot\) nessa fase (décimas a poucas
@@ -2148,9 +2901,9 @@ evolução anterior.</p>
     excesso azul/UV e da variabilidade discutidos acima, o regime
     esperado de uma CTTS de Classe~II tardia.</p>
     <p>A situação é radicalmente diferente nas fases mais jovens: com a
-    taxa de acréscimo de Shu [Eq. (7.23), \(\dot M\approx1{,}6\times
+    taxa de acréscimo de Shu [Eq. (7.53), \(\dot M\approx1{,}6\times
     10^{-6}\,M_\odot/\mathrm{ano}\), \(\sim160\) vezes maior que a taxa
-    fiducial de CTTS], a mesma Equação (7.61) escala linearmente com
+    fiducial de CTTS], a mesma Equação (7.120) escala linearmente com
     \(\dot M\) e dá \(L_{\rm acc}|_{\rm Classe~0/I}\approx160\times
     0{,}08\,L_\odot\approx13\,L_\odot\) — uma a duas ordens de grandeza
     <em>maior</em> que qualquer luminosidade fotosférica plausível para
@@ -2224,20 +2977,34 @@ relativa, forças de van der Waals entre as superfícies unem os grãos
 permanentemente (<em>sticking</em>) em vez de ricochetear — o mesmo
 mecanismo por trás da adesão de poeira doméstica.</p>
 
-<p>Para o tempo característico de coagulação, considere um grão de
-raio \(a\) e densidade interna \(\rho_s\sim1\,\mathrm{g/cm^3}\),
-varrendo grãos menores de densidade \(\rho_d\) (densidade de sólidos no
-disco) a velocidade relativa \(\Delta v\). Pela seção de choque
-geométrica \(\pi a^2\), a taxa de acréscimo de massa é</p>
+<p>Para o tempo característico de coagulação, considere um grão de raio
+\(a\) e densidade interna \(\rho_s\sim1\,\mathrm{g/cm^3}\), varrendo
+grãos menores de densidade \(\rho_d\) (densidade de sólidos no disco) a
+velocidade relativa \(\Delta v\). Em um intervalo \(\mathrm dt\), o grão
+avança uma distância \(\Delta v\,\mathrm dt\) e “varre” um cilindro de
+seção \(\pi a^2\) (sua seção de choque geométrica) e volume
+\(\pi a^2\,\Delta v\,\mathrm dt\). Toda a poeira nesse cilindro, de
+massa \(\rho_d\,\pi a^2\,\Delta v\,\mathrm dt\), gruda no grão (supondo
+eficiência de colagem de \(100\,\%\)). A taxa de acréscimo de massa é,
+portanto,</p>
 \[
-\frac{\mathrm dm}{\mathrm dt} \sim \rho_d\,\pi a^2\,\Delta v\,,
-\tag{7.63}
+\frac{\mathrm dm}{\mathrm dt} \sim \rho_d\,\pi a^2\,\Delta v\,.
+\tag{7.122}
 \]
-<p>e, como \(m=\tfrac43\pi a^3\rho_s\) implica \(\mathrm dm/\mathrm
-dt=4\pi a^2\rho_s\,\mathrm da/\mathrm dt\), segue que</p>
+<p>Por outro lado, a massa do grão é \(m=\tfrac43\pi a^3\rho_s\);
+derivando no tempo pela regra da cadeia,</p>
 \[
+\frac{\mathrm dm}{\mathrm dt}=\frac43\pi\rho_s\cdot3a^2\,\frac{\mathrm da}{\mathrm dt}
+=4\pi a^2\rho_s\,\frac{\mathrm da}{\mathrm dt}\,.
+\tag{7.123}
+\]
+<p>Igualando as duas expressões para \(\mathrm dm/\mathrm dt\) e
+cancelando \(\pi a^2\):</p>
+\[
+4\pi a^2\rho_s\,\frac{\mathrm da}{\mathrm dt}=\rho_d\,\pi a^2\,\Delta v
+\quad\Longrightarrow\quad
 \frac{\mathrm da}{\mathrm dt} \sim \frac{\rho_d\,\Delta v}{4\rho_s}\,,
-\tag{7.64}
+\tag{7.124}
 \]
 <p>uma taxa de crescimento <em>constante</em> (independente de
 \(a\)!) — resultado direto de a seção de choque crescer como \(a^2\)
@@ -2248,7 +3015,7 @@ inicial microscópico, \(a_0\ll a\)) é</p>
 \[
 t_{\rm cresc}(a) \sim \frac{a}{\mathrm da/\mathrm dt}
 \sim \frac{4\rho_s\,a}{\rho_d\,\Delta v}\,.
-\tag{7.65}
+\tag{7.125}
 \]
 
 <div class="exemplo-card">
@@ -2261,18 +3028,22 @@ t_{\rm cresc}(a) \sim \frac{a}{\mathrm da/\mathrm dt}
     \mathrm{g/cm^3}\). Para agitação turbulenta subsônica de agregados
     centimétricos (\(\alpha\sim10^{-3}\)&ndash;\(10^{-2}\)), tome
     \(\Delta v\sim10\,\mathrm{cm/s}\ll c_s\approx1{,}0\times10^5\,
-    \mathrm{cm/s}\). Pela Equação (7.65), com
+    \mathrm{cm/s}\). Pela Equação (7.125), com
     \(\rho_s\approx1\,\mathrm{g/cm^3}\):</p>
     \[
-    t_{\rm cresc}(1\,\mathrm{cm}) \sim
-    \frac{4(1)(1)}{(1{,}3\times10^{-11})(10)} \,\mathrm s
+    \begin{aligned}
+    t_{\rm cresc}(1\,\mathrm{cm}) &\sim
+    \frac{4\rho_s\,a}{\rho_d\,\Delta v}
+    =\frac{4(1\,\mathrm{g\,cm^{-3}})(1\,\mathrm{cm})}{(1{,}3\times10^{-11}\,\mathrm{g\,cm^{-3}})(10\,\mathrm{cm\,s^{-1}})}\\
+    &=\frac{4}{1{,}3\times10^{-10}}\,\mathrm s
     \approx3{,}1\times10^{10}\,\mathrm s\approx1\times10^3\,\mathrm{anos}\,,
-    \tag{7.66}
+    \end{aligned}
+    \tag{7.126}
     \]
     \[
     t_{\rm cresc}(1\,\mathrm m) \sim100\times t_{\rm cresc}(1\,\mathrm{cm})
     \approx1\times10^5\,\mathrm{anos}\,,
-    \tag{7.67}
+    \tag{7.127}
     \]
     <p>já que \(t_{\rm cresc}\propto a\). Ambos os valores são muito
     menores que o tempo de vida do disco, \(\tau_{\rm disco}\sim2\)&ndash;\(4\,\)Myr
@@ -2299,9 +3070,9 @@ t_{\rm cresc}(a) \sim \frac{a}{\mathrm da/\mathrm dt}
   </div>
   <p class="leitura-card">
     Com \(a=1\,\)cm, reproduz \(t_{\rm cresc}\approx1000\) anos [Eq.
-    (7.66)]; com \(a=1\,\)m, reproduz \(\approx10^5\) anos [Eq. (7.67)]
+    (7.126)]; com \(a=1\,\)m, reproduz \(\approx10^5\) anos [Eq. (7.127)]
     — o crescimento é <em>linear</em> em \(a\), consistente com a taxa
-    \(\mathrm da/\mathrm dt\) constante [Eq. (7.64)].
+    \(\mathrm da/\mathrm dt\) constante [Eq. (7.124)].
   </p>
 </div>
 
@@ -2316,51 +3087,107 @@ dezenas de metros sofrem <strong>deriva radial</strong> rápida,
 perdendo-se no disco antes que a coagulação os leve ao tamanho em que a
 autogravidade os desacopla do gás.</p>
 
-<p>A origem física é a mesma sub-keplerianidade do gás introduzida
-acima: sustentado parcialmente por pressão, o gás orbita a
-\(v_{\rm gas}=v_K(1-\eta)\), com</p>
+<p>A origem física é que o gás do disco gira um pouco <em>mais
+devagar</em> que a velocidade kepleriana. Vejamos por quê. Na direção
+radial, um elemento de gás em órbita circular sente a gravidade (para
+dentro) e o gradiente de pressão. Como a pressão diminui para fora
+(\(\mathrm dP/\mathrm dr<0\)), o gradiente empurra o gás para
+<em>fora</em>, ajudando a sustentá-lo. O balanço radial é</p>
+\[
+\frac{v_{\rm gas}^2}{r}=\frac{GM_\star}{r^2}+\frac{1}{\rho}\frac{\mathrm dP}{\mathrm dr}\,.
+\tag{7.128}
+\]
+<p>Multiplicando por \(r\) e usando \(v_K^2=GM_\star/r\):</p>
+\[
+v_{\rm gas}^2=v_K^2+\frac{r}{\rho}\frac{\mathrm dP}{\mathrm dr}
+=v_K^2\left[1+\frac{1}{v_K^2}\,\frac{r}{\rho}\frac{\mathrm dP}{\mathrm dr}\right]\,.
+\tag{7.129}
+\]
+<p>Para simplificar o termo de pressão, escrevemos
+\(\frac{r}{\rho}\frac{\mathrm dP}{\mathrm dr}=\frac{P}{\rho}\,\frac{r}{P}\frac{\mathrm dP}{\mathrm dr}
+=c_s^2\,\frac{\mathrm d\ln P}{\mathrm d\ln r}\) (usando \(P/\rho=c_s^2\)
+e \(\frac{r}{P}\frac{\mathrm dP}{\mathrm dr}=\frac{\mathrm d\ln P}{\mathrm d\ln r}\)).
+Com \(c_s^2/v_K^2=(H/r)^2\) [Equação (7.81)]:</p>
+\[
+v_{\rm gas}^2=v_K^2\left[1+\left(\frac Hr\right)^2\frac{\mathrm d\ln P}{\mathrm d\ln r}\right]\,.
+\tag{7.130}
+\]
+<p>O termo de correção é pequeno (da ordem de \((H/r)^2\sim10^{-3}\)),
+de modo que podemos tirar a raiz usando \(\sqrt{1+x}\approx1+x/2\) para
+\(|x|\ll1\):</p>
+\[
+v_{\rm gas}\approx v_K\left[1+\frac12\left(\frac Hr\right)^2\frac{\mathrm d\ln P}{\mathrm d\ln r}\right]
+\equiv v_K(1-\eta)\,,
+\tag{7.131}
+\]
+<p>o que define</p>
 \[
 \eta \equiv -\frac12\left(\frac Hr\right)^2\frac{\mathrm d\ln P}
-{\mathrm d\ln r}\,,
-\tag{7.68}
+{\mathrm d\ln r}\,.
+\tag{7.132}
 \]
-<p>tipicamente \(\eta\sim10^{-3}\) para um disco fino. Sólidos não
-sentem a pressão do gás e tenderiam a orbitar exatamente a \(v_K\) —
-mas o atrito aerodinâmico com o gás mais lento os freia continuamente,
-fazendo-os espiralar para dentro. Esse atrito é mais eficiente para
+<p>Como \(\mathrm d\ln P/\mathrm d\ln r<0\), temos \(\eta>0\): o gás é
+sub-kepleriano, tipicamente por \(\eta\sim10^{-3}\) para um disco fino.
+Sólidos não sentem a pressão do gás e tenderiam a orbitar exatamente a
+\(v_K\) — mas o atrito aerodinâmico com o gás mais lento funciona como
+um “vento contrário” que os freia continuamente; perdendo momento
+angular, eles espiralam para dentro. Esse atrito é mais eficiente para
 corpos de tamanho intermediário (pequenos o suficiente para sentir o
-arrasto, grandes o suficiente para ter inércia considerável), com
-deriva máxima quando o tempo de acoplamento iguala o período orbital
-(número de Stokes \(\mathrm{St}\sim1\)) — a condição de corpos de
-\(\sim0{,}1\)&ndash;\(1\,\)m a \(1\,\)UA em um disco MMSN. Nesse
-regime,</p>
+arrasto, grandes o suficiente para ter inércia considerável), com deriva
+máxima quando o tempo de acoplamento iguala o período orbital (número de
+Stokes \(\mathrm{St}\sim1\)) — a condição de corpos de
+\(\sim0{,}1\)&ndash;\(1\,\)m a \(1\,\)UA em um disco MMSN. A solução
+completa do movimento de uma partícula sob arrasto dá a velocidade
+radial de deriva (resultado padrão, Weidenschilling, 1977):</p>
 \[
-v_{\rm deriva} \sim \eta\,v_K\,.
-\tag{7.69}
+v_r=-\frac{2\eta v_K}{\mathrm{St}+\mathrm{St}^{-1}}\,,
+\tag{7.133}
+\]
+<p>onde \(\mathrm{St}\) é o número de Stokes (tempo de frenagem pelo
+arrasto, em unidades de \(1/\Omega_K\)). O denominador
+\(\mathrm{St}+1/\mathrm{St}\) é mínimo (vale 2) em \(\mathrm{St}=1\) —
+basta testar: \(\mathrm{St}=0{,}1\) ou \(10\) dão \(10{,}1\). Grãos
+muito pequenos (\(\mathrm{St}\ll1\)) seguem o gás e quase não derivam;
+corpos muito grandes (\(\mathrm{St}\gg1\)) quase não sentem o gás. No
+pior caso, \(\mathrm{St}=1\):</p>
+\[
+v_{\rm deriva} \sim \frac{2\eta v_K}{2}=\eta\,v_K\,.
+\tag{7.134}
 \]
 
 <div class="exemplo-card">
 <div class="caixa exemplo">
   <div class="rotulo">Exemplo — Velocidade e tempo de deriva radial a \(1\,\)UA</div>
   <div class="conteudo">
-    <p>Usando o perfil MMSN, com \(\Sigma\propto r^{-3/2}\),
-    \(T\propto r^{-1/2}\) e, portanto, \(H\propto r^{5/4}\) (já que
-    \(H/r=c_s/v_K\propto T^{1/2}r^{1/2}\)), a densidade no plano médio
-    \(\rho_{\rm mid}=\Sigma/(\sqrt{2\pi}H)\) escala como
-    \(\rho_{\rm mid}\propto r^{-11/4}\) e a pressão
-    \(P=\rho_{\rm mid}c_s^2\propto r^{-13/4}\), ou seja
-    \(\mathrm d\ln P/\mathrm d\ln r\approx-3{,}25\). Com
-    \(H/r\approx0{,}034\) a \(1\,\)UA,</p>
+    <p>Precisamos de \(\mathrm d\ln P/\mathrm d\ln r\) no perfil MMSN
+    [Equação (7.83)]. Se uma grandeza é uma lei de potência,
+    \(P\propto r^p\), então \(\ln P=p\ln r+\text{const}\) e
+    \(\mathrm d\ln P/\mathrm d\ln r=p\): basta achar o expoente. Somando
+    os expoentes passo a passo:</p>
+    <ul>
+      <li>\(T\propto r^{-1/2}\), logo \(c_s^2\propto T\propto r^{-1/2}\) e \(c_s\propto r^{-1/4}\);</li>
+      <li>\(v_K\propto r^{-1/2}\), logo \(H/r=c_s/v_K\propto r^{-1/4+1/2}=r^{1/4}\) e \(H\propto r^{5/4}\);</li>
+      <li>\(\Sigma\propto r^{-3/2}\), logo \(\rho_{\rm mid}=\Sigma/(\sqrt{2\pi}H)\propto r^{-3/2-5/4}=r^{-11/4}\);</li>
+      <li>\(P=\rho_{\rm mid}c_s^2\propto r^{-11/4-1/2}=r^{-13/4}\).</li>
+    </ul>
+    <p>Portanto \(\mathrm d\ln P/\mathrm d\ln r=-13/4=-3{,}25\). Com
+    \(H/r\approx0{,}034\) a \(1\,\)UA (Exemplo da subseção sobre a
+    geometria do disco),</p>
     \[
-    \eta \approx\frac12(0{,}034)^2(3{,}25)\approx1{,}9\times10^{-3}\,.
-    \tag{7.70}
+    \begin{aligned}
+    \eta &=-\frac12\left(\frac Hr\right)^2\frac{\mathrm d\ln P}{\mathrm d\ln r}
+    \approx\frac12(0{,}034)^2(3{,}25)\\
+    &=\frac12(1{,}16\times10^{-3})(3{,}25)
+    \approx1{,}9\times10^{-3}\,.
+    \end{aligned}
+    \tag{7.135}
     \]
     <p>Usando \(v_K\approx3{,}0\times10^6\,\mathrm{cm/s}\) a \(1\,\)UA,
-    a Equação (7.69) dá</p>
+    a Equação (7.134) dá</p>
     \[
     v_{\rm deriva} \approx(1{,}9\times10^{-3})(3{,}0\times10^6)
     \approx5{,}6\times10^3\,\mathrm{cm/s}\approx56\,\mathrm{m/s}\,,
-    \tag{7.71}
+    \tag{7.136}
     \]
     <p>em excelente concordância com o valor clássico
     \(\sim50\,\mathrm{m/s}\) citado para corpos métricos a \(1\,\)UA
@@ -2368,10 +3195,14 @@ v_{\rm deriva} \sim \eta\,v_K\,.
     o tempo para o corpo espiralar uma distância da ordem do próprio
     raio orbital — é então</p>
     \[
-    t_{\rm deriva} \sim\frac{r}{v_{\rm deriva}}
+    \begin{aligned}
+    t_{\rm deriva} &\sim\frac{r}{v_{\rm deriva}}
     \approx\frac{1{,}5\times10^{13}\,\mathrm{cm}}{5{,}6\times10^3\,
-    \mathrm{cm/s}}\approx2{,}7\times10^9\,\mathrm s\approx85\,\mathrm{anos}\,,
-    \tag{7.72}
+    \mathrm{cm/s}}\approx2{,}7\times10^9\,\mathrm s\\
+    &=\frac{2{,}7\times10^9}{3{,}156\times10^7}\,\mathrm{anos}
+    \approx85\,\mathrm{anos}\,,
+    \end{aligned}
+    \tag{7.137}
     \]
     <p>uma escala de tempo <em>extraordinariamente curta</em> — apenas
     dezenas a centenas de órbitas —, e da mesma ordem de grandeza,
@@ -2395,7 +3226,7 @@ qualitativamente diferente precisa atravessar essa janela rapidamente.</p>
   <p class="leitura-card">
     Usando \(v_{\rm deriva}=2\eta v_K\,\mathrm{St}/(1+\mathrm{St}^2)\)
     (forma completa de Nakagawa, Sekiya &amp; Hayashi, 1986, que se
-    reduz à Eq. (7.69) para \(\mathrm{St}\sim1\)), o tempo de deriva
+    reduz à Eq. (7.134) para \(\mathrm{St}\sim1\)), o tempo de deriva
     \(t_{\rm deriva}=r/v_{\rm deriva}\) tem um <strong>mínimo
     catastrófico em \(\mathrm{St}\approx1\)</strong> — o ponto conceitual
     central desta seção: corpos de \(\mathrm{St}\sim1\) (dezenas de
@@ -2514,33 +3345,68 @@ critério de estabilidade local de um disco fino em rotação diferencial
 é o <strong>critério de Toomre</strong>,</p>
 \[
 Q \equiv \frac{c_s\,\Omega}{\pi G\Sigma}\,,
-\tag{7.73}
+\tag{7.138}
 \]
 <p>com fragmentação favorecida para \(Q\lesssim1\) (na prática,
-\(Q\lesssim1{,}3\)&ndash;\(2\) com resfriamento radiativo finito). A
-analogia com a instabilidade de Jeans é direta: autogravidade
-(\(G\Sigma\) vs. \(G\rho\)) compete com suporte de pressão (\(c_s\), em
-ambos os casos), mas aqui a rotação diferencial \(\Omega\) (via a
-frequência epicíclica \(\kappa\approx\Omega\)) faz o papel
-estabilizador que a pressão sozinha fazia na nuvem não-rotante —
-\(Q\lesssim1\) é, em essência, o mesmo "massa de Jeans local menor que
-a perturbação" da condição \(M>M_J\), agora para uma perturbação 2D em
-um disco girante.</p>
+\(Q\lesssim1{,}3\)&ndash;\(2\) com resfriamento radiativo finito).</p>
+
+<h4>De onde vem \(Q\): um argumento de escalas</h4>
+<p>Considere um pedaço do disco de tamanho \(\ell\), com massa
+\(\sim\Sigma\ell^2\). Três efeitos competem:</p>
+<ul>
+  <li><em>Pressão</em> estabiliza pedaços pequenos: uma onda sonora
+  atravessa o pedaço em \(\ell/c_s\), enquanto o colapso gravitacional de
+  uma placa de massa \(\Sigma\ell^2\) leva
+  \(t_{\rm grav}\sim\sqrt{\ell/(G\Sigma)}\). A pressão vence se
+  \(\ell/c_s<\sqrt{\ell/G\Sigma}\), isto é, para
+  \(\ell<\ell_P\sim c_s^2/(G\Sigma)\).</li>
+  <li><em>Rotação</em> estabiliza pedaços grandes: a força de Coriolis e
+  o cisalhamento impedem o colapso se o pedaço gira (tempo \(1/\Omega\))
+  antes de colapsar, \(1/\Omega<\sqrt{\ell/G\Sigma}\), isto é, para
+  \(\ell>\ell_R\sim G\Sigma/\Omega^2\).</li>
+  <li><em>Gravidade</em> vence só na janela \(\ell_P<\ell<\ell_R\).</li>
+</ul>
+<p>Essa janela existe somente se \(\ell_P<\ell_R\):</p>
+\[
+\frac{c_s^2}{G\Sigma}<\frac{G\Sigma}{\Omega^2}
+\quad\Longleftrightarrow\quad
+\frac{c_s^2\Omega^2}{G^2\Sigma^2}<1
+\quad\Longleftrightarrow\quad
+\frac{c_s\Omega}{G\Sigma}<1\,,
+\tag{7.139}
+\]
+<p>que é a Equação (7.138) a menos do fator \(\pi\) (que a análise de
+perturbações completa fornece). Ou seja, \(Q<1\) significa “a pressão e a
+rotação, juntas, não conseguem cobrir todas as escalas”. A analogia com
+a instabilidade de Jeans é direta: autogravidade (\(G\Sigma\) vs.
+\(G\rho\)) compete com suporte de pressão (\(c_s\), em ambos os casos),
+mas aqui a rotação diferencial \(\Omega\) (via a frequência epicíclica
+\(\kappa\approx\Omega\)) faz o papel estabilizador que a pressão sozinha
+fazia na nuvem não-rotante — \(Q\lesssim1\) é, em essência, o mesmo
+"massa de Jeans local menor que a perturbação" da condição \(M>M_J\),
+agora para uma perturbação 2D em um disco girante.</p>
 
 <div class="exemplo-card">
 <div class="caixa exemplo">
   <div class="rotulo">Exemplo — O parâmetro de Toomre do disco MMSN é grande — o disco é estável</div>
   <div class="conteudo">
-    <p>Avaliando \(Q\) a \(r=50\,\)UA usando o perfil MMSN:
-    \(\Sigma(50\,\mathrm{UA})\approx4{,}8\,\mathrm{g/cm^2}\),
-    \(T(50\,\mathrm{UA})\approx40\,\)K
-    (\(c_s\approx3{,}8\times10^4\,\mathrm{cm/s}\)), e
-    \(\Omega_K(50\,\mathrm{UA})\approx5{,}6\times10^{-10}\,
-    \mathrm{s^{-1}}\) (pela Equação (7.35)). Pela Equação (7.73),</p>
+    <p>Avaliando \(Q\) a \(r=50\,\)UA usando o perfil MMSN
+    [Equação (7.83)], ingrediente por ingrediente:</p>
+    <ul>
+      <li>\(\Sigma(50\,\mathrm{UA})=1700\times50^{-3/2}=1700/353{,}6\approx4{,}8\,\mathrm{g/cm^2}\);</li>
+      <li>\(T(50\,\mathrm{UA})=280\times50^{-1/2}=280/7{,}07\approx40\,\)K, e
+      \(c_s\propto T^{1/2}\) dá \(c_s=1{,}0\times10^5\sqrt{40/280}\approx3{,}8\times10^4\,\mathrm{cm/s}\);</li>
+      <li>\(r=50\times1{,}496\times10^{13}=7{,}48\times10^{14}\,\)cm, e pela
+      Equação (7.74),
+      \(\Omega_K=\sqrt{1{,}327\times10^{26}/(7{,}48\times10^{14})^3}
+      =\sqrt{3{,}17\times10^{-19}}\approx5{,}6\times10^{-10}\,\mathrm{s^{-1}}\).</li>
+    </ul>
+    <p>Pela Equação (7.138),</p>
     \[
     Q\approx\frac{(3{,}8\times10^4)(5{,}6\times10^{-10})}
-    {\pi(6{,}674\times10^{-8})(4{,}8)}\approx21\,,
-    \tag{7.74}
+    {\pi(6{,}674\times10^{-8})(4{,}8)}
+    =\frac{2{,}1\times10^{-5}}{1{,}0\times10^{-6}}\approx21\,,
+    \tag{7.140}
     \]
     <p>fortemente estável (\(Q\gg1\)): um disco com a densidade
     superficial "padrão" do MMSN está longe da fragmentação

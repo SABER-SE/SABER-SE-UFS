@@ -9,6 +9,102 @@ antes de continuar, e não repita o que já está marcado como feito.
 
 ---
 
+# CAP. 7, MÓDULO 7 REFEITO: PARTÍCULAS, VETORES E R_c (2026-10-23)
+
+Módulo "Formação do disco por deposição" reescrito como versão animada de
+`eq:fe-raio-centrifugo`. Agora é uma **integração real** (velocidade-Verlet,
+passo adaptativo) em visão meridional, com a_ϖ = −GMϖ/r³ + j²/ϖ³ e
+a_z = −GMz/r³, j conservado por partícula. Ao cruzar o plano médio o gás
+sofre choque (z, v_z → 0) e arrasto radial; só isso o faz estacionar em R_c.
+800 partículas de fundo (slider 100–2000), 4 traçadoras com
+j/j_max = 0,25; 0,5; 0,75; 1 e vetores: gravidade (para dentro), centrífuga
+(para fora) e j (axial, tracejado, roxo, rotulado "NÃO é força").
+Escala dos vetores: raiz quarta da aceleração normalizada pelo valor em R_c
+de cada traçadora (j tem comprimento fixo); isso está dito na nota do módulo.
+Controles: partículas, Ω₀, M⋆, ligar/desligar vetores.
+
+**Validação.** Com R₀ = 0,1 pc (CONST.PC), Ω₀ = 10⁻¹⁴ s⁻¹ e 1 M☉
+(CONST.MSUN): j = 9,52×10²⁰ cm²/s, R_c = 6,83×10¹⁵ cm = 456 UA (o texto
+diz ≈460, arredondado). Em `window.__mdiscoTeste`, as 4 traçadoras estacionam
+em ϖ = j²/(GM) com erro < 10⁻¹³ e gravidade = centrífuga nesse ponto.
+Desempenho (Chromium headless): 60 fps com 800 e com 2000 partículas, em
+1280 e 420 px. Harness do Cap. 7: 16 módulos, 0 problemas. Nenhum `.tex`
+alterado.
+
+**Para o professor revisar:** o raio inicial da animação é 2,2 R_c
+(fora de escala; no exemplo real seria ~43 R_c), e o arrasto no plano médio
+é um modelo, não uma dedução do capítulo.
+
+# SINCRONIZAÇÃO DO CAP. 7 COM O `.tex` EXPANDIDO (2026-10-23)
+
+O professor expandiu `chapters/formacao_estelar.tex` (2243 → 2992 linhas)
+com passos intermediários nas deduções; sem conteúdo conceitual novo, sem
+figuras, caixas ou referências novas. O HTML foi sincronizado.
+
+**Contagem (Cap. 7).** O `.tex` tem 136 ambientes `equation`/`align` e,
+conforme o `.aux` compilado, **140 equações numeradas** (um `align` pode
+numerar várias linhas; `\notag` só suprime a linha em que aparece). O HTML
+passou de 74 para **140** `\tag{}`, uma por equação numerada do `.tex`,
+na mesma ordem. Caixas: 6 contexto / 14 exemplo / 4 atenção / 6 leituras
+(idênticas). `tools/count_completude.py`: tex 136 ambientes, html 140.
+
+**Numeração.** O HTML usa numeração manual. As 66 equações novas
+entraram na ordem do `.tex`, então todas as tags e referências textuais
+foram renumeradas por script. A numeração do HTML agora coincide
+com a do PDF (checada contra as 34 `\label{eq:fe-...}` do `.aux`).
+As 4 equações rotuladas da linearização de Jeans (`eq:fe-cont-lin`,
+`-euler-lin`, `-poisson-lin`, `-onda-jeans`) ficam em (7.18), (7.19),
+(7.20) e (7.23).
+
+**Onde entrou conteúdo** (66 equações numeradas novas, contadas por tag:
+74 → 140; o diff por ambientes do `.tex` dava +67, e essa diferença de 1
+não foi investigada além de a conferência posição a posição, 140/140
+contra o `.aux`, fechar). Virial (+7),
+relação de dispersão (+12, com os Passos 1–4 como `<h4>`), comparação
+dos métodos e exemplo de Jeans (+4), dinâmica do colapso (+8),
+momento angular (+4), Hayashi (+2), classes/SED (+2), geometria do
+disco (+4), viscosidade (+3), temperatura (+3: Casos 1 e 2 em `<h4>`),
+linha de gelo (+1), acréscimo magnetosférico (+5), colunas de acréscimo
+(+3), chegada à ZAMS (+1), coagulação (+1), barreira do metro (+5),
+Toomre (+1).
+
+**Módulos.** Nenhum módulo precisou ser reposicionado: todos já ficavam
+depois da dedução a que se referem. O Módulo 1 (ω²(k)) foi **estendido**:
+agora mostra, em tracejado, a parcela de pressão c_s²k² e a de gravidade
+−4πGρ₀ ao lado de ω² total, amarrando o gráfico aos Passos 3–4.
+
+**Correções colaterais no HTML (já existiam antes).** (1) Quatro
+fórmulas inline com `<` colado a uma letra (`k<k_J`, `M<M_J`, `r<c_s t`,
+`T<T_gelo`) eram lidas como tag HTML e apagavam trechos de texto; agora
+usam `&lt;`. (2) O eixo x do Módulo 1 mostrava `2.0859…E-17`; agora
+usa notação científica curta. (3) α_IR: o HTML definia o índice em
+d log(νFν)/d log ν; o `.tex` usa d log(λFλ)/d log λ (convenção de Lada,
+1987), e o HTML foi alinhado ao `.tex`. Os sinais são opostos entre as duas
+definições; vale o professor confirmar que a convenção em λ é a pretendida.
+
+**Validação.** `harness.js` (Cap. 7): 16 módulos, 0 problemas (mesmo
+resultado de antes; `mshu-t`/`mshu-mstar` seguem como "campos que não
+mudam" por serem preenchidos só pela animação, comportamento já registrado).
+MathJax: 140 rótulos renderizados, 0 erros, sem rolagem horizontal. PDF
+recompilado (`pdflatex` ×2 + `bibtex` + `pdflatex` ×2): 0 erros, 0
+"undefined"; `.tex` não foi alterado.
+
+**Possíveis erratas no `.tex` (para o professor decidir; nada foi alterado).**
+1. `formacao_estelar.tex` ~l.173–174 (energia gravitacional da esfera
+   uniforme): a frase seguinte à equação começa em minúscula, "o resultado
+   padrão para a energia gravitacional…", sem verbo. Provavelmente falta
+   "Este é". No HTML foi unida à frase anterior com ponto e vírgula.
+2. Exemplo da geometria do disco (~l.1545): ρ₀ = 1700/(2,51·5,0×10¹¹)
+   = 1,36×10⁻⁹ g/cm³, mas o texto escreve ≈1,3×10⁻⁹ (arredondaria para
+   1,4×10⁻⁹) e, na linha seguinte, usa 1,35×10⁻⁹ para n. O erro é de ~4%
+   e não afeta nenhuma conclusão. O exemplo de coagulação (~l.2532) repete
+   1,3×10⁻⁹.
+3. Todas as demais contas novas foram refeitas e batem: τ de Jeans
+   (1,8×10⁵ anos), λ_J (0,21 pc), Ω_crit, R_c, ℓ e ν_mol, razões de
+   viscosidade, T de grão (278 K), R_A (5,9 R⋆), R_co (6,7 R⋆), v_imp
+   (280 km/s), T de choque (1,1×10⁶ K), L_acc (0,08 L☉), η, t_deriva
+   (85 anos) e Q (21).
+
 # SESSÃO 4 — resumo executivo (leia isto primeiro)
 
 Ordem do prompt: Etapa 1 (pendências decididas pelo professor) → Etapa 2
@@ -399,7 +495,7 @@ script de verificação antes de confiar no resultado.**
 | `cap04_processos_radiativos.html` | 2869 | `cap04_modulos.js` | 677 | 17 | 9 | 9 |
 | `cap05_equacoes_estrutura.html` | 3772 | `cap05_modulos.js` | 1017 (pós-correção) | 56 | 24 | 15 |
 | `cap06_estrelas_politropicas.html` | 811 | `cap06_modulos.js` | 320 | 7 | 6 | 6 |
-| `cap07_formacao_estelar.html` | 2692 | `cap07_modulos.js` | 945 | 30 | 13 | 23 |
+| `cap07_formacao_estelar.html` | 3513 *(sincronização 2026-10-23)* | `cap07_modulos.js` | 950 | 30 | 13 | 23 |
 | `cap08_equacoes_estado.html` | 1612 | `cap08_modulos.js` | 687 | 18 | 9 | 13 |
 | `cap09_anas_brancas.html` | 649 | `cap09_modulos.js` | 354 | 6 | 4 | 6 |
 | `cap10_geracao_energia.html` | 1357 | `cap10_modulos.js` | 680 | 16 | 9 | 11 |
